@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header-wrapper
+{
+    overflow: hidden;
+    padding: 2em 0em;
+   background: #16A085 repeat-x center top;
+}
+
+.icon:before {
+    font-size: 1.25em;
+    text-decoration: none;
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+}
+#menu
+{
+}
+
+#menu ul
+{
+    display: inline-block;
+    padding: 0em 2em;
+    background: #1ABC9C;
+    text-align: center;
+}
+
+#menu li
+{
+    display: inline-block;
+}
+
+#menu li a, #menu li span
+{
+    display: inline-block;
+    padding: 1.3em 1.5em;
+    text-decoration: none;
+    font-size: 0.90em;
+    font-weight: 600;
+    text-transform: uppercase;
+    outline: 0;
+    color: #FFF;
+}
+
+#menu li:hover a, #menu li.active a, #menu li.active span
+{
+}
+
+#menu .current_page_item a
+{
+    color: #FFF;
+}
+#menu .current_page_item a:hover
+{
+    color: lightyellow;
+}
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+
+#logo
+{
+}
+
+#logo h1
+{
+    display: inline-block;
+    margin-bottom: 0.20em;
+    padding: 0.20em 0.9em;
+    font-size: 3.5em;
+}
+
+#logo a
+{
+    text-decoration: none;
+    color: #FFF;
+}
+
+#logo span
+{
+    padding-right: 0.5em;
+    text-transform: uppercase;
+    font-size: 0.90em;
+    color: rgba(255,255,255,1);
+}
+
+#logo span a
+{
+    color: rgba(255,255,255,0.8);
+}
+
+.wrapper
+{
+    overflow: hidden;
+    padding: 0em 0em 5em 0em;
+    background: #FFF;
+}
+
+#wrapper1
+{
+    background: #FFF;
+}
+
+#wrapper2
+{
+    overflow: hidden;
+    background: #F3F3F3;
+    padding: 5em 0em;
+    text-align: center;
+}
+
+
+
+
