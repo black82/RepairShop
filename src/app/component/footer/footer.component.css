@@ -59,18 +59,27 @@ ul.contact li span
     padding: 0;
 }
 
-ul.contact li a
+ul.contact li a:hover
 {
     color: #FFF;
 }
 
-ul.contact li a:before
-{
-    display: inline-block;
-    background: #1ABC9C;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    color: #FFFFFF;
+ul.contact li a:before {
+  display: inline-block;
+  background: #1ABC9C;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.icon :hover {
+  display: inline-block;
+  background: #1ABC9C;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #34495E;
 }
