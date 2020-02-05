@@ -175,7 +175,7 @@ form ::-moz-focus-inner {
 .check-rouw-1,
 .check-rouw-2,
 .check-rouw-3 {
-  display: flow-root;
+  display: block;
   margin-right: 20%;
   margin-left: 5%;
 }
@@ -291,13 +291,12 @@ form textarea {
 
 }
 
-.icon {
+.icon-input {
   font-weight: normal;
   font-style: normal;
   font-size: 24px; /* Предпочтительный размер иконок */
   display: inline-block;
-  width: 1em;
-  height: 1em;
+  color: #1ABC9C;
   line-height: 1;
   text-transform: none;
   letter-spacing: normal;

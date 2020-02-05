@@ -7,89 +7,98 @@
       <div class="row-1">
         <label>
           <span class="input-title">Date to enter</span>
-          <span class="icon icon-calendar"></span>
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
           <input class="col-1" type="date">
         </label>
         <label><span class="input-title">Address</span>
-          <span class="icon icon-building"></span>
+          <fa-icon [icon]="address" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label>
           <span class="input-title">Model</span>
-          <span class="icon icon-mobile-phone"></span>
+          <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label>
           <span class="input-title">Defect</span>
-          <span class="icon icon-ambulance"></span>
+          <fa-icon [icon]="cogs" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label>
           <span class="input-title">Price quotation</span>
-          <span class="icon icon-money"></span>
+          <fa-icon [icon]="money" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label><span class="input-title">Email</span>
-          <span class="icon icon-inbox"></span>
+          <fa-icon [icon]="email" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label><span class="input-title">State of use</span>
-          <span class="icon icon-star"></span>
+          <fa-icon [icon]="used" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
 
       </div>
       <div class="row-2">
         <label><span class="input-title">Code Device</span>
-          <span class="icon icon-certificate"></span>
+          <fa-icon [icon]="code" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Name of Client</span>
-          <span class="icon icon-user"></span>
+          <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Telethon Number</span>
-          <span class="icon icon-phone"></span>
+          <fa-icon [icon]="phone" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
 
         <label>
           <span class="input-title">IMEI&&SN</span>
-          <span class="icon icon-barcode"></span>
+          <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Deposit</span>
-          <span class="icon icon-money"></span>
+          <fa-icon [icon]="money2" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Password Device</span>
-          <span class="icon icon-unlock"></span>
+          <fa-icon [icon]="password" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Accessory</span>
-          <span class="icon icon-camera-retro"></span>
+          <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
       </div>
     </div>
     <div class="title-container">
-      <p class="title-form"><span class="icon icon-tasks"></span> Tests at the entrance of the machine.</p>
+      <p class="title-form">
+        <fa-icon [icon]="test" class="icon-input"></fa-icon>
+        Tests at the entrance of the machine.
+      </p>
     </div>
     <div class="col-3">
       <div class="check-rouw-1">
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox" value="Bike">
-          <span class="check-box-name">Sensors</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox" value="Bike">
-          <span class="check-box-name">Display</span>
-        </label>
+        <div>
+          <fa-icon [icon]="sensors" class="icon-input"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" name="device-test" type="checkbox" value="Bike">
+            <span class="check-box-name">Sensors</span>
+          </label>
+        </div>
+        <div>
+          <fa-icon [icon]="display" class="icon-input"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" name="device-test" type="checkbox" value="Bike">
+            <span class="check-box-name">Display</span>
+          </label>
+        </div>
         <label class="checkbox">
           <input class="check-box" name="device-test" type="checkbox">
           <span class="check-box-name">Connectors</span>
@@ -130,16 +139,21 @@
     </div>
     <div class="text-div">
       <div class="title-container">
-        <p class="title-form"><span class="icon icon-bookmark"></span> Note the entrance of the machine.</p>
+        <p class="title-form">
+          <fa-icon [icon]="note" class="icon-input"></fa-icon>
+          Note the entrance of the machine.
+        </p>
       </div>
       <label>
-        <textarea class="text-area">...</textarea>
+        <i class="icon icon-text-height"></i>
+        <textarea class="text-area">....</textarea>
       </label>
     </div>
     <div class="button_form">
-      <a class="dismiss" href="enter"><i class="icon icon-remove">Discard Form</i></a>
-      <a class="button button-small" href="enter" type="submit"><i class="icon icon-save">Submit Form</i>
-      </a>
+      <a class="dismiss" href="enter">
+        <fa-icon [icon]="discar"></fa-icon>
+        Discard Form</a>
+      <a class="button button-small" href="enter" type="submit"><span class="icon icon-save">Submit Form</span></a>
     </div>
   </form>
 

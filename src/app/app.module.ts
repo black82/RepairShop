@@ -9,6 +9,7 @@ import {AppRoutingModule} from './app-routing-module';
 import {DeviceinputComponent} from './component/deviceinput/deviceinput.component';
 import {OtpoutDeviceComponent} from './component/otpout-device/otpout-device.component';
 import {SingleContentComponent} from './component/single-content/single-content.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,13 @@ import {SingleContentComponent} from './component/single-content/single-content.
     OtpoutDeviceComponent,
     SingleContentComponent
   ],
-    imports: [
-        AppRoutingModule,
-        BrowserModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    FontAwesomeModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
