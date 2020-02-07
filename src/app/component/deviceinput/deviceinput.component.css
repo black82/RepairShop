@@ -175,7 +175,7 @@ form ::-moz-focus-inner {
 .check-rouw-1,
 .check-rouw-2,
 .check-rouw-3 {
-  display: flow-root;
+  display: block;
   margin-right: 20%;
   margin-left: 5%;
 }
@@ -289,4 +289,22 @@ form textarea {
   padding-top: 40px;
   padding-bottom: 30px;
 
+}
+
+.icon-input {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Предпочтительный размер иконок */
+  display: inline-block;
+  color: #1ABC9C;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased; /* Поддержка всеми WebKit браузерами */
+  text-rendering: optimizeLegibility; /* Поддержка Safari и Chrome */
+  -moz-osx-font-smoothing: grayscale; /* Поддержка Firefox. */
+  font-feature-settings: 'liga'; /* Поддержка IE. */
 }
