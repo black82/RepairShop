@@ -5,14 +5,23 @@
   box-sizing: border-box;
 }
 
+form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #F3F3F3;
+}
+
+.button {
+  position: absolute;
+  margin-left: 80%;
+}
+
 .container {
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  margin-left: 30%;
   width: 300px;
   height: 100px;
+
 }
 
 .container .search {
@@ -82,7 +91,7 @@
   text-shadow: 0 0 10px #1ABC9C;
   padding: 0 80px 0 20px;
   border-radius: 30px;
-  box-shadow: 0 0 25px 0 #1ABC9C, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px 0 #1ABC9C, 0 10px 15px 0 rgba(0, 0, 0, 0.2);
   transition: all 1s;
   opacity: 0;
   z-index: 5;
@@ -95,7 +104,7 @@
 }
 
 .container input:focus {
-  width: 300px;
+  width: 400px;
   opacity: 1;
   cursor: text;
 }
@@ -119,7 +128,7 @@
   height: 2px;
   border: none;
   background: white;
-  border-radius: 0%;
+  border-radius: 1px;
   transform: rotate(-45deg);
 }
 
@@ -178,4 +187,16 @@
 
 .button:before {
   background: #1ABC9C;
+}
+
+.title-form {
+  position: relative;
+  color: #1ABC9C;
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: 58px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 1px 1px #34495E;
 }

@@ -11,6 +11,7 @@ import {OtpoutDeviceComponent} from './component/otpout-device/otpout-device.com
 import {SingleContentComponent} from './component/single-content/single-content.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SearchformComponent} from './component/searchform/searchform.component';
+import {SearchpageComponent} from './component/searchpage/searchpage.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {SearchformComponent} from './component/searchform/searchform.component';
     DeviceinputComponent,
     OtpoutDeviceComponent,
     SingleContentComponent,
-    SearchformComponent
+    SearchformComponent,
+    SearchpageComponent
   ],
   imports: [
     AppRoutingModule,
