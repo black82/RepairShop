@@ -1,0 +1,12 @@
+<form type="submit">
+  <div class="container">
+    <p>{{nameForm}}</p>
+    <input placeholder="Search..." type="text">
+    <div class="search"></div>
+  </div>
+  <a (click)="submit()" class="button button-small" type="submit">
+    <span> <fa-icon [icon]="search"
+                    class="button-icon"></fa-icon>
+      {{textButton}}</span></a>
+</form>
+
