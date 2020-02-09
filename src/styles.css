@@ -1,5 +1,21 @@
 @charset "UTF-8";
-
+.icon-input {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Предпочтительный размер иконок */
+  display: inline-block;
+  color: #1ABC9C;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased; /* Поддержка всеми WebKit браузерами */
+  text-rendering: optimizeLegibility; /* Поддержка Safari и Chrome */
+  -moz-osx-font-smoothing: grayscale; /* Поддержка Firefox. */
+  font-feature-settings: 'liga'; /* Поддержка IE. */
+}
 @font-face
 {
     font-family: 'FontAwesome';

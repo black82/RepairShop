@@ -7,129 +7,173 @@
       <div class="row-1">
         <label>
           <span class="input-title">Return Date</span>
-          <i class="icon icon-calendar"></i>
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
           <input class="col-1" type="date">
         </label>
         <label>
           <span class="input-title"> Name  client</span>
-          <i class="icon icon-user"></i>
+          <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label>
           <span class="input-title">Model</span>
-          <i class="icon icon-mobile-phone"></i>
+          <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label>
           <span class="input-title">IMEI&&SN</span>
-          <i class="icon icon-key"></i>
+          <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label>
           <span class="input-title">Defect</span>
-          <i class="icon icon-ambulance"></i>
+          <fa-icon [icon]="cogs" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
         <label><span class="input-title">Parts replaced</span>
-          <i class="icon icon-hdd"></i>
+          <fa-icon [icon]="chip" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
 
       </div>
       <div class="row-2">
         <label><span class="input-title">Work done</span>
-          <i class="icon icon-wrench"></i>
+          <fa-icon [icon]="work" class="icon-input"></fa-icon>
           <input class="col-1">
         </label>
 
         <label><span class="input-title">Price quotation</span>
-          <i class="icon icon-money"></i>
+          <fa-icon [icon]="money" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Address</span>
-          <i class="icon icon-building"></i>
+          <fa-icon [icon]="address" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Telethon Model</span>
-          <i class="icon icon-mobile-phone"></i>
+          <fa-icon [icon]="model" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Deposit</span>
-          <i class="icon icon-money"></i>
+          <fa-icon [icon]="depossit" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
         <label>
           <span class="input-title">Accessory</span>
-          <i class="icon icon-cog"></i>
+          <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
           <input class="col-2">
         </label>
       </div>
     </div>
     <div class="title-container">
-      <p class="title-form"><i class="icon icon-tasks"></i> Tests at the entrance of the machine.</p>
+      <p class="title-form">
+        <fa-icon [icon]="test" class="icon-input"></fa-icon>
+        Tests at the entrance of the machine.
+      </p>
     </div>
     <div class="col-3">
       <div class="check-rouw-1">
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox" value="Bike">
-          <span class="check-box-name">Sensors</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox" value="Bike">
-          <span class="check-box-name">Display</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Connectors</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Sound/equipment</span>
-        </label>
+        <div class="check-block">
+          <div class="check-single">
+            <fa-icon [icon]="sensors" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox" value="Bike">
+              <span class="check-box-name">Sensors</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="display" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox" value="Bike">
+              <span class="check-box-name">Display</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="conections" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Connectors</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="sound" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Sound/equipment</span>
+            </label>
+          </div>
+        </div>
       </div>
       <div class="check-rouw-2">
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Touch</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Wi-Fi</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Microphone</span>
-        </label>
+        <div class="check-block">
+          <div class="check-single">
+            <fa-icon [icon]="touch" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Touch</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="wifi" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Wi-Fi</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="microfon" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Microphone</span>
+            </label>
+          </div>
+        </div>
       </div>
       <div class="check-rouw-3">
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Sim</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Keyboard</span>
-        </label>
-        <label class="checkbox">
-          <input class="check-box" name="device-test" type="checkbox">
-          <span class="check-box-name">Camera</span>
-        </label>
+        <div class="check-block">
+          <div class="check-single">
+            <fa-icon [icon]="sim" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Sim</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="keybord" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Keyboard</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="camera" class="icon-input"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" name="device-test" type="checkbox">
+              <span class="check-box-name">Camera</span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="text-div">
       <div class="title-container">
-        <p class="title-form"><i class="icon icon-bookmark"></i> Note the entrance of the machine.</p>
+        <p class="title-form">
+          <fa-icon [icon]="text" class="icon-input"></fa-icon>
+          Note the entrance of the machine.
+        </p>
       </div>
       <label>
         <textarea class="text-area">...</textarea>
       </label>
     </div>
     <div class="button_form">
-      <a class="dismiss" href="enter"><span class="icon icon-remove">Discard Form</span></a>
-      <a class="button button-small" href="enter" type="submit"><span class="icon icon-save">Submit Form</span>
+      <a class="dismiss" href="enter"><span><fa-icon [icon]="discar"
+                                                     class="button-icon"></fa-icon>Discard Form</span></a>
+      <a class="button button-small" href="enter" type="submit"><span> <fa-icon [icon]="svaet"
+                                                                                class="button-icon"></fa-icon>Submit Form</span>
       </a>
     </div>
   </form>

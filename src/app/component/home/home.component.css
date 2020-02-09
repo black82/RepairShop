@@ -3,34 +3,34 @@
 /*********************************************************************************/
 
 .image {
-    display: inline-block;
-    border: 1px solid rgba(0, 0, 0, .1);
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .1);
 }
 
 .image img {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 .image-full {
-    display: block;
-    width: 100%;
-    margin: 0 0 3em 0;
+  display: block;
+  width: 100%;
+  margin: 0 0 3em 0;
 }
 
 .image-left {
-    float: left;
-    margin: 0 2em 2em 0;
+  float: left;
+  margin: 0 2em 2em 0;
 }
 
 .image-centered {
-    display: block;
-    margin: 0 0 2em 0;
+  display: block;
+  margin: 0 0 2em 0;
 }
 
 .image-centered img {
-    margin: 40px auto;
-    width: auto;
+  margin: 40px auto;
+  width: auto;
 }
 
 /*********************************************************************************/
@@ -39,13 +39,13 @@
 
 
 .wrapper {
-    overflow: hidden;
-    padding: 0 0 5em 0;
+  overflow: hidden;
+  padding: 0 0 5em 0;
 
 }
 
 #wrapper1 {
-    background: #FFF;
+  background: #FFF;
 }
 
 #wrapper2 {
@@ -53,6 +53,7 @@
   text-align: center;
   padding: 0px 0 0em;
 }
+
 .tools {
   padding-top: 30px;
   font-size: 4em;
@@ -61,67 +62,69 @@
 
 .tools span {
 
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 
 .tools a {
   display: inline-block;
-  background: #1ABC9C;
-  width: 120px;
-  height: 120px;
+  background: none;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  line-height: 120px;
+  line-height: 50px;
   text-align: center;
-  color: #FFFFFF;
+  color: #1ABC9C;
+  margin: 20px;
+  transition: .2s;
+
 }
 
 .tools a:hover {
   display: inline-block;
-  background: #1ABC9C;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  line-height: 120px;
+  background: none;
+  transform: scale(1.5);
+
   text-align: center;
   color: #34495E;
+
 }
 
 #portfolio .box {
-    text-align: center;
-    color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 #portfolio h3 {
-    display: block;
-    padding-bottom: 1em;
-    font-size: 1em;
-    color: rgba(0, 0, 0, 0.6);
+  display: block;
+  padding-bottom: 1em;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 #portfolio .title {
-    text-align: center;
+  text-align: center;
 }
 
 #portfolio .title h2 {
-    color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .column1,
 .column2,
 .column3,
 .column4 {
-    width: 282px;
+  width: 282px;
 }
 
 .column1,
 .column2,
 .column3 {
-    float: left;
-    margin-right: 80px;
-    margin-left: 50px;
-    padding: 3em 0;
+  float: left;
+  margin-right: 80px;
+  margin-left: 50px;
+  padding: 3em 0;
 }
 
 #page-wrapper {
@@ -133,11 +136,12 @@
   margin-bottom: 10px;
 
 }
+
 #icon1,
 #icon2,
-#icon3{
-    display: inline-block;
-    background: #1ABC9C;
+#icon3 {
+  display: inline-block;
+  background: #1ABC9C;
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -171,35 +175,67 @@
   text-decoration: none;
   padding: 10px 30px;
   margin-right: 20px;
-  border: 1px solid #1ABC9C;
+
   background: transparent;
   color: #fff;
   font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    perspective: 500px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  perspective: 500px;
 
-    transition: .2s;
+  transition: .2s;
 }
-.button:last-of-type {margin-right: 0;}
+
+.button:last-of-type {
+  margin-right: 0;
+}
+
 .button span {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
+
 .button:before {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #1ABC9C;
-    transform-origin: left;
-    transition: .5s;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1ABC9C;
+  transform-origin: left;
+  transition: .5s;
+  border-radius: 10px;
 }
+
 .button:hover {
-    color: #1ABC9C;
-    border-color: #1ABC9C;
+  color: #1ABC9C;
+  border-color: #1ABC9C;
 }
-.button:hover:before {transform: rotateY(94deg);}
+
+.button:hover:before {
+  transform: rotateY(94deg);
+}
+
+.paragraph {
+  color: #1ABC9C;
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: 58px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 1px 1px #34495E;
+}
+
+.paragraph1 {
+  color: #34495E;
+  font-family: 'Trebuchet MS', 'Lucida Sans';
+  font-size: 15px;
+
+  line-height: 58px;
+  text-align: center;
+  font-weight: bold;
+
+}
