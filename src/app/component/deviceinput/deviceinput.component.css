@@ -29,10 +29,6 @@
   background: #F3F3F3;
 }
 
-label {
-  margin-bottom: 0.5em;
-}
-
 .row {
   display: flex;
   margin-bottom: 30px;
@@ -40,7 +36,6 @@ label {
 
 .input-title {
   display: grid;
-
   color: #7a7c7f;
   font-size: 15px;
   font-family: "Libre Baskerville", serif;
@@ -169,15 +164,32 @@ form ::-moz-focus-inner {
 }
 
 .col-3 {
+  float: none;
   display: flex;
+}
+
+.check-single {
+  display: flex;
+  margin: auto;
+}
+
+.check-block {
+  vert-align: middle;
+  display: inline-grid;
+  position: page;
 }
 
 .check-rouw-1,
 .check-rouw-2,
 .check-rouw-3 {
-  display: block;
-  margin-right: 20%;
-  margin-left: 5%;
+  content: "";
+  display: grid;
+  width: 33%;
+  flex-grow: 3;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  box-sizing: border-box;
+
 }
 
 form textarea {
@@ -237,14 +249,14 @@ form textarea {
   left: 0;
   width: 100%;
   height: 100%;
-
   transform-origin: left;
   transition: .5s;
+  border-radius: 10px
 }
 
 .button:hover {
   color: #1ABC9C;
-  border-color: #1ABC9C;
+
 }
 
 .button:hover:before,
@@ -264,7 +276,6 @@ form textarea {
 .dismiss:hover {
   color: #F09EA3;
   border-color: #F09EA3;
-
 }
 
 .button_form {
@@ -291,20 +302,3 @@ form textarea {
 
 }
 
-.icon-input {
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px; /* Предпочтительный размер иконок */
-  display: inline-block;
-  color: #1ABC9C;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased; /* Поддержка всеми WebKit браузерами */
-  text-rendering: optimizeLegibility; /* Поддержка Safari и Chrome */
-  -moz-osx-font-smoothing: grayscale; /* Поддержка Firefox. */
-  font-feature-settings: 'liga'; /* Поддержка IE. */
-}

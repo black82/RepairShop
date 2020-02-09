@@ -10,6 +10,8 @@ import {DeviceinputComponent} from './component/deviceinput/deviceinput.componen
 import {OtpoutDeviceComponent} from './component/otpout-device/otpout-device.component';
 import {SingleContentComponent} from './component/single-content/single-content.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {SearchformComponent} from './component/searchform/searchform.component';
+import {SearchpageComponent} from './component/searchpage/searchpage.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     HomeComponent,
     DeviceinputComponent,
     OtpoutDeviceComponent,
-    SingleContentComponent
+    SingleContentComponent,
+    SearchformComponent,
+    SearchpageComponent
   ],
   imports: [
     AppRoutingModule,
