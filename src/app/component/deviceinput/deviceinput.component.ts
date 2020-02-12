@@ -27,6 +27,7 @@ import {faCamera} from '@fortawesome/free-solid-svg-icons/faCamera';
 import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
+import {Client} from '../entity/ClientWeb';
 
 @Component({
   selector: 'app-deviceinput',
@@ -63,6 +64,7 @@ export class DeviceinputComponent implements OnInit {
   camera = faCamera;
   text = faEnvelopeOpenText;
   svaet = faDownload;
+  client: Client;
 
   constructor() {
   }
