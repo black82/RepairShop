@@ -1,5 +1,5 @@
 # RepairShoop
-
+Angular part of the application made for the electronic gadgets repair company !!!
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
 
 ## Development server
