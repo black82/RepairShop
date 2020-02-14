@@ -14,6 +14,8 @@ import {SearchformComponent} from './component/searchform/searchform.component';
 import {SearchpageComponent} from './component/searchpage/searchpage.component';
 import {AlertComponent} from './component/alert/alert.component';
 import {AnimationWaitComponent} from './component/animation-wait/animation-wait.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,10 @@ import {AnimationWaitComponent} from './component/animation-wait/animation-wait.
   imports: [
     AppRoutingModule,
     BrowserModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

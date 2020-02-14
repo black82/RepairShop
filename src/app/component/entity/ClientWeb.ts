@@ -7,9 +7,10 @@ export class Client {
   email: string;
   telephone_number: string;
   address: string;
-  device: Device[];
+  device: Array<Device>;
 
-  constructor(id: number, family: string, name: string, email: string, telephone_number: string, address: string, device: Device[]) {
+  constructor(id: number, family: string, name: string, email: string,
+              telephone_number: string, address: string, device: Array<Device>) {
     this.id = id;
     this.family = family;
     this.name = name;

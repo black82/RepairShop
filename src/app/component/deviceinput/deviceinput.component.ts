@@ -28,6 +28,12 @@ import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOp
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
 import {Client} from '../entity/ClientWeb';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Device} from '../entity/Device';
+import {Repair} from '../entity/Repair';
+import {InputTest} from '../entity/InputTest';
+import {ClientserviceService} from '../service/clientservice.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-deviceinput',
@@ -63,13 +69,72 @@ export class DeviceinputComponent implements OnInit {
   keybord = faKeyboard;
   camera = faCamera;
   text = faEnvelopeOpenText;
-  svaet = faDownload;
+  save = faDownload;
   client: Client;
+  formClient: FormGroup;
+  device: Device;
+  repair: Repair;
+  inputTest: InputTest;
 
-  constructor() {
+  constructor(private fb: FormBuilder, private httpService: ClientserviceService,
+              private router: Router, private route: ActivatedRoute) {
+    this.formClient = this.fb.group({
+      family: new FormControl(''),
+      name: new FormControl(''),
+      email: new FormControl(''),
+      telephone_number: new FormControl(''),
+      address: new FormControl(''),
+      model: new FormControl(''),
+      state_of_use: new FormControl(''),
+      imei: new FormControl(''),
+      code_device: new FormControl(''),
+      password_device: new FormControl(''),
+      accessory: new FormControl(''),
+      date_to_enter: new FormControl(''),
+      defect: new FormControl(''),
+      deposit: new FormControl(''),
+      price: new FormControl(''),
+      sensors_input: new FormControl(),
+      display_input: new FormControl(),
+      connectors_input: new FormControl(),
+      sound_equipment_input: new FormControl(),
+      touch_input: new FormControl(),
+      wi_fi_input: new FormControl(),
+      microphone_input: new FormControl(),
+      sim_input: new FormControl(),
+      keyboard_input: new FormControl(),
+      camera_input: new FormControl(),
+      note: new FormControl('')
+    });
   }
 
   ngOnInit() {
   }
 
+
+  createClient() {
+    let formData = Object.assign({});
+    formData = Object.assign(formData, this.formClient.value);
+    this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
+      formData.connectors_input, formData.sound_equipment_input, formData.touch_input,
+      formData.wi_fi_input, formData.microphone_input, formData.sim_input,
+      formData.keyboard_input, formData.camera_input);
+    this.repair = new Repair(null, formData.date_to_enter, null, formData.defect,
+      formData.deposit, formData.price, null, null,
+      this.inputTest, null, formData.note);
+    this.device = new Device(null, formData.model, formData.state_of_use,
+      formData.imei, formData.code_device, formData.password_device, formData.accessory, [this.repair]);
+
+    this.client = new Client(null, formData.family, formData.name, formData.email,
+      formData.telephone_number, formData.address, [this.device]);
+    console.log(this.client);
+  }
+
+  submitForm() {
+    this.createClient();
+    this.httpService.createClient(this.client).subscribe(report =>
+      report);
+    window.alert('Cient e creato con sucesso!!!');
+    this.router.navigate(['']);
+  }
 }

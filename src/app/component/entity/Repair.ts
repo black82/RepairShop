@@ -2,7 +2,7 @@ import {InputTest} from './InputTest';
 import {OutputTest} from './OutputTest';
 
 export class Repair {
-  id: number;
+  id_Repair: number;
   date_to_enter: Date;
   output_date: Date;
   defect: string;
@@ -12,11 +12,13 @@ export class Repair {
   parts_replaced: string;
   inputModule: InputTest;
   outputTest: OutputTest;
+  note: string;
 
-  constructor(id: number, date_to_enter: Date, output_date: Date, defect: string,
-              deposit: number, price: number, work_don: string, parts_replaced: string,
-              inputModule: InputTest, outputTest: OutputTest) {
-    this.id = id;
+  constructor(id_Repair: number, date_to_enter: Date, output_date: Date,
+              defect: string, deposit: number, price: number,
+              work_don: string, parts_replaced: string, inputModule: InputTest,
+              outputTest: OutputTest, note: string) {
+    this.id_Repair = id_Repair;
     this.date_to_enter = date_to_enter;
     this.output_date = output_date;
     this.defect = defect;
@@ -26,5 +28,6 @@ export class Repair {
     this.parts_replaced = parts_replaced;
     this.inputModule = inputModule;
     this.outputTest = outputTest;
+    this.note = note;
   }
 }

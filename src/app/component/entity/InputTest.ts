@@ -1,29 +1,30 @@
 export class InputTest {
-  id: number;
-  sensors: boolean;
-  display: boolean;
-  connectors: boolean;
-  sound_equipment: boolean;
-  touch: boolean;
-  wi_fi: boolean;
-  microphone: boolean;
-  sim: boolean;
-  keyboard: boolean;
-  camera: boolean;
+  id_InputTest: number;
+  sensors_input: boolean;
+  display_input: boolean;
+  connectors_input: boolean;
+  sound_equipment_input: boolean;
+  touch_input: boolean;
+  wi_fi_input: boolean;
+  microphone_input: boolean;
+  sim_input: boolean;
+  keyboard_input: boolean;
+  camera_input: boolean;
 
-  constructor(id: number, sensors: boolean, display: boolean,
-              connectors: boolean, sound_equipment: boolean, touch: boolean,
-              wi_fi: boolean, microphone: boolean, sim: boolean, keyboard: boolean, camera: boolean) {
-    this.id = id;
-    this.sensors = sensors;
-    this.display = display;
-    this.connectors = connectors;
-    this.sound_equipment = sound_equipment;
-    this.touch = touch;
-    this.wi_fi = wi_fi;
-    this.microphone = microphone;
-    this.sim = sim;
-    this.keyboard = keyboard;
-    this.camera = camera;
+  constructor(id_InputTest: number, sensors_input: boolean, display_input: boolean,
+              connectors_input: boolean, sound_equipment_input: boolean, touch_input: boolean,
+              wi_fi_input: boolean, microphone_input: boolean, sim_input: boolean,
+              keyboard_input: boolean, camera_input: boolean) {
+    this.id_InputTest = id_InputTest;
+    this.sensors_input = sensors_input;
+    this.display_input = display_input;
+    this.connectors_input = connectors_input;
+    this.sound_equipment_input = sound_equipment_input;
+    this.touch_input = touch_input;
+    this.wi_fi_input = wi_fi_input;
+    this.microphone_input = microphone_input;
+    this.sim_input = sim_input;
+    this.keyboard_input = keyboard_input;
+    this.camera_input = camera_input;
   }
 }

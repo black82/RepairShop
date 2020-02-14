@@ -25,6 +25,8 @@ import {faKeyboard} from '@fortawesome/free-solid-svg-icons/faKeyboard';
 import {faCamera} from '@fortawesome/free-solid-svg-icons/faCamera';
 import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
+import {FormGroup} from '@angular/forms';
+import {Client} from '../entity/ClientWeb';
 
 
 @Component({
@@ -60,11 +62,23 @@ export class OtpoutDeviceComponent implements OnInit {
   camera = faCamera;
   text = faEnvelopeOpenText;
   svaet = faDownload;
+  return_device_button_text = 'Search Device';
+  formClient: FormGroup;
+  formSearchClient: FormGroup;
+  titleForm = 'Search Return Device';
+  client: Client;
 
   constructor() {
   }
 
   ngOnInit() {
+
   }
 
+
+  client_catch(client1: Client) {
+    console.log('aaaaaaaaaaa');
+    this.client = client1;
+    console.log(this.client);
+  }
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
 
@@ -30,10 +30,27 @@ export class ClientserviceService {
 
   }
 
+  createClient(client: Client): Observable<string> {
+    return this.http.post<string>(this.apiUrl + 'api/create/client', client, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  searchByTelephoneNumber(telephone: string): Observable<Client> {
+    return this.http.get<Client>(this.apiUrl + '/api/search/number', {
+      params: new HttpParams().set('telephone', telephone), headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+      .pipe(retry(2),
+        catchError(this.errorHandler)
+      );
+  }
+
   searchClientById(param): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/id' + param, this.httpOptions)
       .pipe(
-        retry(2),
         catchError(this.errorHandler)
       );
   }
@@ -56,15 +73,4 @@ export class ClientserviceService {
     return throwError(error);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-
-  private log(message: string) {
-    console.log(message);
-  }
 }

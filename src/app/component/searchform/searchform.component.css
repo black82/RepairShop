@@ -3,12 +3,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 form {
   margin-top: 10px;
   margin-bottom: 10px;
   background: #F3F3F3;
+
 }
 
 .button {
@@ -174,11 +176,13 @@ form {
   border-radius: 10px;
   transform-origin: left;
   transition: .5s;
+  cursor: pointer;
 }
 
 .button:hover {
   color: #1ABC9C;
   border-color: #1ABC9C;
+  cursor: pointer;
 }
 
 .button:hover:before {
@@ -187,6 +191,7 @@ form {
 
 .button:before {
   background: #1ABC9C;
+  cursor: pointer;
 }
 
 .title-form {
