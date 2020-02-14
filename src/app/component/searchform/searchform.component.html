@@ -1,12 +1,10 @@
-<form type="submit">
-  <p class="title-form">{{nameForm}}</p>
+<form (ngSubmit)="submitForm()" [formGroup]="formInput" type="submit">
+  <p class="title-form">{{titleForm}}</p>
   <div class="container">
-
-  <input placeholder="Search..." type="text">
+    <input formControlName="ob" placeholder="Search..." type="text">
     <div class="search"></div>
-
   </div>
-  <a (click)="submit()" class="button button-small" type="submit">
+  <a (click)="submitForm()" class="button button-small" type="submit">
     <span> <fa-icon [icon]="search"
                     class="button-icon"></fa-icon>
       {{textButton}}</span></a>

@@ -1,0 +1,14 @@
+<div *ngIf="hiddenAlertB && control && control.invalid && (control.dirty || control.touched)" class="overlay"
+     id="popup1">
+  <div [ngStyle]="{'background-color':typeAlert ? 'white' : '#F09EA3' }" class="popup">
+    <div>
+      <p *ngIf=!typeAlert class="titleError"> Run Error {{error?.status}}</p>
+      <p *ngIf=typeAlert class="titleError"> Upss :</p>
+      <p class="titleFuni"> – Evacuate ? I also evacuate myself :-) </p></div>
+    <div class="content">
+      <p class="errorMessage">{{errorMessage}}</p>
+      <p *ngIf="typeAlert" class="valError">This value not allowed : {{valueChange}}</p>
+    </div>
+    <a class="close" href="{{position}}">x</a>
+  </div>
+</div>

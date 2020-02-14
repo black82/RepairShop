@@ -1,5 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Client} from '../entity/ClientWeb';
+import {ClientserviceService} from '../service/clientservice.service';
 
 @Component({
   selector: 'app-searchform',
@@ -11,15 +14,31 @@ export class SearchformComponent implements OnInit {
   @Input()
   textButton: string;
   @Input()
-  nameForm: string;
+  titleForm: string;
+  formInput: FormGroup;
+  client: Client;
+  @Output()
+  actionA: EventEmitter<Client> = new EventEmitter();
 
-  constructor() {
+  constructor(private fb: FormBuilder, private client_service: ClientserviceService) {
+    this.formInput = this.fb.group({
+      ob: new FormControl('')
+    });
   }
 
   ngOnInit() {
   }
 
-  submit() {
 
+  submitForm() {
+    this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
+      clie => {
+        this.client = clie;
+        console.log(clie);
+        this.actionA.emit(this.client);
+      },
+      error => {
+      }
+    );
   }
 }

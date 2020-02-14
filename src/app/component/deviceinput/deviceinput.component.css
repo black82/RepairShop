@@ -227,6 +227,7 @@ form textarea {
   text-transform: uppercase;
   perspective: 500px;
   transition: .2s;
+  cursor: pointer;
 }
 
 .button:last-of-type
@@ -238,6 +239,7 @@ form textarea {
 .dismiss span {
   position: relative;
   z-index: 2;
+  cursor: pointer;
 }
 
 .button:before,
@@ -251,11 +253,13 @@ form textarea {
   height: 100%;
   transform-origin: left;
   transition: .5s;
-  border-radius: 10px
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .button:hover {
   color: #1ABC9C;
+  cursor: pointer;
 
 }
 
@@ -271,11 +275,13 @@ form textarea {
 .dismiss:before {
   background: #F09EA3;
   border: 1px solid #F09EA3;
+  cursor: pointer;
 }
 
 .dismiss:hover {
   color: #F09EA3;
   border-color: #F09EA3;
+  cursor: pointer;
 }
 
 .button_form {
