@@ -8,6 +8,7 @@ export class Device {
   code_device: string;
   password_device: string;
   accessory: string;
+  rightNowInRepair: boolean;
   repairs: Repair[];
 
 

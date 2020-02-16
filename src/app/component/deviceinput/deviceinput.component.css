@@ -230,7 +230,7 @@ form textarea {
   cursor: pointer;
 }
 
-.button:last-of-type
+.button:last-of-type,
 .dismiss:last-of-type {
   margin-right: 0;
 }
