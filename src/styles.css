@@ -443,6 +443,7 @@
 .button:last-of-type
 .dismiss:last-of-type {
   margin-right: 0;
+  min-height: 10px;
 }
 
 .button span,

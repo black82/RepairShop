@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
+import {Repair} from '../entity/Repair';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class ClientserviceService {
 
   }
 
-  createClient(client: Client): Observable<string> {
-    return this.http.post<string>(this.apiUrl + 'api/create/client', client, this.httpOptions)
+  createClient(client: Client): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + 'api/create/client', client, this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -46,6 +47,14 @@ export class ClientserviceService {
       .pipe(retry(2),
         catchError(this.errorHandler)
       );
+  }
+
+  outputDeviceForm(repair: Repair, id: number): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/api/create/client/return/device/' + id, repair, this.httpOptions)
+      .pipe(retry(2),
+        catchError(this.errorHandler)
+      );
+
   }
 
   searchClientById(param): Observable<Client> {

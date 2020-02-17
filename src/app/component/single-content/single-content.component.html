@@ -35,9 +35,10 @@
           <span class="input-title"><fa-icon [icon]="date"></fa-icon>Return Date</span>
           <span class="input-title"> <fa-icon [icon]="work"></fa-icon>Work done</span>
           <span class="input-title"> <fa-icon [icon]="chip"></fa-icon>Parts replaced</span>
-          <a (click)="showTestEnter($event)" class="button button-small"><span><fa-icon
+          <a (click)="showTestEnter($event)" class="button"><span><fa-icon
             [icon]="cogs"></fa-icon> Test to Enter</span></a>
-          <a (click)="showTestReturn($event)" class="button button-small"><span><fa-icon [icon]="cogs"></fa-icon> Test to Return</span></a>
+          <a (click)="showTestReturn($event)" class="button"><span><fa-icon
+            [icon]="cogs"></fa-icon> Test to Return</span></a>
           <a (click)="functionHidem()" class="dismiss"><span><fa-icon [icon]="cogs"></fa-icon> Hided all</span></a>
           <div *ngIf=showHidem>
             <div [ngClass]="showHidem ? 'success' : 'danger'">
