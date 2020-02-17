@@ -14,7 +14,7 @@ export class Device {
 
   constructor(id_Device: number, model: string, state_of_use: string,
               imei: string, code_device: string, password_device: string,
-              accessory: string, repairs: Array<Repair>) {
+              accessory: string, rightNowInRepair: boolean, repairs: Repair[]) {
     this.id_Device = id_Device;
     this.model = model;
     this.state_of_use = state_of_use;
@@ -22,7 +22,7 @@ export class Device {
     this.code_device = code_device;
     this.password_device = password_device;
     this.accessory = accessory;
+    this.rightNowInRepair = rightNowInRepair;
     this.repairs = repairs;
   }
-
 }

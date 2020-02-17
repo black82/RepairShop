@@ -4,69 +4,70 @@
   <div class="title-container">
     <p class="title-form">Compilation model for returning the device.</p>
   </div>
-  <form *ngIf="client">
+  <form (ngSubmit)="submitForm()" [formGroup]="formClient">
     <div class="row">
       <div class="row-1">
         <label>
           <span class="input-title">Return Date</span>
           <fa-icon [icon]="date" class="icon-input"></fa-icon>
-          <input class="col-1" type="date">
+          <input class="col-1" formControlName="return_date" type="date">
         </label>
         <label>
           <span class="input-title"> Name  client</span>
           <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
-          <input class="col-1" value="{{client.name}}">
+          <input [contentEditable]="false" class="col-1" formControlName="name_family_output"
+                 value="{{client.name+ ' ' + client.family}}">
         </label>
         <label>
           <span class="input-title">Model</span>
           <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
-          <input [value]="client.device[0].model" class="col-1">
+          <input [value]="device_input?.model" class="col-1" formControlName="mobile_output">
         </label>
         <label>
           <span class="input-title">IMEI&&SN</span>
           <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
-          <input [value]="client.device[0].imei" class="col-1">
+          <input [value]="device_input?.imei" class="col-1" formControlName="imei_output">
         </label>
         <label>
           <span class="input-title">Defect</span>
           <fa-icon [icon]="cogs" class="icon-input"></fa-icon>
-          <input [value]="client.device[0].repairs[0].defect" class="col-1">
+          <input [value]="repair_input?.defect" class="col-1" formControlName="defect_output">
         </label>
         <label><span class="input-title">Parts replaced</span>
           <fa-icon [icon]="chip" class="icon-input"></fa-icon>
-          <input class="col-1">
+          <input [value]="repair_input?.parts_replaced" class="col-1" formControlName="parts_replace_output">
         </label>
 
       </div>
       <div class="row-2">
         <label><span class="input-title">Work done</span>
           <fa-icon [icon]="work" class="icon-input"></fa-icon>
-          <input class="col-1">
+          <input [value]="repair_input?.work_don" class="col-1" formControlName="work_don_output">
         </label>
 
         <label><span class="input-title">Price</span>
           <fa-icon [icon]="money" class="icon-input"></fa-icon>
-          <input [value]="client.device[0].repairs[0].price" class="col-2">
+          <input [value]="repair_input?.price" class="col-2" formControlName="price_output">
         </label>
         <label>
           <span class="input-title">Address</span>
           <fa-icon [icon]="address" class="icon-input"></fa-icon>
-          <input [value]="client.address" class="col-2">
+          <input [value]="client?.address" class="col-2" formControlName="address_output">
         </label>
         <label>
           <span class="input-title">Telethon Model</span>
           <fa-icon [icon]="model" class="icon-input"></fa-icon>
-          <input [value]="client.device[0].model" class="col-2">
+          <input [value]="device_input?.model" class="col-2" formControlName="model_output">
         </label>
         <label>
           <span class="input-title">Deposit</span>
           <fa-icon [icon]="depossit" class="icon-input"></fa-icon>
-          <input [value]="client.device[0].repairs[0].deposit" class="col-2">
+          <input [value]="repair_input?.deposit" class="col-2" formControlName="deposit_output">
         </label>
         <label>
           <span class="input-title">Accessory</span>
           <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
-          <input [value]="client.device[0].accessory" class="col-2">
+          <input [value]="device_input?.accessory" class="col-2" formControlName="accessory_output">
         </label>
       </div>
     </div>
@@ -82,28 +83,32 @@
           <div class="check-single">
             <fa-icon [icon]="sensors" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox" value="Bike">
+              <input [value]="repair_input?.outputTest?.sensors_Output" class="check-box"
+                     formControlName="sensor_output" name="device-test" type="checkbox">
               <span class="check-box-name">Sensors</span>
             </label>
           </div>
           <div class="check-single">
             <fa-icon [icon]="display" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox" value="Bike">
+              <input [value]="repair_input?.outputTest?.display_Output" class="check-box"
+                     formControlName="display_output" name="device-test" type="checkbox">
               <span class="check-box-name">Display</span>
             </label>
           </div>
           <div class="check-single">
             <fa-icon [icon]="conections" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.connectors_Output" class="check-box"
+                     formControlName="connections_output" name="device-test" type="checkbox">
               <span class="check-box-name">Connectors</span>
             </label>
           </div>
           <div class="check-single">
             <fa-icon [icon]="sound" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.sound_equipment_Output" class="check-box"
+                     formControlName="sound_equipment_output" name="device-test" type="checkbox">
               <span class="check-box-name">Sound/equipment</span>
             </label>
           </div>
@@ -114,21 +119,24 @@
           <div class="check-single">
             <fa-icon [icon]="touch" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.touch_Output" class="check-box" formControlName="touch_output"
+                     name="device-test" type="checkbox">
               <span class="check-box-name">Touch</span>
             </label>
           </div>
           <div class="check-single">
             <fa-icon [icon]="wifi" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.wi_fi_Output" class="check-box" formControlName="wi_fi_output"
+                     name="device-test" type="checkbox">
               <span class="check-box-name">Wi-Fi</span>
             </label>
           </div>
           <div class="check-single">
             <fa-icon [icon]="microfon" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.microphone_Output" class="check-box"
+                     formControlName="microphone_output" name="device-test" type="checkbox">
               <span class="check-box-name">Microphone</span>
             </label>
           </div>
@@ -139,21 +147,24 @@
           <div class="check-single">
             <fa-icon [icon]="sim" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.sim_Output" class="check-box" formControlName="sim_output"
+                     name="device-test" type="checkbox">
               <span class="check-box-name">Sim</span>
             </label>
           </div>
           <div class="check-single">
             <fa-icon [icon]="keybord" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.keyboard_Output" class="check-box"
+                     formControlName="keyboard_output" name="device-test" type="checkbox">
               <span class="check-box-name">Keyboard</span>
             </label>
           </div>
           <div class="check-single">
             <fa-icon [icon]="camera" class="icon-input"></fa-icon>
             <label class="checkbox">
-              <input class="check-box" name="device-test" type="checkbox">
+              <input [value]="repair_input?.outputTest?.camera_Output" class="check-box" formControlName="camera_output"
+                     name="device-test" type="checkbox">
               <span class="check-box-name">Camera</span>
             </label>
           </div>
@@ -168,14 +179,14 @@
         </p>
       </div>
       <label>
-        <textarea [value]="client.device[0].repairs[0].note" class="text-area">...</textarea>
+        <textarea [value]="repair_input?.note" class="text-area" formControlName="note_output">...</textarea>
       </label>
     </div>
     <div class="button_form">
-      <a class="dismiss" href="enter"><span><fa-icon [icon]="discar"
-                                                     class="button-icon"></fa-icon>Discard Form</span></a>
-      <a class="button button-small" href="enter" type="submit"><span> <fa-icon [icon]="svaet"
-                                                                                class="button-icon"></fa-icon>Submit Form</span>
+      <a class="dismiss"><span><fa-icon [icon]="discar"
+                                        class="button-icon"></fa-icon>Discard Form</span></a>
+      <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon [icon]="save"
+                                                                                          class="button-icon"></fa-icon>Submit Form</span>
       </a>
     </div>
   </form>

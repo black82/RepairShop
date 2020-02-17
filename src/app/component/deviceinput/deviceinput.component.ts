@@ -33,7 +33,7 @@ import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {InputTest} from '../entity/InputTest';
 import {ClientserviceService} from '../service/clientservice.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-deviceinput',
@@ -77,7 +77,7 @@ export class DeviceinputComponent implements OnInit {
   inputTest: InputTest;
 
   constructor(private fb: FormBuilder, private httpService: ClientserviceService,
-              private router: Router, private route: ActivatedRoute) {
+              private router: Router) {
     this.formClient = this.fb.group({
       family: new FormControl(''),
       name: new FormControl(''),
@@ -120,10 +120,10 @@ export class DeviceinputComponent implements OnInit {
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input);
     this.repair = new Repair(null, formData.date_to_enter, null, formData.defect,
-      formData.deposit, formData.price, null, null,
+      formData.deposit, formData.price, null, null, true,
       this.inputTest, null, formData.note);
     this.device = new Device(null, formData.model, formData.state_of_use,
-      formData.imei, formData.code_device, formData.password_device, formData.accessory, [this.repair]);
+      formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
 
     this.client = new Client(null, formData.family, formData.name, formData.email,
       formData.telephone_number, formData.address, [this.device]);
