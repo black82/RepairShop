@@ -31,6 +31,14 @@
   min-height: 100%;
 }
 
+.ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted {
+  border: solid 2px lightcoral;
+}
+
+.ng-valid.ng-dirty:not(form) {
+  border: solid 1px rgba(0, 0, 0, 0.15);
+}
+
 label {
   margin-bottom: 0.5em;
 }
@@ -72,7 +80,7 @@ form textarea {
   margin: 0.5em 3em;
   padding: 1em 1em;
   box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
-  border: solid 1px rgba(0, 0, 0, 0.15);
+
   -moz-transition: all 0.35s ease-in-out;
   -webkit-transition: all 0.35s ease-in-out;
   -o-transition: all 0.35s ease-in-out;

@@ -24,7 +24,7 @@ import {faKeyboard} from '@fortawesome/free-solid-svg-icons/faKeyboard';
 import {faCamera} from '@fortawesome/free-solid-svg-icons/faCamera';
 import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
 import {ClientserviceService} from '../service/clientservice.service';
 import {Router} from '@angular/router';
@@ -32,6 +32,7 @@ import {Router} from '@angular/router';
 import {Repair} from '../entity/Repair';
 import {Device} from '../entity/Device';
 import {OutputTest} from '../entity/OutputTest';
+import {HttpErrorResponse} from '@angular/common/http';
 
 
 @Component({
@@ -74,7 +75,12 @@ export class OtpoutDeviceComponent implements OnInit {
   private repair_output: Repair;
   private repair_input: Repair;
   private device_input: Device;
-
+  private type_alert: string;
+  private error: HttpErrorResponse;
+  private show_alert: boolean;
+  private message_alert: string;
+  private show_client = false;
+  private formSubmitted = false;
 
   constructor(private fb: FormBuilder, private httpService: ClientserviceService,
               private router: Router) {
@@ -86,28 +92,28 @@ export class OtpoutDeviceComponent implements OnInit {
 
   createFormAfterClientCam() {
     this.formClient = this.fb.group({
-      return_date: [this.repair_input.output_date],
-      name_family_output: [this.client.name + ' ' + this.client.family],
-      mobile_output: [this.device_input.model],
-      imei_output: [this.device_input.imei],
-      defect_output: [this.repair_input.defect],
-      parts_replace_output: [this.repair_input.parts_replaced],
-      work_don_output: [this.repair_input.work_don],
-      price_output: [this.repair_input.price],
-      address_output: [this.client.address],
-      model_output: [this.device_input.model],
-      deposit_output: [this.repair_input.deposit],
-      accessory_output: [this.device_input.accessory],
-      sensor_output: [false],
-      display_output: [false],
-      connections_output: [false],
-      sound_equipment_output: [false],
-      touch_output: [false],
-      wi_fi_output: [false],
-      microphone_output: [false],
-      sim_output: [false],
-      keyboard_output: [false],
-      camera_output: [false],
+      return_date: [this.repair_input.output_date, [Validators.required]],
+      name_family_output: [this.client.family, [Validators.required]],
+      mobile_output: [this.device_input.model, [Validators.required]],
+      imei_output: [this.device_input.imei, [Validators.required]],
+      defect_output: [this.repair_input.defect, [Validators.required]],
+      parts_replace_output: [this.repair_input.parts_replaced, [Validators.required]],
+      work_don_output: [this.repair_input.work_don, [Validators.required]],
+      price_output: [this.repair_input.price, [Validators.required]],
+      address_output: [this.client.address, [Validators.required]],
+      model_output: [this.device_input.model, [Validators.required]],
+      deposit_output: [this.repair_input.deposit, [Validators.required]],
+      accessory_output: [this.device_input.accessory, [Validators.required]],
+      sensor_output: [false, [Validators.required]],
+      display_output: [false, [Validators.required]],
+      connections_output: [false, [Validators.required]],
+      sound_equipment_output: [false, [Validators.required]],
+      touch_output: [false, [Validators.required]],
+      wi_fi_output: [false, [Validators.required]],
+      microphone_output: [false, [Validators.required]],
+      sim_output: [false, [Validators.required]],
+      keyboard_output: [false, [Validators.required]],
+      camera_output: [false, [Validators.required]],
       note_output: [this.repair_input.note],
     });
   }
@@ -115,19 +121,23 @@ export class OtpoutDeviceComponent implements OnInit {
   client_catch(client1) {
     if (client1 as Client) {
       this.client = client1;
-      console.log(this.client);
       this.identified_current_device();
-
     }
   }
 
 
   submitForm() {
     this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(
-      report =>
-        report);
-    window.alert('Operazione e andata con sucesso!!!');
-    this.router.navigate(['']);
+      response => {
+        this.show_alert_function(true, 'success', 'The client' + this.client.name +
+          'received a device and closed the repair procedure !!! Client Id ' + this.client.id, null);
+        this.router.navigate(['']).then(r => r);
+      },
+      error => {
+        this.show_alert_function(true, 'error', 'The client' + this.client.name +
+          'received a device and not closed the repair procedure !!! Client Id ' + this.client.id + '\n' + error.message, error);
+      }
+    );
   }
 
   createClient(): Repair {
@@ -150,31 +160,57 @@ export class OtpoutDeviceComponent implements OnInit {
     return this.repair_output;
   }
 
-  filterCurrentDevice() {
+  filterCurrentDevice(): number {
+    let cour = 0;
     this.client.device.forEach((device) => {
       if (device.rightNowInRepair) {
         console.log(device);
         this.device_input = device;
+        cour++;
       }
     });
-    if (this.device_input) {
-      window.alert('Reparazione non disponibile');
+    if (cour === 0) {
+      this.show_alert_function(true, 'warn', 'The client' + this.client.name +
+        'has no device in repair !!! Client Id ' + this.client.id + '\n', null);
     }
+    return cour;
   }
 
   falterRepairActiveRepair() {
+    let cour = 0;
     this.device_input.repairs.forEach(repair => {
-      if (repair.output_date === null) {
+      if (repair.nowInRepair) {
         this.repair_input = repair;
+        this.show_client = true;
+        cour++;
       }
     });
+    if (cour === 0) {
+      this.show_alert_function(true, 'warn', 'The client' + this.client.name +
+        'has no device in repair !!! Client Id ' + this.client.id + '\n', null);
+    }
+    return cour;
   }
 
   // Urgent rewrite create ne component to wiu 2 device repair active
   identified_current_device() {
-    this.filterCurrentDevice();
-    this.falterRepairActiveRepair();
-    this.createFormAfterClientCam();
+    if (this.filterCurrentDevice() === 1) {
+      if (this.falterRepairActiveRepair() === 1) {
+        this.createFormAfterClientCam();
+      }
+    }
   }
 
+  show_alert_function(show_alert: boolean, type_alert: string, message_alert: string, error_alert: HttpErrorResponse) {
+    console.log(type_alert, message_alert, show_alert);
+    this.error = error_alert;
+    this.show_alert = show_alert;
+    this.type_alert = type_alert;
+    this.message_alert = message_alert;
+  }
+
+
+  close_alert() {
+    this.show_alert = !this.show_alert;
+  }
 }

@@ -124,7 +124,6 @@ export class DeviceinputComponent implements OnInit {
       this.inputTest, null, formData.note);
     this.device = new Device(null, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
-
     this.client = new Client(null, formData.family, formData.name, formData.email,
       formData.telephone_number, formData.address, [this.device]);
     console.log(this.client);
@@ -134,7 +133,7 @@ export class DeviceinputComponent implements OnInit {
     this.createClient();
     this.httpService.createClient(this.client).subscribe(report =>
       report);
-    window.alert('Cient e creato con sucesso!!!');
+    window.alert('Client  create  success!!!');
     this.router.navigate(['']);
   }
 }
