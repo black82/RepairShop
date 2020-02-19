@@ -1,12 +1,15 @@
-<form (ngSubmit)="submitForm()" [formGroup]="formInput" type="submit">
-  <p class="title-form">{{titleForm}}</p>
-  <div class="container">
-    <input formControlName="ob" placeholder="Search..." type="text">
-    <div class="search"></div>
-  </div>
-  <a (click)="submitForm()" class="button button-small" type="submit">
+<div class="search_form">
+  <form (ngSubmit)="submitForm()" [formGroup]="formInput" type="submit">
+    <p class="title-form">{{titleForm}}</p>
+    <div class="container">
+      <input formControlName="ob" placeholder="Search..." type="text">
+      <div class="search"></div>
+    </div>
+    <a (click)="submitForm()" class="button button-small" type="submit">
     <span> <fa-icon [icon]="search"
                     class="button-icon"></fa-icon>
       {{textButton}}</span></a>
-</form>
-
+  </form>
+  <app-alert (alert_active)="close_alert()" *ngIf="show_alert" [errorMessage]="message_alert" [error]="error"
+             [hiddenAlert]="show_alert" [typeAlert]="type_alert"></app-alert>
+</div>

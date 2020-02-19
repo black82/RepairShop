@@ -1,4 +1,5 @@
 .box {
+  position: -ms-device-fixed;
   width: auto;
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.2);
@@ -6,7 +7,7 @@
   border: 2px solid #F09EA3;
   border-radius: 20px/50px;
   background-clip: padding-box;
-  text-align: center;
+
 }
 
 .button {
@@ -22,10 +23,11 @@
 
 .button:hover {
   background: #06D85F;
+
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -33,6 +35,10 @@
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
   opacity: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 .overlay:target {
@@ -64,10 +70,12 @@
   font-weight: bold;
   text-decoration: none;
   color: #333;
+  cursor: pointer;
 }
 
 .popup .close:hover {
   color: #06D85F;
+  cursor: pointer;
 }
 
 .popup .content {
