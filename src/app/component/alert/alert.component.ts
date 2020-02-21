@@ -1,6 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {HttpErrorResponse} from '@angular/common/http';
+import {AlertServiceService} from '../service/alert-service.service';
+import {Alert, AlertType} from '../entity/AlertEntity';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-alert',
@@ -8,58 +11,62 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
-  @Input()
-  errorMessage: string;
-  @Input()
-  hiddenAlert: boolean;
-  @Input()
-  position: string;
-  @Input()
-  error: HttpErrorResponse;
-  @Input()
-  typeAlert: string;
-  @Output()
-  alert_active: EventEmitter<any> = new EventEmitter();
+  private typeAlert: string;
+  private fade = false;
+
   private styleTag: HTMLStyleElement;
   private title_alert: string;
   private body_alert: string;
+  private alert: Alert;
 
-  constructor() {
+  constructor(private alertService: AlertServiceService, private router: Router) {
 
   }
-
 
   private static buildStyleElement(): HTMLStyleElement {
     const style = document.createElement('style');
     style.type = 'text/css';
+    style.className = 'alert_css';
     style.setAttribute('data-debug', 'Injected by WindowScrolling service.');
     style.textContent = `
 			body {
-				overflow: hidden !important ;
-			}
-			.container .search {
+				overflow: hidden !important;
+			  }
+			.container  {
         display: none;
 			}
 		`;
     return (style);
   }
 
-
   ngOnInit() {
-    console.log(this.hiddenAlert, this.title_alert, this.body_alert);
-
-    this.text_alert_initialized();
     this.styleTag = AlertComponent.buildStyleElement();
-
-    this.disable();
-
-    this.typeAlertFunc();
+    this.alertService.alert_open
+      .subscribe(alert => {
+        this.initAllert(alert);
+      });
   }
 
-  hide_alert(): void {
-    this.alert_active.emit();
+  initAllert(alert: Alert) {
+    this.alert = alert;
+    this.text_alert_initialized(alert);
+    this.disable();
+    this.openCloseAlert();
+    setTimeout(() => this.removeAlert(alert), 4000);
+  }
+
+  removeAlert(alert: Alert) {
+    if (this.fade) {
+      this.openCloseAlert();
+    }
     this.enable();
-    this.hiddenAlert = !this.hiddenAlert;
+    if (alert.keepAfterRouteChange) {
+      this.rout_Out_Alert(alert.location);
+    }
+  }
+
+  openCloseAlert() {
+    this.fade = !this.fade;
   }
 
   public disable(): void {
@@ -67,25 +74,25 @@ export class AlertComponent implements OnInit {
   }
 
   public enable(): void {
-    document.body.removeChild(this.styleTag);
+    document.querySelector('body').removeChild(this.styleTag);
   }
 
-  private text_alert_initialized(): void {
-    switch (this.typeAlert) {
-      case 'success': {
+  private text_alert_initialized(alert: Alert): void {
+    switch (alert.type) {
+      case AlertType.Success: {
         this.title_alert = 'Ups : Is Ok';
         this.body_alert = 'Everything went well. Your operation is successfully completed.';
         break;
       }
-      case 'error': {
-        if (this.error === null || this.error === undefined) {
-          this.error = new HttpErrorResponse({error: 'Unknown error', status: 404, statusText: 'an unknown error occurred'});
+      case AlertType.Error: {
+        if (alert.errore === null || alert.errore === undefined) {
+          alert.errore = new HttpErrorResponse({error: 'Unknown error', status: 404, statusText: 'an unknown error occurred'});
         }
-        this.title_alert = 'Ups : Error Status' + this.error.status;
+        this.title_alert = 'Ups : Error Status' + alert.errore.status;
         this.body_alert = 'Something went wrong. Try again. Otherwise contact support.';
         break;
       }
-      case 'warn': {
+      case AlertType.Warning: {
         this.title_alert = 'Ups : Waring';
         this.body_alert = 'Attention. Something\'s not right.';
         break;
@@ -97,23 +104,25 @@ export class AlertComponent implements OnInit {
     }
   }
 
-  private typeAlertFunc(): any {
+  private typeAlertFunc(alert: Alert): any {
     let color = '#F09EA3';
 
-    if (this.typeAlert === 'success') {
+    if (alert.type === AlertType.Success) {
       color = '#06D85F';
 
     }
-    if (this.typeAlert === 'error') {
-      this.typeAlert = '#F09EA3';
-
-
+    if (alert.type === AlertType.Error) {
+      this.typeAlert = '#FE1A00';
     }
-    if (this.typeAlert === 'warn') {
+    if (alert.type === AlertType.Warning) {
       color = '#FFCC00';
 
     }
     return color;
+  }
+
+  private rout_Out_Alert(location: string): void {
+    this.router.navigate([location]).then(r => r);
   }
 
 }

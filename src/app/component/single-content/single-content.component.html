@@ -1,203 +1,204 @@
-<div class="container">
-  <div class="title-container">
-    <p class="title-form"> Customer.</p>
-  </div>
-  <div class="row">
-    <div class="row-1">
-      <div class="container-1-content">
-        <div class="container-2-content">
+<!--<div class="container">-->
+<!--  <div class="title-container">-->
+<!--    <p class="title-form"> Customer.</p>-->
+<!--  </div>-->
+<!--  <div class="row">-->
+<!--    <div class="row-1">-->
+<!--      <div class="container-1-content">-->
+<!--        <div class="container-2-content">-->
 
-          <span class="input-title"><fa-icon [icon]="usertag"></fa-icon> Name of Client</span>
-          <span class="input-title"><fa-icon [icon]="phone"></fa-icon> Telethon Number</span>
-          <span class="input-title"><fa-icon [icon]="email"></fa-icon> Email</span>
-          <span class="input-title"><fa-icon [icon]="address"></fa-icon> Address</span>
-        </div>
-      </div>
+<!--          <span class="input-title">-->
+<!--            <fa-icon [icon]="usertag"></fa-icon> Name of Client: <p>{{client?.name + ' '  + client?.family}}</p></span>-->
+<!--          <span class="input-title"><fa-icon [icon]="phone"></fa-icon> Telethon Number:<p>{{client?.telephone_number}}</p></span>-->
+<!--          <span class="input-title"><fa-icon [icon]="email"></fa-icon> Email:<p>{{client?.email}}</p></span>-->
+<!--          <span class="input-title"><fa-icon [icon]="address"></fa-icon> Address:<p>{{client?.address}}</p></span>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <ul class="border">
-        <li>
-          <span class="input-title"><fa-icon [icon]="mobile"></fa-icon> Model</span>
-          <span class="input-title"><fa-icon [icon]="used"></fa-icon> State of use</span>
-          <span class="input-title"><fa-icon [icon]="code"></fa-icon> IMEI&&SN</span>
-          <span class="input-title"><fa-icon [icon]="password"></fa-icon> Code Device</span>
-          <span class="input-title"> <fa-icon [icon]="password"></fa-icon> Password Device</span>
-          <span class="input-title"><fa-icon [icon]="accessory"></fa-icon> Accessory</span>
-        </li>
-      </ul>
-    </div>
-    <li class="row-2">
-      <ul class="border">
-        <li>
-          <span class="input-title"><fa-icon [icon]="date"></fa-icon> Date to enter</span>
-          <span class="input-title"><fa-icon [icon]="cogs"></fa-icon> Defect</span>
-          <span class="input-title"><fa-icon [icon]="money"></fa-icon> Deposit</span>
-          <span class="input-title"><fa-icon [icon]="money"></fa-icon>Price</span>
-          <span class="input-title"><fa-icon [icon]="date"></fa-icon>Return Date</span>
-          <span class="input-title"> <fa-icon [icon]="work"></fa-icon>Work done</span>
-          <span class="input-title"> <fa-icon [icon]="chip"></fa-icon>Parts replaced</span>
-          <a (click)="showTestEnter($event)" class="button"><span><fa-icon
-            [icon]="cogs"></fa-icon> Test to Enter</span></a>
-          <a (click)="showTestReturn($event)" class="button"><span><fa-icon
-            [icon]="cogs"></fa-icon> Test to Return</span></a>
-          <a (click)="functionHidem()" class="dismiss"><span><fa-icon [icon]="cogs"></fa-icon> Hided all</span></a>
-          <div *ngIf=showHidem>
-            <div [ngClass]="showHidem ? 'success' : 'danger'">
-              <p>Test to Enter</p>
-              <ul class="border">
-                <li class="check-single">
-                  <fa-icon [icon]="sensors"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox" value="Bike">
-                    <span class="check-box-name">Sensors</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="display"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox" value="Bike">
-                    <span class="check-box-name">Display</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="conections"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Connectors</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="sound"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Sound/equipment</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="touch"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Touch</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="wifi"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Wi-Fi</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="microfon"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Microphone</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="sim"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Sim</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="keybord"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Keyboard</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="camera"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Camera</span>
-                  </label>
-                </li>
-              </ul>
-            </div>
+<!--      <ul class="border" *ngFor="let device of client.device">-->
+<!--        <li>-->
+<!--          <ol class="input-title"><fa-icon [icon]="mobile"></fa-icon> Model:{{device?.model}}</ol>-->
+<!--          <ol class="input-title"><fa-icon [icon]="used"></fa-icon> State of use: {{device?.state_of_use}}</ol>-->
+<!--          <ol class="input-title"><fa-icon [icon]="code"></fa-icon> IMEI&&SN:{{device?.imei}}</ol>-->
+<!--          <ol class="input-title"><fa-icon [icon]="password"></fa-icon> Code Device:{{device?.code_device}}</ol>-->
+<!--          <ol class="input-title"> <fa-icon [icon]="password"></fa-icon> Password Device:{{device?.password_device}}</ol>-->
+<!--          <ol class="input-title"><fa-icon [icon]="accessory"></fa-icon> Accessory: {{device?.accessory}}</ol>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <li class="row-2">-->
+<!--      <ul class="border" >-->
+<!--        <li >-->
+<!--          <span class="input-title"><fa-icon [icon]="date"></fa-icon> Date to enter {{}}</span>-->
+<!--          <span class="input-title"><fa-icon [icon]="cogs"></fa-icon> Defect</span>-->
+<!--          <span class="input-title"><fa-icon [icon]="money"></fa-icon> Deposit</span>-->
+<!--          <span class="input-title"><fa-icon [icon]="money"></fa-icon>Price</span>-->
+<!--          <span class="input-title"><fa-icon [icon]="date"></fa-icon>Return Date</span>-->
+<!--          <span class="input-title"> <fa-icon [icon]="work"></fa-icon>Work done</span>-->
+<!--          <span class="input-title"> <fa-icon [icon]="chip"></fa-icon>Parts replaced</span>-->
+<!--          <a (click)="showTestEnter($event)" class="button"><span><fa-icon-->
+<!--            [icon]="cogs"></fa-icon> Test to Enter</span></a>-->
+<!--          <a (click)="showTestReturn($event)" class="button"><span><fa-icon-->
+<!--            [icon]="cogs"></fa-icon> Test to Return</span></a>-->
+<!--          <a (click)="functionHidem()" class="dismiss"><span><fa-icon [icon]="cogs"></fa-icon> Hided all</span></a>-->
+<!--          <div *ngIf=showHidem>-->
+<!--            <div [ngClass]="showHidem ? 'success' : 'danger'">-->
+<!--              <p>Test to Enter</p>-->
+<!--              <ul class="border">-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="sensors"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox" value="Bike">-->
+<!--                    <span class="check-box-name">Sensors</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="display"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox" value="Bike">-->
+<!--                    <span class="check-box-name">Display</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="conections"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Connectors</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="sound"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Sound/equipment</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="touch"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Touch</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="wifi"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Wi-Fi</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="microfon"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Microphone</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="sim"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Sim</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="keybord"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Keyboard</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="camera"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Camera</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
 
-          </div>
-          <div *ngIf="showContainer">
-            <p>Test to Return</p>
-            <div [ngClass]="showContainer ? 'success' : 'danger'">
-              <ul class="border">
-                <li class="check-single">
-                  <fa-icon [icon]="sensors"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox" value="Bike">
-                    <span class="check-box-name">Sensors</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="display"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox" value="Bike">
-                    <span class="check-box-name">Display</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="conections"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Connectors</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="sound"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Sound/equipment</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="touch"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Touch</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="wifi"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Wi-Fi</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="microfon"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Microphone</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="sim"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Sim</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="keybord"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Keyboard</span>
-                  </label>
-                </li>
-                <li class="check-single">
-                  <fa-icon [icon]="camera"></fa-icon>
-                  <label class="checkbox">
-                    <input class="check-box" name="device-test" type="checkbox">
-                    <span class="check-box-name">Camera</span>
-                  </label>
-                </li>
-              </ul>
-            </div>
+<!--          </div>-->
+<!--          <div *ngIf="showContainer">-->
+<!--            <p>Test to Return</p>-->
+<!--            <div [ngClass]="showContainer ? 'success' : 'danger'">-->
+<!--              <ul class="border">-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="sensors"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox" value="Bike">-->
+<!--                    <span class="check-box-name">Sensors</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="display"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox" value="Bike">-->
+<!--                    <span class="check-box-name">Display</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="conections"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Connectors</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="sound"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Sound/equipment</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="touch"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Touch</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="wifi"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Wi-Fi</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="microfon"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Microphone</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="sim"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Sim</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="keybord"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Keyboard</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="check-single">-->
+<!--                  <fa-icon [icon]="camera"></fa-icon>-->
+<!--                  <label class="checkbox">-->
+<!--                    <input class="check-box" name="device-test" type="checkbox">-->
+<!--                    <span class="check-box-name">Camera</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
 
-          </div>
-        </li>
-      </ul>
-  </div>
-</div>
+<!--          </div>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--  </div>-->
+<!--</div>-->
 

@@ -27,12 +27,12 @@ import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
 import {ClientserviceService} from '../service/clientservice.service';
-import {Router} from '@angular/router';
 
 import {Repair} from '../entity/Repair';
 import {Device} from '../entity/Device';
 import {OutputTest} from '../entity/OutputTest';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AlertServiceService} from '../service/alert-service.service';
 
 
 @Component({
@@ -83,7 +83,7 @@ export class OtpoutDeviceComponent implements OnInit {
   private formSubmitted = false;
 
   constructor(private fb: FormBuilder, private httpService: ClientserviceService,
-              private router: Router) {
+              private alert_service: AlertServiceService) {
   }
 
   ngOnInit() {
@@ -129,13 +129,14 @@ export class OtpoutDeviceComponent implements OnInit {
   submitForm() {
     this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(
       response => {
-        this.show_alert_function(true, 'success', 'The client' + this.client.name +
-          'received a device and closed the repair procedure !!! Client Id ' + this.client.id, null);
-        this.router.navigate(['']).then(r => r);
+        this.alert_service.success(null, 'The client' + this.client.name +
+          'received a device and closed the repair procedure !!! Client Id ' + this.client.id, true, null, '');
       },
       error => {
-        this.show_alert_function(true, 'error', 'The client' + this.client.name +
-          'received a device and not closed the repair procedure !!! Client Id ' + this.client.id + '\n' + error.message, error);
+        this.alert_service.error(null, 'The client' + this.client.name +
+          'received a device and not closed the repair procedure !!! Client Id '
+          + this.client.id + '\n' + error.message, false, null, '', error);
+
       }
     );
   }

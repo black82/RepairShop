@@ -23,6 +23,7 @@ import {faCamera} from '@fortawesome/free-solid-svg-icons/faCamera';
 import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faMicrochip} from '@fortawesome/free-solid-svg-icons/faMicrochip';
+import {Client} from '../entity/ClientWeb';
 
 @Component({
   selector: 'app-single-content',
@@ -57,6 +58,7 @@ export class SingleContentComponent implements OnInit {
   work = faTools;
   showHidem = false;
   showContainer = false;
+  client: Client;
 
 
   constructor() {

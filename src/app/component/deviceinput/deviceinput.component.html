@@ -8,170 +8,165 @@
         <label>
           <span class="input-title">Name of Client</span>
           <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="name" type="text">
+          <input [errorStateMatcher]="matcher" [ngClass]="{'form-submitted': formSubmitted}" class="col-1"
+                 formControlName="name" type="text">
         </label>
         <label>
           <span class="input-title">Family of Client</span>
           <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="family" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-1" formControlName="family" type="text">
         </label>
         <label><span class="input-title">Email</span>
           <fa-icon [icon]="email" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="email" type="email">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-1" formControlName="email" type="email">
         </label>
         <label>
           <span class="input-title">Telethon Number</span>
           <fa-icon [icon]="phone" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="telephone_number" type="tel">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-1" formControlName="telephone_number"
+                 type="tel">
         </label>
 
         <label><span class="input-title">Address</span>
           <fa-icon [icon]="address" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="address" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-1" formControlName="address" type="text">
         </label>
         <label>
           <span class="input-title">Model</span>
           <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="model" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-1" formControlName="model" type="text">
         </label>
 
         <label>
           <span class="input-title">Price</span>
           <fa-icon [icon]="money" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="price" type="number">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-1" formControlName="price" type="number">
         </label>
 
         <label><span class="input-title">State of use</span>
           <fa-icon [icon]="used" class="icon-input"></fa-icon>
-          <input class="col-1" formControlName="state_of_use" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-1" formControlName="state_of_use" type="text">
         </label>
 
       </div>
       <div class="row-2">
         <label><span class="input-title">Code Device</span>
           <fa-icon [icon]="code" class="icon-input"></fa-icon>
-          <input class="col-2" formControlName="code_device" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-2" formControlName="code_device" type="text">
         </label>
         <label>
           <span class="input-title">Date to enter</span>
           <fa-icon [icon]="date" class="icon-input"></fa-icon>
-          <input class="col-2" formControlName="date_to_enter" type="date">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-2" formControlName="date_to_enter"
+                 type="date">
         </label>
         <label>
           <span class="input-title">Defect</span>
           <fa-icon [icon]="cogs" class="icon-input"></fa-icon>
-          <input class="col-2" formControlName="defect" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-2" formControlName="defect" type="text">
         </label>
-
         <label>
           <span class="input-title">IMEI&&SN</span>
           <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
-          <input class="col-2" formControlName="imei" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-2" formControlName="imei" type="text">
         </label>
         <label>
           <span class="input-title">Deposit</span>
           <fa-icon [icon]="money2" class="icon-input"></fa-icon>
-          <input class="col-2" formControlName="deposit" type="number">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-2" formControlName="deposit" type="number">
         </label>
         <label>
           <span class="input-title">Password Device</span>
           <fa-icon [icon]="password" class="icon-input"></fa-icon>
-          <input class="col-2" formControlName="password_device" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-2" formControlName="password_device"
+                 type="text">
         </label>
         <label>
           <span class="input-title">Accessory</span>
           <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
-          <input class="col-2" formControlName="accessory" type="text">
+          <input [ngClass]="{'form-submitted': formSubmitted}" class="col-2" formControlName="accessory" type="text">
         </label>
       </div>
     </div>
     <div class="title-container">
       <p class="title-form">
-        <fa-icon [icon]="test" class="icon-input"></fa-icon>
+        <fa-icon [icon]="test" class=""></fa-icon>
         Tests at the entrance of the machine.
       </p>
     </div>
     <div class="col-3">
       <div class="check-rouw-1">
-        <div class="check-block">
           <div class="check-single">
-            <fa-icon [icon]="sensors" class="icon-input"></fa-icon>
+            <fa-icon [icon]="sensors" class="icon-box"></fa-icon>
             <label class="checkbox">
               <input class="check-box" formControlName="sensors_input" name="device-test" type="checkbox">
               <span class="check-box-name">Sensors</span>
             </label>
           </div>
           <div class="check-single">
-            <fa-icon [icon]="display" class="icon-input"></fa-icon>
+            <fa-icon [icon]="display" class="icon-box"></fa-icon>
             <label class="checkbox">
               <input class="check-box" formControlName="display_input" name="device-test" type="checkbox">
               <span class="check-box-name">Display</span>
             </label>
           </div>
           <div class="check-single">
-            <fa-icon [icon]="conections" class="icon-input"></fa-icon>
+            <fa-icon [icon]="conections" class="icon-box"></fa-icon>
             <label class="checkbox">
               <input class="check-box" formControlName="connectors_input" name="device-test" type="checkbox">
               <span class="check-box-name">Connectors</span>
             </label>
           </div>
           <div class="check-single">
-            <fa-icon [icon]="sound" class="icon-input"></fa-icon>
+            <fa-icon [icon]="sound" class="icon-box"></fa-icon>
             <label class="checkbox">
               <input class="check-box" formControlName="sound_equipment_input" name="device-test" type="checkbox">
               <span class="check-box-name">Sound/equipment</span>
             </label>
           </div>
-        </div>
-      </div>
-      <div class="check-rouw-2">
-        <div class="check-block">
           <div class="check-single">
-            <fa-icon [icon]="touch" class="icon-input"></fa-icon>
+            <fa-icon [icon]="touch" class="icon-box"></fa-icon>
             <label class="checkbox">
               <input class="check-box" formControlName="touch_input" name="device-test" type="checkbox">
               <span class="check-box-name">Touch</span>
             </label>
           </div>
-          <div class="check-single">
-            <fa-icon [icon]="wifi" class="icon-input"></fa-icon>
-            <label class="checkbox">
-              <input class="check-box" formControlName="wi_fi_input" name="device-test" type="checkbox">
-              <span class="check-box-name">Wi-Fi</span>
-            </label>
-          </div>
-          <div class="check-single">
-            <fa-icon [icon]="microfon" class="icon-input"></fa-icon>
-            <label class="checkbox">
-              <input class="check-box" formControlName="microphone_input" name="device-test" type="checkbox">
-              <span class="check-box-name">Microphone</span>
-            </label>
-          </div>
+        <div class="check-single">
+          <fa-icon [icon]="wifi" class="icon-box"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="wi_fi_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Wi-Fi</span>
+          </label>
         </div>
       </div>
-      <div class="check-rouw-3">
-        <div class="check-block">
-          <div class="check-single">
-            <fa-icon [icon]="sim" class="icon-input"></fa-icon>
-            <label class="checkbox">
-              <input class="check-box" formControlName="sim_input" name="device-test" type="checkbox">
-              <span class="check-box-name">Sim</span>
-            </label>
-          </div>
-          <div class="check-single">
-            <fa-icon [icon]="keybord" class="icon-input"></fa-icon>
-            <label class="checkbox">
-              <input class="check-box" formControlName="keyboard_input" name="device-test" type="checkbox">
-              <span class="check-box-name">Keyboard</span>
-            </label>
-          </div>
-          <div class="check-single">
-            <fa-icon [icon]="camera" class="icon-input"></fa-icon>
-            <label class="checkbox">
-              <input class="check-box" formControlName="camera_input" name="device-test" type="checkbox">
-              <span class="check-box-name">Camera</span>
-            </label>
-          </div>
+      <div class="check-rouw-2">
+        <div class="check-single">
+          <fa-icon [icon]="microfon" class="icon-box"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="microphone_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Microphone</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="sim" class="icon-box"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="sim_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Sim</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="keybord" class="icon-box"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="keyboard_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Keyboard</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="camera" class="icon-box"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="camera_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Camera</span>
+          </label>
         </div>
       </div>
     </div>

@@ -1,13 +1,11 @@
 <div class="container">
   <app-searchform (actionA)="client_catch($event)"
                   [textButton]="return_device_button_text" [titleForm]="titleForm"></app-searchform>
-  <app-alert (alert_active)="close_alert()" *ngIf="show_alert" [errorMessage]="message_alert" [error]="error"
-             [hiddenAlert]="show_alert" [typeAlert]="type_alert"></app-alert>
+
   <div *ngIf="show_client" class="container_form">
     <div class="title-container">
       <p class="title-form">Compilation model for returning the device.</p>
     </div>
-
     <form (ngSubmit)="submitForm()" [formGroup]="formClient">
       <div class="row">
         <div class="row-1">
@@ -94,105 +92,97 @@
       </div>
       <div class="col-3">
         <div class="check-rouw-1">
-          <div class="check-block">
-            <div class="check-single">
-              <fa-icon [icon]="sensors" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.sensors_Output"
-                       class="check-box"
-                       formControlName="sensor_output" name="device-test" type="checkbox">
-                <span class="check-box-name">Sensors</span>
-              </label>
-            </div>
-            <div class="check-single">
-              <fa-icon [icon]="display" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.display_Output"
-                       class="check-box" formControlName="display_output" name="device-test"
-                       type="checkbox">
-                <span class="check-box-name">Display</span>
-              </label>
-            </div>
-            <div class="check-single">
-              <fa-icon [icon]="conections" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}"
-                       [value]="repair_input?.outputTest?.connectors_Output" class="check-box"
-                       formControlName="connections_output" name="device-test" type="checkbox">
-                <span class="check-box-name">Connectors</span>
-              </label>
-            </div>
-            <div class="check-single">
-              <fa-icon [icon]="sound" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}"
-                       [value]="repair_input?.outputTest?.sound_equipment_Output" class="check-box"
-                       formControlName="sound_equipment_output" name="device-test" type="checkbox">
-                <span class="check-box-name">Sound/equipment</span>
-              </label>
-            </div>
+          <div class="check-single">
+            <fa-icon [icon]="sensors" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.sensors_Output"
+                     class="check-box"
+                     formControlName="sensor_output" name="device-test" type="checkbox">
+              <span class="check-box-name">Sensors</span>
+            </label>
           </div>
+          <div class="check-single">
+            <fa-icon [icon]="display" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.display_Output"
+                     class="check-box" formControlName="display_output" name="device-test"
+                     type="checkbox">
+              <span class="check-box-name">Display</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="conections" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="repair_input?.outputTest?.connectors_Output" class="check-box"
+                     formControlName="connections_output" name="device-test" type="checkbox">
+              <span class="check-box-name">Connectors</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="sound" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="repair_input?.outputTest?.sound_equipment_Output" class="check-box"
+                     formControlName="sound_equipment_output" name="device-test" type="checkbox">
+              <span class="check-box-name">Sound/equipment</span>
+            </label>
+          </div>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="touch" class="icon-box"></fa-icon>
+          <label class="checkbox">
+            <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.touch_Output"
+                   class="check-box" formControlName="touch_output"
+                   name="device-test" type="checkbox">
+            <span class="check-box-name">Touch</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="wifi" class="icon-box"></fa-icon>
+          <label class="checkbox">
+            <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.wi_fi_Output"
+                   class="check-box" formControlName="wi_fi_output"
+                   name="device-test" type="checkbox">
+            <span class="check-box-name">Wi-Fi</span>
+          </label>
         </div>
         <div class="check-rouw-2">
-          <div class="check-block">
-            <div class="check-single">
-              <fa-icon [icon]="touch" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.touch_Output"
-                       class="check-box" formControlName="touch_output"
-                       name="device-test" type="checkbox">
-                <span class="check-box-name">Touch</span>
-              </label>
-            </div>
-            <div class="check-single">
-              <fa-icon [icon]="wifi" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.wi_fi_Output"
-                       class="check-box" formControlName="wi_fi_output"
-                       name="device-test" type="checkbox">
-                <span class="check-box-name">Wi-Fi</span>
-              </label>
-            </div>
-            <div class="check-single">
-              <fa-icon [icon]="microfon" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}"
-                       [value]="repair_input?.outputTest?.microphone_Output" class="check-box"
-                       formControlName="microphone_output" name="device-test" type="checkbox">
-                <span class="check-box-name">Microphone</span>
-              </label>
-            </div>
+          <div class="check-single">
+            <fa-icon [icon]="microfon" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="repair_input?.outputTest?.microphone_Output" class="check-box"
+                     formControlName="microphone_output" name="device-test" type="checkbox">
+              <span class="check-box-name">Microphone</span>
+            </label>
           </div>
-        </div>
-        <div class="check-rouw-3">
-          <div class="check-block">
-            <div class="check-single">
-              <fa-icon [icon]="sim" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.sim_Output"
-                       class="check-box" formControlName="sim_output"
-                       name="device-test" type="checkbox">
-                <span class="check-box-name">Sim</span>
-              </label>
-            </div>
-            <div class="check-single">
-              <fa-icon [icon]="keybord" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.keyboard_Output"
-                       class="check-box"
-                       formControlName="keyboard_output" name="device-test" type="checkbox">
-                <span class="check-box-name">Keyboard</span>
-              </label>
-            </div>
-            <div class="check-single">
-              <fa-icon [icon]="camera" class="icon-input"></fa-icon>
-              <label class="checkbox">
-                <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.camera_Output"
-                       class="check-box" formControlName="camera_output"
-                       name="device-test" type="checkbox">
-                <span class="check-box-name">Camera</span>
-              </label>
-            </div>
+          <div class="check-single">
+            <fa-icon [icon]="sim" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.sim_Output"
+                     class="check-box" formControlName="sim_output"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Sim</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="keybord" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.keyboard_Output"
+                     class="check-box"
+                     formControlName="keyboard_output" name="device-test" type="checkbox">
+              <span class="check-box-name">Keyboard</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="camera" class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.camera_Output"
+                     class="check-box" formControlName="camera_output"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Camera</span>
+            </label>
           </div>
         </div>
       </div>

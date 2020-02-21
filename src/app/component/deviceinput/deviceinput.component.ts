@@ -28,12 +28,13 @@ import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOp
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
 import {Client} from '../entity/ClientWeb';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {InputTest} from '../entity/InputTest';
 import {ClientserviceService} from '../service/clientservice.service';
-import {Router} from '@angular/router';
+import {AlertServiceService} from '../service/alert-service.service';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 @Component({
   selector: 'app-deviceinput',
@@ -75,34 +76,38 @@ export class DeviceinputComponent implements OnInit {
   device: Device;
   repair: Repair;
   inputTest: InputTest;
+  formSubmitted: boolean;
+  formSubmitted_icon: boolean;
+  requiredError: boolean;
+  matcher = new MyErrorStateMatcher();
 
   constructor(private fb: FormBuilder, private httpService: ClientserviceService,
-              private router: Router) {
+              private alert_service: AlertServiceService) {
     this.formClient = this.fb.group({
-      family: new FormControl(''),
-      name: new FormControl(''),
-      email: new FormControl(''),
-      telephone_number: new FormControl(''),
-      address: new FormControl(''),
-      model: new FormControl(''),
-      state_of_use: new FormControl(''),
-      imei: new FormControl(''),
-      code_device: new FormControl(''),
-      password_device: new FormControl(''),
-      accessory: new FormControl(''),
-      date_to_enter: new FormControl(''),
-      defect: new FormControl(''),
-      deposit: new FormControl(''),
-      price: new FormControl(''),
-      sensors_input: new FormControl(),
-      display_input: new FormControl(),
-      connectors_input: new FormControl(),
-      sound_equipment_input: new FormControl(),
-      touch_input: new FormControl(),
-      wi_fi_input: new FormControl(),
-      microphone_input: new FormControl(),
-      sim_input: new FormControl(),
-      keyboard_input: new FormControl(),
+      family: new FormControl(null, [Validators.required]),
+      name: new FormControl(null, [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      telephone_number: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      model: new FormControl('', [Validators.required]),
+      state_of_use: new FormControl('', [Validators.required]),
+      imei: new FormControl('', [Validators.required]),
+      code_device: new FormControl('', [Validators.required]),
+      password_device: new FormControl('', [Validators.required]),
+      accessory: new FormControl('', [Validators.required]),
+      date_to_enter: new FormControl('', [Validators.required]),
+      defect: new FormControl('', [Validators.required]),
+      deposit: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.max(6)]),
+      sensors_input: new FormControl(null, [Validators.required]),
+      display_input: new FormControl(null, [Validators.required]),
+      connectors_input: new FormControl(null, [Validators.required]),
+      sound_equipment_input: new FormControl(null, [Validators.required]),
+      touch_input: new FormControl(null, [Validators.required]),
+      wi_fi_input: new FormControl(null, [Validators.required]),
+      microphone_input: new FormControl(null, [Validators.required]),
+      sim_input: new FormControl(null, [Validators.required]),
+      keyboard_input: new FormControl(null, [Validators.required]),
       camera_input: new FormControl(),
       note: new FormControl('')
     });
@@ -131,9 +136,23 @@ export class DeviceinputComponent implements OnInit {
 
   submitForm() {
     this.createClient();
-    this.httpService.createClient(this.client).subscribe(report =>
-      report);
-    window.alert('Client  create  success!!!');
-    this.router.navigate(['']);
+    this.httpService.createClient(this.client).subscribe(response => {
+        this.alert_service.success(null, 'The client' + this.client.name +
+          'received a device and closed the repair procedure !!! Client Id ' + response, true, null, '');
+      },
+      error => {
+        this.alert_service.error(null, 'The client' + this.client.name +
+          'received a device and not closed the repair procedure !!! Client Id '
+          + this.client.id + '\n' + error.message, false, null, '', error);
+
+      }
+    );
+  }
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
