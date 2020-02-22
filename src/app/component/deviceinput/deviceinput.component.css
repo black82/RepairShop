@@ -346,14 +346,15 @@ form textarea {
 }
 
 .icon-box {
-  color: lightcoral;
+
   font-size: 30px;
 }
 
-.ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted, .ng-touched:not(form).form-submitted {
+.ng-invalid.ng-dirty:not(form).ng-touched:not(form).form-submitted .ng-invalid:not(form).form-submitted {
   border: solid 2px lightcoral;
 }
 
-.ng-valid.ng-dirty:not(form) {
+.ng-valid:not(form) {
   border: solid 1px rgba(0, 0, 0, 0.15);
 }
+

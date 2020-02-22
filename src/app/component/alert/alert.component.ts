@@ -18,6 +18,7 @@ export class AlertComponent implements OnInit {
   private title_alert: string;
   private body_alert: string;
   private alert: Alert;
+  alert_type: AlertType;
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
@@ -43,25 +44,25 @@ export class AlertComponent implements OnInit {
     this.styleTag = AlertComponent.buildStyleElement();
     this.alertService.alert_open
       .subscribe(alert => {
-        this.initAllert(alert);
+        this.alert = alert;
+        this.initAlert();
       });
   }
 
-  initAllert(alert: Alert) {
-    this.alert = alert;
-    this.text_alert_initialized(alert);
+  initAlert() {
+    this.text_alert_initialized();
     this.disable();
     this.openCloseAlert();
-    setTimeout(() => this.removeAlert(alert), 4000);
+    setTimeout(() => this.removeAlert(), 8000);
   }
 
-  removeAlert(alert: Alert) {
+  removeAlert() {
     if (this.fade) {
       this.openCloseAlert();
     }
     this.enable();
-    if (alert.keepAfterRouteChange) {
-      this.rout_Out_Alert(alert.location);
+    if (this.alert.keepAfterRouteChange) {
+      this.rout_Out_Alert(this.alert.location);
     }
   }
 
@@ -77,18 +78,18 @@ export class AlertComponent implements OnInit {
     document.querySelector('body').removeChild(this.styleTag);
   }
 
-  private text_alert_initialized(alert: Alert): void {
-    switch (alert.type) {
+  private text_alert_initialized(): void {
+    switch (this.alert.type) {
       case AlertType.Success: {
         this.title_alert = 'Ups : Is Ok';
         this.body_alert = 'Everything went well. Your operation is successfully completed.';
         break;
       }
       case AlertType.Error: {
-        if (alert.errore === null || alert.errore === undefined) {
-          alert.errore = new HttpErrorResponse({error: 'Unknown error', status: 404, statusText: 'an unknown error occurred'});
+        if (this.alert.errore === null || this.alert.errore === undefined) {
+          this.alert.errore = new HttpErrorResponse({error: 'Unknown error', status: 404, statusText: 'an unknown error occurred'});
         }
-        this.title_alert = 'Ups : Error Status' + alert.errore.status;
+        this.title_alert = 'Ups : Error Status' + this.alert.errore.status;
         this.body_alert = 'Something went wrong. Try again. Otherwise contact support.';
         break;
       }
@@ -104,17 +105,17 @@ export class AlertComponent implements OnInit {
     }
   }
 
-  private typeAlertFunc(alert: Alert): any {
+  private typeAlertFunc(): any {
     let color = '#F09EA3';
 
-    if (alert.type === AlertType.Success) {
+    if (this.alert.type === AlertType.Success) {
       color = '#06D85F';
 
     }
-    if (alert.type === AlertType.Error) {
+    if (this.alert.type === AlertType.Error) {
       this.typeAlert = '#FE1A00';
     }
-    if (alert.type === AlertType.Warning) {
+    if (this.alert.type === AlertType.Warning) {
       color = '#FFCC00';
 
     }

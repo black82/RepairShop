@@ -127,6 +127,11 @@ export class OtpoutDeviceComponent implements OnInit {
 
 
   submitForm() {
+    if (!this.formClient.valid) {
+      Object.keys(this.formClient.controls).forEach(key => {
+        this.formClient.controls[key].markAllAsTouched();
+      });
+    }
     this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(
       response => {
         this.alert_service.success(null, 'The client' + this.client.name +
@@ -171,8 +176,9 @@ export class OtpoutDeviceComponent implements OnInit {
       }
     });
     if (cour === 0) {
-      this.show_alert_function(true, 'warn', 'The client' + this.client.name +
-        'has no device in repair !!! Client Id ' + this.client.id + '\n', null);
+      this.alert_service.warn('',
+        'Non o trovato devaisuri in reparatione',
+        false, false, '');
     }
     return cour;
   }
@@ -187,8 +193,9 @@ export class OtpoutDeviceComponent implements OnInit {
       }
     });
     if (cour === 0) {
-      this.show_alert_function(true, 'warn', 'The client' + this.client.name +
-        'has no device in repair !!! Client Id ' + this.client.id + '\n', null);
+      this.alert_service.warn('',
+        'Non o trovato reparatione active',
+        false, false, '');
     }
     return cour;
   }

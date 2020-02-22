@@ -28,13 +28,12 @@ import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOp
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
 import {Client} from '../entity/ClientWeb';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {InputTest} from '../entity/InputTest';
 import {ClientserviceService} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
-import {ErrorStateMatcher} from '@angular/material/core';
 
 @Component({
   selector: 'app-deviceinput',
@@ -77,9 +76,9 @@ export class DeviceinputComponent implements OnInit {
   repair: Repair;
   inputTest: InputTest;
   formSubmitted: boolean;
-  formSubmitted_icon: boolean;
+  iconSubmitted_icon: boolean;
   requiredError: boolean;
-  matcher = new MyErrorStateMatcher();
+
 
   constructor(private fb: FormBuilder, private httpService: ClientserviceService,
               private alert_service: AlertServiceService) {
@@ -135,6 +134,14 @@ export class DeviceinputComponent implements OnInit {
   }
 
   submitForm() {
+    if (!this.formClient.valid) {
+      Object.keys(this.formClient.controls).forEach(key => {
+        this.formClient.controls[key].markAllAsTouched();
+      });
+      this.alert_service.warn('', 'You form not valid',
+        false, false, '');
+      return;
+    }
     this.createClient();
     this.httpService.createClient(this.client).subscribe(response => {
         this.alert_service.success(null, 'The client' + this.client.name +
@@ -148,11 +155,10 @@ export class DeviceinputComponent implements OnInit {
       }
     );
   }
-}
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  getf() {
+    return this.formClient.controls;
   }
 }
+
+

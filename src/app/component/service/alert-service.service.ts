@@ -22,7 +22,7 @@ export class AlertServiceService {
     this.alert(new Alert(AlertType.Info, message, errore, keepAfterRouteChange, fade, location));
   }
 
-  warn(type, message: string, keepAfterRouteChange: boolean, fade: boolean, location: string, errore: HttpErrorResponse) {
+  warn(type: any, message: string, keepAfterRouteChange: boolean, fade: boolean, location: string, errore?: HttpErrorResponse) {
     this.alert(new Alert(AlertType.Warning, message, errore, keepAfterRouteChange, fade, location));
   }
 
