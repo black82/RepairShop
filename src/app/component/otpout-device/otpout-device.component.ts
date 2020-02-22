@@ -27,12 +27,12 @@ import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
 import {ClientserviceService} from '../service/clientservice.service';
-import {Router} from '@angular/router';
 
 import {Repair} from '../entity/Repair';
 import {Device} from '../entity/Device';
 import {OutputTest} from '../entity/OutputTest';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AlertServiceService} from '../service/alert-service.service';
 
 
 @Component({
@@ -83,7 +83,7 @@ export class OtpoutDeviceComponent implements OnInit {
   private formSubmitted = false;
 
   constructor(private fb: FormBuilder, private httpService: ClientserviceService,
-              private router: Router) {
+              private alert_service: AlertServiceService) {
   }
 
   ngOnInit() {
@@ -127,15 +127,21 @@ export class OtpoutDeviceComponent implements OnInit {
 
 
   submitForm() {
+    if (!this.formClient.valid) {
+      Object.keys(this.formClient.controls).forEach(key => {
+        this.formClient.controls[key].markAllAsTouched();
+      });
+    }
     this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(
       response => {
-        this.show_alert_function(true, 'success', 'The client' + this.client.name +
-          'received a device and closed the repair procedure !!! Client Id ' + this.client.id, null);
-        this.router.navigate(['']).then(r => r);
+        this.alert_service.success(null, 'The client' + this.client.name +
+          'received a device and closed the repair procedure !!! Client Id ' + this.client.id, true, null, '');
       },
       error => {
-        this.show_alert_function(true, 'error', 'The client' + this.client.name +
-          'received a device and not closed the repair procedure !!! Client Id ' + this.client.id + '\n' + error.message, error);
+        this.alert_service.error(null, 'The client' + this.client.name +
+          'received a device and not closed the repair procedure !!! Client Id '
+          + this.client.id + '\n' + error.message, false, null, '', error);
+
       }
     );
   }
@@ -170,8 +176,9 @@ export class OtpoutDeviceComponent implements OnInit {
       }
     });
     if (cour === 0) {
-      this.show_alert_function(true, 'warn', 'The client' + this.client.name +
-        'has no device in repair !!! Client Id ' + this.client.id + '\n', null);
+      this.alert_service.warn('',
+        'Non o trovato devaisuri in reparatione',
+        false, false, '');
     }
     return cour;
   }
@@ -186,8 +193,9 @@ export class OtpoutDeviceComponent implements OnInit {
       }
     });
     if (cour === 0) {
-      this.show_alert_function(true, 'warn', 'The client' + this.client.name +
-        'has no device in repair !!! Client Id ' + this.client.id + '\n', null);
+      this.alert_service.warn('',
+        'Non o trovato reparatione active',
+        false, false, '');
     }
     return cour;
   }

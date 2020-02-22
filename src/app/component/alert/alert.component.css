@@ -4,7 +4,7 @@
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.2);
   padding: 35px;
-  border: 2px solid #F09EA3;
+  border: 2px solid #f97352;
   border-radius: 20px/50px;
   background-clip: padding-box;
 
@@ -33,17 +33,32 @@
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  opacity: 80%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden !important;
 
 }
 
+@keyframes alert {
+  0% {
+    left: 0px;
+    top: -20%;
+  }
+  25% {
+    left: 0px;
+    top: 20%;
+  }
+  50% {
+    left: 0px;
+    top: 0px;
+  }
+
+}
 .overlay:target {
   visibility: visible;
   opacity: 90%;
+
 }
 
 .popup {
@@ -52,7 +67,10 @@
   border-radius: 5px;
   width: 40%;
   position: relative;
-  transition: all 1s ease-in-out;
+  animation-name: alert;
+  animation-duration: 3s;
+  transition: margin-top;
+  animation-fill-mode: backwards
 }
 
 .popup h2 {

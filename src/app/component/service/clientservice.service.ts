@@ -41,7 +41,9 @@ export class ClientserviceService {
   searchByTelephoneNumber(telephone: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + '/api/search/number', {
       params: new HttpParams().set('telephone', telephone), headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json', Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*'
+
       })
     })
       .pipe(retry(2),

@@ -14,11 +14,13 @@ export class HomeComponent implements OnInit {
   search = faSearch;
   return = faSignOutAlt;
   entering = faSignInAlt;
+  hidem_animation = true;
 
   constructor() {
   }
 
   ngOnInit() {
+    setTimeout(() => this.hidem_animation = false, 3000);
   }
 
 }

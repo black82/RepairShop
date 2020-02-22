@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "RepairShoop"
+    }
+  },
+  "defaultProject": "RepairShoop",
+  "cli": {
+    "analytics": "e5619b56-567b-43aa-b2d3-b5a2ef46376c"
+  }
 }
