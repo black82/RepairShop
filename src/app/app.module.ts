@@ -17,6 +17,7 @@ import {AnimationWaitComponent} from './component/animation-wait/animation-wait.
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
+import {PrintPageComponent} from './component/print-page/print-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatInputModule} from '@angular/material/input';
     SearchformComponent,
     SearchpageComponent,
     AlertComponent,
-    AnimationWaitComponent
+    AnimationWaitComponent,
+    PrintPageComponent
   ],
   imports: [
     AppRoutingModule,
