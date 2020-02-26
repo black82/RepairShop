@@ -200,25 +200,12 @@ export class OtpoutDeviceComponent implements OnInit {
     return cour;
   }
 
-  // Urgent rewrite create ne component to wiu 2 device repair active
+  // Urgent rewrite create new component to wiu 2 device repair active
   identified_current_device() {
     if (this.filterCurrentDevice() === 1) {
       if (this.falterRepairActiveRepair() === 1) {
         this.createFormAfterClientCam();
       }
     }
-  }
-
-  show_alert_function(show_alert: boolean, type_alert: string, message_alert: string, error_alert: HttpErrorResponse) {
-    console.log(type_alert, message_alert, show_alert);
-    this.error = error_alert;
-    this.show_alert = show_alert;
-    this.type_alert = type_alert;
-    this.message_alert = message_alert;
-  }
-
-
-  close_alert() {
-    this.show_alert = !this.show_alert;
   }
 }

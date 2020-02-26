@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
@@ -24,6 +24,8 @@ import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOp
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faMicrochip} from '@fortawesome/free-solid-svg-icons/faMicrochip';
 import {Client} from '../entity/ClientWeb';
+import {Device} from '../entity/Device';
+import {Repair} from '../entity/Repair';
 
 @Component({
   selector: 'app-single-content',
@@ -58,16 +60,42 @@ export class SingleContentComponent implements OnInit {
   work = faTools;
   showHidem = false;
   showContainer = false;
+  @Input()
   client: Client;
+  devices_element: Element[] = [];
+  devices: Device[] = [];
+  repairs: Repair[] = [];
+  repairs_element: ElementRepair[] = [];
+  @Input()
+  private refresh: EventEmitter<Client> = new EventEmitter<Client>();
 
 
   constructor() {
   }
 
   ngOnInit() {
+    if (this.client != null) {
+      this.create_client(this.client);
+    }
+    this.refresh.subscribe(data => {
+      this.create_client(data);
+    });
   }
 
-  showTestEnter($event: MouseEvent) {
+  create_client(client: Client) {
+    this.devices_element = [];
+    this.repairs_element = [];
+    this.devices = client.device;
+    this.devices.map(s => this.devices_element.push(new Element(false, s)));
+    this.devices.forEach(device => {
+        device.repairs.forEach(repair =>
+          this.repairs_element.push(new ElementRepair(false, repair)));
+
+      }
+    );
+  }
+
+  showTestEnter() {
     this.showContainer = false;
     this.showHidem = !this.showHidem;
   }
@@ -82,7 +110,28 @@ export class SingleContentComponent implements OnInit {
     this.showContainer = false;
   }
 
-  chekdanger() {
-    return document.getElementsByClassName('danger');
+
+  showElement(element) {
+    element.visible = !element.visible;
+  }
+}
+
+class Element {
+  visible: boolean;
+  divice: Device;
+
+  constructor(visible: boolean, divice: Device) {
+    this.visible = visible;
+    this.divice = divice;
+  }
+}
+
+class ElementRepair {
+  visible: boolean;
+  repair_elemnt: Repair;
+
+  constructor(visible: boolean, repair: Repair) {
+    this.visible = visible;
+    this.repair_elemnt = repair;
   }
 }
