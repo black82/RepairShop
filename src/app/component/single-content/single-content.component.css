@@ -75,7 +75,8 @@
 }
 
 .border li,
-.container-2-content {
+.container-2-content,
+.border-container {
   font-family: "Trebuchet MS", "Lucida Sans", serif;
   padding: 7px 20px;
   margin-bottom: 10px;
@@ -192,4 +193,48 @@ fa-icon {
   font-family: "Trebuchet MS", "Lucida Sans", serif;
   text-align: center;
   color: lightcoral;
+}
+
+.test-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.test-enter,
+.test-output {
+
+
+}
+
+.test-icon {
+  color: lightcoral;
+  margin-right: 4px;
+}
+
+.icon-test-tile {
+  color: #1ABC9C;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+hr {
+  background: #1ABC9C;
+  margin-top: 10px;
+  height: 5px;
+  border: none;
+  border-radius: 3px;
+}
+
+.note-border {
+  border: solid 1px #1ABC9C;
+  border-radius: 10px;
+
+}
+
+.note {
+
 }

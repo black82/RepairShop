@@ -9,16 +9,15 @@ import {Repair} from '../entity/Repair';
 @Injectable({
   providedIn: 'root'
 })
-export class ClientserviceService {
-  isLoggedIn = false;
-  redirectUrl: string;
+export class HttpClien {
+
 
   apiUrl = 'http://localhost:8080/';
-  router: Router;
+
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json; charset=utf-8'
     })
   };
   httpOptionsHtml = {
@@ -27,7 +26,7 @@ export class ClientserviceService {
     })
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -41,7 +40,7 @@ export class ClientserviceService {
   searchByTelephoneNumber(telephone: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + '/api/search/number', {
       params: new HttpParams().set('telephone', telephone), headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json; charset=utf-8'
       })
     })
       .pipe(retry(2),

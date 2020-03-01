@@ -4,7 +4,8 @@
 
   <div *ngIf="show_client" class="container_form">
     <div class="title-container">
-      <p class="title-form">Compilation model for returning the device.</p>
+      <p class="title-form">Compile the model for the device's {{device_input.model}} output
+        client {{client.name}} {{client.family}}</p>
     </div>
     <form (ngSubmit)="submitForm()" [formGroup]="formClient">
       <div class="row">
@@ -213,7 +214,7 @@
             </label>
           </div>
           <div class="check-single">
-            <fa-icon [icon]="camera" [style.color]="formClient.controls.camera_output.value? '#1ABC9C' : 'lightcoral'"
+            <fa-icon [icon]="camera" [style.color]="formClient.controls?.camera_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">
               <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.camera_Output"
@@ -236,8 +237,11 @@
         </label>
       </div>
       <div class="button_form">
-        <a class="dismiss"><span><fa-icon [icon]="discar"
-                                          class="button-icon"></fa-icon>Discard Form</span></a>
+        <a (click)="dismissed()" class="dismiss"><span><fa-icon [icon]="discar"
+                                                                class="button-icon"></fa-icon>Discard Form</span></a>
+        <a (click)="printPage()" class="print">
+        <span> <fa-icon
+          [icon]="printer"></fa-icon> Print Page</span></a>
         <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon [icon]="save"
                                                                                             class="button-icon"></fa-icon>Submit Form</span>
         </a>
@@ -246,4 +250,6 @@
 
   </div>
 </div>
+
+<app-check-device-repair-active (device_return)="select_device($event)"></app-check-device-repair-active>
 

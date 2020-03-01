@@ -1,1 +1,115 @@
-<p>print-page works!</p>
+<div *ngIf="client" class="container-fluid">
+  <div class="head-doc">
+
+    <div class="col">
+      <img
+        alt="logotipo"
+        class="logotipo"
+        src="../../assets/images/logotip.jpg">
+    </div>
+
+    <div class="col">
+      <h2>N Riparazione</h2>
+      <p>{{client?.id}}</p>
+      <div class="address">
+        <p>info@rfvtechnology.eu</p>
+        <p>Nebro Italia(BG) , 24027</p>
+        <p>Via Garibaldi , 6/A</p>
+        <p>Nebro Bergamo, 24027</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="row no-gutters items-group">
+    <div class="col-3 label">
+      <p>Cliente : {{client?.name}} {{client?.family}}</p>
+      <p>Email : {{client?.email}}</p>
+      <p>Cont.Telefonico : {{client?.telephone_number}}</p>
+    </div>
+    <div class="col-9">
+      <p>Indirizzo cliente</p>
+      <p>{{client?.address}}</p>
+    </div>
+  </div>
+
+  <div class="row no-gutters items-group">
+    <div class="col-3 label">
+      <p>Model: {{client?.device[0]?.model}}</p>
+      <p>Condizioni d'uso: {{client?.device[0]?.state_of_use}}</p>
+      <p>IMEI&SN: {{client?.device[0]?.imei}}</p>
+      <p>Difect: {{client?.device[0]?.repairs[0]?.defect}}.</p>
+      <p>Accessory:{{client?.device[0]?.accessory}}</p>
+    </div>
+
+    <div *ngIf="type_print===1" class="col-9">
+      <p>Date to enter : {{client?.device[0]?.repairs[0]?.date_to_enter| date:'mediumDate'}}</p>
+      <p>Deposit : {{client?.device[0].repairs[0]?.deposit}}</p>
+      <p>Prezzo di riparazione : {{client?.device[0]?.repairs[0]?.price}}</p>
+      <p *ngIf="type_print===1">La riparazione sarà finalizzata:{{date_exit | date:'mediumDate'}}</p>
+    </div>
+
+    <div *ngIf="type_print===2" class="col-9">
+      <p>Data di ricezione del dispositivo : {{client?.device[0]?.repairs[0]?.date_to_enter| date:'mediumDate'}}</p>
+      <p>Data di ritorno del dispositivo : {{client?.device[0]?.repairs[0]?.output_date| date:'mediumDate'}}</p>
+      <p>Deposit : {{client?.device[0]?.repairs[0]?.deposit}}</p>
+      <p>Prezzo di riparazione : {{client?.device[0]?.repairs[0]?.price}}</p>
+      <p>Lavoro svolto : {{client?.device[0]?.repairs[0]?.work_don}}</p>
+      <p>Ricambi usati : {{client?.device[0]?.repairs[0]?.parts_replaced}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="row-test">
+      <div class="col-test-1">
+        <p *ngIf="name_test_input.length===0" class="label">Il tuo dispositivo ha superato con successo tutti i nostri
+          test di
+          ingresso!!!</p>
+        <div *ngIf="name_test_input.length>0">
+          <p>Test di ingresso no superate!!!</p>
+          <ul *ngFor="let test of name_test_input" class="disclaimer">
+            <li> {{test}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-test-2">
+        <p *ngIf="name_test_out?.length===0 && type_print===2" class="label">Il tuo dispositivo ha superato con successo
+          tutti i nostri test in uscita!!!</p>
+        <div *ngIf="name_test_out?.length>0">
+          <p>Test di uscita no superate!!!</p>
+          <ul *ngFor="let test of name_test_out" class="disclaimer">
+            <li> {{test}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters items-group">
+    <p>Note Condizioni Generali:</p>
+    <p>
+      RFV Technology non si assume la responsabilità di nessun genere sulle seguenti
+      condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di effettuare i
+      test d'ingresso -Se, o seguito di un salvataggio dati, il cliente dichiara che non sono presenti del dati (RFV
+      Technology si basa sulla dimensione di ogni singola cartella per verificare che tutti i dati presenti sul
+      dispositivo vengano salvati) -Se il dispositivo, pronto per essere consegnato, viene lasciato in negozio per più
+      di 90 giorni a partire dal giorno della chiamata al eliente
+    </p>
+    <p>NB: dopo il termine, Il disponitivo verrà ritirato
+      come spese aziendali per il lavoro non più pagato</p>
+    <hr>
+    <p>Autorizzo il trattamento dei mei dati personali ai sensi del Decreto
+      Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei
+      dati personali”</p>
+  </div>
+  <div *ngIf="type_print===1" class="check-single">
+    <label class="checkbox">
+      <input [checked]="client.send_email_active" class="check-box" formControlName="email_send" name="device-test"
+             type="checkbox">
+      <span class="check-box-name">Accetto di ricevere e-mail con notizie o fatture da questo emittente.</span>
+    </label>
+  </div>
+  <div class="row no-gutters">
+    <div class="col">
+      <p class="disclaimer signature-field">Dichiaro di essere d'accordo con le condizioni stabilite in questo
+        documento. Per quello firmo. Nebro / {{date | date:'mediumDate'}}</p>
+    </div>
+  </div>
+</div>

@@ -13,12 +13,10 @@ import {Router} from '@angular/router';
 export class AlertComponent implements OnInit {
   private typeAlert: string;
   private fade = false;
-
   private styleTag: HTMLStyleElement;
   private title_alert: string;
   private body_alert: string;
   private alert: Alert;
-  alert_type: AlertType;
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
@@ -30,12 +28,9 @@ export class AlertComponent implements OnInit {
     style.className = 'alert_css';
     style.setAttribute('data-debug', 'Injected by WindowScrolling service.');
     style.textContent = `
-			body {
-				overflow: hidden !important;
+			.container {
+				display: none;
 			  }
-			.container  {
-        display: none;
-			}
 		`;
     return (style);
   }
@@ -53,7 +48,6 @@ export class AlertComponent implements OnInit {
     this.text_alert_initialized();
     this.disable();
     this.openCloseAlert();
-    setTimeout(() => this.removeAlert(), 8000);
   }
 
   removeAlert() {

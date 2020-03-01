@@ -8,9 +8,12 @@ export class Client {
   telephone_number: string;
   address: string;
   device: Array<Device>;
+  send_email_active: boolean;
 
-  constructor(id: number, family: string, name: string, email: string,
-              telephone_number: string, address: string, device: Array<Device>) {
+
+  constructor(id: number, family: string, name: string,
+              email: string, telephone_number: string, address: string,
+              device: Array<Device>, send_email_active: boolean) {
     this.id = id;
     this.family = family;
     this.name = name;
@@ -18,5 +21,6 @@ export class Client {
     this.telephone_number = telephone_number;
     this.address = address;
     this.device = device;
+    this.send_email_active = send_email_active;
   }
 }

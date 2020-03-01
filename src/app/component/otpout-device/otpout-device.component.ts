@@ -26,13 +26,16 @@ import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOp
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
-import {ClientserviceService} from '../service/clientservice.service';
+import {HttpClien} from '../service/clientservice.service';
 
 import {Repair} from '../entity/Repair';
 import {Device} from '../entity/Device';
 import {OutputTest} from '../entity/OutputTest';
-import {HttpErrorResponse} from '@angular/common/http';
 import {AlertServiceService} from '../service/alert-service.service';
+import {PrintService} from '../service/print.service';
+import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
+import {PrintEntity} from '../entity/Print_Pojo';
+import {FiltreMoreDeviceRepairActivService} from '../service/filtre-more-device-repair-activ.service';
 
 
 @Component({
@@ -67,23 +70,22 @@ export class OtpoutDeviceComponent implements OnInit {
   private camera = faCamera;
   private text = faEnvelopeOpenText;
   private save = faDownload;
+  private printer = faPrint;
   private return_device_button_text = 'Search Device';
   formClient: FormGroup;
-  private titleForm = 'Search Return Device';
+  private titleForm = 'Search Return Device by  Tel. Number';
   private client: Client;
   private output_test: OutputTest;
   private repair_output: Repair;
   private repair_input: Repair;
   private device_input: Device;
-  private type_alert: string;
-  private error: HttpErrorResponse;
-  private show_alert: boolean;
-  private message_alert: string;
+  private device_repair_active: Device[] = [];
   private show_client = false;
   private formSubmitted = false;
 
-  constructor(private fb: FormBuilder, private httpService: ClientserviceService,
-              private alert_service: AlertServiceService) {
+  constructor(private fb: FormBuilder, private httpService: HttpClien,
+              private alert_service: AlertServiceService, private printService: PrintService,
+              private check_device: FiltreMoreDeviceRepairActivService) {
   }
 
   ngOnInit() {
@@ -166,46 +168,68 @@ export class OtpoutDeviceComponent implements OnInit {
     return this.repair_output;
   }
 
-  filterCurrentDevice(): number {
-    let cour = 0;
+  filterCurrentDevice(): Device[] {
     this.client.device.forEach((device) => {
       if (device.rightNowInRepair) {
-        console.log(device);
-        this.device_input = device;
-        cour++;
+        this.device_repair_active.push(device);
       }
     });
-    if (cour === 0) {
-      this.alert_service.warn('',
-        'Non o trovato devaisuri in reparatione',
-        false, false, '');
-    }
-    return cour;
+    return this.device_repair_active;
   }
 
-  falterRepairActiveRepair() {
-    let cour = 0;
+  filterRepairActiveRepair(): void {
     this.device_input.repairs.forEach(repair => {
       if (repair.nowInRepair) {
         this.repair_input = repair;
         this.show_client = true;
-        cour++;
       }
     });
-    if (cour === 0) {
-      this.alert_service.warn('',
-        'Non o trovato reparatione active',
-        false, false, '');
-    }
-    return cour;
   }
 
-  // Urgent rewrite create new component to wiu 2 device repair active
   identified_current_device() {
-    if (this.filterCurrentDevice() === 1) {
-      if (this.falterRepairActiveRepair() === 1) {
-        this.createFormAfterClientCam();
+    const devices = this.filterCurrentDevice();
+    if (devices.length === 1) {
+      this.device_input = devices[0];
+      this.filterRepairActiveRepair();
+      this.createFormAfterClientCam();
+    } else {
+      if (devices.length === 0) {
+        this.alert_service.warn('', 'Unfortunately, ' +
+          'the introduced customer no longer has a device in repair.', false, false, '', null);
+      } else {
+        this.check_device.device_select(this.device_repair_active);
       }
     }
+
+  }
+
+  printPage(): void {
+    if (!this.formClient.valid) {
+      this.alert_service.warn('', 'Before sending the form ' +
+        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
+      Object.keys(this.formClient.controls).forEach(key => {
+        this.formClient.controls[key].markAllAsTouched();
+      });
+      return;
+    }
+    const client = this.client;
+    client.device = [];
+    this.filterCurrentDevice();
+    client.device.push(this.device_input);
+    client.device[0].repairs = [];
+    client.device[0].repairs.push(this.createClient());
+    this.printService.print_page(new PrintEntity(client, 2));
+
+  }
+
+  select_device($event: Device) {
+    this.device_input = $event;
+    this.filterRepairActiveRepair();
+    this.createFormAfterClientCam();
+  }
+
+  dismissed() {
+    this.alert_service.warn('', 'Sorry, you ' +
+      'left the module.', true, false, '', null);
   }
 }

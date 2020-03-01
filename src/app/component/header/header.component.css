@@ -18,16 +18,18 @@
     font-weight: normal;
     font-style: normal;
 }
-#menu
-{
+#menu {
 }
 
-#menu ul
-{
-    display: inline-block;
-    padding: 0em 2em;
-    background: #1ABC9C;
-    text-align: center;
+svg {
+  color: #FFFFFF;
+}
+
+#menu ul {
+  display: inline-block;
+  padding: 0em 2em;
+  background: #1ABC9C;
+  text-align: center;
 }
 
 #menu li
