@@ -32,8 +32,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {InputTest} from '../entity/InputTest';
-import {ClientserviceService} from '../service/clientservice.service';
+import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
+import {PrintService} from '../service/print.service';
+import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
+import {PrintEntity} from '../entity/Print_Pojo';
 
 @Component({
   selector: 'app-deviceinput',
@@ -70,18 +73,17 @@ export class DeviceinputComponent implements OnInit {
   camera = faCamera;
   text = faEnvelopeOpenText;
   save = faDownload;
+  printer = faPrint;
   client: Client;
   formClient: FormGroup;
   device: Device;
   repair: Repair;
   inputTest: InputTest;
   formSubmitted: boolean;
-  iconSubmitted_icon: boolean;
-  requiredError: boolean;
 
 
-  constructor(private fb: FormBuilder, private httpService: ClientserviceService,
-              private alert_service: AlertServiceService) {
+  constructor(private fb: FormBuilder, private httpService: HttpClien,
+              private alert_service: AlertServiceService, private print: PrintService) {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
@@ -97,18 +99,20 @@ export class DeviceinputComponent implements OnInit {
       date_to_enter: new FormControl('', [Validators.required]),
       defect: new FormControl('', [Validators.required]),
       deposit: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required, Validators.max(6)]),
-      sensors_input: new FormControl(null, [Validators.required]),
-      display_input: new FormControl(null, [Validators.required]),
-      connectors_input: new FormControl(null, [Validators.required]),
-      sound_equipment_input: new FormControl(null, [Validators.required]),
-      touch_input: new FormControl(null, [Validators.required]),
-      wi_fi_input: new FormControl(null, [Validators.required]),
-      microphone_input: new FormControl(null, [Validators.required]),
-      sim_input: new FormControl(null, [Validators.required]),
-      keyboard_input: new FormControl(null, [Validators.required]),
-      camera_input: new FormControl(),
-      note: new FormControl('')
+      price: new FormControl('', [Validators.required]),
+      sensors_input: new FormControl(false),
+      display_input: new FormControl(false),
+      connectors_input: new FormControl(false),
+      sound_equipment_input: new FormControl(false),
+      touch_input: new FormControl(false),
+      wi_fi_input: new FormControl(false),
+      microphone_input: new FormControl(false),
+      sim_input: new FormControl(false),
+      keyboard_input: new FormControl(false),
+      camera_input: new FormControl(false),
+      note: new FormControl(''),
+      email_send: new FormControl(false, [Validators.required]),
+      date_exit: new FormControl('', [Validators.required])
     });
   }
 
@@ -129,7 +133,7 @@ export class DeviceinputComponent implements OnInit {
     this.device = new Device(null, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
     this.client = new Client(null, formData.family, formData.name, formData.email,
-      formData.telephone_number, formData.address, [this.device]);
+      formData.telephone_number, formData.address, [this.device], formData.email_send);
     console.log(this.client);
   }
 
@@ -156,8 +160,22 @@ export class DeviceinputComponent implements OnInit {
     );
   }
 
-  getf() {
-    return this.formClient.controls;
+  print_click() {
+    if (!this.formClient.valid) {
+      this.alert_service.warn('', 'Before sending the form ' +
+        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
+      Object.keys(this.formClient.controls).forEach(key => {
+        this.formClient.controls[key].markAllAsTouched();
+      });
+      return;
+    }
+    this.createClient();
+    this.print.print_open.emit(new PrintEntity(this.client, 1, this.formClient.controls.date_exit.value));
+  }
+
+  dismisset() {
+    this.alert_service.warn('', 'Sorry, you ' +
+      'left the module.', true, false, '', null);
   }
 }
 

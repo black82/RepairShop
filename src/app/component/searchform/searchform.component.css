@@ -1,9 +1,9 @@
 .search_form {
-  max-height: 100%;
+
   box-sizing: border-box;
   background: #F3F3F3;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
+  max-height: 50%;
 }
 
 * {
@@ -23,14 +23,16 @@ form {
   margin-left: 80%;
 }
 
-.container {
+.container-search-form {
   position: relative;
-  margin-left: 30%;
-  width: 300px;
-  height: 200px;
+  display: flex;
+  align-items: center;
+  height: 500px;
+
+
 }
 
-.container .search {
+.container-search-form .search {
   position: absolute;
   margin: auto;
   top: 0;
@@ -47,11 +49,11 @@ form {
 
 }
 
-.container .search:hover {
+.container-search-form .search:hover {
   cursor: pointer;
 }
 
-.container .search::before {
+.container-search-form .search::before {
   content: "";
   position: absolute;
   margin: auto;
@@ -66,7 +68,7 @@ form {
   transition: all 0.5s;
 }
 
-.container .search::after {
+.container-search-form .search::after {
   content: "";
   position: absolute;
   margin: auto;
@@ -81,7 +83,7 @@ form {
   transition: all 0.5s;
 }
 
-.container input {
+.container-search-form input {
   font-family: "Inconsolata", monospace;
   position: absolute;
   margin: auto;
@@ -106,29 +108,29 @@ form {
   letter-spacing: 0.1em;
 }
 
-.container input:hover {
+.container-search-form input:hover {
   cursor: pointer;
 }
 
-.container input:focus {
+.container-search-form input:focus {
   width: 400px;
   opacity: 1;
   cursor: text;
 }
 
-.container input:focus ~ .search {
+.container-search-form input:focus ~ .search {
   right: -250px;
   background: #151515;
   z-index: 6;
 }
 
-.container input:focus ~ .search::before {
+.container-search-form input:focus ~ .search::before {
   top: 0;
   left: 0;
   width: 25px;
 }
 
-.container input:focus ~ .search::after {
+.container-search-form input:focus ~ .search::after {
   top: 0;
   left: 0;
   width: 25px;
@@ -139,7 +141,7 @@ form {
   transform: rotate(-45deg);
 }
 
-.container input::placeholder {
+.container-search-form input::placeholder {
   color: white;
   opacity: 0.5;
   font-weight: bolder;

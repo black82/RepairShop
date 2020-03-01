@@ -1,6 +1,8 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
   <div class="title-container">
-    <p class="title-form">Compilation model for accepting the device.</p>
+    <div tooltip="Compile all fields are required.">
+      <p class="title-form">Compilation model for accepting the device.</p>
+    </div>
   </div>
   <form (ngSubmit)="submitForm()" [formGroup]="formClient">
     <div class="row">
@@ -119,13 +121,22 @@
            && formClient.controls.accessory.invalid && formClient.controls.accessory.errors&& formClient.controls.accessory.pristine}"
                  class="col-2" formControlName="accessory" type="text">
         </label>
+        <label>
+          <span class="input-title">The date the repair will be completed</span>
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.date_exit.dirty || formClient.controls.date_exit.touched)
+           && formClient.controls.date_exit.invalid && formClient.controls.date_exit.errors&& formClient.controls.date_exit.pristine}"
+                 class="col-2" formControlName="date_exit" type="date">
+        </label>
       </div>
     </div>
     <div class="title-container">
-      <p class="title-form">
-        <fa-icon [icon]="test" class=""></fa-icon>
-        Tests at the entrance of the machine.
-      </p>
+      <div tooltip="Please check all the tests the entrance.">
+        <p class="title-form">
+          <fa-icon [icon]="test" class=""></fa-icon>
+          Tests at the entrance of the machine.
+        </p>
+      </div>
     </div>
     <div class="col-3">
       <div class="check-rouw-1">
@@ -133,7 +144,8 @@
           <fa-icon [icon]="sensors" [style.color]="formClient.controls.sensors_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="sensors_input" name="device-test" type="checkbox">
+            <input class="check-box" formControlName="sensors_input"
+                   name="device-test" type="checkbox">
             <span class="check-box-name">Sensors</span>
           </label>
         </div>
@@ -141,7 +153,8 @@
           <fa-icon [icon]="display" [style.color]="formClient.controls.display_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="display_input" name="device-test" type="checkbox">
+            <input [checked]="formClient.controls.display_input.value" class="check-box"
+                   formControlName="display_input" name="device-test" type="checkbox">
             <span class="check-box-name">Display</span>
           </label>
         </div>
@@ -218,21 +231,40 @@
     </div>
     <div class="text-div">
       <div class="title-container">
-        <p class="title-form">
-          <fa-icon [icon]="text" class="icon-input"></fa-icon>
-          Note the entrance of the machine.
-        </p>
+        <div tooltip="Notices for staff at the input device">
+          <p class="title-form">
+            <fa-icon [icon]="text" class="icon-input"></fa-icon>
+            Note the entrance of the machine.
+          </p>
+        </div>
       </div>
       <label>
         <textarea class="text-area" formControlName="note" type="text">....</textarea>
       </label>
+      <div class="check-single">
+        <span class="send-email-activ">
+        <fa-icon [icon]="email" [style.color]="formClient.controls?.email_send.value? '#1ABC9C' : 'lightcoral'"
+                 class="icon-box"></fa-icon>
+        <label class="checkbox" tooltip="The client's agreement to receive notification invoices from us ...">
+          <input class="check-box" formControlName="email_send" name="device-test" type="checkbox">
+          <span class="check-box-name">I agree to receive emails with news or invoices.</span>
+        </label>
+          </span>
+      </div>
     </div>
     <div class="button_form">
-      <a class="dismiss">
+      <div tooltip="You will leave this page!!!">
+        <a (click)="dismisset()" class="dismiss">
         <span><fa-icon [icon]="discar"></fa-icon>
-        Discard Form</span></a>
-      <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon
-        [icon]="save"></fa-icon> Submit Form</span></a>
+        Discard Form</span></a></div>
+      <div tooltip="The model will be sent to the printer">
+        <a (click)="print_click()" class="print">
+        <span> <fa-icon
+          [icon]="printer"></fa-icon> Print Page</span></a></div>
+      <div tooltip="The model will be saved">
+        <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon
+          [icon]="save"></fa-icon> Submit Form</span></a>
+      </div>
     </div>
   </form>
 </div>

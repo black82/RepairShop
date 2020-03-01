@@ -1,40 +1,56 @@
-<div id="page-wrapper">
-  <div class="container" id="page">
-    <p class="title-form ">Welcome!!!</p>
-  <div class="container" id="portfolio">
-    <div class="column1">
-      <div class="box">
-        <h3><a class="icon icon-cloud-upload" href="/enter" id="icon1"></a></h3>
-        <p class="paragraph1">Entering the device repair.</p>
-        <a class="button button-small" href="enter"><span><fa-icon [icon]="entering"></fa-icon>Entering</span></a></div>
-    </div>
-    <div class="column2">
-      <div class="box">
-        <h3><a class="icon icon-cloud-download" href="return" id="icon2"></a></h3>
-        <p class="paragraph1">Returning the client device..</p>
-        <a class="button button-small" href="return"><span><fa-icon [icon]="return"></fa-icon>Returning</span></a></div>
-    </div>
-    <div class="column3">
-      <div class="box">
-        <h3><a class="icon icon-search" href="#" id="icon3"></a></h3>
-        <p class="paragraph1">Customer search.</p>
-        <a class="button button-small" href="#"><span><fa-icon [icon]="search"></fa-icon> Search</span></a>
+<div class="container">
+  <div id="page-wrapper">
+    <div class="container" id="page">
+      <div tooltip="Welcome">
+        <p class="title-form ">Welcome RFV Technology.</p>
+        <p class="paragraph1">I am a tool for device management goes into repair. I hope to help you.</p>
+      </div>
+      <div class="container" id="portfolio">
+        <div class="column1">
+          <div class="box">
+            <div tooltip="Device repair model entry.">
+              <h3><a class="icon icon-cloud-upload" href="/enter" id="icon1"></a></h3>
+            </div>
+            <div tooltip="Device repair model entry.">
+              <a class="button button-small" href="enter"><span><fa-icon [icon]="entering"></fa-icon>Entering</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="column2">
+          <div class="box">
+            <div tooltip="Returning the device to the client">
+              <h3><a class="icon icon-cloud-download" href="return" id="icon2"></a></h3>
+            </div>
+            <div tooltip="Returning the device to the client">
+              <a class="button button-small" href="return"><span><fa-icon [icon]="return"></fa-icon>Returning</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="column3">
+          <div class="box">
+            <div tooltip="Search by phone number">
+              <h3><a class="icon icon-search" href="single" id="icon3"></a></h3>
+            </div>
+            <div tooltip="Search by phone number">
+              <a class="button button-small" href="single"><span><fa-icon [icon]="search"></fa-icon> Search</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="wrapper2">
+        <div id="tools">
+          <div class="tools">
+            <a class="icon icon-mobile-phone" href="enter"></a>
+            <a class="icon icon-check" href=""></a>
+            <a class="icon icon-search" href="#"></a>
+            <a class="icon icon-wrench" href="#"></a>
+            <a class="icon icon-align-right" href="#"></a>
+            <a class="icon icon-filter" href="#"></a>
+            <a class="icon icon-lock" href="#"></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div id="wrapper2">
-    <div id="tools">
-      <div class="tools">
-        <a class="icon icon-mobile-phone" href="enter"></a>
-        <a class="icon icon-check" href=""></a>
-        <a class="icon icon-search" href="#"></a>
-        <a class="icon icon-wrench" href="#"></a>
-        <a class="icon icon-align-right" href="#"></a>
-        <a class="icon icon-filter" href="#"></a>
-        <a class="icon icon-lock" href="#"></a>
-      </div>
-    </div>
-  </div>
-  </div>
+  <app-animation-wait></app-animation-wait>
 </div>
-<app-animation-wait></app-animation-wait>

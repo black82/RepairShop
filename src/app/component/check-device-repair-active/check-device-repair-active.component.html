@@ -1,0 +1,17 @@
+<div *ngIf="fade" class="overlay" id="popup1">
+  <div class="popup">
+    <p class="title-popup"><span><fa-icon [icon]="title_icon"
+                                          class="icon-title">
+    </fa-icon>Found more than one device. Choose the desired device.</span>
+    </p>
+    <div *ngFor="let item of device_input;let i = index" class="box-item">
+      <ul>
+        <li (click)="select_device(item)" class="item-single">
+          <span><fa-icon [icon]="device"></fa-icon>
+             Model - {{item.model}} Imei -{{item.imei}}</span>
+        </li>
+      </ul>
+    </div>
+    <a (click)="removeAlert()" class="close">x</a>
+  </div>
+</div>

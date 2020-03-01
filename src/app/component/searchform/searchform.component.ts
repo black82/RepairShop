@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
-import {ClientserviceService} from '../service/clientservice.service';
+import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class SearchformComponent implements OnInit {
   @Output()
   actionA: EventEmitter<Client> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private client_service: ClientserviceService, private alert_service: AlertServiceService) {
+  constructor(private fb: FormBuilder, private client_service: HttpClien, private alert_service: AlertServiceService) {
     this.formInput = this.fb.group({
       ob: new FormControl('')
     });

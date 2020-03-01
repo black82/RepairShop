@@ -1,0 +1,164 @@
+.box {
+  position: -ms-device-fixed;
+  width: auto;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 35px;
+  border: 2px solid #f97352;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.button:hover {
+  background: #06D85F;
+
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden !important;
+
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 90%;
+
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 40%;
+  position: relative;
+  animation-name: popUp;
+  animation-duration: 2s;
+  transition: margin-left;
+  animation-fill-mode: backwards
+}
+
+.popup h2 {
+  margin-top: 2%;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.popup .close:hover {
+  color: #06D85F;
+  cursor: pointer;
+}
+
+.popup .content {
+  max-height: 80%;
+
+}
+
+@media screen and (max-width: 700px) {
+  .box {
+    width: 50%;
+  }
+}
+
+.popup {
+  min-width: 50%;
+  font-family: "Trebuchet MS", "Lucida Sans", serif;
+  padding: 7px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border-left: 30px solid #1ABC9C;
+  box-shadow: 2px -2px 5px 0 rgba(0, 0, 0, .1),
+  -2px -2px 5px 0 rgba(0, 0, 0, .1),
+  2px 2px 5px 0 rgba(0, 0, 0, .1),
+  -2px 2px 5px 0 rgba(0, 0, 0, .1);
+  font-size: 20px;
+  letter-spacing: 2px;
+  transition: 0.3s all linear;
+  background: #FFFFFF;
+}
+
+li {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  color: #7a7c7f;
+  font-size: 15px;
+  font-family: "Libre Baskerville", serif;
+  line-height: 25px;
+  text-align: left;
+  text-shadow: 0 1px 1px #fff;
+  padding-top: 20px;
+}
+
+li:hover {
+  color: lightcoral;
+  list-style: none;
+  display: flex;
+  font-size: 15px;
+  font-family: "Libre Baskerville", serif;
+  line-height: 25px;
+  text-align: left;
+  text-shadow: 0 1px 1px #fff;
+  padding-top: 20px;
+}
+
+.title-popup {
+  color: #7a7c7f;
+  font-size: 30px;
+  font-family: "Libre Baskerville", serif;
+  line-height: 25px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+  padding-top: 20px;
+}
+
+.box-item:hover {
+
+
+}

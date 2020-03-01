@@ -1,5 +1,5 @@
 export class InputTest {
-  id_InputTest: number;
+  id_input: number;
   sensors_input: boolean;
   display_input: boolean;
   connectors_input: boolean;
@@ -11,11 +11,11 @@ export class InputTest {
   keyboard_input: boolean;
   camera_input: boolean;
 
-  constructor(id_InputTest: number, sensors_input: boolean, display_input: boolean,
+  constructor(id_input: number, sensors_input: boolean, display_input: boolean,
               connectors_input: boolean, sound_equipment_input: boolean, touch_input: boolean,
               wi_fi_input: boolean, microphone_input: boolean, sim_input: boolean,
               keyboard_input: boolean, camera_input: boolean) {
-    this.id_InputTest = id_InputTest;
+    this.id_input = id_input;
     this.sensors_input = sensors_input;
     this.display_input = display_input;
     this.connectors_input = connectors_input;

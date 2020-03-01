@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title-container">
-    <p class="title-form"> Client.</p>
+    <p class="title-form"> Client  {{client.name}} {{client.family}} .</p>
   </div>
   <div class="row">
     <div class="row-1">
@@ -48,230 +48,84 @@
       </div>
     </div>
     <div class="row-2">
+
       <div *ngFor="let item of repairs_element" class="toggle-container-2">
         <div (click)="showElement(item)" class="toggle-title"><span
           [style]="item.visible ?{'color': 'lightcoral'} : {'color': '#1ABC9C'}"
           class="title-toggle">
           <fa-icon [icon]="date"></fa-icon>
-          {{item?.repair_elemnt.date_to_enter}}
+          {{item?.repair_elemnt.date_to_enter | date:'mediumDate'}}
           <span *ngIf="!item.repair_elemnt.nowInRepair">(CLOSET  REPAIR)</span><span
           *ngIf="item.repair_elemnt.nowInRepair">(OPEN REPAIR)</span> </span></div>
+
         <div *ngIf="item.visible">
-          <ul class="border">
-            <li>
+          <div class="border-container">
+            <ul class="border">
+              <p>
               <span class="input-title"><fa-icon
-                [icon]="date"></fa-icon> Date to enter:{{item.repair_elemnt?.date_to_enter}} </span>
-              <span class="input-title"><fa-icon [icon]="cogs"></fa-icon> Defect:{{item.repair_elemnt?.defect}}</span>
-              <span class="input-title"><fa-icon
-                [icon]="money"></fa-icon> Deposit:{{item.repair_elemnt?.deposit}}</span>
-              <span class="input-title"><fa-icon [icon]="money"></fa-icon>Price:{{item.repair_elemnt?.price}}</span>
-              <span class="input-title"><fa-icon [icon]="date"></fa-icon>Return Date:{{item.repair_elemnt?.output_date}}</span>
-              <span class="input-title"> <fa-icon
-                [icon]="work"></fa-icon>Work done:{{item.repair_elemnt?.work_don}}</span>
-              <span class="input-title"> <fa-icon
-                [icon]="chip"></fa-icon>Parts replaced:{{item.repair_elemnt?.parts_replaced}}</span>
-              <a (click)="showTestEnter()" class="button"><span><fa-icon
-                [icon]="cogs"></fa-icon> Test to Enter</span></a>
-              <a (click)="showTestReturn($event)" class="button"><span><fa-icon
-                [icon]="cogs"></fa-icon> Test to Return</span></a>
-              <a (click)="functionHidem()" class="dismiss"><span><fa-icon [icon]="cogs"></fa-icon> Hided all</span></a>
-              <div *ngIf=showHidem>
-                <div [ngClass]="showHidem ? 'success' : 'danger'">
-                  <p>Test to Enter</p>
-                  <ul class="border">
-                    <li class="check-single">
-                      <fa-icon [icon]="sensors"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.sensors_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Sensors</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="display"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.display_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Display</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="conections"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.connectors_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Connectors</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="sound"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.sound_equipment_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Sound/equipment</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="touch"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.touch_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Touch</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="wifi"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.wi_fi_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Wi-Fi</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="microfon"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.microphone_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Microphone</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="sim"></fa-icon>
-                      <label class="checkbox">
-                        <input [value]="item.repair_elemnt?.inputModule?.sim_input" class="check-box" name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Sim</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="keybord"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.keyboard_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Keyboard</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="camera"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.inputModule?.camera_input" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Camera</span>
-                      </label>
-                    </li>
-                  </ul>
+                [icon]="date"></fa-icon> Date to enter:{{item.repair_elemnt?.date_to_enter | date:'mediumDate'}} </span>
+                <span class="input-title"><fa-icon [icon]="cogs"></fa-icon> Defect:{{item.repair_elemnt?.defect}}</span>
+                <span class="input-title"><fa-icon
+                  [icon]="money"></fa-icon> Deposit:{{item.repair_elemnt?.deposit}}</span>
+                <span class="input-title"><fa-icon [icon]="money"></fa-icon>Price:{{item.repair_elemnt?.price}}</span>
+                <span class="input-title"><fa-icon
+                  [icon]="date"></fa-icon>Return Date:{{item.repair_elemnt?.output_date | date:'mediumDate'}}</span>
+                <span class="input-title"> <fa-icon
+                  [icon]="work"></fa-icon>Work done:{{item.repair_elemnt?.work_don}}</span>
+                <span class="input-title"> <fa-icon
+                  [icon]="chip"></fa-icon>Parts replaced:{{item.repair_elemnt?.parts_replaced}}</span>
+            </ul>
+            <hr>
+            <div class="test-container">
+              <div class="test-input-container">
+                <p *ngIf="item.test_input.length===0" class="input-title">
+                  <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                  Il tuo dispositivo ha superato con successo tutti i nostri
+                  test di ingresso!!!
+                </p>
+                <div *ngIf="item.test_input.length>0" class="test-enter">
+                  <p class="input-title">
+                    <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                    Teste non pasate in intrata
+                  </p>
+                  <div *ngFor="let test_input of item.test_input" class="input-title">
+                    <fa-icon [icon]="test_minus" class="test-icon"></fa-icon>
+                    {{test_input}}</div>
                 </div>
-
               </div>
-              <div *ngIf="showContainer">
-                <p>Test to Return</p>
-                <div [ngClass]="showContainer ? 'success' : 'danger'">
-                  <ul class="border">
-                    <li class="check-single">
-                      <fa-icon [icon]="sensors"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.sensors_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Sensors</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="display"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.display_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Display</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="conections"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.connectors_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Connectors</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="sound"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.sound_equipment_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Sound/equipment</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="touch"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.touch_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Touch</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="wifi"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.wi_fi_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Wi-Fi</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="microfon"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.microphone_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Microphone</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="sim"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.sim_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Sim</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="keybord"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.keyboard_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Keyboard</span>
-                      </label>
-                    </li>
-                    <li class="check-single">
-                      <fa-icon [icon]="camera"></fa-icon>
-                      <label class="checkbox">
-                        <input [checked]="item.repair_elemnt?.outputTest?.camera_Output" class="check-box"
-                               name="device-test"
-                               type="checkbox">
-                        <span class="check-box-name">Camera</span>
-                      </label>
-                    </li>
-                  </ul>
+              <div class="test-output">
+                <p *ngIf="item.test_output.length===0" class="input-title">
+                  <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                  Il tuo dispositivo ha superato tutti test di Uscita!!!
+                </p>
+                <p *ngIf="item.test_output.length===11" class="input-title">
+                  <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                  Dispozitivo e anqora in reparazione!!!
+                </p>
+                <div *ngIf="item.test_output.length!=11&&item.test_output.length!=0" class="test-output-container">
+                  <p class="input-title">
+                    <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                    Teste non pasate in uscita
+                  </p>
+                  <div *ngFor="let test_output of item.test_output" class="input-title">
+                    <fa-icon [icon]="test_minus" class="test-icon"></fa-icon>
+                    {{test_output}}</div>
                 </div>
-
               </div>
-            </li>
-          </ul>
+
+              <div>
+                <p class=" input-title">
+                  <fa-icon [icon]="text_note" class="icon-test-tile"></fa-icon>
+                  Note:
+                </p>
+              </div>
+              <div class="note-container">
+                <div class="note-border">
+                  <p class=" input-title note">{{item.repair_elemnt?.note}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

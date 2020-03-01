@@ -18,6 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {PrintPageComponent} from './component/print-page/print-page.component';
+import {CheckDeviceRepairActiveComponent} from './component/check-device-repair-active/check-device-repair-active.component';
+import {TooltipComponent} from './component/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import {PrintPageComponent} from './component/print-page/print-page.component';
     SearchpageComponent,
     AlertComponent,
     AnimationWaitComponent,
-    PrintPageComponent
+    PrintPageComponent,
+    CheckDeviceRepairActiveComponent,
+    TooltipComponent
   ],
   imports: [
     AppRoutingModule,
