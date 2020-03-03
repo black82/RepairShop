@@ -16,10 +16,9 @@ import {AlertComponent} from './component/alert/alert.component';
 import {AnimationWaitComponent} from './component/animation-wait/animation-wait.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {MatInputModule} from '@angular/material/input';
 import {PrintPageComponent} from './component/print-page/print-page.component';
 import {CheckDeviceRepairActiveComponent} from './component/check-device-repair-active/check-device-repair-active.component';
-import {TooltipComponent} from './component/tooltip/tooltip.component';
+
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import {TooltipComponent} from './component/tooltip/tooltip.component';
     AlertComponent,
     AnimationWaitComponent,
     PrintPageComponent,
-    CheckDeviceRepairActiveComponent,
-    TooltipComponent
+    CheckDeviceRepairActiveComponent
   ],
   imports: [
     AppRoutingModule,
@@ -44,8 +42,8 @@ import {TooltipComponent} from './component/tooltip/tooltip.component';
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
-    MatInputModule
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
