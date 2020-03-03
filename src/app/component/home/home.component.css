@@ -97,7 +97,7 @@
   transform: scale(1.5);
 
   text-align: center;
-  color: #34495E;
+  color: lightcoral;
 
 }
 
@@ -225,7 +225,7 @@
 }
 
 .title-form {
-  color: #1ABC9C;
+  color: lightcoral;
   font-size: 2em;
   font-weight: bold;
   font-family: Helvetica, serif;
