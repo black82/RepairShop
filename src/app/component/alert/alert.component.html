@@ -1,12 +1,17 @@
-<div *ngIf="fade" class="overlay" id="popup1">
-  <div [style.background-color]="typeAlertFunc()" class="popup">
-    <div>
+<div *ngIf="fade" class="overlay" id="popup">
+
+  <div class="alert-box">
+    <div [style.background-color]="typeAlertFunc()" class="popup-header">
+      <a (click)="removeAlert()" class="close"><span class="x-alert">x</span></a>
       <p class="titleError"> {{title_alert}}</p>
-      <p class="titleFuni"> {{body_alert}} </p></div>
-    <div class="content">
-      <p *ngIf="alert.type=== 1" class="errorMessage">{{alert?.errore?.message}}</p>
+      <fa-icon [icon]="icon" [style.color]="color_icon" class="icon"></fa-icon>
+    </div>
+    <div class="body-alert">
+      <fa-icon [icon]="info" class="icon-info-box"></fa-icon>
       <p class="errorMessage">{{alert?.message}}</p>
     </div>
-    <a (click)="removeAlert()" class="close">x</a>
+    <div class="footer">
+      <p class="titleFuni"> {{body_alert}} </p>
+    </div>
   </div>
 </div>
