@@ -4,11 +4,20 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {AlertServiceService} from '../service/alert-service.service';
 import {Alert, AlertType} from '../entity/AlertEntity';
 import {Router} from '@angular/router';
+import {faCheckCircle} from '@fortawesome/free-solid-svg-icons/faCheckCircle';
+import {faBomb} from '@fortawesome/free-solid-svg-icons/faBomb';
+
+import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
+
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
+import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
+import {faCheckSquare} from '@fortawesome/free-solid-svg-icons/faCheckSquare';
+
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css']
+  styleUrls: ['./alert.component.css'],
 })
 export class AlertComponent implements OnInit {
   private typeAlert: string;
@@ -17,6 +26,11 @@ export class AlertComponent implements OnInit {
   private title_alert: string;
   private body_alert: string;
   private alert: Alert;
+  private icon: any;
+  private color_icon: any;
+  private info = faInfoCircle;
+  private error_status: number;
+  private ok = faCheckSquare;
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
@@ -75,26 +89,36 @@ export class AlertComponent implements OnInit {
   private text_alert_initialized(): void {
     switch (this.alert.type) {
       case AlertType.Success: {
-        this.title_alert = 'Ups : Is Ok';
+        this.color_icon = '#06D85F';
+        this.icon = faCheckCircle;
+        this.title_alert = ' Is Ok';
         this.body_alert = 'Everything went well. Your operation is successfully completed.';
         break;
       }
       case AlertType.Error: {
+        this.color_icon = '#F09EA3';
+        this.icon = faTimesCircle;
+
         if (this.alert.errore === null || this.alert.errore === undefined) {
           this.alert.errore = new HttpErrorResponse({error: 'Unknown error', status: 404, statusText: 'an unknown error occurred'});
         }
-        this.title_alert = 'Ups : Error Status' + this.alert.errore.status;
-        this.body_alert = 'Something went wrong. Try again. Otherwise contact support.';
+        this.error_status = this.alert.errore.status;
+        this.title_alert = 'Oops : Error ';
+        this.body_alert = 'Try again. Otherwise contact support.';
         break;
       }
       case AlertType.Warning: {
-        this.title_alert = 'Ups : Waring';
+        this.color_icon = '#FFCC00';
+        this.icon = faExclamationCircle;
+        this.title_alert = 'Oops : Waring';
         this.body_alert = 'Attention. Something\'s not right.';
         break;
       }
       default: {
-        this.title_alert = 'Ups : Error Status';
-        this.body_alert = 'Something went wrong. Try again. Otherwise contact support.';
+        this.color_icon = '#F09EA3';
+        this.icon = faBomb;
+        this.title_alert = 'Oops : Error';
+        this.body_alert = 'Try again. Otherwise contact support.';
       }
     }
   }

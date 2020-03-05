@@ -1406,3 +1406,10 @@ aside a {
   overflow: hidden;
   padding: 2em 0em;
 }
+
+.icon-alert-x {
+  font-size: 70px;
+
+  margin-top: 2%;
+  text-shadow: -7px 8px 2px #c54040, -3px 5px #c74b16;
+}
