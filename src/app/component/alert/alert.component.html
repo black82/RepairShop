@@ -4,14 +4,31 @@
     <div [style.background-color]="typeAlertFunc()" class="popup-header">
       <a (click)="removeAlert()" class="close"><span class="x-alert">x</span></a>
       <p class="titleError"> {{title_alert}}</p>
-      <fa-icon [icon]="icon" [style.color]="color_icon" class="icon"></fa-icon>
+      <p class="titleFuni"> {{body_alert}} </p>
+      <div *ngIf=" alert.type===1" class="status-error"><span>Error Status : <a
+        class="status">{{error_status}}</a></span>
+      </div>
     </div>
     <div class="body-alert">
-      <fa-icon [icon]="info" class="icon-info-box"></fa-icon>
-      <p class="errorMessage">{{alert?.message}}</p>
+      <div class="icon-box">
+        <i *ngIf="alert.type===1" [style.color]="color_icon" aria-hidden="true" class="icon icon-remove-circle"
+           id="icon-1"></i>
+        <i *ngIf="alert.type===3" [style.color]="color_icon" aria-hidden="true" class="icon icon-exclamation-sign"
+           id="icon-2"></i>
+        <i *ngIf="alert.type===0" [style.color]="color_icon" aria-hidden="true" class="icon icon-check" id="icon-3"></i>
+
+      </div>
+      <p class="errorMessage">
+        <i aria-hidden="true" class="icon icon-info-sign" id="icon-info"></i>
+
+        {{alert?.message}}</p>
     </div>
-    <div class="footer">
-      <p class="titleFuni"> {{body_alert}} </p>
+    <div [style.background-color]="color_icon" class="footer">
+      <div class="button-container">
+        <a (click)="removeAlert()" class="button">
+        <span> <fa-icon
+          [icon]="ok"></fa-icon> ok</span></a>
+      </div>
     </div>
   </div>
 </div>
