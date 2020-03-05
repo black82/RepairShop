@@ -241,6 +241,7 @@
   perspective: 500px;
   transition: .2s;
   cursor: pointer;
+  width: 40%;
 }
 
 .button:last-of-type {

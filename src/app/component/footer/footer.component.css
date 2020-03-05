@@ -2,66 +2,60 @@
 /* Copyright                                                                     */
 /*********************************************************************************/
 
-#copyright
-{
-    overflow: hidden;
-    padding: 5em 0em;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    text-align: center;
-    background: #16A085 repeat-x center top;
+#copyright {
+  overflow: hidden;
+  padding: 5em 0em;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  background: #16A085 repeat-x center top;
 }
 
-#copyright p
-{
-    letter-spacing: 1px;
-    font-size: 0.90em;
-    color: rgba(255,255,255,0.6);
+#copyright p {
+  letter-spacing: 1px;
+  font-size: 0.90em;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-#copyright a
-{
-    text-decoration: none;
-    color: rgba(255,255,255,0.8);
+#copyright a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
 }
+
 /*********************************************************************************/
 /* Footer                                                                        */
 /*********************************************************************************/
 
-#footer
-{
-    text-align: center;
+footer {
+  text-align: center;
+
 
 }
 
 
-#footer .title span
-{
-    color: rgba(255,255,255,0.4);
-}
-ul.contact
-{
-    margin: 0;
-    padding: 2em 0em 0em 0em;
-    list-style: none;
+#footer .title span {
+  color: rgba(255, 255, 255, 0.4);
 }
 
-ul.contact li
-{
-    display: inline-block;
-    padding: 0em 0.10em;
-    font-size: 1em;
+ul.contact {
+  margin: 0;
+  padding: 2em 0em 0em 0em;
+  list-style: none;
 }
 
-ul.contact li span
-{
-    display: none;
-    margin: 0;
-    padding: 0;
+ul.contact li {
+  display: inline-block;
+  padding: 0em 0.10em;
+  font-size: 1em;
 }
 
-ul.contact li a:hover
-{
-    color: #FFF;
+ul.contact li span {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.contact li a:hover {
+  color: #FFF;
 }
 
 ul.contact li a:before {
