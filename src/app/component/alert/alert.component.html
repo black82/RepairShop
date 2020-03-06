@@ -11,16 +11,18 @@
     </div>
     <div class="body-alert">
       <div class="icon-box">
-        <i *ngIf="alert.type===1" [style.color]="color_icon" aria-hidden="true" class="icon icon-remove-circle"
+        <i *ngIf="alert.type===1" [style.color]="color_icon" aria-hidden="true"
+           class="icon icon-remove-circle"
            id="icon-1"></i>
-        <i *ngIf="alert.type===3" [style.color]="color_icon" aria-hidden="true" class="icon icon-exclamation-sign"
+        <i *ngIf="alert.type===3" [style.color]="color_icon" aria-hidden="true"
+           class="icon icon-exclamation-sign"
            id="icon-2"></i>
-        <i *ngIf="alert.type===0" [style.color]="color_icon" aria-hidden="true" class="icon icon-check" id="icon-3"></i>
+        <i *ngIf="alert.type===0" [style.color]="color_icon" aria-hidden="true"
+           class="icon icon-check" id="icon-3"></i>
 
       </div>
       <p class="errorMessage">
         <i aria-hidden="true" class="icon icon-info-sign" id="icon-info"></i>
-
         {{alert?.message}}</p>
     </div>
     <div [style.background-color]="color_icon" class="footer">

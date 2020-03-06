@@ -2,7 +2,6 @@
   <form (ngSubmit)="submitForm()" [formGroup]="formInput">
     <p class="title-form">{{titleForm}}</p>
     <div [style.height.px]="client!=null ? 200 : 500" class="container-search-form" tooltip="Opens the search field">
-
       <input formControlName="ob" placeholder="Search..." type="text">
       <div class="search"></div>
       <div class="tooltip">
