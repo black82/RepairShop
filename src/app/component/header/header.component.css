@@ -8,8 +8,8 @@
 #header-wrapper
 {
     overflow: hidden;
-    padding: 2em 0em;
-   background:rgb(23, 61, 116) repeat-x center top;
+    padding: 2em 0;
+   background: #16A085 repeat-x center top;
 
 }
 
@@ -31,7 +31,7 @@ svg {
 #menu ul {
   display: inline-block;
   padding: 0 2em;
-  background: #8747EE  ;
+  background: #1ABC9C ;
   text-align: center;
   border-radius: 10px;
  box-shadow:	0 0px 1px rgba(255,255,255,0.5),
