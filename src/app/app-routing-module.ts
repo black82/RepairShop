@@ -8,9 +8,9 @@ import {SearchpageComponent} from './component/searchpage/searchpage.component';
 
 export const routers: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'enter', component: DeviceinputComponent},
-  {path: 'return', component: OtpoutDeviceComponent},
-  {path: 'single', component: SearchpageComponent}
+  {path: 'input/client/device', component: DeviceinputComponent},
+  {path: 'output/client/device', component: OtpoutDeviceComponent},
+  {path: 'search/telephone/number', component: SearchpageComponent}
 ];
 
 @NgModule({
