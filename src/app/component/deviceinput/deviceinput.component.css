@@ -167,7 +167,7 @@ form ::-moz-focus-inner {
   width: 25px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  -o-appearance: none;
+
   appearance: none;
   border: 1px solid #34495E;
   border-radius: 4px;
@@ -240,7 +240,6 @@ form textarea {
   -moz-transition: all 0.35s ease-in-out;
   -webkit-transition: all 0.35s ease-in-out;
   -o-transition: all 0.35s ease-in-out;
-  -ms-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
   font-size: 1em;
   outline: none;
@@ -342,7 +341,7 @@ form textarea {
   justify-content: space-between;
   align-items: flex-start;
   align-content: center;
-  padding: 2em 0em 20px;
+  padding: 2em 0 20px;
   margin-bottom: 20px;
 }
 
