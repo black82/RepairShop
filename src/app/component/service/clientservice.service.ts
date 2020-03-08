@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable, throwError} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
+import {catchError, retry, tap} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
 import {Repair} from '../entity/Repair';
 
@@ -10,8 +9,8 @@ import {Repair} from '../entity/Repair';
   providedIn: 'root'
 })
 export class HttpClien {
-
-
+  redirectUrl: string;
+  isLoggedIn = false;
   apiUrl = 'http://localhost:8080/';
 
 
@@ -26,7 +25,7 @@ export class HttpClien {
     })
   };
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
 
   }
 
@@ -63,6 +62,27 @@ export class HttpClien {
       );
   }
 
+  login(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + '/api/auth/' + 'login', data)
+      .pipe(
+        tap(_ => this.isLoggedIn = true),
+        catchError(
+          this.handleError('login', []))
+      );
+  }
+
+  logout(): void {
+    return localStorage.removeItem('token');
+  }
+
+  register(data: any): Observable<string> {
+    return this.http.post<any>(this.apiUrl + '/api/auth/' + 'register', data, this.httpOptions)
+      .pipe(
+        tap(_ => this.log('register')),
+        catchError(this.handleError('register', []))
+      );
+  }
+
   errorHandler(error: HttpErrorResponse) {
     if (!navigator.onLine) {
       return throwError(new Error(error.error));
@@ -81,4 +101,15 @@ export class HttpClien {
     return throwError(error);
   }
 
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error); // log to console instead
+      this.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    console.log(message);
+  }
 }

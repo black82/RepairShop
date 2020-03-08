@@ -44,48 +44,48 @@ import {FiltreMoreDeviceRepairActivService} from '../service/filtre-more-device-
   styleUrls: ['./otpout-device.component.css']
 })
 export class OtpoutDeviceComponent implements OnInit {
-  private date = faCalendarCheck;
-  private usertag = faUserTag;
-  private mobile = faMobile;
-  private barcode = faBarcode;
-  private cogs = faCogs;
-  private chip = faMicrochip;
-  private work = faTools;
-  private money = faMoneyBill;
-  private address = faMapMarkedAlt;
-  private model = faMobileAlt;
-  private depossit = faMoneyCheck;
-  private accessory = faHatWizard;
-  private test = faClipboardList;
-  private discar = faTrashAlt;
-  private sensors = faDigitalTachograph;
-  private display = faMobileAlt;
-  private conections = faNetworkWired;
-  private sound = faVolumeUp;
-  private touch = faFingerprint;
-  private wifi = faWifi;
-  private microfon = faMicrophone;
-  private sim = faSimCard;
-  private keybord = faKeyboard;
-  private camera = faCamera;
-  private text = faEnvelopeOpenText;
-  private save = faDownload;
-  private printer = faPrint;
-  private return_device_button_text = 'Search Device';
+  date = faCalendarCheck;
+  usertag = faUserTag;
+  mobile = faMobile;
+  barcode = faBarcode;
+  cogs = faCogs;
+  chip = faMicrochip;
+  work = faTools;
+  money = faMoneyBill;
+  address = faMapMarkedAlt;
+  model = faMobileAlt;
+  depossit = faMoneyCheck;
+  accessory = faHatWizard;
+  test = faClipboardList;
+  discar = faTrashAlt;
+  sensors = faDigitalTachograph;
+  display = faMobileAlt;
+  conections = faNetworkWired;
+  sound = faVolumeUp;
+  touch = faFingerprint;
+  wifi = faWifi;
+  microfon = faMicrophone;
+  sim = faSimCard;
+  keybord = faKeyboard;
+  camera = faCamera;
+  text = faEnvelopeOpenText;
+  save = faDownload;
+  printer = faPrint;
+  return_device_button_text = 'Search Device';
   formClient: FormGroup;
-  private titleForm = 'Search Return Device by  Tel. Number';
-  private client: Client;
-  private output_test: OutputTest;
-  private repair_output: Repair;
-  private repair_input: Repair;
-  private device_input: Device;
-  private device_repair_active: Device[] = [];
-  private show_client = false;
-  private formSubmitted = false;
+  titleForm = 'Search Return Device by  Tel. Number';
+  client: Client;
+  output_test: OutputTest;
+  repair_output: Repair;
+  repair_input: Repair;
+  device_input: Device;
+  device_repair_active: Device[] = [];
+  show_client = false;
+  formSubmitted = false;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService, private printService: PrintService,
-              private check_device: FiltreMoreDeviceRepairActivService) {
+              private  check_device: FiltreMoreDeviceRepairActivService) {
   }
 
   ngOnInit() {

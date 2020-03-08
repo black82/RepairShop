@@ -20,23 +20,23 @@ import {faCheckSquare} from '@fortawesome/free-solid-svg-icons/faCheckSquare';
   styleUrls: ['./alert.component.css'],
 })
 export class AlertComponent implements OnInit {
-  private typeAlert: string;
-  private fade = false;
-  private styleTag: HTMLStyleElement;
-  private title_alert: string;
-  private body_alert: string;
-  private alert: Alert;
-  private icon: any;
-  private color_icon: any;
-  private info = faInfoCircle;
-  private error_status: number;
-  private ok = faCheckSquare;
+  typeAlert: string;
+  fade = false;
+  styleTag: HTMLStyleElement;
+  title_alert: string;
+  body_alert: string;
+  alert: Alert;
+  icon: any;
+  color_icon: any;
+  info = faInfoCircle;
+  error_status: number;
+  ok = faCheckSquare;
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
   }
 
-  private static buildStyleElement(): HTMLStyleElement {
+  static buildStyleElement(): HTMLStyleElement {
     const style = document.createElement('style');
     style.type = 'text/css';
     style.className = 'alert_css';
@@ -86,7 +86,7 @@ export class AlertComponent implements OnInit {
     document.querySelector('body').removeChild(this.styleTag);
   }
 
-  private text_alert_initialized(): void {
+  public text_alert_initialized(): void {
     switch (this.alert.type) {
       case AlertType.Success: {
         this.color_icon = '#06D85F';
@@ -123,7 +123,7 @@ export class AlertComponent implements OnInit {
     }
   }
 
-  private typeAlertFunc(): any {
+  public typeAlertFunc(): any {
     let color = '#F09EA3';
 
     if (this.alert.type === AlertType.Success) {
@@ -140,7 +140,7 @@ export class AlertComponent implements OnInit {
     return color;
   }
 
-  private rout_Out_Alert(location: string): void {
+  public rout_Out_Alert(location: string): void {
     this.router.navigate([location]).then(r => r);
   }
 

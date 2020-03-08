@@ -18,6 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {PrintPageComponent} from './component/print-page/print-page.component';
 import {CheckDeviceRepairActiveComponent} from './component/check-device-repair-active/check-device-repair-active.component';
+import {SignUpComponent} from './component/sign-up/sign-up.component';
+import {SignInComponent} from './component/sign-in/sign-in.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import {CheckDeviceRepairActiveComponent} from './component/check-device-repair-
     AlertComponent,
     AnimationWaitComponent,
     PrintPageComponent,
-    CheckDeviceRepairActiveComponent
+    CheckDeviceRepairActiveComponent,
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     AppRoutingModule,

@@ -44,14 +44,14 @@ export class SingleContentComponent implements OnInit {
   text = faEnvelopeOpenText;
   work = faTools;
   test_meteor = faMeteor;
-  private text_note = faEnvelopeOpenText;
+  text_note = faEnvelopeOpenText;
   @Input()
   client: Client;
   devices_element: Element[] = [];
   devices: Device[] = [];
   repairs_element: ElementRepair[] = [];
   @Input()
-  private refresh: EventEmitter<Client> = new EventEmitter<Client>();
+  refresh: EventEmitter<Client> = new EventEmitter<Client>();
 
 
   constructor() {

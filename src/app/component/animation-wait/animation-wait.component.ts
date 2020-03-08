@@ -9,9 +9,7 @@ export type FadeState = 'visible' | 'hidden';
 })
 
 export class AnimationWaitComponent implements OnInit {
-
-
-  private _show = true;
+_show = true;
 
   constructor() {
   }

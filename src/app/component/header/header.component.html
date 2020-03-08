@@ -1,4 +1,3 @@
-
 <div id="header-wrapper">
   <div class="container-header" id="header">
     <div id="logo">
@@ -9,21 +8,34 @@
         fill-rule="evenodd" id="path0"
         stroke="none"></path></g></svg></span><a
         href="#">RFV Technology</a></h1>
-      <div id="menu">
-        <ul>
-          <li class="current_page_item"><a accesskey="1" href="#" title="">
-            <fa-icon [icon]="home"></fa-icon>
-            Homepage</a></li>
-          <li class="current_page_item"><a accesskey="2" class="teaming" href="input/client/device" title="">Enter
-            Device</a>
-          </li>
-          <li class="current_page_item"><a accesskey="3" class="teaming" href="output/client/device" title="">Returning
-            device</a></li>
-          <li class="current_page_item"><a accesskey="4" class="teaming" href="search/telephone/number" title="">Search
-            Customer</a>
-          </li>
-          <li class="current_page_item"><a accesskey="5" class="teaming" href="#" title="">Contact Us</a></li>
-        </ul>
+      <div class="menu-box">
+        <div id="menu">
+          <ul>
+            <li class="current_page_item"><a accesskey="1" href="#" title="">
+              <fa-icon [icon]="home"></fa-icon>
+              Homepage</a></li>
+            <li class="current_page_item"><a accesskey="2" class="teaming" href="input/client/device" title="">Enter
+              Device</a>
+            </li>
+            <li class="current_page_item"><a accesskey="3" class="teaming" href="output/client/device" title="">Returning
+              device</a></li>
+            <li class="current_page_item"><a accesskey="4" class="teaming" href="search/telephone/number" title="">Search
+              Customer</a>
+            </li>
+            <li class="current_page_item"><a accesskey="5" class="teaming" href="#" title="">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="sign-in" id="menu-signi">
+
+          <div class="current_page_item" id="sign-in"><a>
+            <i class="icon icon-lock"></i> Sign in/up</a>
+            <ul class="submenu">
+              <li><a href="client/sign-in">Sign in</a></li>
+              <li><a href="client/sign-up">Sign up</a></li>
+              <li><a (click)="logout()" href="#">LogOut</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

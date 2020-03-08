@@ -13,10 +13,10 @@ export class CheckDeviceRepairActiveComponent implements OnInit {
   device_input: Device[];
   @Output()
   device_return: EventEmitter<Device> = new EventEmitter<Device>();
-  private styleTag: HTMLStyleElement;
-  private fade = false;
-  private title_icon = faBellSlash;
-  private device = faMobile;
+  styleTag: HTMLStyleElement;
+  fade = false;
+  title_icon = faBellSlash;
+  device = faMobile;
 
   constructor(private device_filtre: FiltreMoreDeviceRepairActivService) {
   }
