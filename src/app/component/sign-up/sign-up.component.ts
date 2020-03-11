@@ -3,6 +3,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpClien} from '../service/clientservice.service';
+import {AlertServiceService} from '../service/alert-service.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +20,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private authService: HttpClien) {
+              private authService: HttpClien,
+              private alertService: AlertServiceService) {
   }
 
   ngOnInit() {
@@ -31,9 +33,14 @@ export class SignUpComponent implements OnInit {
   }
 
   onFormSubmit(form: NgForm) {
+    if (this.registerForm.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
     this.authService.register(form)
       .subscribe(res => {
-        this.router.navigate(['login']);
+        this.router.navigate(['client/sign-in']);
       }, (err) => {
         console.log(err);
         alert(err.error);
