@@ -1402,7 +1402,10 @@ aside a {
 }
 
 .container {
-  background: #F3F3F3;
+  background-image: url('src/assets/images/background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   overflow: hidden;
   padding: 2em 0em;
 }

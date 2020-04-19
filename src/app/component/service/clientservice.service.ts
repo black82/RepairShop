@@ -37,7 +37,7 @@ export class HttpClien {
   }
 
   searchByTelephoneNumber(telephone: string): Observable<Client> {
-    return this.http.get<Client>(this.apiUrl + '/api/search/number', {
+    return this.http.get<Client>(this.apiUrl + 'api/search/number', {
       params: new HttpParams().set('telephone', telephone), headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8'
       })
@@ -48,7 +48,7 @@ export class HttpClien {
   }
 
   outputDeviceForm(repair: Repair, id: number): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/api/create/client/return/device/' + id, repair, this.httpOptions)
+    return this.http.post<boolean>(this.apiUrl + 'api/create/client/return/device/' + id, repair, this.httpOptions)
       .pipe(retry(2),
         catchError(this.errorHandler)
       );
@@ -63,7 +63,7 @@ export class HttpClien {
   }
 
   login(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl + '/api/auth/' + 'login', data)
+    return this.http.post<any>(this.apiUrl + 'api/auth/' + 'login', data)
       .pipe(
         tap(_ => this.isLoggedIn = true),
         catchError(
@@ -76,7 +76,7 @@ export class HttpClien {
   }
 
   register(data: any): Observable<string> {
-    return this.http.post<any>(this.apiUrl + '/api/auth/' + 'register', data, this.httpOptions)
+    return this.http.post<any>(this.apiUrl + 'api/auth/' + 'register', data, this.httpOptions)
       .pipe(
         tap(_ => this.log('register')),
         catchError(this.handleError('register', []))

@@ -19,7 +19,52 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.clickElementAnimation();
     setTimeout(() => this.hidem_animation = false, 3000);
   }
 
+  clickElementCentralIcon(elementList: NodeListOf<Element>) {
+    elementList.forEach(node => {
+      node.addEventListener('click', evt => {
+        node.querySelector('.tooltip').removeAttribute('tooltip');
+        node.querySelectorAll('.icon-animation').forEach(className => {
+          if (className.className === (evt.target as Element).className) {
+            className.classList.add('animation1');
+            (className as HTMLElement).style.color = '#34495E';
+          }
+        });
+      });
+    });
+
+  }
+
+  clickElementAnimation() {
+    this.tooltipAnimation();
+    this.clickElementCentralIcon(document.querySelectorAll('.box'));
+    this.clickElementCTools(document.querySelectorAll('.tools'));
+  }
+
+  clickElementCTools(elementList: NodeListOf<Element>) {
+    elementList.forEach(node => {
+      node.addEventListener('click', evt => {
+        const classList = node.querySelectorAll('.icon-animation');
+        classList.forEach(className => {
+          if (className.className === (evt.target as Element).className) {
+            className.classList.add('animation2');
+            (className as HTMLElement).style.color = '#34495E';
+          }
+        });
+
+      });
+    });
+
+  }
+
+  tooltipAnimation() {
+    document.querySelectorAll('.tooltip').forEach(tooltip => {
+      tooltip.addEventListener('mouseenter', evt => {
+        tooltip.classList.add('animation-tooltip');
+      });
+    });
+  }
 }
