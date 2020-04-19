@@ -117,6 +117,7 @@ export class DeviceinputComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.animation_call();
   }
 
 
@@ -177,6 +178,60 @@ export class DeviceinputComponent implements OnInit {
     this.alert_service.warn('', 'Sorry, you ' +
       'left the module.', true, false, '', null);
   }
+
+  animation_call() {
+    this.animationButtonForm();
+    this.animationCheckBox();
+    this.animationTitle();
+    this.animationInput();
+  }
+
+  animationButtonForm() {
+    document.querySelectorAll('.button').forEach(button => {
+      button.addEventListener('mouseenter', evt => {
+        console.log(evt);
+        if (this.formClient.valid) {
+          button.id = 'success-button';
+        } else {
+          button.id = 'wrong-button';
+        }
+      });
+    });
+  }
+
+  animationCheckBox() {
+    document.querySelectorAll('.checkbox').forEach(checkbox => {
+      checkbox.addEventListener('click', evt => {
+        if (!checkbox.value) {
+          checkbox.id = 'success-checkbox';
+        } else {
+          checkbox.id = 'wrong-checkbox';
+        }
+      });
+    });
+  }
+
+  animationTitle() {
+    document.querySelectorAll('fa-icon').forEach(title => {
+      title.addEventListener('mouseenter', evt => {
+        if (!title.classList.contains('button-icon')) {
+          title.id = 'title-hover';
+        }
+      });
+    });
+  }
+
+  animationInput() {
+    document.querySelectorAll('label').forEach(label => {
+      label.addEventListener('input', ev => {
+        if (ev.target.validity.valid) {
+          label.querySelector('fa-icon').style.color = '#34495E';
+        }
+      });
+    });
+
+  }
+
 }
 
 
