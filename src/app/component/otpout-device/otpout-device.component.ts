@@ -89,6 +89,12 @@ export class OtpoutDeviceComponent implements OnInit {
   }
 
   ngOnInit() {
+    setInterval(elt => {
+      if (this.show_client) {
+        this.animation_call();
+        clearInterval();
+      }
+    }, 300);
 
   }
 
@@ -232,4 +238,64 @@ export class OtpoutDeviceComponent implements OnInit {
     this.alert_service.warn('', 'Sorry, you ' +
       'left the module.', true, false, '', null);
   }
+
+  animation_call() {
+    console.log('asdsadsad');
+    this.animationButtonForm();
+    this.animationCheckBox();
+    this.animationTitle();
+    this.animationInput();
+  }
+
+  animationButtonForm() {
+    document.querySelectorAll('.button').forEach(button => {
+      button.addEventListener('mouseenter', evt => {
+        console.log(evt);
+        if (this.formClient.valid) {
+          button.id = 'success-button';
+        } else {
+          button.id = 'wrong-button';
+        }
+      });
+    });
+  }
+
+  animationCheckBox() {
+    document.querySelectorAll('.checkbox').forEach(checkbox => {
+      checkbox.addEventListener('click', evt => {
+        if (!checkbox.value) {
+          checkbox.id = 'success-checkbox';
+        } else {
+          checkbox.id = 'wrong-checkbox';
+        }
+      });
+    });
+  }
+
+  animationTitle() {
+    document.querySelectorAll('fa-icon').forEach(title => {
+      title.addEventListener('mouseenter', evt => {
+        if (!title.classList.contains('button-icon')) {
+          title.id = 'title-hover';
+        }
+      });
+    });
+  }
+
+  animationInput() {
+    document.querySelectorAll('label').forEach(label => {
+      const icon = label.querySelector('fa-icon');
+      const inputElement = label.querySelector('input');
+      if (inputElement.value.length !== 0) {
+        icon.style.color = '#34495E';
+      }
+      label.addEventListener('input', ev => {
+        if (ev.target.validity.valid) {
+          icon.style.color = '#34495E';
+        }
+      });
+    });
+
+  }
+
 }

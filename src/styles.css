@@ -1075,7 +1075,7 @@
 }
 
 .icon-blogger-sign:before, .icon-blogger:before, .icon-delicious:before, .icon-dribbble-sign:before, .icon-dribbble:before, .icon-dropbox:before, .icon-drupal:before, .icon-evernote-sign:before, .icon-evernote:before, .icon-flickr-sign:before, .icon-flickr:before, .icon-forrst-sign:before, .icon-forrst:before, .icon-foursquare-sign:before, .icon-foursquare:before, .icon-git-fork:before, .icon-hacker-news:before, .icon-instagram:before, .icon-lastfm-sign:before, .icon-lastfm:before, .icon-paypal:before, .icon-picasa-sign:before, .icon-picasa:before, .icon-reddit:before, .icon-share-this-sign:before, .icon-share-this:before, .icon-skype:before, .icon-soundcloud:before, .icon-spotify:before, .icon-stack-overflow:before, .icon-tumblr-sign:before, .icon-tumblr:before, .icon-vimeo-sign:before, .icon-vimeo:before, .icon-wordpress-sign:before, .icon-wordpress:before, .icon-yelp-sign:before, .icon-yelp:before, .icon-youtube-sign:before, .icon-youtube:before {
-  font-family: 'Font-Awesome-Social';
+  font-family: 'Font-Awesome-Social', serif;
 }
 
 .icon-dropbox:before {
@@ -1407,7 +1407,7 @@ aside a {
   background-attachment: fixed;
   background-size: cover;
   overflow: hidden;
-  padding: 2em 0em;
+  padding: 2em 0;
 }
 
 .icon-alert-x {
@@ -1415,4 +1415,47 @@ aside a {
 
   margin-top: 2%;
   text-shadow: -7px 8px 2px #c54040, -3px 5px #c74b16;
+}
+
+.title-form {
+  color: #1ABC9C;
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: 58px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 1px 1px #34495E;
+  cursor: pointer;
+  -webkit-animation: tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  animation: tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+
+}
+
+@-webkit-keyframes tracking-in-contract {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+
+@keyframes tracking-in-contract {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
 }

@@ -44,7 +44,7 @@ export class SingleContentComponent implements OnInit {
   text = faEnvelopeOpenText;
   work = faTools;
   test_meteor = faMeteor;
-  text_note = faEnvelopeOpenText;
+
   @Input()
   client: Client;
   devices_element: Element[] = [];

@@ -14,31 +14,31 @@
           <span class="input-title"><fa-icon [icon]="address"></fa-icon> Address:{{client?.address}}</span>
         </div>
       </div>
-      <div *ngFor="let element of devices_element" class="toggle-container-1">
+      <div *ngFor="let element of devices_element; let index" class="toggle-container-1">
         <div (click)="showElement(element)" class="toggle-title">
           <span [style]="element.visible ?{'color': 'lightcoral'} : {'color': '#1ABC9C'}" class="title-toggle"><fa-icon
             [icon]="usertag"></fa-icon>
             {{client?.name}} - <fa-icon [icon]="mobile"></fa-icon>
             {{element.divice.model}}<span *ngIf="!element.divice.rightNowInRepair">(CLOSET  REPAIR)</span><span
               *ngIf="element.divice.rightNowInRepair">(OPEN REPAIR)</span></span></div>
-        <div *ngIf="element.visible">
+        <div *ngIf="element.visible" class="show">
           <ul class="border">
             <li>
               <ol class="input-title">
                 <fa-icon [icon]="mobile"></fa-icon>
-                Model:{{element.divice?.model}}</ol>
+                Model: {{element.divice?.model}}</ol>
               <ol class="input-title">
                 <fa-icon [icon]="used"></fa-icon>
                 State of use: {{element.divice?.state_of_use}}</ol>
               <ol class="input-title">
                 <fa-icon [icon]="code"></fa-icon>
-                IMEI&&SN:{{element.divice?.imei}}</ol>
+                IMEI&&SN: {{element.divice?.imei}}</ol>
               <ol class="input-title">
                 <fa-icon [icon]="password"></fa-icon>
-                Code Device:{{element.divice?.code_device}}</ol>
+                Code Device: {{element.divice?.code_device}}</ol>
               <ol class="input-title">
                 <fa-icon [icon]="password"></fa-icon>
-                Password Device:{{element.divice?.password_device}}</ol>
+                Password Device: {{element.divice?.password_device}}</ol>
               <ol class="input-title">
                 <fa-icon [icon]="accessory"></fa-icon>
                 Accessory: {{element.divice?.accessory}}</ol>
@@ -59,21 +59,21 @@
           *ngIf="item.repair_elemnt.nowInRepair">(OPEN REPAIR)</span> </span></div>
 
         <div *ngIf="item.visible">
-          <div class="border-container">
+          <div class="border-container show">
             <ul class="border">
               <p>
               <span class="input-title"><fa-icon
-                [icon]="date"></fa-icon> Date to enter:{{item.repair_elemnt?.date_to_enter | date:'mediumDate'}} </span>
+                [icon]="date"></fa-icon> Date to enter: {{item.repair_elemnt?.date_to_enter | date:'mediumDate'}} </span>
                 <span class="input-title"><fa-icon [icon]="cogs"></fa-icon> Defect:{{item.repair_elemnt?.defect}}</span>
                 <span class="input-title"><fa-icon
-                  [icon]="money"></fa-icon> Deposit:{{item.repair_elemnt?.deposit}}</span>
+                  [icon]="money"></fa-icon> Deposit: {{item.repair_elemnt?.deposit}}</span>
                 <span class="input-title"><fa-icon [icon]="money"></fa-icon>Price:{{item.repair_elemnt?.price}}</span>
                 <span class="input-title"><fa-icon
-                  [icon]="date"></fa-icon>Return Date:{{item.repair_elemnt?.output_date | date:'mediumDate'}}</span>
+                  [icon]="date"></fa-icon>Return Date: {{item.repair_elemnt?.output_date | date:'mediumDate'}}</span>
                 <span class="input-title"> <fa-icon
-                  [icon]="work"></fa-icon>Work done:{{item.repair_elemnt?.work_don}}</span>
+                  [icon]="work"></fa-icon>Work done: {{item.repair_elemnt?.work_don}}</span>
                 <span class="input-title"> <fa-icon
-                  [icon]="chip"></fa-icon>Parts replaced:{{item.repair_elemnt?.parts_replaced}}</span>
+                  [icon]="chip"></fa-icon>Parts replaced: {{item.repair_elemnt?.parts_replaced}}</span>
             </ul>
             <hr>
             <div class="test-container">
@@ -98,8 +98,10 @@
                   <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
                   Il tuo dispositivo ha superato tutti test di Uscita!!!
                 </p>
+
                 <p *ngIf="item.test_output.length===11" class="input-title">
-                  <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+
+                <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
                   Dispozitivo e anqora in reparazione!!!
                 </p>
                 <div *ngIf="item.test_output.length!=11&&item.test_output.length!=0" class="test-output-container">
@@ -115,7 +117,7 @@
 
               <div>
                 <p class=" input-title">
-                  <fa-icon [icon]="text_note" class="icon-test-tile"></fa-icon>
+                  <fa-icon [icon]="text" class="icon-test-tile"></fa-icon>
                   Note:
                 </p>
               </div>
