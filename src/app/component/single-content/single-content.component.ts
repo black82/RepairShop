@@ -125,7 +125,6 @@ export class SingleContentComponent implements OnInit {
       test_result.length = 11;
       return test_result;
     }
-    console.log(test);
     if (!test[0]) {
       test_result.push(' Fotocamera difettosa');
     }
@@ -156,7 +155,6 @@ export class SingleContentComponent implements OnInit {
     if (!test[9]) {
       test_result.push(' Il sensore del dispositivo è danneggiato');
     }
-    console.log(test_result);
     return test_result;
   }
 }

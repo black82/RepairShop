@@ -2,16 +2,20 @@
   <div class="search_form">
     <form (ngSubmit)="submitForm()" [formGroup]="formInput">
       <p class="title-form">{{titleForm}}</p>
-      <div [style.height.px]="client!=null ? 200 : 500" class="container-search-form" tooltip="Opens the search field">
+      <div class="container-search-form" tooltip="Opens the search field">
         <input formControlName="ob" placeholder="Search..." type="text">
         <div class="search"></div>
         <div class="tooltip">
         </div>
       </div>
-      <a (click)="submitForm()" class="button button-small" type="submit">
+      <a (click)="submitForm()" class="button button-small" id="search-button" type="submit">
+
     <span tooltip="Get started on the search"> <fa-icon [icon]="search"
                                                         class="button-icon"></fa-icon>
       {{textButton}}</span></a>
+      <a class="button button-small" id="show-button">
+    <span> <fa-icon [icon]="search" class="button-icon"></fa-icon>
+      Show Form</span></a>
     </form>
   </div>
 </div>

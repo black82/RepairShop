@@ -146,6 +146,7 @@ export class OtpoutDeviceComponent implements OnInit {
           'received a device and closed the repair procedure !!! Client Id ' + this.client.id, true, null, '');
       },
       error => {
+        this.show_client = false;
         this.alert_service.error(null, 'The client' + this.client.name +
           'received a device and not closed the repair procedure !!! Client Id '
           + this.client.id + '\n' + error.message, false, null, '', error);
@@ -170,7 +171,6 @@ export class OtpoutDeviceComponent implements OnInit {
       this.formClient.controls.parts_replace_output.value, this.repair_input.nowInRepair,
       this.repair_input.inputModule, this.output_test, this.formClient.controls.note_output.value);
     this.repair_output.date_to_enter = this.repair_input.date_to_enter;
-    console.log(this.repair_output);
     return this.repair_output;
   }
 
@@ -240,7 +240,6 @@ export class OtpoutDeviceComponent implements OnInit {
   }
 
   animation_call() {
-    console.log('asdsadsad');
     this.animationButtonForm();
     this.animationCheckBox();
     this.animationTitle();
@@ -250,7 +249,6 @@ export class OtpoutDeviceComponent implements OnInit {
   animationButtonForm() {
     document.querySelectorAll('.button').forEach(button => {
       button.addEventListener('mouseenter', evt => {
-        console.log(evt);
         if (this.formClient.valid) {
           button.id = 'success-button';
         } else {
@@ -286,16 +284,17 @@ export class OtpoutDeviceComponent implements OnInit {
     document.querySelectorAll('label').forEach(label => {
       const icon = label.querySelector('fa-icon');
       const inputElement = label.querySelector('input');
-      if (inputElement.value.length !== 0) {
+      if (inputElement?.value?.length !== 0 && inputElement?.style) {
         icon.style.color = '#34495E';
       }
       label.addEventListener('input', ev => {
-        if (ev.target.validity.valid) {
+        if (ev.target.validity.valid && icon?.style) {
           icon.style.color = '#34495E';
         }
       });
     });
 
   }
+
 
 }

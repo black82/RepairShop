@@ -12,11 +12,6 @@
 
 }
 
-form {
-
-
-}
-
 .button {
   position: absolute;
   margin-left: 80%;
@@ -198,7 +193,10 @@ form {
 .button:before {
   background: #1ABC9C;
   cursor: pointer;
+  visibility: visible;
 }
 
-
+#show-button {
+  position: center;
+}
 

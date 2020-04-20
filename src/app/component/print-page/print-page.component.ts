@@ -72,7 +72,6 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].inputModule.sensors_input) {
       this.name_test_input.push(' X Il sensore del dispositivo è danneggiato ');
     }
-    console.log(this.name_test_input);
   }
 
   printPage(client: Client): void {
@@ -115,6 +114,5 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].outputTest.sensors_Output) {
       this.name_test_out.push(' X Il sensore del dispositivo è danneggiato ');
     }
-    console.log(this.name_test_out);
   }
 }
