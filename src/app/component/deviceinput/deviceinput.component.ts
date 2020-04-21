@@ -135,8 +135,7 @@ export class DeviceinputComponent implements OnInit {
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
     this.client = new Client(null, formData.family, formData.name, formData.email,
       formData.telephone_number, formData.address, [this.device], formData.email_send);
-    console.log(this.client);
-  }
+   }
 
   submitForm() {
     if (!this.formClient.valid) {
@@ -189,7 +188,6 @@ export class DeviceinputComponent implements OnInit {
   animationButtonForm() {
     document.querySelectorAll('.button').forEach(button => {
       button.addEventListener('mouseenter', evt => {
-        console.log(evt);
         if (this.formClient.valid) {
           button.id = 'success-button';
         } else {

@@ -53,8 +53,12 @@ export class AlertComponent implements OnInit {
     this.styleTag = AlertComponent.buildStyleElement();
     this.alertService.alert_open
       .subscribe(alert => {
+        if (alert?.type === AlertType.Error && alert?.error?.status !== 401) {
+          return;
+        }
         this.alert = alert;
         this.initAlert();
+
       });
   }
 

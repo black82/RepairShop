@@ -20,6 +20,8 @@ export class SearchformComponent implements OnInit {
   client: Client;
   @Output()
   actionA: EventEmitter<Client> = new EventEmitter();
+  hideSearch = false;
+  button: Element;
 
   constructor(private fb: FormBuilder, private client_service: HttpClien, private alert_service: AlertServiceService) {
     this.formInput = this.fb.group({
@@ -28,6 +30,7 @@ export class SearchformComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.hiddenFormAfterSubmitForm();
   }
 
 
@@ -39,10 +42,12 @@ export class SearchformComponent implements OnInit {
     }
     this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
       client => {
+        this.hideSearch = true;
         this.client = client;
         this.actionA.emit(this.client);
       },
       error => {
+        this.hideSearch = false;
         console.log(error);
         this.alert_service.error(null,
           'Unfortunately we could not find this client '
@@ -50,5 +55,29 @@ export class SearchformComponent implements OnInit {
         ;
       }
     );
+  }
+
+  hiddenFormAfterSubmitForm() {
+    const showButton = document.querySelector('#show-button');
+    this.button = showButton;
+    showButton.style.display = 'none';
+    const searchButton = document.querySelector('#search-button');
+    searchButton.addEventListener('click', evt => {
+      document.querySelector('.search_form').style.display = 'none';
+      this.showSearchForm();
+    });
+
+  }
+
+  showSearchForm() {
+    const button = this.button as HTMLElement;
+    const formOutput = document.querySelector('.container');
+    formOutput.appendChild(button);
+    button.style.display = 'flex';
+    this.button.addEventListener('click', event => {
+      document.querySelector('.search_form').style.display = 'block';
+      document.querySelector('.container').removeChild(button);
+    });
+
   }
 }
