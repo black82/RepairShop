@@ -141,7 +141,7 @@ export class OtpoutDeviceComponent implements OnInit {
       });
     }
     this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(
-      response => {
+      () => {
         this.alert_service.success(null, 'The client' + this.client.name +
           'received a device and closed the repair procedure !!! Client Id ' + this.client.id, true, null, '');
       },
