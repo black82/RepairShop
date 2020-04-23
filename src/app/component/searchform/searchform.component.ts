@@ -22,6 +22,8 @@ export class SearchformComponent implements OnInit {
   actionA: EventEmitter<Client> = new EventEmitter();
   hideSearch = false;
   button: Element;
+  @Output()
+  hiddenForm = new EventEmitter();
 
   constructor(private fb: FormBuilder, private client_service: HttpClien, private alert_service: AlertServiceService) {
     this.formInput = this.fb.group({
@@ -58,26 +60,27 @@ export class SearchformComponent implements OnInit {
   }
 
   hiddenFormAfterSubmitForm() {
-    const showButton = document.querySelector('#show-button');
-    this.button = showButton;
-    showButton.style.display = 'none';
+    document.getElementById('show-button').style.opacity = '0';
     const searchButton = document.querySelector('#search-button');
-    searchButton.addEventListener('click', evt => {
-      document.querySelector('.search_form').style.display = 'none';
-      this.showSearchForm();
+    searchButton.addEventListener('click', () => {
+      document.querySelector('form').id = 'form-hide';
+      setTimeout(this.showSearchForm, 1000);
     });
 
   }
 
   showSearchForm() {
-    const button = this.button as HTMLElement;
-    const formOutput = document.querySelector('.container');
-    formOutput.appendChild(button);
-    button.style.display = 'flex';
-    this.button.addEventListener('click', event => {
-      document.querySelector('.search_form').style.display = 'block';
-      document.querySelector('.container').removeChild(button);
-    });
+    document.getElementById('show-button').style.opacity = '1';
+    document.querySelector('form').style.display = 'none';
+    document.querySelector('#show-button').addEventListener('click', () => {
+      document.querySelector('form').style.display = 'block';
+      document.querySelector('form').id = 'show-form';
+      document.getElementById('show-button').style.opacity = '0';
+      setTimeout(() => {
+        this.hiddenForm?.emit(true);
+        this.actionA?.emit(null);
+      }, 1000);
 
+    });
   }
 }
