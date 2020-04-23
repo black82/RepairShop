@@ -297,4 +297,7 @@ export class OtpoutDeviceComponent implements OnInit {
   }
 
 
+  show_client_change(hide: boolean) {
+    this.show_client = hide;
+  }
 }

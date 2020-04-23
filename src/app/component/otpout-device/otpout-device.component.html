@@ -1,6 +1,7 @@
 <div class="container">
   <app-searchform (actionA)="client_catch($event)"
-                  [textButton]="return_device_button_text" [titleForm]="titleForm"></app-searchform>
+                  (hiddenForm)="show_client_change($event)" [textButton]="return_device_button_text"
+                  [titleForm]="titleForm"></app-searchform>
 
   <div *ngIf="show_client" class="container_form">
     <div class="title-container" tooltip="Compile all fields are required.">
