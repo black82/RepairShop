@@ -31,6 +31,7 @@ export class AlertComponent implements OnInit {
   info = faInfoCircle;
   error_status: number;
   ok = faCheckSquare;
+  alert401 = false;
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
@@ -55,6 +56,7 @@ export class AlertComponent implements OnInit {
       .subscribe(alert => {
         if (alert?.type === AlertType.Error) {
           if (alert.error as HttpErrorResponse && alert.error.status === 401) {
+            this.alert401Show();
             return;
           }
         }
@@ -160,4 +162,23 @@ export class AlertComponent implements OnInit {
     this.router.navigate([location]).then(r => r);
   }
 
+  alert401Show() {
+    this.alert401 = true;
+    const alerts = document.getElementById('alert-container');
+
+    const alertBox = document.createElement('div');
+    alertBox.classList.add('alert-msg', 'slide-in');
+    const alertMsg = document.createTextNode('The button has been clicked!');
+    alertBox.appendChild(alertMsg);
+    alerts.insertBefore(alertBox, alerts.childNodes[0]);
+  }
+
+  removeAlert401() {
+    const alerts = document.getElementById('alert-container');
+    alerts.childNodes[1].classList.add('slide-out');
+    setTimeout(() => {
+      alerts.removeChild(alerts.lastChild);
+    }, 600);
+    this.alert401 = false;
+  }
 }
