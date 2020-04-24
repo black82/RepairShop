@@ -53,8 +53,10 @@ export class AlertComponent implements OnInit {
     this.styleTag = AlertComponent.buildStyleElement();
     this.alertService.alert_open
       .subscribe(alert => {
-        if (alert?.type === AlertType.Error && alert?.error?.status !== 401) {
-          return;
+        if (alert?.type === AlertType.Error) {
+          if (alert.error as HttpErrorResponse && alert.error.status === 401) {
+            return;
+          }
         }
         this.alert = alert;
         this.initAlert();
@@ -104,7 +106,17 @@ export class AlertComponent implements OnInit {
         this.icon = faTimesCircle;
 
         if (this.alert.errore === null || this.alert.errore === undefined) {
-          this.alert.errore = new HttpErrorResponse({error: 'Unknown error', status: 404, statusText: 'an unknown error occurred'});
+          this.alert.errore = new HttpErrorResponse({
+            error: 'Unknown error',
+            status: 404,
+            statusText: 'an unknown error occurred'
+          });
+        }
+        if (this.alert.errore.status === 0) {
+          this.error_status = 500;
+          this.title_alert = 'Oops : Error ';
+          this.alert.message = 'The backend part did not give any answer.';
+          break;
         }
         this.error_status = this.alert.errore.status;
         this.title_alert = 'Oops : Error ';

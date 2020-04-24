@@ -26,8 +26,9 @@ export class SearchformComponent implements OnInit {
   hiddenForm = new EventEmitter();
 
   constructor(private fb: FormBuilder, private client_service: HttpClien, private alert_service: AlertServiceService) {
+    const nonWhitespaceRegExp: RegExp = new RegExp('\\S');
     this.formInput = this.fb.group({
-      ob: new FormControl(null, Validators.compose([Validators.nullValidator, Validators.pattern(/^((?!\s{2,}).)*$/)]))
+      ob: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)])
     });
   }
 
@@ -37,18 +38,20 @@ export class SearchformComponent implements OnInit {
 
 
   submitForm() {
-    if (!this.formInput.valid) {
+    if (this.formInput.invalid) {
       this.alert_service.warn('',
         'Please fill in the search field, The field cannot be empty.', false, false, '');
       return;
     }
     this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
       client => {
+        console.log('suces')
         this.hideSearch = true;
         this.client = client;
         this.actionA.emit(this.client);
       },
       error => {
+
         this.hideSearch = false;
         console.log(error);
         this.alert_service.error(null,
@@ -62,9 +65,13 @@ export class SearchformComponent implements OnInit {
   hiddenFormAfterSubmitForm() {
     document.getElementById('show-button').style.opacity = '0';
     const searchButton = document.querySelector('#search-button');
+    console.log('111asdasda');
     searchButton.addEventListener('click', () => {
-      document.querySelector('form').id = 'form-hide';
-      setTimeout(this.showSearchForm, 1000);
+      if (this.hideSearch) {
+        console.log('asdasda');
+        document.querySelector('form').id = 'form-hide';
+        setTimeout(this.showSearchForm, 1000);
+      }
     });
 
   }
