@@ -31,7 +31,6 @@ export class AlertComponent implements OnInit {
   info = faInfoCircle;
   error_status: number;
   ok = faCheckSquare;
-  alert401 = false;
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
@@ -54,9 +53,13 @@ export class AlertComponent implements OnInit {
     this.styleTag = AlertComponent.buildStyleElement();
     this.alertService.alert_open
       .subscribe(alert => {
-        if (alert?.type === AlertType.Error) {
-          if (alert.error as HttpErrorResponse && alert.error.status === 401) {
-            this.alert401Show();
+        if (alert.type === AlertType.Error) {
+          if (alert.errore?.error?.status === 401) {
+            this.alert401Show(alert.errore);
+            return;
+          }
+          if (alert.errore?.status === 401) {
+            this.alert401Show(alert.errore);
             return;
           }
         }
@@ -162,23 +165,40 @@ export class AlertComponent implements OnInit {
     this.router.navigate([location]).then(r => r);
   }
 
-  alert401Show() {
-    this.alert401 = true;
-    const alerts = document.getElementById('alert-container');
-
+  alert401Show(error) {
+    const alerts = document.querySelector('#alert-container');
     const alertBox = document.createElement('div');
-    alertBox.classList.add('alert-msg', 'slide-in');
-    const alertMsg = document.createTextNode('The button has been clicked!');
+    alertBox.id = 'alert-msg';
+    const alertMsg = document.createTextNode('You were redirected because: ' + error.error.message || error.errorCode);
     alertBox.appendChild(alertMsg);
+    const boxButton = document.createElement('a');
+    boxButton.classList.add('close');
+    const spanButton = document.createElement('span');
+    spanButton.classList.add('x-alert');
+    spanButton.textContent = 'x';
+    boxButton.appendChild(spanButton);
     alerts.insertBefore(alertBox, alerts.childNodes[0]);
+    alertBox.appendChild(boxButton);
+    this.setStyleBoxAlert(boxButton, spanButton, alertBox);
+    boxButton.addEventListener('click', () => {
+      this.removeAlert401(alerts);
+    });
   }
 
-  removeAlert401() {
-    const alerts = document.getElementById('alert-container');
-    alerts.childNodes[1].classList.add('slide-out');
-    setTimeout(() => {
-      alerts.removeChild(alerts.lastChild);
-    }, 600);
-    this.alert401 = false;
+
+  removeAlert401(alerts: Element) {
+    alerts.childNodes[0].id = 'slide-out';
+    alerts.removeChild(alerts.lastChild);
+
+  }
+
+  setStyleBoxAlert(boxButton: HTMLAnchorElement, spanButton: HTMLSpanElement, alertBox: HTMLDivElement) {
+    boxButton.style.width = '5px';
+    boxButton.style.height = '5px';
+    spanButton.style.fontSize = '20px';
+    spanButton.style.marginTop = '-10px';
+    alertBox.style.borderRadius = '10px';
+    alertBox.style.top = '49%';
+    alertBox.style.height = '7%';
   }
 }

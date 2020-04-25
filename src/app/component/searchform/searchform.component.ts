@@ -45,15 +45,12 @@ export class SearchformComponent implements OnInit {
     }
     this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
       client => {
-        console.log('suces')
-        this.hideSearch = true;
         this.client = client;
+        this.hideSearch = true;
         this.actionA.emit(this.client);
       },
       error => {
-
         this.hideSearch = false;
-        console.log(error);
         this.alert_service.error(null,
           'Unfortunately we could not find this client '
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
@@ -67,8 +64,7 @@ export class SearchformComponent implements OnInit {
     const searchButton = document.querySelector('#search-button');
     console.log('111asdasda');
     searchButton.addEventListener('click', () => {
-      if (this.hideSearch) {
-        console.log('asdasda');
+      if (!this.hideSearch) {
         document.querySelector('form').id = 'form-hide';
         setTimeout(this.showSearchForm, 1000);
       }

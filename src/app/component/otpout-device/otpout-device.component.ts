@@ -100,7 +100,7 @@ export class OtpoutDeviceComponent implements OnInit {
 
   createFormAfterClientCam() {
     this.formClient = this.fb.group({
-      return_date: [this.repair_input.output_date, [Validators.required]],
+      return_date: [null, [Validators.required]],
       name_family_output: [this.client.family, [Validators.required]],
       mobile_output: [this.device_input.model, [Validators.required]],
       imei_output: [this.device_input.imei, [Validators.required]],

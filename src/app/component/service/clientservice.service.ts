@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {catchError, retry, tap} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
 import {Repair} from '../entity/Repair';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +13,21 @@ export class HttpClien {
   redirectUrl: string;
   isLoggedIn = false;
   apiUrl = 'http://localhost:8080/';
+  htt;
 
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
   httpOptionsHtml = {
     headers: new HttpHeaders({
       Accept: 'text/html'
     })
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
   createClient(client: Client): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + 'api/create/client', client, this.httpOptions)
+    return this.http.post<boolean>(this.apiUrl + 'api/create/client', client)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -38,17 +35,17 @@ export class HttpClien {
 
   searchByTelephoneNumber(telephone: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/number', {
-      params: new HttpParams().set('telephone', telephone), headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8'
-      })
+      params: new HttpParams().set('telephone', telephone)
     })
       .pipe(retry(2),
-        catchError(this.errorHandler)
+        catchError(err => {
+          return this.errorHandler(err);
+        })
       );
   }
 
   outputDeviceForm(repair: Repair, id: number): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + 'api/create/client/return/device/' + id, repair, this.httpOptions)
+    return this.http.post<boolean>(this.apiUrl + 'api/create/client/return/device/' + id, repair)
       .pipe(retry(2),
         catchError(this.errorHandler)
       );
@@ -56,7 +53,7 @@ export class HttpClien {
   }
 
   searchClientById(param): Observable<Client> {
-    return this.http.get<Client>(this.apiUrl + 'api/search/id' + param, this.httpOptions)
+    return this.http.get<Client>(this.apiUrl + 'api/search/id' + param)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -67,7 +64,7 @@ export class HttpClien {
       .pipe(
         tap(_ => this.isLoggedIn = true),
         catchError(
-          this.handleError('login', []))
+          this.errorHandler)
       );
   }
 
@@ -76,15 +73,16 @@ export class HttpClien {
   }
 
   register(data: any): Observable<string> {
-    return this.http.post<any>(this.apiUrl + 'api/auth/' + 'register', data, this.httpOptions)
+    return this.http.post<any>(this.apiUrl + 'api/auth/' + 'register', data)
       .pipe(
         tap(_ => this.log('register')),
-        catchError(this.handleError('register', []))
+        catchError(this.errorHandler)
       );
   }
 
-  errorHandler(error: HttpErrorResponse) {
+  errorHandler(error) {
     if (!navigator.onLine) {
+      error = error as HttpErrorResponse;
       return throwError(new Error(error.error));
     }
     if (error.error instanceof ErrorEvent) {
@@ -101,13 +99,13 @@ export class HttpClien {
     return throwError(error);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
+  // private handleError<T>(operation = 'operation', result?: T) {
+  //   return (error: any): Observable<T> => {
+  //     console.error(error);
+  //     this.log(`${operation} failed: ${error.message}`);
+  //     return of(result as T);
+  //   };
+  // }
 
   private log(message: string) {
     console.log(message);

@@ -6,7 +6,11 @@ import {Router} from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+  currentRoute: string;
+
   constructor(private router: Router) {
+    this.currentRoute = this.router.url;
+
   }
 
 
@@ -24,25 +28,29 @@ export class TokenInterceptor implements HttpInterceptor {
     if (!request.headers.has('Content-Type')) {
       request = request.clone({
         setHeaders: {
-          'content-type': 'application/json'
+          'Content-type': 'application/json'
         }
       });
     }
-    console.log(request);
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
+          this.currentRoute = null;
           console.log('event--->>>', event);
         }
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
+        console.log('error--->>>', error);
         if (error.error.toString().includes('Expired or invalid JWT token')) {
+          error.error.status = 401;
           localStorage.removeItem('token');
-          this.router.navigate(['client/sign-in']);
+          localStorage.setItem('navigate', this.currentRoute);
+          this.router.navigate(['client/sign-in']).then(r => console.log('navigate to sign-in' + r));
         }
-        if (error.status === 401) {
-          this.router.navigate(['client/sign-in']);
+        if (error.error.status === 401) {
+          localStorage.setItem('navigate', this.currentRoute);
+          this.router.navigate(['client/sign-in']).then(r => console.log('navigate to sign-in' + r));
         }
         return throwError(error);
       }));

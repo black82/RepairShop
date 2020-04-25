@@ -19,32 +19,6 @@
 
 }
 
-.close {
-  width: 30px;
-  height: 30px;
-  background: #fff !important;
-  color: #000 !important;
-  box-shadow: 0 2px 5px 0 #222b3c;
-  padding: .2em;
-  border-radius: 50px;
-  display: flex;
-  position: absolute;
-  font-size: 2.1em;
-  border: none;
-  right: -20px;
-  top: -10px;
-}
-
-.x-alert {
-  margin-top: -15px;
-  size: 20px;
-  cursor: pointer;
-}
-
-.x-alert:hover {
-  color: #06D85F;
-
-}
 
 .overlay {
   position: absolute;
@@ -306,60 +280,9 @@ body {
 }
 
 
-
 #alert-container {
   z-index: 1;
-
-.alert-msg {
-  background: #fff;
-  border: 1px solid #ddd;
-  bottom: 25px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
-  left: 25px;
-  padding: 15px;
-  position: absolute;
-  z-index: 99;
-
-&:before {
-   color: #60c354;
-   content: "\f06a";
-   font-family: "Font Awesome 5 Free", serif;
-   font-size: 1.5em;
-   font-weight: 600;
-   margin-right: 10px;
-   vertical-align: sub;
- }
-}
 }
 
-.slide-in {
-  animation-name: slideIn;
-  animation-duration: 0.8s;
-}
 
-@keyframes slideIn {
-  from {
-    transform: translateX(-400px);
-  }
 
-  to {
-    transform: translateX(0);
-  }
-}
-
-.slide-out {
-  animation-name: slideOut;
-  animation-duration: 0.8s;
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  to {
-    transform: translateY(80px);
-    opacity: 0;
-  }
-}

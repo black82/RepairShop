@@ -49,8 +49,18 @@ export class SignInComponent implements OnInit {
     this.authService.login(client)
       .subscribe(res => {
         if (res.token) {
+          const element = document.querySelector('.close') as HTMLElement;
           localStorage.setItem('token', res.token);
-          this.router.navigate(['']).then(r => r);
+          const nav_url = localStorage.getItem('navigate');
+          if (element) {
+            element.click();
+          }
+          if (nav_url) {
+            this.router.navigate([nav_url]);
+            localStorage.removeItem('navigate');
+          } else {
+            this.router.navigate(['']).then(r => r);
+          }
         }
       }, (err) => {
         this.alertService.error('', 'You credential is invalid s',
