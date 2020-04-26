@@ -7,6 +7,7 @@ import {SearchpageComponent} from './component/searchpage/searchpage.component';
 import {SignUpComponent} from './component/sign-up/sign-up.component';
 import {SignInComponent} from './component/sign-in/sign-in.component';
 import {AutGuardService} from './component/service/aut-guard.service';
+import {SearchEmailComponent} from './component/search-email/search-email.component';
 
 
 export const routers: Routes = [
@@ -15,7 +16,8 @@ export const routers: Routes = [
   {path: 'output/client/device', component: OtpoutDeviceComponent, canActivate: [AutGuardService]},
   {path: 'search/telephone/number', component: SearchpageComponent, canActivate: [AutGuardService]},
   {path: 'client/sign-up', component: SignUpComponent},
-  {path: 'client/sign-in', component: SignInComponent}
+  {path: 'client/sign-in', component: SignInComponent},
+  {path: 'search/email', component: SearchEmailComponent, canActivate: [AutGuardService]}
 ];
 
 @NgModule({

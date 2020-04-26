@@ -3,21 +3,24 @@ import {Client} from '../entity/ClientWeb';
 import {FormhidenService} from '../service/formhiden.service';
 
 @Component({
-  selector: 'app-searchpage',
-  templateUrl: './searchpage.component.html',
-  styleUrls: ['./searchpage.component.css']
+  selector: 'app-search-email',
+  templateUrl: './search-email.component.html',
+  styleUrls: ['./search-email.component.css']
 })
-export class SearchpageComponent implements OnInit {
-  nameForm = 'Search by Tel. Number';
-  button = 'Search';
+export class SearchEmailComponent implements OnInit {
+  nameForm = 'Search by Email';
+  button = 'Search Email';
   client: Client;
+  show_client: boolean;
 
 
   constructor(private hide_form: FormhidenService) {
   }
 
   ngOnInit() {
-
+    this.hide_form.form_open.subscribe(value => {
+      this.show_client = value;
+    });
   }
 
   client_catch($event: Client) {
@@ -28,3 +31,4 @@ export class SearchpageComponent implements OnInit {
     }
   }
 }
+

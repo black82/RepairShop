@@ -54,33 +54,15 @@ export class SearchformComponent implements OnInit {
     }
     switch (this.typeForm) {
       case 'telephone': {
-        this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
-          client => {
-            this.client = client;
-            this.actionA.emit(this.client);
-          },
-          error => {
-            this.hideSearch = false;
-            this.alert_service.error(null,
-              'Unfortunately we could not find this client '
-              + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-            ;
-          });
+        this.searchByTelephone();
         break;
       }
       case 'id-repair': {
-        this.client_service.searchByRepairId(this.formInput.controls.ob.value).subscribe(
-          client => {
-            this.client = client;
-            this.actionA.emit(this.client);
-          },
-          error => {
-            this.hideSearch = false;
-            this.alert_service.error(null,
-              'Unfortunately we could not find this client '
-              + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-            ;
-          });
+        this.searchByIdRepair();
+        break;
+      }
+      case 'email': {
+        this.searchByEmail();
         break;
       }
     }
@@ -115,5 +97,50 @@ export class SearchformComponent implements OnInit {
       document.querySelector('form').style.display = 'block';
       document.querySelector('form').id = 'show-form';
     });
+  }
+
+  searchByTelephone() {
+    this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
+      client => {
+        this.client = client;
+        this.actionA.emit(this.client);
+      },
+      error => {
+        this.hideSearch = false;
+        this.alert_service.error(null,
+          'Unfortunately we could not find this client '
+          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
+        ;
+      });
+  }
+
+  searchByIdRepair() {
+    this.client_service.searchByRepairId(this.formInput.controls.ob.value).subscribe(
+      client => {
+        this.client = client;
+        this.actionA.emit(this.client);
+      },
+      error => {
+        this.hideSearch = false;
+        this.alert_service.error(null,
+          'Unfortunately we could not find this client '
+          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
+        ;
+      });
+  }
+
+  searchByEmail() {
+    this.client_service.searchByEmail(this.formInput.controls.ob.value).subscribe(
+      client => {
+        this.client = client;
+        this.actionA.emit(this.client);
+      },
+      error => {
+        this.hideSearch = false;
+        this.alert_service.error(null,
+          'Unfortunately we could not find this client '
+          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
+        ;
+      });
   }
 }

@@ -53,6 +53,17 @@ export class HttpClien {
       );
   }
 
+  searchByEmail(email: string): Observable<Client> {
+    return this.http.get<Client>(this.apiUrl + 'api/search/email', {
+      params: new HttpParams().set('email', email)
+    })
+      .pipe(retry(2),
+        catchError(err => {
+          return this.errorHandler(err);
+        })
+      );
+  }
+
   outputDeviceForm(repair: Repair, id: number): Observable<boolean> {
     return this.http.post<boolean>(this.apiUrl + 'api/create/client/return/device/' + id, repair)
       .pipe(retry(2),
@@ -79,7 +90,6 @@ export class HttpClien {
       );
   }
   logout(): void {
-    this.log('logout success');
     localStorage.setItem('islogin', '0');
     return localStorage.removeItem('token');
   }

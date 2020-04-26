@@ -73,7 +73,7 @@ export class OtpoutDeviceComponent implements OnInit {
   printer = faPrint;
   return_device_button_text = 'Search Device';
   formClient: FormGroup;
-  titleForm = 'Search Return Device by  Tel. Number';
+  titleForm = 'Search Return Device by  Repair Number';
   client: Client;
   output_test: OutputTest;
   repair_output: Repair;

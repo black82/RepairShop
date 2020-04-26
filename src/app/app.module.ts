@@ -22,6 +22,7 @@ import {SignUpComponent} from './component/sign-up/sign-up.component';
 import {SignInComponent} from './component/sign-in/sign-in.component';
 import {TokenInterceptor} from './component/service/TokenInterceptor';
 import {HttpClien} from './component/service/clientservice.service';
+import {SearchEmailComponent} from './component/search-email/search-email.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {HttpClien} from './component/service/clientservice.service';
     PrintPageComponent,
     CheckDeviceRepairActiveComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    SearchEmailComponent
   ],
   imports: [
     AppRoutingModule,

@@ -2,8 +2,8 @@
   <div class="container-search">
     <div class="search-input-container1">
       <app-searchform (actionA)="client_catch($event)" [textButton]="button" [titleForm]="nameForm"
-                      [typeForm]="'telephone'"></app-searchform>
+                      [typeForm]="'email'"></app-searchform>
     </div>
-    <app-single-content *ngIf="client" [client]="client"></app-single-content>
+    <app-single-content *ngIf="show_client" [client]="client"></app-single-content>
   </div>
 </div>
