@@ -24,6 +24,10 @@ export class SearchformComponent implements OnInit {
   button: Element;
   @Output()
   hiddenForm = new EventEmitter();
+  @Input()
+  hiddenFormBack: boolean;
+  @Input()
+  onChange: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private fb: FormBuilder, private client_service: HttpClien, private alert_service: AlertServiceService) {
     const nonWhitespaceRegExp: RegExp = new RegExp('\\S');
@@ -33,6 +37,9 @@ export class SearchformComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.onChange.subscribe(value => {
+      this.hiddenFormBack = value;
+    });
     this.hiddenFormAfterSubmitForm();
   }
 
@@ -62,8 +69,8 @@ export class SearchformComponent implements OnInit {
   hiddenFormAfterSubmitForm() {
     document.getElementById('show-button').style.opacity = '0';
     const searchButton = document.querySelector('#search-button');
-    console.log('111asdasda');
     searchButton.addEventListener('click', () => {
+
       if (!this.hideSearch) {
         document.querySelector('form').id = 'form-hide';
         setTimeout(this.showSearchForm, 1000);
@@ -76,14 +83,15 @@ export class SearchformComponent implements OnInit {
     document.getElementById('show-button').style.opacity = '1';
     document.querySelector('form').style.display = 'none';
     document.querySelector('#show-button').addEventListener('click', () => {
+      (document.querySelector('.show-form') as HTMLElement).style.opacity = '0';
       document.querySelector('form').style.display = 'block';
       document.querySelector('form').id = 'show-form';
-      document.getElementById('show-button').style.opacity = '0';
-      setTimeout(() => {
-        this.hiddenForm?.emit(true);
-        this.actionA?.emit(null);
-      }, 1000);
 
     });
+  }
+
+
+  show_client_change($event) {
+    this.hiddenFormBack = $event;
   }
 }

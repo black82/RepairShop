@@ -198,6 +198,7 @@
 
 
 #form-hide {
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
   -webkit-animation: slide-out-elliptic-top-bck 0.7s ease-in both;
   animation: slide-out-elliptic-top-bck 0.7s ease-in both;
 }
@@ -211,6 +212,7 @@
     opacity: 1;
   }
   100% {
+
     -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
     transform: translateY(-600px) rotateX(-30deg) scale(0);
     -webkit-transform-origin: 50% 100%;
@@ -227,6 +229,7 @@
 
 @-webkit-keyframes slit-in-vertical {
   0% {
+
     -webkit-transform: translateZ(-800px) rotateY(90deg);
     transform: translateZ(-800px) rotateY(90deg);
     opacity: 0;

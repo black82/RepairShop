@@ -6,29 +6,27 @@ import {HttpClien} from './clientservice.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AutGuardService implements CanActivate {
+
   constructor(private authService: HttpClien, private router: Router) {
+
   }
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state1: RouterStateSnapshot): boolean {
-    const url: string = state1.url;
-
+    state: RouterStateSnapshot): boolean {
+    const url: string = state.url;
     return this.checkLogin(url);
   }
 
   checkLogin(url: string): boolean {
-    if (this.authService.isLoggedIn) {
-      console.log('state');
+    if (localStorage.getItem('islogin') === '1') {
       return true;
+    } else {
+      localStorage.setItem('navigate', url);
+      this.router.navigate(['client/sign-in']);
+      return false;
     }
 
-    // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
-
-    // Navigate to the login page with extras
-    this.router.navigate(['client/sign-in']);
-    return false;
   }
 }

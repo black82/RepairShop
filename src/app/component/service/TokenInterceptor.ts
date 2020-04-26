@@ -3,12 +3,13 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {HttpClien} from './clientservice.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   currentRoute: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private httpClient: HttpClien) {
     this.currentRoute = this.router.url;
 
   }
@@ -37,6 +38,7 @@ export class TokenInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           this.currentRoute = null;
           console.log('event--->>>', event);
+          localStorage.setItem('islogin', '1');
         }
         return event;
       }),
@@ -44,11 +46,13 @@ export class TokenInterceptor implements HttpInterceptor {
         console.log('error--->>>', error);
         if (error.error.toString().includes('Expired or invalid JWT token')) {
           error.error.status = 401;
+          localStorage.setItem('islogin', '0');
           localStorage.removeItem('token');
           localStorage.setItem('navigate', this.currentRoute);
           this.router.navigate(['client/sign-in']).then(r => console.log('navigate to sign-in' + r));
         }
         if (error.error.status === 401) {
+          localStorage.setItem('islogin', '0');
           localStorage.setItem('navigate', this.currentRoute);
           this.router.navigate(['client/sign-in']).then(r => console.log('navigate to sign-in' + r));
         }

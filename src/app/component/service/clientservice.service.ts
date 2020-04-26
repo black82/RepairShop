@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry, tap} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
@@ -11,19 +11,9 @@ import {Router} from '@angular/router';
 })
 export class HttpClien {
   redirectUrl: string;
-  isLoggedIn = false;
   apiUrl = 'http://localhost:8080/';
-  htt;
-
-
-  httpOptionsHtml = {
-    headers: new HttpHeaders({
-      Accept: 'text/html'
-    })
-  };
 
   constructor(private http: HttpClient, private router: Router) {
-
   }
 
   createClient(client: Client): Observable<boolean> {
@@ -62,13 +52,16 @@ export class HttpClien {
   login(data: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/auth/' + 'login', data)
       .pipe(
-        tap(_ => this.isLoggedIn = true),
-        catchError(
-          this.errorHandler)
+        tap(() => {
+          console.log('login success');
+          localStorage.setItem('islogin', '1');
+        }),
+        catchError(this.errorHandler)
       );
   }
-
   logout(): void {
+    this.log('logout success');
+    localStorage.setItem('islogin', '0');
     return localStorage.removeItem('token');
   }
 
@@ -98,14 +91,6 @@ export class HttpClien {
 
     return throwError(error);
   }
-
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     console.error(error);
-  //     this.log(`${operation} failed: ${error.message}`);
-  //     return of(result as T);
-  //   };
-  // }
 
   private log(message: string) {
     console.log(message);

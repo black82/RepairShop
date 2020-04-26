@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {faCalendarCheck} from '@fortawesome/free-solid-svg-icons';
 import {faUserTag} from '@fortawesome/free-solid-svg-icons/faUserTag';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
@@ -82,6 +82,8 @@ export class OtpoutDeviceComponent implements OnInit {
   device_repair_active: Device[] = [];
   show_client = false;
   formSubmitted = false;
+  @Output()
+  onChange = new EventEmitter();
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService, private printService: PrintService,
@@ -89,7 +91,7 @@ export class OtpoutDeviceComponent implements OnInit {
   }
 
   ngOnInit() {
-    setInterval(elt => {
+    setInterval(() => {
       if (this.show_client) {
         this.animation_call();
         clearInterval();
@@ -188,6 +190,7 @@ export class OtpoutDeviceComponent implements OnInit {
       if (repair.nowInRepair) {
         this.repair_input = repair;
         this.show_client = true;
+        this.onChange.emit({value: true});
       }
     });
   }
@@ -248,7 +251,7 @@ export class OtpoutDeviceComponent implements OnInit {
 
   animationButtonForm() {
     document.querySelectorAll('.button').forEach(button => {
-      button.addEventListener('mouseenter', evt => {
+      button.addEventListener('mouseenter', () => {
         if (this.formClient.valid) {
           button.id = 'success-button';
         } else {
@@ -260,7 +263,7 @@ export class OtpoutDeviceComponent implements OnInit {
 
   animationCheckBox() {
     document.querySelectorAll('.checkbox').forEach(checkbox => {
-      checkbox.addEventListener('click', evt => {
+      checkbox.addEventListener('click', () => {
         if (!checkbox.value) {
           checkbox.id = 'success-checkbox';
         } else {
@@ -272,7 +275,7 @@ export class OtpoutDeviceComponent implements OnInit {
 
   animationTitle() {
     document.querySelectorAll('fa-icon').forEach(title => {
-      title.addEventListener('mouseenter', evt => {
+      title.addEventListener('mouseenter', () => {
         if (!title.classList.contains('button-icon')) {
           title.id = 'title-hover';
         }
@@ -297,7 +300,9 @@ export class OtpoutDeviceComponent implements OnInit {
   }
 
 
-  show_client_change(hide: boolean) {
+  show_client_change(hide) {
     this.show_client = hide;
   }
+
+
 }
