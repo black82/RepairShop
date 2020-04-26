@@ -17,7 +17,15 @@ export class HttpClien {
   }
 
   createClient(client: Client): Observable<boolean> {
+    console.log(client);
     return this.http.post<boolean>(this.apiUrl + 'api/create/client', client)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  printClient(client: Client): Observable<Client> {
+    return this.http.post<Client>(this.apiUrl + 'api/print/client', client)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -26,6 +34,17 @@ export class HttpClien {
   searchByTelephoneNumber(telephone: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/number', {
       params: new HttpParams().set('telephone', telephone)
+    })
+      .pipe(retry(2),
+        catchError(err => {
+          return this.errorHandler(err);
+        })
+      );
+  }
+
+  searchByRepairId(repairId: string): Observable<Client> {
+    return this.http.get<Client>(this.apiUrl + 'api/search/number', {
+      params: new HttpParams().set('repair', repairId)
     })
       .pipe(retry(2),
         catchError(err => {

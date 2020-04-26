@@ -15,12 +15,14 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   date: Date = new Date();
   type_print: number;
   date_exit: Date;
+  id: string;
 
   constructor(private print: PrintService) {
   }
 
   ngOnInit(): void {
     this.print.print_open.subscribe(print => {
+      this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
       this.name_test_input = [];
       this.name_test_out = [];
@@ -84,6 +86,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
   check_test_OK_out(client: Client) {
+    console.log(client.device[0].repairs[0].outputTest.camera_Output);
     if (!client.device[0].repairs[0].outputTest.camera_Output) {
       this.name_test_out.push(' X Fotocamera difettosa ');
     }
@@ -114,5 +117,19 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].outputTest.sensors_Output) {
       this.name_test_out.push(' X Il sensore del dispositivo è danneggiato ');
     }
+  }
+
+  id_repair(client: Client): string {
+    let id;
+    client.device.forEach(device => {
+      if (device.rightNowInRepair) {
+        device.repairs.forEach(repair => {
+          if (repair.nowInRepair) {
+            id = repair.id_Repair;
+          }
+        });
+      }
+    });
+    return id.toString();
   }
 }

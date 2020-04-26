@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
+import {FormhidenService} from '../service/formhiden.service';
 
 @Component({
   selector: 'app-searchform',
@@ -15,6 +16,8 @@ export class SearchformComponent implements OnInit {
   @Input()
   textButton: string;
   @Input()
+  typeForm: string;
+  @Input()
   titleForm: string;
   formInput: FormGroup;
   client: Client;
@@ -22,14 +25,11 @@ export class SearchformComponent implements OnInit {
   actionA: EventEmitter<Client> = new EventEmitter();
   hideSearch = false;
   button: Element;
-  @Output()
-  hiddenForm = new EventEmitter();
-  @Input()
-  hiddenFormBack: boolean;
-  @Input()
-  onChange: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private client_service: HttpClien, private alert_service: AlertServiceService) {
+  constructor(private fb: FormBuilder,
+              private client_service: HttpClien,
+              private alert_service: AlertServiceService,
+              private form_hide_Service: FormhidenService) {
     const nonWhitespaceRegExp: RegExp = new RegExp('\\S');
     this.formInput = this.fb.group({
       ob: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)])
@@ -37,8 +37,10 @@ export class SearchformComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onChange.subscribe(value => {
-      this.hiddenFormBack = value;
+    this.form_hide_Service.form_open.subscribe(value => {
+
+      this.hideSearch = value;
+
     });
     this.hiddenFormAfterSubmitForm();
   }
@@ -50,48 +52,68 @@ export class SearchformComponent implements OnInit {
         'Please fill in the search field, The field cannot be empty.', false, false, '');
       return;
     }
-    this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
-      client => {
-        this.client = client;
-        this.hideSearch = true;
-        this.actionA.emit(this.client);
-      },
-      error => {
-        this.hideSearch = false;
-        this.alert_service.error(null,
-          'Unfortunately we could not find this client '
-          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-        ;
+    switch (this.typeForm) {
+      case 'telephone': {
+        this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
+          client => {
+            this.client = client;
+            this.actionA.emit(this.client);
+          },
+          error => {
+            this.hideSearch = false;
+            this.alert_service.error(null,
+              'Unfortunately we could not find this client '
+              + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
+            ;
+          });
+        break;
       }
-    );
+      case 'id-repair': {
+        this.client_service.searchByRepairId(this.formInput.controls.ob.value).subscribe(
+          client => {
+            this.client = client;
+            this.actionA.emit(this.client);
+          },
+          error => {
+            this.hideSearch = false;
+            this.alert_service.error(null,
+              'Unfortunately we could not find this client '
+              + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
+            ;
+          });
+        break;
+      }
+    }
+
+
   }
 
   hiddenFormAfterSubmitForm() {
     document.getElementById('show-button').style.opacity = '0';
     const searchButton = document.querySelector('#search-button');
     searchButton.addEventListener('click', () => {
+        setTimeout(() => {
+          if (this.hideSearch) {
+            document.querySelector('form').id = 'form-hide';
+            setTimeout(() => {
+              this.showSearchForm();
+            }, 500);
+          }
+        }, 1000);
 
-      if (!this.hideSearch) {
-        document.querySelector('form').id = 'form-hide';
-        setTimeout(this.showSearchForm, 1000);
+
       }
-    });
-
+    );
   }
 
   showSearchForm() {
-    document.getElementById('show-button').style.opacity = '1';
+    document.querySelector('.show-form').style.opacity = '1';
     document.querySelector('form').style.display = 'none';
-    document.querySelector('#show-button').addEventListener('click', () => {
+    document.querySelector('.show-form').addEventListener('click', () => {
       (document.querySelector('.show-form') as HTMLElement).style.opacity = '0';
+      this.form_hide_Service.form_open.emit(false);
       document.querySelector('form').style.display = 'block';
       document.querySelector('form').id = 'show-form';
-
     });
-  }
-
-
-  show_client_change($event) {
-    this.hiddenFormBack = $event;
   }
 }

@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
+import {FormhidenService} from '../service/formhiden.service';
 
 @Component({
   selector: 'app-searchpage',
@@ -10,10 +11,9 @@ export class SearchpageComponent implements OnInit {
   nameForm = 'Search bay Tel. Number';
   button = 'Search';
   client: Client;
-  @Output()
-  refresh_client: EventEmitter<Client> = new EventEmitter();
 
-  constructor() {
+
+  constructor(private hide_form: FormhidenService) {
   }
 
   ngOnInit() {
@@ -21,9 +21,10 @@ export class SearchpageComponent implements OnInit {
   }
 
   client_catch($event: Client) {
+    console.log($event);
     if ($event as Client) {
-      this.refresh_client.emit($event);
       this.client = $event;
+      this.hide_form.form_open.emit(true);
     }
   }
 }

@@ -75,6 +75,7 @@ export class DeviceinputComponent implements OnInit {
   save = faDownload;
   printer = faPrint;
   client: Client;
+  client_print: Client;
   formClient: FormGroup;
   device: Device;
   repair: Repair;
@@ -135,7 +136,8 @@ export class DeviceinputComponent implements OnInit {
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
     this.client = new Client(null, formData.family, formData.name, formData.email,
       formData.telephone_number, formData.address, [this.device], formData.email_send);
-   }
+    return this.client;
+  }
 
   submitForm() {
     if (!this.formClient.valid) {
@@ -146,7 +148,11 @@ export class DeviceinputComponent implements OnInit {
         false, false, '');
       return;
     }
-    this.createClient();
+    if (this.client_print) {
+      this.createClient();
+    } else {
+      this.client = this.client_print;
+    }
     this.httpService.createClient(this.client).subscribe(response => {
         this.alert_service.success(null, 'The client' + this.client.name +
           'received a device and closed the repair procedure !!! Client Id ' + response, true, null, '');
@@ -170,7 +176,10 @@ export class DeviceinputComponent implements OnInit {
       return;
     }
     this.createClient();
-    this.print.print_open.emit(new PrintEntity(this.client, 1, this.formClient.controls.date_exit.value));
+    this.httpService.printClient(this.client).subscribe(client => {
+      this.client_print = client;
+      this.print.print_open.emit(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
+    });
   }
 
   dismisset() {

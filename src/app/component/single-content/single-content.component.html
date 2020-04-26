@@ -61,19 +61,35 @@
         <div *ngIf="item.visible">
           <div class="border-container show">
             <ul class="border">
-              <p>
-              <span class="input-title"><fa-icon
-                [icon]="date"></fa-icon> Date to enter: {{item.repair_elemnt?.date_to_enter | date:'mediumDate'}} </span>
-                <span class="input-title"><fa-icon [icon]="cogs"></fa-icon> Defect:{{item.repair_elemnt?.defect}}</span>
-                <span class="input-title"><fa-icon
-                  [icon]="money"></fa-icon> Deposit: {{item.repair_elemnt?.deposit}}</span>
-                <span class="input-title"><fa-icon [icon]="money"></fa-icon>Price:{{item.repair_elemnt?.price}}</span>
-                <span class="input-title"><fa-icon
-                  [icon]="date"></fa-icon>Return Date: {{item.repair_elemnt?.output_date | date:'mediumDate'}}</span>
-                <span class="input-title"> <fa-icon
-                  [icon]="work"></fa-icon>Work done: {{item.repair_elemnt?.work_don}}</span>
-                <span class="input-title"> <fa-icon
-                  [icon]="chip"></fa-icon>Parts replaced: {{item.repair_elemnt?.parts_replaced}}</span>
+              <li class="input-title">
+                <fa-icon [icon]="cogs"></fa-icon>
+                <strong> Repair Id:{{item.repair_elemnt?.id_Repair}}</strong></li>
+              <li class="input-title">
+                <fa-icon
+                  [icon]="date"></fa-icon>
+                Date to enter: {{item.repair_elemnt?.date_to_enter | date:'mediumDate'}} </li>
+              <li class="input-title">
+                <fa-icon [icon]="cogs"></fa-icon>
+                Defect:{{item.repair_elemnt?.defect}}</li>
+              <li class="input-title">
+                <fa-icon
+                  [icon]="money"></fa-icon>
+                Deposit: {{item.repair_elemnt?.deposit}}</li>
+              <li class="input-title">
+                <fa-icon [icon]="money"></fa-icon>
+                Price:{{item.repair_elemnt?.price}}</li>
+              <li class="input-title">
+                <fa-icon
+                  [icon]="date"></fa-icon>
+                Return Date: {{item.repair_elemnt?.output_date | date:'mediumDate'}}</li>
+              <li class="input-title">
+                <fa-icon
+                  [icon]="work"></fa-icon>
+                Work done: {{item.repair_elemnt?.work_don}}</li>
+              <li class="input-title">
+                <fa-icon
+                  [icon]="chip"></fa-icon>
+                Parts replaced: {{item.repair_elemnt?.parts_replaced}}</li>
             </ul>
             <hr>
             <div class="test-container">

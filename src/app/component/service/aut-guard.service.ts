@@ -19,13 +19,14 @@ export class AutGuardService implements CanActivate {
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): boolean {
+  checkLogin(url: string): any {
     if (localStorage.getItem('islogin') === '1') {
       return true;
     } else {
       localStorage.setItem('navigate', url);
       this.router.navigate(['client/sign-in']);
       return false;
+
     }
 
   }

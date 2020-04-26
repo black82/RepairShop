@@ -302,6 +302,7 @@ form textarea {
 .button:hover {
   color: #1ABC9C;
   border-color: #1ABC9C;
+  cursor: pointer;
 }
 
 .button:hover:before,

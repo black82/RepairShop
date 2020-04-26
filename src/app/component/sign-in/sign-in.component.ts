@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpClien} from '../service/clientservice.service';
-import {ErrorStateMatcher} from '@angular/material/core';
 import {AlertServiceService} from '../service/alert-service.service';
 import {ClientLogIn} from '../entity/ClientLogIn';
 import {faLock} from '@fortawesome/free-solid-svg-icons/faLock';
@@ -74,15 +73,3 @@ export class SignInComponent implements OnInit {
 
 }
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher
-  implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control
-      && control.invalid
-      && (control.dirty
-        || control.touched ||
-        isSubmitted));
-  }
-}

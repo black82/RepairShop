@@ -61,9 +61,6 @@ export class SingleContentComponent implements OnInit {
     if (this.client != null) {
       this.create_client(this.client);
     }
-    this.refresh.subscribe(data => {
-      this.create_client(data);
-    });
   }
 
   create_client(client: Client) {

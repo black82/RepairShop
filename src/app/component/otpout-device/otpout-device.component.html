@@ -1,12 +1,12 @@
 <div class="container">
-  <app-searchform (actionA)="client_catch($event)"
-                  (hiddenForm)="show_client_change($event)" [textButton]="return_device_button_text"
+  <app-searchform (actionA)="client_catch($event)" [textButton]="return_device_button_text"
+                  [typeForm]="'id-repair'"
                   [titleForm]="titleForm"></app-searchform>
 
   <div *ngIf="show_client" class="container_form">
     <div class="title-container" tooltip="Compile all fields are required.">
       <div class="tooltip">
-        <p class="title-form">Compile the model for the device's "{{device_input.model}}" output
+        <p class="title-form">Compile the model for the device's "{{client.device[0]?.model}}" output
           client "{{client.name}} {{client.family}}"</p>
       </div>
     </div>
@@ -43,7 +43,7 @@
             <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.imei_output.dirty ||
             formClient.controls.imei_output.touched) && formClient.controls.imei_output.invalid && formClient.controls.imei_output.errors}"
-                   [value]="device_input?.imei" class="col-1"
+                   [value]="client.device[0]?.imei" class="col-1"
                    formControlName="imei_output">
           </label>
           <label>
@@ -51,14 +51,14 @@
             <fa-icon [icon]="cogs" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.defect_output.dirty ||
             formClient.controls.defect_output.touched) && formClient.controls.defect_output.invalid && formClient.controls.defect_output.errors}"
-                   [value]="repair_input?.defect" class="col-1"
+                   [value]="client.device[0].repairs[0]?.defect" class="col-1"
                    formControlName="defect_output">
           </label>
           <label><span class="input-title">Parts replaced</span>
             <fa-icon [icon]="chip" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.parts_replace_output.dirty ||
             formClient.controls.parts_replace_output.touched) && formClient.controls.parts_replace_output.invalid && formClient.controls.parts_replace_output.errors}"
-                   [value]="repair_input?.parts_replaced" class="col-1"
+                   [value]="client.device[0].repairs[0]?.parts_replaced" class="col-1"
                    formControlName="parts_replace_output">
           </label>
 
@@ -68,7 +68,7 @@
             <fa-icon [icon]="work" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.work_don_output.dirty ||
             formClient.controls.work_don_output.touched) && formClient.controls.work_don_output.invalid && formClient.controls.work_don_output.errors}"
-                   [value]="repair_input?.work_don" class="col-1"
+                   [value]="client.device[0].repairs[0]?.work_don" class="col-1"
                    formControlName="work_don_output">
           </label>
 
@@ -76,7 +76,7 @@
             <fa-icon [icon]="money" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.price_output.dirty ||
             formClient.controls.price_output.touched) && formClient.controls.price_output.invalid && formClient.controls.price_output.errors}"
-                   [value]="repair_input?.price" class="col-2"
+                   [value]="client.device[0].repairs[0]?.price" class="col-2"
                    formControlName="price_output">
           </label>
           <label>
@@ -92,7 +92,7 @@
             <fa-icon [icon]="model" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.model_output.dirty ||
             formClient.controls.model_output.touched) && formClient.controls.model_output.invalid && formClient.controls.model_output.errors}"
-                   [value]="device_input?.model" class="col-2"
+                   [value]="client.device[0]?.model" class="col-2"
                    formControlName="model_output">
           </label>
           <label>
@@ -100,7 +100,7 @@
             <fa-icon [icon]="depossit" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.deposit_output.dirty ||
             formClient.controls.deposit_output.touched) && formClient.controls.deposit_output.invalid && formClient.controls.deposit_output.errors}"
-                   [value]="repair_input?.deposit" class="col-2"
+                   [value]="client.device[0].repairs[0]?.deposit" class="col-2"
                    formControlName="deposit_output">
           </label>
           <label>
@@ -108,7 +108,7 @@
             <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.accessory_output.dirty ||
             formClient.controls.accessory_output.touched) && formClient.controls.accessory_output.invalid && formClient.controls.accessory_output.errors}"
-                   [value]="device_input?.accessory" class="col-2"
+                   [value]="client.device[0]?.accessory" class="col-2"
                    formControlName="accessory_output">
           </label>
         </div>
@@ -127,7 +127,7 @@
             <fa-icon [icon]="sensors" [style.color]="formClient.controls.sensor_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">
-              <input [value]="repair_input?.outputTest?.sensors_Output"
+              <input [value]="client.device[0].repairs[0]?.outputTest?.sensors_Output"
                      class="check-box"
                      formControlName="sensor_output" name="device-test" type="checkbox">
               <span class="check-box-name">Sensors</span>
@@ -137,7 +137,8 @@
             <fa-icon [icon]="display" [style.color]="formClient.controls.display_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">
-              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.display_Output"
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.display_Output"
                      class="check-box" formControlName="display_output" name="device-test"
                      type="checkbox">
               <span class="check-box-name">Display</span>
@@ -149,7 +150,7 @@
                      class="icon-box"></fa-icon>
             <label class="checkbox">
               <input [ngClass]="{'form-submitted': formSubmitted}"
-                     [value]="repair_input?.outputTest?.connectors_Output" class="check-box"
+                     [value]="client.device[0].repairs[0]?.outputTest?.connectors_Output" class="check-box"
                      formControlName="connections_output" name="device-test" type="checkbox">
               <span class="check-box-name">Connectors</span>
             </label>
@@ -160,7 +161,7 @@
                      class="icon-box"></fa-icon>
             <label class="checkbox">
               <input [ngClass]="{'form-submitted': formSubmitted}"
-                     [value]="repair_input?.outputTest?.sound_equipment_Output" class="check-box"
+                     [value]="client.device[0].repairs[0]?.outputTest?.sound_equipment_Output" class="check-box"
                      formControlName="sound_equipment_output" name="device-test" type="checkbox">
               <span class="check-box-name">Sound/equipment</span>
             </label>
@@ -170,7 +171,8 @@
           <fa-icon [icon]="touch" [style.color]="formClient.controls.touch_output.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box"></fa-icon>
           <label class="checkbox">
-            <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.touch_Output"
+            <input [ngClass]="{'form-submitted': formSubmitted}"
+                   [value]="client.device[0].repairs[0]?.outputTest?.touch_Output"
                    class="check-box" formControlName="touch_output"
                    name="device-test" type="checkbox">
             <span class="check-box-name">Touch</span>
@@ -180,7 +182,8 @@
           <fa-icon [icon]="wifi" [style.color]="formClient.controls.wi_fi_output.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box"></fa-icon>
           <label class="checkbox">
-            <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.wi_fi_Output"
+            <input [ngClass]="{'form-submitted': formSubmitted}"
+                   [value]="client.device[0].repairs[0]?.outputTest?.wi_fi_Output"
                    class="check-box" formControlName="wi_fi_output"
                    name="device-test" type="checkbox">
             <span class="check-box-name">Wi-Fi</span>
@@ -193,7 +196,7 @@
                      class="icon-box"></fa-icon>
             <label class="checkbox">
               <input [ngClass]="{'form-submitted': formSubmitted}"
-                     [value]="repair_input?.outputTest?.microphone_Output" class="check-box"
+                     [value]="client.device[0].repairs[0]?.outputTest?.microphone_Output" class="check-box"
                      formControlName="microphone_output" name="device-test" type="checkbox">
               <span class="check-box-name">Microphone</span>
             </label>
@@ -202,7 +205,8 @@
             <fa-icon [icon]="sim" [style.color]="formClient.controls.sim_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">
-              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.sim_Output"
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.sim_Output"
                      class="check-box" formControlName="sim_output"
                      name="device-test" type="checkbox">
               <span class="check-box-name">Sim</span>
@@ -213,7 +217,8 @@
                      [style.color]="formClient.controls.keyboard_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">
-              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.keyboard_Output"
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.keyboard_Output"
                      class="check-box"
                      formControlName="keyboard_output" name="device-test" type="checkbox">
               <span class="check-box-name">Keyboard</span>
@@ -223,7 +228,8 @@
             <fa-icon [icon]="camera" [style.color]="formClient.controls?.camera_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">
-              <input [ngClass]="{'form-submitted': formSubmitted}" [value]="repair_input?.outputTest?.camera_Output"
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.camera_Output"
                      class="check-box" formControlName="camera_output"
                      name="device-test" type="checkbox">
               <span class="check-box-name">Camera</span>
@@ -241,7 +247,8 @@
           </div>
         </div>
         <label>
-          <textarea [value]="repair_input?.note" class="text-area" formControlName="note_output">...</textarea>
+          <textarea [value]="client.device[0].repairs[0]?.note" class="text-area"
+                    formControlName="note_output">...</textarea>
         </label>
       </div>
 
@@ -262,9 +269,7 @@
         </div>
       </div>
     </form>
-
   </div>
 </div>
 
-<app-check-device-repair-active (device_return)="select_device($event)"></app-check-device-repair-active>
 
