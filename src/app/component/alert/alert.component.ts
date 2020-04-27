@@ -12,6 +12,7 @@ import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import {faCheckSquare} from '@fortawesome/free-solid-svg-icons/faCheckSquare';
+import {faExclamation} from '@fortawesome/free-solid-svg-icons/faExclamation';
 
 
 @Component({
@@ -31,70 +32,55 @@ export class AlertComponent implements OnInit {
   info = faInfoCircle;
   error_status: number;
   ok = faCheckSquare;
+  warn = faExclamation;
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
   }
 
-  static buildStyleElement(): HTMLStyleElement {
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.className = 'alert_css';
-    style.setAttribute('data-debug', 'Injected by WindowScrolling service.');
-    style.textContent = `
-			.container {
-				display: none;
-			  }
-		`;
-    return (style);
-  }
-
   ngOnInit() {
-    this.styleTag = AlertComponent.buildStyleElement();
     this.alertService.alert_open
       .subscribe(alert => {
         if (alert.type === AlertType.Error) {
           if (alert.errore?.error?.status === 401) {
-            this.alert401Show(alert.errore);
+            this.body_alert = 'The time since the last login has expired.';
+            this.info_alert();
             return;
           }
           if (alert.errore?.status === 401) {
-            this.alert401Show(alert.errore);
+            this.body_alert = 'Please sign in.';
+            this.info_alert();
             return;
           }
         }
         this.alert = alert;
         this.initAlert();
-
+        if (document?.querySelector('.show--alert')) {
+          setTimeout(() => {
+            this.removeAlert();
+          }, 5000);
+        }
       });
   }
 
   initAlert() {
     this.text_alert_initialized();
-    this.disable();
-    this.openCloseAlert();
+  }
+
+  success_alert() {
+    const success = document.querySelector('.toast--green');
+    success.classList.add('show--alert');
   }
 
   removeAlert() {
-    if (this.fade) {
-      this.openCloseAlert();
-    }
-    this.enable();
+    const remove = document.querySelector('.show--alert');
+    remove.classList.add('hidden--alert');
+    setTimeout(() => {
+      remove.classList.remove('show--alert');
+    }, 70);
     if (this.alert.keepAfterRouteChange) {
       this.rout_Out_Alert(this.alert.location);
     }
-  }
-
-  openCloseAlert() {
-    this.fade = !this.fade;
-  }
-
-  public disable(): void {
-    document.body.appendChild(this.styleTag);
-  }
-
-  public enable(): void {
-    document.querySelector('body').removeChild(this.styleTag);
   }
 
   public text_alert_initialized(): void {
@@ -104,6 +90,7 @@ export class AlertComponent implements OnInit {
         this.icon = faCheckCircle;
         this.title_alert = ' Is Ok';
         this.body_alert = 'Everything went well. Your operation is successfully completed.';
+        this.success_alert();
         break;
       }
       case AlertType.Error: {
@@ -121,11 +108,13 @@ export class AlertComponent implements OnInit {
           this.error_status = 500;
           this.title_alert = 'Oops : Error ';
           this.alert.message = 'The backend part did not give any answer.';
+          this.error_alert();
           break;
         }
         this.error_status = this.alert.errore.status;
         this.title_alert = 'Oops : Error ';
         this.body_alert = 'Try again. Otherwise contact support.';
+        this.error_alert();
         break;
       }
       case AlertType.Warning: {
@@ -133,72 +122,39 @@ export class AlertComponent implements OnInit {
         this.icon = faExclamationCircle;
         this.title_alert = 'Oops : Waring';
         this.body_alert = 'Attention. Something\'s not right.';
+        this.warning_alert();
         break;
       }
-      default: {
+      case AlertType.Info: {
         this.color_icon = '#F09EA3';
         this.icon = faBomb;
-        this.title_alert = 'Oops : Error';
-        this.body_alert = 'Try again. Otherwise contact support.';
+        this.title_alert = 'Info';
+        this.body_alert = 'Oops : It\'s a normal situation.';
+        this.info_alert();
       }
     }
-  }
-
-  public typeAlertFunc(): any {
-    let color = '#F09EA3';
-
-    if (this.alert.type === AlertType.Success) {
-      color = '#06D85F';
-
-    }
-    if (this.alert.type === AlertType.Error) {
-      this.typeAlert = '#FE1A00';
-    }
-    if (this.alert.type === AlertType.Warning) {
-      color = '#FFCC00';
-
-    }
-    return color;
   }
 
   public rout_Out_Alert(location: string): void {
     this.router.navigate([location]).then(r => r);
   }
 
-  alert401Show(error) {
-    const alerts = document.querySelector('#alert-container');
-    const alertBox = document.createElement('div');
-    alertBox.id = 'alert-msg';
-    const alertMsg = document.createTextNode('You were redirected because: ' + error.error.message || error.errorCode);
-    alertBox.appendChild(alertMsg);
-    const boxButton = document.createElement('a');
-    boxButton.classList.add('close');
-    const spanButton = document.createElement('span');
-    spanButton.classList.add('x-alert');
-    spanButton.textContent = 'x';
-    boxButton.appendChild(spanButton);
-    alerts.insertBefore(alertBox, alerts.childNodes[0]);
-    alertBox.appendChild(boxButton);
-    this.setStyleBoxAlert(boxButton, spanButton, alertBox);
-    boxButton.addEventListener('click', () => {
-      this.removeAlert401(alerts);
-    });
+
+  error_alert() {
+    const error_alert = document.querySelector('.toast--red');
+    error_alert.classList.add('show--alert');
   }
 
-
-  removeAlert401(alerts: Element) {
-    alerts.childNodes[0].id = 'slide-out';
-    alerts.removeChild(alerts.lastChild);
-
+  warning_alert() {
+    const warn_alert = document.querySelector('.toast--yellow');
+    if (warn_alert.classList.contains('hidden--alert')) {
+      warn_alert.classList.remove('hidden--alert');
+    }
+    warn_alert.classList.add('show--alert');
   }
 
-  setStyleBoxAlert(boxButton: HTMLAnchorElement, spanButton: HTMLSpanElement, alertBox: HTMLDivElement) {
-    boxButton.style.width = '5px';
-    boxButton.style.height = '5px';
-    spanButton.style.fontSize = '20px';
-    spanButton.style.marginTop = '-10px';
-    alertBox.style.borderRadius = '10px';
-    alertBox.style.top = '49%';
-    alertBox.style.height = '7%';
+  info_alert() {
+    const error_alert = document.querySelector('.toast--blue');
+    error_alert.classList.add('show--alert');
   }
 }
