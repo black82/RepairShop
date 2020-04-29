@@ -115,6 +115,10 @@ export class SearchformComponent implements OnInit {
   }
 
   searchByIdRepair() {
+    if (!Number(this.formInput.controls.ob.value)) {
+      this.alert_service.info(null, 'The value entered must be a Number.', false, false, null, null);
+      return;
+    }
     this.client_service.searchByRepairId(this.formInput.controls.ob.value).subscribe(
       client => {
         this.client = client;
@@ -127,6 +131,7 @@ export class SearchformComponent implements OnInit {
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
         ;
       });
+
   }
 
   searchByEmail() {

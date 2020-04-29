@@ -11,8 +11,6 @@ import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
-import {faCheckSquare} from '@fortawesome/free-solid-svg-icons/faCheckSquare';
-import {faExclamation} from '@fortawesome/free-solid-svg-icons/faExclamation';
 
 
 @Component({
@@ -21,9 +19,7 @@ import {faExclamation} from '@fortawesome/free-solid-svg-icons/faExclamation';
   styleUrls: ['./alert.component.css'],
 })
 export class AlertComponent implements OnInit {
-  typeAlert: string;
-  fade = false;
-  styleTag: HTMLStyleElement;
+
   title_alert: string;
   body_alert: string;
   alert: Alert;
@@ -31,8 +27,7 @@ export class AlertComponent implements OnInit {
   color_icon: any;
   info = faInfoCircle;
   error_status: number;
-  ok = faCheckSquare;
-  warn = faExclamation;
+
 
   constructor(private alertService: AlertServiceService, private router: Router) {
 
@@ -54,6 +49,9 @@ export class AlertComponent implements OnInit {
           }
         }
         this.alert = alert;
+        if (alert?.message === 'Sorry, you left the module.') {
+          this.router.navigate(alert.location).then();
+        }
         this.initAlert();
         if (document?.querySelector('.show--alert')) {
           setTimeout(() => {
@@ -74,10 +72,10 @@ export class AlertComponent implements OnInit {
 
   removeAlert() {
     const remove = document.querySelector('.show--alert');
-    remove.classList.add('hidden--alert');
+    remove?.classList.add('hidden--alert');
     setTimeout(() => {
-      remove.classList.remove('show--alert');
-    }, 70);
+      remove?.classList?.remove('show--alert');
+    }, 700);
     if (this.alert.keepAfterRouteChange) {
       this.rout_Out_Alert(this.alert.location);
     }
@@ -142,6 +140,9 @@ export class AlertComponent implements OnInit {
 
   error_alert() {
     const error_alert = document.querySelector('.toast--red');
+    if (error_alert.classList.contains('hidden--alert')) {
+      error_alert.classList.remove('hidden--alert');
+    }
     error_alert.classList.add('show--alert');
   }
 
@@ -154,7 +155,10 @@ export class AlertComponent implements OnInit {
   }
 
   info_alert() {
-    const error_alert = document.querySelector('.toast--blue');
-    error_alert.classList.add('show--alert');
+    const info_alert = document.querySelector('.toast--blue');
+    if (info_alert.classList.contains('hidden--alert')) {
+      info_alert.classList.remove('hidden--alert');
+    }
+    info_alert.classList.add('show--alert');
   }
 }

@@ -232,7 +232,10 @@ export class DeviceinputComponent implements OnInit {
     document.querySelectorAll('label').forEach(label => {
       label.addEventListener('input', ev => {
         if (ev.target.validity.valid) {
-          label.querySelector('fa-icon').style.color = '#34495E';
+          const htmlElement = label.querySelector('fa-icon') as HTMLElement;
+          if (ev.target.type !== 'checkbox') {
+            htmlElement.style.color = '#34495E';
+          }
         }
       });
     });

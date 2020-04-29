@@ -121,6 +121,7 @@ fa-icon {
 .show--alert {
   position: fixed;
   visibility: visible;
+  z-index: 10;
   left: 60%;
   margin-left: -20px;
   -webkit-animation: tilt-in-bl-out 0.65s cubic-bezier(0.550, 0.085, 0.680, 0.530);
