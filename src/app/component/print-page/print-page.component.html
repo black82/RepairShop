@@ -1,13 +1,115 @@
-<div *ngIf="client" class="container-fluid">
+<div class="container-fluid">
   <div class="head-doc">
+    <head>
+      <style>
 
+        html, body, h1, h2, h3, h4, p, img {
+          margin: 0;
+        }
+
+        h1 {
+          font-size: 18pt;
+          font-weight: 500;
+          margin-bottom: 0.5cm;
+        }
+
+        h2 {
+          font-size: 16pt;
+          font-weight: 500;
+        }
+
+        p {
+          font-size: 12pt;
+        }
+
+        .items-group {
+          border-style: solid;
+          border-color: black;
+          border-width: 1pt 1pt 1pt 1pt;
+          border-radius: 5pt;
+          padding: 3pt 3pt 3pt 3pt;
+          margin: 9pt 0 9pt 0;
+        }
+
+        .logotipo {
+          width: 6cm;
+          height: 4cm;
+          margin: -0.5cm;
+        }
+
+        .label {
+          font-weight: 500;
+        }
+
+        .disclaimer, .address p {
+          font-size: 10pt;
+        }
+
+        .signature-field {
+          padding-bottom: 24pt;
+          border-bottom: solid black 1pt;
+        }
+
+        .head-doc {
+          width: 80%;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: flex-start;
+          align-content: center;
+          margin-bottom: 20px;
+          margin-top: 5px;
+          margin-left: 5px;
+        }
+
+
+        .row-test {
+          border-left: solid black 1pt;
+          border-top: solid black 1pt;
+          border-radius: 10pt;
+          border-right: solid black 1pt;
+          padding: 9pt 0 24pt 9pt;
+          border-bottom: solid black 1pt;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: flex-start;
+          align-content: center;
+        }
+
+        .col-test-1,
+        .col-test-2 {
+          display: inline-flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          justify-content: space-around;
+          align-items: baseline;
+          align-content: center;
+          width: 48%;
+        }
+
+        .logotipo {
+          grid-area: logo;
+        }
+
+        .cliente-label {
+          grid-area: clt-lbl;
+        }
+
+        html {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+      </style>
+    </head>
     <div class="col">
       <img
-        alt="logotipo"
+        alt=""
         class="logotipo"
-        src="/assets/images/logotip.jpg">
+        src="https://drive.google.com/uc?export=view&id=1c5YUfYkgtc67r3Wy6YlswzU_cIT_UVIK&origin=https://mail.google.com/mail/u/0/"/>
     </div>
-
     <div class="col">
       <h2>N Riparazione</h2>
       <p><strong>{{id}}</strong></p>
@@ -20,7 +122,7 @@
     </div>
 
   </div>
-  <div class="row no-gutters items-group">
+  <div class="row no-gutters items-group cliente-label">
     <div class="col-3 label">
       <p>Cliente : {{client?.name}} {{client?.family}}</p>
       <p>Email : {{client?.email}}</p>

@@ -238,9 +238,15 @@
           </p>
         </div>
       </div>
-      <label>
-        <textarea class="text-area" formControlName="note" type="text">....</textarea>
-      </label>
+      <div class="row-1">
+        <app-dragfile></app-dragfile>
+      </div>
+      <div class="row-2">
+        <label>
+          <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
+        </label>
+      </div>
+
       <div class="check-single">
         <span class="send-email-activ">
         <fa-icon [icon]="email" [style.color]="formClient.controls?.email_send.value? '#1ABC9C' : 'lightcoral'"

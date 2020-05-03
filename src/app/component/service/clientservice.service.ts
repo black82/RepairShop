@@ -5,6 +5,7 @@ import {catchError, retry, tap} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
 import {Repair} from '../entity/Repair';
 import {Router} from '@angular/router';
+import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,15 @@ export class HttpClien {
   }
 
   printClient(client: Client): Observable<Client> {
+    console.log(client);
     return this.http.post<Client>(this.apiUrl + 'api/print/client', client)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  saved_print_page(invoiceToolsDto: InvoiceToolsDto): Observable<string> {
+    return this.http.post<string>(this.apiUrl + 'admin/api/saved/print/page', invoiceToolsDto)
       .pipe(
         catchError(this.errorHandler)
       );

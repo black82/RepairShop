@@ -89,7 +89,7 @@ export class SearchformComponent implements OnInit {
   }
 
   showSearchForm() {
-    document.querySelector('.show-form').style.opacity = '1';
+    document.getElementById('#show-form').style.opacity = '1';
     document.querySelector('form').style.display = 'none';
     document.querySelector('.show-form').addEventListener('click', () => {
       (document.querySelector('.show-form') as HTMLElement).style.opacity = '0';

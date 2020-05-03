@@ -23,6 +23,8 @@ import {SignInComponent} from './component/sign-in/sign-in.component';
 import {TokenInterceptor} from './component/service/TokenInterceptor';
 import {HttpClien} from './component/service/clientservice.service';
 import {SearchEmailComponent} from './component/search-email/search-email.component';
+import {DragfileComponent} from './component/dragfile/dragfile.component';
+import {DragDropDirective} from './component/dragfile/DragDropDirective';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import {SearchEmailComponent} from './component/search-email/search-email.compon
     CheckDeviceRepairActiveComponent,
     SignUpComponent,
     SignInComponent,
-    SearchEmailComponent
+    SearchEmailComponent,
+    DragfileComponent,
+    DragDropDirective
   ],
   imports: [
     AppRoutingModule,

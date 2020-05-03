@@ -1,5 +1,6 @@
 import {InputTest} from './InputTest';
 import {OutputTest} from './OutputTest';
+import {RepairFileStorage} from './RepairFileStorage';
 
 export class Repair {
   id_Repair: number;
@@ -14,12 +15,13 @@ export class Repair {
   inputModule: InputTest;
   outputTest: OutputTest;
   note: string;
+  repairFileStorage: RepairFileStorage;
 
 
   constructor(id_Repair: number, date_to_enter: Date, output_date: Date,
               defect: string, deposit: number, price: number, work_don: string,
-              parts_replaced: string, nowInRepair: boolean,
-              inputModule: InputTest, outputTest: OutputTest, note: string) {
+              parts_replaced: string, nowInRepair: boolean, inputModule: InputTest,
+              outputTest: OutputTest, note: string, repairFileStorage: RepairFileStorage) {
     this.id_Repair = id_Repair;
     this.date_to_enter = date_to_enter;
     this.output_date = output_date;
@@ -32,5 +34,6 @@ export class Repair {
     this.inputModule = inputModule;
     this.outputTest = outputTest;
     this.note = note;
+    this.repairFileStorage = repairFileStorage;
   }
 }

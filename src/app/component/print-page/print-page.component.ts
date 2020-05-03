@@ -1,7 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
 import {PrintService} from '../service/print.service';
 import {PrintEntity} from '../entity/Print_Pojo';
+import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+
 
 @Component({
   selector: 'app-print-page',
@@ -9,6 +11,7 @@ import {PrintEntity} from '../entity/Print_Pojo';
   styleUrls: ['./print-page.component.css']
 })
 export class PrintPageComponent implements OnInit, OnDestroy {
+  @ViewChild('content') content: ElementRef;
   client: Client;
   name_test_input: string[] = [];
   name_test_out: string[] = [];
@@ -16,12 +19,15 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   type_print: number;
   date_exit: Date;
   id: string;
+  invoice_tools: InvoiceToolsDto = new InvoiceToolsDto();
+  print_entity: PrintEntity;
 
   constructor(private print: PrintService) {
   }
 
   ngOnInit(): void {
     this.print.print_open.subscribe(print => {
+      this.print_entity = print;
       this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
       this.name_test_input = [];
@@ -77,8 +83,15 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
   printPage(client: Client): void {
+
     this.client = client;
-    setTimeout(() => window.print(), 1000);
+    setTimeout(() => {
+      const html = document.querySelector('.container-fluid');
+      window.print();
+      this.createInvoiceToPrintPage(html);
+
+    }, 1000);
+
   }
 
   ngOnDestroy(): void {
@@ -120,7 +133,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
   id_repair(client: Client): string {
-    let id;
+    let id = null;
     client.device.forEach(device => {
       if (device.rightNowInRepair) {
         device.repairs.forEach(repair => {
@@ -131,5 +144,24 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       }
     });
     return id.toString();
+  }
+
+  checkTypePrint(): string {
+    switch (this.print_entity.type_client_print) {
+      case 1: {
+        return 'inputInvoice';
+      }
+      case 2: {
+        return 'outputInvoice';
+      }
+    }
+  }
+
+  private createInvoiceToPrintPage(html: Element) {
+    this.invoice_tools.destinationUser = this.client.email;
+    this.invoice_tools.htmlPage += html;
+    this.invoice_tools.repairID = +this.id;
+    this.invoice_tools.typeFile = this.checkTypePrint();
+    this.print.invoice_make.emit(this.invoice_tools);
   }
 }

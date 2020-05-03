@@ -36,6 +36,8 @@ import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {FiltreMoreDeviceRepairActivService} from '../service/filtre-more-device-repair-activ.service';
 import {FormhidenService} from '../service/formhiden.service';
+import {RepairFileStorage} from '../entity/RepairFileStorage';
+import {ImageSenderService} from '../service/image-sender.service';
 
 
 @Component({
@@ -79,6 +81,7 @@ export class OtpoutDeviceComponent implements OnInit {
   repair_output: Repair;
   show_client = false;
   formSubmitted = false;
+  repairFileStorage: RepairFileStorage;
 
 
   constructor(private fb: FormBuilder,
@@ -86,7 +89,7 @@ export class OtpoutDeviceComponent implements OnInit {
               private alert_service: AlertServiceService,
               private printService: PrintService,
               private  check_device: FiltreMoreDeviceRepairActivService,
-              private hidden_form: FormhidenService) {
+              private hidden_form: FormhidenService, private imageSender: ImageSenderService) {
   }
 
   ngOnInit() {
@@ -162,7 +165,7 @@ export class OtpoutDeviceComponent implements OnInit {
   }
 
   createClient(): Repair {
-
+    this.client.device[0].repairs[0].repairFileStorage.fotoExitDevice = this.imageSender.submitImageToBack();
     let formData = Object.assign({});
     console.log('create', formData.camera_output);
     formData = Object.assign(formData, this.formClient.value);
@@ -177,7 +180,8 @@ export class OtpoutDeviceComponent implements OnInit {
       this.formClient.controls.price_output.value,
       this.formClient.controls.work_don_output.value,
       this.formClient.controls.parts_replace_output.value, this.client.device[0].repairs[0].nowInRepair,
-      this.client.device[0].repairs[0].inputModule, this.output_test, this.formClient.controls.note_output.value);
+      this.client.device[0].repairs[0].inputModule, this.output_test, this.formClient.controls.note_output.value,
+      this.client.device[0].repairs[0].repairFileStorage);
     this.repair_output.date_to_enter = this.client.device[0].repairs[0].date_to_enter;
     return this.repair_output;
   }
@@ -225,7 +229,7 @@ export class OtpoutDeviceComponent implements OnInit {
   animationCheckBox() {
     document.querySelectorAll('.checkbox').forEach(checkbox => {
       checkbox.addEventListener('click', () => {
-        if (!checkbox.value) {
+        if (!checkbox?.value) {
           checkbox.id = 'success-checkbox';
         } else {
           checkbox.id = 'wrong-checkbox';
@@ -254,7 +258,7 @@ export class OtpoutDeviceComponent implements OnInit {
         }
       }
       label.addEventListener('input', ev => {
-        if (ev.target.validity.valid && icon?.style) {
+        if (ev.target?.validity?.valid && icon?.style) {
           icon.style.color = '#34495E';
         }
       });

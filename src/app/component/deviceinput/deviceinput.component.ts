@@ -37,6 +37,9 @@ import {AlertServiceService} from '../service/alert-service.service';
 import {PrintService} from '../service/print.service';
 import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
 import {PrintEntity} from '../entity/Print_Pojo';
+import {ImageSenderService} from '../service/image-sender.service';
+import {RepairFileStorage} from '../entity/RepairFileStorage';
+import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 
 @Component({
   selector: 'app-deviceinput',
@@ -75,16 +78,17 @@ export class DeviceinputComponent implements OnInit {
   save = faDownload;
   printer = faPrint;
   client: Client;
-  client_print: Client;
+  client_after_saved: Client;
   formClient: FormGroup;
   device: Device;
   repair: Repair;
   inputTest: InputTest;
   formSubmitted: boolean;
-
+  repairFileStorage: RepairFileStorage = new RepairFileStorage();
+  invoice: InvoiceToolsDto;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
-              private alert_service: AlertServiceService, private print: PrintService) {
+              private alert_service: AlertServiceService, private print: PrintService, private imageSender: ImageSenderService) {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
@@ -119,10 +123,14 @@ export class DeviceinputComponent implements OnInit {
 
   ngOnInit() {
     this.animation_call();
+    this.print.invoice_make.subscribe(invoice => {
+      this.create_invoice(invoice);
+    });
   }
 
 
   createClient() {
+    this.repairFileStorage.fotoEnterDevice = this.imageSender.submitImageToBack();
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
     this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
@@ -131,7 +139,7 @@ export class DeviceinputComponent implements OnInit {
       formData.keyboard_input, formData.camera_input);
     this.repair = new Repair(null, formData.date_to_enter, null, formData.defect,
       formData.deposit, formData.price, null, null, true,
-      this.inputTest, null, formData.note);
+      this.inputTest, null, formData.note, this.repairFileStorage);
     this.device = new Device(null, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
     this.client = new Client(null, formData.family, formData.name, formData.email,
@@ -148,22 +156,21 @@ export class DeviceinputComponent implements OnInit {
         false, false, '');
       return;
     }
-    if (this.client_print) {
-      this.createClient();
+    if (!this.client_after_saved) {
+      this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
+        , false, null, '', null);
     } else {
-      this.client = this.client_print;
-    }
-    this.httpService.createClient(this.client).subscribe(response => {
+      this.httpService.saved_print_page(this.invoice).subscribe(url => {
         this.alert_service.success(null, 'The client' + this.client.name +
-          'received a device and closed the repair procedure !!! Client Id ' + response, true, null, '');
-      },
-      error => {
+          'received a device and closed the repair procedure !!! Client Id ' + this.client_after_saved.id, true, null, '');
+        return;
+      }, error => {
         this.alert_service.error(null, 'The client' + this.client.name +
           'received a device and not closed the repair procedure !!! Client Id '
           + this.client.id + '\n' + error.message, false, null, '', error);
+      });
 
-      }
-    );
+    }
   }
 
   print_click() {
@@ -175,10 +182,18 @@ export class DeviceinputComponent implements OnInit {
       });
       return;
     }
-    this.createClient();
+    if (!this.client_after_saved) {
+      this.createClient();
+    } else {
+      this.client = this.client_after_saved;
+    }
     this.httpService.printClient(this.client).subscribe(client => {
-      this.client_print = client;
+      this.client_after_saved = client;
       this.print.print_open.emit(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
+    }, error => {
+      this.alert_service.error(null, 'The client' + this.client.name +
+        'received a device and not closed the repair procedure !!! Client Id '
+        + this.client.id + '\n' + error.message, false, null, '', error);
     });
   }
 
@@ -232,16 +247,23 @@ export class DeviceinputComponent implements OnInit {
     document.querySelectorAll('label').forEach(label => {
       label.addEventListener('input', ev => {
         if (ev.target.validity.valid) {
-          const htmlElement = label.querySelector('fa-icon') as HTMLElement;
+          const htmlElement = label.querySelector('fa-icon') as HTMLOrSVGImageElement;
           if (ev.target.type !== 'checkbox') {
             htmlElement.style.color = '#34495E';
           }
+        }
+        if (ev.target.value === '') {
+          const htmlElement = label.querySelector('fa-icon') as HTMLOrSVGImageElement;
+          htmlElement.style.color = 'lightcoral';
         }
       });
     });
 
   }
 
+  private create_invoice(invoice: InvoiceToolsDto) {
+    this.invoice = invoice;
+  }
 }
 
 
