@@ -1,13 +1,7 @@
-
 html, body, h1, h2, h3, h4, p, img {
   margin: 0;
 }
 
-h1 {
-  font-size: 18pt;
-  font-weight: 500;
-  margin-bottom: 0.5cm;
-}
 
 h2 {
   font-size: 16pt;
@@ -60,12 +54,6 @@ p {
 }
 
 
-.container {
-  display: grid;
-  grid: "numero numero" "logo loja" "clt-lbl clt" "da-lbl da";
-  grid-row-gap: 1cm;
-}
-
 .row-test {
   border-left: solid black 1pt;
   border-top: solid black 1pt;
@@ -92,50 +80,10 @@ p {
   width: 48%;
 }
 
-.label-group {
-  border-left: solid black 1pt;
-  border-top: solid black 1pt;
-  border-top-left-radius: 10pt;
-  padding: 9pt 0 0 9pt
-}
-
-.description-group {
-  border-top: solid black 1pt;
-  padding: 9pt 0 0 9pt
-}
-
-.numero {
-  grid-area: numero;
-}
-
-.loja {
-  grid-area: loja;
-}
-
 .logotipo {
   grid-area: logo;
 }
 
 .cliente-label {
   grid-area: clt-lbl;
-}
-
-.cliente {
-  grid-area: clt;
-}
-
-.detalhes-assistencia-label {
-  grid-area: da-lbl;
-}
-
-.detalhes-assistencia {
-  grid-area: da;
-}
-
-.container, .container-fluid {
-  padding: 0;
-}
-
-html {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

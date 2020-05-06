@@ -13,7 +13,7 @@ import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 export class PrintPageComponent implements OnInit, OnDestroy {
   @ViewChild('content') content: ElementRef;
   client: Client;
-  name_test_input: string[] = [];
+  name_test_entre: string[] = [];
   name_test_out: string[] = [];
   date: Date = new Date();
   type_print: number;
@@ -30,7 +30,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.print_entity = print;
       this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
-      this.name_test_input = [];
+      this.name_test_entre = [];
       this.name_test_out = [];
       this.check_type_print(print);
       this.check_test_OK(print.client_print);
@@ -51,34 +51,34 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
   check_test_OK(client: Client) {
     if (!client.device[0].repairs[0].inputModule.camera_input) {
-      this.name_test_input.push(' X Fotocamera difettosa ');
+      this.name_test_entre.push(' X Fotocamera difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.keyboard_input) {
-      this.name_test_input.push(' X La tastiera è danneggiata ');
+      this.name_test_entre.push(' X La tastiera è danneggiata ');
     }
     if (!client.device[0].repairs[0].inputModule.sim_input) {
-      this.name_test_input.push(' X La scheda SIM è danneggiata o assente ');
+      this.name_test_entre.push(' X La scheda SIM è danneggiata o assente ');
     }
     if (!client.device[0].repairs[0].inputModule.microphone_input) {
-      this.name_test_input.push(' X Microfono difettoso ');
+      this.name_test_entre.push(' X Microfono difettoso ');
     }
     if (!client.device[0].repairs[0].inputModule.wi_fi_input) {
-      this.name_test_input.push(' X Il connettore Wi-Fi è difettoso ');
+      this.name_test_entre.push(' X Il connettore Wi-Fi è difettoso ');
     }
     if (!client.device[0].repairs[0].inputModule.touch_input) {
-      this.name_test_input.push(' X Il sensore Touch è difettoso ');
+      this.name_test_entre.push(' X Il sensore Touch è difettoso ');
     }
     if (!client.device[0].repairs[0].inputModule.sound_equipment_input) {
-      this.name_test_input.push(' X L\'apparecchiatura audio è difettosa ');
+      this.name_test_entre.push(' X L\'apparecchiatura audio è difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.connectors_input) {
-      this.name_test_input.push(' X I Connettori del dispositivo sono difettosi ');
+      this.name_test_entre.push(' X I Connettori del dispositivo sono difettosi ');
     }
     if (!client.device[0].repairs[0].inputModule.display_input) {
-      this.name_test_input.push(' X Il display del dispositivo è danneggiato ');
+      this.name_test_entre.push(' X Il display del dispositivo è danneggiato ');
     }
     if (!client.device[0].repairs[0].inputModule.sensors_input) {
-      this.name_test_input.push(' X Il sensore del dispositivo è danneggiato ');
+      this.name_test_entre.push(' X Il sensore del dispositivo è danneggiato ');
     }
   }
 
@@ -88,8 +88,8 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       const html = document.querySelector('.container-fluid');
       window.print();
-      this.createInvoiceToPrintPage(html);
-
+      this.createInvoiceToPrintPage(html.innerHTML);
+      console.log(html.innerHTML);
     }, 1000);
 
   }
@@ -157,9 +157,9 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  private createInvoiceToPrintPage(html: Element) {
+  private createInvoiceToPrintPage(html) {
     this.invoice_tools.destinationUser = this.client.email;
-    this.invoice_tools.htmlPage += html;
+    this.invoice_tools.htmlPage = html;
     this.invoice_tools.repairID = +this.id;
     this.invoice_tools.typeFile = this.checkTypePrint();
     this.print.invoice_make.emit(this.invoice_tools);
