@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import {ImageSenderService} from '../service/image-sender.service';
+import {faFileUpload} from '@fortawesome/free-solid-svg-icons/faFileUpload';
 
 @Component({
   selector: 'app-dragfile',
@@ -9,30 +9,24 @@ import {ImageSenderService} from '../service/image-sender.service';
 })
 export class DragfileComponent implements OnInit {
   files: any = [];
-  recyclable = faTrash;
+  file_icon = faFileUpload;
 
   constructor(private imageSend: ImageSenderService) {
   }
 
   ngOnInit(): void {
-  }
-
-
-  uploadFile(event) {
-    for (let index = 0; index < event.length; index++) {
-      const element = event[index];
-      this.imageSend.addImagesToSend(element);
-
-      this.files.push(element.name);
-    }
-  }
-
-  deleteAttachment(index, file: File) {
-    this.files.splice(index, 1);
-    console.log(index);
-    this.imageSend.removeImages(index);
 
   }
 
+
+  onSelect(event) {
+    this.imageSend.addImage.emit(event);
+    this.files.push(event.addedFiles[0]);
+  }
+
+  onRemove(file) {
+    this.imageSend.removeImages(this.files.indexOf(file));
+    this.files.splice(this.files.indexOf(file), 1);
+  }
 
 }

@@ -21,10 +21,9 @@ export class SearchpageComponent implements OnInit {
   }
 
   client_catch($event: Client) {
-    console.log($event);
-    if ($event as Client) {
-      this.client = $event;
-      this.hide_form.form_open.emit(true);
-    }
+   if ($event as Client) {
+     this.client = $event;
+     this.hide_form.form_open.emit(true);
+   }
   }
 }

@@ -44,7 +44,6 @@ export class SingleContentComponent implements OnInit {
   text = faEnvelopeOpenText;
   work = faTools;
   test_meteor = faMeteor;
-
   @Input()
   client: Client;
   devices_element: Element[] = [];
@@ -52,7 +51,7 @@ export class SingleContentComponent implements OnInit {
   repairs_element: ElementRepair[] = [];
   @Input()
   refresh: EventEmitter<Client> = new EventEmitter<Client>();
-
+  show_repair = false;
 
   constructor() {
   }
@@ -77,6 +76,11 @@ export class SingleContentComponent implements OnInit {
 
   showElement(element) {
     element.visible = !element.visible;
+    this.showRepair();
+  }
+
+  showRepair() {
+    this.show_repair = !this.show_repair;
   }
 
   create_input_test(repaired: Repair): ElementRepair {

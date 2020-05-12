@@ -1,8 +1,4 @@
-:root {
-  --primary-color: #16A085;
-  --second-color: #1ABC9C;
-  --backgrount-color: #F3F3F3;
-}
+
 
 * {
   margin: 0;
@@ -56,7 +52,6 @@
 }
 
 
-
 .row {
   display: flex;
   flex-direction: row;
@@ -84,8 +79,8 @@ form .submit {
   text-decoration-style: solid;
 }
 
-form input.col-1,
-form input.col-2,
+form input.input-1,
+form input.input-2,
 form select,
 form textarea {
   position: relative;
@@ -112,8 +107,8 @@ form textarea:hover {
 
 }
 
-form input.col-1:focus,
-form input.col-2:focus,
+form input.input-1:focus,
+form input.input-2:focus,
 form select:focus,
 form textarea:focus {
   box-shadow: 0 0 2px 1px #E0E0E0;
@@ -193,7 +188,7 @@ form ::-moz-focus-inner {
   border: 2px solid #34495E;
 }
 
-.col-3 {
+.col-checkbox {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -244,7 +239,8 @@ form textarea {
 
 .button,
 .dismiss,
-.print {
+.print,
+.email {
   position: relative;
   align-content: center;
   display: inline-block;
@@ -263,13 +259,15 @@ form textarea {
 
 .button:last-of-type,
 .dismiss:last-of-type,
-.print:last-of-type {
+.print:last-of-type,
+.email:last-of-type {
   margin-right: 0;
 }
 
 .button span,
 .dismiss span,
-.print span {
+.print span,
+.email span {
   position: relative;
   z-index: 2;
 
@@ -277,7 +275,8 @@ form textarea {
 
 .button:before,
 .dismiss:before,
-.print:before {
+.print:before,
+.email:before {
   content: "";
   position: absolute;
   z-index: 1;
@@ -299,8 +298,13 @@ form textarea {
 
 .button:hover:before,
 .dismiss:hover:before,
-.print:hover:before {
+.print:hover:before,
+.email:hover:before {
   transform: rotateY(94deg);
+}
+
+.email:before {
+  color: steelblue;
 }
 
 .button:before {
@@ -319,9 +323,21 @@ form textarea {
   cursor: pointer;
 }
 
+.email:before {
+  background: steelblue;
+  border: 1px solid steelblue;
+  cursor: pointer;
+}
+
 .dismiss:hover {
   color: #F09EA3;
   border-color: #F09EA3;
+  cursor: pointer;
+}
+
+.email:hover {
+  color: steelblue;
+  border-color: steelblue;
   cursor: pointer;
 }
 
@@ -336,7 +352,7 @@ form textarea {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
   align-content: center;
   padding: 2em 0 20px;
   margin-bottom: 20px;
@@ -347,6 +363,7 @@ form textarea {
   padding-bottom: 30px;
 
 }
+
 .icon-box {
   font-size: 30px;
 }

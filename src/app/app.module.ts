@@ -24,7 +24,12 @@ import {TokenInterceptor} from './component/service/TokenInterceptor';
 import {HttpClien} from './component/service/clientservice.service';
 import {SearchEmailComponent} from './component/search-email/search-email.component';
 import {DragfileComponent} from './component/dragfile/dragfile.component';
-import {DragDropDirective} from './component/dragfile/DragDropDirective';
+import {EmailModalComponent} from './component/email-madal/email-modal.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxDropzoneModule} from 'ngx-dropzone';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {SigPadComponent} from './component/sig-pad/sig-pad.component';
 
 
 @NgModule({
@@ -46,15 +51,20 @@ import {DragDropDirective} from './component/dragfile/DragDropDirective';
     SignInComponent,
     SearchEmailComponent,
     DragfileComponent,
-    DragDropDirective
+    EmailModalComponent,
+    SigPadComponent
   ],
   imports: [
+    NgbModule,
     AppRoutingModule,
     BrowserModule,
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxDropzoneModule,
+    BrowserAnimationsModule,
+    MatExpansionModule
 
   ],
   providers: [HttpClien,

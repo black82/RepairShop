@@ -81,7 +81,7 @@ export class SearchformComponent implements OnInit {
               this.showSearchForm();
             }, 500);
           }
-        }, 1000);
+        }, 500);
 
 
       }
@@ -89,7 +89,7 @@ export class SearchformComponent implements OnInit {
   }
 
   showSearchForm() {
-    document.getElementById('#show-form').style.opacity = '1';
+    document.getElementsByClassName('show-form')[0].style.opacity = '1';
     document.querySelector('form').style.display = 'none';
     document.querySelector('.show-form').addEventListener('click', () => {
       (document.querySelector('.show-form') as HTMLElement).style.opacity = '0';

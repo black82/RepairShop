@@ -21,14 +21,10 @@ export class ImageSenderService {
 
   addImagesToSend(file) {
     this.selectFile(file);
-    console.log(this.images);
   }
 
   removeImages(index) {
-    console.log(index);
     this.images.splice(index, 1);
-    console.log(this.images);
-
   }
 
   selectFile(file) {
@@ -42,7 +38,6 @@ export class ImageSenderService {
   handleFile(event) {
     const binaryString = event.target.result;
     this.images.push(btoa(binaryString));
-    console.log(this.images);
   }
 
   submitImageToBack() {

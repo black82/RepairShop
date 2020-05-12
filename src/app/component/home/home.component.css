@@ -112,9 +112,10 @@
   0 10px 10px rgba(0, 0, 0, .2),
   0 20px 20px rgba(0, 0, 0, .15);
   transition: box-shadow 1s;
+
 }
 
-.container {
+.container1, .container-2 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -230,19 +231,24 @@
 
 }
 
+.icon {
+  box-sizing: unset;
+  margin-left: 10px;
+}
+
 .button:last-of-type {
   margin-right: 0;
 }
 
 .button span {
   position: relative;
-  z-index: 2;
+
 }
 
 .button:before {
   content: "";
   position: absolute;
-  z-index: 1;
+
   top: 0;
   left: 0;
   width: 100%;
@@ -286,7 +292,6 @@
 }
 
 .animation1 {
-
   animation-name: spin;
   animation-duration: 500ms;
   animation-iteration-count: 1;

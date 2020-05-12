@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box
-
 }
 
 .overlay {
@@ -15,6 +14,7 @@
   margin-right: auto;
   overflow: hidden !important;
   opacity: 80%;
+  z-index: 100;
 }
 
 @keyframes loader {

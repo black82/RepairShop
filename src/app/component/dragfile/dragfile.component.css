@@ -1,11 +1,31 @@
-.uploadfilecontainer {
-  width: 100%;
+
+.container-drag {
+  max-width: 90% !important;
+  min-width: 500px;
+  display: inline-flex !important;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  align-content: flex-start;
+  max-height: 210px !important;
+
+  box-sizing: border-box;
+  margin-bottom: -170px;
+}
+
+ngx-dropzone {
+  display: block;
+  box-sizing: content-box;
+  min-width: 100% !important;
   position: relative;
   -webkit-appearance: none;
-  background: #fff;
-  background: rgba(255, 255, 255, 0.75);
+  background: transparent;
   border-radius: 0.50em;
-  margin: 0.5em 0;
+  margin: 0.5em 0em;
   padding: 1em 1em;
   box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
   border: solid 1px rgba(0, 0, 0, 0.15);
@@ -13,58 +33,10 @@
   transition: all 0.35s ease-in-out;
   font-size: 1em;
   outline: none;
-  min-height: 10em;
-  min-width: 28em;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 
-}
 
-.container-drag {
-  margin-left: 40px;
-  width: 100%;
-  display: inline-flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: baseline;
-  align-content: flex-start;
-}
 
-.uploadfilecontainer:hover {
-  cursor: pointer;
-  background-color: transparent !important;
-  opacity: 0.8;
-}
 
-.files-list {
 
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
-  margin: 10px auto;
-  background: #ffffff;
-  border: 1px dashed;
-  border-radius: 12px;
-  padding: 5px;
-  color: #1c8adb;
-}
-
-.files-list .delete-file {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.files-list .delete-file fa-icon {
-  width: 30px;
-  color: lightcoral;
-}
-
-input#file-upload-button {
-  background-color: #1ABC9C;
-}

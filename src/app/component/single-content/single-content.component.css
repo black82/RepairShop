@@ -11,8 +11,11 @@
 
 }
 
+.border {
+  border: none !important;
+}
 
-.container {
+.container-body {
   min-height: 100%;
   margin-bottom: 10px;
 }
@@ -24,8 +27,17 @@
   font-family: "Libre Baskerville", serif;
   line-height: 25px;
   text-align: left;
-  text-shadow: 0 1px 1px #fff;
   padding-top: 20px;
+}
+
+.acortion-title {
+  color: white !important;
+  font-size: 20px;
+  padding-top: 0 !important;
+}
+
+.acortion-title:hover {
+  color: #1ABC9C !important;
 }
 
 .row-1,
@@ -123,18 +135,6 @@
 
 }
 
-fa-icon {
-
-
-}
-
-.check-single {
-
-}
-
-.input-title {
-
-}
 
 .test-button {
   margin-right: 10px;
@@ -161,7 +161,6 @@ fa-icon {
   margin-top: 5px;
   min-width: 100%;
 }
-
 
 
 .title-toggle {
@@ -191,24 +190,16 @@ fa-icon {
 }
 
 .icon-test-tile {
-  color: #1ABC9C;
+  color: white;
   margin-right: 10px;
   font-size: 20px;
 }
 
 hr {
   background: #1ABC9C;
-
   height: 1px;
   border: none;
   border-radius: 3px;
-}
-
-.note-container {
-  border: solid 1px #1ABC9C;
-  border-radius: 10px;
-  min-width: 100%;
-
 }
 
 .note {
@@ -253,4 +244,68 @@ hr {
     transform-origin: top;
     opacity: 1;
   }
+}
+
+
+.accordion {
+  max-width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.accordion__label,
+.accordion__content {
+  padding: 14px 20px;
+}
+
+.accordion__label {
+  background: #1ABC9C;
+  display: block;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+
+.accordion__label:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.accordion__label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 12px;
+  height: 6px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="50" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 100,0 50,50" style="fill:%23FFFFFF99;" /></svg>');
+  background-size: contain;
+  transition: transform 0.4s;
+}
+
+.accordion__content {
+  background: transparent;
+  line-height: 1.6;
+  font-size: 0.85em;
+  display: none;
+}
+
+.accordion__input {
+  display: none;
+}
+
+.accordion__input:checked ~ .accordion__content {
+  display: block;
+}
+
+.accordion__input:checked ~ .accordion__label::after {
+  transform: translateY(-50%) rotate(0.5turn);
+}
+
+.mat-expansion-panel {
+  background: #1ABC9C;
 }

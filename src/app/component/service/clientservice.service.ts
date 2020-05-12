@@ -18,7 +18,6 @@ export class HttpClien {
   }
 
   createClient(client: Client): Observable<boolean> {
-    console.log(client);
     return this.http.post<boolean>(this.apiUrl + 'api/create/client', client)
       .pipe(
         catchError(this.errorHandler)
@@ -26,15 +25,14 @@ export class HttpClien {
   }
 
   printClient(client: Client): Observable<Client> {
-    console.log(client);
     return this.http.post<Client>(this.apiUrl + 'api/print/client', client)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
-  saved_print_page(invoiceToolsDto: InvoiceToolsDto): Observable<string> {
-    return this.http.post<string>(this.apiUrl + 'admin/api/saved/print/page', invoiceToolsDto)
+  saved_print_page(invoiceToolsDto: InvoiceToolsDto): Observable<URL> {
+    return this.http.post<URL>(this.apiUrl + 'admin/api/saved/print/page', invoiceToolsDto)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -92,12 +90,12 @@ export class HttpClien {
     return this.http.post<any>(this.apiUrl + 'api/auth/' + 'login', data)
       .pipe(
         tap(() => {
-          console.log('login success');
           localStorage.setItem('islogin', '1');
         }),
         catchError(this.errorHandler)
       );
   }
+
   logout(): void {
     localStorage.setItem('islogin', '0');
     return localStorage.removeItem('token');
@@ -107,6 +105,13 @@ export class HttpClien {
     return this.http.post<any>(this.apiUrl + 'api/auth/' + 'register', data)
       .pipe(
         tap(_ => this.log('register')),
+        catchError(this.errorHandler)
+      );
+  }
+
+  sendEmailClient(invoice: InvoiceToolsDto): Observable<URL> {
+    return this.http.post<URL>(this.apiUrl + 'admin/api/sample/email/attachment', invoice)
+      .pipe(
         catchError(this.errorHandler)
       );
   }

@@ -3,7 +3,7 @@
    margin-top: 5px;">
     <div class="col" style="float: left;">
       <img alt="" class="logotipo" height="190"
-           src="https://drive.google.com/uc?export=view&id=1c5YUfYkgtc67r3Wy6YlswzU_cIT_UVIK&origin=https://mail.google.com/mail/u/0/"
+           src="/assets/images/logotip.jpg"
            style=""
            width="190"/>
     </div>
@@ -48,18 +48,18 @@
 
     <div *ngIf="type_print===1" class="col-9">
       <p style="font-size: 12pt;margin: 5px">
-        : {{"Date to enter :  " + client?.device[0]?.repairs[0]?.date_to_enter| date:'mediumDate'}}</p>
+        {{"Date to enter :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
       <p style="font-size: 12pt;margin: 5px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
       <p style="font-size: 12pt;margin: 5px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
       <p *ngIf="type_print===1"
-         style="margin: 5px">{{"La riparazione sarà finalizzata :  " + date_exit | date:'mediumDate'}}</p>
+         style="margin: 5px">{{"La riparazione sarà finalizzata :  " + date_exit }}</p>
     </div>
 
     <div *ngIf="type_print===2" class="col-9" style="margin: 5px">
       <p
-        style="font-size: 12pt;margin: 5px"> {{"Data di ricezione del dispositivo :  " + client?.device[0]?.repairs[0]?.date_to_enter| date:'mediumDate'}}</p>
+        style="font-size: 12pt;margin: 5px"> {{"Data di ricezione del dispositivo :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
       <p style="font-size: 12pt;margin: 5px;">
-        {{"Data di ritorno del dispositivo :  " + client?.device[0]?.repairs[0]?.output_date| date:'mediumDate'}}</p>
+        {{"Data di ritorno del dispositivo :  " + client?.device[0]?.repairs[0]?.output_date}}</p>
       <p style="font-size: 12pt;margin: 5px;">{{"Deposit :  " + client?.device[0]?.repairs[0]?.deposit}}</p>
       <p style="font-size: 12pt;margin: 5px;">{{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
       <p style="font-size: 12pt;margin: 5px;">{{"Lavoro svolto :  " + client?.device[0]?.repairs[0]?.work_don}}</p>
@@ -67,7 +67,7 @@
         style="font-size: 12pt;margin: 5px;">{{"Ricambi usati :  " + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row1">
     <div class="row-test" style="border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
@@ -80,7 +80,7 @@
         <div *ngIf="name_test_entre.length>0">
           <p style="font-size: 12pt;margin: 5px;">Test di ingresso no superate!!!</p>
           <ul *ngFor="let test of name_test_entre" class="disclaimer">
-            <li style="font-size: 12pt;margin: 5px;color: #c54040"> {{test}}</li>
+            <li style="font-size: 12pt;margin: 5px;color: #c54040;"> {{test}}</li>
           </ul>
         </div>
       </div>
@@ -130,7 +130,7 @@
       <p class="disclaimer signature-field" style="font-size: 12pt; padding-bottom: 24pt; margin: 5px;color: #c54040;
   border-bottom: solid black 1pt;">Dichiaro di essere d'accordo con le condizioni
         stabilite in questo
-        documento. Per quello firmo. Nebro / {{date | date:'mediumDate'}}</p>
+        documento. Per quello firmo. Nebro / {{date }}</p>
     </div>
   </div>
 </div>

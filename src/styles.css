@@ -2,7 +2,7 @@
 .icon-input {
   font-weight: normal;
   font-style: normal;
-  font-size: 24px; /* Предпочтительный размер иконок */
+  font-size: 24px;
   display: inline-block;
   color: #1ABC9C;
   line-height: 1;
@@ -11,10 +11,10 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
-  -webkit-font-smoothing: antialiased; /* Поддержка всеми WebKit браузерами */
-  text-rendering: optimizeLegibility; /* Поддержка Safari и Chrome */
-  -moz-osx-font-smoothing: grayscale; /* Поддержка Firefox. */
-  font-feature-settings: 'liga'; /* Поддержка IE. */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
 }
 
 @font-face {
@@ -51,28 +51,19 @@
 */
 
 .icon {
-  text-decoration: none;
+  text-decoration: none !important;;
 }
 
 .icon:before {
   font-size: 1.25em;
-  text-decoration: none;
+  text-decoration: none !important;
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
-  -webkit-text-rendering: optimizeLegibility;
-  -moz-text-rendering: optimizeLegibility;
-  -ms-text-rendering: optimizeLegibility;
-  -o-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -ms-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
   -webkit-font-feature-settings: "liga" 1, "dlig" 1;
   -moz-font-feature-settings: "liga=1, dlig=1";
-  -ms-font-feature-settings: "liga" 1, "dlig" 1;
   -o-font-feature-settings: "liga" 1, "dlig" 1;
   font-feature-settings: "liga" 1, "dlig" 1;
 }
@@ -1303,7 +1294,6 @@ app-print-page {
   box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
   background: #333;
   color: #fff;
-  z-index: 1000;
 }
 
 /* Make the tooltips respond to hover */
@@ -1359,7 +1349,7 @@ app-print-page {
 
 /* UNRELATED to tooltips */
 body {
-
+  margin: 10px;
   background: snow;
 }
 
@@ -1401,7 +1391,7 @@ aside a {
   padding: .4em 1em;
 }
 
-.container {
+.container-body {
   background-image: url('src/assets/images/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -1412,7 +1402,6 @@ aside a {
 
 .icon-alert-x {
   font-size: 70px;
-
   margin-top: 2%;
   text-shadow: -7px 8px 2px #c54040, -3px 5px #c74b16;
 }
@@ -1511,8 +1500,8 @@ aside a {
 .close {
   width: 30px;
   height: 30px;
-  background: #fff !important;
-  color: #000 !important;
+  background: #fff;
+  color: #000;
   box-shadow: 0 2px 5px 0 #222b3c;
   padding: .2em;
   border-radius: 50px;
@@ -1535,3 +1524,122 @@ aside a {
 
 }
 
+.button,
+.dismiss,
+.print,
+.email {
+  position: relative;
+  align-content: center;
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-right: 20px;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  perspective: 500px;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.button:last-of-type,
+.dismiss:last-of-type,
+.print:last-of-type,
+.email:last-of-type {
+  margin-right: 0;
+}
+
+.button span,
+.dismiss span,
+.print span,
+.email span {
+  position: relative;
+  z-index: 2;
+
+}
+
+.button:before,
+.dismiss:before,
+.print:before,
+.email:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  transition: .4s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: #1ABC9C;
+  cursor: pointer;
+
+}
+
+.button:hover:before,
+.dismiss:hover:before,
+.print:hover:before,
+.email:hover:before {
+  transform: rotateY(94deg);
+}
+
+.email:before {
+  color: steelblue;
+}
+
+.button:before {
+  background: #1ABC9C;
+}
+
+.dismiss:before {
+  background: #F09EA3;
+  border: 1px solid #F09EA3;
+  cursor: pointer;
+}
+
+.print:before {
+  background: #34495E;
+  border: 1px solid #34495E;
+  cursor: pointer;
+}
+
+.email:before {
+  background: steelblue;
+  border: 1px solid steelblue;
+  cursor: pointer;
+}
+
+.dismiss:hover {
+  color: #F09EA3;
+  border-color: #F09EA3;
+  cursor: pointer;
+}
+
+.email:hover {
+  color: steelblue;
+  border-color: steelblue;
+  cursor: pointer;
+}
+
+.print:hover {
+  color: #34495E;
+  border-color: #34495E;
+  cursor: pointer;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

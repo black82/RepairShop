@@ -9,12 +9,12 @@ export type FadeState = 'visible' | 'hidden';
 })
 
 export class AnimationWaitComponent implements OnInit {
-_show = true;
+
 
   constructor() {
   }
 
   ngOnInit() {
-    setTimeout(() => this._show = false, 3000);
+
   }
 }

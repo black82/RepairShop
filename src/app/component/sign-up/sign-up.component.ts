@@ -42,7 +42,6 @@ export class SignUpComponent implements OnInit {
       .subscribe(res => {
         this.router.navigate(['client/sign-in']);
       }, (err) => {
-        console.log(err);
         this.alertService.warn('', err.error.message, false, false, '');
       });
   }

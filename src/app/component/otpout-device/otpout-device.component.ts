@@ -36,8 +36,11 @@ import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {FiltreMoreDeviceRepairActivService} from '../service/filtre-more-device-repair-activ.service';
 import {FormhidenService} from '../service/formhiden.service';
-import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {ImageSenderService} from '../service/image-sender.service';
+import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+import {EmailSenderService} from '../service/email-sender.service';
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
+import {SigPadService} from '../service/sig-pad.service';
 
 
 @Component({
@@ -81,20 +84,27 @@ export class OtpoutDeviceComponent implements OnInit {
   repair_output: Repair;
   show_client = false;
   formSubmitted = false;
-  repairFileStorage: RepairFileStorage;
-
+  client_after_saved: Client;
+  invoice: InvoiceToolsDto;
+  mail = faEnvelope;
 
   constructor(private fb: FormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private printService: PrintService,
               private  check_device: FiltreMoreDeviceRepairActivService,
-              private hidden_form: FormhidenService, private imageSender: ImageSenderService) {
+              private hidden_form: FormhidenService,
+              private imageSender: ImageSenderService,
+              private emailSender: EmailSenderService,
+              private sig_pad_service: SigPadService) {
   }
 
   ngOnInit() {
     this.hidden_form.form_open.subscribe(value => {
       this.show_client = value;
+    });
+    this.printService.invoice_make.subscribe(invoice => {
+      this.create_invoice(invoice);
     });
     setInterval(() => {
       if (this.show_client) {
@@ -103,6 +113,33 @@ export class OtpoutDeviceComponent implements OnInit {
       }
     }, 300);
 
+  }
+
+  submitForm() {
+    if (!this.formClient.valid) {
+      Object.keys(this.formClient.controls).forEach(key => {
+        this.formClient.controls[key].markAllAsTouched();
+      });
+      this.alert_service.warn('', 'You form not valid',
+        false, false, '');
+      return;
+    }
+    if (!this.client_after_saved) {
+      this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
+        , false, null, '', null);
+    } else {
+      this.httpService.saved_print_page(this.invoice).subscribe(url => {
+        this.alert_service.success(null, 'The client' + this.client_after_saved.name +
+          'received a device and create the repair procedure !!! Client Id '
+          + this.client_after_saved.id + 'Document url : \n' + url, true, null, '');
+        return;
+      }, error => {
+        this.alert_service.error(null, 'The client' + this.client.name +
+          'received a device and not closed the repair procedure !!! Client Id '
+          + this.client.id + '\n' + error.message, false, null, '', error);
+      });
+
+    }
   }
 
   createFormAfterClientCam() {
@@ -142,32 +179,31 @@ export class OtpoutDeviceComponent implements OnInit {
     }
   }
 
-
-  submitForm() {
+  print_click() {
     if (!this.formClient.valid) {
+      this.alert_service.warn('', 'Before sending the form ' +
+        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
       Object.keys(this.formClient.controls).forEach(key => {
         this.formClient.controls[key].markAllAsTouched();
       });
+      return;
     }
-    this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(
-      () => {
-        this.alert_service.success(null, 'The client' + this.client.name +
-          'received a device and closed the repair procedure !!! Client Id ' + this.client.id, true, null, '');
-      },
-      error => {
-        this.show_client = false;
-        this.alert_service.error(null, 'The client' + this.client.name +
-          'received a device and not closed the repair procedure !!! Client Id '
-          + this.client.id + '\n' + error.message, false, null, '', error);
 
-      }
-    );
+    this.client = this.addRepairToClient(this.client);
+
+    this.httpService.printClient(this.client).subscribe(client => {
+      this.client_after_saved = client;
+      this.printService.print_open.emit(new PrintEntity(client, 2));
+    }, error => {
+      this.alert_service.error(null, 'The client' + this.client.name +
+        'received a device and not closed the repair procedure !!! Client Id '
+        + this.client.id + '\n' + error.message, false, null, '', error);
+    });
   }
 
   createClient(): Repair {
     this.client.device[0].repairs[0].repairFileStorage.fotoExitDevice = this.imageSender.submitImageToBack();
     let formData = Object.assign({});
-    console.log('create', formData.camera_output);
     formData = Object.assign(formData, this.formClient.value);
     this.output_test = new OutputTest(null, formData.sensor_output, formData.display_output,
       formData.connections_output, formData.sound_equipment_output, formData.touch_output,
@@ -186,20 +222,19 @@ export class OtpoutDeviceComponent implements OnInit {
     return this.repair_output;
   }
 
-  printPage(): void {
+  sign_pad_open() {
     if (!this.formClient.valid) {
       this.alert_service.warn('', 'Before sending the form ' +
-        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
+        'to the Email please complete all the fields !!! Thank you. Try again.', false, false, '', null);
       Object.keys(this.formClient.controls).forEach(key => {
         this.formClient.controls[key].markAllAsTouched();
       });
       return;
     }
-    const repair = this.createClient();
-    this.client.device[0].repairs = [];
-    this.client.device[0].repairs.push(repair);
-    this.printService.print_page(new PrintEntity(this.client, 2));
-
+    this.sig_pad_service.open$.emit();
+    this.sig_pad_service.open$.subscribe(() => {
+      this.submitFormAndSendEmail();
+    });
   }
 
   dismissed() {
@@ -266,4 +301,46 @@ export class OtpoutDeviceComponent implements OnInit {
 
   }
 
+  submitFormAndSendEmail() {
+    this.client = this.addRepairToClient(this.client);
+    this.subscribe_success_response();
+    this.httpService.printClient(this.client).subscribe(client => {
+      this.client_after_saved = client;
+      this.emailSender.email_send(new PrintEntity(client, 2));
+    }, error => {
+      this.alert_service.error(null, 'The client2' + this.client.name +
+        'received a device and not closed the repair procedure !!! Client Id '
+        + this.client.id + '\n' + error.message, false, null, '', error);
+    });
+  }
+
+  subscribe_success_response() {
+    this.emailSender.email_sent_send_success.subscribe(() => {
+      this.alert_service.success(null, 'The client' + this.client_after_saved.name +
+        'received a device and create the repair procedure !!! Client Id '
+        + this.client_after_saved.id, true, null, '');
+      return;
+    });
+  }
+
+  addRepairToClient(client: Client): Client {
+    if (client.device.length === 1) {
+      if (client.device[0].repairs.length === 1) {
+        client.device[0].repairs[0] = this.createClient();
+      } else {
+        const repairs = client.device[0].repairs.map(repair => {
+          if (repair.nowInRepair) {
+            repair = this.createClient();
+          }
+          return repair;
+        });
+        client.device[0].repairs = repairs;
+      }
+    }
+    return client;
+  }
+
+  private create_invoice(invoice: InvoiceToolsDto) {
+    this.invoice = invoice;
+  }
 }

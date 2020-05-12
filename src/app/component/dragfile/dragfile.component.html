@@ -1,11 +1,11 @@
-<div class="container-drag">
-  <div (click)="fileInput.click()" (onFileDropped)="uploadFile($event)" appDragDrop class="uploadfilecontainer">
-    <input #fileInput (change)="uploadFile($event.target.files)" type="file">
-  </div>
-  <div *ngFor="let file of files;let i= index" class="files-list">
-    <p> {{ file }} </p>
-    <button (click)="deleteAttachment(i,file)" class="delete-file">
-      <fa-icon [icon]="recyclable" class="icon-box test-icon"></fa-icon>
-    </button>
-  </div>
+<div class="container-drag" style="max-width: border-box">
+  <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'">
+    <ngx-dropzone-label>
+      <fa-icon [icon]="file_icon" class="icon-input"></fa-icon>
+      Drop it, baby!
+    </ngx-dropzone-label>
+    <ngx-dropzone-preview (removed)="onRemove(f)" *ngFor="let f of files" [removable]="true">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
 </div>

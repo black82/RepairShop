@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faPhoneSquare, faUserTag} from '@fortawesome/free-solid-svg-icons';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
@@ -40,13 +40,15 @@ import {PrintEntity} from '../entity/Print_Pojo';
 import {ImageSenderService} from '../service/image-sender.service';
 import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+import {EmailSenderService} from '../service/email-sender.service';
+import {SigPadService} from '../service/sig-pad.service';
 
 @Component({
   selector: 'app-deviceinput',
   templateUrl: './deviceinput.component.html',
   styleUrls: ['./deviceinput.component.css']
 })
-export class DeviceinputComponent implements OnInit {
+export class DeviceinputComponent implements OnInit, OnDestroy {
   used = faHeart;
   mobile = faMobile;
   email = faEnvelope;
@@ -86,9 +88,15 @@ export class DeviceinputComponent implements OnInit {
   formSubmitted: boolean;
   repairFileStorage: RepairFileStorage = new RepairFileStorage();
   invoice: InvoiceToolsDto;
+  mail = faEnvelope;
+  showAnimation = false;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
-              private alert_service: AlertServiceService, private print: PrintService, private imageSender: ImageSenderService) {
+              private alert_service: AlertServiceService,
+              private print: PrintService,
+              private imageSender: ImageSenderService,
+              private emailSender: EmailSenderService,
+              private sig_pad_service: SigPadService) {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
@@ -161,8 +169,9 @@ export class DeviceinputComponent implements OnInit {
         , false, null, '', null);
     } else {
       this.httpService.saved_print_page(this.invoice).subscribe(url => {
-        this.alert_service.success(null, 'The client' + this.client.name +
-          'received a device and closed the repair procedure !!! Client Id ' + this.client_after_saved.id, true, null, '');
+        this.alert_service.success(null, 'The client' + this.client_after_saved.name +
+          'received a device and create the repair procedure !!! Client Id '
+          + this.client_after_saved.id + 'Document url : \n' + url, true, null, '');
         return;
       }, error => {
         this.alert_service.error(null, 'The client' + this.client.name +
@@ -191,6 +200,7 @@ export class DeviceinputComponent implements OnInit {
       this.client_after_saved = client;
       this.print.print_open.emit(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
     }, error => {
+      this.showAnimation = false;
       this.alert_service.error(null, 'The client' + this.client.name +
         'received a device and not closed the repair procedure !!! Client Id '
         + this.client.id + '\n' + error.message, false, null, '', error);
@@ -211,7 +221,7 @@ export class DeviceinputComponent implements OnInit {
 
   animationButtonForm() {
     document.querySelectorAll('.button').forEach(button => {
-      button.addEventListener('mouseenter', evt => {
+      button.addEventListener('mouseenter', () => {
         if (this.formClient.valid) {
           button.id = 'success-button';
         } else {
@@ -223,7 +233,7 @@ export class DeviceinputComponent implements OnInit {
 
   animationCheckBox() {
     document.querySelectorAll('.checkbox').forEach(checkbox => {
-      checkbox.addEventListener('click', evt => {
+      checkbox.addEventListener('click', () => {
         if (!checkbox.value) {
           checkbox.id = 'success-checkbox';
         } else {
@@ -235,7 +245,7 @@ export class DeviceinputComponent implements OnInit {
 
   animationTitle() {
     document.querySelectorAll('fa-icon').forEach(title => {
-      title.addEventListener('mouseenter', evt => {
+      title.addEventListener('mouseenter', () => {
         if (!title.classList.contains('button-icon')) {
           title.id = 'title-hover';
         }
@@ -247,13 +257,13 @@ export class DeviceinputComponent implements OnInit {
     document.querySelectorAll('label').forEach(label => {
       label.addEventListener('input', ev => {
         if (ev.target.validity.valid) {
-          const htmlElement = label.querySelector('fa-icon') as HTMLOrSVGImageElement;
-          if (ev.target.type !== 'checkbox') {
+          const htmlElement = label.querySelector('fa-icon') as HTMLElement;
+          if (ev.target.type !== 'checkbox' && !ev.target.classList.contains('text-area')) {
             htmlElement.style.color = '#34495E';
           }
         }
-        if (ev.target.value === '') {
-          const htmlElement = label.querySelector('fa-icon') as HTMLOrSVGImageElement;
+        if (ev.target.value === '' && !ev.target.classList.contains('text-area')) {
+          const htmlElement = label.querySelector('fa-icon') as HTMLElement;
           htmlElement.style.color = 'lightcoral';
         }
       });
@@ -263,6 +273,59 @@ export class DeviceinputComponent implements OnInit {
 
   private create_invoice(invoice: InvoiceToolsDto) {
     this.invoice = invoice;
+  }
+
+  ngOnDestroy(): void {
+    this.print.invoice_make.unsubscribe();
+  }
+
+  sign_pad_open() {
+    if (!this.formClient.valid) {
+      this.alert_service.warn('', 'Before sending the form ' +
+        'to the Email please complete all the fields !!! Thank you. Try again.', false, false, '', null);
+      Object.keys(this.formClient.controls).forEach(key => {
+        this.formClient.controls[key].markAllAsTouched();
+      });
+      return;
+    }
+    this.sig_pad_service.open$.emit();
+    this.sig_pad_service.open$.subscribe(() => {
+      this.submitFormAndSendEmail();
+    });
+  }
+
+  submitFormAndSendEmail() {
+    if (!this.client_after_saved) {
+      this.createClient();
+    } else {
+      this.client = this.client_after_saved;
+    }
+
+    this.subscribe_success_response();
+    this.httpService.printClient(this.client).subscribe(client => {
+      this.client_after_saved = client;
+      this.emailSender.email_send(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
+    }, error => {
+      this.alert_service.error(null, 'The client2' + this.client.name +
+        'received a device and not closed the repair procedure !!! Client Id '
+        + this.client.id + '\n' + error.message, false, null, '', error);
+    });
+  }
+
+  subscribe_success_response() {
+    this.animation_end();
+    this.emailSender.email_sent_send_success.subscribe(() => {
+      this.alert_service.success(null, 'The client3' + this.client_after_saved.name +
+        'received a device and create the repair procedure !!! Client Id '
+        + this.client_after_saved.id, true, null, '');
+      return;
+    });
+  }
+
+  animation_end() {
+    this.emailSender.anime_question.subscribe(value => {
+      this.showAnimation = value;
+    });
   }
 }
 

@@ -24,7 +24,6 @@ export class SearchEmailComponent implements OnInit {
   }
 
   client_catch($event: Client) {
-    console.log($event);
     if ($event as Client) {
       this.client = $event;
       this.hide_form.form_open.emit(true);

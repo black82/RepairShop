@@ -14,6 +14,7 @@
 
 .toast__svg {
   fill: #fff;
+  cursor: pointer;
 }
 
 .toast {
@@ -45,11 +46,12 @@
   top: 50%;
   left: 22px;
   transform: translateY(-50%);
-  width: 14px;
-  height: 14px;
-  padding: 7px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
   border-radius: 50%;
   display: inline-block;
+  cursor: pointer;
 }
 
 .toast__type {
@@ -71,8 +73,11 @@
   padding-right: 60px;
 }
 
-fa-icon {
+svg {
   color: white;
+  margin-top: -3px;
+  font-size: 10px;
+
 }
 
 .toast__close {
@@ -84,6 +89,7 @@ fa-icon {
   height: 14px;
   fill: #878787;
   transform: translateY(-50%);
+
 }
 
 .toast--green .toast__icon {
@@ -123,6 +129,7 @@ fa-icon {
   visibility: visible;
   z-index: 10;
   left: 60%;
+  opacity: 1;
   margin-left: -20px;
   -webkit-animation: tilt-in-bl-out 0.65s cubic-bezier(0.550, 0.085, 0.680, 0.530);
   animation: tilt-in-bl-out 0.65s cubic-bezier(0.550, 0.085, 0.680, 0.530);
@@ -132,12 +139,12 @@ fa-icon {
   0% {
     -webkit-transform: rotateY(35deg) rotateX(-20deg) translate(-250px, 250px) skew(-12deg, -15deg);
     transform: rotateY(35deg) rotateX(-20deg) translate(-250px, 250px) skew(-12deg, -15deg);
-    opacity: 0;
+
   }
   100% {
     -webkit-transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
     transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
-    opacity: 1;
+
   }
 }
 

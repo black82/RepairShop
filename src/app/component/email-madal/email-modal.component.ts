@@ -1,16 +1,19 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
-import {PrintService} from '../service/print.service';
-import {PrintEntity} from '../entity/Print_Pojo';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+import {PrintEntity} from '../entity/Print_Pojo';
+import {EmailSenderService} from '../service/email-sender.service';
+import {HttpClien} from '../service/clientservice.service';
+import {AlertServiceService} from '../service/alert-service.service';
+import {SigPadService} from '../service/sig-pad.service';
 
 
 @Component({
-  selector: 'app-print-page',
-  templateUrl: './print-page.component.html',
-  styleUrls: ['./print-page.component.css']
+  selector: 'app-email-modal',
+  templateUrl: 'email-modal.component.html',
+  styleUrls: ['./email-modal.component.css']
 })
-export class PrintPageComponent implements OnInit, OnDestroy {
+export class EmailModalComponent implements OnInit, OnDestroy {
   client: Client;
   name_test_entre: string[] = [];
   name_test_out: string[] = [];
@@ -18,25 +21,68 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   type_print: number;
   date_exit: Date;
   id: string;
-  invoice_tools: InvoiceToolsDto = new InvoiceToolsDto();
   print_entity: PrintEntity;
+  show_email_send = false;
+  observableInvoice: EventEmitter<InvoiceToolsDto> = new EventEmitter();
+  images_sig: string[] = [];
 
-  constructor(private print: PrintService) {
+  constructor(private emailSender: EmailSenderService,
+              private http: HttpClien,
+              private alert_service: AlertServiceService,
+              private sig_pad_service: SigPadService) {
+
   }
 
   ngOnInit(): void {
-    this.print.print_open.subscribe(print => {
+    this.images_sig = this.sig_pad_service.image_sig;
+    this.emailSender.email_send_event.subscribe(print => {
       this.print_entity = print;
+      this.client = print.client_print;
       this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
-      this.name_test_entre = [];
-      this.name_test_out = [];
       this.check_type_print(print);
       this.check_test_OK(print.client_print);
-      setTimeout(() => this.printPage(print.client_print), 200);
-
+      const timeout = setTimeout(() => {
+        this.emailPage(print.client_print);
+        clearTimeout(timeout);
+      }, 1000);
     });
+  }
 
+
+  ok() {
+    this.emailSender.anime_question.next(true);
+    const html = document.querySelector('.container-page');
+    this.show_email_send = false;
+    const invoiceToPrintPage = this.createInvoiceToPrintPage(html.innerHTML);
+    this.sendEmailToBackend(invoiceToPrintPage);
+  }
+
+  sendEmailToBackend(invoiceToolsDto) {
+    this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
+      this.emailSender.anime_question.next(false);
+      this.emailSender.email_sent_send_success.emit();
+    }, error => {
+      this.emailSender.anime_question.next(false);
+      this.alert_service.error(null, error.error.message
+        , false, null, '', error);
+    });
+  }
+
+  dismiss() {
+    this.show_email_send = true;
+    this.client = null;
+  }
+
+  checkTypePrint(): string {
+    switch (this.print_entity.type_client_print) {
+      case 1: {
+        return 'inputInvoice';
+      }
+      case 2: {
+        return 'outputInvoice';
+      }
+    }
   }
 
   check_type_print(printTypes: PrintEntity) {
@@ -44,7 +90,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.check_test_OK_out(printTypes.client_print);
     }
     if (printTypes.type_client_print === 1) {
-      this.date_exit = printTypes.date_exit_device;
+      this.date_exit = printTypes?.date_exit_device;
     }
   }
 
@@ -79,21 +125,17 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].inputModule.sensors_input) {
       this.name_test_entre.push(' X Il sensore del dispositivo è danneggiato ');
     }
+
   }
 
-  printPage(client: Client): void {
-
+  emailPage(client: Client): void {
     this.client = client;
-    setTimeout(() => {
-      const html = document.querySelector('.container-fluid');
-      window.print();
-      this.createInvoiceToPrintPage(html.innerHTML);
-    }, 1000);
-
+    this.show_email_send = true;
   }
 
   ngOnDestroy(): void {
-    this.print.print_open.unsubscribe();
+    this.emailSender.email_send_event.unsubscribe();
+    this.observableInvoice.unsubscribe();
   }
 
   check_test_OK_out(client: Client) {
@@ -143,22 +185,21 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     return id.toString();
   }
 
-  checkTypePrint(): string {
-    switch (this.print_entity.type_client_print) {
-      case 1: {
-        return 'inputInvoice';
-      }
-      case 2: {
-        return 'outputInvoice';
-      }
-    }
-  }
-
   private createInvoiceToPrintPage(html) {
-    this.invoice_tools.destinationUser = this.client.email;
-    this.invoice_tools.htmlPage = html;
-    this.invoice_tools.repairID = +this.id;
-    this.invoice_tools.typeFile = this.checkTypePrint();
-    this.print.invoice_make.emit(this.invoice_tools);
+    const invoiceToPrintPage = new InvoiceToolsDto();
+    invoiceToPrintPage.destinationUser = this.client.email;
+    invoiceToPrintPage.subjectEmail = 'RfvTechnology numero di riparazione -  ' + this.id;
+    if (this.print_entity.type_client_print === 1) {
+      invoiceToPrintPage.messageEmail = 'Il dispositivo sarà pronto per essere ritirato alla data - ' + this.date_exit;
+    } else {
+      invoiceToPrintPage.messageEmail = 'Sono contento che tu abbia scelto la' +
+        ' RFVTehnology . Ti stiamo aspettando di nuovo. Buona giornata.';
+    }
+    invoiceToPrintPage.htmlPage = html;
+    invoiceToPrintPage.repairID = +this.id;
+    invoiceToPrintPage.typeFile = this.checkTypePrint();
+    return invoiceToPrintPage;
   }
 }
+
+

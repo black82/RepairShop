@@ -23,7 +23,7 @@
 }
 
 .row-2 label {
-  width: 80%;
+  width: 100%;
   display: inline-flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -95,8 +95,8 @@ form .submit {
   text-decoration-style: solid;
 }
 
-form input.col-1,
-form input.col-2,
+form input.input-1,
+form input.input-2,
 form select,
 form textarea {
   position: relative;
@@ -124,8 +124,8 @@ form textarea:hover {
 
 }
 
-form input.col-1:focus,
-form input.col-2:focus,
+form input.input-1:focus,
+form input.input-2:focus,
 form select:focus,
 form textarea:focus {
   box-shadow: 0 0 2px 1px #E0E0E0;
@@ -219,7 +219,7 @@ form ::-moz-focus-inner {
 
 }
 
-.col-3 {
+.col-checkbox {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -255,7 +255,8 @@ form textarea {
 
 .button,
 .dismiss,
-.print {
+.print,
+.email {
   position: relative;
   align-content: center;
   display: inline-block;
@@ -269,24 +270,29 @@ form textarea {
   text-transform: uppercase;
   perspective: 500px;
   transition: .2s;
+  cursor: pointer;
 }
 
 .button:last-of-type,
 .dismiss:last-of-type,
-.print:last-of-type {
+.print:last-of-type,
+.email:last-of-type {
   margin-right: 0;
 }
 
 .button span,
 .dismiss span,
-.print span {
+.print span,
+.email span {
   position: relative;
   z-index: 2;
+
 }
 
 .button:before,
 .dismiss:before,
-.print:before {
+.print:before,
+.email:before {
   content: "";
   position: absolute;
   z-index: 1;
@@ -294,21 +300,27 @@ form textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
   transform-origin: left;
-  transition: .5s;
+  transition: .4s;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .button:hover {
   color: #1ABC9C;
-  border-color: #1ABC9C;
   cursor: pointer;
+
 }
 
 .button:hover:before,
 .dismiss:hover:before,
-.print:hover:before {
+.print:hover:before,
+.email:hover:before {
   transform: rotateY(94deg);
+}
+
+.email:before {
+  color: steelblue;
 }
 
 .button:before {
@@ -318,17 +330,30 @@ form textarea {
 .dismiss:before {
   background: #F09EA3;
   border: 1px solid #F09EA3;
-}
-
-.dismiss:hover {
-  color: #F09EA3;
-  border-color: #F09EA3;
-
+  cursor: pointer;
 }
 
 .print:before {
   background: #34495E;
   border: 1px solid #34495E;
+  cursor: pointer;
+}
+
+.email:before {
+  background: steelblue;
+  border: 1px solid steelblue;
+  cursor: pointer;
+}
+
+.dismiss:hover {
+  color: #F09EA3;
+  border-color: #F09EA3;
+  cursor: pointer;
+}
+
+.email:hover {
+  color: steelblue;
+  border-color: steelblue;
   cursor: pointer;
 }
 
@@ -356,7 +381,7 @@ form textarea {
 
 }
 
-.col-3 {
+.col-checkbox {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -374,8 +399,8 @@ form textarea {
 
 }
 
-.check-rouw-1,
-.check-rouw-2 {
+.check-col-1,
+.check-col-2 {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

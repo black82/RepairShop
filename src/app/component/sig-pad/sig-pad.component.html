@@ -1,0 +1,13 @@
+<div *ngIf="showSigPad" class="container-pad">
+  <div class="body-pad">
+    <p class="title-pad">{{name}}</p>
+    <canvas #sigPad (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)" height="150"
+            width="300"></canvas>
+    <div class="colon-button">
+      <div class="button-row">
+        <a (click)="clear()" class="clear-button">CLEAR</a>
+        <a (click)="save()" class="submit-button">SAVE</a>
+      </div>
+    </div>
+  </div>
+</div>

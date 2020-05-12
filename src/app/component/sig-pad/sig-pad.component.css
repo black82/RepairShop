@@ -1,0 +1,93 @@
+canvas {
+  border: 2px solid #000;
+  background: #FFFFFF;
+  border-radius: 5px;
+}
+
+.title-pad {
+  margin-top: 20%;
+  color: white;
+  font-size: 20px;
+}
+
+.container-pad {
+  position: fixed;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw; /* viewport width */
+  height: 100vh; /* viewport height */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9;
+  opacity: 1;
+  -webkit-transition: opacity 100ms ease-in;
+  -moz-transition: opacity 100ms ease-in;
+  transition: opacity 100ms ease-in;
+  padding-top: 10%;
+
+}
+
+canvas:hover {
+  border: 4px solid #EE4D68;
+}
+
+.body-pad {
+  margin-left: 50%;
+  margin-right: 50%;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: center;
+  padding: 2em 0 20px;
+  margin-bottom: 20px;
+}
+
+.clear-button,
+.submit-button {
+  display: block;
+
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 5px 60px;
+  box-shadow: 0 2px 5px #00E4F6;
+  transition: 0.25s;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.clear-button {
+  background-color: #0B1B48;
+  color: white;
+}
+
+.submit-button {
+  color: white;
+  background: #1ABC9C;
+}
+
+.clear-button:hover,
+.submit-button:hover {
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+  transition: 0.25s;
+}
+
+.clear-button:hover {
+  color: lightcoral;
+}
+
+.submit-button:hover {
+  color: #1d72f3;
+}
+
