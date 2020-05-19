@@ -2,7 +2,7 @@
   <div class="title-container">
     <p class="title-form"> Client  {{client.name}} {{client.family}} .</p>
   </div>
-  <div class="row">
+  <div class="row-container">
     <div class="row-1">
       <div class="container-1-content">
         <div class="container-2-content">
@@ -21,7 +21,7 @@
             {{client?.name}} - <fa-icon [icon]="mobile"></fa-icon>
             {{element.divice.model}}<span *ngIf="!element.divice.rightNowInRepair">(CLOSET  REPAIR)</span><span
               *ngIf="element.divice.rightNowInRepair">(OPEN REPAIR)</span></span></div>
-        <div *ngIf="element.visible" class="show">
+        <div *ngIf="element.visible && device_show" class="show">
           <ul class="border">
             <li>
               <ol class="input-title">
@@ -49,8 +49,8 @@
     </div>
     <div class="row-2">
 
-      <div *ngFor="let item of repairs_element" class="toggle-container-2">
-        <div (click)="showElement(item)" *ngIf="show_repair" class="toggle-title"><span
+      <div *ngFor="let item of repairs_element; let i= index" class="toggle-container-2">
+        <div (click)="showElementRepair(item)" *ngIf="show_repair" class="toggle-title"><span
           [style]="item.visible ?{'color': 'lightcoral'} : {'color': '#1ABC9C'}"
           class="title-toggle">
           <fa-icon [icon]="date"></fa-icon>
@@ -58,12 +58,12 @@
           <span *ngIf="!item.repair_elemnt.nowInRepair">(CLOSET  REPAIR)</span><span
           *ngIf="item.repair_elemnt.nowInRepair">(OPEN REPAIR)</span> </span></div>
 
-        <div *ngIf="show_repair">
+        <div *ngIf="item.visible&&show_repair">
           <div class="border-container show">
             <ul class="border">
               <ol class="input-title">
                 <fa-icon [icon]="cogs"></fa-icon>
-                <strong> Repair Id:{{item.repair_elemnt?.id_Repair}}</strong></ol>
+                <strong> Repair Id:{{item.repair_elemnt?.repair_Id}}</strong></ol>
               <ol class="input-title">
                 <fa-icon
                   [icon]="date"></fa-icon>
@@ -174,16 +174,54 @@
       </div>
     </div>
   </div>
-  <mat-expansion-panel>
+  <mat-expansion-panel *ngIf="show_document">
     <mat-expansion-panel-header>
-      FOto and document
+      <fa-icon [icon]="images_icon"></fa-icon>
+      <p>Images To Repair & Invoice</p>
     </mat-expansion-panel-header>
 
     <ng-template matExpansionPanelContent>
-      <img
-        height="100px"
-        src="{{'data:image/jpeg;base64,'+repairs_element[0].repair_elemnt.repairFileStorage.fotoEnterDevice[0].fotoBase64}}"
-        width="70px">
+      <div class="row-container">
+        <div class="foto-enter-device row-1">
+          <div>
+            <div *ngIf="repair_fileStorage?.invoiceToEnterDeviceToRepair"
+                 class="link-invoice-enter ">
+              <a (click)="open_popup(repair_fileStorage.invoiceToEnterDeviceToRepair)"
+                 class="link-invoice">Invoice
+                to Open Repair</a>
+            </div>
+
+            <div *ngIf="repair_fileStorage.fotoEnterDevice && repair_fileStorage.fotoEnterDevice.length > 0"
+                 class="image-input">
+              <ul *ngFor="let images of repair_fileStorage.fotoEnterDevice; let i =index">
+                <li (click)="zoum($event,i);" class="image-content">
+                  <img [class]="i+'-image'" alt="" class="image-content"
+                       id="normal-zoom"
+                       src="{{'data:image/jpeg;base64,'+images.fotoBase64}}">
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row-2">
+          <div *ngIf="repair_fileStorage.invoiceToExitDeviceToRepair"
+               class="link-invoice-enter">
+            <a (click)="open_popup(repair_fileStorage.invoiceToEnterDeviceToRepair)"
+               class="link-invoice">Invoice
+              to Closet Repair</a>
+
+            <div *ngIf="repair_fileStorage.fotoExitDevice.length > 0" class="foto-out-device">
+              <ul *ngFor=" let images of repair_fileStorage.fotoExitDevice;let i =index">
+                <li (click)="zoum($event,(i+100));" class="image-content">
+                  <img [class]="(i+100)+'-image'" alt="" class="image-content"
+                       id="normal-zoom1"
+                       src="{{'data:image/jpeg;base64,'+images.fotoBase64}}"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </ng-template>
   </mat-expansion-panel>
 

@@ -135,7 +135,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       if (device.rightNowInRepair) {
         device.repairs.forEach(repair => {
           if (repair.nowInRepair) {
-            id = repair.id_Repair;
+            id = repair.repair_Id;
           }
         });
       }

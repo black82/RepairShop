@@ -1276,8 +1276,8 @@ app-print-page {
 
 [tooltip]::before {
   content: '';
-  border: 5px solid transparent; /* opinion 4 */
-  z-index: 1001; /* absurdity 1 */
+  border: 5px solid transparent;
+  z-index: 2;
 }
 
 [tooltip]::after {
@@ -1349,8 +1349,9 @@ app-print-page {
 
 /* UNRELATED to tooltips */
 body {
-  margin: 10px;
+  margin: 10px !important;
   background: snow;
+
 }
 
 main {

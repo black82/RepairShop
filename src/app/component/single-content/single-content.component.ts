@@ -19,6 +19,8 @@ import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {faMinusSquare} from '@fortawesome/free-solid-svg-icons/faMinusSquare';
 import {faMeteor} from '@fortawesome/free-solid-svg-icons/faMeteor';
+import {faFileImage} from '@fortawesome/free-solid-svg-icons/faFileImage';
+import {RepairFileStorage} from '../entity/RepairFileStorage';
 
 @Component({
   selector: 'app-single-content',
@@ -44,14 +46,20 @@ export class SingleContentComponent implements OnInit {
   text = faEnvelopeOpenText;
   work = faTools;
   test_meteor = faMeteor;
+  images_icon = faFileImage;
   @Input()
   client: Client;
   devices_element: Element[] = [];
   devices: Device[] = [];
   repairs_element: ElementRepair[] = [];
+  repair_element_click: ElementRepair;
+  repair_fileStorage: RepairFileStorage;
   @Input()
   refresh: EventEmitter<Client> = new EventEmitter<Client>();
   show_repair = false;
+  show_document = false;
+  device_show = false;
+  element: Element;
 
   constructor() {
   }
@@ -67,20 +75,35 @@ export class SingleContentComponent implements OnInit {
     this.repairs_element = [];
     this.devices = client.device;
     this.devices.map(s => this.devices_element.push(new Element(false, s)));
-    this.devices.forEach(device => {
-        device.repairs.forEach(repair =>
-          this.repairs_element.push(this.create_input_test(repair)));
-      }
-    );
   }
 
   showElement(element) {
+    this.repairs_element = [];
     element.visible = !element.visible;
+    element.divice.repairs.forEach(repair => {
+      const elementRepair = this.create_input_test(repair);
+      elementRepair.visible = false;
+      this.repairs_element.push(elementRepair);
+    });
+    this.deviceShow();
+  }
+
+
+  deviceShow() {
+    this.device_show = !this.device_show;
     this.showRepair();
   }
 
   showRepair() {
     this.show_repair = !this.show_repair;
+    if (this.show_document) {
+      this.showDocument();
+    }
+
+  }
+
+  showDocument() {
+    this.show_document = !this.show_document;
   }
 
   create_input_test(repaired: Repair): ElementRepair {
@@ -157,6 +180,27 @@ export class SingleContentComponent implements OnInit {
       test_result.push(' Il sensore del dispositivo è danneggiato');
     }
     return test_result;
+  }
+
+  zoum($event, i: number) {
+    const htmlImageElement = document.getElementsByClassName(`${i}-image`);
+    const image = htmlImageElement[0] as HTMLImageElement;
+    if (image?.id !== 'zoom') {
+      image.id = 'zoom';
+    } else {
+      image.id = 'normal-zoom';
+    }
+  }
+
+  open_popup(url: string) {
+    window.open(url, 'Invoice', 'width=400px,height=500px');
+  }
+
+  showElementRepair(item: ElementRepair) {
+    item.visible = true;
+    this.repair_fileStorage = null;
+    this.repair_fileStorage = item.repair_elemnt.repairFileStorage;
+    this.showDocument();
   }
 }
 

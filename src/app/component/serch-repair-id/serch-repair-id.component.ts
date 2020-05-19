@@ -3,12 +3,12 @@ import {Client} from '../entity/ClientWeb';
 import {FormhidenService} from '../service/formhiden.service';
 
 @Component({
-  selector: 'app-searchpage',
-  templateUrl: './searchpage.component.html',
-  styleUrls: ['./searchpage.component.css']
+  selector: 'app-serch-repair-id',
+  templateUrl: './serch-repair-id.component.html',
+  styleUrls: ['./serch-repair-id.component.css']
 })
-export class SearchpageComponent implements OnInit {
-  nameForm = 'Search by Tel. Number';
+export class SerchRepairIdComponent implements OnInit {
+  nameForm = 'Search by Reapair Number';
   button = 'Search';
   client: Client;
   show_content = false;
@@ -29,4 +29,5 @@ export class SearchpageComponent implements OnInit {
       this.hide_form.form_open.emit(true);
     }
   }
+
 }

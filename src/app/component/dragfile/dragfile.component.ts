@@ -20,7 +20,7 @@ export class DragfileComponent implements OnInit {
 
 
   onSelect(event) {
-    this.imageSend.addImage.emit(event);
+    this.imageSend.addImagesToSend(event.addedFiles[0]);
     this.files.push(event.addedFiles[0]);
   }
 

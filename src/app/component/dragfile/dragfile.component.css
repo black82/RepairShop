@@ -11,10 +11,9 @@
   -webkit-box-align: baseline;
   align-items: baseline;
   align-content: flex-start;
-  max-height: 210px !important;
+  max-height: 13.3em !important;
 
   box-sizing: border-box;
-  margin-bottom: -170px;
 }
 
 ngx-dropzone {

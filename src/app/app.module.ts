@@ -30,6 +30,7 @@ import {NgxDropzoneModule} from 'ngx-dropzone';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {SigPadComponent} from './component/sig-pad/sig-pad.component';
+import {SerchRepairIdComponent} from './component/serch-repair-id/serch-repair-id.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {SigPadComponent} from './component/sig-pad/sig-pad.component';
     SearchEmailComponent,
     DragfileComponent,
     EmailModalComponent,
-    SigPadComponent
+    SigPadComponent,
+    SerchRepairIdComponent
   ],
   imports: [
     NgbModule,

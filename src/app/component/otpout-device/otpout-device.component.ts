@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faCalendarCheck} from '@fortawesome/free-solid-svg-icons';
 import {faUserTag} from '@fortawesome/free-solid-svg-icons/faUserTag';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
@@ -48,7 +48,8 @@ import {SigPadService} from '../service/sig-pad.service';
   templateUrl: './otpout-device.component.html',
   styleUrls: ['./otpout-device.component.css']
 })
-export class OtpoutDeviceComponent implements OnInit {
+export class OtpoutDeviceComponent implements OnInit, OnDestroy {
+
   date = faCalendarCheck;
   usertag = faUserTag;
   mobile = faMobile;
@@ -209,7 +210,7 @@ export class OtpoutDeviceComponent implements OnInit {
       formData.connections_output, formData.sound_equipment_output, formData.touch_output,
       formData.wi_fi_output, formData.microphone_output, formData.sim_output,
       formData.keyboard_output, formData.camera_output);
-    this.repair_output = new Repair(this.client.device[0].repairs[0].id_Repair,
+    this.repair_output = new Repair(this.client.device[0].repairs[0].repair_Id,
       this.client.device[0].repairs[0].date_to_enter, this.formClient.controls.return_date.value,
       this.formClient.controls.defect_output.value,
       this.formClient.controls.deposit_output.value,
@@ -342,5 +343,12 @@ export class OtpoutDeviceComponent implements OnInit {
 
   private create_invoice(invoice: InvoiceToolsDto) {
     this.invoice = invoice;
+  }
+
+  ngOnDestroy(): void {
+    this.emailSender.email_sent_send_success.unsubscribe();
+    this.sig_pad_service.open$.unsubscribe();
+    this.printService.invoice_make.unsubscribe();
+    this.hidden_form.form_open.unsubscribe();
   }
 }

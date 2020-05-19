@@ -20,12 +20,21 @@
   font-style: normal;
 }
 
-#menu {
+svg path {
+  fill: white;
+}
+
+svg path:hover {
+  background-size: cover;
+  fill: #34495E;
+  cursor: pointer;
+  transform-style: preserve-3d;
 
 }
 
 svg {
-  color: #FFFFFF;
+  -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
 }
 
 #menu ul,
@@ -59,12 +68,7 @@ svg {
 #menu li:hover a, #menu li.active a, #menu li.active span {
 }
 
-#menu .current_page_item a,
-#menu-signi .current_page_item a {
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
-  0 -2px 4px rgba(0, 0, 0, 0.5);
-  color: #FFF;
-}
+
 
 #menu .current_page_item a:hover,
 #menu-signi .current_page_item a:hover {
@@ -219,6 +223,7 @@ svg {
   visibility: visible;
   opacity: 1;
   transform: scale(1);
+  z-index: 1500;
 
 }
 
