@@ -34,11 +34,8 @@
 .icon {
   display: inline-block;
   color: #FFFFFF;
-  font-size: 30px;
+  font-size: 20px;
   vertical-align: center;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
-  0 -2px 4px rgba(0, 0, 0, 0.5);
-
 }
 
 .container {
@@ -96,12 +93,25 @@ input[type='submit'] {
   display: -ms-flexbox;
   display: flex;
   margin: 20px;
+
 }
 
 .form__input {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  background: rgb(232, 240, 254) !important;
+  box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  3px 0 0 2px #FFFFFF,
+  3px 3px 0 3px #BBB,
+  2px 8px 5px 5px rgba(0, 0, 0, 0.3),
+  3px -1px 1px 5px rgba(0, 0, 0, 0.05) !important;
+}
+
+.form__input:invalid {
+  background: lightcoral !important;
+
 }
 
 .login label,
@@ -109,6 +119,12 @@ input[type='submit'] {
 .login input[type='password'] {
   border-radius: 20px;
   padding: 15px;
+  box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);
 }
 
 .login label {
@@ -142,6 +158,7 @@ input[type='submit'] {
   text-transform: uppercase;
   border-radius: 10px;
   font-size: 20px;
+  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 .login input[type='submit']:focus,
@@ -163,10 +180,23 @@ p {
   font-weight: bold;
   font-family: Helvetica, serif;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 input::placeholder {
-  color: #FFFFFF;
+  color: #0B1B48;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
+}
+
+label {
+  margin-top: -7px;
+}
+
+.error-message {
+  color: #cc0033;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 5px 0 0;
 }

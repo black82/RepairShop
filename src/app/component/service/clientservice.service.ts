@@ -6,6 +6,7 @@ import {Client} from '../entity/ClientWeb';
 import {Repair} from '../entity/Repair';
 import {Router} from '@angular/router';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+import {Device} from '../entity/Device';
 
 @Injectable({
   providedIn: 'root'
@@ -71,8 +72,8 @@ export class HttpClien {
       );
   }
 
-  outputDeviceForm(repair: Repair, id: number): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + 'api/create/client/return/device/' + id, repair)
+  outputDeviceForm(repair: Repair, id: number): Observable<Device> {
+    return this.http.post<Device>(this.apiUrl + 'api/create/client/return/device/' + id, repair)
       .pipe(retry(2),
         catchError(this.errorHandler)
       );
@@ -90,14 +91,14 @@ export class HttpClien {
     return this.http.post<any>(this.apiUrl + 'api/auth/' + 'login', data)
       .pipe(
         tap(() => {
-          localStorage.setItem('islogin', '1');
+          localStorage.setItem('is_login', new Date(new Date().getTime() + +3600 * 1000).toString());
         }),
         catchError(this.errorHandler)
       );
   }
 
   logout(): void {
-    localStorage.setItem('islogin', '0');
+    localStorage.removeItem('is_login');
     return localStorage.removeItem('token');
   }
 

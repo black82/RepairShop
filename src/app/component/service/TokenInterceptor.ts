@@ -16,28 +16,24 @@ export class TokenInterceptor implements HttpInterceptor {
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     const token = localStorage.getItem('token');
 
     if (token) {
       request = request.clone({
-        setHeaders: {
-          Authorization: 'Bearer ' + token
+          headers: request.headers.append('Authorization', 'Bearer ' + token)
         }
-      });
+      );
     }
     if (!request.headers.has('Content-Type')) {
       request = request.clone({
-        setHeaders: {
-          'Content-type': 'application/json'
+          headers: request.headers.append('Content-Type', 'application/json'),
         }
-      });
+      );
     }
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           this.currentRoute = null;
-          localStorage.setItem('islogin', '1');
         }
         return event;
       }),
@@ -46,13 +42,11 @@ export class TokenInterceptor implements HttpInterceptor {
         console.log('error--->>>', error);
         if (error.error.message.includes('Expired or invalid JWT token')) {
           error.error.status = 401;
-          localStorage.setItem('islogin', '0');
           localStorage.removeItem('token');
           localStorage.setItem('navigate', this.currentRoute);
           this.router.navigate(['client/sign-in']).then(r => r);
         }
         if (error.error.status === 401) {
-          localStorage.setItem('islogin', '0');
           localStorage.setItem('navigate', this.currentRoute);
           this.router.navigate(['client/sign-in']).then(r => r);
         }

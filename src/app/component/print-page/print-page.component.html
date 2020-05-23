@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-page">
   <div class="head-doc" style=";
    margin-top: 25px;float: left;width: 100%; display: inline;">
     <div class="col" style="float: left; width:67%;">
@@ -20,118 +20,124 @@
       </div>
     </div>
   </div>
-  <div class="row no-gutters items-group cliente-label" style="border-style: solid;
+
+  <div style="clear: both;">
+    <div style="float: none;border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;
-  margin: 0px 5px 5px;">
-    <div class="col-3 label">
-      <p style="font-size: 12pt;margin: 5px">{{"Cliente :  " + client?.name}} {{client?.family}}</p>
-      <p style="font-size: 12pt;margin: 5px"> {{"Email :  " + client?.email}}</p>
-      <p style="font-size: 12pt;margin: 5px"> {{"Cont.Telefonico : " + client?.telephone_number}}</p>
-    </div>
-    <div class="col-9">
-      <p style="font-size: 12pt;margin: 5px">{{"Indirizzo cliente :  " + client?.address}}</p>
+  margin: 0 5px 5px;">
+      <div class="col-324234">
+        <p style="font-size: 8pt;margin: 3px">{{"Cliente :  " + client?.name}} {{client?.family}}</p>
+        <p style="font-size: 8pt;margin: 3px"> {{"Email :  " + client?.email}}</p>
+        <p style="font-size: 8pt;margin: 3px"> {{"Cont.Telefonico : " + client?.telephone_number}}</p>
+        <p style="font-size: 8pt;margin: 3px">{{"Indirizzo cliente :  " + client?.address}}</p>
+      </div>
     </div>
   </div>
-
-  <div class="row no-gutters items-group" style="border-style: solid;
+  <div style="border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
-  border-radius: 5pt;margin: 5px">
-    <div class="col-3 label">
-      <p style="font-size: 12pt;margin: 5px"> {{"Model :  " + client?.device[0]?.model}}</p>
-      <p style="font-size: 12pt;margin: 5px"> {{"Condizioni d'uso :  " + client?.device[0]?.state_of_use}}</p>
-      <p style="font-size: 12pt;margin: 5px"> {{"IMEI&SN :  " + client?.device[0]?.imei}}</p>
-      <p style="font-size: 12pt;margin: 5px"> {{"Difect :  " + client?.device[0]?.repairs[0]?.defect}}.</p>
-      <p style="font-size: 12pt;margin: 5px">{{"Accessory :  " + client?.device[0]?.accessory}}</p>
+  border-radius: 5pt;margin: 0 5px 5px;">
+    <div>
+      <p style="font-size: 8pt;margin: 3px"> {{"Model :  " + client?.device[0]?.model}}</p>
+      <p style="font-size: 8pt;margin: 3px"> {{"Condizioni d'uso :  " + client?.device[0]?.state_of_use}}</p>
+      <p style="font-size: 8pt;margin: 3px"> {{"IMEI&SN :  " + client?.device[0]?.imei}}</p>
+      <p style="font-size: 8pt;margin: 3px"> {{"Difect :  " + client?.device[0]?.repairs[0]?.defect}}.</p>
+      <p style="font-size: 8pt;margin: 3px">{{"Accessory :  " + client?.device[0]?.accessory}}</p>
     </div>
 
-    <div *ngIf="type_print===1" class="col-9">
-      <p style="font-size: 12pt;margin: 5px">
-        {{"Date to enter :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
-      <p style="font-size: 12pt;margin: 5px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
-      <p style="font-size: 12pt;margin: 5px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
-      <p *ngIf="type_print===1"
-         style="margin: 5px">{{"La riparazione sarà finalizzata :  " + date_exit }}</p>
+    <div *ngIf="type_print===1">
+      <div>
+        <p style="font-size: 8pt;margin: 3px;">
+          {{"Date to enter :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
+        <p style="font-size: 8pt;margin: 3px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
+        <p
+          style="font-size: 8pt;margin: 3px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
+        <p *ngIf="type_print===1"
+           style="font-size: 8pt;margin: 3px">{{"La riparazione sarà finalizzata :  " + date_exit}}</p>
+      </div>
     </div>
-
-    <div *ngIf="type_print===2" class="col-9" style="margin: 5px">
+    <div *ngIf="type_print===2" style="margin: 3px">
       <p
-        style="font-size: 12pt;margin: 5px"> {{"Data di ricezione del dispositivo :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
-      <p style="font-size: 12pt;margin: 5px;">
+        style="font-size: 8pt;margin: 3px"> {{"Data di ricezione del dispositivo :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
+      <p style="font-size: 8pt;margin: 3px;">
         {{"Data di ritorno del dispositivo :  " + client?.device[0]?.repairs[0]?.output_date}}</p>
-      <p style="font-size: 12pt;margin: 5px;">{{"Deposit :  " + client?.device[0]?.repairs[0]?.deposit}}</p>
-      <p style="font-size: 12pt;margin: 5px;">{{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
-      <p style="font-size: 12pt;margin: 5px;">{{"Lavoro svolto :  " + client?.device[0]?.repairs[0]?.work_don}}</p>
+      <p style="font-size: 8pt;margin: 3px;">{{"Deposit :  " + client?.device[0]?.repairs[0]?.deposit}}</p>
       <p
-        style="font-size: 12pt;margin: 5px;">{{"Ricambi usati :  " + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
+        style="font-size: 8pt;margin: 3px;">{{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
+      <p style="font-size: 8pt;margin: 3px;">{{"Lavoro svolto :  " + client?.device[0]?.repairs[0]?.work_don}}</p>
+      <p
+        style="font-size: 8pt;margin: 3px;">{{"Ricambi usati :  " + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
     </div>
   </div>
-  <div class="row1">
-    <div class="row-test" style="border-style: solid;
+  <div style="clear: both;">
+    <div style="border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
-  border-radius: 5pt; margin: 5px">
-      <div class="col-test-1">
-        <p *ngIf="name_test_entre.length===0" class="label" style="font-size: 12pt;margin: 5px; color: #1ABC9C">Il tuo
+  border-radius: 5pt;margin: 0 5px 5px;">
+      <div style="width:50%;">
+        <p *ngIf="name_test_entre.length===0" class="label" style="font-size: 8pt;margin: 2px; color: #1ABC9C">Il
+          tuo
           dispositivo ha superato con successo tutti i nostri
           test di
           ingresso!!!</p>
         <div *ngIf="name_test_entre.length>0">
-          <p style="font-size: 12pt;margin: 5px;">Test di ingresso no superate!!!</p>
-          <ul *ngFor="let test of name_test_entre" class="disclaimer">
-            <li style="font-size: 12pt;margin: 5px;color: #c54040;"> {{test}}</li>
+          <p style="color: #1ABC9C;font-size: 8pt;margin: 2px;">Test di ingresso no superate!!!</p>
+          <ul *ngFor="let test of name_test_entre">
+            <li style="color: #c54040;font-size: 8pt;margin: 2px"> {{'Test falito: ' + test}}</li>
           </ul>
         </div>
       </div>
-      <div class="col-test-2" style="padding-left: 400px; margin: -85px 5px 5px;">
-        <p *ngIf="name_test_out?.length===0 && type_print===2" class="label"
-           style="font-size: 12pt;margin: 5px; color: #1ABC9C">Il tuo dispositivo
-          ha superato con successo
-          tutti i nostri test in uscita!!!</p>
-        <div *ngIf="name_test_out?.length>0">
-          <p style="font-size: 12pt;margin: 5px;">Test di uscita no superate!!!</p>
-          <ul *ngFor="let test of name_test_out" class="disclaimer">
-            <li style="font-size: 12pt;margin: 5px;color: #c54040"> {{test}}</li>
-          </ul>
+      <div style="width:50%;">
+        <div>
+          <p *ngIf="name_test_out?.length===0 && type_print===2" class="label"
+             style="font-size: 8pt;margin: 2px; color: #1ABC9C">Il tuo dispositivo
+            ha superato con successo
+            tutti i nostri test in uscita!!!</p>
+          <div *ngIf="name_test_out?.length>0">
+            <p style="font-size: 8pt;margin: 2px;">Test di uscita no superate!!!</p>
+            <ul *ngFor="let test_exit of name_test_out" class="disclaimer">
+              <li style="color: #c54040;font-size: 8pt;margin: 2px"> {{'Test falito: ' + test_exit}}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row no-gutters items-group" style="border-style: solid;
+  <div style=" border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
-  border-radius: 5pt;margin: 5px">
-    <p style="font-size: 12pt; margin: 5px;">Note Condizioni Generali:</p>
-    <p style="font-size: 12pt;margin: 5px;">
+  border-radius: 5pt;margin: 0 5px 5px;">
+    <p style="font-size: 8pt; margin: 3px;">Note Condizioni Generali:</p>
+    <p style="font-size: 8pt;margin: 2px;">
       RFV Technology non si assume la responsabilità di nessun genere sulle seguenti
-      condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di effettuare i
+      condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di effettuare
+      i
       test d'ingresso -Se, o seguito di un salvataggio dati, il cliente dichiara che non sono presenti del dati (RFV
       Technology si basa sulla dimensione di ogni singola cartella per verificare che tutti i dati presenti sul
-      dispositivo vengano salvati) -Se il dispositivo, pronto per essere consegnato, viene lasciato in negozio per più
+      dispositivo vengano salvati) -Se il dispositivo, pronto per essere consegnato, viene lasciato in negozio per
+      più
       di 90 giorni a partire dal giorno della chiamata al eliente
     </p>
-    <p style="font-size: 12pt; margin: 5px;">NB: dopo il termine, Il disponitivo verrà ritirato
+    <p style="font-size: 8pt; margin: 2px;">NB: dopo il termine, Il disponitivo verrà ritirato
       come spese aziendali per il lavoro non più pagato</p>
     <hr>
-    <p style="font-size: 12pt; margin: 5px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto
+    <p style="font-size: 8pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto
       Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei
       dati personali”</p>
   </div>
-  <div *ngIf="type_print===1" class="check-single" style="margin: 5px">
-    <label class="checkbox" style="color: #1ABC9C">
-      <input [checked]="client.send_email_active" class="check-box" formControlName="email_send" name="device-test"
-             type="checkbox">
-      <span class="check-box-name" style="color: #1ABC9C">Accetto di ricevere e-mail con notizie o fatture da questo emittente.</span>
-    </label>
-  </div>
-  <div class="row no-gutters">
-    <div class="col">
-      <p class="disclaimer signature-field" style="font-size: 12pt; padding-bottom: 24pt; margin: 5px;color: #c54040;
+  <div style="margin: 3px">
+    <span style="color: #1ABC9C">{{client?.send_email_active ? ' SI ' : ' NO '}}accetto di ricevere e-mail con notizie o fatture da questo emittente.</span>
+    <div>
+      <div class="row no-gutters">
+        <div class="col">
+          <p class="disclaimer signature-field" style="font-size: 12pt; padding-bottom: 24pt; margin: 5px;color: #c54040;
   border-bottom: solid black 1pt;">Dichiaro di essere d'accordo con le condizioni
-        stabilite in questo
-        documento. Per quello firmo. Nebro / {{date }}</p>
+            stabilite in questo
+            documento. Per quello firmo. Nebro / {{date | date:'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

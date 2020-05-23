@@ -174,9 +174,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
           + this.client_after_saved.id + 'Document url : \n' + url, true, null, '');
         return;
       }, error => {
-        this.alert_service.error(null, 'The client' + this.client.name +
-          'received a device and not closed the repair procedure !!! Client Id '
-          + this.client.id + '\n' + error.message, false, null, '', error);
+        console.error(error);
       });
 
     }
@@ -200,10 +198,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.client_after_saved = client;
       this.print.print_open.emit(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
     }, error => {
-      this.showAnimation = false;
-      this.alert_service.error(null, 'The client' + this.client.name +
-        'received a device and not closed the repair procedure !!! Client Id '
-        + this.client.id + '\n' + error.message, false, null, '', error);
+      console.error(error);
     });
   }
 
@@ -306,9 +301,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.client_after_saved = client;
       this.emailSender.email_send(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
     }, error => {
-      this.alert_service.error(null, 'The client2' + this.client.name +
-        'received a device and not closed the repair procedure !!! Client Id '
-        + this.client.id + '\n' + error.message, false, null, '', error);
+      console.error(error);
     });
   }
 

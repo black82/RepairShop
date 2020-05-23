@@ -85,7 +85,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
     this.client = client;
     setTimeout(() => {
-      const html = document.querySelector('.container-fluid');
+      const html = document.querySelector('.container-page');
       window.print();
       this.createInvoiceToPrintPage(html.innerHTML);
     }, 1000);
@@ -130,17 +130,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
   id_repair(client: Client): string {
-    let id = null;
-    client.device.forEach(device => {
-      if (device.rightNowInRepair) {
-        device.repairs.forEach(repair => {
-          if (repair.nowInRepair) {
-            id = repair.repair_Id;
-          }
-        });
-      }
-    });
-    return id.toString();
+    return client.device[0].repairs[0].repair_Id.toString();
   }
 
   checkTypePrint(): string {

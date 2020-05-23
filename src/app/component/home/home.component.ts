@@ -26,9 +26,12 @@ export class HomeComponent implements OnInit {
   clickElementCentralIcon(elementList: NodeListOf<Element>) {
     elementList.forEach(node => {
       node.addEventListener('click', evt => {
+        const button = node.querySelector('.box-empty') as HTMLElement;
+
         node.querySelector('.tooltip').removeAttribute('tooltip');
         node.querySelectorAll('.icon-animation').forEach(className => {
           if (className.className === (evt.target as Element).className) {
+            button.style.height = '160px';
             className.classList.add('animation1');
             (className as HTMLElement).style.color = '#34495E';
           }

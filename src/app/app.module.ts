@@ -15,13 +15,12 @@ import {SearchpageComponent} from './component/searchpage/searchpage.component';
 import {AlertComponent} from './component/alert/alert.component';
 import {AnimationWaitComponent} from './component/animation-wait/animation-wait.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {PrintPageComponent} from './component/print-page/print-page.component';
 import {CheckDeviceRepairActiveComponent} from './component/check-device-repair-active/check-device-repair-active.component';
 import {SignUpComponent} from './component/sign-up/sign-up.component';
 import {SignInComponent} from './component/sign-in/sign-in.component';
 import {TokenInterceptor} from './component/service/TokenInterceptor';
-import {HttpClien} from './component/service/clientservice.service';
 import {SearchEmailComponent} from './component/search-email/search-email.component';
 import {DragfileComponent} from './component/dragfile/dragfile.component';
 import {EmailModalComponent} from './component/email-madal/email-modal.component';
@@ -69,7 +68,7 @@ import {SerchRepairIdComponent} from './component/serch-repair-id/serch-repair-i
     MatExpansionModule
 
   ],
-  providers: [HttpClien,
+  providers: [HttpClient,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

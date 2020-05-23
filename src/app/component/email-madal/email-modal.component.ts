@@ -172,7 +172,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   id_repair(client: Client): string {
-    let id = null;
+    let id = 0;
+    if (this.print_entity?.id) {
+      return this.print_entity?.id.toString();
+    }
     client.device.forEach(device => {
       if (device.rightNowInRepair) {
         device.repairs.forEach(repair => {
@@ -183,6 +186,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       }
     });
     return id.toString();
+
   }
 
   private createInvoiceToPrintPage(html) {

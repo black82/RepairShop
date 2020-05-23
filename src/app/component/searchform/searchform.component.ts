@@ -52,6 +52,7 @@ export class SearchformComponent implements OnInit {
         'Please fill in the search field, The field cannot be empty.', false, false, '');
       return;
     }
+    this.form_hide_Service.id_repair.emit(this.formInput.controls.ob.value);
     switch (this.typeForm) {
       case 'telephone': {
         this.searchByTelephone();
