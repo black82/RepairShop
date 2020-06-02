@@ -1,0 +1,44 @@
+table {
+  font-family: arial, sans-serif;
+  font-size: x-small;
+  background: #F5E2CD;
+  min-height: 80vh;
+
+
+}
+
+th {
+  background: #336699;
+  color: #FFFFFF;
+  text-align: left;
+  max-height: 100%;
+}
+
+
+.button-log {
+  margin-left: 48%;
+  padding: 20px;
+  background-color: #1ABC9C;
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.button-log:hover {
+  background-color: lightcoral;
+  cursor: pointer;
+}
+
+.log-container {
+  min-height: 500px;
+}
+
+.container-log {
+  display: block;
+  width: 80%;
+
+}

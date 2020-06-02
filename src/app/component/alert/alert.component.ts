@@ -56,7 +56,10 @@ export class AlertComponent implements OnInit {
         if (document?.querySelector('.show--alert')) {
           setTimeout(() => {
             this.removeAlert();
+            clearTimeout();
           }, 5000);
+        } else {
+          this.removeAlert();
         }
       });
   }
@@ -73,9 +76,7 @@ export class AlertComponent implements OnInit {
   removeAlert() {
     const remove = document.querySelector('.show--alert');
     remove?.classList.add('hidden--alert');
-    setTimeout(() => {
-      remove?.classList?.remove('show--alert');
-    }, 700);
+    remove?.classList?.remove('show--alert');
     if (this.alert.keepAfterRouteChange) {
       this.rout_Out_Alert(this.alert.location);
     }

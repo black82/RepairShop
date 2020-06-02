@@ -326,9 +326,8 @@
 }
 
 .animation2 {
-  position: fixed;
-  -webkit-animation: slit-out-vertical 0.5s ease-in both;
-  animation: slit-out-vertical 0.5s ease-in both;
+  -webkit-animation: slit-out-vertical 0.3s ease-in both;
+  animation: slit-out-vertical 0.3s ease-in both;
 }
 
 @-webkit-keyframes slit-out-vertical {

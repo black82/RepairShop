@@ -39,7 +39,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
   }
 
-  check_type_print(printTypes: PrintEntity) {
+  check_type_print(printTypes: PrintEntity): void {
     if (printTypes.type_client_print === 2) {
       this.check_test_OK_out(printTypes.client_print);
     }
@@ -48,7 +48,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  check_test_OK(client: Client) {
+  check_test_OK(client: Client): void {
     if (!client.device[0].repairs[0].inputModule.camera_input) {
       this.name_test_entre.push(' X Fotocamera difettosa ');
     }

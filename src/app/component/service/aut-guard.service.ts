@@ -24,8 +24,7 @@ export class AutGuardService implements CanActivate {
     if (expires_date > new Date()) {
       return true;
     } else {
-      localStorage.removeItem('token');
-      localStorage.removeItem('is_login');
+      localStorage.clear();
       localStorage.setItem('navigate', url);
       this.router.navigate(['client/sign-in']);
       return false;

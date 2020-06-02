@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
 import {FormhidenService} from '../service/formhiden.service';
 
@@ -7,7 +7,8 @@ import {FormhidenService} from '../service/formhiden.service';
   templateUrl: './searchpage.component.html',
   styleUrls: ['./searchpage.component.css']
 })
-export class SearchpageComponent implements OnInit {
+export class SearchpageComponent implements OnInit, OnDestroy {
+
   nameForm = 'Search by Tel. Number';
   button = 'Search';
   client: Client;
@@ -28,5 +29,9 @@ export class SearchpageComponent implements OnInit {
       this.client = $event;
       this.hide_form.form_open.emit(true);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.hide_form.form_open.unsubscribe();
   }
 }

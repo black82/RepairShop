@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
 import {FormhidenService} from '../service/formhiden.service';
 
@@ -7,7 +7,8 @@ import {FormhidenService} from '../service/formhiden.service';
   templateUrl: './serch-repair-id.component.html',
   styleUrls: ['./serch-repair-id.component.css']
 })
-export class SerchRepairIdComponent implements OnInit {
+export class SerchRepairIdComponent implements OnInit, OnDestroy {
+
   nameForm = 'Search by Reapair Number';
   button = 'Search';
   client: Client;
@@ -30,4 +31,7 @@ export class SerchRepairIdComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.hide_form.form_open.unsubscribe();
+  }
 }

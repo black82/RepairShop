@@ -7,6 +7,8 @@ import {ClientLogIn} from '../entity/ClientLogIn';
 import {faLock} from '@fortawesome/free-solid-svg-icons/faLock';
 import {faQuestion} from '@fortawesome/free-solid-svg-icons/faQuestion';
 import {faAt, faExclamation} from '@fortawesome/free-solid-svg-icons';
+import {AdminServiceService} from '../service/admin-service.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,7 +24,11 @@ export class SignInComponent implements OnInit {
   lock = faLock;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router, private authService: HttpClien, private alertService: AlertServiceService) {
+              private router: Router,
+              private authService: HttpClien,
+              private alertService: AlertServiceService,
+              private admin: AdminServiceService,
+              private animation_wait: AnimeServiceService) {
   }
 
   ngOnInit() {
@@ -48,9 +54,15 @@ export class SignInComponent implements OnInit {
     }
     this.deleteTacked();
     const client = this.createSigInEntity();
+    this.animation_wait.$anime_show.emit(true);
     this.authService.login(client)
       .subscribe(res => {
+        this.animation_wait.$anime_show.emit(false);
         if (res.token) {
+          if (res.roles) {
+            localStorage.setItem('roles', res.roles);
+            this.admin.$admin_show.emit();
+          }
           const element = document.querySelector('.close') as HTMLElement;
           localStorage.setItem('token', res.token);
           const nav_url = localStorage.getItem('navigate');
@@ -60,11 +72,13 @@ export class SignInComponent implements OnInit {
           if (nav_url) {
             this.router.navigate([nav_url]);
             localStorage.removeItem('navigate');
+
           } else {
             this.router.navigate(['']).then(r => r);
           }
         }
       }, (err) => {
+        this.animation_wait.$anime_show.emit(false);
         console.log(err);
       });
   }

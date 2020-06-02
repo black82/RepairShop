@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {catchError, retry, tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
 import {Repair} from '../entity/Repair';
-import {Router} from '@angular/router';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Device} from '../entity/Device';
 
@@ -13,16 +12,11 @@ import {Device} from '../entity/Device';
 })
 export class HttpClien {
   redirectUrl: string;
+  // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
+
   apiUrl = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
-
-  createClient(client: Client): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + 'api/create/client', client)
-      .pipe(
-        catchError(this.errorHandler)
-      );
+  constructor(private http: HttpClient) {
   }
 
   printClient(client: Client): Observable<Client> {
@@ -43,21 +37,27 @@ export class HttpClien {
     return this.http.get<Client>(this.apiUrl + 'api/search/number', {
       params: new HttpParams().set('telephone', telephone)
     })
-      .pipe(retry(2),
-        catchError(err => {
-          return this.errorHandler(err);
-        })
+      .pipe(
+        catchError(
+          this.errorHandler)
+      );
+  }
+
+  searchByRepairIdAndRepairAcriv(repairId: string): Observable<Client> {
+    return this.http.get<Client>(this.apiUrl + 'api/search/number', {
+      params: new HttpParams().set('repair', repairId)
+    })
+      .pipe(
+        catchError(this.errorHandler)
       );
   }
 
   searchByRepairId(repairId: string): Observable<Client> {
-    return this.http.get<Client>(this.apiUrl + 'api/search/number', {
-      params: new HttpParams().set('repair', repairId)
+    return this.http.get<Client>(this.apiUrl + 'api/search/repair/number', {
+      params: new HttpParams().set('id', repairId)
     })
-      .pipe(retry(2),
-        catchError(err => {
-          return this.errorHandler(err);
-        })
+      .pipe(
+        catchError(this.errorHandler)
       );
   }
 
@@ -65,16 +65,16 @@ export class HttpClien {
     return this.http.get<Client>(this.apiUrl + 'api/search/email', {
       params: new HttpParams().set('email', email)
     })
-      .pipe(retry(2),
-        catchError(err => {
-          return this.errorHandler(err);
-        })
-      );
+      .pipe(
+        catchError(
+          this.errorHandler
+        ));
+
   }
 
   outputDeviceForm(repair: Repair, id: number): Observable<Device> {
     return this.http.post<Device>(this.apiUrl + 'api/create/client/return/device/' + id, repair)
-      .pipe(retry(2),
+      .pipe(
         catchError(this.errorHandler)
       );
 
@@ -95,48 +95,53 @@ export class HttpClien {
         }),
         catchError(this.errorHandler)
       );
+
   }
 
   logout(): void {
-    localStorage.removeItem('is_login');
-    return localStorage.removeItem('token');
+    localStorage.clear();
   }
 
   register(data: any): Observable<string> {
     return this.http.post<any>(this.apiUrl + 'api/auth/' + 'register', data)
       .pipe(
-        tap(_ => this.log('register')),
-        catchError(this.errorHandler)
-      );
+        catchError(this.errorHandler));
   }
 
   sendEmailClient(invoice: InvoiceToolsDto): Observable<URL> {
+
     return this.http.post<URL>(this.apiUrl + 'admin/api/sample/email/attachment', invoice)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
+  logGetHtml(): Observable<string> {
+    return this.http.get(this.apiUrl + 'web/logs', {
+      responseType: 'text'
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   errorHandler(error) {
     if (!navigator.onLine) {
-      error = error as HttpErrorResponse;
-      return throwError(new Error(error.error));
+      const error1 = new Error(error.error);
+      error1.message = 'You lost your internet connection.';
+      return throwError(error1);
     }
     if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
+      const error1 = new ErrorEvent(error.error);
+      error1.error.message = 'A client-side or network error occurred. Handle it accordingly.';
+      error = error1;
       console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(error.name +
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+      console.error(error?.name +
+        `Backend returned code ${error?.status}, ` +
+        `body was: ${error?.message}`);
     }
-
     return throwError(error);
-  }
-
-  private log(message: string) {
-    console.log(message);
   }
 }

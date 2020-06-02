@@ -41,6 +41,7 @@ export class ImageSenderService {
   }
 
   submitImageToBack() {
+    this.images = Array.from(new Set(this.images));
     this.images.forEach(value => {
       this.imagesList.push(new ImageList(value));
     });

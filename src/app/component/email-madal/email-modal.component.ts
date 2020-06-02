@@ -6,6 +6,7 @@ import {EmailSenderService} from '../service/email-sender.service';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {SigPadService} from '../service/sig-pad.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   constructor(private emailSender: EmailSenderService,
               private http: HttpClien,
               private alert_service: AlertServiceService,
-              private sig_pad_service: SigPadService) {
+              private sig_pad_service: SigPadService,
+              private animation_wait: AnimeServiceService) {
 
   }
 
@@ -59,10 +61,13 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   sendEmailToBackend(invoiceToolsDto) {
+    this.animation_wait.$anime_show.emit(true);
     this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
+      this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.next(false);
       this.emailSender.email_sent_send_success.emit();
     }, error => {
+      this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.next(false);
       this.alert_service.error(null, error.error.message
         , false, null, '', error);

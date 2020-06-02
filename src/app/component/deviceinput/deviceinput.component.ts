@@ -42,6 +42,7 @@ import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {EmailSenderService} from '../service/email-sender.service';
 import {SigPadService} from '../service/sig-pad.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 @Component({
   selector: 'app-deviceinput',
@@ -96,7 +97,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
               private print: PrintService,
               private imageSender: ImageSenderService,
               private emailSender: EmailSenderService,
-              private sig_pad_service: SigPadService) {
+              private sig_pad_service: SigPadService,
+              private animation_wait: AnimeServiceService) {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
@@ -168,12 +170,15 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
         , false, null, '', null);
     } else {
+      this.animation_wait.$anime_show.emit(true);
       this.httpService.saved_print_page(this.invoice).subscribe(url => {
+        this.animation_wait.$anime_show.emit(false);
         this.alert_service.success(null, 'The client' + this.client_after_saved.name +
           'received a device and create the repair procedure !!! Client Id '
           + this.client_after_saved.id + 'Document url : \n' + url, true, null, '');
         return;
       }, error => {
+        this.animation_wait.$anime_show.emit(false);
         console.error(error);
       });
 
@@ -194,10 +199,13 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     } else {
       this.client = this.client_after_saved;
     }
+    this.animation_wait.$anime_show.emit(true);
     this.httpService.printClient(this.client).subscribe(client => {
+      this.animation_wait.$anime_show.emit(false);
       this.client_after_saved = client;
       this.print.print_open.emit(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
     }, error => {
+      this.animation_wait.$anime_show.emit(false);
       console.error(error);
     });
   }
@@ -297,10 +305,13 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     }
 
     this.subscribe_success_response();
+    this.animation_wait.$anime_show.emit(true);
     this.httpService.printClient(this.client).subscribe(client => {
+      this.animation_wait.$anime_show.emit(false);
       this.client_after_saved = client;
       this.emailSender.email_send(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
     }, error => {
+      this.animation_wait.$anime_show.emit(false);
       console.error(error);
     });
   }

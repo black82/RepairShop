@@ -5,6 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {AlertServiceService} from './alert-service.service';
 
+
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   currentRoute: string;
@@ -17,7 +18,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
-
     if (token) {
       request = request.clone({
           headers: request.headers.append('Authorization', 'Bearer ' + token)
@@ -38,19 +38,25 @@ export class TokenInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
-        const message = error.error.message;
+        const message = error?.error?.message;
         console.log('error--->>>', error);
-        if (error.error.message.includes('Expired or invalid JWT token')) {
-          error.error.status = 401;
-          localStorage.removeItem('token');
-          localStorage.setItem('navigate', this.currentRoute);
-          this.router.navigate(['client/sign-in']).then(r => r);
+        if (error?.error?.message) {
+          if (error?.error?.message.includes('Expired or invalid JWT token')) {
+            error.error.status = 401;
+            localStorage.clear();
+            localStorage.setItem('navigate', this.currentRoute);
+            this.router.navigate(['client/sign-in']).then(r => r);
+            return;
+          }
+
+          if (error?.error?.status === 401) {
+            localStorage.clear();
+            localStorage.setItem('navigate', this.currentRoute);
+            this.router.navigate(['client/sign-in']).then(r => r);
+            return;
+          }
         }
-        if (error.error.status === 401) {
-          localStorage.setItem('navigate', this.currentRoute);
-          this.router.navigate(['client/sign-in']).then(r => r);
-        }
-        this.alertService.error(null, message, false, false, '', error);
+        this?.alertService.error(null, message, false, false, '', error);
         return throwError(error);
       }));
   }

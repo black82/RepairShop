@@ -1,117 +1,112 @@
-* {
-  box-sizing: border-box
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+.loading {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #1ABC9C;
+  z-index: 99;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden !important;
-  opacity: 80%;
-  z-index: 100;
+  display: none;
 }
 
-@keyframes loader {
-  0% {
-    transform: rotate(-45deg)
-  }
-  50% {
-    transform: rotate(-135deg)
-  }
-  100% {
-    transform: rotate(-225deg)
-  }
-}
-
-@keyframes span-1 {
-  0% {
-    transform: translate(0);
-  }
-  50% {
-    transform: translate(-50px, 0);
-    border-color: #EE4D68
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-@keyframes span-2 {
-  0% {
-    transform: translate(0);
-  }
-  50% {
-    transform: translate(50px, 0);
-    border-color: #875678
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-@keyframes span-3 {
-  0% {
-    transform: translate(0);
-  }
-  50% {
-    transform: translate(0, -50px);
-    border-color: #FF9900
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-@keyframes span-4 {
-  0% {
-    transform: translate(0);
-  }
-  50% {
-    transform: translate(0, 50px);
-    border-color: #00E4F6
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-.loader {
-  margin-left: 50%;
-  margin-top: 15%;
-  width: 50px;
-  height: 50px;
-  position: relative;
-  animation: loader 2s infinite ease-in-out;
-}
-
-.loader span {
+.loading:after {
+  content: "";
   width: 50px;
   height: 50px;
   position: absolute;
+  top: -30px;
+  right: 0;
   left: 0;
-  top: 0;
-  border: 4px solid #0B1B48;
-
+  bottom: 0;
+  margin: auto;
+  border: 6px solid #f2f2f2;
+  border-top: 6px dotted #f2f2f2;
+  border-bottom: 6px dotted #f2f2f2;
+  border-radius: 50%;
+  animation: loading 2s infinite;
 }
 
-.loader span:nth-child(1) {
-  animation: span-1 2s ease-in-out infinite;
+.loading:before {
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: white;
+  content: "Loading...";
+  position: absolute;
+  top: 57%;
+  text-align: center;
+  right: 0;
+  left: 0;
+  margin: auto;
 }
 
-.loader span:nth-child(2) {
-  animation: span-2 2s ease-in-out infinite;
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
 }
 
-.loader span:nth-child(3) {
-  animation: span-3 2s ease-in-out infinite;
+.anime-hide {
+  -webkit-animation: slide-out-bck-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  animation: slide-out-bck-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  display: none;
 }
 
-.loader span:nth-child(4) {
-  animation: span-4 2s ease-in-out infinite;
+@-webkit-keyframes slide-out-bck-center {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    opacity: 1;
+
+  }
+  100% {
+    -webkit-transform: translateZ(-1100px);
+    transform: translateZ(-1100px);
+    opacity: 0;
+
+  }
 }
+
+@keyframes slide-out-bck-center {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    opacity: 1;
+
+  }
+  100% {
+    -webkit-transform: translateZ(-1100px);
+    transform: translateZ(-1100px);
+    opacity: 0;
+
+  }
+}
+
+.anime-start {
+  display: block;
+  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+

@@ -41,6 +41,7 @@ import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {EmailSenderService} from '../service/email-sender.service';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {SigPadService} from '../service/sig-pad.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 
 @Component({
@@ -85,7 +86,6 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   repair_output: Repair;
   show_client = false;
   formSubmitted = false;
-  client_after_saved: Client;
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
   id_repair: number;
@@ -98,10 +98,11 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
               private hidden_form: FormhidenService,
               private imageSender: ImageSenderService,
               private emailSender: EmailSenderService,
-              private sig_pad_service: SigPadService) {
+              private sig_pad_service: SigPadService,
+              private animation_wait: AnimeServiceService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.hidden_form.id_repair.subscribe(id => {
       this.id_repair = id;
     });
@@ -120,7 +121,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
 
   }
 
-  submitForm() {
+  submitForm(): void {
     if (!this.formClient.valid) {
       Object.keys(this.formClient.controls).forEach(key => {
         this.formClient.controls[key].markAllAsTouched();
@@ -133,17 +134,20 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
         , false, null, '', null);
     } else {
+      this.animation_wait.$anime_show.emit(true);
       this.httpService.saved_print_page(this.invoice).subscribe(() => {
+        this.animation_wait.$anime_show.emit(false);
         this.alert_service.success(null, 'The client received a device and create the repair procedure !!!', true, null, '');
         return;
       }, error => {
+        this.animation_wait.$anime_show.emit(false);
         console.error(error);
       });
 
     }
   }
 
-  createFormAfterClientCam() {
+  createFormAfterClientCam(): void {
     this.formClient = this.fb.group({
       return_date: [null, [Validators.required]],
       name_family_output: [this.client.family, [Validators.required]],
@@ -171,7 +175,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     });
   }
 
-  client_catch(client1) {
+  client_catch(client1): void {
     if (client1 as Client) {
       this.client = client1;
       this.show_client = true;
@@ -181,7 +185,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     }
   }
 
-  print_click() {
+  print_click(): void {
     if (!this.formClient.valid) {
       this.alert_service.warn('', 'Before sending the form ' +
         'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
@@ -190,16 +194,17 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       });
       return;
     }
-
     this.client = this.addRepairToClient(this.client);
-
+    this.animation_wait.$anime_show.emit(true);
     this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(device => {
+      this.animation_wait.$anime_show.emit(false);
       device.repairs = [];
       device.repairs.push(this.createClient());
       this.client.device = [];
       this.client.device.push(device);
       this.printService.print_open.emit(new PrintEntity(this.client, 2));
     }, error => {
+      this.animation_wait.$anime_show.emit(false);
       console.log(error);
     });
   }
@@ -225,7 +230,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     return this.repair_output;
   }
 
-  sign_pad_open() {
+  sign_pad_open(): void {
     if (!this.formClient.valid) {
       this.alert_service.warn('', 'Before sending the form ' +
         'to the Email please complete all the fields !!! Thank you. Try again.', false, false, '', null);
@@ -240,19 +245,19 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     });
   }
 
-  dismissed() {
+  dismissed(): void {
     this.alert_service.warn('', 'Sorry, you ' +
       'left the module.', true, false, '', null);
   }
 
-  animation_call() {
+  animation_call(): void {
     this.animationButtonForm();
     this.animationCheckBox();
     this.animationTitle();
     this.animationInput();
   }
 
-  animationButtonForm() {
+  animationButtonForm(): void {
     document.querySelectorAll('.button').forEach(button => {
       button.addEventListener('mouseenter', () => {
         if (this.formClient.valid) {
@@ -264,7 +269,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     });
   }
 
-  animationCheckBox() {
+  animationCheckBox(): void {
     document.querySelectorAll('.checkbox').forEach(checkbox => {
       checkbox.addEventListener('click', () => {
         if (!checkbox?.value) {
@@ -276,7 +281,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     });
   }
 
-  animationTitle() {
+  animationTitle(): void {
     document.querySelectorAll('fa-icon').forEach(title => {
       title.addEventListener('mouseenter', () => {
         if (!title.classList.contains('button-icon')) {
@@ -286,7 +291,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     });
   }
 
-  animationInput() {
+  animationInput(): void {
     document.querySelectorAll('label').forEach(label => {
       const icon = label.querySelector('fa-icon') as HTMLElement;
       const inputElement = label.querySelector('input');
@@ -304,7 +309,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
 
   }
 
-  submitFormAndSendEmail() {
+  submitFormAndSendEmail(): void {
     if (!this.formClient.valid) {
       this.alert_service.warn('', 'Before sending the form ' +
         'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
@@ -316,19 +321,21 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.subscribe_success_response();
 
     this.client = this.addRepairToClient(this.client);
-
+    this.animation_wait.$anime_show.emit(true);
     this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(device => {
+      this.animation_wait.$anime_show.emit(false);
       device.repairs = [];
       device.repairs.push(this.createClient());
       this.client.device = [];
       this.client.device.push(device);
       this.emailSender.email_send(new PrintEntity(this.client, 2, null, this.repair_output.repair_Id));
     }, error => {
+      this.animation_wait.$anime_show.emit(false);
       console.log(error);
     });
   }
 
-  subscribe_success_response() {
+  subscribe_success_response(): void {
     this.emailSender.email_sent_send_success.subscribe(() => {
       this.alert_service.success(null, 'The client' + this.client?.name +
         'received a device and create the repair procedure !!! Client Id '
@@ -342,19 +349,18 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       if (client.device[0].repairs.length === 1) {
         client.device[0].repairs[0] = this.createClient();
       } else {
-        const repairs = client.device[0].repairs.map(repair => {
+        client.device[0].repairs = client.device[0].repairs.map(repair => {
           if (repair.nowInRepair) {
             repair = this.createClient();
           }
           return repair;
         });
-        client.device[0].repairs = repairs;
       }
     }
     return client;
   }
 
-  private create_invoice(invoice: InvoiceToolsDto) {
+  private create_invoice(invoice: InvoiceToolsDto): void {
     this.invoice = invoice;
   }
 
@@ -365,12 +371,11 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.hidden_form.form_open.unsubscribe();
   }
 
-  private filterRepair() {
+  private filterRepair(): void {
     const device = this.client.device;
     device.forEach(value => {
         value.repairs.forEach(repair => {
-          // tslint:disable-next-line:triple-equals
-          if (repair.repair_Id != this.id_repair) {
+          if (!repair.repair_Id.toString().includes(this.id_repair.toString())) {
             device.splice(device.lastIndexOf(value), 1);
           }
         });

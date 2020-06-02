@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
@@ -11,7 +11,7 @@ import {FormhidenService} from '../service/formhiden.service';
   templateUrl: './searchform.component.html',
   styleUrls: ['./searchform.component.css']
 })
-export class SearchformComponent implements OnInit {
+export class SearchformComponent implements OnInit, OnDestroy {
   search = faSearch;
   @Input()
   textButton: string;
@@ -38,9 +38,7 @@ export class SearchformComponent implements OnInit {
 
   ngOnInit() {
     this.form_hide_Service.form_open.subscribe(value => {
-
       this.hideSearch = value;
-
     });
     this.hiddenFormAfterSubmitForm();
   }
@@ -65,6 +63,9 @@ export class SearchformComponent implements OnInit {
       case 'email': {
         this.searchByEmail();
         break;
+      }
+      case 'repair-id-all': {
+        this.searchByRepairIdAll();
       }
     }
 
@@ -120,6 +121,26 @@ export class SearchformComponent implements OnInit {
       this.alert_service.info(null, 'The value entered must be a Number.', false, false, null, null);
       return;
     }
+    this.client_service.searchByRepairIdAndRepairAcriv(this.formInput.controls.ob.value).subscribe(
+      client => {
+        this.client = client;
+        this.actionA.emit(this.client);
+      },
+      error => {
+        this.hideSearch = false;
+        this.alert_service.error(null,
+          'Unfortunately we could not find this client '
+          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
+        ;
+      });
+
+  }
+
+  searchByRepairIdAll() {
+    if (!Number(this.formInput.controls.ob.value)) {
+      this.alert_service.info(null, 'The value entered must be a Number.', false, false, null, null);
+      return;
+    }
     this.client_service.searchByRepairId(this.formInput.controls.ob.value).subscribe(
       client => {
         this.client = client;
@@ -148,5 +169,9 @@ export class SearchformComponent implements OnInit {
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
         ;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.form_hide_Service.form_open.subscribe();
   }
 }

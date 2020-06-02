@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {Router} from '@angular/router';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class SignUpComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private authService: HttpClien,
-              private alertService: AlertServiceService) {
+              private alertService: AlertServiceService,
+              private animation_wait: AnimeServiceService) {
   }
 
   ngOnInit() {
@@ -52,11 +54,14 @@ export class SignUpComponent implements OnInit {
       return;
     }
     this.deleteTacked();
+    this.animation_wait.$anime_show.emit(true);
     this.authService.register(form)
       .subscribe(res => {
+        this.animation_wait.$anime_show.emit(false);
         this.alertService.info(null, 'Before logging in, confirm the email.',
           true, true, 'client/sign-in', null);
       }, (err) => {
+        this.animation_wait.$anime_show.emit(false);
         console.log(err);
       });
   }
