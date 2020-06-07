@@ -80,13 +80,6 @@ export class HttpClien {
 
   }
 
-  searchClientById(param): Observable<Client> {
-    return this.http.get<Client>(this.apiUrl + 'api/search/id' + param)
-      .pipe(
-        catchError(this.errorHandler)
-      );
-  }
-
   login(data: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/auth/' + 'login', data)
       .pipe(
@@ -109,8 +102,14 @@ export class HttpClien {
   }
 
   sendEmailClient(invoice: InvoiceToolsDto): Observable<URL> {
-
     return this.http.post<URL>(this.apiUrl + 'admin/api/sample/email/attachment', invoice)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  sendSimpleEmailClient(invoice: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'admin/api/sample/email/sender', invoice)
       .pipe(
         catchError(this.errorHandler)
       );

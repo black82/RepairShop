@@ -33,6 +33,8 @@ import {SearchRepairIdComponent} from './component/serch-repair-id/search-repair
 import {LogServiceComponent} from './component/log-service/log-service.component';
 import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {StatisticComponent} from './component/statistic/statistic.component';
+import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     SigPadComponent,
     SearchRepairIdComponent,
     LogServiceComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    StatisticComponent,
+    EmailClientSendComponent
   ],
   imports: [
     NgbModule,

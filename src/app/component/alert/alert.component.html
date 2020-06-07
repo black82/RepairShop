@@ -10,7 +10,7 @@
     <p class="toast__type">Success</p>
     <p class="toast__message">{{alert?.message}}</p>
   </div>
-  <div class="toast__close">
+  <div (click)="removeAlert()" class="toast__close">
     <svg enable-background="new 0 0 15.642 15.642" viewBox="0 0 15.642 15.642"
          xmlns="http://www.w3.org/2000/svg">
       <path

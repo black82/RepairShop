@@ -11,6 +11,7 @@ import {SearchEmailComponent} from './component/search-email/search-email.compon
 import {SearchRepairIdComponent} from './component/serch-repair-id/search-repair-id.component';
 import {LogServiceComponent} from './component/log-service/log-service.component';
 import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboard.component';
+import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
 
 
 export const routers: Routes = [
@@ -24,6 +25,7 @@ export const routers: Routes = [
   {path: 'search/repair/id', component: SearchRepairIdComponent, canActivate: [AutGuardService]},
   {path: 'logs/server', component: LogServiceComponent, canActivate: [AutGuardService]},
   {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AutGuardService]},
+  {path: 'email/client/send', component: EmailClientSendComponent, canActivate: [AutGuardService]},
 ];
 
 @NgModule({
