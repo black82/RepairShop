@@ -14,8 +14,4 @@ export class PrintService {
   constructor() {
   }
 
-  print_page(print_client: PrintEntity) {
-    this.print_open.emit(print_client);
-  }
-
 }

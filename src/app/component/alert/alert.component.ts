@@ -52,16 +52,21 @@ export class AlertComponent implements OnInit {
         if (alert?.message === 'Sorry, you left the module.') {
           this.router.navigate(alert.location).then();
         }
-        this.initAlert();
-        if (document?.querySelector('.show--alert')) {
-          setTimeout(() => {
-            this.removeAlert();
-            clearTimeout();
-          }, 5000);
-        } else {
-          this.removeAlert();
-        }
+        this.timeout_remove_alert();
       });
+  }
+
+  timeout_remove_alert() {
+    if (!document.querySelector('.show--alert')) {
+      this.initAlert();
+      const timeout = setTimeout(() => {
+        this.removeAlert();
+        clearTimeout(timeout);
+      }, 10000);
+    } else {
+      this.removeAlert();
+      this.initAlert();
+    }
   }
 
   initAlert() {

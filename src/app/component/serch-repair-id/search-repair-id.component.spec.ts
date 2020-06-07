@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {SerchRepairIdComponent} from './serch-repair-id.component';
+import {SearchRepairIdComponent} from './search-repair-id.component';
 
 describe('SerchRepairIdComponent', () => {
-  let component: SerchRepairIdComponent;
-  let fixture: ComponentFixture<SerchRepairIdComponent>;
+  let component: SearchRepairIdComponent;
+  let fixture: ComponentFixture<SearchRepairIdComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SerchRepairIdComponent]
+      declarations: [SearchRepairIdComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SerchRepairIdComponent);
+    fixture = TestBed.createComponent(SearchRepairIdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

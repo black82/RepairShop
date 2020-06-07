@@ -8,7 +8,7 @@ import {SignUpComponent} from './component/sign-up/sign-up.component';
 import {SignInComponent} from './component/sign-in/sign-in.component';
 import {AutGuardService} from './component/service/aut-guard.service';
 import {SearchEmailComponent} from './component/search-email/search-email.component';
-import {SerchRepairIdComponent} from './component/serch-repair-id/serch-repair-id.component';
+import {SearchRepairIdComponent} from './component/serch-repair-id/search-repair-id.component';
 import {LogServiceComponent} from './component/log-service/log-service.component';
 import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboard.component';
 
@@ -21,7 +21,7 @@ export const routers: Routes = [
   {path: 'client/sign-up', component: SignUpComponent},
   {path: 'client/sign-in', component: SignInComponent},
   {path: 'search/email', component: SearchEmailComponent, canActivate: [AutGuardService]},
-  {path: 'search/repair/id', component: SerchRepairIdComponent, canActivate: [AutGuardService]},
+  {path: 'search/repair/id', component: SearchRepairIdComponent, canActivate: [AutGuardService]},
   {path: 'logs/server', component: LogServiceComponent, canActivate: [AutGuardService]},
   {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AutGuardService]},
 ];

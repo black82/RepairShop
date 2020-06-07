@@ -1,25 +1,27 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
 import {FormhidenService} from '../service/formhiden.service';
+import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'app-serch-repair-id',
-  templateUrl: './serch-repair-id.component.html',
-  styleUrls: ['./serch-repair-id.component.css']
+  selector: 'app-search-repair-id',
+  templateUrl: './search-repair-id.component.html',
+  styleUrls: ['./search-repair-id.component.css']
 })
-export class SerchRepairIdComponent implements OnInit, OnDestroy {
+export class SearchRepairIdComponent implements OnInit, OnDestroy {
 
-  nameForm = 'Search by Reapair Number';
   button = 'Search';
   client: Client;
   show_content = false;
+  nameForm = 'Search by Repair Number(ID)';
+  private form_open: Subscription;
 
 
   constructor(private hide_form: FormhidenService) {
   }
 
   ngOnInit() {
-    this.hide_form.form_open.subscribe(value => {
+    this.form_open = this.hide_form.form_open.subscribe(value => {
       this.show_content = value;
     });
   }
@@ -32,6 +34,8 @@ export class SerchRepairIdComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.hide_form.form_open.unsubscribe();
+    if (this.form_open) {
+      this.form_open.unsubscribe();
+    }
   }
 }

@@ -5,6 +5,7 @@ import {Client} from '../entity/ClientWeb';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {FormhidenService} from '../service/formhiden.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-searchform',
@@ -23,8 +24,9 @@ export class SearchformComponent implements OnInit, OnDestroy {
   client: Client;
   @Output()
   actionA: EventEmitter<Client> = new EventEmitter();
-  hideSearch = false;
   button: Element;
+  hidem_show_form_local: EventEmitter<any> = new EventEmitter();
+  private show_form: Subscription;
 
   constructor(private fb: FormBuilder,
               private client_service: HttpClien,
@@ -34,13 +36,14 @@ export class SearchformComponent implements OnInit, OnDestroy {
     this.formInput = this.fb.group({
       ob: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)])
     });
+
+
   }
 
   ngOnInit() {
-    this.form_hide_Service.form_open.subscribe(value => {
-      this.hideSearch = value;
+    this.show_form = this.hidem_show_form_local.subscribe(() => {
+      this.hiddenFormAfterSubmitForm();
     });
-    this.hiddenFormAfterSubmitForm();
   }
 
 
@@ -74,20 +77,8 @@ export class SearchformComponent implements OnInit, OnDestroy {
 
   hiddenFormAfterSubmitForm() {
     document.getElementById('show-button').style.opacity = '0';
-    const searchButton = document.querySelector('#search-button');
-    searchButton.addEventListener('click', () => {
-        setTimeout(() => {
-          if (this.hideSearch) {
-            document.querySelector('form').id = 'form-hide';
-            setTimeout(() => {
-              this.showSearchForm();
-            }, 500);
-          }
-        }, 500);
-
-
-      }
-    );
+    document.querySelector('form').id = 'form-hide';
+    this.showSearchForm();
   }
 
   showSearchForm() {
@@ -102,13 +93,19 @@ export class SearchformComponent implements OnInit, OnDestroy {
   }
 
   searchByTelephone() {
+    const value = this.formInput.controls.ob.value;
+    if (!this.phoneValidator(value)) {
+      this.alert_service.info(null, 'The value entered must be a Telethon Number.Example: +39123456123', false, false, null, null);
+      return;
+    }
     this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(
       client => {
+        this.hidem_show_form_local.emit();
         this.client = client;
         this.actionA.emit(this.client);
+
       },
       error => {
-        this.hideSearch = false;
         this.alert_service.error(null,
           'Unfortunately we could not find this client '
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
@@ -121,13 +118,13 @@ export class SearchformComponent implements OnInit, OnDestroy {
       this.alert_service.info(null, 'The value entered must be a Number.', false, false, null, null);
       return;
     }
-    this.client_service.searchByRepairIdAndRepairAcriv(this.formInput.controls.ob.value).subscribe(
+    this.client_service.searchByRepairIdAndRepairArhiv(this.formInput.controls.ob.value).subscribe(
       client => {
         this.client = client;
         this.actionA.emit(this.client);
+        this.hidem_show_form_local.emit();
       },
       error => {
-        this.hideSearch = false;
         this.alert_service.error(null,
           'Unfortunately we could not find this client '
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
@@ -145,9 +142,9 @@ export class SearchformComponent implements OnInit, OnDestroy {
       client => {
         this.client = client;
         this.actionA.emit(this.client);
+        this.hidem_show_form_local.emit();
       },
       error => {
-        this.hideSearch = false;
         this.alert_service.error(null,
           'Unfortunately we could not find this client '
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
@@ -157,13 +154,18 @@ export class SearchformComponent implements OnInit, OnDestroy {
   }
 
   searchByEmail() {
+    const email: string = this.formInput.controls.ob.value;
+    if (!this.emailValidator(email)) {
+      this.alert_service.info(null, 'The value entered must be a email.', false, false, null, null);
+      return;
+    }
     this.client_service.searchByEmail(this.formInput.controls.ob.value).subscribe(
       client => {
         this.client = client;
         this.actionA.emit(this.client);
+        this.hidem_show_form_local.emit();
       },
       error => {
-        this.hideSearch = false;
         this.alert_service.error(null,
           'Unfortunately we could not find this client '
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
@@ -171,7 +173,19 @@ export class SearchformComponent implements OnInit, OnDestroy {
       });
   }
 
+  emailValidator(email: string): boolean {
+    const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return EMAIL_REGEXP.test(email);
+  }
+
+  phoneValidator(phone: string): boolean {
+    const EMAIL_REGEXP = /^[0-9\-\+]{9,15}$/;
+    return EMAIL_REGEXP.test(phone);
+  }
+
   ngOnDestroy(): void {
-    this.form_hide_Service.form_open.subscribe();
+    if (this.show_form) {
+      this.show_form.unsubscribe();
+    }
   }
 }

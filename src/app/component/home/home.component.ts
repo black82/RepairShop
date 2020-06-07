@@ -20,7 +20,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.clickElementAnimation();
-    setTimeout(() => this.hidem_animation = false, 3000);
+    const timeout = setTimeout(() => {
+      this.hidem_animation = false;
+      clearTimeout(timeout);
+    }, 3000);
   }
 
   clickElementCentralIcon(elementList: NodeListOf<Element>) {

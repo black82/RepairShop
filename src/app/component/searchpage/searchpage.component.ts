@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
 import {FormhidenService} from '../service/formhiden.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-searchpage',
@@ -13,13 +14,13 @@ export class SearchpageComponent implements OnInit, OnDestroy {
   button = 'Search';
   client: Client;
   show_content = false;
-
+  form_open: Subscription;
 
   constructor(private hide_form: FormhidenService) {
   }
 
   ngOnInit() {
-    this.hide_form.form_open.subscribe(value => {
+    this.form_open = this.hide_form.form_open.subscribe(value => {
       this.show_content = value;
     });
   }
@@ -32,6 +33,9 @@ export class SearchpageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.hide_form.form_open.unsubscribe();
+    if (this.form_open) {
+      this.form_open.unsubscribe();
+    }
+
   }
 }

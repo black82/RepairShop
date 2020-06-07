@@ -43,6 +43,7 @@ import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {EmailSenderService} from '../service/email-sender.service';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-deviceinput',
@@ -91,6 +92,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
   showAnimation = false;
+  invoice_event: Subscription;
+  sig_pad_event: Subscription;
+  email_send_event: Subscription;
+  email_anime_event: Subscription;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
@@ -133,7 +138,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.animation_call();
-    this.print.invoice_make.subscribe(invoice => {
+    this.invoice_event = this.print.invoice_make.subscribe(invoice => {
       this.create_invoice(invoice);
     });
   }
@@ -278,10 +283,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.invoice = invoice;
   }
 
-  ngOnDestroy(): void {
-    this.print.invoice_make.unsubscribe();
-  }
-
   sign_pad_open() {
     if (!this.formClient.valid) {
       this.alert_service.warn('', 'Before sending the form ' +
@@ -292,7 +293,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       return;
     }
     this.sig_pad_service.open$.emit();
-    this.sig_pad_service.open$.subscribe(() => {
+    this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
       this.submitFormAndSendEmail();
     });
   }
@@ -318,7 +319,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   subscribe_success_response() {
     this.animation_end();
-    this.emailSender.email_sent_send_success.subscribe(() => {
+    this.email_send_event = this.emailSender.email_sent_send_success.subscribe(() => {
       this.alert_service.success(null, 'The client3' + this.client_after_saved.name +
         'received a device and create the repair procedure !!! Client Id '
         + this.client_after_saved.id, true, null, '');
@@ -327,10 +328,23 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   animation_end() {
-    this.emailSender.anime_question.subscribe(value => {
+    this.email_anime_event = this.emailSender.anime_question.subscribe(value => {
       this.showAnimation = value;
     });
   }
+
+  ngOnDestroy(): void {
+    if (this.invoice_event) {
+      this.invoice_event.unsubscribe();
+    }
+    if (this.sig_pad_event) {
+      this.sig_pad_event.unsubscribe();
+    }
+    if (this.email_send_event) {
+      this.email_send_event.unsubscribe();
+    }
+    if (this.email_anime_event) {
+      this.email_anime_event.unsubscribe();
+    }
+  }
 }
-
-

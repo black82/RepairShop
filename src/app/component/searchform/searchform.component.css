@@ -258,3 +258,7 @@
     transform: translateZ(0) rotateY(0);
   }
 }
+
+#show-button {
+  opacity: 0;
+}

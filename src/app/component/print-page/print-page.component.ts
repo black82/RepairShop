@@ -3,6 +3,7 @@ import {Client} from '../entity/ClientWeb';
 import {PrintService} from '../service/print.service';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -20,12 +21,13 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   id: string;
   invoice_tools: InvoiceToolsDto = new InvoiceToolsDto();
   print_entity: PrintEntity;
+  private print_open_event: Subscription;
 
   constructor(private print: PrintService) {
   }
 
   ngOnInit(): void {
-    this.print.print_open.subscribe(print => {
+    this.print_open_event = this.print.print_open.subscribe(print => {
       this.print_entity = print;
       this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
@@ -33,7 +35,10 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.name_test_out = [];
       this.check_type_print(print);
       this.check_test_OK(print.client_print);
-      setTimeout(() => this.printPage(print.client_print), 200);
+      const time = setTimeout(() => {
+        this.printPage(print.client_print);
+        clearTimeout(time);
+      }, 200);
 
     });
 
@@ -84,16 +89,19 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   printPage(client: Client): void {
 
     this.client = client;
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       const html = document.querySelector('.container-page');
       window.print();
       this.createInvoiceToPrintPage(html.innerHTML);
+      clearTimeout(timeout);
     }, 1000);
 
   }
 
   ngOnDestroy(): void {
-    this.print.print_open.unsubscribe();
+    if (this.print_open_event) {
+      this.print_open_event.unsubscribe();
+    }
   }
 
   check_test_OK_out(client: Client) {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {PrintEntity} from '../entity/Print_Pojo';
@@ -7,6 +7,7 @@ import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -24,8 +25,8 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   id: string;
   print_entity: PrintEntity;
   show_email_send = false;
-  observableInvoice: EventEmitter<InvoiceToolsDto> = new EventEmitter();
   images_sig: string[] = [];
+  private email_send_event: Subscription;
 
   constructor(private emailSender: EmailSenderService,
               private http: HttpClien,
@@ -37,7 +38,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.images_sig = this.sig_pad_service.image_sig;
-    this.emailSender.email_send_event.subscribe(print => {
+    this.email_send_event = this.emailSender.email_send_event.subscribe(print => {
       this.print_entity = print;
       this.client = print.client_print;
       this.id = this.id_repair(print.client_print);
@@ -139,8 +140,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.emailSender.email_send_event.unsubscribe();
-    this.observableInvoice.unsubscribe();
+    if (this.email_send_event) {
+      this.email_send_event.unsubscribe();
+    }
   }
 
   check_test_OK_out(client: Client) {

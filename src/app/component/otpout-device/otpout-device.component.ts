@@ -42,6 +42,7 @@ import {EmailSenderService} from '../service/email-sender.service';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -89,6 +90,11 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
   id_repair: number;
+  private email_event: Subscription;
+  private sig_pad_event: Subscription;
+  private invoice_mak_event: Subscription;
+  private form_open: Subscription;
+  private id_repair_event: Subscription;
 
   constructor(private fb: FormBuilder,
               private httpService: HttpClien,
@@ -103,19 +109,19 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.hidden_form.id_repair.subscribe(id => {
+    this.id_repair_event = this.hidden_form.id_repair.subscribe(id => {
       this.id_repair = id;
     });
-    this.hidden_form.form_open.subscribe(value => {
+    this.form_open = this.hidden_form.form_open.subscribe(value => {
       this.show_client = value;
     });
-    this.printService.invoice_make.subscribe(invoice => {
+    this.invoice_mak_event = this.printService.invoice_make.subscribe(invoice => {
       this.create_invoice(invoice);
     });
-    setInterval(() => {
+    const interval = setInterval(() => {
       if (this.show_client) {
         this.animation_call();
-        clearInterval();
+        clearInterval(interval);
       }
     }, 300);
 
@@ -240,7 +246,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       return;
     }
     this.sig_pad_service.open$.emit();
-    this.sig_pad_service.open$.subscribe(() => {
+    this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
       this.submitFormAndSendEmail();
     });
   }
@@ -336,7 +342,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   }
 
   subscribe_success_response(): void {
-    this.emailSender.email_sent_send_success.subscribe(() => {
+    this.email_event = this.emailSender.email_sent_send_success.subscribe(() => {
       this.alert_service.success(null, 'The client' + this.client?.name +
         'received a device and create the repair procedure !!! Client Id '
         + this.client?.id, true, null, '');
@@ -365,10 +371,21 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.emailSender.email_sent_send_success.unsubscribe();
-    this.sig_pad_service.open$.unsubscribe();
-    this.printService.invoice_make.unsubscribe();
-    this.hidden_form.form_open.unsubscribe();
+    if (this.email_event) {
+      this.email_event.unsubscribe();
+    }
+    if (this.sig_pad_event) {
+      this.sig_pad_event.unsubscribe();
+    }
+    if (this.invoice_mak_event) {
+      this.invoice_mak_event.unsubscribe();
+    }
+    if (this.form_open) {
+      this.form_open.unsubscribe();
+    }
+    if (this.id_repair_event) {
+      this.id_repair_event.unsubscribe();
+    }
   }
 
   private filterRepair(): void {

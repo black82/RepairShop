@@ -29,7 +29,7 @@ import {NgxDropzoneModule} from 'ngx-dropzone';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {SigPadComponent} from './component/sig-pad/sig-pad.component';
-import {SerchRepairIdComponent} from './component/serch-repair-id/serch-repair-id.component';
+import {SearchRepairIdComponent} from './component/serch-repair-id/search-repair-id.component';
 import {LogServiceComponent} from './component/log-service/log-service.component';
 import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -56,7 +56,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     DragfileComponent,
     EmailModalComponent,
     SigPadComponent,
-    SerchRepairIdComponent,
+    SearchRepairIdComponent,
     LogServiceComponent,
     AdminDashboardComponent
   ],

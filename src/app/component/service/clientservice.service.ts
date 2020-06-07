@@ -43,7 +43,7 @@ export class HttpClien {
       );
   }
 
-  searchByRepairIdAndRepairAcriv(repairId: string): Observable<Client> {
+  searchByRepairIdAndRepairArhiv(repairId: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/number', {
       params: new HttpParams().set('repair', repairId)
     })

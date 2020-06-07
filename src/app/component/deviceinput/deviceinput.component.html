@@ -38,7 +38,7 @@
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number.dirty || formClient.controls.telephone_number.touched)
            && formClient.controls.telephone_number.invalid && formClient.controls.telephone_number.errors}"
                  class="input-1" formControlName="telephone_number"
-                 type="tel">
+                 pattern="^[0-9\-\+]{9,15}$" type="tel">
         </label>
 
         <label><span class="input-title">Address</span>
