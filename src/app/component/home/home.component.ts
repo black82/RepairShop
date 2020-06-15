@@ -1,24 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
 import {faSignInAlt} from '@fortawesome/free-solid-svg-icons';
+import {AdminServiceService} from '../service/admin-service.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   search = faSearch;
   return = faSignOutAlt;
   entering = faSignInAlt;
   hidem_animation = true;
+  admin = false;
+  private subscribe_admin: Subscription;
 
-  constructor() {
+  constructor(private adminService: AdminServiceService) {
   }
 
   ngOnInit() {
+    const view = localStorage.getItem('roles');
+    if (view) {
+      this.admin = true;
+    }
+    this.subscribe_admin = this.adminService.$admin_show.subscribe(value => {
+      this.showAdminPage(value);
+    });
     this.clickElementAnimation();
     const timeout = setTimeout(() => {
       this.hidem_animation = false;
@@ -42,6 +53,10 @@ export class HomeComponent implements OnInit {
       });
     });
 
+  }
+
+  showAdminPage(value) {
+    this.admin = value;
   }
 
   clickElementAnimation() {
@@ -68,9 +83,15 @@ export class HomeComponent implements OnInit {
 
   tooltipAnimation() {
     document.querySelectorAll('.tooltip').forEach(tooltip => {
-      tooltip.addEventListener('mouseenter', evt => {
+      tooltip.addEventListener('mouseenter', () => {
         tooltip.classList.add('animation-tooltip');
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscribe_admin) {
+      this.subscribe_admin.unsubscribe();
+    }
   }
 }

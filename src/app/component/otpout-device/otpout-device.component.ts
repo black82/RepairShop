@@ -224,7 +224,9 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       formData.wi_fi_output, formData.microphone_output, formData.sim_output,
       formData.keyboard_output, formData.camera_output);
     this.repair_output = new Repair(this.client.device[0].repairs[0].repair_Id,
-      this.client.device[0].repairs[0].date_to_enter, this.formClient.controls.return_date.value,
+      this.client.device[0].repairs[0].date_to_enter,
+      this.client.device[0].repairs[0].exp_complet_date,
+      this.formClient.controls.return_date.value,
       this.formClient.controls.defect_output.value,
       this.formClient.controls.deposit_output.value,
       this.formClient.controls.price_output.value,

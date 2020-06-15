@@ -1,6 +1,6 @@
 <div *ngIf="show_email_send" class="modalDialog modal-container" id="openModal-about">
   <div>
-    <a class="close" href="#close" title="Close">X</a>
+    <a (click)="dismiss()" class="close" title="Close"><span class="x">X</span></a>
     <div class="container-page">
       <div class="head-doc" style=";
    margin-top: 25px;float: left;width: 100%; display: inline;">
@@ -17,9 +17,8 @@
   font-weight: 500;color: #c54040">Riparazione</h1>
             <p style="font-size: 8pt;  color:#c54040"><strong>{{'Nr. ' + id}}</strong></p>
             <p style="font-size: 8pt;margin: 3px;">info@rfvtechnology.eu</p>
-            <p style="font-size: 8pt;margin: 3px;">Nebro Italia(BG) , 24027</p>
+            <p style="font-size: 8pt;margin: 3px;">Nembro Italia(BG) , 24027</p>
             <p style="font-size: 8pt;margin: 3px;">Via Garibaldi , 6/A</p>
-            <p style="font-size: 8pt;margin: 3px;">Nebro Bergamo, 24027</p>
           </div>
         </div>
       </div>
@@ -136,7 +135,7 @@
           <div style="font-size: 8pt; margin: 3px;color: #c54040;
   border-bottom: solid black 1pt;">Dichiaro di essere d'accordo con le condizioni
             stabilite in questo
-            documento. Per quello firmo. Nebro - {{date | date:'dd/MM/yyyy'}}
+            documento. Per quello firmo. Nembro - {{date | date:'dd/MM/yyyy'}}
             <div class="sig_container" style=" float: left;
    width: 100%; display: inline-block">
               <div class="staff-container" style="float: left; width:50%;">

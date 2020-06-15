@@ -6,6 +6,7 @@ import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {FormhidenService} from '../service/formhiden.service';
 import {Subscription} from 'rxjs';
+import {Repair} from '../entity/Repair';
 
 @Component({
   selector: 'app-searchform',
@@ -24,6 +25,8 @@ export class SearchformComponent implements OnInit, OnDestroy {
   client: Client;
   @Output()
   actionA: EventEmitter<Client> = new EventEmitter();
+  @Output()
+  actionB: EventEmitter<Repair> = new EventEmitter();
   button: Element;
   hidem_show_form_local: EventEmitter<any> = new EventEmitter();
   private show_form: Subscription;
@@ -69,6 +72,11 @@ export class SearchformComponent implements OnInit, OnDestroy {
       }
       case 'repair-id-all': {
         this.searchByRepairIdAll();
+        break;
+      }
+      case 'repair-id-extend': {
+        this.searchRepairByIdRepair();
+        break;
       }
     }
 
@@ -171,6 +179,25 @@ export class SearchformComponent implements OnInit, OnDestroy {
           + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
         ;
       });
+  }
+
+  searchRepairByIdRepair() {
+    if (!Number(this.formInput.controls.ob.value)) {
+      this.alert_service.info(null, 'The value entered must be a Number.', false, false, null, null);
+      return;
+    }
+    this.client_service.searchRepairByRepairId(this.formInput.controls.ob.value).subscribe(
+      repair => {
+        this.actionB.emit(repair);
+        this.hidem_show_form_local.emit();
+      },
+      error => {
+        this.alert_service.error(null,
+          'Unfortunately we could not find this client '
+          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
+        ;
+      });
+
   }
 
   emailValidator(email: string): boolean {

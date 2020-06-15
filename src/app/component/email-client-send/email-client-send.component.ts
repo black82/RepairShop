@@ -17,6 +17,7 @@ export class EmailClientSendComponent implements OnInit {
   emailSendForm: FormGroup;
   invoice: InvoiceToolsDto = new InvoiceToolsDto();
   formSubmitted: boolean;
+  isAdmin = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -26,6 +27,22 @@ export class EmailClientSendComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkAuth();
+  }
+
+  checkAuth() {
+    const item = localStorage.getItem('token');
+    if (item) {
+      this.httpClient.isAdmin(item).subscribe(value => {
+        this.isAdmin = value;
+      }, error => {
+        console.log(error);
+      });
+    }
+    this.createForm();
+  }
+
+  createForm(): void {
     this.emailSendForm = this.formBuilder.group({
 
       email: [null, [Validators.required, Validators.email,

@@ -6,7 +6,7 @@
           <i class="icon icon-envelope"></i>
           <span class="hidden">Email </span>
           <span *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.value!==null"
-                class="error-message"> {{'  ' + 'Email is a required field.'}}</span>
+                class="error-message"> {{'  ' + '*required field'}}</span>
         </label>
         <input class="form__input" formControlName="email" id="login__username" name="email" placeholder="Email"
                required
@@ -17,9 +17,9 @@
           <i class="icon icon-user"></i>
           <span class="hidden">Full Name</span>
           <span *ngIf="registerForm.controls.fullName.invalid && registerForm.controls.fullName.value!==null "
-                class="error-message">Name is a required field.
+                class="error-message">*required field
           </span></label>
-        <input class="form__input" formControlName="fullName" name="fullName"
+        <input class="form__input" formControlName="fullName" id="login__family" name="fullName"
                placeholder="Full Name" type="text">
       </div>
       <div class="form__field" tooltip="Min. lents 4 Max 10.">
@@ -27,7 +27,7 @@
           <i class="icon icon-lock"></i>
           <span class="hidden">Password</span>
           <span *ngIf="registerForm.controls.password.invalid&& registerForm.controls.password.value!==null"
-                class="error-message"> {{'  ' + 'Password is a required field.'}}</span>
+                class="error-message"> {{'  ' + '*required field'}}</span>
         </label>
         <input class="form__input" formControlName="password" id="login__password" name="password"
                placeholder="Password"

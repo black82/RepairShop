@@ -13,7 +13,7 @@ import {AnimeServiceService} from '../service/anime-service.service';
 })
 export class SignUpComponent implements OnInit {
   registerForm: FormGroup;
-  messagePassword = 'Password is a required field.';
+  messagePassword = '*required field';
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -96,15 +96,14 @@ export class SignUpComponent implements OnInit {
         this.messagePassword = 'Passwords are not the same.';
         matchingControl.setErrors({mustMatch: true});
       } else {
-        this.messagePassword = 'Confirm Password is a required field.';
+        this.messagePassword = '*required field';
         matchingControl.setErrors(null);
       }
     };
   }
 
   deleteTacked() {
-    localStorage.removeItem('is_login');
-    return localStorage.removeItem('token');
+    this.authService.logout();
   }
 }
 

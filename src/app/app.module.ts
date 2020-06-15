@@ -35,6 +35,8 @@ import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboa
 import {MatGridListModule} from '@angular/material/grid-list';
 import {StatisticComponent} from './component/statistic/statistic.component';
 import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
+import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.component';
+import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import {EmailClientSendComponent} from './component/email-client-send/email-clie
     LogServiceComponent,
     AdminDashboardComponent,
     StatisticComponent,
-    EmailClientSendComponent
+    EmailClientSendComponent,
+    DiviceTumorowComponent,
+    ExtendRepairComponent
   ],
   imports: [
     NgbModule,

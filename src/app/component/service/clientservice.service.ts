@@ -6,17 +6,19 @@ import {Client} from '../entity/ClientWeb';
 import {Repair} from '../entity/Repair';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Device} from '../entity/Device';
+import {AdminServiceService} from './admin-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClien {
-  redirectUrl: string;
+  // redirectUrl: string;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
 
   apiUrl = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private adminService: AdminServiceService) {
   }
 
   printClient(client: Client): Observable<Client> {
@@ -36,11 +38,10 @@ export class HttpClien {
   searchByTelephoneNumber(telephone: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/number', {
       params: new HttpParams().set('telephone', telephone)
-    })
-      .pipe(
-        catchError(
-          this.errorHandler)
-      );
+    }).pipe(
+      catchError(
+        this.errorHandler)
+    );
   }
 
   searchByRepairIdAndRepairArhiv(repairId: string): Observable<Client> {
@@ -55,20 +56,26 @@ export class HttpClien {
   searchByRepairId(repairId: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/repair/number', {
       params: new HttpParams().set('id', repairId)
-    })
-      .pipe(
-        catchError(this.errorHandler)
-      );
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  searchRepairByRepairId(repairId: string): Observable<Repair> {
+    return this.http.get<Repair>(this.apiUrl + 'api/search/repair/id', {
+      params: new HttpParams().set('id', repairId)
+    }).pipe(
+      catchError(this.errorHandler)
+    );
   }
 
   searchByEmail(email: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/email', {
       params: new HttpParams().set('email', email)
-    })
-      .pipe(
-        catchError(
-          this.errorHandler
-        ));
+    }).pipe(
+      catchError(
+        this.errorHandler
+      ));
 
   }
 
@@ -85,6 +92,7 @@ export class HttpClien {
       .pipe(
         tap(() => {
           localStorage.setItem('is_login', new Date(new Date().getTime() + +3600 * 1000).toString());
+
         }),
         catchError(this.errorHandler)
       );
@@ -92,6 +100,7 @@ export class HttpClien {
   }
 
   logout(): void {
+    this.adminService.$admin_show.emit(false);
     localStorage.clear();
   }
 
@@ -116,11 +125,29 @@ export class HttpClien {
   }
 
   logGetHtml(): Observable<string> {
-    return this.http.get(this.apiUrl + 'web/logs', {
+    return this.http.get(this.apiUrl + 'admin/web/logs', {
       responseType: 'text'
     }).pipe(
       catchError(this.errorHandler)
     );
+  }
+
+  list_preparing_device(): Observable<Array<Client>> {
+    return this.http.get<Array<Client>>(this.apiUrl + 'admin/api/device/preparing').pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  isAdmin(token: string): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + 'admin/api/' + 'check/role/user', token)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  extendDateRepair(repair: Repair): Observable<any> {
+    return this.http.post<boolean>(this.apiUrl + 'admin/api/' + 'extend/date/repair', repair)
+      .pipe(
+        catchError(this.errorHandler));
   }
 
   errorHandler(error) {
@@ -143,4 +170,6 @@ export class HttpClien {
     }
     return throwError(error);
   }
+
+
 }

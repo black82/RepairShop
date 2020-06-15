@@ -61,7 +61,7 @@ export class SignInComponent implements OnInit {
         if (res.token) {
           if (res.roles) {
             localStorage.setItem('roles', res.roles);
-            this.admin.$admin_show.emit();
+            this.admin.$admin_show.emit(true);
           }
           const element = document.querySelector('.close') as HTMLElement;
           localStorage.setItem('token', res.token);
@@ -111,8 +111,7 @@ export class SignInComponent implements OnInit {
   }
 
   deleteTacked() {
-    localStorage.removeItem('is_login');
-    return localStorage.removeItem('token');
+    this.authService.logout();
   }
 }
 

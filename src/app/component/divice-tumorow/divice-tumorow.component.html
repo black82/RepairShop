@@ -1,0 +1,32 @@
+<div class="container-body">
+  <div *ngIf="isAdmin" class="button-send">
+    <a (click)="get_list_client()" class="button button-small" type="submit"><span> <fa-icon
+      [icon]="save" class="button-icon"></fa-icon> Get Device</span></a>
+  </div>
+  <div tooltip="Compile all fields are required.">
+    <p *ngIf="!notdevice" class="title-form">Preparing the device for tomorrow</p>
+  </div>
+  <table *ngIf="show_devices" class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Repair Id</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Model</th>
+      <th scope="col">Defect</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let element of client_array; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{element.device[0].repairs[0].repair_Id}}</td>
+      <td>{{element.name}}</td>
+      <td>{{element.family}}</td>
+      <td>{{element.device[0].model}}</td>
+      <td>{{element.device[0].repairs[0].defect}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <p *ngIf="notdevice" class="title-form">I don't have a device under repair that needs to be ready tomorrow</p>
+</div>

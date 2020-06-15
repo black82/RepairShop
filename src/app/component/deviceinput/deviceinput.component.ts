@@ -152,7 +152,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input);
-    this.repair = new Repair(null, formData.date_to_enter, null, formData.defect,
+    this.repair = new Repair(null, formData.date_to_enter, formData.date_exit, null, formData.defect,
       formData.deposit, formData.price, null, null, true,
       this.inputTest, null, formData.note, this.repairFileStorage);
     this.device = new Device(null, formData.model, formData.state_of_use,

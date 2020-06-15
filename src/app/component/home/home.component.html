@@ -6,12 +6,12 @@
           <div class="box">
             <div class="test">
               <div class="tooltip" tooltip="Device repair model entry.">
-                <h3><a class="icon icon-cloud-upload  icon-animation" href="/input/client/device"
+                <h3><a class="icon icon-cloud-upload  icon-animation" routerLink="/input/client/device"
                        id="icon1"></a></h3>
               </div>
             </div>
             <div class="box-empty"></div>
-            <a class="button button-small" href="/input/client/device"><span><fa-icon
+            <a class="button button-small" routerLink="/input/client/device"><span><fa-icon
               [icon]="entering"
               class="icon-animation"></fa-icon>Entering</span></a>
           </div>
@@ -19,11 +19,11 @@
         <div class="column2">
           <div class="box">
             <div class="tooltip" tooltip="Returning the device to the client">
-              <h3><a class="icon icon-cloud-download  icon-animation" href="/output/client/device"
+              <h3><a class="icon icon-cloud-download  icon-animation" routerLink="/output/client/device"
                      id="icon2"></a></h3>
             </div>
             <div class="box-empty"></div>
-            <a class="button button-small" href="/output/client/device"><span><fa-icon
+            <a class="button button-small" routerLink="/output/client/device"><span><fa-icon
               [icon]="return"
               class="icon-animation"></fa-icon>Returning</span></a>
           </div>
@@ -31,11 +31,11 @@
         <div class="column3">
           <div class="box">
             <div class="tooltip" tooltip="Search by phone number">
-              <h3><a class="icon icon-search icon-animation" href="/search/telephone/number"
+              <h3><a class="icon icon-search icon-animation" routerLink="/search/telephone/number"
                      id="icon3"></a></h3>
             </div>
             <div class="box-empty"></div>
-            <a class="button button-small" href="/search/telephone/number"><span><fa-icon
+            <a class="button button-small" routerLink="/search/telephone/number"><span><fa-icon
               [icon]="search"></fa-icon> Search</span></a>
           </div>
         </div>
@@ -44,13 +44,13 @@
     <div id="wrapper2">
       <div id="tools">
         <div class="tools">
-          <a class="icon icon-mobile-phone icon-animation" href="/input/client/device"></a>
-          <a class="icon icon-check icon-animation" href="/output/client/device"></a>
-          <a class="icon icon-search icon-animation" href="/search/telephone/number"></a>
-          <a class="icon icon-wrench icon-animation" href="#"></a>
-          <a class="icon icon-align-right icon-animation" href="#"></a>
-          <a class="icon icon-filter icon-animation" href="#"></a>
-          <a class="icon icon-lock icon-animation" href="/client/sign-in"></a>
+          <a class="icon icon-mobile-phone icon-animation" routerLink="/input/client/device"></a>
+          <a class="icon icon-check icon-animation" routerLink="/output/client/device"></a>
+          <a class="icon icon-search icon-animation" routerLink="/search/telephone/number"></a>
+          <a *ngIf="admin" class="icon icon-wrench icon-animation" routerLink="/admin/dashboard"></a>
+          <a *ngIf="admin" class="icon icon-align-right icon-animation" routerLink="#"></a>
+          <a *ngIf="admin" class="icon icon-filter icon-animation" routerLink="#"></a>
+          <a class="icon icon-lock icon-animation" routerLink="/client/sign-in"></a>
         </div>
       </div>
     </div>

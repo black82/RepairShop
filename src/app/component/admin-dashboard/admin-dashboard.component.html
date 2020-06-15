@@ -1,11 +1,11 @@
 <div class="container-body">
-  <div class="container-1" id="page">
+  <div *ngIf="isAdmin" class="container-1" id="page">
     <div class="container-2" id="portfolio">
       <div class="column1">
         <div class="box">
           <div class="test">
             <p class="title-form">Recent server log.</p>
-            <a class="icon icon-cogs  icon-animation" href="/logs/server"
+            <a class="icon icon-cogs  icon-animation" routerLink="/logs/server"
                id="icon_logs"></a>
           </div>
         </div>
@@ -14,7 +14,7 @@
         <div class="box">
           <div class="test">
             <p class="title-form">Send an email Client.</p>
-            <a class="icon icon-envelope  icon-animation" href="/email/client/send"
+            <a class="icon icon-envelope  icon-animation" routerLink="/email/client/send"
                id="icon_mail"></a>
           </div>
         </div>
@@ -25,7 +25,7 @@
             <div>
               <p class="title-form">Device ready tomorrow.</p>
             </div>
-            <a class="icon icon-laptop  icon-animation" href="/logs/server"
+            <a class="icon icon-laptop  icon-animation" routerLink="/device/preparation"
                id="icon_curent_device"></a>
           </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="box">
           <div class="test">
             <p class="title-form">Extension repair term.</p>
-            <a class="icon icon-exchange  icon-animation" href="/logs/server"
+            <a class="icon icon-exchange  icon-animation" routerLink="/repair/extend"
                id="icon_batch"></a>
           </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="box">
           <div class="test">
             <p class="title-form">User Management.</p>
-            <a class="icon icon-user  icon-animation" href="/logs/server"
+            <a class="icon icon-user  icon-animation" routerLink="/logs/server"
                id="icon_user"></a>
           </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="box">
           <div class="test">
             <p class="title-form">Repair statistics.</p>
-            <a class="icon icon-align-right icon-animation" href="/logs/server"
+            <a class="icon icon-align-right icon-animation" routerLink="/logs/server"
                id="icon_statistic"></a>
           </div>
         </div>

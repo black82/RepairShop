@@ -12,6 +12,8 @@ import {SearchRepairIdComponent} from './component/serch-repair-id/search-repair
 import {LogServiceComponent} from './component/log-service/log-service.component';
 import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboard.component';
 import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
+import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.component';
+import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
 
 
 export const routers: Routes = [
@@ -26,6 +28,8 @@ export const routers: Routes = [
   {path: 'logs/server', component: LogServiceComponent, canActivate: [AutGuardService]},
   {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AutGuardService]},
   {path: 'email/client/send', component: EmailClientSendComponent, canActivate: [AutGuardService]},
+  {path: 'device/preparation', component: DiviceTumorowComponent, canActivate: [AutGuardService]},
+  {path: 'repair/extend', component: ExtendRepairComponent, canActivate: [AutGuardService]},
 ];
 
 @NgModule({

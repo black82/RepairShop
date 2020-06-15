@@ -109,17 +109,18 @@ input[type='submit'] {
   -ms-flex: 1;
   flex: 1;
   background: rgb(232, 240, 254) !important;
-  box-shadow: inset 0 3px 0 0 #BBB,
-  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
-  3px 0 0 2px #FFFFFF,
-  3px 3px 0 3px #BBB,
-  2px 8px 5px 5px rgba(0, 0, 0, 0.3),
-  3px -1px 1px 5px rgba(0, 0, 0, 0.05) !important;
+  /*box-shadow: inset 0 3px 0 0 #BBB,*/
+  /*inset 0 3px 0 3px rgba(0, 0, 0, 0.1),*/
+  /*3px 0 0 2px #FFFFFF,*/
+  /*3px 3px 0 3px #BBB,*/
+  /*2px 8px 5px 5px rgba(0, 0, 0, 0.3),*/
+  /*3px -1px 1px 5px rgba(0, 0, 0, 0.05) !important;*/
+  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 .form__input:invalid {
   background: lightcoral !important;
-  width: 200px !important;
+  width: 200px;
 }
 
 .login label,
@@ -135,12 +136,14 @@ input[type='submit'] {
   border-top-right-radius: 0;
   padding-left: 20px;
   padding-right: 20px;
-  box-shadow: inset 0 3px 0 0 #BBB,
-  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
-  0 0 0 4px #FFFFFF,
-  0 3px 0 3px #BBB,
-  0 8px 5px 5px rgba(0, 0, 0, 0.3),
-  0 -1px 1px 5px rgba(0, 0, 0, 0.05);
+  /*box-shadow: inset 0 3px 0 0 #BBB,*/
+  /*inset 0 3px 0 3px rgba(0, 0, 0, 0.1),*/
+  /*0 0 0 4px #FFFFFF,*/
+  /*0 3px 0 3px #BBB,*/
+  /*0 8px 5px 5px rgba(0, 0, 0, 0.3),*/
+  /*0 -1px 1px 5px rgba(0, 0, 0, 0.05);*/
+  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
+
 }
 
 .login input[type='password'],
@@ -155,12 +158,14 @@ input[type='submit'] {
 .login input[type='text']:focus,
 .login input[type='text']:hover {
   background-color: #1ABC9C;
-  box-shadow: inset 0 3px 0 0 #BBB,
-  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
-  0 0 0 4px #FFFFFF,
-  0 3px 0 3px #BBB,
-  0 8px 5px 5px rgba(0, 0, 0, 0.3),
-  0 -1px 1px 5px rgba(0, 0, 0, 0.05);
+  /*box-shadow: inset 0 3px 0 0 #BBB,*/
+  /*inset 0 3px 0 3px rgba(0, 0, 0, 0.1),*/
+  /*0 0 0 4px #FFFFFF,*/
+  /*0 3px 0 3px #BBB,*/
+  /*0 8px 5px 5px rgba(0, 0, 0, 0.3),*/
+  /*0 -1px 1px 5px rgba(0, 0, 0, 0.05);*/
+  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
+
 }
 
 .login input[type='submit'] {

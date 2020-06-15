@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faHome} from '@fortawesome/free-solid-svg-icons';
 import {HttpClien} from '../service/clientservice.service';
 import {AdminServiceService} from '../service/admin-service.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,31 +13,34 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   home = faHome;
   admin = false;
+  private subscribe_admin: Subscription;
+
 
   constructor(private http: HttpClien,
               private adminService: AdminServiceService) {
   }
 
   ngOnInit() {
-    const item = localStorage.getItem('roles');
-    if (item && item.length === 5) {
+    const view = localStorage.getItem('roles');
+    if (view) {
       this.admin = true;
     }
-    this.adminService.$admin_show.subscribe(() => {
-      this.showAdminPage();
+    this.subscribe_admin = this.adminService.$admin_show.subscribe(value => {
+      this.showAdminPage(value);
     });
   }
 
   logout() {
-    this.admin = false;
     this.http.logout();
   }
 
-  showAdminPage() {
-    this.admin = true;
+  showAdminPage(value) {
+    this.admin = value;
   }
 
   ngOnDestroy(): void {
-    this.adminService.$admin_show.unsubscribe();
+    if (this.subscribe_admin) {
+      this.subscribe_admin.unsubscribe();
+    }
   }
 }

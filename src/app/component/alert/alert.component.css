@@ -190,9 +190,3 @@ svg {
     opacity: 1;
   }
 }
-
-.toast__close:hover {
-  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
-  height: 20px;
-  width: 20px;
-}
