@@ -27,6 +27,8 @@ export class AlertComponent implements OnInit {
   color_icon: any;
   info = faInfoCircle;
   error_status: number;
+  alert_closet = false;
+  private timeout: number;
 
 
   constructor(private alertService: AlertServiceService, private router: Router) {
@@ -59,10 +61,10 @@ export class AlertComponent implements OnInit {
   timeout_remove_alert() {
     if (!document.querySelector('.show--alert')) {
       this.initAlert();
-      const timeout = setTimeout(() => {
-        this.removeAlert();
-        clearTimeout(timeout);
-      }, 10000);
+      // this.timeout = setTimeout(() => {
+      //   this.removeAlert();
+      //   clearTimeout(this.timeout);
+      // }, 10000);
     } else {
       this.removeAlert();
       this.initAlert();
@@ -85,6 +87,10 @@ export class AlertComponent implements OnInit {
     if (this.alert.keepAfterRouteChange) {
       this.rout_Out_Alert(this.alert.location);
     }
+  }
+
+  closeBaton() {
+    this.timeout = 0;
   }
 
   public text_alert_initialized(): void {

@@ -5,6 +5,8 @@ import {HttpClien} from '../service/clientservice.service';
 import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {faMobileAlt} from '@fortawesome/free-solid-svg-icons/faMobileAlt';
+import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
+import {ExtendDateService} from '../service/extend-date.service';
 
 @Component({
   selector: 'app-divice-tumorow',
@@ -19,9 +21,12 @@ export class DiviceTumorowComponent implements OnInit {
   save = faMobileAlt;
   notdevice = false;
   isAdmin = false;
+  showRepair = false;
+  date = faCalendarPlus;
 
   constructor(private animation_wait: AnimeServiceService,
-              private httpService: HttpClien) {
+              private httpService: HttpClien,
+              private extend_date_service: ExtendDateService) {
   }
 
   ngOnInit(): void {
@@ -75,8 +80,29 @@ export class DiviceTumorowComponent implements OnInit {
         });
       }
     });
+    clients = this.check_activ_device(clients);
     return clients;
   }
 
 
+  extendDate(client: Client) {
+    this.repair = client.device[0].repairs[0];
+    this.extend_date_service.$repair_extend_date_modal.emit(this.repair);
+  }
+
+  private check_activ_device(clients: Client[]) {
+    let device_acyiv = true;
+    clients.forEach(client => {
+      if (client.device.length > 0) {
+        device_acyiv = false;
+      } else {
+        clients.splice(clients.indexOf(client), 1);
+      }
+    });
+    if (device_acyiv) {
+      return [];
+    } else {
+      return clients;
+    }
+  }
 }

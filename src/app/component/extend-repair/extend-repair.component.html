@@ -1,57 +1,5 @@
 <div class="container-body">
   <app-searchform (actionB)="repair_catch($event)" [textButton]="button" [titleForm]="nameForm"
                   [typeForm]="'repair-id-extend'"></app-searchform>
-  <div *ngIf="repair" class="container-body">
-    <table class="table table-sm">
-      <thead>
-      <tr>
-        <th scope="col">Repair Id</th>
-        <th scope="col">Device Defect</th>
-        <th scope="col">Repair Started Repair</th>
-        <th scope="col">Price</th>
-        <th scope="col">Expected Complete Date Repair</th>
-        <th scope="col">Extension of Repair Time</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>
-          <p>
-            <fa-icon [icon]="id" class="icon-input td-icon"></fa-icon>
-            <span class="td-content">{{repair?.repair_Id}}</span></p>
-        </td>
-        <td>
-          <p>
-            <fa-icon [icon]="device_icon" class="icon-input td-icon"></fa-icon>
-            <span class="td-content">{{repair?.defect}}</span></p>
-        </td>
-        <td>
-          <p>
-            <fa-icon [icon]="date_enter" class="icon-input td-icon"></fa-icon>
-            <span class="td-content"> {{repair?.date_to_enter | date:'dd.MM.yyyy'}}</span>
-          </p>
-        </td>
-        <td>
-          <p>
-            <fa-icon [icon]="money" class="icon-input td-icon"></fa-icon>
-            <span class="td-content">{{repair?.price}}</span>
-          </p>
-        </td>
-        <td>
-          <form [formGroup]="formRepair">
-            <label>
-              <fa-icon [icon]="date" class="icon-input"></fa-icon>
-              <input [value]="repair?.exp_complet_date | date:'yyyy-MM-dd'" class="input-1"
-                     formControlName="date_complete" type="date">
-            </label>
-          </form>
-        </td>
-        <td>
-          <a (click)="save_extend_date()" class="button button-small" type="submit"><span> <fa-icon
-            [icon]="date" class="button-icon"></fa-icon> Ext. Repair</span></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-extend-date-repair [repair]="repair" [show]="showRepair" [type_modal_normal]="true"></app-extend-date-repair>
 </div>

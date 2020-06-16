@@ -1,3 +1,7 @@
+.container-body {
+  min-height: 100vh;
+
+}
 
 * {
   margin: 0;
@@ -46,6 +50,7 @@
 .button:hover {
   color: lightcoral;
   border-color: lightcoral;
+  cursor: pointer;
 }
 
 .button:hover:before {
@@ -114,4 +119,26 @@ form input {
 .td-content:hover {
   color: #0B1B48;
   cursor: none;
+}
+
+.modal {
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  position: fixed;
+
+  display: flex;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 80%;
+  height: 80%;
+  overflow: auto;
+  margin: 10%;
 }

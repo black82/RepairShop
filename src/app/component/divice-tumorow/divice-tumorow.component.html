@@ -15,6 +15,8 @@
       <th scope="col">Last</th>
       <th scope="col">Model</th>
       <th scope="col">Defect</th>
+      <th scope="col">Expected Complete Date Repair</th>
+      <th scope="col">Extend Complete Date</th>
     </tr>
     </thead>
     <tbody>
@@ -25,8 +27,12 @@
       <td>{{element.family}}</td>
       <td>{{element.device[0].model}}</td>
       <td>{{element.device[0].repairs[0].defect}}</td>
+      <td>{{element.device[0].repairs[0].exp_complet_date|date:'dd.MM.yyyy'}}</td>
+      <td><a (click)="extendDate(element)" class="button button-small"><span> <fa-icon
+        [icon]="date" class="button-icon"></fa-icon></span></a></td>
     </tr>
     </tbody>
   </table>
+  <app-extend-date-repair [repair]="repair" [show]="showRepair" [type_modal_normal]="false"></app-extend-date-repair>
   <p *ngIf="notdevice" class="title-form">I don't have a device under repair that needs to be ready tomorrow</p>
 </div>

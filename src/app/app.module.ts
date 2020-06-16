@@ -37,6 +37,7 @@ import {StatisticComponent} from './component/statistic/statistic.component';
 import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
 import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.component';
 import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
+import {ExtendDateRepairComponent} from './component/extend-date-repair/extend-date-repair.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import {ExtendRepairComponent} from './component/extend-repair/extend-repair.com
     StatisticComponent,
     EmailClientSendComponent,
     DiviceTumorowComponent,
-    ExtendRepairComponent
+    ExtendRepairComponent,
+    ExtendDateRepairComponent
   ],
   imports: [
     NgbModule,
