@@ -14,6 +14,7 @@ import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboa
 import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
 import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.component';
 import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
+import {UserAdminComponent} from './component/user-admin/user-admin.component';
 
 
 export const routers: Routes = [
@@ -30,6 +31,7 @@ export const routers: Routes = [
   {path: 'email/client/send', component: EmailClientSendComponent, canActivate: [AutGuardService]},
   {path: 'device/preparation', component: DiviceTumorowComponent, canActivate: [AutGuardService]},
   {path: 'repair/extend', component: ExtendRepairComponent, canActivate: [AutGuardService]},
+  {path: 'admin/user', component: UserAdminComponent, canActivate: [AutGuardService]},
 ];
 
 @NgModule({

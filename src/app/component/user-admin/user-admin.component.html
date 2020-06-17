@@ -1,0 +1,42 @@
+<div class="container-body">
+  <div *ngIf="isAdmin" class="content-container">
+    <a (click)="getAllUsers()" class="button button-small button-get"><span> <fa-icon
+      [icon]="user_icon" class="button-icon"></fa-icon> Get All Users</span></a>
+    <div *ngIf="showUser" class="container-users">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Email Confirmed</th>
+          <th scope="col">User Enable</th>
+          <th scope="col">User Roles</th>
+          <th scope="col">Disable User</th>
+          <th scope="col">Activate User</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let element of users; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{element?.fullName}}</td>
+          <td>{{element?.email}}</td>
+          <td>{{element?.confirmEmail ? 'Yes' : 'Nou'}}</td>
+          <td>{{element?.enabled ? 'Yes' : 'Nou'}}</td>
+          <td>
+            <ul *ngFor="let role of element?.roles_users">
+              <li [style.color]="role!='USER'? 'lightcoral':'#1ABC9C'">{{role}}</li>
+            </ul>
+          </td>
+          <td><a (click)="disableUser(element)" class="button button-small button-disable"><span> <fa-icon
+            [icon]="user_disable" class="button-icon"></fa-icon>Disable User</span></a>
+          </td>
+          <td><a (click)="empowerUser(element)" class="button button-small button-activate"><span> <fa-icon
+            [icon]="user_active" class="button-icon"></fa-icon>Activate User</span></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

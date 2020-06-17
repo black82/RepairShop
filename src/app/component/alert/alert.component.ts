@@ -61,10 +61,10 @@ export class AlertComponent implements OnInit {
   timeout_remove_alert() {
     if (!document.querySelector('.show--alert')) {
       this.initAlert();
-      // this.timeout = setTimeout(() => {
-      //   this.removeAlert();
-      //   clearTimeout(this.timeout);
-      // }, 10000);
+      this.timeout = setTimeout(() => {
+        this.removeAlert();
+        clearTimeout(this.timeout);
+      }, 10000);
     } else {
       this.removeAlert();
       this.initAlert();
@@ -90,7 +90,8 @@ export class AlertComponent implements OnInit {
   }
 
   closeBaton() {
-    this.timeout = 0;
+    clearTimeout(this.timeout);
+    this.removeAlert();
   }
 
   public text_alert_initialized(): void {

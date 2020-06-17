@@ -7,6 +7,7 @@ import {Repair} from '../entity/Repair';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Device} from '../entity/Device';
 import {AdminServiceService} from './admin-service.service';
+import {StaffUser} from '../entity/StaffUser';
 
 @Injectable({
   providedIn: 'root'
@@ -146,6 +147,24 @@ export class HttpClien {
 
   extendDateRepair(repair: Repair): Observable<any> {
     return this.http.post<boolean>(this.apiUrl + 'admin/api/' + 'extend/date/repair', repair)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  getAllUser(): Observable<StaffUser []> {
+    return this.http.get<StaffUser[]>(this.apiUrl + 'admin/api/extracting/all/users')
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  disableUser(user: StaffUser): Observable<any> {
+    return this.http.post<StaffUser>(this.apiUrl + 'admin/api/disable/user', user)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  activeUser(user: StaffUser): Observable<any> {
+    return this.http.post<StaffUser>(this.apiUrl + 'admin/api/empower/user', user)
       .pipe(
         catchError(this.errorHandler));
   }

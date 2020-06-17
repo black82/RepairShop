@@ -24,8 +24,8 @@ export class Repair {
               defect: string, deposit: number, price: number,
               work_don: string, parts_replaced: string,
               nowInRepair: boolean, inputModule: InputTest,
-              outputTest: OutputTest, note: string
-    , repairFileStorage: RepairFileStorage) {
+              outputTest: OutputTest, note: string,
+              repairFileStorage: RepairFileStorage) {
     this.repair_Id = repair_Id;
     this.date_to_enter = date_to_enter;
     this.exp_complet_date = exp_complet_date;

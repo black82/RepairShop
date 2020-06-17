@@ -23,7 +23,7 @@ import {SignInComponent} from './component/sign-in/sign-in.component';
 import {TokenInterceptor} from './component/service/TokenInterceptor';
 import {SearchEmailComponent} from './component/search-email/search-email.component';
 import {DragfileComponent} from './component/dragfile/dragfile.component';
-import {EmailModalComponent} from './component/email-madal/email-modal.component';
+import {EmailModalComponent} from './component/email-modal/email-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxDropzoneModule} from 'ngx-dropzone';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -38,6 +38,7 @@ import {EmailClientSendComponent} from './component/email-client-send/email-clie
 import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.component';
 import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
 import {ExtendDateRepairComponent} from './component/extend-date-repair/extend-date-repair.component';
+import {UserAdminComponent} from './component/user-admin/user-admin.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import {ExtendDateRepairComponent} from './component/extend-date-repair/extend-d
     EmailClientSendComponent,
     DiviceTumorowComponent,
     ExtendRepairComponent,
-    ExtendDateRepairComponent
+    ExtendDateRepairComponent,
+    UserAdminComponent
   ],
   imports: [
     NgbModule,

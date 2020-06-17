@@ -38,7 +38,7 @@ export class TokenInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
-        const message = error?.error?.message;
+        let message = error?.error?.message;
         console.log('error--->>>', error);
         if (error?.error?.message) {
           if (error?.error?.message.includes('Expired or invalid JWT token')) {
@@ -55,6 +55,9 @@ export class TokenInterceptor implements HttpInterceptor {
             this.router.navigate(['client/sign-in']).then(r => r);
             return;
           }
+        }
+        if (!message) {
+          message = error?.message;
         }
         this?.alertService.error(null, message, false, false, '', error);
         return throwError(error);

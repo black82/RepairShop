@@ -47,7 +47,8 @@ export class DiviceTumorowComponent implements OnInit {
   get_list_client() {
     this.animation_wait.$anime_show.emit(true);
     this.httpService.list_preparing_device().subscribe(value => {
-      this.client_array = this.filerRepair(value);
+      this.client_array = value;
+      this.filerRepair();
       this.animation_wait.$anime_show.emit(false);
       if (this.client_array.length > 0) {
         this.show_devices = true;
@@ -60,49 +61,24 @@ export class DiviceTumorowComponent implements OnInit {
     });
   }
 
-  filerRepair(clients: Client[]): Client[] {
-    clients.forEach(client => {
-      if (client.device.length > 1) {
-        client.device.forEach(device => {
-          let new_client = null;
-          new_client = client;
-          new_client.device = [];
-          new_client.device.push(device);
-          clients.push(new_client);
-          if (device.repairs.length > 1) {
-            device.repairs.forEach(repairs => {
-              if (!repairs.nowInRepair) {
-                device.repairs.splice(device.repairs.indexOf(repairs), 1);
-              }
-            });
-          }
-          clients.splice(clients.indexOf(client), 1);
-        });
-      }
+  filerRepair(): void {
+    this.client_array.forEach(client => {
+      client.device = client.device.filter(device => device.repairs.length !== 0);
+      client.device.forEach(device => {
+        device.repairs.filter(repair => !repair.nowInRepair);
+      });
+      this.check_active_device();
     });
-    clients = this.check_activ_device(clients);
-    return clients;
   }
 
 
-  extendDate(client: Client) {
+  extendDate(client: Client): void {
     this.repair = client.device[0].repairs[0];
     this.extend_date_service.$repair_extend_date_modal.emit(this.repair);
   }
 
-  private check_activ_device(clients: Client[]) {
-    let device_acyiv = true;
-    clients.forEach(client => {
-      if (client.device.length > 0) {
-        device_acyiv = false;
-      } else {
-        clients.splice(clients.indexOf(client), 1);
-      }
-    });
-    if (device_acyiv) {
-      return [];
-    } else {
-      return clients;
-    }
+  private check_active_device(): void {
+    this.client_array = this.client_array.filter(client => client.device.length !== 0);
   }
+
 }
