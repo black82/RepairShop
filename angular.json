@@ -28,16 +28,19 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/quill/dist/quill.js"
+            ]
           },
           "configurations": {
             "production": {
-                 "fileReplacements": [
-                   {
-                     "replace": "src/environments/environment.ts",
-                     "with": "src/environments/environment.prod.ts"
-                   }
-                 ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

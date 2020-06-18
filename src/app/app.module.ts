@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppComponent} from './app.component';
+
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {HomeComponent} from './component/home/home.component';
@@ -39,6 +39,9 @@ import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.
 import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
 import {ExtendDateRepairComponent} from './component/extend-date-repair/extend-date-repair.component';
 import {UserAdminComponent} from './component/user-admin/user-admin.component';
+import {StatisticRepairComponent} from './component/statistic-repair/statistic-repair.component';
+import {AppComponent} from './app.component';
+import {ChartModule} from 'primeng';
 
 
 @NgModule({
@@ -70,7 +73,8 @@ import {UserAdminComponent} from './component/user-admin/user-admin.component';
     DiviceTumorowComponent,
     ExtendRepairComponent,
     ExtendDateRepairComponent,
-    UserAdminComponent
+    UserAdminComponent,
+    StatisticRepairComponent
   ],
   imports: [
     NgbModule,
@@ -83,8 +87,8 @@ import {UserAdminComponent} from './component/user-admin/user-admin.component';
     NgxDropzoneModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    MatGridListModule
-
+    MatGridListModule,
+    ChartModule
   ],
   providers: [HttpClient,
     {

@@ -42,3 +42,14 @@ th {
   width: 80%;
 
 }
+
+.container-log {
+  margin-top: 5%;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+table {
+  max-width: 80%;
+  zoom: 74% !important;
+}

@@ -26,11 +26,32 @@ export class LogServiceComponent implements OnInit, OnDestroy {
     this.httpClient.logGetHtml().subscribe(html => {
       this.animation_wait.$anime_show.emit(false);
       this.logHtml = this.sanitizer.bypassSecurityTrustHtml(html);
+      this.resizeTableHtml();
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       console.log(error?.error?.message);
     });
 
+  }
+
+  resizeTableHtml() {
+    let htmlTableElement = null;
+    let count = 0;
+    const timeout = setInterval(() => {
+      count++;
+      console.log(count);
+      htmlTableElement = document.querySelectorAll('table');
+      if (htmlTableElement) {
+        htmlTableElement.forEach(element => {
+          element.style.zoom = '74%';
+        });
+
+        clearInterval(timeout);
+      }
+      if (count > 30) {
+        clearInterval(timeout);
+      }
+    }, 300);
   }
 
   showHidden(): void {
