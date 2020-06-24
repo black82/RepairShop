@@ -5,8 +5,11 @@
 
   <div *ngIf="show_client" class="container_form">
     <div class="title-container" tooltip="Compile all fields are required.">
-      <p class="title-form">Compile the model for the device's "{{client.device[0]?.model}}" output
-        client "{{client.name}} {{client.family}}"</p>
+      <p class="title-form">
+        <fa-icon [icon]="modul" class="icon-input"></fa-icon>
+        Compile the model for the device's "{{client.device[0]?.model}}" output
+        client "{{client.name}} {{client.family}}"
+      </p>
     </div>
     <form (ngSubmit)="submitForm()" [formGroup]="formClient">
       <div class="row">
@@ -250,8 +253,9 @@
       <div class="text-div">
         <div class="title-container" tooltip="Notes for staff at the output of the machine">
           <p class="title-form">
+            <fa-icon [icon]="photo" class="icon-input"></fa-icon>
+            Photos and Note the output of the machine
             <fa-icon [icon]="text" class="icon-input"></fa-icon>
-            Note the entrance of the machine.
           </p>
         </div>
         <app-sig-pad></app-sig-pad>

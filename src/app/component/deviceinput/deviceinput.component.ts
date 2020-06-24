@@ -44,6 +44,8 @@ import {EmailSenderService} from '../service/email-sender.service';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
 import {Subscription} from 'rxjs';
+import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
+import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
 
 @Component({
   selector: 'app-deviceinput',
@@ -82,6 +84,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   save = faDownload;
   printer = faPrint;
   display_touch = faMobile;
+  photo = faImages;
+  modul = faFileInvoice;
   client: Client;
   client_after_saved: Client;
   formClient: FormGroup;

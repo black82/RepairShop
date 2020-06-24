@@ -198,7 +198,7 @@ form ::-moz-focus-inner {
 }
 
 .icon-box {
-  color: lightcoral;
+  color: white;
   font-size: 30px;
 }
 
@@ -206,7 +206,7 @@ form ::-moz-focus-inner {
   content: '\2713';
   display: flex;
   text-align: center;
-  color: lightcoral;
+  color: white;
   position: absolute;
   left: 0.7rem;
   top: 0.2rem;

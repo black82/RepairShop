@@ -121,14 +121,14 @@ export class SingleContentComponent implements OnInit {
     value_test_input.push(repaired.inputModule.display_touch_input);
 
     const valuie_test_output = this.create_output_test_name(repaired);
-
+    console.log(value_test_input);
     return new ElementRepair(false, repaired, this.check_test_OK(value_test_input), this.check_test_OK(valuie_test_output));
   }
 
   create_output_test_name(repaired: Repair): boolean [] {
     const value = [];
     if (repaired.nowInRepair) {
-      value.length = 12;
+      value.length = 11;
       return value;
     }
     value.push(repaired.outputTest?.camera_Output);
@@ -147,10 +147,10 @@ export class SingleContentComponent implements OnInit {
 
   check_test_OK(test: boolean[]): string[] {
     const test_result = [];
-    if (test.length === 11) {
-      test_result.length = 11;
-      return test_result;
-    }
+    // if (test.length === 11) {
+    //   test_result.length = 11;
+    //   return test_result;
+    // }
     if (!test[0]) {
       test_result.push(' Fotocamera difettosa');
     }
@@ -184,6 +184,7 @@ export class SingleContentComponent implements OnInit {
     if (!test[10]) {
       test_result.push(' Il display touch del dispositivo è danneggiato');
     }
+    console.log(test_result);
     return test_result;
   }
 

@@ -43,6 +43,8 @@ import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
 import {Subscription} from 'rxjs';
+import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
+import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
 
 
 @Component({
@@ -90,6 +92,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
   display_touch = faMobile;
+  photo = faImages;
+  modul = faFileInvoice;
   id_repair: number;
   private email_event: Subscription;
   private sig_pad_event: Subscription;

@@ -1,7 +1,10 @@
 <div class="container-body" xmlns="http://www.w3.org/1999/html">
   <div class="title-container">
     <div tooltip="Compile all fields are required.">
-      <p class="title-form">Compilation model for accepting the device.</p>
+      <p class="title-form">
+        <fa-icon [icon]="modul" class="icon-input"></fa-icon>
+        Compilation model for accepting the device.
+      </p>
     </div>
   </div>
 
@@ -123,7 +126,7 @@
                  class="input-2" formControlName="accessory" type="text">
         </label>
         <label>
-          <span class="input-title">The date the repair will be completed</span>
+          <span class="input-title">The date will be completed</span>
           <fa-icon [icon]="date" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.date_exit.dirty || formClient.controls.date_exit.touched)
            && formClient.controls.date_exit.invalid && formClient.controls.date_exit.errors&& formClient.controls.date_exit.pristine}"
@@ -243,8 +246,9 @@
       <div class="title-container">
         <div tooltip="Notices for staff at the input device">
           <p class="title-form">
+            <fa-icon [icon]="photo" class="icon-input"></fa-icon>
+            Photos and Note the entrance of the machine
             <fa-icon [icon]="text" class="icon-input"></fa-icon>
-            Note the entrance of the machine.
           </p>
         </div>
       </div>
