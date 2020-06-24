@@ -21,6 +21,10 @@
   align-content: flex-start;
 }
 
+.title-form {
+  color: lightcoral !important;
+}
+
 #icon_logs,
 #icon_mail,
 #icon_curent_device,

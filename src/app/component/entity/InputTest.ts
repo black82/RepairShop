@@ -5,6 +5,7 @@ export class InputTest {
   connectors_input: boolean;
   sound_equipment_input: boolean;
   touch_input: boolean;
+  display_touch_input: boolean;
   wi_fi_input: boolean;
   microphone_input: boolean;
   sim_input: boolean;
@@ -13,7 +14,7 @@ export class InputTest {
 
   constructor(id_input: number, sensors_input: boolean, display_input: boolean,
               connectors_input: boolean, sound_equipment_input: boolean, touch_input: boolean,
-              wi_fi_input: boolean, microphone_input: boolean, sim_input: boolean,
+              display_touch_input: boolean, wi_fi_input: boolean, microphone_input: boolean, sim_input: boolean,
               keyboard_input: boolean, camera_input: boolean) {
     this.id_input = id_input;
     this.sensors_input = sensors_input;
@@ -26,5 +27,6 @@ export class InputTest {
     this.sim_input = sim_input;
     this.keyboard_input = keyboard_input;
     this.camera_input = camera_input;
+    this.display_touch_input = display_touch_input;
   }
 }

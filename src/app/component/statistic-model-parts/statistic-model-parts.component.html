@@ -1,5 +1,6 @@
-<div *ngIf="show_data" class="container-body1">
+<div *ngIf="show_data&&isAdmin" class="container-body">
+  <h1 class="title-form"></h1>
   <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
     [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-  <p-chart [data]="data_object" type="bar"></p-chart>
+  <p-chart [data]="data_object" type="pie"></p-chart>
 </div>

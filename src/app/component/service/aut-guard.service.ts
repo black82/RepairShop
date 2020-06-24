@@ -24,9 +24,9 @@ export class AutGuardService implements CanActivate {
     if (expires_date > new Date()) {
       return true;
     } else {
-      localStorage.clear();
+      this.authService.logout();
       localStorage.setItem('navigate', url);
-      this.router.navigate(['client/sign-in']);
+      this.router.navigate(['client/sign-in']).then(r => r);
       return false;
 
     }

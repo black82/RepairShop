@@ -222,6 +222,18 @@
             </label>
           </div>
           <div class="check-single">
+            <fa-icon [icon]="display_touch"
+                     [style.color]="formClient.controls.display_touch_output.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.display_touch_Output"
+                     class="check-box"
+                     formControlName="display_touch_output" name="device-test" type="checkbox">
+              <span class="check-box-name">Display Touch</span>
+            </label>
+          </div>
+          <div class="check-single">
             <fa-icon [icon]="camera" [style.color]="formClient.controls?.camera_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">

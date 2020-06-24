@@ -5,6 +5,7 @@
 
 }
 
+
 #header-wrapper {
   overflow: hidden;
   padding: 2em 0;
@@ -121,6 +122,9 @@ svg {
 #logo a {
   text-decoration: none;
   color: #FFF;
+}
+
+#logo a:hover {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -186,9 +190,11 @@ svg {
   opacity: 0;
   transform: scale(.8);
   transition: .4s ease-in-out;
+  border-radius: 5%;
 }
 
-.submenu-search {
+.submenu-search,
+.submenu-admin {
   margin-left: -15%;
   list-style: none;
   min-width: 200px;
@@ -204,12 +210,14 @@ svg {
 }
 
 .submenu:hover,
-.submenu-search:hover {
+.submenu-search:hover,
+.submenu-admin:hover {
   border: 1px solid #34495E;
 }
 
 .submenu li a,
-.submenu-search li a {
+.submenu-search li a,
+.submenu-admin li a {
   padding: 10px 0;
   margin: 0 10px;
   border-bottom: 1px solid #efefef;
@@ -219,7 +227,8 @@ svg {
 }
 
 .sign-in > #sign-in:hover .submenu,
-#search-menu:hover .submenu-search {
+#search-menu:hover .submenu-search,
+#admin-menu:hover .submenu-admin {
   visibility: visible;
   opacity: 1;
   transform: scale(1);

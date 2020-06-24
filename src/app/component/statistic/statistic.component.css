@@ -8,3 +8,170 @@
 .container-body {
   min-height: 100vh;
 }
+
+form .formerize-placeholder {
+  color: #555 !important;
+}
+
+form ::-webkit-input-placeholder {
+  color: #555 !important;
+}
+
+form :-moz-placeholder {
+  color: #555 !important;
+}
+
+form ::-moz-placeholder {
+  color: #555 !important;
+}
+
+form :-ms-input-placeholder {
+  color: #555 !important;
+}
+
+form input.input:focus {
+  box-shadow: 0 0 2px 1px #E0E0E0;
+  background: #fff;
+}
+
+form input {
+  position: relative;
+  -webkit-appearance: none;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.75);
+  width: 80%;
+  border-radius: 0.50em;
+  padding: 0.5em 1em;
+  box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
+  -moz-transition: all 0.35s ease-in-out;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  font-size: 1em;
+  outline: none;
+  margin: 10px auto;
+
+}
+
+.icon-input {
+  margin: 10px;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.container-plugin,
+.container-chart {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+  align-content: center;
+
+}
+
+.container-chart {
+  width: 70%;
+
+}
+
+.container-plugin {
+  width: 20%;
+}
+
+.doughnut-chart {
+  width: 120%;
+  margin: 50px auto;
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  background: transparent;
+  color: #FFFFFF;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  perspective: 500px;
+  transition: .2s;
+  padding: 0.8em;
+
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: lightcoral;
+  transform-origin: left;
+  transition: .5s;
+  border-radius: 10px;
+
+}
+
+.button {
+  margin: 20px;
+}
+
+.button span {
+  position: relative;
+  z-index: 2;
+}
+
+.first:hover {
+  color: lightcoral;
+  border-color: lightcoral;
+  cursor: pointer;
+}
+
+.model:before {
+  background: #FFCE56;
+}
+
+.model:hover {
+  color: #FFCE56;
+  border-color: #FFCE56;
+  cursor: pointer;
+}
+
+.month:hover {
+  color: #1d72f3;
+  border-color: #1d72f3;
+  cursor: pointer;
+}
+
+.month:before {
+  background: #1d72f3;
+}
+
+.button:hover:before {
+
+  transform: rotateY(94deg);
+}
+
+.date-interval {
+  color: lightcoral !important;
+}
+
+.input-title {
+  display: grid;
+  color: #7a7c7f;
+  font-size: 15px;
+  font-family: "Libre Baskerville", serif;
+  line-height: 25px;
+  text-align: left;
+  text-shadow: 0 1px 1px #fff;
+  padding-top: 20px;
+
+}

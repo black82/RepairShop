@@ -81,6 +81,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   text = faEnvelopeOpenText;
   save = faDownload;
   printer = faPrint;
+  display_touch = faMobile;
   client: Client;
   client_after_saved: Client;
   formClient: FormGroup;
@@ -125,6 +126,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       connectors_input: new FormControl(false),
       sound_equipment_input: new FormControl(false),
       touch_input: new FormControl(false),
+      display_touch_input: new FormControl(false),
       wi_fi_input: new FormControl(false),
       microphone_input: new FormControl(false),
       sim_input: new FormControl(false),
@@ -149,7 +151,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
     this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
-      formData.connectors_input, formData.sound_equipment_input, formData.touch_input,
+      formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input);
     this.repair = new Repair(null, formData.date_to_enter, formData.date_exit, null, formData.defect,

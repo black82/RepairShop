@@ -57,7 +57,7 @@
 .icon:before {
   font-size: 1.25em;
   text-decoration: none !important;
-  font-family: FontAwesome;
+  font-family: FontAwesome, cursive;
   font-weight: normal;
   font-style: normal;
   text-rendering: optimizeLegibility;
@@ -1349,7 +1349,7 @@ app-print-page {
 
 /* UNRELATED to tooltips */
 body {
-  margin: 10px !important;
+  margin: 5px 10px !important;
   background: snow;
 
 }

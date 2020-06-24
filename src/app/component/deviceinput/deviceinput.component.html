@@ -213,6 +213,15 @@
           </label>
         </div>
         <div class="check-single">
+          <fa-icon [icon]="display_touch"
+                   [style.color]="formClient.controls.display_touch_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="display_touch_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Display Touch</span>
+          </label>
+        </div>
+        <div class="check-single">
           <fa-icon [icon]="keybord" [style.color]="formClient.controls.keyboard_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">

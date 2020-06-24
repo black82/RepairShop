@@ -1,7 +1,10 @@
 <div class="container-body">
-  <div class="log-container">
+  <h1 class="title-form">Here you can receive log files from the server
     <a (click)="serviceGetLogHtml()" [hidden]="!hidden" class="button-log">Show Log</a>
     <a (click)="showHidden()" [hidden]="hidden" class="button-log">Hidden Log</a>
+  </h1>
+  <div class="log-container">
+
     <br>
     <div class="container-log">
       <div *ngIf="logHtml&& !hidden" [innerHtml]="logHtml" class="ContainerLog"></div>

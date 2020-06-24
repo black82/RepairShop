@@ -1,4 +1,4 @@
-<div id="header-wrapper">
+<header id="header-wrapper">
   <div class="container-header" id="header">
     <div id="logo">
       <h1><span><svg height="100" id="svg"
@@ -7,51 +7,101 @@
         fill="#000000"
         fill-rule="evenodd" id="path0"
         stroke="none"></path></g></svg></span><a
-        href="#">RFV Technology</a></h1>
+        routerLink="/">RFV Technology</a></h1>
       <div class="menu-box">
         <div id="menu">
-          <ul>
-            <li class="current_page_item"><a accesskey="1" href="#" title="">
-              <fa-icon [icon]="home"></fa-icon>
-              Homepage</a></li>
-            <li class="current_page_item"><a accesskey="2" class="teaming"
-                                             routerLink="/input/client/device" title="">Enter
-              Device</a>
-            </li>
-            <li class="current_page_item"><a accesskey="3" class="teaming"
-                                             routerLink="/output/client/device" title="">Returning
-              device</a></li>
-            <li class="current_page_item" id="search-menu"><a accesskey="4" class="teaming" title="">Search Customer</a>
-              <div class="current_page_item" id="search_menu">
-                <div class="search-menu">
-                  <ul class="submenu-search">
-                    <li><a routerLink="/search/telephone/number">Search Customer by Tel. Number</a></li>
-                    <br>
-                    <li><a routerLink="/search/email">Search by Email</a></li>
-                    <br>
-                    <li><a routerLink="/search/repair/id">Search by Repair Id</a></li>
-                    <br>
-                  </ul>
+          <nav>
+            <ul>
+              <li class="current_page_item"><a accesskey="1" routerLink="/" title="">
+                <fa-icon [icon]="home"></fa-icon>
+                Homepage</a></li>
+              <li class="current_page_item"><a accesskey="2" class="teaming"
+                                               routerLink="/input/client/device" title="">Enter
+                Device</a>
+              </li>
+              <li class="current_page_item"><a accesskey="3" class="teaming"
+                                               routerLink="/output/client/device" title="">Returning
+                device</a></li>
+              <li class="current_page_item" id="search-menu"><a accesskey="4" class="teaming" title="">Search
+                Customer</a>
+                <div class="current_page_item" id="search_menu">
+                  <div class="search-menu">
+                    <ul class="submenu-search">
+                      <li><a routerLink="/search/telephone/number">
+                        <fa-icon [icon]="phone"></fa-icon>
+                        Search Customer by Tel. Number</a></li>
+                      <br>
+                      <li><a routerLink="/search/email">
+                        <fa-icon [icon]="mail"></fa-icon>
+                        Search by Email</a></li>
+                      <br>
+                      <li><a routerLink="/search/repair/id">
+                        <fa-icon [icon]="idIcon"></fa-icon>
+                        Search by Repair Id</a></li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li *ngIf="admin" class="current_page_item" id="admin-menu"><a accesskey="5" routerLink="/admin/dashboard"
-                                                                           title="">Admin App</a></li>
-          </ul>
+              </li>
+              <li *ngIf="admin" class="current_page_item" id="admin-menu"><a accesskey="5" routerLink="/admin/dashboard"
+                                                                             title="Admin Ap">Admin App</a>
+                <div class="current_page_item">
+                  <div class="admin-menu">
+                    <ul class="submenu-admin">
+                      <li><a routerLink="/admin/logs/server">
+                        <fa-icon [icon]="logs"></fa-icon>
+                        Log on to the Server</a></li>
+                      <br>
+                      <li><a routerLink="/admin/email/client/send">
+                        <fa-icon [icon]="mail"></fa-icon>
+                        Send an Email</a></li>
+                      <br>
+                      <li><a routerLink="/admin/device/preparation">
+                        <fa-icon [icon]="device"></fa-icon>
+                        Device Ready Tomorrow</a></li>
+                      <br>
+                      <li><a routerLink="/admin/repair/extend">
+                        <fa-icon [icon]="calendar"></fa-icon>
+                        Extension Repair</a></li>
+                      <br>
+                      <li><a routerLink="/admin/user">
+                        <fa-icon [icon]="users"></fa-icon>
+                        User Management</a></li>
+                      <br>
+                      <li><a routerLink="/admin/statistic/repair">
+                        <fa-icon [icon]="charts"></fa-icon>
+                        Repair Statics</a></li>
+
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </nav>
         </div>
         <div class="sign-in" id="menu-signi">
 
           <div class="current_page_item" id="sign-in"><a>
             <i class="icon icon-lock"></i> Sign in/up</a>
-            <ul class="submenu">
-              <li><a routerLink="/client/sign-in">Sign in</a></li>
-              <li><a routerLink="/client/sign-up">Sign up</a></li>
-              <li><a (click)="logout()" href="#">LogOut</a></li>
-            </ul>
+            <nav>
+              <ul class="submenu">
+                <li><a routerLink="/client/sign-in">
+                  <fa-icon [icon]="signIn"></fa-icon>
+                  Sign in</a></li>
+                <li><a routerLink="/client/sign-up">
+                  <fa-icon [icon]="signUp"></fa-icon>
+                  Sign up</a></li>
+                <li><a (click)="logout()" href="#">
+                  <fa-icon [icon]="signOut"></fa-icon>
+                  LogOut</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
+
     </div>
+
   </div>
-</div>
+</header>
 

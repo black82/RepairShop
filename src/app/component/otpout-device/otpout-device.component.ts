@@ -89,6 +89,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   formSubmitted = false;
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
+  display_touch = faMobile;
   id_repair: number;
   private email_event: Subscription;
   private sig_pad_event: Subscription;
@@ -172,6 +173,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       connections_output: [false, [Validators.required]],
       sound_equipment_output: [false, [Validators.required]],
       touch_output: [false, [Validators.required]],
+      display_touch_output: [false, [Validators.required]],
       wi_fi_output: [false, [Validators.required]],
       microphone_output: [false, [Validators.required]],
       sim_output: [false, [Validators.required]],
@@ -220,7 +222,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
     this.output_test = new OutputTest(null, formData.sensor_output, formData.display_output,
-      formData.connections_output, formData.sound_equipment_output, formData.touch_output,
+      formData.connections_output, formData.sound_equipment_output, formData.touch_output, formData.display_touch_output,
       formData.wi_fi_output, formData.microphone_output, formData.sim_output,
       formData.keyboard_output, formData.camera_output);
     this.repair_output = new Repair(this.client.device[0].repairs[0].repair_Id,

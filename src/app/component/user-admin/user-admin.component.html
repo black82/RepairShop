@@ -1,5 +1,6 @@
 <div class="container-body">
   <div *ngIf="isAdmin" class="content-container">
+    <h1 class="title-form">Registered Users of the application are administered here</h1>
     <a (click)="getAllUsers()" class="button button-small button-get"><span> <fa-icon
       [icon]="user_icon" class="button-icon"></fa-icon> Get All Users</span></a>
     <div *ngIf="showUser" class="container-users">

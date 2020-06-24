@@ -5,6 +5,7 @@ export class OutputTest {
   connectors_Output: boolean;
   sound_equipment_Output: boolean;
   touch_Output: boolean;
+  display_touch_Output: boolean;
   wi_fi_Output: boolean;
   microphone_Output: boolean;
   sim_Output: boolean;
@@ -12,7 +13,7 @@ export class OutputTest {
   camera_Output: boolean;
 
   constructor(id_Output: number, sensors_Output: boolean, display_Output: boolean,
-              connectors_Output: boolean, sound_equipment_Output: boolean,
+              display_touch_Output: boolean, connectors_Output: boolean, sound_equipment_Output: boolean,
               touch_Output: boolean, wi_fi_Output: boolean, microphone_Output: boolean,
               sim_Output: boolean, keyboard_Output: boolean, camera_Output: boolean) {
     this.id_Output = id_Output;
@@ -26,5 +27,6 @@ export class OutputTest {
     this.sim_Output = sim_Output;
     this.keyboard_Output = keyboard_Output;
     this.camera_Output = camera_Output;
+    this.display_touch_Output = display_touch_Output;
   }
 }

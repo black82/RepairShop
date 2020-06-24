@@ -4,13 +4,14 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {AlertServiceService} from './alert-service.service';
+import {HttpClien} from './clientservice.service';
 
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   currentRoute: string;
 
-  constructor(private router: Router, private alertService: AlertServiceService) {
+  constructor(private router: Router, private alertService: AlertServiceService, private httpClient: HttpClien) {
     this.currentRoute = this.router.url;
 
   }
@@ -43,14 +44,14 @@ export class TokenInterceptor implements HttpInterceptor {
         if (error?.error?.message) {
           if (error?.error?.message.includes('Expired or invalid JWT token')) {
             error.error.status = 401;
-            localStorage.clear();
+            this.httpClient.logout();
             localStorage.setItem('navigate', this.currentRoute);
             this.router.navigate(['client/sign-in']).then(r => r);
             return;
           }
 
           if (error?.error?.status === 401) {
-            localStorage.clear();
+            this.httpClient.logout();
             localStorage.setItem('navigate', this.currentRoute);
             this.router.navigate(['client/sign-in']).then(r => r);
             return;

@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
-import {faSignInAlt} from '@fortawesome/free-solid-svg-icons';
+import {faEnvelope, faSignInAlt, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
+import {faChartArea} from '@fortawesome/free-solid-svg-icons/faChartArea';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,9 @@ import {Subscription} from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
 
   search = faSearch;
+  chart_button = faChartArea;
+  user_admin = faUserFriends;
+  email_send = faEnvelope;
   return = faSignOutAlt;
   entering = faSignInAlt;
   hidem_animation = true;
@@ -30,6 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscribe_admin = this.adminService.$admin_show.subscribe(value => {
       this.showAdminPage(value);
     });
+
     this.clickElementAnimation();
     const timeout = setTimeout(() => {
       this.hidem_animation = false;
@@ -38,10 +43,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   clickElementCentralIcon(elementList: NodeListOf<Element>) {
+
     elementList.forEach(node => {
       node.addEventListener('click', evt => {
         const button = node.querySelector('.box-empty') as HTMLElement;
-
         node.querySelector('.tooltip').removeAttribute('tooltip');
         node.querySelectorAll('.icon-animation').forEach(className => {
           if (className.className === (evt.target as Element).className) {
@@ -52,7 +57,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       });
     });
-
   }
 
   showAdminPage(value) {
@@ -67,7 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   clickElementCTools(elementList: NodeListOf<Element>) {
     elementList.forEach(node => {
-      node.addEventListener('click', evt => {
+      node.addEventListener('mouseenter', evt => {
         const classList = node.querySelectorAll('.icon-animation');
         classList.forEach(className => {
           if (className.className === (evt.target as Element).className) {

@@ -118,6 +118,7 @@ export class SingleContentComponent implements OnInit {
     value_test_input.push(repaired.inputModule.connectors_input);
     value_test_input.push(repaired.inputModule.display_input);
     value_test_input.push(repaired.inputModule.sensors_input);
+    value_test_input.push(repaired.inputModule.display_touch_input);
 
     const valuie_test_output = this.create_output_test_name(repaired);
 
@@ -127,7 +128,7 @@ export class SingleContentComponent implements OnInit {
   create_output_test_name(repaired: Repair): boolean [] {
     const value = [];
     if (repaired.nowInRepair) {
-      value.length = 11;
+      value.length = 12;
       return value;
     }
     value.push(repaired.outputTest?.camera_Output);
@@ -140,6 +141,7 @@ export class SingleContentComponent implements OnInit {
     value.push(repaired.outputTest?.connectors_Output);
     value.push(repaired.outputTest?.display_Output);
     value.push(repaired.outputTest?.sensors_Output);
+    value.push(repaired.outputTest?.display_touch_Output);
     return value;
   }
 
@@ -178,6 +180,9 @@ export class SingleContentComponent implements OnInit {
     }
     if (!test[9]) {
       test_result.push(' Il sensore del dispositivo è danneggiato');
+    }
+    if (!test[10]) {
+      test_result.push(' Il display touch del dispositivo è danneggiato');
     }
     return test_result;
   }

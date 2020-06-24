@@ -42,6 +42,7 @@ import {UserAdminComponent} from './component/user-admin/user-admin.component';
 import {StatisticRepairComponent} from './component/statistic-repair/statistic-repair.component';
 import {AppComponent} from './app.component';
 import {ChartModule} from 'primeng';
+import {StatisticModelPartsComponent} from './component/statistic-model-parts/statistic-model-parts.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import {ChartModule} from 'primeng';
     ExtendRepairComponent,
     ExtendDateRepairComponent,
     UserAdminComponent,
-    StatisticRepairComponent
+    StatisticRepairComponent,
+    StatisticModelPartsComponent
   ],
   imports: [
     NgbModule,

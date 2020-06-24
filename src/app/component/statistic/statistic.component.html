@@ -1,1 +1,44 @@
-<p-chart [data]="data" type="doughnut"></p-chart>
+<div class="container-body">
+  <div *ngIf="isAdmin" class="row-container">
+    <div class="container-plugin">
+      <form [formGroup]="formDataInterval">
+        <a (click)="getData()" class="button button-small first"><span> <fa-icon
+          [icon]="statistic_button" class="button-icon"></fa-icon> Statistic Model</span></a>
+
+        <a (click)="getDataByMonth()" class="button button-small month"><span> <fa-icon
+          [icon]="statistic_button" class="button-icon"></fa-icon>Statistic Month</span></a>
+        <a (click)="getDataByModelAndParts()" class="button button-small model"><span> <fa-icon
+          [icon]="statistic_button" class="button-icon"></fa-icon>Stat. Model&Parts</span></a>
+        <span class="input-title">Date init :</span>
+        <label>
+          <fa-icon [icon]="date_init" class="icon-input"></fa-icon>
+          <input class="input-1"
+                 formControlName="date_init" type="date">
+        </label><br>
+
+        <label>
+          <span class="input-title">Date Complete :</span>
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <input class="input-1"
+                 formControlName="date_complete" type="date">
+        </label>
+      </form>
+    </div>
+    <div class="container-chart">
+      <div *ngIf="show_chart" class="doughnut-char">
+        <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
+          [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
+        <h1 class="title-form">Device repaired
+          from date/ <span class="date-interval">{{formDataInterval.controls.date_init.value}}</span>
+          to dated/
+          <span class="date-interval">{{formDataInterval.controls.date_complete.value}}</span>
+          : = <span class="date-interval">{{sum_device}}</span></h1>
+        <p-chart [data]="data_object" class="doughnut-chart" type="doughnut"></p-chart>
+      </div>
+
+    </div>
+
+  </div>
+  <app-statistic-repair></app-statistic-repair>
+  <app-statistic-model-parts></app-statistic-model-parts>
+</div>

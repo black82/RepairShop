@@ -72,6 +72,9 @@ export class AlertComponent implements OnInit {
   }
 
   initAlert() {
+    if (this.alert.keepAfterRouteChange) {
+      this.rout_Out_Alert(this.alert.location);
+    }
     this.text_alert_initialized();
   }
 
@@ -84,9 +87,6 @@ export class AlertComponent implements OnInit {
     const remove = document.querySelector('.show--alert');
     remove?.classList.add('hidden--alert');
     remove?.classList?.remove('show--alert');
-    if (this.alert.keepAfterRouteChange) {
-      this.rout_Out_Alert(this.alert.location);
-    }
   }
 
   closeBaton() {

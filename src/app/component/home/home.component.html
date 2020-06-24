@@ -39,7 +39,7 @@
               [icon]="search"></fa-icon> Search</span></a>
           </div>
         </div>
-      </div>
+
     </div>
     <div id="wrapper2">
       <div id="tools">
@@ -48,11 +48,14 @@
           <a class="icon icon-check icon-animation" routerLink="/output/client/device"></a>
           <a class="icon icon-search icon-animation" routerLink="/search/telephone/number"></a>
           <a *ngIf="admin" class="icon icon-wrench icon-animation" routerLink="/admin/dashboard"></a>
-          <a *ngIf="admin" class="icon icon-align-right icon-animation" routerLink="/admin/statistic/repair"></a>
+          <a *ngIf="admin" class="icon icon-bar-chart icon-animation" routerLink="/admin/statistic/repair"></a>
+          <a *ngIf="admin" class="icon icon-calendar icon-animation" routerLink="/admin/repair/extend"></a>
+          <a *ngIf="admin" class="icon icon-envelope-alt icon-animation" routerLink="admin/email/client/send"></a>
           <a *ngIf="admin" class="icon icon-user icon-animation" routerLink="/admin/user"></a>
           <a class="icon icon-lock icon-animation" routerLink="/client/sign-in"></a>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </div>

@@ -8,6 +8,8 @@ import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Device} from '../entity/Device';
 import {AdminServiceService} from './admin-service.service';
 import {StaffUser} from '../entity/StaffUser';
+import {StatisticModel} from '../entity/StatisticModel';
+import {StatisticModelParts} from '../entity/StatisticModelParts';
 
 @Injectable({
   providedIn: 'root'
@@ -126,7 +128,7 @@ export class HttpClien {
   }
 
   logGetHtml(): Observable<string> {
-    return this.http.get(this.apiUrl + 'admin/web/logs', {
+    return this.http.get(this.apiUrl + 'admin/api/web/logs', {
       responseType: 'text'
     }).pipe(
       catchError(this.errorHandler)
@@ -165,6 +167,27 @@ export class HttpClien {
 
   activeUser(user: StaffUser): Observable<any> {
     return this.http.post<StaffUser>(this.apiUrl + 'admin/api/empower/user', user)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  intervalRepairMaidStatisticByModel(init: Date, finaly: Date): Observable<any> {
+    const params = new HttpParams().set('initiate', init.toString()).set('finale', finaly.toString());
+    return this.http.get<[]>(this.apiUrl + 'admin/api/interval/repair', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  intervalRepairMaidStatisticByMonth(init: Date, finaly: Date): Observable<StatisticModel[]> {
+    const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
+    return this.http.get<StatisticModel[]>(this.apiUrl + 'admin/api/statistic/repair/month/interval', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  intervalRepairModelAndPartsStatistic(init: Date, finaly: Date): Observable<StatisticModelParts[]> {
+    const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
+    return this.http.get<any>(this.apiUrl + 'admin/api/statistic/repair/model/parts/interval', {params})
       .pipe(
         catchError(this.errorHandler));
   }

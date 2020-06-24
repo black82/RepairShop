@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {HttpClien} from '../service/clientservice.service';
+import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
+import {faLaptopCode} from '@fortawesome/free-solid-svg-icons/faLaptopCode';
+import {faChartLine} from '@fortawesome/free-solid-svg-icons/faChartLine';
+import {faUserEdit} from '@fortawesome/free-solid-svg-icons/faUserEdit';
+import {faFileMedicalAlt} from '@fortawesome/free-solid-svg-icons/faFileMedicalAlt';
+import {faEnvelopeOpen} from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,6 +17,12 @@ import {HttpClien} from '../service/clientservice.service';
 export class AdminDashboardComponent implements OnInit {
   logs_icon = faCogs;
   isAdmin = false;
+  calendar = faCalendarPlus;
+  device = faLaptopCode;
+  charts = faChartLine;
+  users = faUserEdit;
+  logs = faFileMedicalAlt;
+  mail = faEnvelopeOpen;
 
   constructor(private httpService: HttpClien) {
   }
