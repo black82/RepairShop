@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {faEnvelopeOpen, faHome, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
+import {faEnvelopeOpen, faHome, faMobile, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import {HttpClien} from '../service/clientservice.service';
 import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
@@ -12,6 +12,7 @@ import {faPhoneSquare} from '@fortawesome/free-solid-svg-icons/faPhoneSquare';
 import {faIdCard} from '@fortawesome/free-solid-svg-icons/faIdCard';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
 import {faUserPlus} from '@fortawesome/free-solid-svg-icons/faUserPlus';
+import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   signIn = faSignInAlt;
   signOut = faSignOutAlt;
   signUp = faUserPlus;
+  devices = faMobile;
+  repair = faTools;
   private subscribe_admin: Subscription;
 
 

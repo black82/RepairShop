@@ -78,6 +78,10 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.searchRepairByIdRepair();
         break;
       }
+      case 'device-imei': {
+        this.searchByImei();
+        break;
+      }
     }
 
 
@@ -114,10 +118,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
 
       },
       error => {
-        this.alert_service.error(null,
-          'Unfortunately we could not find this client '
-          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-        ;
+
       });
   }
 
@@ -133,10 +134,6 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.hidem_show_form_local.emit();
       },
       error => {
-        this.alert_service.error(null,
-          'Unfortunately we could not find this client '
-          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-        ;
       });
 
   }
@@ -153,10 +150,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.hidem_show_form_local.emit();
       },
       error => {
-        this.alert_service.error(null,
-          'Unfortunately we could not find this client '
-          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-        ;
+
       });
 
   }
@@ -174,10 +168,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.hidem_show_form_local.emit();
       },
       error => {
-        this.alert_service.error(null,
-          'Unfortunately we could not find this client '
-          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-        ;
+
       });
   }
 
@@ -192,10 +183,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.hidem_show_form_local.emit();
       },
       error => {
-        this.alert_service.error(null,
-          'Unfortunately we could not find this client '
-          + this.formInput.controls.ob.value + ' please try with other search data.', false, true, '', error)
-        ;
+
       });
 
   }
@@ -214,5 +202,22 @@ export class SearchformComponent implements OnInit, OnDestroy {
     if (this.show_form) {
       this.show_form.unsubscribe();
     }
+  }
+
+  private searchByImei() {
+    if (this.formInput.invalid) {
+      this.alert_service.info(null, 'The value entered must be invalid', false, false, null, null);
+      return;
+    }
+    this.client_service.searchByTImei(this.formInput.controls.ob.value).subscribe(
+      client => {
+        this.hidem_show_form_local.emit();
+        this.client = client;
+        this.actionA.emit(this.client);
+
+      },
+      error => {
+
+      });
   }
 }

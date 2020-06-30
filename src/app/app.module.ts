@@ -43,6 +43,8 @@ import {StatisticRepairComponent} from './component/statistic-repair/statistic-r
 import {AppComponent} from './app.component';
 import {ChartModule} from 'primeng';
 import {StatisticModelPartsComponent} from './component/statistic-model-parts/statistic-model-parts.component';
+import {AddNewDeviceComponent} from './component/add-new-device/add-new-device.component';
+import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.component';
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import {StatisticModelPartsComponent} from './component/statistic-model-parts/st
     ExtendDateRepairComponent,
     UserAdminComponent,
     StatisticRepairComponent,
-    StatisticModelPartsComponent
+    StatisticModelPartsComponent,
+    AddNewDeviceComponent,
+    AddnewRepairComponent
   ],
   imports: [
     NgbModule,

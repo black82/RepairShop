@@ -16,11 +16,15 @@ import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.
 import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
 import {UserAdminComponent} from './component/user-admin/user-admin.component';
 import {StatisticComponent} from './component/statistic/statistic.component';
+import {AddNewDeviceComponent} from './component/add-new-device/add-new-device.component';
+import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.component';
 
 
 export const routers: Routes = [
   {path: '', component: HomeComponent},
   {path: 'input/client/device', component: DeviceinputComponent, canActivate: [AutGuardService]},
+  {path: 'input/client/new/device', component: AddNewDeviceComponent, canActivate: [AutGuardService]},
+  {path: 'input/client/new/repair', component: AddnewRepairComponent, canActivate: [AutGuardService]},
   {path: 'output/client/device', component: OtpoutDeviceComponent, canActivate: [AutGuardService]},
   {path: 'search/telephone/number', component: SearchpageComponent, canActivate: [AutGuardService]},
   {path: 'client/sign-up', component: SignUpComponent},

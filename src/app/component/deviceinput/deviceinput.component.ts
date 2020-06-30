@@ -46,6 +46,7 @@ import {AnimeServiceService} from '../service/anime-service.service';
 import {Subscription} from 'rxjs';
 import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
 import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
+import {DeviceInputService} from '../service/device-input.service';
 
 @Component({
   selector: 'app-deviceinput',
@@ -101,6 +102,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   sig_pad_event: Subscription;
   email_send_event: Subscription;
   email_anime_event: Subscription;
+  private subscriber: Subscription;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
@@ -108,19 +110,20 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
               private imageSender: ImageSenderService,
               private emailSender: EmailSenderService,
               private sig_pad_service: SigPadService,
-              private animation_wait: AnimeServiceService) {
+              private animation_wait: AnimeServiceService,
+              private service_input: DeviceInputService) {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      telephone_number: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required]),
-      model: new FormControl('', [Validators.required]),
-      state_of_use: new FormControl('', [Validators.required]),
-      imei: new FormControl('', [Validators.required]),
-      code_device: new FormControl('', [Validators.required]),
-      password_device: new FormControl('', [Validators.required]),
-      accessory: new FormControl('', [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      telephone_number: new FormControl(null, [Validators.required]),
+      address: new FormControl(null, [Validators.required]),
+      model: new FormControl(null, [Validators.required]),
+      state_of_use: new FormControl(null, [Validators.required]),
+      imei: new FormControl(null, [Validators.required]),
+      code_device: new FormControl(null, [Validators.required]),
+      password_device: new FormControl(null, [Validators.required]),
+      accessory: new FormControl(null, [Validators.required]),
       date_to_enter: new FormControl('', [Validators.required]),
       defect: new FormControl('', [Validators.required]),
       deposit: new FormControl('', [Validators.required]),
@@ -140,9 +143,14 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       email_send: new FormControl(false, [Validators.required]),
       date_exit: new FormControl('', [Validators.required])
     });
+
   }
 
   ngOnInit() {
+    this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
+      this.client = clientPush;
+      this.validation_insert_input();
+    });
     this.animation_call();
     this.invoice_event = this.print.invoice_make.subscribe(invoice => {
       this.create_invoice(invoice);
@@ -186,7 +194,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
         this.animation_wait.$anime_show.emit(false);
         this.alert_service.success(null, 'The client' + this.client_after_saved.name +
           'received a device and create the repair procedure !!! Client Id '
-          + this.client_after_saved.id + 'Document url : \n' + url, true, null, '');
+          + this.client_after_saved.id + '\n Document url : \n' + '<a [href]="{{url}}">' + url + '</a>', true, null, '');
         return;
       }, error => {
         this.animation_wait.$anime_show.emit(false);
@@ -352,5 +360,14 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     if (this.email_anime_event) {
       this.email_anime_event.unsubscribe();
     }
+  }
+
+  validation_insert_input() {
+    Object.keys(this.formClient.controls).forEach(key => {
+      setTimeout(() => {
+
+
+      }, 1000);
+    });
   }
 }

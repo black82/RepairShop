@@ -1,0 +1,28 @@
+<div class="container-body">
+  <div *ngIf="button_container" class="title-container">
+    <h1 class="title-form">Search the customer by Email or Phone Number to initiate a new Repair</h1>
+  </div>
+  <div *ngIf="button_container" class="button-cont">
+    <a (click)="searchByEmail()" class="button button-small show-form">
+    <span> <fa-icon [icon]="mail" class="button-icon "></fa-icon>
+      Search by email</span></a>
+    <a (click)="searchByPhone()" class="button button-small show-form">
+    <span> <fa-icon [icon]="phone" class="button-icon "></fa-icon>
+      Search by Tel. Number</span></a>
+  </div>
+  <div *ngIf="search_email_form" class="container-search">
+    <div class="search-input-container1">
+      <app-searchform (actionA)="client_catch($event)" [textButton]="buttonEmailSearch" [titleForm]="nameFormByEmail"
+                      [typeForm]="'email'"></app-searchform>
+    </div>
+  </div>
+  <div *ngIf="search_phone_form" class="container-search">
+    <div class="search-input-container1">
+      <app-searchform (actionA)="client_catch($event)" [textButton]="buttonPhone" [titleForm]="nameFormPhone"
+                      [typeForm]="'telephone'"></app-searchform>
+    </div>
+  </div>
+  <div *ngIf="device_input_container" class="device-input-container">
+    <app-deviceinput></app-deviceinput>
+  </div>
+</div>

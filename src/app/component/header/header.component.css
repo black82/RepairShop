@@ -66,9 +66,6 @@ svg {
   color: #FFF;
 }
 
-#menu li:hover a, #menu li.active a, #menu li.active span {
-}
-
 
 
 #menu .current_page_item a:hover,
@@ -194,7 +191,8 @@ svg {
 }
 
 .submenu-search,
-.submenu-admin {
+.submenu-admin,
+.submenu-client {
   margin-left: -15%;
   list-style: none;
   min-width: 200px;
@@ -206,18 +204,20 @@ svg {
   visibility: hidden;
   opacity: 0;
   transform: scale(.8);
-  transition: .4s ease-in-out;
+  transition: 0.8s ease-in-out;
 }
 
 .submenu:hover,
 .submenu-search:hover,
-.submenu-admin:hover {
+.submenu-admin:hover,
+.submenu-client:hover {
   border: 1px solid #34495E;
 }
 
 .submenu li a,
 .submenu-search li a,
-.submenu-admin li a {
+.submenu-admin li a,
+.submenu-client li a {
   padding: 10px 0;
   margin: 0 10px;
   border-bottom: 1px solid #efefef;
@@ -228,7 +228,8 @@ svg {
 
 .sign-in > #sign-in:hover .submenu,
 #search-menu:hover .submenu-search,
-#admin-menu:hover .submenu-admin {
+#admin-menu:hover .submenu-admin,
+#new-client-menu:hover .submenu-client {
   visibility: visible;
   opacity: 1;
   transform: scale(1);

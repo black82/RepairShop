@@ -207,10 +207,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     invoiceToPrintPage.destinationUser = this.client.email;
     invoiceToPrintPage.subjectEmail = 'RfvTechnology numero di riparazione -  ' + this.id;
     if (this.print_entity.type_client_print === 1) {
-      invoiceToPrintPage.messageEmail = 'Il dispositivo sarà pronto per essere ritirato alla data - ' + this.date_exit;
+      invoiceToPrintPage.messageEmail = 'The device will be ready to date : ' + this.date_exit;
     } else {
-      invoiceToPrintPage.messageEmail = 'Sono contento che tu abbia scelto la' +
-        ' RFVTehnology . Ti stiamo aspettando di nuovo. Buona giornata.';
+      invoiceToPrintPage.messageEmail = 'Device was taken ex offices by the owner.';
     }
     invoiceToPrintPage.htmlPage = html;
     invoiceToPrintPage.repairID = +this.id;

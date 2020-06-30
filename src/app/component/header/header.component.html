@@ -15,9 +15,29 @@
               <li class="current_page_item"><a accesskey="1" routerLink="/" title="">
                 <fa-icon [icon]="home"></fa-icon>
                 Homepage</a></li>
-              <li class="current_page_item"><a accesskey="2" class="teaming"
-                                               routerLink="/input/client/device" title="">Enter
+              <li class="current_page_item" id="new-client-menu"><a accesskey="2" class="teaming"
+                                                                    routerLink="/input/client/device" title="">Enter
                 Device</a>
+                <div class="current_page_item" id="client_menu">
+                  <div class="client-menu">
+                    <ul class="submenu-client">
+                      <li><a class="menu-link" routerLink="/input/client/device">
+                        <fa-icon [icon]="signUp"></fa-icon>
+                        Create new Client</a>
+                      </li>
+                      <br>
+                      <li><a routerLink="/input/client/new/device">
+                        <fa-icon [icon]="devices"></fa-icon>
+                        Add new device to present Client</a>
+                      </li>
+                      <br>
+                      <li><a routerLink="/input/client/new/repair">
+                        <fa-icon [icon]="repair"></fa-icon>
+                        Add new repair to present device&Client</a></li>
+                      <br>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li class="current_page_item"><a accesskey="3" class="teaming"
                                                routerLink="/output/client/device" title="">Returning

@@ -39,8 +39,8 @@ export class TokenInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
-        let message = error?.error?.message;
-        console.log('error--->>>', error);
+        let message = error?.error?.rootCause?.message;
+        console.log('error--->>>', message);
         if (error?.error?.message) {
           if (error?.error?.message.includes('Expired or invalid JWT token')) {
             error.error.status = 401;

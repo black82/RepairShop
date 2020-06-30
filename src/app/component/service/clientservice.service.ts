@@ -16,9 +16,9 @@ import {StatisticModelParts} from '../entity/StatisticModelParts';
 })
 export class HttpClien {
   // redirectUrl: string;
-  apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
+  // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
 
-  // apiUrl = 'http://localhost:8080/';
+  apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient,
               private adminService: AdminServiceService) {
@@ -41,6 +41,15 @@ export class HttpClien {
   searchByTelephoneNumber(telephone: string): Observable<Client> {
     return this.http.get<Client>(this.apiUrl + 'api/search/number', {
       params: new HttpParams().set('telephone', telephone)
+    }).pipe(
+      catchError(
+        this.errorHandler)
+    );
+  }
+
+  searchByTImei(imei: string): Observable<Client> {
+    return this.http.get<Client>(this.apiUrl + 'api/search/imei/number', {
+      params: new HttpParams().set('imei', imei)
     }).pipe(
       catchError(
         this.errorHandler)

@@ -19,7 +19,7 @@
             [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.name.dirty ||
             formClient.controls.name.touched) && formClient.controls.name.invalid && formClient.controls.name.errors}"
             class="input-1"
-            formControlName="name" type="text">
+            [ngModel]="client?.name" formControlName="name" type="text">
         </label>
         <label>
           <span class="input-title">Family of Client</span>
@@ -27,13 +27,13 @@
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.family.dirty ||
             formClient.controls.family.touched) && formClient.controls.family.invalid && formClient.controls.family.errors}"
-            class="input-1" formControlName="family" type="text">
+            [ngModel]="client?.family" class="input-1" formControlName="family" type="text">
         </label>
         <label><span class="input-title">Email</span>
           <fa-icon [icon]="email" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.email.dirty || formClient.controls.email.touched) && formClient.controls.email.invalid && formClient.controls.email.errors}"
-            class="input-1" formControlName="email" type="email">
+            [ngModel]="client?.email" class="input-1" formControlName="email" type="email">
         </label>
         <label>
           <span class="input-title">Telethon Number</span>
@@ -41,21 +41,21 @@
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number.dirty || formClient.controls.telephone_number.touched)
            && formClient.controls.telephone_number.invalid && formClient.controls.telephone_number.errors}"
                  class="input-1" formControlName="telephone_number"
-                 pattern="^[0-9\-\+]{9,15}$" type="tel">
+                 [ngModel]="client?.telephone_number" pattern="^[0-9\-\+]{9,15}$" type="tel">
         </label>
 
         <label><span class="input-title">Address</span>
           <fa-icon [icon]="address" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.address.dirty || formClient.controls.address.touched)
            && formClient.controls.address.invalid && formClient.controls.address.errors}" class="input-1"
-                 formControlName="address" type="text">
+                 [ngModel]="client?.address" formControlName="address" type="text">
         </label>
         <label>
           <span class="input-title">Model</span>
           <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
            && formClient.controls.model.invalid && formClient.controls.model.errors}" class="input-1"
-                 formControlName="model" type="text">
+                 [ngModel]="client?.device[0]?.model" formControlName="model" type="text">
         </label>
 
         <label>
@@ -70,7 +70,7 @@
           <fa-icon [icon]="used" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.state_of_use.dirty || formClient.controls.state_of_use.touched)
            && formClient.controls.state_of_use.invalid && formClient.controls.state_of_use.errors}" class="input-1"
-                 formControlName="state_of_use" type="text">
+                 [ngModel]="client?.device[0]?.state_of_use" formControlName="state_of_use" type="text">
         </label>
 
       </div>
@@ -79,7 +79,7 @@
           <fa-icon [icon]="code" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.code_device.dirty || formClient.controls.code_device.touched)
            && formClient.controls.code_device.invalid && formClient.controls.code_device.errors}" class="input-2"
-                 formControlName="code_device" type="text">
+                 [ngModel]="client?.device[0]?.code_device" formControlName="code_device" type="text">
         </label>
         <label>
           <span class="input-title">Date to enter</span>
@@ -101,7 +101,7 @@
           <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.imei.dirty || formClient.controls.imei.touched)
            && formClient.controls.imei.invalid && formClient.controls.imei.errors&& formClient.controls.imei.pristine}"
-                 class="input-2" formControlName="imei" type="text">
+                 [ngModel]="client?.device[0]?.imei" class="input-2" formControlName="imei" type="text">
         </label>
         <label>
           <span class="input-title">Deposit</span>
@@ -115,7 +115,7 @@
           <fa-icon [icon]="password" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.password_device.dirty || formClient.controls.password_device.touched)
            && formClient.controls.password_device.invalid && formClient.controls.password_device.errors&& formClient.controls.password_device.pristine}"
-                 class="input-2" formControlName="password_device"
+                 [ngModel]="client?.device[0]?.password_device" class="input-2" formControlName="password_device"
                  type="text">
         </label>
         <label>
@@ -123,7 +123,7 @@
           <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.accessory.dirty || formClient.controls.accessory.touched)
            && formClient.controls.accessory.invalid && formClient.controls.accessory.errors&& formClient.controls.accessory.pristine}"
-                 class="input-2" formControlName="accessory" type="text">
+                 [ngModel]="client?.device[0]?.accessory" class="input-2" formControlName="accessory" type="text">
         </label>
         <label>
           <span class="input-title">The date will be completed</span>

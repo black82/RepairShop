@@ -1,0 +1,19 @@
+<div class="container-body">
+  <div *ngIf="button_container" class="title-container">
+    <h1 class="title-form">Search the customer by Device Imei to initiate a new Repair</h1>
+  </div>
+  <div *ngIf="button_container" class="button-cont">
+    <a (click)="searchByImei()" class="button button-small show-form">
+    <span> <fa-icon [icon]="imei_icon" class="button-icon "></fa-icon>
+      Search by Imei</span></a>
+  </div>
+  <div *ngIf="search_imei_form" class="container-search">
+    <div class="search-input-container1">
+      <app-searchform (actionA)="client_catch($event)" [textButton]="buttonEmailSearch" [titleForm]="nameFormByImei"
+                      [typeForm]="'device-imei'"></app-searchform>
+    </div>
+  </div>
+  <div *ngIf="device_input_container" class="device-input-container">
+    <app-deviceinput></app-deviceinput>
+  </div>
+</div>
