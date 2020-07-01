@@ -18,7 +18,7 @@ export class HttpClien {
   // redirectUrl: string;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
 
-  apiUrl = 'http://localhost:8080/';
+   apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient,
               private adminService: AdminServiceService) {
@@ -122,8 +122,8 @@ export class HttpClien {
         catchError(this.errorHandler));
   }
 
-  sendEmailClient(invoice: InvoiceToolsDto): Observable<URL> {
-    return this.http.post<URL>(this.apiUrl + 'admin/api/sample/email/attachment', invoice)
+  sendEmailClient(invoice: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/sample/email/attachment', invoice)
       .pipe(
         catchError(this.errorHandler)
       );
