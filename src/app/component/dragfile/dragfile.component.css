@@ -1,8 +1,8 @@
 
 .container-drag {
-  max-width: 90% !important;
-  min-width: 500px;
-  display: inline-flex !important;
+  max-width: 90%;
+  width: 90%;
+  display: inline-flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   flex-direction: column;
@@ -11,21 +11,21 @@
   -webkit-box-align: baseline;
   align-items: baseline;
   align-content: flex-start;
-  max-height: 13.3em !important;
-
+  max-height: 13em;
+  margin: 0.5em 0;
   box-sizing: border-box;
 }
 
 ngx-dropzone {
   display: block;
   box-sizing: content-box;
-  min-width: 100% !important;
+  min-width: 100%;
   position: relative;
   -webkit-appearance: none;
   background: transparent;
   border-radius: 0.50em;
-  margin: 0.5em 0em;
-  padding: 1em 1em;
+  margin: 0.5em 0;
+  padding: 0.6em 1em;
   box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
   border: solid 1px rgba(0, 0, 0, 0.15);
   -webkit-transition: all 0.35s ease-in-out;

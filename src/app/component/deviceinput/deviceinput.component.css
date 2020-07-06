@@ -9,7 +9,7 @@
 
 .row-2 label,
 .row-1 label {
-  width: 100%;
+  width: 90%;
   display: inline-flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -24,7 +24,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-around;
-  align-items: baseline;
+
   align-content: center;
   width: 48%;
 }
@@ -178,9 +178,9 @@ form ::-moz-focus-inner {
   content: '\2713';
   display: block;
   text-align: center;
-  color: #1ABC9C;
-  position: absolute;
-  left: 0.7rem;
+  color: white;
+  position: fixed;
+  left: 0.9rem;
   top: 0.2rem;
 }
 

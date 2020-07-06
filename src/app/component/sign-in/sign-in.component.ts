@@ -52,6 +52,7 @@ export class SignInComponent implements OnInit {
         ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
       return;
     }
+    const nav_url = localStorage.getItem('navigate');
     this.deleteTacked();
     const client = this.createSigInEntity();
     this.animation_wait.$anime_show.emit(true);
@@ -65,7 +66,6 @@ export class SignInComponent implements OnInit {
           }
           const element = document.querySelector('.close') as HTMLElement;
           localStorage.setItem('token', res.token);
-          const nav_url = localStorage.getItem('navigate');
           if (element) {
             element.click();
           }

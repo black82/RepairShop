@@ -215,9 +215,6 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.client = client;
         this.actionA.emit(this.client);
 
-      },
-      error => {
-
       });
   }
 }

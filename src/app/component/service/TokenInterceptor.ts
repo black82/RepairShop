@@ -40,26 +40,31 @@ export class TokenInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         let message = error?.error?.rootCause?.message;
-        console.log('error--->>>', message);
-        if (error?.error?.message) {
-          if (error?.error?.message.includes('Expired or invalid JWT token')) {
+        if (error?.message) {
+          if (error?.message.includes('Expired or invalid JWT token')) {
             error.error.status = 401;
             this.httpClient.logout();
-            localStorage.setItem('navigate', this.currentRoute);
+            localStorage.setItem('navigate', this.router.url);
             this.router.navigate(['client/sign-in']).then(r => r);
             return;
           }
 
-          if (error?.error?.status === 401) {
+          if (error?.status === 401) {
             this.httpClient.logout();
-            localStorage.setItem('navigate', this.currentRoute);
+            localStorage.setItem('navigate', this.router.url);
             this.router.navigate(['client/sign-in']).then(r => r);
             return;
           }
         }
         if (!message) {
-          message = error?.message;
+          if (error?.status === 404 && error?.message.includes('api')) {
+
+            message = 'Unfortunately, nothing could be found. Check the data entered.';
+          } else {
+            message = error?.message;
+          }
         }
+        console.log('error--->>>', error?.status);
         this?.alertService.error(null, message, false, false, '', error);
         return throwError(error);
       }));

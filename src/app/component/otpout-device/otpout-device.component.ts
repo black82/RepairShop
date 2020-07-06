@@ -161,17 +161,17 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   createFormAfterClientCam(): void {
     this.formClient = this.fb.group({
       return_date: [null, [Validators.required]],
-      name_family_output: [this.client.family, [Validators.required]],
-      mobile_output: [this.client.device[0].model, [Validators.required]],
-      imei_output: [this.client.device[0].imei, [Validators.required]],
-      defect_output: [this.client.device[0].repairs[0].defect, [Validators.required]],
-      parts_replace_output: [this.client.device[0].repairs[0].parts_replaced, [Validators.required]],
-      work_don_output: [this.client.device[0].repairs[0].work_don, [Validators.required]],
-      price_output: [this.client.device[0].repairs[0].price, [Validators.required]],
-      address_output: [this.client.address, [Validators.required]],
-      model_output: [this.client.device[0].model, [Validators.required]],
-      deposit_output: [this.client.device[0].repairs[0].deposit, [Validators.required]],
-      accessory_output: [this.client.device[0].accessory, [Validators.required]],
+      name_family_output: [null, [Validators.required]],
+      mobile_output: [null, [Validators.required]],
+      imei_output: [null, [Validators.required]],
+      defect_output: [null, [Validators.required]],
+      parts_replace_output: [null, [Validators.required]],
+      work_don_output: [null, [Validators.required]],
+      price_output: [null, [Validators.required]],
+      address_output: [null, [Validators.required]],
+      model_output: [null, [Validators.required]],
+      deposit_output: [null, [Validators.required]],
+      accessory_output: [null, [Validators.required]],
       sensor_output: [false, [Validators.required]],
       display_output: [false, [Validators.required]],
       connections_output: [false, [Validators.required]],
@@ -232,7 +232,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.repair_output = new Repair(this.client.device[0].repairs[0].repair_Id,
       this.client.device[0].repairs[0].date_to_enter,
       this.client.device[0].repairs[0].exp_complet_date,
-      this.formClient.controls.return_date.value,
+      this.setDataHourAndMin(this.formClient.controls.return_date.value),
       this.formClient.controls.defect_output.value,
       this.formClient.controls.deposit_output.value,
       this.formClient.controls.price_output.value,
@@ -396,14 +396,29 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     }
   }
 
+  setDataHourAndMin(date: Date): Date {
+    let dateReturn = null;
+    if (date) {
+      dateReturn = new Date(date);
+      const data = new Date();
+      dateReturn.setHours(data.getHours());
+      dateReturn.setMinutes(data.getMinutes());
+      dateReturn.setSeconds(data.getSeconds());
+    }
+    return dateReturn;
+  }
+
   private filterRepair(): void {
     const device = this.client.device;
     device.forEach(value => {
         value.repairs.forEach(repair => {
           if (!repair.repair_Id.toString().includes(this.id_repair.toString())) {
-            device.splice(device.lastIndexOf(value), 1);
+            value.repairs.splice(value.repairs.lastIndexOf(repair), 1);
           }
         });
+        if (value.repairs.length === 0) {
+          device.splice(device.indexOf(value, 1));
+        }
       }
     );
     this.client.device = device;

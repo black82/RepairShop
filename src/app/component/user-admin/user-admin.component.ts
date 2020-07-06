@@ -42,7 +42,6 @@ export class UserAdminComponent implements OnInit {
   getAllUsers() {
     this.httpService.getAllUser().subscribe(value => {
       this.users = value;
-      console.log(value);
       this.showUser = true;
     });
   }

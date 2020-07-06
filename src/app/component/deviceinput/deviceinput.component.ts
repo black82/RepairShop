@@ -166,7 +166,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input);
-    this.repair = new Repair(null, formData.date_to_enter, formData.date_exit, null, formData.defect,
+    this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
+      this.setDataHourAndMin(formData.date_exit), null, formData.defect,
       formData.deposit, formData.price, null, null, true,
       this.inputTest, null, formData.note, this.repairFileStorage);
     this.device = new Device(null, formData.model, formData.state_of_use,
@@ -174,6 +175,18 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.client = new Client(null, formData.family, formData.name, formData.email,
       formData.telephone_number, formData.address, [this.device], formData.email_send);
     return this.client;
+  }
+
+  setDataHourAndMin(date: Date): Date {
+    let dateReturn = null;
+    if (date) {
+      dateReturn = new Date(date);
+      const data = new Date();
+      dateReturn.setHours(data.getHours());
+      dateReturn.setMinutes(data.getMinutes());
+      dateReturn.setSeconds(data.getSeconds());
+    }
+    return dateReturn;
   }
 
   submitForm() {
@@ -194,7 +207,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
         this.animation_wait.$anime_show.emit(false);
         this.alert_service.success(null, 'The client' + this.client_after_saved.name +
           'received a device and create the repair procedure !!! Client Id '
-          + this.client_after_saved.id + '\n Document url : \n' + '<a [href]="{{url}}">' + url + '</a>', true, null, '');
+          + this.client_after_saved.id + '\n Document url : \n' + url, true, null, '');
         return;
       }, error => {
         this.animation_wait.$anime_show.emit(false);

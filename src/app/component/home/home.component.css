@@ -194,7 +194,7 @@
   position: center;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
   transition: text-shadow 0.5s;
 }
 
@@ -244,6 +244,7 @@
   perspective: 500px;
   transition: .1s;
 
+
 }
 
 .icon {
@@ -271,6 +272,7 @@
   transform-origin: left;
   transition: .5s;
   border-radius: 10px;
+  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 .button:hover {
@@ -360,50 +362,113 @@
 }
 
 .animation-tooltip {
-  -webkit-animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-  animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  -webkit-animation: bounce-in-fwd 1.1s both;
+  animation: bounce-in-fwd 1.1s both;
 }
 
-@keyframes text-focus-in {
+@-webkit-keyframes bounce-in-fwd {
   0% {
-    -webkit-filter: blur(12px);
-    filter: blur(12px);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
     opacity: 1;
   }
+  55% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: scale(0.84);
+    transform: scale(0.84);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  89% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
   100% {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes bounce-in-fwd {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
     opacity: 1;
   }
-}
-
-@-webkit-keyframes kenburns-top {
-  0% {
-    -webkit-transform: scale(1) translateY(0);
-    transform: scale(1) translateY(0);
-    -webkit-transform-origin: 50% 16%;
-    transform-origin: 50% 16%;
+  55% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: scale(0.84);
+    transform: scale(0.84);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  89% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
   }
   100% {
-    -webkit-transform: scale(1.25) translateY(-15px);
-    transform: scale(1.25) translateY(-15px);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-  }
-}
-
-@keyframes kenburns-top {
-  0% {
-    -webkit-transform: scale(1) translateY(0);
-    transform: scale(1) translateY(0);
-    -webkit-transform-origin: 50% 16%;
-    transform-origin: 50% 16%;
-  }
-  100% {
-    -webkit-transform: scale(1.25) translateY(-15px);
-    transform: scale(1.25) translateY(-15px);
-    -webkit-transform-origin: top;
-    transform-origin: top;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
 }
 

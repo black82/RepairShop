@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   tooltipAnimation() {
-    document.querySelectorAll('.tooltip').forEach(tooltip => {
+    document.querySelectorAll('.icon_cont').forEach(tooltip => {
       tooltip.addEventListener('mouseenter', () => {
         tooltip.classList.add('animation-tooltip');
       });

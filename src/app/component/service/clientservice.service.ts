@@ -15,10 +15,10 @@ import {StatisticModelParts} from '../entity/StatisticModelParts';
   providedIn: 'root'
 })
 export class HttpClien {
-  // redirectUrl: string;
-  // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
 
-   apiUrl = 'http://localhost:8080/';
+  apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
+
+  // apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient,
               private adminService: AdminServiceService) {
@@ -212,12 +212,6 @@ export class HttpClien {
       error1.error.message = 'A client-side or network error occurred. Handle it accordingly.';
       error = error1;
       console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(error?.name +
-        `Backend returned code ${error?.status}, ` +
-        `body was: ${error?.message}`);
     }
     return throwError(error);
   }

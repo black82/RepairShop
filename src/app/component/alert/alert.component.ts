@@ -11,6 +11,7 @@ import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
+import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 
 
 @Component({
@@ -26,9 +27,12 @@ export class AlertComponent implements OnInit {
   icon: any;
   color_icon: any;
   info = faInfoCircle;
+  exclamation = faExclamationCircle;
   error_status: number;
   alert_closet = false;
   private timeout: number;
+  exclamation_triangle = faExclamationTriangle;
+  sucess = faCheckCircle;
 
 
   constructor(private alertService: AlertServiceService, private router: Router) {
@@ -61,10 +65,10 @@ export class AlertComponent implements OnInit {
   timeout_remove_alert() {
     if (!document.querySelector('.show--alert')) {
       this.initAlert();
-      this.timeout = setTimeout(() => {
-        this.removeAlert();
-        clearTimeout(this.timeout);
-      }, 10000);
+      // this.timeout = setTimeout(() => {
+      //   this.removeAlert();
+      //   clearTimeout(this.timeout);
+      // }, 10000);
     } else {
       this.removeAlert();
       this.initAlert();
@@ -84,13 +88,13 @@ export class AlertComponent implements OnInit {
   }
 
   removeAlert() {
-    const remove = document.querySelector('.show--alert');
-    remove?.classList.add('hidden--alert');
-    remove?.classList?.remove('show--alert');
+    const remove = document.querySelectorAll('.show--alert');
+    remove?.forEach(value => {
+      value?.classList.add('hidden--alert');
+    });
   }
 
   closeBaton() {
-    clearTimeout(this.timeout);
     this.removeAlert();
   }
 

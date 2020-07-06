@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {HttpClien} from '../service/clientservice.service';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {faFileMedicalAlt} from '@fortawesome/free-solid-svg-icons/faFileMedicalAlt';
 
 @Component({
   selector: 'app-log-service',
@@ -11,7 +12,7 @@ import {AnimeServiceService} from '../service/anime-service.service';
 export class LogServiceComponent implements OnInit, OnDestroy {
   logHtml: SafeHtml;
   hidden = true;
-
+  logs = faFileMedicalAlt;
   constructor(private sanitizer: DomSanitizer,
               private httpClient: HttpClien,
               private animation_wait: AnimeServiceService) {

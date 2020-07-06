@@ -120,9 +120,8 @@ export class SingleContentComponent implements OnInit {
     value_test_input.push(repaired.inputModule.sensors_input);
     value_test_input.push(repaired.inputModule.display_touch_input);
 
-    const valuie_test_output = this.create_output_test_name(repaired);
-    console.log(value_test_input);
-    return new ElementRepair(false, repaired, this.check_test_OK(value_test_input), this.check_test_OK(valuie_test_output));
+    const val_test_output = this.create_output_test_name(repaired);
+    return new ElementRepair(false, repaired, this.check_test_OK(value_test_input), this.check_test_OK(val_test_output));
   }
 
   create_output_test_name(repaired: Repair): boolean [] {
@@ -184,7 +183,6 @@ export class SingleContentComponent implements OnInit {
     if (!test[10]) {
       test_result.push(' Il display touch del dispositivo è danneggiato');
     }
-    console.log(test_result);
     return test_result;
   }
 

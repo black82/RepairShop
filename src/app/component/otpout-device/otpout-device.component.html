@@ -29,7 +29,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.name_family_output.dirty ||
             formClient.controls.name_family_output.touched) && formClient.controls.name_family_output.invalid && formClient.controls.name_family_output.errors}"
                    class="input-1"
-                   formControlName="name_family_output" value="{{client.name+ ' ' + client.family}}">
+                   [ngModel]="client?.name+ ' ' + client?.family" formControlName="name_family_output">
           </label>
           <label>
             <span class="input-title">Model</span>
@@ -37,14 +37,14 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.mobile_output.dirty ||
             formClient.controls.mobile_output.touched) && formClient.controls.mobile_output.invalid && formClient.controls.mobile_output.errors}"
                    class="input-1"
-                   formControlName="mobile_output">
+                   [ngModel]="client?.device[0]?.model" formControlName="mobile_output">
           </label>
           <label>
             <span class="input-title">IMEI&&SN</span>
             <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.imei_output.dirty ||
             formClient.controls.imei_output.touched) && formClient.controls.imei_output.invalid && formClient.controls.imei_output.errors}"
-                   [value]="client.device[0]?.imei" class="input-1"
+                   [ngModel]="client?.device[0]?.imei" class="input-1"
                    formControlName="imei_output">
           </label>
           <label>
@@ -52,14 +52,14 @@
             <fa-icon [icon]="cogs" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.defect_output.dirty ||
             formClient.controls.defect_output.touched) && formClient.controls.defect_output.invalid && formClient.controls.defect_output.errors}"
-                   [value]="client.device[0].repairs[0]?.defect" class="input-1"
+                   [ngModel]="client?.device[0]?.repairs[0]?.defect" class="input-1"
                    formControlName="defect_output">
           </label>
           <label><span class="input-title">Parts replaced</span>
             <fa-icon [icon]="chip" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.parts_replace_output.dirty ||
             formClient.controls.parts_replace_output.touched) && formClient.controls.parts_replace_output.invalid && formClient.controls.parts_replace_output.errors}"
-                   [value]="client.device[0].repairs[0]?.parts_replaced" class="input-1"
+                   [ngModel]="client?.device[0]?.repairs[0]?.parts_replaced" class="input-1"
                    formControlName="parts_replace_output">
           </label>
 
@@ -69,7 +69,7 @@
             <fa-icon [icon]="work" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.work_don_output.dirty ||
             formClient.controls.work_don_output.touched) && formClient.controls.work_don_output.invalid && formClient.controls.work_don_output.errors}"
-                   [value]="client.device[0].repairs[0]?.work_don" class="input-1"
+                   [ngModel]="client?.device[0]?.repairs[0]?.work_don" class="input-1"
                    formControlName="work_don_output">
           </label>
 
@@ -77,7 +77,7 @@
             <fa-icon [icon]="money" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.price_output.dirty ||
             formClient.controls.price_output.touched) && formClient.controls.price_output.invalid && formClient.controls.price_output.errors}"
-                   [value]="client.device[0].repairs[0]?.price" class="input-2"
+                   [ngModel]="client?.device[0]?.repairs[0]?.price" class="input-2"
                    formControlName="price_output">
           </label>
           <label>
@@ -85,7 +85,7 @@
             <fa-icon [icon]="address" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.address_output.dirty ||
             formClient.controls.address_output.touched) && formClient.controls.address_output.invalid && formClient.controls.address_output.errors}"
-                   [value]="client?.address" class="input-2"
+                   [ngModel]="client?.address" class="input-2"
                    formControlName="address_output">
           </label>
           <label>
@@ -93,7 +93,7 @@
             <fa-icon [icon]="model" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.model_output.dirty ||
             formClient.controls.model_output.touched) && formClient.controls.model_output.invalid && formClient.controls.model_output.errors}"
-                   [value]="client.device[0]?.model" class="input-2"
+                   [ngModel]="client?.device[0]?.model" class="input-2"
                    formControlName="model_output">
           </label>
           <label>
@@ -101,7 +101,7 @@
             <fa-icon [icon]="depossit" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.deposit_output.dirty ||
             formClient.controls.deposit_output.touched) && formClient.controls.deposit_output.invalid && formClient.controls.deposit_output.errors}"
-                   [value]="client.device[0].repairs[0]?.deposit" class="input-2"
+                   [ngModel]="client?.device[0]?.repairs[0]?.deposit" class="input-2"
                    formControlName="deposit_output">
           </label>
           <label>
@@ -109,7 +109,7 @@
             <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.accessory_output.dirty ||
             formClient.controls.accessory_output.touched) && formClient.controls.accessory_output.invalid && formClient.controls.accessory_output.errors}"
-                   [value]="client.device[0]?.accessory" class="input-2"
+                   [ngModel]="client?.device[0]?.accessory" class="input-2"
                    formControlName="accessory_output">
           </label>
         </div>
@@ -118,7 +118,7 @@
 
         <p class="title-form">
           <fa-icon [icon]="test" class="icon-input"></fa-icon>
-          Tests at the entrance of the machine.
+          Tests at the output of the machine.
         </p>
       </div>
       <div class="col-checkbox">
@@ -127,7 +127,7 @@
             <fa-icon [icon]="sensors" [style.color]="formClient.controls.sensor_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
             <label class="checkbox">
-              <input [value]="client.device[0].repairs[0]?.outputTest?.sensors_Output"
+              <input [value]="client.device[0]?.repairs[0]?.outputTest?.sensors_Output"
                      class="check-box"
                      formControlName="sensor_output" name="device-test" type="checkbox">
               <span class="check-box-name">Sensors</span>
@@ -138,7 +138,7 @@
                      class="icon-box"></fa-icon>
             <label class="checkbox">
               <input [ngClass]="{'form-submitted': formSubmitted}"
-                     [value]="client.device[0].repairs[0]?.outputTest?.display_Output"
+                     [value]="client?.device[0]?.repairs[0]?.outputTest?.display_Output"
                      class="check-box" formControlName="display_output" name="device-test"
                      type="checkbox">
               <span class="check-box-name">Display</span>
@@ -150,7 +150,7 @@
                      class="icon-box"></fa-icon>
             <label class="checkbox">
               <input [ngClass]="{'form-submitted': formSubmitted}"
-                     [value]="client.device[0].repairs[0]?.outputTest?.connectors_Output" class="check-box"
+                     [value]="client?.device[0]?.repairs[0]?.outputTest?.connectors_Output" class="check-box"
                      formControlName="connections_output" name="device-test" type="checkbox">
               <span class="check-box-name">Connectors</span>
             </label>
@@ -161,12 +161,12 @@
                      class="icon-box"></fa-icon>
             <label class="checkbox">
               <input [ngClass]="{'form-submitted': formSubmitted}"
-                     [value]="client.device[0].repairs[0]?.outputTest?.sound_equipment_Output" class="check-box"
+                     [ngModel]="client?.device[0]?.repairs[0]?.outputTest?.sound_equipment_Output" class="check-box"
                      formControlName="sound_equipment_output" name="device-test" type="checkbox">
               <span class="check-box-name">Sound/equipment</span>
             </label>
           </div>
-        </div>
+
         <div class="check-single">
           <fa-icon [icon]="touch" [style.color]="formClient.controls.touch_output.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box"></fa-icon>
@@ -178,16 +178,17 @@
             <span class="check-box-name">Touch</span>
           </label>
         </div>
-        <div class="check-single">
-          <fa-icon [icon]="wifi" [style.color]="formClient.controls.wi_fi_output.value? '#1ABC9C' : 'lightcoral'"
-                   class="icon-box"></fa-icon>
-          <label class="checkbox">
-            <input [ngClass]="{'form-submitted': formSubmitted}"
-                   [value]="client.device[0].repairs[0]?.outputTest?.wi_fi_Output"
-                   class="check-box" formControlName="wi_fi_output"
-                   name="device-test" type="checkbox">
-            <span class="check-box-name">Wi-Fi</span>
-          </label>
+          <div class="check-single">
+            <fa-icon [icon]="wifi" [style.color]="formClient.controls.wi_fi_output.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.wi_fi_Output"
+                     class="check-box" formControlName="wi_fi_output"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Wi-Fi</span>
+            </label>
+          </div>
         </div>
         <div class="check-col-2">
           <div class="check-single">
@@ -263,10 +264,8 @@
           <app-dragfile></app-dragfile>
         </div>
         <div class="row-2">
-          <label>
           <textarea [value]="client.device[0].repairs[0]?.note" class="text-area"
                     formControlName="note_output">...</textarea>
-          </label>
         </div>
       </div>
       <div class="button_form">
