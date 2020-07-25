@@ -100,6 +100,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   private invoice_mak_event: Subscription;
   private form_open: Subscription;
   private id_repair_event: Subscription;
+  email_send_disable = false;
 
   constructor(private fb: FormBuilder,
               private httpService: HttpClien,
@@ -194,7 +195,12 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.hidden_form.form_open.emit(true);
       this.filterRepair();
       this.createFormAfterClientCam();
+      this.emailSendButton();
     }
+  }
+
+  emailSendButton() {
+    this.email_send_disable = this.client.email == null;
   }
 
   print_click(): void {
@@ -352,7 +358,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   subscribe_success_response(): void {
     this.email_event = this.emailSender.email_sent_send_success.subscribe(() => {
       this.alert_service.success(null, 'The client' + this.client?.name +
-        'received a device and create the repair procedure !!! Client Id '
+        'received a device and close the repair procedure !!! Client Id '
         + this.client?.id, true, null, '');
       return;
     });

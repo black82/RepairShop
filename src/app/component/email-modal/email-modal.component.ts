@@ -8,6 +8,7 @@ import {AlertServiceService} from '../service/alert-service.service';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
 import {Subscription} from 'rxjs';
+import {InvoiceType} from '../entity/InvoiceType';
 
 
 @Component({
@@ -211,6 +212,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     } else {
       invoiceToPrintPage.messageEmail = 'Device was taken ex offices by the owner.';
     }
+    invoiceToPrintPage.typeSender = InvoiceType.emailInvoice;
     invoiceToPrintPage.htmlPage = html;
     invoiceToPrintPage.repairID = +this.id;
     invoiceToPrintPage.typeFile = this.checkTypePrint();

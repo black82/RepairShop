@@ -8,7 +8,8 @@
         <label for="email">
           <i class="icon icon-envelope"></i>
         </label>
-        <input class="form__input" formControlName="email" id="email" name="email" placeholder="Recipient's email"
+        <input [readOnly]="editable" class="form__input" formControlName="email" id="email" name="email"
+               placeholder="Recipient's email"
                required
                type="email">
       </div>
@@ -22,7 +23,7 @@
                type="text">
       </div>
       <label for="message">
-        <i class="icon icon-comment"></i>
+        <i class="icon icon-comment icon-textarea"></i>
 
         <textarea class="text-area" formControlName="message" id="message" placeholder="Email message"
                   type="text"></textarea>

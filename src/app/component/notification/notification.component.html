@@ -1,0 +1,31 @@
+<div *ngIf="wiuNotification" class="notification-container">
+  <div [style.color]="counters==0?'white':'#EE4D68'" class="notification-head">
+    <fa-icon [icon]="counters>0?notificationIconPresent:notificationIcon" class="notification-icon"
+             id="icon-noti">
+    </fa-icon>
+    <a *ngIf="counters>0" class="counter-notification" id="counter-notify">{{ counters }}</a>
+  </div>
+  <div *ngIf="counters > 0" class="notification-body">
+    <ul *ngFor="let not of notification" class="notification-ul">
+      <li (click)="editResandMessage(not)" class="list-not">
+        <a class="notification-link">
+          <div class="col-xs-2 notification-type text-center">
+            <fa-icon [icon]="commentIcon"></fa-icon>
+          </div>
+          <div class="col-xs-10 p-x">
+            <strong class="text-info">{{not.message_status}}</strong>
+            <small class="truncate-3-line text-default">
+              Unfortunately, something went wrong, control the data and try again.
+              <br>
+              {{not.type_sender}}
+              <small class="text-muted">
+                {{not.destination_user}}
+              </small>
+            </small>
+          </div>
+        </a>
+        <hr>
+      </li>
+    </ul>
+  </div>
+</div>

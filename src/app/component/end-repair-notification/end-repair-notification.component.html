@@ -1,0 +1,20 @@
+<div class="container-body">
+  <app-searchform (actionA)="client_catch($event)" [textButton]="button_text"
+                  [titleForm]="titleForm"
+                  [typeForm]="'id-repair'"></app-searchform>
+  <div *ngIf="sendSmsShow" class="sms-container">
+    <app-sms-sender [destinationNumber]="client.telephone_number" [editable]="true"></app-sms-sender>
+  </div>
+  <div *ngIf="sendEmailShow" class="email-container">
+    <app-email-notification [destinationUser]="client.email"
+                            [editable]="true"
+                            [id_repair]="client.device[0].repairs[0].repair_Id"
+                            [typeEmail]="'emailNot'"></app-email-notification>
+  </div>
+  <div *ngIf="checkTypeSender" class="check-type-sender">
+    <a (click)="showSms()" class="button button-small" type="submit"><span> <fa-icon
+      [icon]="smsIcon" class="button-icon"></fa-icon> Send Sms</span></a>
+    <a (click)="showEmail()" class="button button-small" type="submit"><span> <fa-icon
+      [icon]="emailIcon" class="button-icon"></fa-icon> Send Email</span></a>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import {faQuestion} from '@fortawesome/free-solid-svg-icons/faQuestion';
 import {faAt, faExclamation} from '@fortawesome/free-solid-svg-icons';
 import {AdminServiceService} from '../service/admin-service.service';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {AutoLogoutService} from '../service/auto-logout-service.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -28,7 +29,8 @@ export class SignInComponent implements OnInit {
               private authService: HttpClien,
               private alertService: AlertServiceService,
               private admin: AdminServiceService,
-              private animation_wait: AnimeServiceService) {
+              private animation_wait: AnimeServiceService,
+              private autoLogout: AutoLogoutService) {
   }
 
   ngOnInit() {
@@ -77,6 +79,7 @@ export class SignInComponent implements OnInit {
             this.router.navigate(['']).then(r => r);
           }
         }
+        this.autoLogout.startListenerActivity();
       }, (err) => {
         this.animation_wait.$anime_show.emit(false);
         console.log(err);

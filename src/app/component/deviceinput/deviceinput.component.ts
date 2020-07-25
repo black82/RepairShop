@@ -102,6 +102,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   sig_pad_event: Subscription;
   email_send_event: Subscription;
   email_anime_event: Subscription;
+  email_send_disable = true;
   private subscriber: Subscription;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
@@ -115,7 +116,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      email: new FormControl(null, [Validators.email]),
       telephone_number: new FormControl(null, [Validators.required]),
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
@@ -140,16 +141,16 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       keyboard_input: new FormControl(false),
       camera_input: new FormControl(false),
       note: new FormControl(''),
-      email_send: new FormControl(false, [Validators.required]),
+      email_send: new FormControl(false),
       date_exit: new FormControl('', [Validators.required])
     });
 
   }
 
   ngOnInit() {
+    this.disabledButtonSendEmail();
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
-      this.validation_insert_input();
     });
     this.animation_call();
     this.invoice_event = this.print.invoice_make.subscribe(invoice => {
@@ -319,6 +320,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       });
       return;
     }
+    if (this.formClient.controls.email.value.length < 1) {
+      this.alert_service.warn('', 'Enter the recipient\'s email', false, false, '', null);
+      return;
+    }
     this.sig_pad_service.open$.emit();
     this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
       this.submitFormAndSendEmail();
@@ -347,7 +352,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   subscribe_success_response() {
     this.animation_end();
     this.email_send_event = this.emailSender.email_sent_send_success.subscribe(() => {
-      this.alert_service.success(null, 'The client3' + this.client_after_saved.name +
+      this.alert_service.success(null, 'The client ' + this.client_after_saved.name +
         'received a device and create the repair procedure !!! Client Id '
         + this.client_after_saved.id, true, null, '');
       return;
@@ -375,12 +380,12 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     }
   }
 
-  validation_insert_input() {
-    Object.keys(this.formClient.controls).forEach(key => {
-      setTimeout(() => {
 
+  disabledButtonSendEmail() {
+    const email = document.getElementById('email-client');
+    email.addEventListener('input', () => {
+      this.email_send_disable = (this.formClient.controls.email.value.length === 0 && this.formClient.invalid);
 
-      }, 1000);
     });
   }
 }

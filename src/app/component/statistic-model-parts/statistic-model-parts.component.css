@@ -45,3 +45,8 @@
 
   transform: rotateY(94deg);
 }
+
+.doughnut-chart {
+  width: 120%;
+  margin: 50px auto;
+}

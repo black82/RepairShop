@@ -279,7 +279,8 @@
           [icon]="printer"></fa-icon> Print Page</span></a>
         </div>
         <div>
-          <a (click)="sign_pad_open()" class=" button email"><span> <fa-icon
+          <a (click)="sign_pad_open()" [class.disabled]="email_send_disable"
+             class=" button email"><span> <fa-icon
             [icon]="mail" class="button-icon"></fa-icon> Email Submit</span></a>
         </div>
         <div tooltip="The model will be saved">

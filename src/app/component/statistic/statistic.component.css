@@ -78,7 +78,7 @@ form input {
 }
 
 .container-chart {
-  width: 70%;
+  width: 80%;
 
 }
 
@@ -90,6 +90,7 @@ form input {
   width: 120%;
   margin: 50px auto;
 }
+
 
 .button {
   position: relative;
@@ -129,7 +130,11 @@ form input {
   z-index: 2;
 }
 
-.first:hover {
+.doughnut-chart:hover {
+  cursor: pointer;
+}
+
+.button:hover {
   color: lightcoral;
   border-color: lightcoral;
   cursor: pointer;

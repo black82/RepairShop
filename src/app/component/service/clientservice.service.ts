@@ -10,15 +10,16 @@ import {AdminServiceService} from './admin-service.service';
 import {StaffUser} from '../entity/StaffUser';
 import {StatisticModel} from '../entity/StatisticModel';
 import {StatisticModelParts} from '../entity/StatisticModelParts';
+import {MessageInvoice} from '../entity/MessageInvoice';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClien {
+  handler: any;
+  // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
 
-  apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-
-  // apiUrl = 'http://localhost:8080/';
+  apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient,
               private adminService: AdminServiceService) {
@@ -31,8 +32,8 @@ export class HttpClien {
       );
   }
 
-  saved_print_page(invoiceToolsDto: InvoiceToolsDto): Observable<URL> {
-    return this.http.post<URL>(this.apiUrl + 'admin/api/saved/print/page', invoiceToolsDto)
+  saved_print_page(invoiceToolsDto: InvoiceToolsDto) {
+    return this.http.post(this.apiUrl + 'api/saved/print/page', invoiceToolsDto)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -130,7 +131,7 @@ export class HttpClien {
   }
 
   sendSimpleEmailClient(invoice: InvoiceToolsDto): Observable<any> {
-    return this.http.post<any>(this.apiUrl + 'admin/api/sample/email/sender', invoice)
+    return this.http.post<any>(this.apiUrl + 'api/sample/email/sender', invoice)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -197,6 +198,36 @@ export class HttpClien {
   intervalRepairModelAndPartsStatistic(init: Date, finaly: Date): Observable<StatisticModelParts[]> {
     const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
     return this.http.get<any>(this.apiUrl + 'admin/api/statistic/repair/model/parts/interval', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  retrySendInvoice(message: MessageInvoice) {
+    return this.http.post(this.apiUrl + 'v1/send/invoice/retry', message)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  getAllRejectNotification(): Observable<MessageInvoice[]> {
+    return this.http.get<MessageInvoice[]>(this.apiUrl + 'v1/all/invoice/reject')
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  deleteRejectNotification(id: number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + 'v1/delete/reject/invoice/' + id)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  sendSmsNotification(invoiceToolsDto: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'message/api/sms/', invoiceToolsDto)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  sendEmailNotification(invoiceToolsDto: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'message/api/notification/end/repair', invoiceToolsDto)
       .pipe(
         catchError(this.errorHandler));
   }

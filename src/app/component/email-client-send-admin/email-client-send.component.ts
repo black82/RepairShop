@@ -6,6 +6,7 @@ import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {AnimeServiceService} from '../service/anime-service.service';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+import {InvoiceType} from '../entity/InvoiceType';
 
 @Component({
   selector: 'app-email-client-send',
@@ -16,7 +17,6 @@ export class EmailClientSendComponent implements OnInit {
   save = faShare;
   emailSendForm: FormGroup;
   invoice: InvoiceToolsDto = new InvoiceToolsDto();
-  formSubmitted: boolean;
   isAdmin = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -63,6 +63,7 @@ export class EmailClientSendComponent implements OnInit {
     this.animation_wait.$anime_show.emit(true);
     this.httpClient.sendSimpleEmailClient(this.createInvoiceToSend()).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
+      this.soundAlert();
       this.alertService.success(null, 'The email was successfully sent to the recipient', false, false, '');
     }, error => {
       this.animation_wait.$anime_show.emit(false);
@@ -76,6 +77,7 @@ export class EmailClientSendComponent implements OnInit {
     this.invoice.destinationUser = formData.email;
     this.invoice.subjectEmail = formData.subject;
     this.invoice.messageEmail = formData.message;
+    this.invoice.typeSender = InvoiceType.email;
     return this.invoice;
   }
 
@@ -96,5 +98,9 @@ export class EmailClientSendComponent implements OnInit {
   IsErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+
+  soundAlert() {
+    this.alertService.soundSend();
   }
 }

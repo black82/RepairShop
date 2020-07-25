@@ -34,7 +34,7 @@ import {LogServiceComponent} from './component/log-service/log-service.component
 import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {StatisticComponent} from './component/statistic/statistic.component';
-import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
+import {EmailClientSendComponent} from './component/email-client-send-admin/email-client-send.component';
 import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.component';
 import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
 import {ExtendDateRepairComponent} from './component/extend-date-repair/extend-date-repair.component';
@@ -45,6 +45,12 @@ import {ChartModule} from 'primeng';
 import {StatisticModelPartsComponent} from './component/statistic-model-parts/statistic-model-parts.component';
 import {AddNewDeviceComponent} from './component/add-new-device/add-new-device.component';
 import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.component';
+import {WebSocketService} from './component/service/WebSocketService';
+import {NotificationComponent} from './component/notification/notification.component';
+import {NotifaiManageComponent} from './component/notifai-manage/notifai-manage.component';
+import {EndRepairNotificationComponent} from './component/end-repair-notification/end-repair-notification.component';
+import {SmsSenderComponent} from './component/sms-sender/sms-sender.component';
+import {EmailNotificationComponent} from './component/email-notification/email-notification.component';
 
 
 @NgModule({
@@ -80,7 +86,12 @@ import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.com
     StatisticRepairComponent,
     StatisticModelPartsComponent,
     AddNewDeviceComponent,
-    AddnewRepairComponent
+    AddnewRepairComponent,
+    NotificationComponent,
+    NotifaiManageComponent,
+    EndRepairNotificationComponent,
+    SmsSenderComponent,
+    EmailNotificationComponent
   ],
   imports: [
     NgbModule,
@@ -96,7 +107,7 @@ import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.com
     MatGridListModule,
     ChartModule
   ],
-  providers: [HttpClient,
+  providers: [WebSocketService, HttpClient,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

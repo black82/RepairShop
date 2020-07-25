@@ -29,7 +29,8 @@
               <li [style.color]="role!='USER'? 'lightcoral':'#1ABC9C'">{{role}}</li>
             </ul>
           </td>
-          <td><a (click)="disableUser(element)" class="button button-small button-disable"><span> <fa-icon
+          <td><a (click)="disableUser(element)" [class.disabled]="element.roles_users.includes('ADMIN')"
+                 class="button button-small button-disable"><span> <fa-icon
             [icon]="user_disable" class="button-icon"></fa-icon>Disable User</span></a>
           </td>
           <td><a (click)="empowerUser(element)" class="button button-small button-activate"><span> <fa-icon

@@ -1,0 +1,37 @@
+<div *ngIf="show_message" class="container-body-notification-modal">
+  <div class="notification-content">
+    <a (click)="dismiss()" class="close" title="Close"><span class="x">X</span></a>
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Status</th>
+        <th scope="col">Description</th>
+        <th scope="col">Type</th>
+        <th scope="col">SenderType</th>
+        <th scope="col">Destination</th>
+        <th scope="col">ID</th>
+        <th scope="col">Repair - Id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <td>{{messages.message_status}}</td>
+        <td>{{messages.message_subject}}</td>
+        <td>{{messages.message_type}}</td>
+        <td>{{messages.type_sender}}</td>
+        <td>{{messages.destination_user}}</td>
+        <td>{{messages.message_id}}</td>
+        <td>{{messages.repair_Id}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="button-container">
+      <a (click)="deleteMessage(messages)" class="button button-small"><span> <fa-icon
+        [icon]="discar" class="button-icon"></fa-icon>Delete Notification</span></a>
+      <a (click)="resendMessage(messages)" class="button button-small"><span> <fa-icon
+        [icon]="mail" class="button-icon"></fa-icon>ReSend Message</span></a>
+    </div>
+  </div>
+</div>

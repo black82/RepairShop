@@ -1,0 +1,36 @@
+<div class="container-body">
+  <div>
+    <p class="title-form">Email submission form</p>
+  </div>
+  <div class="container-form">
+    <form [formGroup]="emailSendForm" class="form login" method="POST">
+      <div class="form__field">
+        <label for="email">
+          <i class="icon icon-envelope"></i>
+        </label>
+        <input class="form__input" formControlName="email" id="email" name="email" placeholder="Recipient's email"
+               required
+               type="email">
+      </div>
+      <div class="form__field">
+        <label for="subject">
+          <i class="icon icon-suitcase"></i>
+        </label>
+        <input class="form__input"
+               formControlName="subject" id="subject" name="subject" placeholder="Subject Email"
+               required
+               type="text">
+      </div>
+      <label for="message">
+        <i class="icon icon-comment icon-textarea"></i>
+
+        <textarea class="text-area" formControlName="message" id="message" placeholder="Email message"
+                  type="text"></textarea>
+      </label>
+      <div class="button-send">
+        <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon
+          [icon]="save" class="button-icon"></fa-icon> Send Email</span></a>
+      </div>
+    </form>
+  </div>
+</div>

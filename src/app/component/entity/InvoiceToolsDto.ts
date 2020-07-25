@@ -5,4 +5,5 @@ export class InvoiceToolsDto {
   subjectEmail: string;
   messageEmail: string;
   htmlPage: string;
+  typeSender: string;
 }

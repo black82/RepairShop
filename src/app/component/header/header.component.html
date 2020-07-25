@@ -39,9 +39,23 @@
                   </div>
                 </div>
               </li>
-              <li class="current_page_item"><a accesskey="3" class="teaming"
-                                               routerLink="/output/client/device" title="">Returning
-                device</a></li>
+              <li class="current_page_item" id="output-menu"><a accesskey="3" class="teaming"
+                                                                routerLink="/output/client/device" title="">Returning
+                device</a>
+                <div class="submenu-output">
+                  <ul class="submenu-output1">
+                    <li><a routerLink="/output/client/device">
+                      <fa-icon [icon]="outputRepair"></fa-icon>
+                      Closing the Repair</a></li>
+                    <li><a routerLink="/output/repair/notification">
+                      <fa-icon [icon]="notificationSend"></fa-icon>
+                      Send notification end of repair</a></li>
+                    <!--                    <li><a (click)="logout()" href="#">-->
+                    <!--                      <fa-icon [icon]="signOut"></fa-icon>-->
+                    <!--                      LogOut</a></li>-->
+                  </ul>
+                </div>
+              </li>
               <li class="current_page_item" id="search-menu"><a accesskey="4" class="teaming" title="">Search
                 Customer</a>
                 <div class="current_page_item" id="search_menu">
@@ -90,38 +104,40 @@
                       <li><a routerLink="/admin/statistic/repair">
                         <fa-icon [icon]="charts"></fa-icon>
                         Repair Statics</a></li>
-
                     </ul>
                   </div>
                 </div>
               </li>
-
             </ul>
           </nav>
         </div>
         <div class="sign-in" id="menu-signi">
-
-          <div class="current_page_item" id="sign-in"><a>
-            <i class="icon icon-lock"></i> Sign in/up</a>
-            <nav>
-              <ul class="submenu">
-                <li><a routerLink="/client/sign-in">
-                  <fa-icon [icon]="signIn"></fa-icon>
-                  Sign in</a></li>
-                <li><a routerLink="/client/sign-up">
-                  <fa-icon [icon]="signUp"></fa-icon>
-                  Sign up</a></li>
-                <li><a (click)="logout()" href="#">
-                  <fa-icon [icon]="signOut"></fa-icon>
-                  LogOut</a></li>
-              </ul>
-            </nav>
+          <div>
+            <ul>
+              <li>
+                <app-notification></app-notification>
+              </li>
+              <li class="sign-in-menu current_page_item">
+                <a id="sign-in"><i class="icon icon-lock"></i> Sign in/up</a>
+                <div class="submenu-sign">
+                  <ul class="submenu">
+                    <li><a routerLink="/client/sign-in">
+                      <fa-icon [icon]="signIn"></fa-icon>
+                      Sign in</a></li>
+                    <li><a routerLink="/client/sign-up">
+                      <fa-icon [icon]="signUp"></fa-icon>
+                      Sign up</a></li>
+                    <li><a (click)="logout()" href="#">
+                      <fa-icon [icon]="signOut"></fa-icon>
+                      LogOut</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </header>
 

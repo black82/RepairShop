@@ -225,7 +225,7 @@ form textarea {
   background: #fff;
   background: rgba(255, 255, 255, 0.75);
   border-radius: 0.50em;
-  margin: 0.5em 0em;
+  margin: 0.5em 0;
   padding: 1em 1em;
   box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
   border: solid 1px rgba(0, 0, 0, 0.15);
@@ -680,4 +680,13 @@ form textarea {
     transform: rotateY(0deg);
     opacity: 1;
   }
+
+}
+
+.disabled {
+  pointer-events: none !important;
+  cursor: default;
+  background-color: #7a7c7f !important;
+  color: #333333 !important;
+  border-radius: 25%;
 }

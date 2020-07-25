@@ -7,6 +7,7 @@ import {HttpClien} from './clientservice.service';
   providedIn: 'root'
 })
 export class AutGuardService implements CanActivate {
+  isAuthenticate = false;
 
   constructor(private authService: HttpClien, private router: Router) {
 
@@ -22,13 +23,14 @@ export class AutGuardService implements CanActivate {
   checkLogin(url: string): any {
     const expires_date = new Date(localStorage.getItem('is_login'));
     if (expires_date > new Date()) {
+      this.isAuthenticate = true;
       return true;
     } else {
+      this.isAuthenticate = false;
       this.authService.logout();
       localStorage.setItem('navigate', url);
       this.router.navigate(['client/sign-in']).then(r => r);
       return false;
-
     }
 
   }

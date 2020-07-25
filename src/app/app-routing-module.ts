@@ -11,13 +11,14 @@ import {SearchEmailComponent} from './component/search-email/search-email.compon
 import {SearchRepairIdComponent} from './component/serch-repair-id/search-repair-id.component';
 import {LogServiceComponent} from './component/log-service/log-service.component';
 import {AdminDashboardComponent} from './component/admin-dashboard/admin-dashboard.component';
-import {EmailClientSendComponent} from './component/email-client-send/email-client-send.component';
+import {EmailClientSendComponent} from './component/email-client-send-admin/email-client-send.component';
 import {DiviceTumorowComponent} from './component/divice-tumorow/divice-tumorow.component';
 import {ExtendRepairComponent} from './component/extend-repair/extend-repair.component';
 import {UserAdminComponent} from './component/user-admin/user-admin.component';
 import {StatisticComponent} from './component/statistic/statistic.component';
 import {AddNewDeviceComponent} from './component/add-new-device/add-new-device.component';
 import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.component';
+import {EndRepairNotificationComponent} from './component/end-repair-notification/end-repair-notification.component';
 
 
 export const routers: Routes = [
@@ -38,6 +39,7 @@ export const routers: Routes = [
   {path: 'admin/repair/extend', component: ExtendRepairComponent, canActivate: [AutGuardService]},
   {path: 'admin/user', component: UserAdminComponent, canActivate: [AutGuardService]},
   {path: 'admin/statistic/repair', component: StatisticComponent, canActivate: [AutGuardService]},
+  {path: 'output/repair/notification', component: EndRepairNotificationComponent, canActivate: [AutGuardService]},
 ];
 
 @NgModule({

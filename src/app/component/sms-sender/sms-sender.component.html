@@ -1,0 +1,37 @@
+<div class="container-body">
+  <div>
+    <p class="title-form">SMS submission form</p>
+  </div>
+  <div class="container-form">
+    <form [formGroup]="smsSendForm" class="form login" method="POST">
+      <div class="form__field">
+        <label for="phoneNumber">
+          <i class="icon icon-phone"></i>
+        </label>
+        <input [readonly]="editable" class="form__input" formControlName="phoneNumber" id="phoneNumber"
+               name="phoneNumber" placeholder="Recipient's sms"
+               required
+               type="email">
+      </div>
+      <div class="form__field">
+        <label for="subject">
+          <i class="icon icon-suitcase"></i>
+        </label>
+        <input class="form__input"
+               formControlName="subject" id="subject" name="subject" placeholder="Subject Sms"
+               required
+               type="text">
+      </div>
+      <label for="message">
+        <i class="icon icon-comment icon-textarea"></i>
+
+        <textarea class="text-area" formControlName="message" id="message" placeholder="Sms message"
+                  type="text"></textarea>
+      </label>
+      <div class="button-send">
+        <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon
+          [icon]="save" class="button-icon"></fa-icon> Send Sms</span></a>
+      </div>
+    </form>
+  </div>
+</div>

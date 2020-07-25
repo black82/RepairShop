@@ -33,7 +33,7 @@
           <fa-icon [icon]="email" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.email.dirty || formClient.controls.email.touched) && formClient.controls.email.invalid && formClient.controls.email.errors}"
-            [ngModel]="client?.email" class="input-1" formControlName="email" type="email">
+            [ngModel]="client?.email" class="input-1" formControlName="email" id="email-client" type="email">
         </label>
         <label>
           <span class="input-title">Telethon Number</span>
@@ -257,6 +257,7 @@
           <app-dragfile></app-dragfile>
         </div>
         <div class="row-2">
+
             <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
 
           <app-email-modal></app-email-modal>
@@ -268,7 +269,7 @@
         <fa-icon [icon]="email" [style.color]="formClient.controls?.email_send.value? '#1ABC9C' : 'lightcoral'"
                  class="icon-box"></fa-icon>
         <label class="checkbox" tooltip="The client's agreement to receive notification invoices from us ...">
-          <input class="check-box" formControlName="email_send" name="device-test" type="checkbox">
+          <input class="check-box" formControlName="email_send" id="email-sender" name="device-test" type="checkbox">
           <span class="check-box-name">I agree to receive emails with news or invoices.</span>
         </label>
           </span>
@@ -284,7 +285,7 @@
         <span> <fa-icon class="button-icon"
                         [icon]="printer"></fa-icon> Print Page</span></a></div>
       <div>
-        <a (click)="sign_pad_open()" class=" button email"><span> <fa-icon
+        <a (click)="sign_pad_open()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
           [icon]="mail" class="button-icon"></fa-icon> Email Submit</span></a>
       </div>
       <div>

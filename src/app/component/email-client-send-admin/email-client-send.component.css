@@ -50,6 +50,11 @@ form textarea {
 
 }
 
+.icon-textarea {
+  display: block;
+
+}
+
 .icon:hover {
   color: #0B1B48;
   cursor: pointer;

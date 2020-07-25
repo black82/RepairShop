@@ -30,5 +30,18 @@ export class AlertServiceService {
     this.alert_open.emit(alert);
   }
 
+  soundAlert() {
+    const audio = new Audio();
+    audio.src = '../../../assets/sound/alarm_message.mp3';
+    audio.load();
+    audio.play().then(r => r);
+  }
+
+  soundSend() {
+    const audio = new Audio();
+    audio.src = '../../../assets/sound/sending.mp3';
+    audio.load();
+    audio.play().then(r => r);
+  }
 }
 

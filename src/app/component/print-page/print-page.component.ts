@@ -4,6 +4,7 @@ import {PrintService} from '../service/print.service';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Subscription} from 'rxjs';
+import {InvoiceType} from '../entity/InvoiceType';
 
 
 @Component({
@@ -163,6 +164,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     this.invoice_tools.htmlPage = html;
     this.invoice_tools.repairID = +this.id;
     this.invoice_tools.typeFile = this.checkTypePrint();
+    this.invoice_tools.typeSender = InvoiceType.PrintPage;
     this.print.invoice_make.emit(this.invoice_tools);
   }
 }
