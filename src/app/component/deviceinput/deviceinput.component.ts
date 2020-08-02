@@ -103,6 +103,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   email_send_event: Subscription;
   email_anime_event: Subscription;
   email_send_disable = true;
+  countSigPad = 0;
   private subscriber: Subscription;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
@@ -324,38 +325,35 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.alert_service.warn('', 'Enter the recipient\'s email', false, false, '', null);
       return;
     }
-    this.sig_pad_service.open$.emit();
-    this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
+    if (this.countSigPad === 0) {
+      this.countSigPad++;
+      this.sig_pad_service.open$.emit();
+      this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
+        this.submitFormAndSendEmail();
+      });
+    } else {
       this.submitFormAndSendEmail();
-    });
+    }
   }
 
   submitFormAndSendEmail() {
-    if (!this.client_after_saved) {
-      this.createClient();
-    } else {
-      this.client = this.client_after_saved;
-    }
-
     this.subscribe_success_response();
-    this.animation_wait.$anime_show.emit(true);
-    this.httpService.printClient(this.client).subscribe(client => {
-      this.animation_wait.$anime_show.emit(false);
-      this.client_after_saved = client;
-      this.emailSender.email_send(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
-    }, error => {
-      this.animation_wait.$anime_show.emit(false);
-      console.error(error);
-    });
+    this.emailSender.email_send(new PrintEntity(this.createClient(), 1, this.formClient.controls.date_exit.value));
+
   }
 
   subscribe_success_response() {
     this.animation_end();
-    this.email_send_event = this.emailSender.email_sent_send_success.subscribe(() => {
-      this.alert_service.success(null, 'The client ' + this.client_after_saved.name +
-        'received a device and create the repair procedure !!! Client Id '
-        + this.client_after_saved.id, true, null, '');
-      return;
+    this.email_send_event = this.emailSender.email_sent_send_success.subscribe(success => {
+      if (success) {
+        this.alert_service.success(null, 'The client ' + this.client_after_saved.name +
+          'received a device and create the repair procedure !!! Client Id : '
+          + this.client_after_saved.id, true, null, '');
+        return;
+      } else {
+        this.alert_service.warn(null, 'Edit repair and resend',
+          false, false, null);
+      }
     });
   }
 

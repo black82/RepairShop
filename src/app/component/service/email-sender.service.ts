@@ -7,7 +7,7 @@ import {PrintEntity} from '../entity/Print_Pojo';
 export class EmailSenderService {
   @Output()
   email_send_event: EventEmitter<PrintEntity> = new EventEmitter();
-  email_sent_send_success: EventEmitter<void> = new EventEmitter<void>();
+  email_sent_send_success: EventEmitter<boolean> = new EventEmitter<boolean>();
   anime_question: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {

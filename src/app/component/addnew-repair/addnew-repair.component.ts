@@ -47,7 +47,6 @@ export class AddnewRepairComponent implements OnInit {
 
   private inputClientDevice() {
     this.client.device[0].repairs = [];
-    console.log(this.client);
     this.search_imei_form = false;
     this.button_container = false;
     this.device_input_container = true;

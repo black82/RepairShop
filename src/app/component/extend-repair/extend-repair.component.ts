@@ -47,7 +47,6 @@ export class ExtendRepairComponent implements OnInit, OnDestroy {
 
   repair_catch(repair) {
     this.repair = repair;
-    console.log(repair);
     this.hide_form.form_open.emit(true);
   }
 

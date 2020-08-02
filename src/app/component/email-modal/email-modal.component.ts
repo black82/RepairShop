@@ -23,9 +23,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   date: Date = new Date();
   type_print: number;
   date_exit: Date;
-  id: string;
+  id = '';
   print_entity: PrintEntity;
   show_email_send = false;
+  show_email_alternative = true;
   images_sig: string[] = [];
   private email_send_event: Subscription;
 
@@ -55,11 +56,21 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
 
   ok() {
-    this.emailSender.anime_question.next(true);
-    const html = document.querySelector('.container-page');
-    this.show_email_send = false;
-    const invoiceToPrintPage = this.createInvoiceToPrintPage(html.innerHTML);
-    this.sendEmailToBackend(invoiceToPrintPage);
+    this.http.printClient(this.client).subscribe(response => {
+      this.client = response;
+      this.id = this.id_repair(response);
+    });
+    const interval = setInterval(() => {
+      if (this.id !== '') {
+        this.emailSender.anime_question.next(true);
+        const html = document.querySelector('.container-page');
+        this.show_email_send = false;
+        const invoiceToPrintPage = this.createInvoiceToPrintPage(html.innerHTML);
+        this.sendEmailToBackend(invoiceToPrintPage);
+        clearInterval(interval);
+      }
+    }, 300);
+
   }
 
   sendEmailToBackend(invoiceToolsDto) {
@@ -67,7 +78,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.next(false);
-      this.emailSender.email_sent_send_success.emit();
+      this.emailSender.email_sent_send_success.emit(true);
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.next(false);
@@ -77,8 +88,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   dismiss() {
-    this.show_email_send = true;
-    this.client = null;
+    this.emailSender.email_sent_send_success.emit(false);
+    this.show_email_send = false;
+
+
   }
 
   checkTypePrint(): string {
@@ -102,6 +115,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   check_test_OK(client: Client) {
+    this.name_test_entre = [];
     if (!client.device[0].repairs[0].inputModule.camera_input) {
       this.name_test_entre.push(' X Fotocamera difettosa ');
     }
@@ -150,6 +164,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   check_test_OK_out(client: Client) {
+    this.name_test_out = [];
     if (!client.device[0].repairs[0].outputTest.camera_Output) {
       this.name_test_out.push(' X Fotocamera difettosa ');
     }
@@ -181,26 +196,29 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.name_test_out.push(' X Il sensore del dispositivo è danneggiato ');
     }
     if (!client.device[0].repairs[0].outputTest.display_touch_Output) {
-      this.name_test_entre.push(' X Il display_touchy del dispositivo è danneggiato ');
+      this.name_test_out.push(' X Il display_touchy del dispositivo è danneggiato ');
     }
   }
 
   id_repair(client: Client): string {
-    let id = 0;
-    if (this.print_entity?.id) {
-      return this.print_entity?.id.toString();
-    }
-    client.device.forEach(device => {
-      if (device.rightNowInRepair) {
-        device.repairs.forEach(repair => {
-          if (repair.nowInRepair) {
-            id = repair.repair_Id;
-          }
-        });
+    if (client.id != null) {
+      let id = 0;
+      if (this.print_entity?.id) {
+        return this.print_entity?.id.toString();
       }
-    });
-    return id.toString();
-
+      client.device.forEach(device => {
+        if (device.rightNowInRepair) {
+          device.repairs.forEach(repair => {
+            if (repair.nowInRepair) {
+              id = repair.repair_Id;
+            }
+          });
+        }
+      });
+      return id.toString();
+    } else {
+      return '';
+    }
   }
 
   private createInvoiceToPrintPage(html) {
@@ -217,6 +235,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     invoiceToPrintPage.repairID = +this.id;
     invoiceToPrintPage.typeFile = this.checkTypePrint();
     return invoiceToPrintPage;
+  }
+
+  showModal() {
+    this.show_email_alternative = !this.show_email_alternative;
   }
 }
 

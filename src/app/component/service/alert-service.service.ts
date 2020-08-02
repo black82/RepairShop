@@ -32,16 +32,22 @@ export class AlertServiceService {
 
   soundAlert() {
     const audio = new Audio();
-    audio.src = '../../../assets/sound/alarm_message.mp3';
+    audio.type = 'audio/mp3';
+    audio.crossOrigin = 'anonimus';
+    audio.src = './../assets/sound/alarm_message.mp3';
     audio.load();
     audio.play().then(r => r);
   }
 
+  //
   soundSend() {
     const audio = new Audio();
-    audio.src = '../../../assets/sound/sending.mp3';
+    audio.crossOrigin = 'anonimus';
+    audio.type = 'application/force-download';
+    audio.src = './../assets/sound/sending.mp3';
     audio.load();
-    audio.play().then(r => r);
+    console.log(audio);
+    audio.play().then(r => console.log(r));
   }
 }
 

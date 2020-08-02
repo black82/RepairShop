@@ -117,7 +117,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.actionA.emit(this.client);
 
       },
-      error => {
+      () => {
 
       });
   }
@@ -133,7 +133,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.actionA.emit(this.client);
         this.hidem_show_form_local.emit();
       },
-      error => {
+      () => {
       });
 
   }
@@ -149,7 +149,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.actionA.emit(this.client);
         this.hidem_show_form_local.emit();
       },
-      error => {
+      () => {
 
       });
 
@@ -167,7 +167,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.actionA.emit(this.client);
         this.hidem_show_form_local.emit();
       },
-      error => {
+      () => {
 
       });
   }
@@ -182,7 +182,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.actionB.emit(repair);
         this.hidem_show_form_local.emit();
       },
-      error => {
+      () => {
 
       });
 

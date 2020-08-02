@@ -30,7 +30,6 @@ export class AlertComponent implements OnInit {
   exclamation = faExclamationCircle;
   error_status: number;
   alert_closet = false;
-  private timeout: number;
   exclamation_triangle = faExclamationTriangle;
   sucess = faCheckCircle;
 

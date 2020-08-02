@@ -52,7 +52,6 @@ export class SingleContentComponent implements OnInit {
   devices_element: Element[] = [];
   devices: Device[] = [];
   repairs_element: ElementRepair[] = [];
-  repair_element_click: ElementRepair;
   repair_fileStorage: RepairFileStorage;
   @Input()
   refresh: EventEmitter<Client> = new EventEmitter<Client>();

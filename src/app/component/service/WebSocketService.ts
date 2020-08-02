@@ -27,10 +27,7 @@ export class WebSocketService {
   }
 
   public addNewMessage(message: MessageInvoice) {
-    console.log(message);
-    console.log(1);
     if (this.socket) {
-      console.log(2);
       this.socket.send('/ app / send / message', {}, message);
     }
   }

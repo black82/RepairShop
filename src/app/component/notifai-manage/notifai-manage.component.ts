@@ -40,7 +40,6 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   }
 
   resendMessage(message) {
-    console.log(message);
     this.http.retrySendInvoice(message).subscribe(() => {
       this.show_message = false;
       this.soundSend();

@@ -56,7 +56,7 @@ export class SignUpComponent implements OnInit {
     this.deleteTacked();
     this.animation_wait.$anime_show.emit(true);
     this.authService.register(form)
-      .subscribe(res => {
+      .subscribe(() => {
         this.animation_wait.$anime_show.emit(false);
         this.alertService.info(null, 'Before logging in, confirm the email.',
           true, true, 'client/sign-in', null);

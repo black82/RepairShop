@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AnimeServiceService} from '../service/anime-service.service';
 
-export type FadeState = 'visible' | 'hidden';
 
 @Component({
   selector: 'app-animation-wait',
@@ -11,7 +10,6 @@ export type FadeState = 'visible' | 'hidden';
 
 export class AnimationWaitComponent implements OnInit, OnDestroy {
 
-  showAnimation = false;
 
 
   constructor(private anime_service: AnimeServiceService) {

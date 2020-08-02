@@ -65,6 +65,9 @@ export class SignInComponent implements OnInit {
           if (res.roles) {
             localStorage.setItem('roles', res.roles);
             this.admin.$admin_show.emit(true);
+            this.admin.$user_show.emit(true);
+          } else {
+            this.admin.$user_show.emit(true);
           }
           const element = document.querySelector('.close') as HTMLElement;
           localStorage.setItem('token', res.token);
@@ -72,7 +75,7 @@ export class SignInComponent implements OnInit {
             element.click();
           }
           if (nav_url) {
-            this.router.navigate([nav_url]);
+            this.router.navigate([nav_url]).then(r => r);
             localStorage.removeItem('navigate');
 
           } else {

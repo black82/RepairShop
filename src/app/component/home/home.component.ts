@@ -4,7 +4,6 @@ import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
 import {faEnvelope, faSignInAlt, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
-import {faChartArea} from '@fortawesome/free-solid-svg-icons/faChartArea';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,6 @@ import {faChartArea} from '@fortawesome/free-solid-svg-icons/faChartArea';
 export class HomeComponent implements OnInit, OnDestroy {
 
   search = faSearch;
-  chart_button = faChartArea;
   user_admin = faUserFriends;
   email_send = faEnvelope;
   return = faSignOutAlt;

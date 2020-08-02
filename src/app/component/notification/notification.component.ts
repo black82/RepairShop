@@ -35,13 +35,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.deleteAndSubscribe();
 
-    this.adminService.$admin_show.subscribe(value => {
+    this.adminService.$user_show.subscribe(value => {
       this.wiuNotification = value;
       if (value) {
         this.getAllRejectNotification();
         const stompClient = this.webSocketService.connect();
-        stompClient.connect({}, fram => {
-          console.log(fram);
+        stompClient.connect({}, () => {
           this.subscribe = stompClient.subscribe('/topic/notification', notifications => {
             this.notifications = JSON.parse(notifications.body);
             this.notification.push(this.notifications);
@@ -85,8 +84,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   deleteAndSubscribe() {
     this.subscription = this.adminService.$deleteMessage.subscribe(message => {
       this.httpClient.deleteRejectNotification(message.message_id).subscribe(
-        (value => {
-          console.log(value);
+        (() => {
         })
       );
       this.notification.splice(this.notification.indexOf(message), 1);

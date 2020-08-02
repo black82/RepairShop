@@ -11,6 +11,8 @@ export class AdminServiceService {
   $show_notified: EventEmitter<MessageInvoice> = new EventEmitter();
   @Output()
   $deleteMessage: EventEmitter<MessageInvoice> = new EventEmitter();
+  @Output()
+  $user_show: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {
   }

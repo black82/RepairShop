@@ -3,7 +3,6 @@ import {HttpClien} from '../service/clientservice.service';
 import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 import {StaffUser} from '../entity/StaffUser';
 import {AlertServiceService} from '../service/alert-service.service';
-import {AnimeServiceService} from '../service/anime-service.service';
 import {faUserEdit} from '@fortawesome/free-solid-svg-icons/faUserEdit';
 import {faUserFriends} from '@fortawesome/free-solid-svg-icons/faUserFriends';
 
@@ -20,8 +19,9 @@ export class UserAdminComponent implements OnInit {
   users: StaffUser[];
   showUser = false;
 
-  constructor(private httpService: HttpClien, private alertService: AlertServiceService,
-              private animation_wait: AnimeServiceService) {
+  constructor(private httpService: HttpClien,
+              private alertService: AlertServiceService,
+  ) {
   }
 
   ngOnInit(): void {

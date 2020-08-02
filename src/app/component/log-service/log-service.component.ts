@@ -40,7 +40,6 @@ export class LogServiceComponent implements OnInit, OnDestroy {
     let count = 0;
     const timeout = setInterval(() => {
       count++;
-      console.log(count);
       htmlTableElement = document.querySelectorAll('table');
       if (htmlTableElement) {
         htmlTableElement.forEach(element => {

@@ -1,9 +1,4 @@
 
-.toast__container {
-  display: flex;
-  vertical-align: middle;
-}
-
 .toast__cell {
   display: flex;
 }

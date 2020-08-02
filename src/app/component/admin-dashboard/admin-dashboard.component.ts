@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {HttpClien} from '../service/clientservice.service';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
 import {faLaptopCode} from '@fortawesome/free-solid-svg-icons/faLaptopCode';
@@ -15,7 +14,6 @@ import {faEnvelopeOpen} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  logs_icon = faCogs;
   isAdmin = false;
   calendar = faCalendarPlus;
   device = faLaptopCode;

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
@@ -114,6 +114,7 @@ export class HttpClien {
 
   logout(): void {
     this.adminService.$admin_show.emit(false);
+    this.adminService.$user_show.emit(false);
     localStorage.clear();
   }
 
@@ -218,6 +219,20 @@ export class HttpClien {
     return this.http.delete<any>(this.apiUrl + 'v1/delete/reject/invoice/' + id)
       .pipe(
         catchError(this.errorHandler));
+  }
+
+  deleteDiscardRepair(client: Client): Observable<any> {
+    const header: HttpHeaders = new HttpHeaders()
+      .append('Content-Type', 'application/json; charset=UTF-8');
+    const httpOptions = {
+      headers: header,
+      body: {Client: client}
+    };
+    console.log(httpOptions);
+    return this.http.request('delete', this.apiUrl + 'api/discard/repair/', {body: client})
+      .pipe(
+        catchError(this.errorHandler)
+      );
   }
 
   sendSmsNotification(invoiceToolsDto: InvoiceToolsDto): Observable<any> {
