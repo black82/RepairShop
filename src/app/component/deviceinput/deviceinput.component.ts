@@ -43,10 +43,11 @@ import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {EmailSenderService} from '../service/email-sender.service';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
 import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
 import {DeviceInputService} from '../service/device-input.service';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-deviceinput',
@@ -104,7 +105,19 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   email_anime_event: Subscription;
   email_send_disable = true;
   countSigPad = 0;
+  showAddButton = false;
+  showAddAutocomplete = false;
+  filteredItems1: Observable<any[]>;
   private subscriber: Subscription;
+  prompt = 'Press <enter> to add "';
+  items: string[] = [
+    'Cats',
+    'Birds',
+    'Dogs',
+    '1',
+    'iphone',
+    'der'
+  ];
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
@@ -149,6 +162,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.filteredItems1 = this.formClient.controls.model.valueChanges.pipe(
+      startWith(''),
+      map(item => item ? this.filterItems(item) : this.items.slice())
+    );
     this.disabledButtonSendEmail();
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
@@ -159,6 +176,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     });
   }
 
+  filterAutocomplete() {
+
+  }
 
   createClient() {
     this.repairFileStorage.fotoEnterDevice = this.imageSender.submitImageToBack();
@@ -385,5 +405,43 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.email_send_disable = (this.formClient.controls.email.value.length === 0 && this.formClient.invalid);
 
     });
+  }
+
+  filterItems(name) {
+    let results = this.items.filter(item =>
+      item?.toLowerCase().indexOf(name?.toLowerCase()) === 0);
+
+    this.showAddButton = results.length === 0;
+    if (this.showAddButton) {
+      results = [this.prompt + name + '"'];
+    }
+    this.showAddAutocomplete = true;
+
+    return results;
+  }
+
+  optionSelected(option) {
+    console.log(option);
+    if (option?.indexOf(this.prompt) === 0) {
+      this.addOptionModel();
+    } else {
+      this.formClient.controls.model.setValue(option);
+      this.showAddAutocomplete = false;
+    }
+  }
+
+  addOptionModel() {
+    const option = this.removePromptFromOption(this.formClient.controls.model.value);
+    if (!this.items.some(entry => entry === option)) {
+      const index = this.items.push(option) - 1;
+      this.formClient.controls.model.setValue(this.items[index]);
+    }
+  }
+
+  removePromptFromOption(option) {
+    if (option.startsWith(this.prompt)) {
+      option = option.substring(this.prompt.length, option.length - 1);
+    }
+    return option;
   }
 }

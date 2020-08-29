@@ -50,12 +50,28 @@
            && formClient.controls.address.invalid && formClient.controls.address.errors}" class="input-1"
                  [ngModel]="client?.address" formControlName="address" type="text">
         </label>
+
         <label>
           <span class="input-title">Model</span>
           <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
-          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
-           && formClient.controls.model.invalid && formClient.controls.model.errors}" class="input-1"
-                 [ngModel]="client?.device[0]?.model" formControlName="model" type="text">
+
+          <input (input)="filterItems($event.target.value)" class="input-1"
+                 [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
+           && formClient.controls.model.invalid && formClient.controls.model.errors}"
+                 [ngModel]="client?.device[0]?.model" autocomplete="off"
+                 formControlName="model" id="model" type="text">
+          <div>
+            <div *ngIf="showAddAutocomplete" class="item-autocomplete-container">
+              <div *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
+                <div *ngIf="i<5" class="item-autocomplete">
+                  <div (click)="optionSelected(item)" class="item-div"><span>{{ item }}
+                  </span>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </label>
 
         <label>

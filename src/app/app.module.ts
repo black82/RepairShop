@@ -51,6 +51,12 @@ import {NotifaiManageComponent} from './component/notifai-manage/notifai-manage.
 import {EndRepairNotificationComponent} from './component/end-repair-notification/end-repair-notification.component';
 import {SmsSenderComponent} from './component/sms-sender/sms-sender.component';
 import {EmailNotificationComponent} from './component/email-notification/email-notification.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -105,7 +111,13 @@ import {EmailNotificationComponent} from './component/email-notification/email-n
     BrowserAnimationsModule,
     MatExpansionModule,
     MatGridListModule,
-    ChartModule
+    ChartModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatInputModule
   ],
   providers: [WebSocketService, HttpClient,
     {
