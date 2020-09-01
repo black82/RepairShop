@@ -725,3 +725,8 @@ form textarea {
   border-radius: 5px;
   background-color: DodgerBlue !important;
 }
+
+.box-autocomplete {
+  margin: 0;
+  padding: 0;
+}

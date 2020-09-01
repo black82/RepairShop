@@ -5,6 +5,7 @@ import {PrintEntity} from '../entity/Print_Pojo';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Subscription} from 'rxjs';
 import {InvoiceType} from '../entity/InvoiceType';
+import {HttpClien} from '../service/clientservice.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   print_entity: PrintEntity;
   private print_open_event: Subscription;
 
-  constructor(private print: PrintService) {
+  constructor(private print: PrintService, private http: HttpClien) {
   }
 
   ngOnInit(): void {
@@ -55,8 +56,24 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
   check_test_OK(client: Client): void {
+    this.name_test_entre = [];
     if (!client.device[0].repairs[0].inputModule.camera_input) {
       this.name_test_entre.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.bluetooth) {
+      this.name_test_entre.push(' X Bluetooh difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.vibrations) {
+      this.name_test_entre.push(' X Vibrations difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.camera_input) {
+      this.name_test_entre.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.audio_equipment) {
+      this.name_test_entre.push(' X Audio difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.software) {
+      this.name_test_entre.push(' X Software difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.keyboard_input) {
       this.name_test_entre.push(' X La tastiera è danneggiata ');
@@ -88,17 +105,38 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].inputModule.display_touch_input) {
       this.name_test_entre.push(' X Il display_touchy del dispositivo è danneggiato ');
     }
+
   }
 
   printPage(client: Client): void {
-
     this.client = client;
     const timeout = setTimeout(() => {
+      this.checkIfClickPrint();
       const html = document.querySelector('.container-page');
       window.print();
       this.createInvoiceToPrintPage(html.innerHTML);
+
       clearTimeout(timeout);
     }, 1000);
+
+  }
+
+  checkIfClickPrint() {
+    if (window.matchMedia) {
+      const mediaQueryList = window.matchMedia('print');
+      mediaQueryList.addListener(mql => {
+        if (mql.matches) {
+        } else {
+          this.print.$success_print.emit(true);
+        }
+      });
+    }
+    // const mediaQueryList1 = window.matchMedia('cancel');
+    // mediaQueryList1.addListener(mql => {
+    //   if (!mql.matches) {
+    //     this.http.deleteDiscardRepair(this.client);
+    //   }
+    // });
 
   }
 
@@ -109,8 +147,12 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
   check_test_OK_out(client: Client) {
+    this.name_test_out = [];
     if (!client.device[0].repairs[0].outputTest.camera_Output) {
       this.name_test_out.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.camera_Output_Front) {
+      this.name_test_out.push(' X Fotocamera Frontale difettosa ');
     }
     if (!client.device[0].repairs[0].outputTest.keyboard_Output) {
       this.name_test_out.push(' X La tastiera è danneggiata ');
@@ -140,7 +182,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.name_test_out.push(' X Il sensore del dispositivo è danneggiato ');
     }
     if (!client.device[0].repairs[0].outputTest.display_touch_Output) {
-      this.name_test_entre.push(' X Il display_touchy del dispositivo è danneggiato ');
+      this.name_test_out.push(' X Il display_touchy del dispositivo è danneggiato ');
     }
   }
 

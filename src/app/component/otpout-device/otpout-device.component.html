@@ -60,7 +60,20 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.parts_replace_output.dirty ||
             formClient.controls.parts_replace_output.touched) && formClient.controls.parts_replace_output.invalid && formClient.controls.parts_replace_output.errors}"
                    [ngModel]="client?.device[0]?.repairs[0]?.parts_replaced" class="input-1"
+                   (input)="filterItems(formClient.controls.parts_replace_output.value)"
                    formControlName="parts_replace_output">
+            <div class="box-autocomplete">
+              <div *ngIf="showAddAutocomplete" class="item-autocomplete-container">
+                <div *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
+                  <div *ngIf="i<5" class="item-autocomplete">
+                    <div (click)="optionSelected(item)" class="item-div"><span>{{ item }}
+                  </span>
+                      <hr>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </label>
 
         </div>
@@ -131,6 +144,15 @@
                      class="check-box"
                      formControlName="sensor_output" name="device-test" type="checkbox">
               <span class="check-box-name">Sensors</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="software" [style.color]="formClient.controls.software.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box test-icon"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" formControlName="software"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Software's</span>
             </label>
           </div>
           <div class="check-single">
@@ -248,9 +270,48 @@
               <span class="check-box-name">Camera</span>
             </label>
           </div>
+          <div class="check-single">
+            <fa-icon [icon]="vibrations" [style.color]="formClient.controls.vibrations.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box test-icon"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" formControlName="vibrations" name="device-test" type="checkbox">
+              <span class="check-box-name">Vibrations</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="soundPhone"
+                     [style.color]="formClient.controls.audio_equipment_output.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box test-icon"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" formControlName="audio_equipment_output" name="device-test" type="checkbox">
+              <span class="check-box-name">Audio Device</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="wifi" [style.color]="formClient.controls.bluetooth.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box test-icon"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box" formControlName="bluetooth"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Bluetooth</span>
+            </label>
+          </div>
+          <div class="check-single">
+            <fa-icon [icon]="camera"
+                     [style.color]="formClient.controls?.camera_Output_Front.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.camera_Output_Front"
+                     class="check-box" formControlName="camera_Output_Front"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Camera Front</span>
+            </label>
+          </div>
         </div>
       </div>
       <app-email-modal></app-email-modal>
+      <app-number-repair></app-number-repair>
       <div class="text-div">
         <div class="title-container" tooltip="Notes for staff at the output of the machine">
           <p class="title-form">

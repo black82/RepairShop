@@ -57,6 +57,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
+import {AutocompletComponent} from './component/autocomplet/autocomplet.component';
+import {NumberRepairComponent} from './component/number-repair/number-repair.component';
 
 
 @NgModule({
@@ -97,7 +99,9 @@ import {MatInputModule} from '@angular/material/input';
     NotifaiManageComponent,
     EndRepairNotificationComponent,
     SmsSenderComponent,
-    EmailNotificationComponent
+    EmailNotificationComponent,
+    AutocompletComponent,
+    NumberRepairComponent
   ],
   imports: [
     NgbModule,

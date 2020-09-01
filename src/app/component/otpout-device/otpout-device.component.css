@@ -702,10 +702,51 @@ form textarea {
     opacity: 1;
   }
 }
+
 .disabled {
   pointer-events: none !important;
   cursor: default;
   background-color: #7a7c7f !important;
   color: #333333 !important;
   border-radius: 25%;
+}
+
+.container-autocomplete {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: baseline;
+  align-content: flex-start;
+  position: relative;
+
+}
+
+.item-autocomplete-container {
+  width: 30%;
+  margin-top: auto;
+  position: absolute;
+  display: block;
+  background: white;
+  left: 4%;
+  border: 1px solid black;
+  padding: 5px;
+  z-index: 100;
+  border-radius: 5px;
+}
+
+.item-autocomplete {
+  padding: 20px;
+  width: 100%;
+}
+
+.item-autocomplete:hover {
+  border-radius: 5px;
+  background-color: DodgerBlue !important;
+}
+
+.box-autocomplete {
+  margin: 0;
+  padding: 0;
 }

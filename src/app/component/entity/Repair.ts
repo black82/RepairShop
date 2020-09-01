@@ -9,7 +9,7 @@ export class Repair {
   output_date: Date;
   defect: string;
   deposit: number;
-  price: number;
+  price: string;
   work_don: string;
   parts_replaced: string;
   nowInRepair: boolean;
@@ -21,7 +21,7 @@ export class Repair {
 
   constructor(repair_Id: number, date_to_enter: Date,
               exp_complet_date: Date, output_date: Date,
-              defect: string, deposit: number, price: number,
+              defect: string, deposit: number, price: string,
               work_don: string, parts_replaced: string,
               nowInRepair: boolean, inputModule: InputTest,
               outputTest: OutputTest, note: string,

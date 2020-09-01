@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
-import {faPhoneSquare, faUserTag} from '@fortawesome/free-solid-svg-icons';
+import {faFileSignature, faPhoneSquare, faUserTag, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faMoneyBill} from '@fortawesome/free-solid-svg-icons/faMoneyBill';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
@@ -16,13 +16,11 @@ import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
 import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import {faFingerprint} from '@fortawesome/free-solid-svg-icons/faFingerprint';
 import {faMobileAlt} from '@fortawesome/free-solid-svg-icons/faMobileAlt';
-import {faNetworkWired} from '@fortawesome/free-solid-svg-icons/faNetworkWired';
 import {faVolumeUp} from '@fortawesome/free-solid-svg-icons/faVolumeUp';
 import {faDigitalTachograph} from '@fortawesome/free-solid-svg-icons/faDigitalTachograph';
 import {faWifi} from '@fortawesome/free-solid-svg-icons/faWifi';
 import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
 import {faSimCard} from '@fortawesome/free-solid-svg-icons/faSimCard';
-import {faKeyboard} from '@fortawesome/free-solid-svg-icons/faKeyboard';
 import {faCamera} from '@fortawesome/free-solid-svg-icons/faCamera';
 import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
@@ -48,6 +46,10 @@ import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
 import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
 import {DeviceInputService} from '../service/device-input.service';
 import {map, startWith} from 'rxjs/operators';
+import {faPowerOff} from '@fortawesome/free-solid-svg-icons/faPowerOff';
+import {faCameraRetro} from '@fortawesome/free-solid-svg-icons/faCameraRetro';
+import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
+import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
 
 @Component({
   selector: 'app-deviceinput',
@@ -74,13 +76,15 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   discar = faTrashAlt;
   sensors = faDigitalTachograph;
   display = faMobileAlt;
-  conections = faNetworkWired;
+  conections = faChargingStation;
+  soundPhone = faPhoneVolume;
   sound = faVolumeUp;
   touch = faFingerprint;
   wifi = faWifi;
   microfon = faMicrophone;
   sim = faSimCard;
-  keybord = faKeyboard;
+  keybord = faPowerOff;
+  cameraFront = faCameraRetro;
   camera = faCamera;
   text = faEnvelopeOpenText;
   save = faDownload;
@@ -88,6 +92,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   display_touch = faMobile;
   photo = faImages;
   modul = faFileInvoice;
+  vibrations = faVihara;
+  software = faFileSignature;
   client: Client;
   client_after_saved: Client;
   formClient: FormGroup;
@@ -110,14 +116,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   filteredItems1: Observable<any[]>;
   private subscriber: Subscription;
   prompt = 'Press <enter> to add "';
-  items: string[] = [
-    'Cats',
-    'Birds',
-    'Dogs',
-    '1',
-    'iphone',
-    'der'
-  ];
+  itemsModels: string[] = [];
+  repairIdPopup = false;
+  private subscription: Subscription;
+  private subscriptionPrintSuccess: Subscription;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
@@ -135,7 +137,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
       state_of_use: new FormControl(null, [Validators.required]),
-      imei: new FormControl(null, [Validators.required]),
+      imei: new FormControl(null),
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
@@ -147,6 +149,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       display_input: new FormControl(false),
       connectors_input: new FormControl(false),
       sound_equipment_input: new FormControl(false),
+      audio_equipment_input: new FormControl(false),
+      software: new FormControl(false),
+      bluetooth: new FormControl(false),
+      vibrations: new FormControl(false),
       touch_input: new FormControl(false),
       display_touch_input: new FormControl(false),
       wi_fi_input: new FormControl(false),
@@ -154,6 +160,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       sim_input: new FormControl(false),
       keyboard_input: new FormControl(false),
       camera_input: new FormControl(false),
+      camera_input_front: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
       date_exit: new FormControl('', [Validators.required])
@@ -162,9 +169,12 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.subscription = this.httpService.getListModelsDevice().subscribe(list => {
+      this.itemsModels = list;
+    });
     this.filteredItems1 = this.formClient.controls.model.valueChanges.pipe(
       startWith(''),
-      map(item => item ? this.filterItems(item) : this.items.slice())
+      map(item => item ? this.filterItems(item) : this.itemsModels.slice())
     );
     this.disabledButtonSendEmail();
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
@@ -174,10 +184,13 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.invoice_event = this.print.invoice_make.subscribe(invoice => {
       this.create_invoice(invoice);
     });
-  }
-
-  filterAutocomplete() {
-
+    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
+      if (value) {
+        this.submitForm();
+      } else {
+        this.client_after_saved = null;
+      }
+    });
   }
 
   createClient() {
@@ -187,7 +200,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
-      formData.keyboard_input, formData.camera_input);
+      formData.keyboard_input, formData.camera_input, formData.camera_input_front,
+      formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
+      formData.software);
     this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
       this.setDataHourAndMin(formData.date_exit), null, formData.defect,
       formData.deposit, formData.price, null, null, true,
@@ -225,11 +240,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
         , false, null, '', null);
     } else {
       this.animation_wait.$anime_show.emit(true);
-      this.httpService.saved_print_page(this.invoice).subscribe(url => {
+      this.httpService.saved_print_page(this.invoice).subscribe(() => {
         this.animation_wait.$anime_show.emit(false);
-        this.alert_service.success(null, 'The client' + this.client_after_saved.name +
-          'received a device and create the repair procedure !!! Client Id '
-          + this.client_after_saved.id + '\n Document url : \n' + url, true, null, '');
+        this.print.$success_print_id.emit(this.client_after_saved);
         return;
       }, error => {
         this.animation_wait.$anime_show.emit(false);
@@ -264,7 +277,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     });
   }
 
-  dismisset() {
+  dismissed() {
     this.alert_service.warn('', 'Sorry, you ' +
       'left the module.', true, false, '', null);
   }
@@ -366,10 +379,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.animation_end();
     this.email_send_event = this.emailSender.email_sent_send_success.subscribe(success => {
       if (success) {
-        this.alert_service.success(null, 'The client ' + this.client_after_saved.name +
-          'received a device and create the repair procedure !!! Client Id : '
-          + this.client_after_saved.id, true, null, '');
-        return;
+        this.print.$success_print_id.emit(success);
       } else {
         this.alert_service.warn(null, 'Edit repair and resend',
           false, false, null);
@@ -396,6 +406,15 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     if (this.email_anime_event) {
       this.email_anime_event.unsubscribe();
     }
+    if (this.subscriber) {
+      this.subscriber.unsubscribe();
+    }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    if (this.subscriptionPrintSuccess) {
+      this.subscriptionPrintSuccess.unsubscribe();
+    }
   }
 
 
@@ -408,7 +427,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   filterItems(name) {
-    let results = this.items.filter(item =>
+    let results = this.itemsModels.filter(item =>
       item?.toLowerCase().indexOf(name?.toLowerCase()) === 0);
 
     this.showAddButton = results.length === 0;
@@ -421,7 +440,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   optionSelected(option) {
-    console.log(option);
     if (option?.indexOf(this.prompt) === 0) {
       this.addOptionModel();
     } else {
@@ -432,10 +450,11 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   addOptionModel() {
     const option = this.removePromptFromOption(this.formClient.controls.model.value);
-    if (!this.items.some(entry => entry === option)) {
-      const index = this.items.push(option) - 1;
-      this.formClient.controls.model.setValue(this.items[index]);
+    if (!this.itemsModels.some(entry => entry === option)) {
+      const index = this.itemsModels.push(option) - 1;
+      this.formClient.controls.model.setValue(this.itemsModels[index]);
     }
+    this.addNewModels(option);
   }
 
   removePromptFromOption(option) {
@@ -443,5 +462,16 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       option = option.substring(this.prompt.length, option.length - 1);
     }
     return option;
+  }
+
+  addNewModels(models: string) {
+    this.httpService.addNewModelsToList(models).subscribe(() => {
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getClient() {
+    return this.client_after_saved;
   }
 }

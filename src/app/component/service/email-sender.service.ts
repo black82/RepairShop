@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {PrintEntity} from '../entity/Print_Pojo';
+import {Client} from '../entity/ClientWeb';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import {PrintEntity} from '../entity/Print_Pojo';
 export class EmailSenderService {
   @Output()
   email_send_event: EventEmitter<PrintEntity> = new EventEmitter();
-  email_sent_send_success: EventEmitter<boolean> = new EventEmitter<boolean>();
+  email_sent_send_success: EventEmitter<Client> = new EventEmitter<Client>();
   anime_question: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {

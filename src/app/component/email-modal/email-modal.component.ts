@@ -56,10 +56,17 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
 
   ok() {
-    this.http.printClient(this.client).subscribe(response => {
-      this.client = response;
-      this.id = this.id_repair(response);
-    });
+    if (this.print_entity.type_client_print === 1) {
+      this.http.printClient(this.client).subscribe(response => {
+        this.client = response;
+        this.id = this.id_repair(response);
+      });
+    } else {
+      this.http.outputDeviceForm(this.client.device[0].repairs[0],
+        this.client.device[0].repairs[0].repair_Id).subscribe(response => {
+        this.id = response.repairs[0].repair_Id.toString();
+      });
+    }
     const interval = setInterval(() => {
       if (this.id !== '') {
         this.emailSender.anime_question.next(true);
@@ -78,7 +85,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.next(false);
-      this.emailSender.email_sent_send_success.emit(true);
+      this.emailSender.email_sent_send_success.emit(this.client);
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.next(false);
@@ -88,7 +95,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   dismiss() {
-    this.emailSender.email_sent_send_success.emit(false);
+    this.emailSender.email_sent_send_success.emit(null);
     this.show_email_send = false;
 
 
@@ -118,6 +125,21 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.name_test_entre = [];
     if (!client.device[0].repairs[0].inputModule.camera_input) {
       this.name_test_entre.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.bluetooth) {
+      this.name_test_entre.push(' X Bluetooh difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.vibrations) {
+      this.name_test_entre.push(' X Vibrations difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.camera_input) {
+      this.name_test_entre.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.audio_equipment) {
+      this.name_test_entre.push(' X Audio difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.software) {
+      this.name_test_entre.push(' X Software difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.keyboard_input) {
       this.name_test_entre.push(' X La tastiera è danneggiata ');
@@ -167,6 +189,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.name_test_out = [];
     if (!client.device[0].repairs[0].outputTest.camera_Output) {
       this.name_test_out.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.camera_Output_Front) {
+      this.name_test_out.push(' X Fotocamera Frontale difettosa ');
     }
     if (!client.device[0].repairs[0].outputTest.keyboard_Output) {
       this.name_test_out.push(' X La tastiera è danneggiata ');

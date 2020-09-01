@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <form (ngSubmit)="submitForm()" [formGroup]="formClient">
+  <form (ngSubmit)="submitForm()" [formGroup]="formClient" autocomplete="off">
     <div class="row">
       <div class="row-1">
 
@@ -19,7 +19,7 @@
             [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.name.dirty ||
             formClient.controls.name.touched) && formClient.controls.name.invalid && formClient.controls.name.errors}"
             class="input-1"
-            [ngModel]="client?.name" formControlName="name" type="text">
+            [ngModel]="client?.name" formControlName="name" placeholder="Name of Client" type="text">
         </label>
         <label>
           <span class="input-title">Family of Client</span>
@@ -27,13 +27,15 @@
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.family.dirty ||
             formClient.controls.family.touched) && formClient.controls.family.invalid && formClient.controls.family.errors}"
-            [ngModel]="client?.family" class="input-1" formControlName="family" type="text">
+            [ngModel]="client?.family" class="input-1" formControlName="family" placeholder="Family of Client"
+            type="text">
         </label>
         <label><span class="input-title">Email</span>
           <fa-icon [icon]="email" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.email.dirty || formClient.controls.email.touched) && formClient.controls.email.invalid && formClient.controls.email.errors}"
-            [ngModel]="client?.email" class="input-1" formControlName="email" id="email-client" type="email">
+            [ngModel]="client?.email" class="input-1" formControlName="email" id="email-client"
+            placeholder="Email of Client" type="email">
         </label>
         <label>
           <span class="input-title">Telethon Number</span>
@@ -41,14 +43,15 @@
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number.dirty || formClient.controls.telephone_number.touched)
            && formClient.controls.telephone_number.invalid && formClient.controls.telephone_number.errors}"
                  class="input-1" formControlName="telephone_number"
-                 [ngModel]="client?.telephone_number" pattern="^[0-9\-\+]{9,15}$" type="tel">
+                 [ngModel]="client?.telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Telethon Number"
+                 type="tel">
         </label>
 
         <label><span class="input-title">Address</span>
           <fa-icon [icon]="address" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.address.dirty || formClient.controls.address.touched)
            && formClient.controls.address.invalid && formClient.controls.address.errors}" class="input-1"
-                 [ngModel]="client?.address" formControlName="address" type="text">
+                 [ngModel]="client?.address" formControlName="address" placeholder="Address of Client" type="text">
         </label>
 
         <label>
@@ -59,8 +62,10 @@
                  [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
            && formClient.controls.model.invalid && formClient.controls.model.errors}"
                  [ngModel]="client?.device[0]?.model" autocomplete="off"
-                 formControlName="model" id="model" type="text">
-          <div>
+                 (keyup.enter)="addNewModels(formClient.controls.model.value)" formControlName="model" id="model"
+                 placeholder="Device Model"
+                 type="text">
+          <div class="box-autocomplete">
             <div *ngIf="showAddAutocomplete" class="item-autocomplete-container">
               <div *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
                 <div *ngIf="i<5" class="item-autocomplete">
@@ -79,14 +84,15 @@
           <fa-icon [icon]="money" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.price.dirty || formClient.controls.price.touched)
            && formClient.controls.price.invalid && formClient.controls.price.errors}" class="input-1"
-                 formControlName="price" type="number">
+                 formControlName="price" placeholder="Price of Repair" type="text">
         </label>
 
-        <label><span class="input-title">State of use</span>
+        <label><span class="input-title">State of Use</span>
           <fa-icon [icon]="used" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.state_of_use.dirty || formClient.controls.state_of_use.touched)
            && formClient.controls.state_of_use.invalid && formClient.controls.state_of_use.errors}" class="input-1"
-                 [ngModel]="client?.device[0]?.state_of_use" formControlName="state_of_use" type="text">
+                 [ngModel]="client?.device[0]?.state_of_use" formControlName="state_of_use"
+                 placeholder="State Use of Device" type="text">
         </label>
 
       </div>
@@ -95,7 +101,8 @@
           <fa-icon [icon]="code" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.code_device.dirty || formClient.controls.code_device.touched)
            && formClient.controls.code_device.invalid && formClient.controls.code_device.errors}" class="input-2"
-                 [ngModel]="client?.device[0]?.code_device" formControlName="code_device" type="text">
+                 [ngModel]="client?.device[0]?.code_device" formControlName="code_device" placeholder="Code Device"
+                 type="text">
         </label>
         <label>
           <span class="input-title">Date to enter</span>
@@ -103,28 +110,29 @@
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_enter.dirty || formClient.controls.date_to_enter.touched)
            && formClient.controls.date_to_enter.invalid && formClient.controls.date_to_enter.errors&& formClient.controls.date_to_enter.pristine}"
                  class="input-2" formControlName="date_to_enter"
-                 type="date">
+                 placeholder="Date to Enter" type="date">
         </label>
         <label>
           <span class="input-title">Defect</span>
           <fa-icon [icon]="cogs" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.defect.dirty || formClient.controls.defect.touched)
            && formClient.controls.defect.invalid && formClient.controls.defect.errors&& formClient.controls.defect.pristine}"
-                 class="input-2" formControlName="defect" type="text">
+                 class="input-2" formControlName="defect" placeholder="Defect of Device" type="text">
         </label>
         <label>
           <span class="input-title">IMEI&&SN</span>
           <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.imei.dirty || formClient.controls.imei.touched)
            && formClient.controls.imei.invalid && formClient.controls.imei.errors&& formClient.controls.imei.pristine}"
-                 [ngModel]="client?.device[0]?.imei" class="input-2" formControlName="imei" type="text">
+                 [ngModel]="client?.device[0]?.imei" class="input-2" formControlName="imei"
+                 placeholder="Imei or Sn of Device" type="text">
         </label>
         <label>
           <span class="input-title">Deposit</span>
           <fa-icon [icon]="money2" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.deposit.dirty || formClient.controls.deposit.touched)
            && formClient.controls.deposit.invalid && formClient.controls.deposit.errors&& formClient.controls.deposit.pristine}"
-                 class="input-2" formControlName="deposit" type="number">
+                 class="input-2" formControlName="deposit" placeholder="Deposit of Repair" type="number">
         </label>
         <label>
           <span class="input-title">Password Device</span>
@@ -132,21 +140,22 @@
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.password_device.dirty || formClient.controls.password_device.touched)
            && formClient.controls.password_device.invalid && formClient.controls.password_device.errors&& formClient.controls.password_device.pristine}"
                  [ngModel]="client?.device[0]?.password_device" class="input-2" formControlName="password_device"
-                 type="text">
+                 placeholder="Pin Cod of Device" type="text">
         </label>
         <label>
           <span class="input-title">Accessory</span>
           <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.accessory.dirty || formClient.controls.accessory.touched)
            && formClient.controls.accessory.invalid && formClient.controls.accessory.errors&& formClient.controls.accessory.pristine}"
-                 [ngModel]="client?.device[0]?.accessory" class="input-2" formControlName="accessory" type="text">
+                 [ngModel]="client?.device[0]?.accessory" class="input-2" formControlName="accessory"
+                 placeholder="Accessory of Device" type="text">
         </label>
         <label>
           <span class="input-title">The date will be completed</span>
           <fa-icon [icon]="date" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.date_exit.dirty || formClient.controls.date_exit.touched)
            && formClient.controls.date_exit.invalid && formClient.controls.date_exit.errors&& formClient.controls.date_exit.pristine}"
-                 class="input-2" formControlName="date_exit" type="date">
+                 class="input-2" formControlName="date_exit" placeholder="Date Completed" type="date">
         </label>
       </div>
     </div>
@@ -167,6 +176,15 @@
             <input class="check-box" formControlName="sensors_input"
                    name="device-test" type="checkbox">
             <span class="check-box-name">Sensors</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="software" [style.color]="formClient.controls.software.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="software"
+                   name="device-test" type="checkbox">
+            <span class="check-box-name">Software's</span>
           </label>
         </div>
         <div class="check-single">
@@ -193,9 +211,19 @@
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
             <input class="check-box" formControlName="sound_equipment_input" name="device-test" type="checkbox">
-            <span class="check-box-name">Sound/equipment</span>
+            <span class="check-box-name">Speaker</span>
           </label>
         </div>
+        <div class="check-single">
+          <fa-icon [icon]="soundPhone"
+                   [style.color]="formClient.controls.audio_equipment_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="audio_equipment_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Audio Device</span>
+          </label>
+        </div>
+
         <div class="check-single">
           <fa-icon [icon]="touch" [style.color]="formClient.controls.touch_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
@@ -245,7 +273,7 @@
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
             <input class="check-box" formControlName="keyboard_input" name="device-test" type="checkbox">
-            <span class="check-box-name">Keyboard</span>
+            <span class="check-box-name">On/off button</span>
           </label>
         </div>
         <div class="check-single">
@@ -254,6 +282,32 @@
           <label class="checkbox">
             <input class="check-box" formControlName="camera_input" name="device-test" type="checkbox">
             <span class="check-box-name">Camera</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="cameraFront"
+                   [style.color]="formClient.controls.camera_input_front.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="camera_input_front" name="device-test" type="checkbox">
+            <span class="check-box-name">Camera Front</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="vibrations" [style.color]="formClient.controls.vibrations.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="vibrations" name="device-test" type="checkbox">
+            <span class="check-box-name">Vibrations</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="wifi"
+                   [style.color]="formClient.controls.bluetooth.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="bluetooth" name="device-test" type="checkbox">
+            <span class="check-box-name">Bluetooth</span>
           </label>
         </div>
       </div>
@@ -280,6 +334,7 @@
           <app-sig-pad></app-sig-pad>
         </div>
       </div>
+      <app-number-repair></app-number-repair>
       <div class="check-single">
         <span class="send-email-activ">
         <fa-icon [icon]="email" [style.color]="formClient.controls?.email_send.value? '#1ABC9C' : 'lightcoral'"
@@ -293,7 +348,7 @@
     </div>
     <div class="button_form">
       <div tooltip="You will leave this page!!!">
-        <a (click)="dismisset()" class="dismiss">
+        <a (click)="dismissed()" class="dismiss">
         <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
         Discard Form</span></a></div>
       <div tooltip="The model will be sent to the printer">
@@ -304,11 +359,9 @@
         <a (click)="sign_pad_open()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
           [icon]="mail" class="button-icon"></fa-icon> Email Submit</span></a>
       </div>
-      <div>
-        <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon
-          [icon]="save" class="button-icon"></fa-icon> Submit Form</span></a>
-      </div>
+
     </div>
   </form>
 </div>
+
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Client} from '../entity/ClientWeb';
@@ -18,7 +18,7 @@ import {MessageInvoice} from '../entity/MessageInvoice';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  // apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  //  apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
   apiUrl = 'http://localhost:8080/';
 
@@ -223,14 +223,7 @@ export class HttpClien {
   }
 
   deleteDiscardRepair(client: Client): Observable<any> {
-    const header: HttpHeaders = new HttpHeaders()
-      .append('Content-Type', 'application/json; charset=UTF-8');
-    const httpOptions = {
-      headers: header,
-      body: {Client: client}
-    };
-    console.log(httpOptions);
-    return this.http.request('delete', this.apiUrl + 'api/discard/repair/', {body: client})
+    return this.http.post<any>(this.apiUrl + 'api/discard/repair/', client)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -246,6 +239,34 @@ export class HttpClien {
     return this.http.post<any>(this.apiUrl + 'message/api/notification/end/repair', invoiceToolsDto)
       .pipe(
         catchError(this.errorHandler));
+  }
+
+  getListModelsDevice(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl + 'api/utils/models')
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  addNewModelsToList(model: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/utils/save/models', model)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  getListPartsDevice(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl + 'api/utils/parts')
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  addNewPartsToList(part: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/utils/save/parts', part)
+      .pipe(
+        catchError(this.errorHandler)
+      );
   }
 
   errorHandler(error) {

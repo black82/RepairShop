@@ -46,8 +46,7 @@ export class AlertServiceService {
     audio.type = 'application/force-download';
     audio.src = './../assets/sound/sending.mp3';
     audio.load();
-    console.log(audio);
-    audio.play().then(r => console.log(r));
+    audio.play().then(r => r);
   }
 }
 
