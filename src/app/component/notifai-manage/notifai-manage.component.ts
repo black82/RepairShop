@@ -7,6 +7,7 @@ import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {WebSocketService} from '../service/WebSocketService';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-notifai-manage',
@@ -19,16 +20,21 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   messages: MessageInvoice;
   show_message = false;
   private subscription: Subscription;
+  formMessage: FormGroup;
 
   constructor(private adminService: AdminServiceService,
               private webSocketService: WebSocketService,
               private http: HttpClien,
-              private alertService: AlertServiceService) {
+              private alertService: AlertServiceService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.subscription = this.adminService.$show_notified.subscribe(notify => {
       this.messages = notify;
+      this.formMessage = this.fb.group({
+        destination: ['', [Validators.required]],
+      });
       this.show_message = true;
     });
   }
@@ -40,6 +46,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   }
 
   resendMessage(message) {
+    this.messages.destination_user = this.formMessage.controls.destination.value;
     this.http.retrySendInvoice(message).subscribe(() => {
       this.show_message = false;
       this.soundSend();

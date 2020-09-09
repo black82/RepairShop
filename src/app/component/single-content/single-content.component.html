@@ -1,13 +1,16 @@
 <div class="container-body">
   <div class="title-container">
-    <p class="title-form"> Client  {{client.name}} {{client.family}} .</p>
+    <p class="title-form"> Client <span
+      style="color: lightcoral"> {{client.typeClient ? client.companyName : client?.name + ' ' + client.family}} </span>
+    </p>
   </div>
   <div class="row-container">
     <div class="row-1">
       <div class="container-1-content">
         <div class="container-2-content">
           <span class="input-title">
-            <fa-icon [icon]="usertag"></fa-icon> Name of Client: {{client?.name + ' ' + client?.family}}</span>
+            <fa-icon
+              [icon]="usertag"></fa-icon>Client: {{client.typeClient ? client.companyName : client?.name + ' ' + client.family}}</span>
           <span class="input-title"><fa-icon
             [icon]="phone"></fa-icon> Telethon Number:{{client?.telephone_number}}</span>
           <span class="input-title"><fa-icon [icon]="email"></fa-icon> Email:{{client?.email}}</span>

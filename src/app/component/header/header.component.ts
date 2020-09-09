@@ -1,5 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {faClipboardCheck, faConciergeBell, faEnvelopeOpen, faHome, faMobile, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
+import {
+  faClipboardCheck,
+  faConciergeBell,
+  faEnvelopeOpen,
+  faFileSignature,
+  faHome,
+  faMobile,
+  faSignInAlt,
+  faUserTag
+} from '@fortawesome/free-solid-svg-icons';
 import {HttpClien} from '../service/clientservice.service';
 import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
@@ -37,6 +46,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   repair = faTools;
   notificationSend = faConciergeBell;
   outputRepair = faClipboardCheck;
+  redact = faFileSignature;
+  usertag = faUserTag;
   private subscribe_admin: Subscription;
 
 

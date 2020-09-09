@@ -29,6 +29,8 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   show_email_alternative = true;
   images_sig: string[] = [];
   private email_send_event: Subscription;
+  userNickname: string;
+  notes: string[] = [];
 
   constructor(private emailSender: EmailSenderService,
               private http: HttpClien,
@@ -46,11 +48,19 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
       this.check_type_print(print);
+      this.splitNotes(this.client.device[0].repairs[0].note);
       this.check_test_OK(print.client_print);
-      const timeout = setTimeout(() => {
-        this.emailPage(print.client_print);
-        clearTimeout(timeout);
-      }, 1000);
+      this.http.getNickNameCurrentStaffUser().subscribe(name => {
+        this.animation_wait.$anime_show.emit(false);
+        this.userNickname = name.currentName;
+        const timeout = setTimeout(() => {
+          this.emailPage(print.client_print);
+          clearTimeout(timeout);
+        }, 1000);
+      }, () => {
+        this.animation_wait.$anime_show.emit(false);
+      });
+
     });
   }
 
@@ -107,9 +117,18 @@ export class EmailModalComponent implements OnInit, OnDestroy {
         return 'inputInvoice';
       }
       case 2: {
+
         return 'outputInvoice';
       }
     }
+  }
+
+  splitNotes(note: string) {
+    console.log(this.notes);
+    if (note) {
+      this.notes = note.split(';');
+    }
+
   }
 
   check_type_print(printTypes: PrintEntity) {
@@ -131,9 +150,6 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     }
     if (!client.device[0].repairs[0].inputModule.vibrations) {
       this.name_test_entre.push(' X Vibrations difettosa ');
-    }
-    if (!client.device[0].repairs[0].inputModule.camera_input) {
-      this.name_test_entre.push(' X Fotocamera difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.audio_equipment) {
       this.name_test_entre.push(' X Audio difettosa ');
@@ -158,6 +174,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     }
     if (!client.device[0].repairs[0].inputModule.sound_equipment_input) {
       this.name_test_entre.push(' X L\'apparecchiatura audio è difettosa ');
+    }
+    if (!client.device[0].repairs[0].inputModule.camera_input_front) {
+      this.name_test_entre.push(' X Fotocamera Frontale difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.connectors_input) {
       this.name_test_entre.push(' X I Connettori del dispositivo sono difettosi ');
@@ -189,6 +208,18 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.name_test_out = [];
     if (!client.device[0].repairs[0].outputTest.camera_Output) {
       this.name_test_out.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.audio_equipment) {
+      this.name_test_out.push(' X Speaker difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.software) {
+      this.name_test_out.push(' X Software difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.vibrations) {
+      this.name_test_out.push(' X Vibrations difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.bluetooth) {
+      this.name_test_out.push(' X Bluetooh difettosa ');
     }
     if (!client.device[0].repairs[0].outputTest.camera_Output_Front) {
       this.name_test_out.push(' X Fotocamera Frontale difettosa ');

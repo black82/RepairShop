@@ -149,9 +149,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     }, 300);
     this.subscriptionPrintSuccess = this.printService.$success_print.subscribe(value => {
       if (value) {
-        this.httpService.outputDeviceForm(this.createClient(), this.client.id).subscribe(
-          () => {
-          }, error => console.error(error));
+
         this.submitForm();
       }
     });
@@ -247,7 +245,14 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     }
     this.client = this.addRepairToClient(this.client);
     this.animation_wait.$anime_show.emit(true);
-    this.printService.print_open.emit(new PrintEntity(this.client, 2));
+    this.httpService.outputDeviceForm(this.createClient(), this.client.device[0].repairs[0].repair_Id).subscribe(
+      () => {
+        this.printService.print_open.emit(new PrintEntity(this.client, 2));
+      }, error => {
+        this.animation_wait.$anime_show.emit(false);
+        console.error(error);
+      });
+
   }
 
   createClient(): Repair {
@@ -268,10 +273,19 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.formClient.controls.price_output.value,
       this.formClient.controls.work_don_output.value,
       this.formClient.controls.parts_replace_output.value, this.client.device[0].repairs[0].nowInRepair,
-      this.client.device[0].repairs[0].inputModule, this.output_test, this.formClient.controls.note_output.value,
+      this.client.device[0].repairs[0].inputModule, this.output_test, this.changeNotes(this.formClient.controls.note_output.value),
       this.client.device[0].repairs[0].repairFileStorage);
     this.repair_output.date_to_enter = this.client.device[0].repairs[0].date_to_enter;
+    console.log(this.repair_output);
     return this.repair_output;
+  }
+
+  changeNotes(note: string) {
+    if (note) {
+      return note + ';';
+    } else {
+      return note;
+    }
   }
 
   sign_pad_open(): void {

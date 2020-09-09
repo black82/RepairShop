@@ -82,15 +82,27 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.searchByImei();
         break;
       }
+      case 'single-repair-id': {
+        this.searchSingleRepairById();
+        break;
+      }
     }
 
 
   }
 
   hiddenFormAfterSubmitForm() {
-    document.getElementById('show-button').style.opacity = '0';
-    document.querySelector('form').id = 'form-hide';
-    this.showSearchForm();
+    const elementById = document.getElementById('show-button');
+    if (elementById) {
+      elementById.style.opacity = '0';
+      document.querySelector('form').id = 'form-hide';
+      this.showSearchForm();
+    } else {
+      const timeout = setTimeout(() => {
+        this.hiddenFormAfterSubmitForm();
+        clearTimeout(timeout);
+      }, 300);
+    }
   }
 
   showSearchForm() {
@@ -186,6 +198,21 @@ export class SearchformComponent implements OnInit, OnDestroy {
 
       });
 
+  }
+
+  searchSingleRepairById() {
+    if (!Number(this.formInput.controls.ob.value)) {
+      this.alert_service.info(null, 'The value entered must be a Number.', false, false, null, null);
+      return;
+    }
+    this.client_service.getClientSingleRepair(this.formInput.controls.ob.value).subscribe(
+      client => {
+        this.actionA.emit(client);
+        this.hidem_show_form_local.emit();
+      },
+      () => {
+
+      });
   }
 
   emailValidator(email: string): boolean {

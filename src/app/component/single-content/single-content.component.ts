@@ -111,6 +111,7 @@ export class SingleContentComponent implements OnInit {
 
   check_test_OK(client: Client): string[] {
     const name_test_entre: string[] = [];
+
     if (!client.device[0].repairs[0].inputModule.camera_input) {
       name_test_entre.push(' X Fotocamera difettosa ');
     }
@@ -118,10 +119,7 @@ export class SingleContentComponent implements OnInit {
       name_test_entre.push(' X Bluetooh difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.vibrations) {
-      name_test_entre.push(' X Vibrations difettosa ');
-    }
-    if (!client.device[0].repairs[0].inputModule.camera_input) {
-      name_test_entre.push(' X Fotocamera difettosa ');
+     name_test_entre.push(' X Vibrations difettosa ');
     }
     if (!client.device[0].repairs[0].inputModule.audio_equipment) {
       name_test_entre.push(' X Audio difettosa ');
@@ -147,6 +145,9 @@ export class SingleContentComponent implements OnInit {
     if (!client.device[0].repairs[0].inputModule.sound_equipment_input) {
       name_test_entre.push(' X L\'apparecchiatura audio è difettosa ');
     }
+    if (!client.device[0].repairs[0].inputModule.camera_input_front) {
+      name_test_entre.push(' X Fotocamera Frontale difettosa ');
+    }
     if (!client.device[0].repairs[0].inputModule.connectors_input) {
       name_test_entre.push(' X I Connettori del dispositivo sono difettosi ');
     }
@@ -167,6 +168,18 @@ export class SingleContentComponent implements OnInit {
     if (!client.device[0].rightNowInRepair) {
       if (!client.device[0].repairs[0].outputTest.camera_Output) {
         name_test_out.push(' X Fotocamera difettosa ');
+      }
+      if (!client.device[0].repairs[0].outputTest.audio_equipment) {
+        name_test_out.push(' X Speaker difettosa ');
+      }
+      if (!client.device[0].repairs[0].outputTest.software) {
+        name_test_out.push(' X Software difettosa ');
+      }
+      if (!client.device[0].repairs[0].outputTest.vibrations) {
+        name_test_out.push(' X Vibrations difettosa ');
+      }
+      if (!client.device[0].repairs[0].outputTest.bluetooth) {
+        name_test_out.push(' X Bluetooh difettosa ');
       }
       if (!client.device[0].repairs[0].outputTest.camera_Output_Front) {
         name_test_out.push(' X Fotocamera Frontale difettosa ');

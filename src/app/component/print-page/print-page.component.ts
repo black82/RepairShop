@@ -6,6 +6,7 @@ import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Subscription} from 'rxjs';
 import {InvoiceType} from '../entity/InvoiceType';
 import {HttpClien} from '../service/clientservice.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 
 @Component({
@@ -24,8 +25,11 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   invoice_tools: InvoiceToolsDto = new InvoiceToolsDto();
   print_entity: PrintEntity;
   private print_open_event: Subscription;
+  userNickName: string;
 
-  constructor(private print: PrintService, private http: HttpClien) {
+  constructor(private print: PrintService,
+              private http: HttpClien,
+              private animation_wait: AnimeServiceService) {
   }
 
   ngOnInit(): void {
@@ -37,10 +41,17 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.name_test_out = [];
       this.check_type_print(print);
       this.check_test_OK(print.client_print);
-      const time = setTimeout(() => {
-        this.printPage(print.client_print);
-        clearTimeout(time);
-      }, 200);
+      this.http.getNickNameCurrentStaffUser().subscribe(name => {
+        this.animation_wait.$anime_show.emit(false);
+        this.userNickName = name.currentName;
+        const time = setTimeout(() => {
+          this.printPage(print.client_print);
+          clearTimeout(time);
+        }, 1000);
+      }, () => {
+        this.animation_wait.$anime_show.emit(false);
+      });
+
 
     });
 
@@ -66,9 +77,6 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].inputModule.vibrations) {
       this.name_test_entre.push(' X Vibrations difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.camera_input) {
-      this.name_test_entre.push(' X Fotocamera difettosa ');
-    }
     if (!client.device[0].repairs[0].inputModule.audio_equipment) {
       this.name_test_entre.push(' X Audio difettosa ');
     }
@@ -93,6 +101,9 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].inputModule.sound_equipment_input) {
       this.name_test_entre.push(' X L\'apparecchiatura audio è difettosa ');
     }
+    if (!client.device[0].repairs[0].inputModule.camera_input_front) {
+      this.name_test_entre.push(' X Fotocamera Frontale difettosa ');
+    }
     if (!client.device[0].repairs[0].inputModule.connectors_input) {
       this.name_test_entre.push(' X I Connettori del dispositivo sono difettosi ');
     }
@@ -111,11 +122,11 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   printPage(client: Client): void {
     this.client = client;
     const timeout = setTimeout(() => {
-      this.checkIfClickPrint();
+      // this.checkIfClickPrint();
       const html = document.querySelector('.container-page');
       window.print();
       this.createInvoiceToPrintPage(html.innerHTML);
-
+      this.print.$success_print.emit(true);
       clearTimeout(timeout);
     }, 1000);
 
@@ -127,7 +138,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       mediaQueryList.addListener(mql => {
         if (mql.matches) {
         } else {
-          this.print.$success_print.emit(true);
+
         }
       });
     }
@@ -150,6 +161,18 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     this.name_test_out = [];
     if (!client.device[0].repairs[0].outputTest.camera_Output) {
       this.name_test_out.push(' X Fotocamera difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.audio_equipment) {
+      this.name_test_out.push(' X Speaker difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.software) {
+      this.name_test_out.push(' X Software difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.vibrations) {
+      this.name_test_out.push(' X Vibrations difettosa ');
+    }
+    if (!client.device[0].repairs[0].outputTest.bluetooth) {
+      this.name_test_out.push(' X Bluetooh difettosa ');
     }
     if (!client.device[0].repairs[0].outputTest.camera_Output_Front) {
       this.name_test_out.push(' X Fotocamera Frontale difettosa ');

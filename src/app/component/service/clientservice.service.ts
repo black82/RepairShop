@@ -11,6 +11,7 @@ import {StaffUser} from '../entity/StaffUser';
 import {StatisticModel} from '../entity/StatisticModel';
 import {StatisticModelParts} from '../entity/StatisticModelParts';
 import {MessageInvoice} from '../entity/MessageInvoice';
+import {UserStaffNickNamePojo} from '../entity/UserStaffNickNamePojo';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ import {MessageInvoice} from '../entity/MessageInvoice';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  //  apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  //    apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
   apiUrl = 'http://localhost:8080/';
 
@@ -248,8 +249,25 @@ export class HttpClien {
       );
   }
 
+  getClientSingleRepair(id: number): Observable<Client> {
+    return this.http.get<Client>(this.apiUrl + 'api/search/single/repair/number',
+      {
+        params: new HttpParams().set('id', String(id))
+      })
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
   addNewModelsToList(model: string): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/utils/save/models', model)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  savedEditClient(client: Client): Observable<any> {
+    return this.http.put<any>(this.apiUrl + 'api/redact/client', client)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -264,6 +282,22 @@ export class HttpClien {
 
   addNewPartsToList(part: string): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/utils/save/parts', part)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  getClientPageable(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/all/client/pageable-',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getNickNameCurrentStaffUser(): Observable<UserStaffNickNamePojo> {
+    return this.http.get<UserStaffNickNamePojo>(this.apiUrl + 'api/current/user/nickname')
       .pipe(
         catchError(this.errorHandler)
       );

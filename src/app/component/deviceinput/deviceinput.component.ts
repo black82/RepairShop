@@ -50,6 +50,7 @@ import {faPowerOff} from '@fortawesome/free-solid-svg-icons/faPowerOff';
 import {faCameraRetro} from '@fortawesome/free-solid-svg-icons/faCameraRetro';
 import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
 import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
+import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons/faArrowAltCircleRight';
 
 @Component({
   selector: 'app-deviceinput',
@@ -94,6 +95,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   modul = faFileInvoice;
   vibrations = faVihara;
   software = faFileSignature;
+  companyType = faArrowAltCircleRight;
   client: Client;
   client_after_saved: Client;
   formClient: FormGroup;
@@ -115,9 +117,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   showAddAutocomplete = false;
   filteredItems1: Observable<any[]>;
   private subscriber: Subscription;
-  prompt = 'Press <enter> to add "';
+  prompt = 'Click <enter> to add "';
   itemsModels: string[] = [];
-  repairIdPopup = false;
+  companyShow = false;
   private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
 
@@ -132,8 +134,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.email]),
+      email: new FormControl('', [Validators.email]),
       telephone_number: new FormControl(null, [Validators.required]),
+      telephone_number_second: new FormControl(null),
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
       state_of_use: new FormControl(null, [Validators.required]),
@@ -161,6 +164,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       keyboard_input: new FormControl(false),
       camera_input: new FormControl(false),
       camera_input_front: new FormControl(false),
+      client_type: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
       date_exit: new FormControl('', [Validators.required])
@@ -176,7 +180,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       startWith(''),
       map(item => item ? this.filterItems(item) : this.itemsModels.slice())
     );
-    this.disabledButtonSendEmail();
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
     });
@@ -195,23 +198,38 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   createClient() {
     this.repairFileStorage.fotoEnterDevice = this.imageSender.submitImageToBack();
+
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
+
     this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input, formData.camera_input_front,
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
       formData.software);
+
     this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
       this.setDataHourAndMin(formData.date_exit), null, formData.defect,
       formData.deposit, formData.price, null, null, true,
-      this.inputTest, null, formData.note, this.repairFileStorage);
+      this.inputTest, null, this.changeNotes(formData.note), this.repairFileStorage);
+
     this.device = new Device(null, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
-    this.client = new Client(null, formData.family, formData.name, formData.email,
-      formData.telephone_number, formData.address, [this.device], formData.email_send);
+
+    this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
+      formData.telephone_number, formData.telephone_number_second, formData.address,
+      [this.device], formData.email_send, formData.client_type);
+    console.log(this.repair);
     return this.client;
+  }
+
+  changeNotes(note: string) {
+    if (note) {
+      return 'Note di ingresso : ' + note + ';';
+    } else {
+      return note;
+    }
   }
 
   setDataHourAndMin(date: Date): Date {
@@ -268,7 +286,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     }
     this.animation_wait.$anime_show.emit(true);
     this.httpService.printClient(this.client).subscribe(client => {
-      this.animation_wait.$anime_show.emit(false);
+
       this.client_after_saved = client;
       this.print.print_open.emit(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
     }, error => {
@@ -354,7 +372,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    if (this.formClient.controls.email.value.length < 1) {
+    if (this.formClient.controls.email.value === null && this.formClient.controls.email.invalid) {
       this.alert_service.warn('', 'Enter the recipient\'s email', false, false, '', null);
       return;
     }
@@ -418,12 +436,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
 
-  disabledButtonSendEmail() {
-    const email = document.getElementById('email-client');
-    email.addEventListener('input', () => {
-      this.email_send_disable = (this.formClient.controls.email.value.length === 0 && this.formClient.invalid);
-
-    });
+  emailControlChange() {
+    this.email_send_disable = (this.formClient.controls.email.invalid && this.formClient.controls.email.value.length > 0);
   }
 
   filterItems(name) {
@@ -473,5 +487,21 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   getClient() {
     return this.client_after_saved;
+  }
+
+  companyClient() {
+    this.companyShow = !this.companyShow;
+    if (this.companyShow) {
+      this.formClient.addControl('companyName', new FormControl(null, [Validators.required]));
+      this.formClient.controls.name.setValue(null);
+      this.formClient.controls.family.setValue(null);
+      this.formClient.removeControl('name');
+      this.formClient.removeControl('family');
+    } else {
+      this.formClient.controls.companyName.setValue(null);
+      this.formClient.removeControl('companyName');
+      this.formClient.addControl('name', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('family', new FormControl(null, [Validators.required]));
+    }
   }
 }

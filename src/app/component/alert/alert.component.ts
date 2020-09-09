@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {HttpErrorResponse} from '@angular/common/http';
 import {AlertServiceService} from '../service/alert-service.service';
@@ -12,6 +12,7 @@ import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -19,8 +20,7 @@ import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/faExclama
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css'],
 })
-export class AlertComponent implements OnInit {
-
+export class AlertComponent implements OnInit, OnDestroy {
   title_alert: string;
   body_alert: string;
   alert: Alert;
@@ -32,6 +32,7 @@ export class AlertComponent implements OnInit {
   alert_closet = false;
   exclamation_triangle = faExclamationTriangle;
   sucess = faCheckCircle;
+  private subscription: Subscription;
 
 
   constructor(private alertService: AlertServiceService, private router: Router) {
@@ -39,8 +40,9 @@ export class AlertComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.alertService.alert_open
+    this.subscription = this.alertService.alert_open
       .subscribe(alert => {
+        console.log(alert);
         if (alert.type === AlertType.Error) {
           if (alert.errore?.error?.status === 401) {
             this.body_alert = 'The time since the last login has expired.';
@@ -64,10 +66,6 @@ export class AlertComponent implements OnInit {
   timeout_remove_alert() {
     if (!document.querySelector('.show--alert')) {
       this.initAlert();
-      // this.timeout = setTimeout(() => {
-      //   this.removeAlert();
-      //   clearTimeout(this.timeout);
-      // }, 10000);
     } else {
       this.removeAlert();
       this.initAlert();
@@ -83,14 +81,19 @@ export class AlertComponent implements OnInit {
 
   success_alert() {
     const success = document.querySelector('.toast--green');
+    if (success.classList.contains('hidden--alert')) {
+      success.classList.remove('hidden--alert');
+    }
     success.classList.add('show--alert');
   }
 
   removeAlert() {
     const remove = document.querySelectorAll('.show--alert');
-    remove?.forEach(value => {
-      value?.classList.add('hidden--alert');
-    });
+    if (remove) {
+      remove?.forEach(value => {
+        value?.classList.add('hidden--alert');
+      });
+    }
   }
 
   closeBaton() {
@@ -176,5 +179,11 @@ export class AlertComponent implements OnInit {
       info_alert.classList.remove('hidden--alert');
     }
     info_alert.classList.add('show--alert');
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

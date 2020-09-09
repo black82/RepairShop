@@ -84,6 +84,11 @@ p {
   grid-area: logo;
 }
 
-.cliente-label {
-  grid-area: clt-lbl;
-}
+ .cliente-label {
+   grid-area: clt-lbl;
+ }
+
+ .fa-stamp {
+   margin-top: 20px;
+   margin-left: 30%;
+ }

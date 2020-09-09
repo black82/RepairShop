@@ -28,9 +28,17 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
 
   close() {
     this.showPopup = false;
-    this.alert_service.success(null, 'The client ' + this.client.name.toUpperCase() +
+    this.alert_service.success(null, 'The client ' + this.getNameByTypeClient(this.client) +
       'received a device and create the repair procedure !!! Repair Id :'
       + this.client.device[0].repairs[0].repair_Id.toString().toUpperCase(), true, null, '');
+  }
+
+  getNameByTypeClient(client: Client): string {
+    if (client.typeClient) {
+      return client.companyName.toUpperCase();
+    } else {
+      return client.name.toUpperCase() + ' ' + client.family.toUpperCase();
+    }
   }
 
   ngOnDestroy(): void {

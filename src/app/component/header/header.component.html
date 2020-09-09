@@ -1,5 +1,5 @@
 <header id="header-wrapper">
-  <div class="container-header" id="header">
+  <nav class="container-header" id="header">
     <div id="logo">
       <h1><span><svg height="100" id="svg"
                      viewBox="0, 0, 400,477" width="80" xmlns="http://www.w3.org/2000/svg"><g id="svgg"><path
@@ -76,7 +76,27 @@
                   </div>
                 </div>
               </li>
-              <li *ngIf="admin" class="current_page_item" id="admin-menu"><a accesskey="5" routerLink="/admin/dashboard"
+              <li class="current_page_item" id="repair-menu"><a accesskey="5" routerLink="/repair/edit" title="Edit">
+                Admin Repair</a>
+                <div class="current_page_item" id="admin-repair">
+                  <div class="admin-repair">
+                    <ul class="submenu-repair">
+                      <li><a routerLink="/repair/edit">
+                        <fa-icon [icon]="redact"></fa-icon>
+                        Redact Repair</a></li>
+                      <br>
+                      <li><a routerLink="/all/repair/paginator">
+                        <fa-icon [icon]="usertag"></fa-icon>
+                        Show All Client </a></li>
+                      <br>
+                      <!--                      <li><a routerLink="/search/repair/id">-->
+                      <!--                        <fa-icon [icon]="idIcon"></fa-icon>-->
+                      <!--                        Search by Repair Id</a></li>-->
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li *ngIf="admin" class="current_page_item" id="admin-menu"><a accesskey="6" routerLink="/admin/dashboard"
                                                                              title="Admin Ap">Admin App</a>
                 <div class="current_page_item">
                   <div class="admin-menu">
@@ -138,6 +158,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </header>
 

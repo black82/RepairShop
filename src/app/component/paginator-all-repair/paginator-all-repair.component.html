@@ -1,0 +1,61 @@
+<div class="container-body">
+  <div class="container-top">
+    <img alt="repair worker" class="image-top"
+         src="http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/assets/images/plumber.png">
+    <div class="button-con">
+      <a (click)="getServerData()" class="button button-small button-get"><span> <fa-icon
+        [icon]="repair_icon" class="button-icon"></fa-icon> Get All Client</span></a>
+    </div>
+
+  </div>
+  <div *ngIf="paginator" class="container-paginator">
+    <mat-paginator #paginator
+                   (page)="pageEvent = getServerData($event)"
+                   [length]="length"
+                   [pageIndex]="pageIndex"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   [pageSize]="pageSize"
+    >
+
+    </mat-paginator>
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">Id Client</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Type Client</th>
+        <th scope="col">Address</th>
+        <th scope="col">Show Client</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of datasource; let i = index">
+        <td class="element-td">{{element.id}}</td>
+        <td class="element-td">{{element.typeClient ? element.companyName : element?.family + ' ' + element.name}}</td>
+        <td class="element-td">{{element?.email}}</td>
+        <td class="element-td">{{element?.telephone_number}}</td>
+        <td class="element-td">{{element?.typeClient ? 'Company' : 'Person'}}</td>
+        <td class="element-td">
+          {{element.address}}
+        </td>
+
+        <td><a (click)="shows(element)" class="button button-small button-activate"><span> <fa-icon
+          [icon]="shows_button" class="button-icon"></fa-icon>Show Client</span></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="shouwClient" class="container-single-content">
+    <div class="container-modal">
+      <a (click)="hideClient()" class="close">&times;</a>
+      <app-single-content [client]="client_shouw"></app-single-content>
+      <div><a (click)="hideClient()"
+              class="button button-small button-disable"><span> <fa-icon
+        [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,8 @@ import {StatisticComponent} from './component/statistic/statistic.component';
 import {AddNewDeviceComponent} from './component/add-new-device/add-new-device.component';
 import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.component';
 import {EndRepairNotificationComponent} from './component/end-repair-notification/end-repair-notification.component';
+import {EditRepairComponent} from './component/edit-repair/edit-repair.component';
+import {PaginatorAllRepairComponent} from './component/paginator-all-repair/paginator-all-repair.component';
 
 
 export const routers: Routes = [
@@ -40,6 +42,8 @@ export const routers: Routes = [
   {path: 'admin/user', component: UserAdminComponent, canActivate: [AutGuardService]},
   {path: 'admin/statistic/repair', component: StatisticComponent, canActivate: [AutGuardService]},
   {path: 'output/repair/notification', component: EndRepairNotificationComponent, canActivate: [AutGuardService]},
+  {path: 'repair/edit', component: EditRepairComponent, canActivate: [AutGuardService]},
+  {path: 'all/repair/paginator', component: PaginatorAllRepairComponent, canActivate: [AutGuardService]},
 ];
 
 @NgModule({

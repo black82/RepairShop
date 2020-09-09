@@ -9,32 +9,52 @@
   </div>
 
   <form (ngSubmit)="submitForm()" [formGroup]="formClient" autocomplete="off">
+    <div class="check-single">
+      <fa-icon [icon]="companyType" [style.color]="formClient.controls.client_type.value? '#1ABC9C' : 'lightcoral'"
+               class="icon-box test-icon"></fa-icon>
+      <label class="checkbox">
+        <input (click)="companyClient()"
+               class="check-box" formControlName="client_type" name="device-test" type="checkbox">
+        <span class="check-box-name">Is Company's</span>
+      </label>
+    </div>
     <div class="row">
       <div class="row-1">
 
-        <label>
+        <label *ngIf="!companyShow">
           <span class="input-title">Name of Client</span>
           <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
           <input
-            [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.name.dirty ||
-            formClient.controls.name.touched) && formClient.controls.name.invalid && formClient.controls.name.errors}"
+            [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.name?.dirty ||
+            formClient.controls?.name?.touched) && formClient?.controls.name?.invalid && formClient.controls?.name?.errors}"
             class="input-1"
             [ngModel]="client?.name" formControlName="name" placeholder="Name of Client" type="text">
         </label>
-        <label>
+        <label *ngIf="!companyShow">
           <span class="input-title">Family of Client</span>
           <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
           <input
-            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.family.dirty ||
-            formClient.controls.family.touched) && formClient.controls.family.invalid && formClient.controls.family.errors}"
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls?.family?.dirty ||
+            formClient.controls?.family?.touched) && formClient.controls?.family?.invalid && formClient.controls?.family?.errors}"
             [ngModel]="client?.family" class="input-1" formControlName="family" placeholder="Family of Client"
             type="text">
         </label>
-        <label><span class="input-title">Email</span>
+        <label *ngIf="companyShow">
+          <span class="input-title">Company Name</span>
+          <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.companyName?.dirty ||
+            formClient.controls.companyName.touched) && formClient.controls.companyName.invalid && formClient.controls.companyName.errors}"
+            [ngModel]="client?.companyName" class="input-1" formControlName="companyName" placeholder="Company Name"
+            type="text">
+        </label>
+        <label>
+          <span class="input-title">Email</span>
           <fa-icon [icon]="email" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.email.dirty || formClient.controls.email.touched) && formClient.controls.email.invalid && formClient.controls.email.errors}"
-            [ngModel]="client?.email" class="input-1" formControlName="email" id="email-client"
+            (change)="emailControlChange()" (ngModelChange)="emailControlChange()" [ngModel]="client?.email"
+            class="input-1" formControlName="email" id="email-client"
             placeholder="Email of Client" type="email">
         </label>
         <label>
@@ -46,7 +66,15 @@
                  [ngModel]="client?.telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Telethon Number"
                  type="tel">
         </label>
-
+        <label>
+          <span class="input-title">Telethon Number 2</span>
+          <fa-icon [icon]="phone" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number_second.dirty || formClient.controls.telephone_number_second.touched)
+           && formClient.controls.telephone_number_second.invalid && formClient.controls.telephone_number_second.errors}"
+                 [ngModel]="client?.telephone_number_second" class="input-1"
+                 formControlName="telephone_number_second" placeholder="Telethon Number Optional"
+                 type="tel">
+        </label>
         <label><span class="input-title">Address</span>
           <fa-icon [icon]="address" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.address.dirty || formClient.controls.address.touched)

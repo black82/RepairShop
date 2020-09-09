@@ -7,7 +7,7 @@ import {AlertServiceService} from './alert-service.service';
   providedIn: 'root'
 })
 export class AutoLogoutService {
-  MINUTES_UNITL_AUTO_LOGOUT = 5;
+  MINUTES_UNITL_AUTO_LOGOUT = 15;
   CHECK_INTERVAL = 15000;
   STORE_KEY = 'lastAction';
 
@@ -74,7 +74,7 @@ export class AutoLogoutService {
       if (isTimeout) {
         this.removeListener();
         this.http.logout();
-        this.allServices.info(null, 'Due to inactivity in the last 5 minutes you have been disconnected',
+        this.allServices.info(null, 'Due to inactivity in the last 15 minutes you have been disconnected',
           true, false, 'client/sign-in', null);
       }
     }

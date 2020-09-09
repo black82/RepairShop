@@ -21,7 +21,14 @@
         <td>{{messages.message_subject}}</td>
         <td>{{messages.message_type}}</td>
         <td>{{messages.type_sender}}</td>
-        <td>{{messages.destination_user}}</td>
+        <td>
+          <form [formGroup]="formMessage">
+            <label>
+              <input [ngModel]="messages.destination_user" class="input-1"
+                     formControlName="destination" type="text">
+            </label>
+          </form>
+        </td>
         <td>{{messages.message_id}}</td>
         <td>{{messages.repair_Id}}</td>
       </tr>

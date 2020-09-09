@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     elementList.forEach(node => {
       node.addEventListener('click', evt => {
         const button = node.querySelector('.box-empty') as HTMLElement;
-        node.querySelector('.tooltip').removeAttribute('tooltip');
+        // node.querySelector('.tooltip').removeAttribute('tooltip');
         node.querySelectorAll('.icon-animation').forEach(className => {
           if (className.className === (evt.target as Element).className) {
             button.style.height = '160px';
@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.tooltipAnimation();
     this.clickElementCentralIcon(document.querySelectorAll('.box'));
     this.clickElementCTools(document.querySelectorAll('.tools'));
+
   }
 
   clickElementCTools(elementList: NodeListOf<Element>) {

@@ -17,10 +17,10 @@
             <div class="address">
               <h1 style="font-size: 16pt;
   font-weight: 500;color: #c54040">Riparazione</h1>
-              <p style="font-size: 8pt;  color:#c54040"><strong>{{'Nr. ' + id}}</strong></p>
-              <p style="font-size: 8pt;margin: 3px;">info@rfvtechnology.it</p>
-              <p style="font-size: 8pt;margin: 3px;">Nembro Italia(BG) , 24027</p>
-              <p style="font-size: 8pt;margin: 3px;">Via Garibaldi , 6/A</p>
+              <p style="font-size: 9pt;  color:#c54040"><strong>{{'Nr. ' + id}}</strong></p>
+              <p style="font-size: 9pt;margin: 3px;">info@rfvtechnology.it</p>
+              <p style="font-size: 9pt;margin: 3px;">Nembro Italia(BG) , 24027</p>
+              <p style="font-size: 9pt;margin: 3px;">Via Garibaldi , 6/A</p>
             </div>
           </div>
         </div>
@@ -32,10 +32,13 @@
   border-radius: 5pt;
   margin: 0 5px 5px;">
             <div class="col-324234">
-              <p style="font-size: 8pt;margin: 3px">{{"Cliente :  " + client?.name}} {{client?.family}}</p>
-              <p style="font-size: 8pt;margin: 3px"> {{"Email :  " + client?.email}}</p>
-              <p style="font-size: 8pt;margin: 3px"> {{"Cont.Telefonico : " + client?.telephone_number}}</p>
-              <p style="font-size: 8pt;margin: 3px">{{"Indirizzo cliente :  " + client?.address}}</p>
+              <p *ngIf="!client?.typeClient"
+                 style="font-size: 9pt;margin: 3px">{{"Cliente :  " + client?.name + ' ' + client?.family }}</p>
+              <p *ngIf="client?.typeClient"
+                 style="font-size: 9pt;margin: 3px">{{"Cliente :  " + client?.companyName }}</p>
+              <p style="font-size: 9pt;margin: 3px"> {{"Email :  " + client?.email}}</p>
+              <p style="font-size: 9pt;margin: 3px"> {{"Cont.Telefonico : " + client?.telephone_number}}</p>
+              <p style="font-size: 9pt;margin: 3px">{{"Indirizzo cliente :  " + client?.address}}</p>
             </div>
           </div>
         </div>
@@ -44,77 +47,99 @@
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;">
           <div>
-            <p style="font-size: 8pt;margin: 3px"> {{"Model :  " + client?.device[0]?.model}}</p>
-            <p style="font-size: 8pt;margin: 3px"> {{"Condizioni d'uso :  " + client?.device[0]?.state_of_use}}</p>
-            <p style="font-size: 8pt;margin: 3px"> {{"IMEI&SN :  " + client?.device[0]?.imei}}</p>
-            <p style="font-size: 8pt;margin: 3px"> {{"Difect :  " + client?.device[0]?.repairs[0]?.defect}}.</p>
-            <p style="font-size: 8pt;margin: 3px">{{"Accessory :  " + client?.device[0]?.accessory}}</p>
+            <p style="font-size: 9pt;margin: 3px"> {{"Model :  " + client?.device[0]?.model}}</p>
+            <p style="font-size: 9pt;margin: 3px"> {{"Condizioni d'uso :  " + client?.device[0]?.state_of_use}}</p>
+            <p style="font-size: 9pt;margin: 3px"> {{"IMEI&SN :  " + client?.device[0]?.imei}}</p>
+            <p style="font-size: 9pt;margin: 3px"> {{"Difect :  " + client?.device[0]?.repairs[0]?.defect}}.</p>
+            <p style="font-size: 9pt;margin: 3px">{{"Accessory :  " + client?.device[0]?.accessory}}</p>
           </div>
 
           <div *ngIf="type_print===1">
             <div>
-              <p style="font-size: 8pt;margin: 3px;">
+              <p style="font-size: 9pt;margin: 3px;">
                 {{"Date to enter :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
-              <p style="font-size: 8pt;margin: 3px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
+              <p style="font-size: 9pt;margin: 3px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
               <p
-                style="font-size: 8pt;margin: 3px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
+                style="font-size: 9pt;margin: 3px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
               <p *ngIf="type_print===1"
-                 style="font-size: 8pt;margin: 3px">{{"La riparazione sarà finalizzata :  " + date_exit}}</p>
+                 style="font-size: 9pt;margin: 3px">{{"La riparazione sarà finalizzata :  " + date_exit}}</p>
             </div>
           </div>
           <div *ngIf="type_print===2" style="margin: 3px">
             <p
-              style="font-size: 8pt;margin: 3px"> {{"Data di ricezione del dispositivo :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
-            <p style="font-size: 8pt;margin: 3px;">
-              {{"Data di ritorno del dispositivo :  " + client?.device[0]?.repairs[0]?.output_date}}</p>
-            <p style="font-size: 8pt;margin: 3px;">{{"Deposit :  " + client?.device[0]?.repairs[0]?.deposit}}</p>
+              style="font-size: 9pt;margin: 3px"> {{"Data di ricezione del dispositivo :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
+            <p style="font-size: 9pt;margin: 3px;">
+              {{"Data di ritorno del dispositivo :  " + client?.device[0]?.repairs[0]?.output_date }}</p>
+            <p style="font-size: 9pt;margin: 3px;">{{"Deposit :  " + client?.device[0]?.repairs[0]?.deposit}}</p>
             <p
-              style="font-size: 8pt;margin: 3px;">{{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
-            <p style="font-size: 8pt;margin: 3px;">{{"Lavoro svolto :  " + client?.device[0]?.repairs[0]?.work_don}}</p>
+              style="font-size: 9pt;margin: 3px;">{{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
+            <p style="font-size: 9pt;margin: 3px;">{{"Lavoro svolto :  " + client?.device[0]?.repairs[0]?.work_don}}</p>
             <p
-              style="font-size: 8pt;margin: 3px;">{{"Ricambi usati :  " + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
+              style="font-size: 9pt;margin: 3px;">{{"Ricambi usati :  " + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
           </div>
         </div>
-        <div style="clear: both;">
-          <div style="border-style: solid;
-  border-color: black;
-  border-width: 1pt 1pt 1pt 1pt;
-  border-radius: 5pt;margin: 0 5px 5px;">
-            <div style="width:50%;">
+        <div style="border-style: solid; border-color: black;  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px 05px;">
+          <table style="width: 99%;">
+            <td style="width:50%;">
               <p *ngIf="name_test_entre.length===0" class="label" style="font-size: 8pt;margin: 2px; color: #1ABC9C">Il
                 tuo
                 dispositivo ha superato con successo tutti i nostri
                 test di
                 ingresso!!!</p>
-              <div *ngIf="name_test_entre.length>0">
+              <div *ngIf="name_test_entre.length>0&& name_test_entre.length!=16">
                 <p style="color: #1ABC9C;font-size: 8pt;margin: 2px;">Test di ingresso no superate!!!</p>
                 <ul *ngFor="let test of name_test_entre">
                   <li style="color: #c54040;font-size: 8pt;margin: 2px"> {{'Test falito: ' + test}}</li>
                 </ul>
               </div>
-            </div>
-            <div style="width:50%;">
+              <div *ngIf="name_test_entre.length===16">
+                <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test in ingresso sono negativi o non e
+                  stato
+                  possibile testare il dispositivo.!!!</p>
+              </div>
+            </td>
+            <td style="width:50%;">
               <div>
                 <p *ngIf="name_test_out?.length===0 && type_print===2" class="label"
                    style="font-size: 8pt;margin: 2px; color: #1ABC9C">Il tuo dispositivo
                   ha superato con successo
                   tutti i nostri test in uscita!!!</p>
-                <div *ngIf="name_test_out?.length>0">
-                  <p style="font-size: 8pt;margin: 2px;">Test di uscita no superate!!!</p>
+                <div *ngIf="name_test_out?.length>0&&name_test_out.length!=16">
+                  <p style="font-size: 8pt;margin: 2px; color: #1ABC9C;">Test di uscita no superate!!!</p>
                   <ul *ngFor="let test_exit of name_test_out" class="disclaimer">
-                    <li style="color: #c54040;font-size: 8pt;margin: 2px"> {{test_exit}}</li>
+                    <li style="color: #c54040;font-size: 8pt;margin: 2px"> {{'Test falito: ' + test_exit}}</li>
                   </ul>
                 </div>
               </div>
-            </div>
-          </div>
+              <div *ngIf="name_test_out.length===16">
+                <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test in uscita sono negativi o non e
+                  stato
+                  possibile testare il dispositivo.!!!</p>
+              </div>
+            </td>
+          </table>
         </div>
         <div style=" border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;">
-          <p style="font-size: 8pt; margin: 3px;">Note Condizioni Generali:</p>
-          <p style="font-size: 8pt;margin: 2px;">
+          <p style="font-size: 9pt; margin: 3px;">Note : </p>
+          <p
+            *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0].note.length>0"
+            style="font-size: 9pt;margin: 2px; color: #c54040;">
+            {{client.device[0].repairs[0].note}}</p>
+          <hr>
+          <!--          <div-->
+          <!--            *ngIf="client.device[0].repairs[0].note!=null-->
+          <!--            &&client.device[0].repairs[0].note.length>0"-->
+          <!--            style="font-size: 9pt;margin: 2px; color: #c54040;">-->
+          <!--            <p>{{notes[0]}}</p>-->
+          <!--            <p *ngIf="notes&&notes.length>0">{{notes[1]}}</p>-->
+          <!--          </div>-->
+          <!--          <hr>-->
+          <p style="font-size: 9pt; margin: 3px;">Condizioni Generali:</p>
+          <p style="font-size: 9pt;margin: 2px;">
             RFV Technology non si assume la responsabilità di nessun genere sulle seguenti
             condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di
             effettuare
@@ -126,28 +151,31 @@
             più
             di 90 giorni a partire dal giorno della chiamata al eliente
           </p>
-          <p style="font-size: 8pt; margin: 2px;">NB: dopo il termine, Il disponitivo verrà ritirato
+          <p style="font-size: 9pt; margin: 2px;">NB: dopo il termine, Il disponitivo verrà ritirato
             come spese aziendali per il lavoro non più pagato</p>
           <hr>
-          <p style="font-size: 8pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto
+          <p style="font-size: 9pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto
             Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei
             dati personali”</p>
         </div>
         <div style="margin: 3px">
           <span style="color: #1ABC9C">{{client?.send_email_active ? ' SI ' : ' NO '}}accetto di ricevere e-mail con notizie o fatture da questo emittente.</span>
           <div>
-            <div style="font-size: 8pt; margin: 3px;color: #c54040;
+            <div style="font-size: 9pt; margin: 3px;color: #c54040;
   border-bottom: solid black 1pt;">Dichiaro di essere d'accordo con le condizioni
               stabilite in questo
               documento. Per quello firmo. Nembro - {{date | date:'dd/MM/yyyy'}}
               <div class="sig_container" style=" float: left;
    width: 100%; display: inline-block">
                 <div class="staff-container" style="float: left; width:50%;">
-                  <p>RFV Staff :</p>
+                  <p>RFV Staff : <span style="color: #1ABC9C">{{userNickname}}</span></p>
                   <img alt="" height="20px" src="{{images_sig[0]}}" width="70px">
                 </div>
                 <div class="client_container" style="display: inline; width:30%;float: left">
-                  <p style="width: 50%">Client :</p>
+                  <p *ngIf="!client?.typeClient" style="width: 49%">Client :<span
+                    style="color: #1ABC9C"> {{client?.name + ' ' + client?.family}}</span></p>
+                  <p *ngIf="client?.typeClient" style="width: 49%">Client :<span
+                    style="color: #1ABC9C"> {{client?.companyName}}</span></p>
                   <img alt="" height="20px" src="{{images_sig[1]}}" width="70px">
 
                 </div>

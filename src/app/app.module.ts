@@ -59,6 +59,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
 import {AutocompletComponent} from './component/autocomplet/autocomplet.component';
 import {NumberRepairComponent} from './component/number-repair/number-repair.component';
+import {EditRepairComponent} from './component/edit-repair/edit-repair.component';
+import {PaginatorAllRepairComponent} from './component/paginator-all-repair/paginator-all-repair.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -101,7 +104,9 @@ import {NumberRepairComponent} from './component/number-repair/number-repair.com
     SmsSenderComponent,
     EmailNotificationComponent,
     AutocompletComponent,
-    NumberRepairComponent
+    NumberRepairComponent,
+    EditRepairComponent,
+    PaginatorAllRepairComponent
   ],
   imports: [
     NgbModule,
@@ -121,7 +126,8 @@ import {NumberRepairComponent} from './component/number-repair/number-repair.com
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [WebSocketService, HttpClient,
     {
