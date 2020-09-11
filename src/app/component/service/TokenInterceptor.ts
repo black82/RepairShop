@@ -58,12 +58,18 @@ export class TokenInterceptor implements HttpInterceptor {
         }
         if (!message) {
           if (error?.status === 404 && error?.message.includes('api')) {
-              message = 'Unfortunately, nothing could be found. Check the data entered.';
+            message = 'Unfortunately, nothing could be found. Check the data entered.';
           } else {
             message = error?.message;
           }
         }
-        console.log('error--->>>', error?.status);
+        if (error?.error?.payload?.localizedMessage) {
+          message = error.error.payload.localizedMessage;
+        }
+        if (error?.error?.message) {
+          message = error.error.message;
+        }
+        console.log('error--->>>', error);
         this?.alertService.error(null, message, false, false, '', error);
         return throwError(error);
       }));

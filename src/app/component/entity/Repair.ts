@@ -16,16 +16,15 @@ export class Repair {
   inputModule: InputTest;
   outputTest: OutputTest;
   note: string;
+  noteOutput: string;
   repairFileStorage: RepairFileStorage;
 
 
-  constructor(repair_Id: number, date_to_enter: Date,
-              exp_complet_date: Date, output_date: Date,
-              defect: string, deposit: number, price: string,
-              work_don: string, parts_replaced: string,
-              nowInRepair: boolean, inputModule: InputTest,
-              outputTest: OutputTest, note: string,
-              repairFileStorage: RepairFileStorage) {
+  constructor(repair_Id: number, date_to_enter: Date, exp_complet_date: Date,
+              output_date: Date, defect: string, deposit: number, price: string,
+              work_don: string, parts_replaced: string, nowInRepair: boolean,
+              inputModule: InputTest, outputTest: OutputTest, note: string,
+              noteOutput: string, repairFileStorage: RepairFileStorage) {
     this.repair_Id = repair_Id;
     this.date_to_enter = date_to_enter;
     this.exp_complet_date = exp_complet_date;
@@ -39,6 +38,7 @@ export class Repair {
     this.inputModule = inputModule;
     this.outputTest = outputTest;
     this.note = note;
+    this.noteOutput = noteOutput;
     this.repairFileStorage = repairFileStorage;
   }
 }

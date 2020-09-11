@@ -4,6 +4,9 @@
              id="icon-noti">
     </fa-icon>
     <a *ngIf="counters>0" class="counter-notification" id="counter-notify">{{ counters }}</a>
+    <span tooltip="Current User NickName">
+    <span class="user-name"> {{nicknameUserName}}</span>
+      </span>
   </div>
   <div *ngIf="counters > 0" class="notification-body">
     <ul *ngFor="let not of notification" class="notification-ul">

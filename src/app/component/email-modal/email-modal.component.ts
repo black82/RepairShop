@@ -64,6 +64,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     });
   }
 
+  setNewDateFormat(date: Date): Date {
+    return new Date(date);
+  }
 
   ok() {
     if (this.print_entity.type_client_print === 1) {

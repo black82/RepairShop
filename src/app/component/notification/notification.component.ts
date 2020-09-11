@@ -25,6 +25,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   wiuNotification = false;
   private subscribe: Subscription;
   private subscription: Subscription;
+  nicknameUserName: string;
+  private subscriptionAdminService: Subscription;
 
   constructor(private webSocketService: WebSocketService,
               private adminService: AdminServiceService,
@@ -35,12 +37,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.deleteAndSubscribe();
 
-    this.adminService.$user_show.subscribe(value => {
+    this.subscriptionAdminService = this.adminService.$user_show.subscribe(value => {
       this.wiuNotification = value;
       if (value) {
         this.getAllRejectNotification();
         const stompClient = this.webSocketService.connect();
         stompClient.connect({}, () => {
+          this.getSuperNameUser();
           this.subscribe = stompClient.subscribe('/topic/notification', notifications => {
             this.notifications = JSON.parse(notifications.body);
             this.notification.push(this.notifications);
@@ -54,7 +57,18 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.webSocketService.disconnection();
       }
     });
+    const view = localStorage.getItem('token');
+    if (view) {
+      this.adminService.$user_show.emit(true);
+    }
+  }
 
+  getSuperNameUser() {
+    this.httpClient.getNickNameCurrentStaffUser().subscribe(nickname => {
+      if (nickname) {
+        this.nicknameUserName = nickname.currentName;
+      }
+    });
   }
 
   bellAnimation(): void {
@@ -98,6 +112,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+    if (this.subscriptionAdminService) {
+      this.subscriptionAdminService.unsubscribe();
     }
   }
 

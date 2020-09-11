@@ -210,7 +210,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       keyboard_output: new FormControl(false),
       camera_output: new FormControl(false),
       camera_Output_Front: new FormControl(false),
-      note_output: [this.client.device[0].repairs[0].note],
+      note_output: [''],
     });
 
   }
@@ -273,7 +273,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.formClient.controls.price_output.value,
       this.formClient.controls.work_don_output.value,
       this.formClient.controls.parts_replace_output.value, this.client.device[0].repairs[0].nowInRepair,
-      this.client.device[0].repairs[0].inputModule, this.output_test, this.changeNotes(this.formClient.controls.note_output.value),
+      this.client.device[0].repairs[0].inputModule, this.output_test, this.client.device[0].repairs[0].note,
+      this.changeNotes(this.formClient.controls.note_output.value),
       this.client.device[0].repairs[0].repairFileStorage);
     this.repair_output.date_to_enter = this.client.device[0].repairs[0].date_to_enter;
     console.log(this.repair_output);
@@ -282,7 +283,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
 
   changeNotes(note: string) {
     if (note) {
-      return note + ';';
+      return 'Nota in uscita : ' + note + ' ;';
     } else {
       return note;
     }

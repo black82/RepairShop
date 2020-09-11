@@ -135,7 +135,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
       email: new FormControl('', [Validators.email]),
-      telephone_number: new FormControl(null, [Validators.required]),
+      telephone_number: new FormControl(null),
       telephone_number_second: new FormControl(null),
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
@@ -212,7 +212,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
       this.setDataHourAndMin(formData.date_exit), null, formData.defect,
       formData.deposit, formData.price, null, null, true,
-      this.inputTest, null, this.changeNotes(formData.note), this.repairFileStorage);
+      this.inputTest, null, this.changeNotes(formData.note), null, this.repairFileStorage);
 
     this.device = new Device(null, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);

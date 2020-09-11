@@ -21,6 +21,8 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   date: Date = new Date();
   type_print: number;
   date_exit: Date;
+  client_date_input: Date;
+  client_date_outpute: Date;
   id: string;
   invoice_tools: InvoiceToolsDto = new InvoiceToolsDto();
   print_entity: PrintEntity;
@@ -64,6 +66,10 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     if (printTypes.type_client_print === 1) {
       this.date_exit = printTypes.date_exit_device;
     }
+  }
+
+  setNewDateFormat(date: Date): Date {
+    return new Date(date);
   }
 
   check_test_OK(client: Client): void {

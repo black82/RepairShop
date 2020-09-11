@@ -31,7 +31,10 @@
            style="font-size: 8pt;margin: 3px">{{"Cliente :  " + client?.name + ' ' + client?.family }}</p>
         <p *ngIf="client?.typeClient" style="font-size: 8pt;margin: 3px">{{"Cliente :  " + client?.companyName }}</p>
         <p *ngIf="client?.email!=null" style="font-size: 8pt;margin: 3px"> {{"Email :  " + client?.email}}</p>
-        <p style="font-size: 8pt;margin: 3px"> {{"Cont.Telefonico : " + client?.telephone_number}}</p>
+        <p *ngIf="!client?.telephone_number?.includes('n/a')"
+           style="font-size: 8pt;margin: 3px"> {{"Numero Telefonico : " + client?.telephone_number}}</p>
+        <p *ngIf="client?.telephone_number?.includes('n/a')"
+           style="font-size: 8pt;margin: 3px">Numero Telefonico : n/a</p>
         <p style="font-size: 8pt;margin: 3px">{{"Indirizzo cliente :  " + client?.address}}</p>
       </div>
     </div>
@@ -43,7 +46,10 @@
     <div>
       <p style="font-size: 8pt;margin: 3px"> {{"Model :  " + client?.device[0]?.model}}</p>
       <p style="font-size: 8pt;margin: 3px"> {{"Condizioni d'uso :  " + client?.device[0]?.state_of_use}}</p>
-      <p style="font-size: 8pt;margin: 3px"> {{"IMEI&SN :  " + client?.device[0]?.imei}}</p>
+      <p *ngIf="!client?.device[0]?.imei.includes('n/a')"
+         style="font-size: 8pt;margin: 3px"> {{"IMEI & SN :  " + client?.device[0]?.imei}}</p>
+      <p *ngIf="client?.device[0]?.imei.includes('n/a')"
+         style="font-size: 8pt;margin: 3px"> IMEI & SN : n/a </p>
       <p style="font-size: 8pt;margin: 3px"> {{"Difect :  " + client?.device[0]?.repairs[0]?.defect}}.</p>
       <p style="font-size: 8pt;margin: 3px">{{"Accessory :  " + client?.device[0]?.accessory}}</p>
     </div>
@@ -51,19 +57,23 @@
     <div *ngIf="type_print===1">
       <div>
         <p style="font-size: 8pt;margin: 3px;">
-          {{"Date to enter :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
+          Date to enter
+          :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
         <p style="font-size: 8pt;margin: 3px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
         <p
           style="font-size: 8pt;margin: 3px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
         <p *ngIf="type_print===1"
-           style="font-size: 8pt;margin: 3px">{{"La riparazione sarà finalizzata :  " + date_exit}}</p>
+           style="font-size: 8pt;margin: 3px">La riparazione sarà finalizzata
+          : {{ setNewDateFormat(date_exit)| date: 'yyyy/MM/dd'}}</p>
       </div>
     </div>
     <div *ngIf="type_print===2" style="margin: 3px">
       <p
-        style="font-size: 8pt;margin: 3px"> {{"Data di ricezione del dispositivo :  " + client?.device[0]?.repairs[0]?.date_to_enter}}</p>
+        style="font-size: 8pt;margin: 3px">Data di ricezione del dispositivo
+        : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
       <p style="font-size: 8pt;margin: 3px;">
-        {{"Data di ritorno del dispositivo :  " + client?.device[0]?.repairs[0]?.output_date}}</p>
+        Data di ritorno del dispositivo
+        : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
       <p style="font-size: 8pt;margin: 3px;">{{"Deposit :  " + client?.device[0]?.repairs[0]?.deposit}}</p>
       <p
         style="font-size: 8pt;margin: 3px;">{{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
@@ -117,9 +127,12 @@
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;">
     <p style="font-size: 8pt; margin: 3px;">Note : </p>
-    <p *ngIf="client?.device[0]?.repairs[0]?.note!=null&&client?.device[0]?.repairs[0]?.note?.length>0"
-       style="font-size: 8pt;margin: 2px; color: #c54040;">
+    <p
+      style="font-size: 8pt;margin: 2px; color: #c54040;">
       {{client?.device[0]?.repairs[0]?.note}}</p>
+    <p
+      style="font-size: 8pt;margin: 2px; color: #c54040;">
+      {{client?.device[0]?.repairs[0]?.noteOutput}}</p>
     <hr>
     <p style="font-size: 8pt; margin: 3px;">Condizioni Generali:</p>
     <p style="font-size: 8pt;margin: 2px;">

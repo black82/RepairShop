@@ -256,7 +256,8 @@ export class EditRepairComponent implements OnInit, OnDestroy {
       this.client.device[0].repairs[0].exp_complet_date, this.setDataHourAndMin(formData.date_exit), formData.defect,
       formData.deposit, formData.price, formData.work_don_output,
       formData.parts_replace_output, this.client.device[0].repairs[0].nowInRepair,
-      this.inputTest, this.output_test, formData.note, this.client.device[0].repairs[0].repairFileStorage);
+      this.inputTest, this.output_test, formData.note, this.client.device[0].repairs[0].noteOutput,
+      this.client.device[0].repairs[0].repairFileStorage);
     this.device = new Device(this.client.device[0].id_Device, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory,
       this.client.device[0].rightNowInRepair, [this.repair]);

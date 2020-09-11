@@ -25,8 +25,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const view = localStorage.getItem('roles');
+    const view = localStorage.getItem('token');
     if (view) {
+
       this.admin = true;
     }
     this.subscribe_admin = this.adminService.$admin_show.subscribe(value => {
