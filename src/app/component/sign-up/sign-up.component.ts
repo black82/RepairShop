@@ -54,16 +54,27 @@ export class SignUpComponent implements OnInit {
       return;
     }
     this.deleteTacked();
-    this.animation_wait.$anime_show.emit(true);
-    this.authService.register(form)
-      .subscribe(() => {
-        this.animation_wait.$anime_show.emit(false);
+    this.authService.register(form).subscribe(() => {
+      this.welcomeAnime();
+      setTimeout(() => {
         this.alertService.info(null, 'Before logging in, confirm the email.',
           true, true, 'client/sign-in', null);
-      }, (err) => {
-        this.animation_wait.$anime_show.emit(false);
-        console.log(err);
-      });
+      }, 3500);
+    }, (err) => {
+      this.animation_wait.$anime_show.emit(false);
+      console.log(err);
+    });
+  }
+
+  welcomeAnime() {
+    const loginForm = document.getElementById('login-text');
+    const elementById = document.getElementById('welcome-anime');
+    const htmlFormElement = document.querySelector('form') as HTMLElement;
+    if (elementById && htmlFormElement) {
+      loginForm.classList.add('login-text-anime');
+      htmlFormElement.classList.add('form-anime');
+      elementById.classList.add('welcome-anime-1');
+    }
   }
 
   ValidatorTrimSpace(control: FormControl) {

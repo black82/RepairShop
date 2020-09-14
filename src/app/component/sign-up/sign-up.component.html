@@ -1,12 +1,12 @@
 <div class="container-body">
+  <h1 class="text--center" id="login-text"> Staff registration form</h1>
+  <h1 class="welcome-anime text--center" id="welcome-anime"> 🙂 Thanks for registering</h1>
   <div class="grid">
     <form (ngSubmit)="onFormSubmit(registerForm.value)" [formGroup]="registerForm" class="form login" method="POST">
       <div class="form__field" tooltip="The email will be verified.">
         <label for="login__username">
-          <i class="icon icon-envelope"></i>
-          <span class="hidden">Email </span>
-          <span *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.value!==null"
-                class="error-message"> {{'  ' + '*required field'}}</span>
+           <span *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.value!==null"
+                 class="error-message"> {{'  ' + '*required field'}}</span>
         </label>
         <input class="form__input" formControlName="email" id="login__username" name="email" placeholder="Email"
                required
@@ -14,8 +14,6 @@
       </div>
       <div class="form__field">
         <label for="login__username">
-          <i class="icon icon-user"></i>
-          <span class="hidden">Full Name</span>
           <span *ngIf="registerForm.controls.fullName.invalid && registerForm.controls.fullName.value!==null "
                 class="error-message">*required field
           </span></label>
@@ -24,10 +22,8 @@
       </div>
       <div class="form__field" tooltip="Min. lents 4 Max 10.">
         <label for="login__password">
-          <i class="icon icon-lock"></i>
-          <span class="hidden">Password</span>
-          <span *ngIf="registerForm.controls.password.invalid&& registerForm.controls.password.value!==null"
-                class="error-message"> {{'  ' + '*required field'}}</span>
+            <span *ngIf="registerForm.controls.password.invalid&& registerForm.controls.password.value!==null"
+                  class="error-message"> {{'  ' + '*required field'}}</span>
         </label>
         <input class="form__input" formControlName="password" id="login__password" name="password"
                placeholder="Password"
@@ -35,11 +31,9 @@
       </div>
       <div class="form__field">
         <label for="login__password">
-          <i class="icon icon-lock"></i>
-          <span class="hidden">Password</span>
-          <span
-            *ngIf="registerForm.controls.confirmPassword.invalid&& registerForm.controls.confirmPassword.value!==null"
-            class="error-message"> {{messagePassword}}</span>
+             <span
+               *ngIf="registerForm.controls.confirmPassword.invalid&& registerForm.controls.confirmPassword.value!==null"
+               class="error-message"> {{messagePassword}}</span>
         </label>
         <input autocomplete="off" class="form__input" formControlName="confirmPassword" id="login__password__confirm"
                name="confirmPassword"
@@ -51,4 +45,16 @@
     </form>
     <p class="text--center"> Before logging in, open the indicated email and confirm !!!</p>
   </div>
+  <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
 </div>

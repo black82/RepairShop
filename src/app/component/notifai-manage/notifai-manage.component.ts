@@ -33,7 +33,8 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
     this.subscription = this.adminService.$show_notified.subscribe(notify => {
       this.messages = notify;
       this.formMessage = this.fb.group({
-        destination: ['', [Validators.required]],
+        destination: [this.messages?.destination_user, [Validators.required, Validators.email]],
+        subject: [this.messages.message_subject, [Validators.required]],
       });
       this.show_message = true;
     });
@@ -46,7 +47,11 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   }
 
   resendMessage(message) {
-    this.messages.destination_user = this.formMessage.controls.destination.value;
+    console.log(message);
+    if (this.formMessage.controls.destination.value) {
+      this.messages.destination_user = this.formMessage.controls.destination.value;
+    }
+    this.messages.message_subject = this.formMessage.controls.subject.value;
     this.http.retrySendInvoice(message).subscribe(() => {
       this.show_message = false;
       this.soundSend();

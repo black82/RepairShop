@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
-import {faFileSignature, faPhoneSquare, faUserTag, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faFileSignature, faFlushed, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faMoneyBill} from '@fortawesome/free-solid-svg-icons/faMoneyBill';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
@@ -51,6 +51,11 @@ import {faCameraRetro} from '@fortawesome/free-solid-svg-icons/faCameraRetro';
 import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
 import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
 import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons/faArrowAltCircleRight';
+import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
+import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
+import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
+import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
+import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
 
 @Component({
   selector: 'app-deviceinput',
@@ -66,7 +71,11 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   address = faAddressCard;
   date = faCalendarPlus;
   code = faUserLock;
-  usertag = faUserTag;
+  usertag = faUserSecret;
+  userPerson = faUserCheck;
+  userFamely = faUserCircle;
+  ivaCompany = faBars;
+  sidCompany = faCode;
   phone = faPhoneSquare;
   barcode = faBarcode;
   money2 = faMoneyCheck;
@@ -80,6 +89,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   conections = faChargingStation;
   soundPhone = faPhoneVolume;
   sound = faVolumeUp;
+  faceIdFa = faFlushed;
   touch = faFingerprint;
   wifi = faWifi;
   microfon = faMicrophone;
@@ -135,8 +145,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
       email: new FormControl('', [Validators.email]),
-      telephone_number: new FormControl(null),
-      telephone_number_second: new FormControl(null),
+      telephone_number: new FormControl('+39'),
+      telephone_number_second: new FormControl('+39'),
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
       state_of_use: new FormControl(null, [Validators.required]),
@@ -163,6 +173,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       sim_input: new FormControl(false),
       keyboard_input: new FormControl(false),
       camera_input: new FormControl(false),
+      faceId_input: new FormControl(false),
       camera_input_front: new FormControl(false),
       client_type: new FormControl(false),
       note: new FormControl(''),
@@ -201,13 +212,17 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
-
+    // if (formData.imei != null && formData?.imei?.length < 14) {
+    //   this.alert_service.info(null, 'The entered IMEI is not valid. Check the value entered in the IMEI and please try again'
+    //     , false, false, '', null);
+    //   return ;
+    // }
     this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input, formData.camera_input_front,
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
-      formData.software);
+      formData.software, formData.faceId_input);
 
     this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
       this.setDataHourAndMin(formData.date_exit), null, formData.defect,
@@ -219,9 +234,14 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,
-      [this.device], formData.email_send, formData.client_type);
+      [this.device], formData.email_send, formData.client_type,
+      formData.ivaClient, formData.sdiClient);
     console.log(this.repair);
     return this.client;
+  }
+
+  checkImeiLength(imei: string) {
+
   }
 
   changeNotes(note: string) {
@@ -493,13 +513,19 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.companyShow = !this.companyShow;
     if (this.companyShow) {
       this.formClient.addControl('companyName', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('sdiClient', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('ivaClient', new FormControl(null, [Validators.required]));
       this.formClient.controls.name.setValue(null);
       this.formClient.controls.family.setValue(null);
       this.formClient.removeControl('name');
       this.formClient.removeControl('family');
     } else {
       this.formClient.controls.companyName.setValue(null);
+      this.formClient.controls.ivaClient.setValue(null);
+      this.formClient.controls.sdiClient.setValue(null);
       this.formClient.removeControl('companyName');
+      this.formClient.removeControl('sdiClient');
+      this.formClient.removeControl('ivaClient');
       this.formClient.addControl('name', new FormControl(null, [Validators.required]));
       this.formClient.addControl('family', new FormControl(null, [Validators.required]));
     }

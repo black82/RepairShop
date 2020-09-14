@@ -57,36 +57,50 @@ export class SignInComponent implements OnInit {
     const nav_url = localStorage.getItem('navigate');
     this.deleteTacked();
     const client = this.createSigInEntity();
-    this.animation_wait.$anime_show.emit(true);
     this.authService.login(client)
       .subscribe(res => {
-        this.animation_wait.$anime_show.emit(false);
-        if (res.token) {
-          if (res.roles) {
-            localStorage.setItem('roles', res.roles);
-            this.admin.$admin_show.emit(true);
-            this.admin.$user_show.emit(true);
-          } else {
-            this.admin.$user_show.emit(true);
-          }
-          const element = document.querySelector('.close') as HTMLElement;
-          localStorage.setItem('token', res.token);
-          if (element) {
-            element.click();
-          }
-          if (nav_url) {
-            this.router.navigate([nav_url]).then(r => r);
-            localStorage.removeItem('navigate');
+        this.welcomeAnime();
+        const timeout = setTimeout(() => {
+          if (res.token) {
+            if (res.roles) {
+              localStorage.setItem('roles', res.roles);
+              this.admin.$admin_show.emit(true);
+              this.admin.$user_show.emit(true);
+            } else {
+              this.admin.$user_show.emit(true);
+            }
+            const element = document.querySelector('.close') as HTMLElement;
+            localStorage.setItem('token', res.token);
+            if (element) {
+              element.click();
+            }
+            if (nav_url) {
+              this.router.navigate([nav_url]).then(r => r);
+              localStorage.removeItem('navigate');
 
-          } else {
-            this.router.navigate(['']).then(r => r);
+            } else {
+              this.router.navigate(['']).then(r => r);
+            }
           }
-        }
-        this.autoLogout.startListenerActivity();
+          this.autoLogout.startListenerActivity();
+          clearTimeout(timeout);
+        }, 2500);
+
       }, (err) => {
         this.animation_wait.$anime_show.emit(false);
         console.log(err);
       });
+  }
+
+  welcomeAnime() {
+    const loginForm = document.getElementById('login-text');
+    const elementById = document.getElementById('welcome-anime');
+    const htmlFormElement = document.querySelector('form') as HTMLElement;
+    if (elementById && htmlFormElement) {
+      loginForm.classList.add('login-text-anime');
+      htmlFormElement.classList.add('form-anime');
+      elementById.classList.add('welcome-anime-1');
+    }
   }
 
   createSigInEntity(): ClientLogIn {

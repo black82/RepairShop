@@ -12,7 +12,7 @@
         <h1 style="font-size: 16pt;
   font-weight: 500;color: #c54040">Riparazione</h1>
         <p style="font-size: 8pt;  color:#c54040"><strong>{{'Nr. ' + id}}</strong></p>
-        <p style="font-size: 8pt;margin: 3px;">info@rfvtechnology.eu</p>
+        <p style="font-size: 8pt;margin: 3px;">info@rfvtechnology.it</p>
         <p style="font-size: 8pt;margin: 3px;">Nembro Italia(BG) , 24027</p>
         <p style="font-size: 8pt;margin: 3px;">Via Garibaldi , 6/A</p>
         <p style="font-size: 8pt;margin: 3px;">Nembro Bergamo, 24027</p>
@@ -30,6 +30,10 @@
         <p *ngIf="!client?.typeClient"
            style="font-size: 8pt;margin: 3px">{{"Cliente :  " + client?.name + ' ' + client?.family }}</p>
         <p *ngIf="client?.typeClient" style="font-size: 8pt;margin: 3px">{{"Cliente :  " + client?.companyName }}</p>
+        <p *ngIf="client?.typeClient"
+           style="font-size: 9pt;margin: 3px">{{"Cliente Iva :  " + client?.ivaCompany }}</p>
+        <p *ngIf="client?.typeClient"
+           style="font-size: 9pt;margin: 3px">{{"Cliente  Sdi:  " + client?.sdiCompany }}</p>
         <p *ngIf="client?.email!=null" style="font-size: 8pt;margin: 3px"> {{"Email :  " + client?.email}}</p>
         <p *ngIf="!client?.telephone_number?.includes('n/a')"
            style="font-size: 8pt;margin: 3px"> {{"Numero Telefonico : " + client?.telephone_number}}</p>
@@ -91,13 +95,13 @@
           dispositivo ha superato con successo tutti i nostri
           test di
           ingresso!!!</p>
-        <div *ngIf="name_test_entre.length>0&& name_test_entre.length!=16">
+        <div *ngIf="name_test_entre.length>0&& name_test_entre.length!=17">
           <p style="color: #1ABC9C;font-size: 8pt;margin: 2px;">Test di ingresso no superate!!!</p>
           <ul *ngFor="let test of name_test_entre">
             <li style="color: #c54040;font-size: 8pt;margin: 2px"> {{'Test falito: ' + test}}</li>
           </ul>
         </div>
-        <div *ngIf="name_test_entre.length===16">
+        <div *ngIf="name_test_entre.length===17">
           <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test in ingresso sono negativi o non e stato
             possibile testare il dispositivo.!!!</p>
         </div>
@@ -108,14 +112,14 @@
              style="font-size: 8pt;margin: 2px; color: #1ABC9C">Il tuo dispositivo
             ha superato con successo
             tutti i nostri test in uscita!!!</p>
-          <div *ngIf="name_test_out?.length>0&&name_test_out.length!=16">
+          <div *ngIf="name_test_out?.length>0&&name_test_out.length!=17">
             <p style="font-size: 8pt;margin: 2px; color: #1ABC9C;">Test di uscita no superate!!!</p>
             <ul *ngFor="let test_exit of name_test_out" class="disclaimer">
               <li style="color: #c54040;font-size: 8pt;margin: 2px"> {{'Test falito: ' + test_exit}}</li>
             </ul>
           </div>
         </div>
-        <div *ngIf="name_test_out.length===16">
+        <div *ngIf="name_test_out.length===17">
           <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test in uscita sono negativi o non e stato
             possibile testare il dispositivo.!!!</p>
         </div>

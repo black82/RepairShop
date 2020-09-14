@@ -11,6 +11,12 @@
           <span class="input-title">
             <fa-icon
               [icon]="usertag"></fa-icon>Client: {{client.typeClient ? client.companyName : client?.name + ' ' + client.family}}</span>
+          <span *ngIf="client?.typeClient" class="input-title">
+            <fa-icon
+              [icon]="usertag"></fa-icon>Client Iva: {{client.ivaCompany}}</span>
+          <span *ngIf="client?.typeClient" class="input-title">
+            <fa-icon
+              [icon]="usertag"></fa-icon>Client SDI: {{client.sdiCompany}}</span>
           <span class="input-title"><fa-icon
             [icon]="phone"></fa-icon> Telethon Number:{{client?.telephone_number}}</span>
           <span class="input-title"><fa-icon [icon]="email"></fa-icon> Email:{{client?.email}}</span>

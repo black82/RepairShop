@@ -46,6 +46,24 @@
                 [ngModel]="client?.companyName" class="input-1" formControlName="companyName" placeholder="Company Name"
                 type="text">
             </label>
+            <label *ngIf="companyShow">
+              <span class="input-title">Company SDI</span>
+              <fa-icon [icon]="sidCompany" class="icon-input"></fa-icon>
+              <input
+                [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.sdiClient?.dirty ||
+            formClient.controls.sdiClient.touched) && formClient.controls.sdiClient.invalid && formClient.controls.sdiClient.errors}"
+                [ngModel]="client?.sdiCompany" class="input-1" formControlName="sdiClient" placeholder="Company SDI"
+                type="text">
+            </label>
+            <label *ngIf="companyShow">
+              <span class="input-title">Company Iva</span>
+              <fa-icon [icon]="ivaCompany" class="icon-input"></fa-icon>
+              <input
+                [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.ivaClient?.dirty ||
+            formClient.controls.ivaClient.touched) && formClient.controls.ivaClient.invalid && formClient.controls.ivaClient.errors}"
+                [ngModel]="client?.ivaCompany" class="input-1" formControlName="ivaClient" placeholder="Company Iva"
+                type="text">
+            </label>
             <label><span class="input-title">Email</span>
               <fa-icon [icon]="email" class="icon-input"></fa-icon>
               <input
@@ -143,7 +161,7 @@
               <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
               <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.imei.dirty || formClient.controls.imei.touched)
            && formClient.controls.imei.invalid && formClient.controls.imei.errors&& formClient.controls.imei.pristine}"
-                     [ngModel]="client?.device[0]?.imei" class="input-2" formControlName="imei"
+                     [ngModel]="client?.device[0]?.imei.includes" class="input-2" formControlName="imei"
                      placeholder="Imei or Sn of Device" type="text">
             </label>
             <label>
@@ -371,6 +389,18 @@
                        type="checkbox">
                 <span class="check-box-name">Bluetooth</span>
               </label>
+
+            </div>
+            <div class="check-single">
+              <fa-icon [icon]="faceIdFa"
+                       [style.color]="formClient.controls.faceId_input.value? '#1ABC9C' : 'lightcoral'"
+                       class="icon-box test-icon"></fa-icon>
+              <label class="checkbox">
+                <input [ngModel]="client.device[0].repairs[0]?.inputModule?.faceIdInput" class="check-box"
+                       formControlName="faceId_input" name="device-test"
+                       type="checkbox">
+                <span class="check-box-name">Face Id</span>
+              </label>
             </div>
           </div>
         </div>
@@ -576,8 +606,18 @@
                            type="checkbox">
                     <span class="check-box-name">Bluetooth</span>
                   </label>
+                  <div class="check-single">
+                    <fa-icon [icon]="faceIdFa"
+                             [style.color]="formClient.controls.faceId_output.value? '#1ABC9C' : 'lightcoral'"
+                             class="icon-box test-icon"></fa-icon>
+                    <label class="checkbox">
+                      <input [ngModel]="client.device[0].repairs[0].outputTest.faceIdOutput" class="check-box"
+                             formControlName="faceId_output" name="device-test"
+                             type="checkbox">
+                      <span class="check-box-name">Face Id</span>
+                    </label>
+                  </div>
                 </div>
-
               </div>
             </div>
             <div tooltip="Notices for staff at the input device">
@@ -624,7 +664,5 @@
         </div>
       </form>
     </div>
-
-
   </div>
 </div>

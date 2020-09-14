@@ -199,7 +199,6 @@ form ::-moz-focus-inner {
 
 .check-single {
   display: flex;
-  padding-right: 30px;
   padding-top: 10px;
 }
 

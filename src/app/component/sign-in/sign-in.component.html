@@ -1,9 +1,10 @@
 <div class="container-body">
   <div class="grid">
+    <h1 class="welcome-anime" id="welcome-anime">Welcome</h1>
+    <h1 class="login-text" id="login-text">Login Form</h1>
     <form (ngSubmit)="onFormSubmit()" [formGroup]=loginForm class="form login" method="POST">
       <div class="form__field">
         <label for="login__username">
-          <fa-icon [icon]="email" class="icon"></fa-icon>
           <span class="hidden">Username</span>
           <span *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.value!==null"
                 class="error-message"> {{'  ' + '*required field'}}</span></label>
@@ -13,7 +14,6 @@
       </div>
       <div class="form__field">
         <label for="login__password">
-          <fa-icon [icon]="lock" class="icon"></fa-icon>
           <span class="hidden">Password</span>
           <span *ngIf="loginForm.controls.password.invalid&& loginForm.controls.password.value!==null"
                 class="error-message"> {{'  ' + '*required field'}}</span></label>
@@ -24,12 +24,25 @@
       <div class="form__field">
         <input type="submit" value="Sign In">
       </div>
+      <p class="text--center"> Not a member
+        <fa-icon [icon]="question"></fa-icon>
+        <a routerLink="/client/sign-up"> Sign up Now
+          <fa-icon [icon]="exclamation"></fa-icon>
+        </a>
+      </p>
     </form>
-    <p class="text--center"> Not a member
-      <fa-icon [icon]="question"></fa-icon>
-      <a routerLink="/client/sign-up"> Sign up Now
-        <fa-icon [icon]="exclamation"></fa-icon>
-      </a>
-    </p>
+
   </div>
+  <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
 </div>

@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const view = localStorage.getItem('token');
+    const view = localStorage.getItem('roles');
     if (view) {
       this.admin = true;
     }
@@ -71,6 +71,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   showAdminPage(value) {
     this.admin = value;
+    this.addAnimeToHelper(value);
+
+  }
+
+  addAnimeToHelper(value: boolean) {
+    if (value) {
+      const timeout = setTimeout(() => {
+        const elementById = document.getElementById('helper');
+        if (elementById) {
+          elementById.classList.add('anime-helper');
+          const timeout1 = setTimeout(() => {
+            elementById.classList.add('anime-helper-2');
+            clearTimeout(timeout1);
+          }, 4000);
+        }
+        clearTimeout(timeout);
+      }, 1000);
+
+    } else {
+      const elementById = document.getElementById('helper');
+      if (elementById) {
+        elementById.classList.remove('anime-helper');
+        elementById.classList.remove('anime-helper-2');
+      }
+    }
   }
 
   ngOnDestroy(): void {

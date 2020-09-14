@@ -16,14 +16,17 @@ export class InputTest {
   vibrations: boolean;
   audio_equipment: boolean;
   software: boolean;
+  faceIdInput: boolean;
+  messageInvoiceId: string;
 
 
   constructor(id_input: number, sensors_input: boolean, display_input: boolean,
               connectors_input: boolean, sound_equipment_input: boolean,
-              touch_input: boolean, display_touch_input: boolean, wi_fi_input: boolean,
-              microphone_input: boolean, sim_input: boolean, keyboard_input: boolean,
-              camera_input: boolean, camera_input_front: boolean, bluetooth: boolean,
-              vibrations: boolean, audio_equipment_input: boolean, software: boolean) {
+              touch_input: boolean, display_touch_input: boolean,
+              wi_fi_input: boolean, microphone_input: boolean, sim_input: boolean,
+              keyboard_input: boolean, camera_input: boolean,
+              camera_input_front: boolean, bluetooth: boolean, vibrations: boolean,
+              audio_equipment: boolean, software: boolean, faceIdInput: boolean) {
     this.id_input = id_input;
     this.sensors_input = sensors_input;
     this.display_input = display_input;
@@ -39,7 +42,8 @@ export class InputTest {
     this.camera_input_front = camera_input_front;
     this.bluetooth = bluetooth;
     this.vibrations = vibrations;
-    this.audio_equipment = audio_equipment_input;
+    this.audio_equipment = audio_equipment;
     this.software = software;
+    this.faceIdInput = faceIdInput;
   }
 }

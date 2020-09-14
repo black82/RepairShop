@@ -23,7 +23,7 @@
 
         <label *ngIf="!companyShow">
           <span class="input-title">Name of Client</span>
-          <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
+          <fa-icon [icon]="userPerson" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.name?.dirty ||
             formClient.controls?.name?.touched) && formClient?.controls.name?.invalid && formClient.controls?.name?.errors}"
@@ -32,13 +32,14 @@
         </label>
         <label *ngIf="!companyShow">
           <span class="input-title">Family of Client</span>
-          <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
+          <fa-icon [icon]="userFamely" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls?.family?.dirty ||
             formClient.controls?.family?.touched) && formClient.controls?.family?.invalid && formClient.controls?.family?.errors}"
             [ngModel]="client?.family" class="input-1" formControlName="family" placeholder="Family of Client"
             type="text">
         </label>
+
         <label *ngIf="companyShow">
           <span class="input-title">Company Name</span>
           <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
@@ -46,6 +47,24 @@
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.companyName?.dirty ||
             formClient.controls.companyName.touched) && formClient.controls.companyName.invalid && formClient.controls.companyName.errors}"
             [ngModel]="client?.companyName" class="input-1" formControlName="companyName" placeholder="Company Name"
+            type="text">
+        </label>
+        <label *ngIf="companyShow">
+          <span class="input-title">Company SDI</span>
+          <fa-icon [icon]="sidCompany" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.sdiClient?.dirty ||
+            formClient.controls.sdiClient.touched) && formClient.controls.sdiClient.invalid && formClient.controls.sdiClient.errors}"
+            [ngModel]="client?.sdiCompany" class="input-1" formControlName="sdiClient" placeholder="Company SDI"
+            type="text">
+        </label>
+        <label *ngIf="companyShow">
+          <span class="input-title">Company Iva</span>
+          <fa-icon [icon]="ivaCompany" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.ivaClient?.dirty ||
+            formClient.controls.ivaClient.touched) && formClient.controls.ivaClient.invalid && formClient.controls.ivaClient.errors}"
+            [ngModel]="client?.ivaCompany" class="input-1" formControlName="ivaClient" placeholder="Company Iva"
             type="text">
         </label>
         <label>
@@ -81,11 +100,9 @@
            && formClient.controls.address.invalid && formClient.controls.address.errors}" class="input-1"
                  [ngModel]="client?.address" formControlName="address" placeholder="Address of Client" type="text">
         </label>
-
         <label>
           <span class="input-title">Model</span>
           <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
-
           <input (input)="filterItems($event.target.value)" class="input-1"
                  [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
            && formClient.controls.model.invalid && formClient.controls.model.errors}"
@@ -106,7 +123,6 @@
             </div>
           </div>
         </label>
-
         <label>
           <span class="input-title">Price</span>
           <fa-icon [icon]="money" class="icon-input"></fa-icon>
@@ -114,17 +130,16 @@
            && formClient.controls.price.invalid && formClient.controls.price.errors}" class="input-1"
                  formControlName="price" placeholder="Price of Repair" type="text">
         </label>
-
-        <label><span class="input-title">State of Use</span>
+      </div>
+      <div class="row-2">
+        <label>
+          <span class="input-title">State of Use</span>
           <fa-icon [icon]="used" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.state_of_use.dirty || formClient.controls.state_of_use.touched)
            && formClient.controls.state_of_use.invalid && formClient.controls.state_of_use.errors}" class="input-1"
                  [ngModel]="client?.device[0]?.state_of_use" formControlName="state_of_use"
                  placeholder="State Use of Device" type="text">
         </label>
-
-      </div>
-      <div class="row-2">
         <label><span class="input-title">Code Device</span>
           <fa-icon [icon]="code" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.code_device.dirty || formClient.controls.code_device.touched)
@@ -336,6 +351,15 @@
           <label class="checkbox">
             <input class="check-box" formControlName="bluetooth" name="device-test" type="checkbox">
             <span class="check-box-name">Bluetooth</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="faceIdFa"
+                   [style.color]="formClient.controls.faceId_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box" formControlName="faceId_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Face Id</span>
           </label>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {faCalendarCheck, faFileSignature, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarCheck, faFileSignature, faFlushed, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faUserTag} from '@fortawesome/free-solid-svg-icons/faUserTag';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
@@ -85,6 +85,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   save = faDownload;
   printer = faPrint;
   vibrations = faVihara;
+  faceIdFa = faFlushed;
   software = faFileSignature;
   return_device_button_text = 'Search Device';
   formClient: FormGroup;
@@ -209,6 +210,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       vibrations: new FormControl(false),
       keyboard_output: new FormControl(false),
       camera_output: new FormControl(false),
+      faceId_output: new FormControl(false),
       camera_Output_Front: new FormControl(false),
       note_output: [''],
     });
@@ -263,7 +265,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       formData.connections_output, formData.sound_equipment_output, formData.touch_output, formData.display_touch_output,
       formData.wi_fi_output, formData.microphone_output, formData.sim_output,
       formData.keyboard_output, formData.camera_output, formData.camera_Output_Front,
-      formData.bluetooth, formData.vibrations, formData.audio_equipment_output, formData.software);
+      formData.bluetooth, formData.vibrations,
+      formData.audio_equipment_output, formData.software, formData.faceId_output);
     this.repair_output = new Repair(this.client.device[0].repairs[0].repair_Id,
       this.client.device[0].repairs[0].date_to_enter,
       this.client.device[0].repairs[0].exp_complet_date,

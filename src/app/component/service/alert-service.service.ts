@@ -34,7 +34,7 @@ export class AlertServiceService {
     const audio = new Audio();
     audio.type = 'audio/mp3';
     audio.crossOrigin = 'anonimus';
-    audio.src = './../assets/sound/alarm_message.mp3';
+    audio.src = './../assets/sound/hand-bell.mp3';
     audio.load();
     audio.play().then(r => r);
   }

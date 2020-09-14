@@ -12,12 +12,15 @@ export class Client {
   device: Array<Device>;
   send_email_active: boolean;
   typeClient: boolean;
+  ivaCompany: string;
+  sdiCompany: string;
 
 
-  constructor(id: number, family: string, name: string, companyName: string,
-              email: string, telephone_number: string, telephone_number_second: string,
-              address: string, device: Array<Device>, send_email_active: boolean,
-              typeClient: boolean) {
+  constructor(id: number, family: string, name: string,
+              companyName: string, email: string, telephone_number: string,
+              telephone_number_second: string, address: string,
+              device: Array<Device>, send_email_active: boolean,
+              typeClient: boolean, ivaCompany: string, sdiCompany: string) {
     this.id = id;
     this.family = family;
     this.name = name;
@@ -29,5 +32,7 @@ export class Client {
     this.device = device;
     this.send_email_active = send_email_active;
     this.typeClient = typeClient;
+    this.ivaCompany = ivaCompany;
+    this.sdiCompany = sdiCompany;
   }
 }

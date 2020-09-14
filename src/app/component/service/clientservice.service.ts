@@ -19,7 +19,7 @@ import {UserStaffNickNamePojo} from '../entity/UserStaffNickNamePojo';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  //    apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  //   apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
   apiUrl = 'http://localhost:8080/';
 

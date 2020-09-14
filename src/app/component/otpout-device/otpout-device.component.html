@@ -310,6 +310,18 @@
               <span class="check-box-name">Camera Front</span>
             </label>
           </div>
+          <div class="check-single">
+            <fa-icon [icon]="faceIdFa"
+                     [style.color]="formClient.controls?.faceId_output.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.faceIdOutput"
+                     class="check-box" formControlName="faceId_output"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Face Id</span>
+            </label>
+          </div>
         </div>
       </div>
       <app-email-modal></app-email-modal>

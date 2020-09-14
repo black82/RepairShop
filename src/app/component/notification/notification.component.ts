@@ -50,7 +50,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
             this.counters = this.notification.length;
             this.bellAnimation();
             this.counterAnime();
-            this.soundAlert();
+            if (document.getElementsByClassName('notification-anime')) {
+              this.soundAlert();
+            }
           });
         });
       } else {
@@ -73,11 +75,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   bellAnimation(): void {
     const iconBell = document.getElementById('icon-noti');
-    iconBell.classList.add('notification-anime');
-    const timeout = setTimeout(() => {
-      iconBell.classList.remove('notification-anime');
-      clearTimeout(timeout);
-    }, 15000);
+    if (iconBell) {
+      iconBell.classList.add('notification-anime');
+      const timeout = setTimeout(() => {
+        iconBell.classList.remove('notification-anime');
+        clearTimeout(timeout);
+      }, 15000);
+    }
   }
 
   counterAnime() {

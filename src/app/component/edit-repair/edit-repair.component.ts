@@ -16,7 +16,7 @@ import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
 import {faUserLock} from '@fortawesome/free-solid-svg-icons/faUserLock';
-import {faFileSignature, faPhoneSquare, faUserTag, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faFileSignature, faFlushed, faPhoneSquare, faUserTag, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
 import {faMoneyCheck} from '@fortawesome/free-solid-svg-icons/faMoneyCheck';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
@@ -49,6 +49,8 @@ import {faMicrochip} from '@fortawesome/free-solid-svg-icons/faMicrochip';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {ImageSenderService} from '../service/image-sender.service';
 import {OutputTest} from '../entity/OutputTest';
+import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
+import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
 
 @Component({
   selector: 'app-edit-repair',
@@ -72,6 +74,8 @@ export class EditRepairComponent implements OnInit, OnDestroy {
   date = faCalendarPlus;
   code = faUserLock;
   usertag = faUserTag;
+  ivaCompany = faBars;
+  sidCompany = faCode;
   phone = faPhoneSquare;
   barcode = faBarcode;
   money2 = faMoneyCheck;
@@ -97,6 +101,7 @@ export class EditRepairComponent implements OnInit, OnDestroy {
   display_touch = faMobile;
   photo = faImages;
   modul = faFileInvoice;
+  faceIdFa = faFlushed;
   vibrations = faVihara;
   software = faFileSignature;
   client_after_saved: Client;
@@ -109,27 +114,19 @@ export class EditRepairComponent implements OnInit, OnDestroy {
   repairFileStorage: RepairFileStorage = new RepairFileStorage();
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
-  showAnimation = false;
   invoice_event: Subscription;
   email_send_event: Subscription;
   email_anime_event: Subscription;
   email_send_disable = true;
   countSigPad = 0;
-  showAddButton = false;
   showAddAutocomplete = false;
   filteredItems1: Observable<any[]>;
   prompt = 'Press <enter> to add "';
   itemsModels: string[] = [];
   companyShow = false;
   formTitle = 'Find By Id';
-  private email_event: Subscription;
-  private sig_pad_event: Subscription;
-  private invoice_mak_event: Subscription;
   private form_open: Subscription;
   private id_repair_event: Subscription;
-  private subscriber: Subscription;
-  private subscription: Subscription;
-  private subscriptionPrintSuccess: Subscription;
   private output_test: OutputTest;
 
   constructor(private fb: FormBuilder,
@@ -173,8 +170,8 @@ export class EditRepairComponent implements OnInit, OnDestroy {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.email]),
-      telephone_number: new FormControl(null, [Validators.required]),
+      email: new FormControl(null),
+      telephone_number: new FormControl(null),
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
       state_of_use: new FormControl(null, [Validators.required]),
@@ -183,8 +180,8 @@ export class EditRepairComponent implements OnInit, OnDestroy {
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
       date_to_enter: new FormControl(null, [Validators.required]),
-      work_don_output: new FormControl(null),
-      parts_replace_output: new FormControl(null),
+      work_don_output: new FormControl(null, [Validators.required]),
+      parts_replace_output: new FormControl(null, [Validators.required]),
       defect: new FormControl(null, [Validators.required]),
       deposit: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),
@@ -204,6 +201,8 @@ export class EditRepairComponent implements OnInit, OnDestroy {
       keyboard_input: new FormControl(false),
       camera_input: new FormControl(false),
       camera_input_front: new FormControl(false),
+      faceId_input: new FormControl(false),
+      faceId_output: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
       date_exit: new FormControl(null, [Validators.required]),
@@ -240,14 +239,15 @@ export class EditRepairComponent implements OnInit, OnDestroy {
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input, formData.camera_input_front,
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
-      formData.software);
+      formData.software, formData.faceId_input);
     if (this.client.device[0].repairs[0].outputTest != null) {
       this.output_test = new OutputTest(this.client.device[0].repairs[0].outputTest.id_Output,
         formData.sensor_output, formData.display_output,
         formData.connections_output, formData.sound_equipment_output, formData.touch_output, formData.display_touch_output,
         formData.wi_fi_output, formData.microphone_output, formData.sim_output,
         formData.keyboard_output, formData.camera_output, formData.camera_Output_Front,
-        formData.bluetooth_output, formData.vibrations_output, formData.audio_equipment_output, formData.software);
+        formData.bluetooth_output, formData.vibrations_output,
+        formData.audio_equipment_output, formData.software, formData.faceId_output);
     } else {
       this.output_test = null;
     }
@@ -263,7 +263,7 @@ export class EditRepairComponent implements OnInit, OnDestroy {
       this.client.device[0].rightNowInRepair, [this.repair]);
     this.client = new Client(this.client.id, formData.family, formData.name, formData.companyName,
       formData.email, formData.telephone_number, this.client.telephone_number_second, formData.address,
-      [this.device], formData.email_send, this.client.typeClient);
+      [this.device], formData.email_send, this.client.typeClient, formData.ivaClient, formData.sdiClient);
     return this.client;
   }
 
@@ -288,7 +288,7 @@ export class EditRepairComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.httpService.savedEditClient(this.createClient()).subscribe(response => {
+    this.httpService.savedEditClient(this.createClient()).subscribe(() => {
       this.alert_service.success(null, 'The client ' + this.getNameByTypeClient(this.client) + '  was successfully edited'
         , true, false, '');
     }, error => {
@@ -388,10 +388,19 @@ export class EditRepairComponent implements OnInit, OnDestroy {
     this.companyShow = !this.companyShow;
     if (this.companyShow) {
       this.formClient.addControl('companyName', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('sdiClient', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('ivaClient', new FormControl(null, [Validators.required]));
+      this.formClient.controls.name.setValue(null);
+      this.formClient.controls.family.setValue(null);
       this.formClient.removeControl('name');
       this.formClient.removeControl('family');
     } else {
+      this.formClient.controls.companyName.setValue(null);
+      this.formClient.controls.ivaClient.setValue(null);
+      this.formClient.controls.sdiClient.setValue(null);
       this.formClient.removeControl('companyName');
+      this.formClient.removeControl('sdiClient');
+      this.formClient.removeControl('ivaClient');
       this.formClient.addControl('name', new FormControl(null, [Validators.required]));
       this.formClient.addControl('family', new FormControl(null, [Validators.required]));
     }

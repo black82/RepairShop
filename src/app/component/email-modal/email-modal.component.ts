@@ -89,7 +89,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
         this.sendEmailToBackend(invoiceToPrintPage);
         clearInterval(interval);
       }
-    }, 300);
+    }, 1000);
 
   }
 
@@ -193,7 +193,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     if (!client.device[0].repairs[0].inputModule.display_touch_input) {
       this.name_test_entre.push(' X Il display_touchy del dispositivo è danneggiato ');
     }
-
+    if (!client.device[0].repairs[0].inputModule.faceIdInput) {
+      this.name_test_entre.push(' X Il Face Id del dispositivo è danneggiato ');
+    }
   }
 
   emailPage(client: Client): void {
@@ -256,6 +258,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     }
     if (!client.device[0].repairs[0].outputTest.display_touch_Output) {
       this.name_test_out.push(' X Il display_touchy del dispositivo è danneggiato ');
+    }
+    if (!client.device[0].repairs[0].outputTest.faceIdOutput) {
+      this.name_test_out.push(' X Il Face Id del dispositivo è danneggiato ');
     }
   }
 

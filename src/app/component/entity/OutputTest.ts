@@ -16,15 +16,16 @@ export class OutputTest {
   vibrations: boolean;
   audio_equipment: boolean;
   software: boolean;
+  faceIdOutput: boolean;
 
 
-  constructor(id_Output: number, sensors_Output: boolean,
-              display_Output: boolean, connectors_Output: boolean,
-              sound_equipment_Output: boolean, touch_Output: boolean,
-              display_touch_Output: boolean, wi_fi_Output: boolean, microphone_Output: boolean,
-              sim_Output: boolean, keyboard_Output: boolean, camera_Output: boolean,
-              camera_Output_Front: boolean, bluetooth: boolean, vibrations: boolean,
-              audio_equipment_input: boolean, software: boolean) {
+  constructor(id_Output: number, sensors_Output: boolean, display_Output: boolean,
+              connectors_Output: boolean, sound_equipment_Output: boolean,
+              touch_Output: boolean, display_touch_Output: boolean, wi_fi_Output: boolean,
+              microphone_Output: boolean, sim_Output: boolean, keyboard_Output: boolean,
+              camera_Output: boolean, camera_Output_Front: boolean, bluetooth: boolean,
+              vibrations: boolean, audio_equipment: boolean, software: boolean,
+              faceIdOutput: boolean) {
     this.id_Output = id_Output;
     this.sensors_Output = sensors_Output;
     this.display_Output = display_Output;
@@ -40,7 +41,8 @@ export class OutputTest {
     this.camera_Output_Front = camera_Output_Front;
     this.bluetooth = bluetooth;
     this.vibrations = vibrations;
-    this.audio_equipment = audio_equipment_input;
+    this.audio_equipment = audio_equipment;
     this.software = software;
+    this.faceIdOutput = faceIdOutput;
   }
 }

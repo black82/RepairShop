@@ -78,6 +78,7 @@ export class EmailClientSendComponent implements OnInit {
     this.invoice.subjectEmail = formData.subject;
     this.invoice.messageEmail = formData.message;
     this.invoice.typeSender = InvoiceType.email;
+    this.invoice.typeFile = InvoiceType.email;
     return this.invoice;
   }
 

@@ -8,6 +8,7 @@
     <span class="user-name"> {{nicknameUserName}}</span>
       </span>
   </div>
+
   <div *ngIf="counters > 0" class="notification-body">
     <ul *ngFor="let not of notification" class="notification-ul">
       <li (click)="editResandMessage(not)" class="list-not">

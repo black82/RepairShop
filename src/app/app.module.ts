@@ -62,6 +62,7 @@ import {NumberRepairComponent} from './component/number-repair/number-repair.com
 import {EditRepairComponent} from './component/edit-repair/edit-repair.component';
 import {PaginatorAllRepairComponent} from './component/paginator-all-repair/paginator-all-repair.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {SendRedactPasswordRequestComponent} from './component/send-redact-password-request/send-redact-password-request.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AutocompletComponent,
     NumberRepairComponent,
     EditRepairComponent,
-    PaginatorAllRepairComponent
+    PaginatorAllRepairComponent,
+    SendRedactPasswordRequestComponent
   ],
   imports: [
     NgbModule,
