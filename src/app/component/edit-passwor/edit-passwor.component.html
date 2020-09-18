@@ -1,0 +1,45 @@
+<div class="container-body">
+  <h1 class="welcome-anime" id="welcome-anime">Thank you shortly you will receive instructions</h1>
+  <h1 class="login-text" id="login-text">Enter The Authentication Email</h1>
+  <div class="grid">
+    <form (ngSubmit)="onFormSubmit()" [formGroup]=loginForm class="form login" method="POST">
+      <div class="form__field">
+        <label for="login__password">
+          <span class="hidden">Username</span>
+          <span *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.value!==null"
+                class="error-message"> {{'  ' + '*required field'}}</span></label>
+        <input class="form__input" formControlName="password" id="login__password" name="password"
+               placeholder="password"
+               required
+               type="password">
+      </div>
+      <div class="form__field">
+        <label for="login__confirm__password">
+          <span class="hidden">Username</span>
+          <span *ngIf="loginForm.controls.confirm_password.invalid && loginForm.controls.confirm_password.value!==null"
+                class="error-message"> {{'  ' + '*required field'}}</span></label>
+        <input class="form__input" formControlName="confirm_password" id="login__confirm__password"
+               name="confirm_password" placeholder="Confirm Password"
+               required
+               type="password">
+      </div>
+      <div class="form__field">
+        <input type="submit" value="Change New Password">
+      </div>
+    </form>
+
+  </div>
+  <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+

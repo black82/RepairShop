@@ -369,6 +369,7 @@ form button:hover {
   bottom: -160px;
   animation: square 25s infinite;
   transition-timing-function: linear;
+  margin-bottom: -50px;
 }
 
 .bg-bubbles li:nth-child(1) {

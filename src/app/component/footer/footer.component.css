@@ -65,7 +65,7 @@ ul.contact li a:before {
   position: relative;
   border-radius: 25px;
   padding: 25px 25px 15px 25px;
-  background-color: #1ABC9C;
+  background: linear-gradient(to top right, hsl(179, 34%, 100%) 40%, hsl(155, 50%, 61%) 100%) !important;
   box-shadow: inset 0 3px 0 0 #BBB,
   inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
   0 0 0 4px #FFFFFF,

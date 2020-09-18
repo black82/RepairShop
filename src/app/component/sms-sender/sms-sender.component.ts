@@ -61,6 +61,7 @@ export class SmsSenderComponent implements OnInit {
     this.invoice.subjectEmail = formData.subject;
     this.invoice.messageEmail = formData.message;
     this.invoice.typeSender = InvoiceType.sms;
+    this.invoice.typeFile = InvoiceType.sms;
     return this.invoice;
   }
 

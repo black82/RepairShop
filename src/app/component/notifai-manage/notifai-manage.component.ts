@@ -8,6 +8,7 @@ import {WebSocketService} from '../service/WebSocketService';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
 
 @Component({
   selector: 'app-notifai-manage',
@@ -21,6 +22,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   show_message = false;
   private subscription: Subscription;
   formMessage: FormGroup;
+  hide_button = faHistory;
 
   constructor(private adminService: AdminServiceService,
               private webSocketService: WebSocketService,
@@ -35,6 +37,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
       this.formMessage = this.fb.group({
         destination: [this.messages?.destination_user, [Validators.required, Validators.email]],
         subject: [this.messages.message_subject, [Validators.required]],
+        type_sender: [this.messages.message_type, [Validators.required]],
       });
       this.show_message = true;
     });
@@ -47,21 +50,45 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   }
 
   resendMessage(message) {
-    console.log(message);
     if (this.formMessage.controls.destination.value) {
       this.messages.destination_user = this.formMessage.controls.destination.value;
     }
     this.messages.message_subject = this.formMessage.controls.subject.value;
+    this.messages.type_sender = this.formMessage.controls.type_sender.value;
     this.http.retrySendInvoice(message).subscribe(() => {
-      this.show_message = false;
+      this.addAnimeEnvelop();
       this.soundSend();
+      this.dismiss();
       this.adminService.$deleteMessage.emit(message);
 
     });
   }
 
+  addAnimeEnvelop() {
+    const elementById = document.getElementById('send-icon');
+    const elementById1 = document.getElementById('envelop-header');
+    if (elementById) {
+      elementById.classList.add('anime-envelop');
+    }
+    if (elementById1) {
+      elementById1.classList.add('anime-envelop');
+    }
+  }
+
   dismiss() {
-    this.show_message = !this.show_message;
+    const elementById = document.getElementById('container-not');
+    if (elementById) {
+      elementById.classList.add('close-modal');
+    }
+    const timeout = setTimeout(() => {
+      this.show_message = false;
+      clearTimeout(timeout);
+    }, 2000);
+
+  }
+
+  dismissButton() {
+    this.show_message = false;
   }
 
   deleteMessage(messages: MessageInvoice) {

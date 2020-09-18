@@ -22,6 +22,8 @@ import {faIdCard} from '@fortawesome/free-solid-svg-icons/faIdCard';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
 import {faUserPlus} from '@fortawesome/free-solid-svg-icons/faUserPlus';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
+import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
 
 @Component({
   selector: 'app-header',
@@ -39,6 +41,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   mail = faEnvelopeOpen;
   phone = faPhoneSquare;
   idIcon = faIdCard;
+  envelope = faEnvelope;
+  passwordRecovery = faUnlockAlt;
   signIn = faSignInAlt;
   signOut = faSignOutAlt;
   signUp = faUserPlus;

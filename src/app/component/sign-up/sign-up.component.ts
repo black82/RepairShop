@@ -56,9 +56,10 @@ export class SignUpComponent implements OnInit {
     this.deleteTacked();
     this.authService.register(form).subscribe(() => {
       this.welcomeAnime();
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         this.alertService.info(null, 'Before logging in, confirm the email.',
           true, true, 'client/sign-in', null);
+        clearTimeout(timeout);
       }, 3500);
     }, (err) => {
       this.animation_wait.$anime_show.emit(false);

@@ -1,49 +1,61 @@
-<div *ngIf="show_message" class="container-body-notification-modal">
-  <div class="notification-content">
-    <a (click)="dismiss()" class="close" title="Close"><span class="x">X</span></a>
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <header class="ccheader">
+<div *ngIf="show_message" class="container-body-notification-modal" id="container-not">
+  <div class="container-notification-borde">
+    <div class="notification-content">
+      <a (click)=" dismissButton()" class="close" title="Close"><span class="x">X</span></a>
+      <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+      <header class="ccheader">
+        <h1><i class="fa fa-envelope fa-2x ccform-addon" id="envelop-header"></i>
+          Form for editing notifications</h1>
+      </header>
+      <div class="wrapper">
+        <form [formGroup]="formMessage" class="ccform">
+          <div class="ccfield-prepend">
+            <span class="ccform-addon"><i class="fa fa-user fa-2x"></i></span>
+            <span class="text-input">Destination Notification</span>
+            <input [value]="messages?.destination_user"
+                   class="ccformfield" formControlName="destination" placeholder="Destination Notification" required
+                   type="text">
+          </div>
+          <div class="ccfield-prepend">
+            <span class="ccform-addon"><i class="fa fa-check-square fa-2x"></i></span>
+            <span class="text-input">Status</span>
+            <input [value]="messages?.message_status" class="ccformfield" placeholder="Status" readonly type="text">
+          </div>
+          <div class="ccfield-prepend">
+            <span class="ccform-addon"><i class="fa fa-android fa-2x"></i></span>
+            <span class="text-input"> Type Sender</span>
+            <input [value]="messages?.message_type" class="ccformfield" formControlName="type_sender"
+                   placeholder="Type Sender" type="text">
+          </div>
+          <div class="ccfield-prepend">
+            <span class="ccform-addon"><i class="fa fa-info fa-2x"></i></span>
+            <span class="text-input">Subject</span>
+            <input [value]="messages?.message_subject" class="ccformfield" placeholder="Subject" required type="text">
+          </div>
+          <div class="ccfield-prepend">
+            <span class="ccform-addon"><i class="fa fa-info-circle fa-2x"></i></span>
+            <span class="text-input">Repair Id</span>
+            <input [value]="messages?.repair_Id" class="ccformfield" placeholder="Repair-id" readonly type="text">
+          </div>
+        </form>
+      </div>
+      <div class="button-container">
+        <label>
+          <a (click)="deleteMessage(messages)" class="button button-small">
+            <span> <fa-icon [icon]="discar" class="button-icon"></fa-icon></span> Delete
+            Message</a>
+        </label>
+        <label>
+          <a (click)="resendMessage(messages)" class="button button-small">
+            <span> <fa-icon [icon]="mail" class="button-icon " id="send-icon"></fa-icon></span> ReSend
+            Message</a>
+        </label>
+        <div><a (click)="dismissButton()"
+                class="button button-small button-disable"><span> <fa-icon
+          [icon]="hide_button" class="button-icon"></fa-icon>    Hide Message</span></a>
+        </div>
+      </div>
+    </div>
 
-      <h1><i class="fa fa-envelope fa-2x ccform-addon"></i>
-        Form for editing notifications</h1>
-    </header>
-    <div class="wrapper">
-      <form [formGroup]="formMessage" class="ccform">
-        <div class="ccfield-prepend">
-          <span class="ccform-addon"><i class="fa fa-user fa-2x"></i></span>
-          <span>Destination Notification</span>
-          <input [value]="messages?.destination_user"
-                 class="ccformfield" formControlName="destination" placeholder="Destination Notification" required
-                 type="text">
-        </div>
-        <div class="ccfield-prepend">
-          <span class="ccform-addon"><i class="fa fa-check-square fa-2x"></i></span>
-          <span>Status</span>
-          <input [value]="messages?.message_status" class="ccformfield" placeholder="Status" readonly type="text">
-        </div>
-        <div class="ccfield-prepend">
-          <span class="ccform-addon"><i class="fa fa-android fa-2x"></i></span>
-          <span> Type Sender</span>
-          <input [value]="messages?.type_sender" class="ccformfield" placeholder="Type Sender"
-                 readonly type="text">
-        </div>
-        <div class="ccfield-prepend">
-          <span class="ccform-addon"><i class="fa fa-info fa-2x"></i></span>
-          <span>Subject</span>
-          <input [value]="messages?.message_subject" class="ccformfield" placeholder="Subject" required type="text">
-        </div>
-        <div class="ccfield-prepend">
-          <span class="ccform-addon"><i class="fa fa-info-circle fa-2x"></i></span>
-          <span>Repair Id</span>
-          <input [value]="messages?.repair_Id" class="ccformfield" placeholder="Repair-id" readonly type="text">
-        </div>
-      </form>
-    </div>
-    <div class="button-container">
-      <a (click)="deleteMessage(messages)" class="button button-small"><span> <fa-icon
-        [icon]="discar" class="button-icon"></fa-icon>Delete Notification</span></a>
-      <a (click)="resendMessage(messages)" class="button button-small"><span> <fa-icon
-        [icon]="mail" class="button-icon"></fa-icon>ReSend Message</span></a>
-    </div>
   </div>
 </div>

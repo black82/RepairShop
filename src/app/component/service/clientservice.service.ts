@@ -12,6 +12,7 @@ import {StatisticModel} from '../entity/StatisticModel';
 import {StatisticModelParts} from '../entity/StatisticModelParts';
 import {MessageInvoice} from '../entity/MessageInvoice';
 import {UserStaffNickNamePojo} from '../entity/UserStaffNickNamePojo';
+import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
 
 @Injectable({
   providedIn: 'root'
@@ -296,11 +297,49 @@ export class HttpClien {
     );
   }
 
+  getClientPageableByInterval(page: number, size: number, dateInit: Date, dateComplete: Date): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/date/client/pageable-',
+      {
+        params: new HttpParams()
+          .set('page', String(page))
+          .set('size', String(size))
+          .set('dateinit', String(dateInit))
+          .set('datecomplete', String(dateComplete))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getMessagePageableByInterval(page: number, size: number, dateInit: Date, dateComplete: Date): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/date/message/pageable-',
+      {
+        params: new HttpParams()
+          .set('page', String(page))
+          .set('size', String(size))
+          .set('dateinit', String(dateInit))
+          .set('datecomplete', String(dateComplete))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getNickNameCurrentStaffUser(): Observable<UserStaffNickNamePojo> {
     return this.http.get<UserStaffNickNamePojo>(this.apiUrl + 'api/current/user/nickname')
       .pipe(
         catchError(this.errorHandler)
       );
+  }
+
+  sendRequestChangePassword(passwordRecoveryPojo: PasswordRecoveryPojo): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/recovery/password/request', passwordRecoveryPojo).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  sendRequestChangePasswordToSaved(passwordRecoveryPojo: PasswordRecoveryPojo): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/recovery/password/saved', passwordRecoveryPojo).pipe(
+      catchError(this.errorHandler)
+    );
   }
 
   errorHandler(error) {

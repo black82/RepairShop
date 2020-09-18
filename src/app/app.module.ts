@@ -63,6 +63,9 @@ import {EditRepairComponent} from './component/edit-repair/edit-repair.component
 import {PaginatorAllRepairComponent} from './component/paginator-all-repair/paginator-all-repair.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {SendRedactPasswordRequestComponent} from './component/send-redact-password-request/send-redact-password-request.component';
+import {EditPassworComponent} from './component/edit-passwor/edit-passwor.component';
+import {ClientPaginatorDateComponent} from './component/client-paginator-date/client-paginator-date.component';
+import {MessageAdminComponent} from './component/message-admin/message-admin.component';
 
 
 @NgModule({
@@ -108,7 +111,10 @@ import {SendRedactPasswordRequestComponent} from './component/send-redact-passwo
     NumberRepairComponent,
     EditRepairComponent,
     PaginatorAllRepairComponent,
-    SendRedactPasswordRequestComponent
+    SendRedactPasswordRequestComponent,
+    EditPassworComponent,
+    ClientPaginatorDateComponent,
+    MessageAdminComponent
   ],
   imports: [
     NgbModule,

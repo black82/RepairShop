@@ -156,6 +156,7 @@ fa-icon {
 }
 
 .container-modal {
+  display: block;
   padding: 20px;
   border: 1px solid #888;
   background: transparent !important;
@@ -167,11 +168,11 @@ fa-icon {
   left: 50%;
 }
 
-::ng-deep .container-single-content > .container-modal > app-single-content > .container-body {
-  background: white !important;
-  color: black !important;
-  border-radius: 5px;
-}
+/*::ng-deep .container-single-content > .container-modal > app-single-content > .container-body {*/
+/*  background: white !important;*/
+/*  color: black !important;*/
+/*  border-radius: 5px;*/
+/*}*/
 
 .close {
   padding-left: 7.5px;
@@ -190,33 +191,60 @@ fa-icon {
   cursor: pointer;
 }
 
-.close-modal {
-  -webkit-animation: fade-out-bck 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) 0s both;
-  animation: fade-out-bck 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) 0s both;
+form input {
+  position: relative;
+  -webkit-appearance: none;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.75);
+  width: 80%;
+  border-radius: 0.50em;
+  padding: 0.5em 1em;
+  box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
+  -moz-transition: all 0.35s ease-in-out;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  font-size: 1em;
+  outline: none;
+  margin: 10px auto;
+
 }
 
-@-webkit-keyframes fade-out-bck {
-  0% {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateZ(-80px);
-    transform: translateZ(-80px);
-    opacity: 0;
-  }
+.icon-input {
+  margin: 10px;
 }
 
-@keyframes fade-out-bck {
-  0% {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: translateZ(-80px);
-    transform: translateZ(-80px);
-    opacity: 0;
-  }
+form .formerize-placeholder {
+  color: #555 !important;
 }
+
+form ::-webkit-input-placeholder {
+  color: #555 !important;
+}
+
+form :-moz-placeholder {
+  color: #555 !important;
+}
+
+form ::-moz-placeholder {
+  color: #555 !important;
+}
+
+form :-ms-input-placeholder {
+  color: #555 !important;
+}
+
+form input.input:focus {
+  box-shadow: 0 0 2px 1px #E0E0E0;
+  background: #fff;
+}
+
+label {
+  display: block !important;
+}
+
+.form-container {
+  min-width: 34%;
+}
+
+

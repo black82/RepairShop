@@ -144,9 +144,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
-      email: new FormControl('', [Validators.email]),
-      telephone_number: new FormControl('+39'),
-      telephone_number_second: new FormControl('+39'),
+      email: new FormControl(null, [Validators.email]),
+      telephone_number: new FormControl(null),
+      telephone_number_second: new FormControl(null),
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
       state_of_use: new FormControl(null, [Validators.required]),
@@ -154,10 +154,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
-      date_to_enter: new FormControl('', [Validators.required]),
-      defect: new FormControl('', [Validators.required]),
-      deposit: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
+      date_to_enter: new FormControl(null, [Validators.required]),
+      defect: new FormControl(null, [Validators.required]),
+      deposit: new FormControl(null, [Validators.required]),
+      price: new FormControl(null, [Validators.required]),
       sensors_input: new FormControl(false),
       display_input: new FormControl(false),
       connectors_input: new FormControl(false),
@@ -209,14 +209,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   createClient() {
     this.repairFileStorage.fotoEnterDevice = this.imageSender.submitImageToBack();
-
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
-    // if (formData.imei != null && formData?.imei?.length < 14) {
-    //   this.alert_service.info(null, 'The entered IMEI is not valid. Check the value entered in the IMEI and please try again'
-    //     , false, false, '', null);
-    //   return ;
-    // }
+
     this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
@@ -240,8 +235,42 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     return this.client;
   }
 
-  checkImeiLength(imei: string) {
+  checkImeiLength(imei: string): boolean {
+    if (this.checkLengthString(imei)) {
+      imei = null;
+      this.formClient.controls.imei.setValue(null);
+    }
+    if (imei != null && imei?.length < 14) {
+      this.alert_service.info(null, 'The entered IMEI is not valid. Check the value entered in the IMEI and please try again'
+        , false, false, '', null);
+      return true;
+    } else {
+      return false;
+    }
+  }
 
+  checkNumberLength(number: string): boolean {
+    if (this.checkLengthString(number)) {
+      number = null;
+      this.formClient.controls.telephone_number.setValue(null);
+    }
+    if (number != null && number?.length < 5) {
+      this.alert_service.info(null, 'The entered Telephone Number is not valid. Check the value entered in the Telephone Number and please try again'
+        , false, false, '', null);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkLengthString(string: string): boolean {
+    if (string != null) {
+      string.trim();
+      if (string.length !== 0) {
+        return false;
+      }
+    }
+    return true;
   }
 
   changeNotes(note: string) {
@@ -299,6 +328,11 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       });
       return;
     }
+    if (this.checkImeiLength(this.formClient.controls.imei.value) ||
+      this.checkNumberLength(this.formClient.controls.telephone_number.value)) {
+      return;
+    }
+
     if (!this.client_after_saved) {
       this.createClient();
     } else {
@@ -390,6 +424,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       Object.keys(this.formClient.controls).forEach(key => {
         this.formClient.controls[key].markAllAsTouched();
       });
+      return;
+    }
+    if (this.checkImeiLength(this.formClient.controls.imei.value) ||
+      this.checkNumberLength(this.formClient.controls.telephone_number.value)) {
       return;
     }
     if (this.formClient.controls.email.value === null && this.formClient.controls.email.invalid) {

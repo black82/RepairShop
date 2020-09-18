@@ -56,7 +56,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
         const timeout = setTimeout(() => {
           this.emailPage(print.client_print);
           clearTimeout(timeout);
-        }, 1000);
+        }, 1500);
       }, () => {
         this.animation_wait.$anime_show.emit(false);
       });

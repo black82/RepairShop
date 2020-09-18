@@ -21,6 +21,10 @@ import {AddnewRepairComponent} from './component/addnew-repair/addnew-repair.com
 import {EndRepairNotificationComponent} from './component/end-repair-notification/end-repair-notification.component';
 import {EditRepairComponent} from './component/edit-repair/edit-repair.component';
 import {PaginatorAllRepairComponent} from './component/paginator-all-repair/paginator-all-repair.component';
+import {SendRedactPasswordRequestComponent} from './component/send-redact-password-request/send-redact-password-request.component';
+import {EditPassworComponent} from './component/edit-passwor/edit-passwor.component';
+import {ClientPaginatorDateComponent} from './component/client-paginator-date/client-paginator-date.component';
+import {MessageAdminComponent} from './component/message-admin/message-admin.component';
 
 
 export const routers: Routes = [
@@ -32,6 +36,8 @@ export const routers: Routes = [
   {path: 'search/telephone/number', component: SearchpageComponent, canActivate: [AutGuardService]},
   {path: 'client/sign-up', component: SignUpComponent},
   {path: 'client/sign-in', component: SignInComponent},
+  {path: 'recovery/password', component: EditPassworComponent},
+  {path: 'recovery/password/request', component: SendRedactPasswordRequestComponent},
   {path: 'search/email', component: SearchEmailComponent, canActivate: [AutGuardService]},
   {path: 'search/repair/id', component: SearchRepairIdComponent, canActivate: [AutGuardService]},
   {path: 'admin/logs/server', component: LogServiceComponent, canActivate: [AutGuardService]},
@@ -44,6 +50,8 @@ export const routers: Routes = [
   {path: 'output/repair/notification', component: EndRepairNotificationComponent, canActivate: [AutGuardService]},
   {path: 'repair/edit', component: EditRepairComponent, canActivate: [AutGuardService]},
   {path: 'all/repair/paginator', component: PaginatorAllRepairComponent, canActivate: [AutGuardService]},
+  {path: 'date/repair/paginator', component: ClientPaginatorDateComponent, canActivate: [AutGuardService]},
+  {path: 'date/message/paginator', component: MessageAdminComponent, canActivate: [AutGuardService]},
 ];
 
 @NgModule({

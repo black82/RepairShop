@@ -94,9 +94,13 @@
                         <fa-icon [icon]="usertag"></fa-icon>
                         Show All Client </a></li>
                       <br>
-                      <!--                      <li><a routerLink="/search/repair/id">-->
-                      <!--                        <fa-icon [icon]="idIcon"></fa-icon>-->
-                      <!--                        Search by Repair Id</a></li>-->
+                      <li><a routerLink="date/repair/paginator">
+                        <fa-icon [icon]="idIcon"></fa-icon>
+                        Show All Client By Date</a></li>
+                      <br>
+                      <li><a routerLink="date/message/paginator">
+                        <fa-icon [icon]="envelope"></fa-icon>
+                        Manage Sent Messages</a></li>
                     </ul>
                   </div>
                 </div>
@@ -148,13 +152,18 @@
                   <ul class="submenu">
                     <li><a routerLink="/client/sign-in">
                       <fa-icon [icon]="signIn"></fa-icon>
-                      Sign in</a></li>
+                      Sign in / Login</a></li>
                     <li><a routerLink="/client/sign-up">
                       <fa-icon [icon]="signUp"></fa-icon>
-                      Sign up</a></li>
+                      Sign up/ Registered</a></li>
+                    <li><a routerLink="/recovery/password/request">
+                      <fa-icon [icon]="passwordRecovery"></fa-icon>
+                      Recovery Password</a>
+                    </li>
                     <li><a (click)="logout()" href="#">
                       <fa-icon [icon]="signOut"></fa-icon>
-                      LogOut</a></li>
+                      Disconnect</a>
+                    </li>
                   </ul>
                 </div>
               </li>

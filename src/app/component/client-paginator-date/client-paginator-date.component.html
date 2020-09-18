@@ -1,10 +1,30 @@
 <div class="container-body">
   <div class="container-top">
-    <img alt="repair worker" class="image-top"
-         src="http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/assets/images/plumber.png">
+    <img alt="repair worker" class="image-top" height="80px"
+         src="http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/assets/images/plumber.png"
+         width="80px">
+    <div class="form-container">
+      <form [formGroup]="formDataInterval">
+        <label for="date_init">
+          <fa-icon [icon]="date_init" class="icon-input"></fa-icon>
+          <span class="input-title">Date init </span>
+
+          <input class="input-1"
+                 formControlName="date_init" id="date_init"
+                 name="date_init" placeholder="Date Init Period" required type="date">
+        </label><br>
+
+        <label for="date_finish">
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <span class="input-title">Date Complete </span>
+          <input class="input-1"
+                 formControlName="date_complete" id="date_finish" placeholder="Date Finish Period" required type="date">
+        </label>
+      </form>
+    </div>
     <div class="button-con">
       <a (click)="getServerData()" class="button button-small button-get"><span> <fa-icon
-        [icon]="repair_icon" class="button-icon"></fa-icon> Get All Client</span></a>
+        [icon]="repair_icon" class="button-icon"></fa-icon> Search Client</span></a>
     </div>
 
   </div>
@@ -21,18 +41,23 @@
     <table class="table table-sm">
       <thead>
       <tr>
+        <th scope="col">Nr</th>
         <th scope="col">Id Client</th>
+        <!--        <th scope="col">Id Repair</th>-->
         <th scope="col">Full Name</th>
         <th scope="col">Email</th>
         <th scope="col">Phone Number</th>
         <th scope="col">Type Client</th>
         <th scope="col">Address</th>
+        <th scope="col">Date Create</th>
         <th scope="col">Show Client</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let element of datasource; let i = index">
+        <td class="element-td" style="color: #c54040">{{i + 1}}</td>
         <td class="element-td">{{element.id}}</td>
+        <!--      <td class="element-td" style="color: #0B1B48">{{element.device[0].repairs[0].repair_Id}}</td>-->
         <td class="element-td">{{element.typeClient ? element.companyName : element?.family + ' ' + element.name}}</td>
         <td class="element-td">{{element?.email}}</td>
         <td class="element-td">{{element?.telephone_number}}</td>
@@ -40,7 +65,9 @@
         <td class="element-td">
           {{element.address}}
         </td>
-
+        <td class="element-td">
+          {{setNewDateFormat(element.device[0].repairs[0].date_to_enter)| date: 'yyyy/MM/dd'}}
+        </td>
         <td><a (click)="shows(element)" class="button button-small button-activate"><span> <fa-icon
           [icon]="shows_button" class="button-icon"></fa-icon>Show Client</span></a>
         </td>
@@ -48,7 +75,7 @@
       </tbody>
     </table>
   </div>
-  <div *ngIf="shouwClient" class="container-single-content" id="container-body">
+  <div *ngIf="shouwClient" class="container-single-content">
     <div class="container-modal">
       <a (click)="hideClient()" class="close">&times;</a>
       <app-single-content [client]="client_shouw"></app-single-content>

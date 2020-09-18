@@ -57,7 +57,6 @@ export class PaginatorAllRepairComponent implements OnInit {
   }
 
   shows(element: Client) {
-    this.hideClient();
     const timeout = setTimeout(() => {
       this.shouwClient = true;
       this.client_shouw = element;
@@ -67,7 +66,14 @@ export class PaginatorAllRepairComponent implements OnInit {
   }
 
   hideClient() {
-    this.shouwClient = false;
-    this.client_shouw = null;
+    const elementById = document.getElementById('container-body');
+    if (elementById) {
+      elementById.classList.add('close-modal');
+    }
+    const timeout = setTimeout(() => {
+      this.shouwClient = false;
+      this.client_shouw = null;
+      clearTimeout(timeout);
+    }, 1000);
   }
 }
