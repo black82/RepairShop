@@ -50,9 +50,9 @@
     <div>
       <p style="font-size: 8pt;margin: 3px"> {{"Model :  " + client?.device[0]?.model}}</p>
       <p style="font-size: 8pt;margin: 3px"> {{"Condizioni d'uso :  " + client?.device[0]?.state_of_use}}</p>
-      <p *ngIf="!client?.device[0]?.imei.includes('n/a')"
-         style="font-size: 8pt;margin: 3px"> {{"IMEI & SN :  " + client?.device[0]?.imei}}</p>
-      <p *ngIf="client?.device[0]?.imei.includes('n/a')"
+      <p *ngIf="!client?.telephone_number?.includes('n/a')"
+         style="font-size: 8pt;margin: 3px">"IMEI & SN : " {{ client?.device[0]?.imei}}</p>
+      <p *ngIf="client?.telephone_number?.includes('n/a')"
          style="font-size: 8pt;margin: 3px"> IMEI & SN : n/a </p>
       <p style="font-size: 8pt;margin: 3px"> {{"Difect :  " + client?.device[0]?.repairs[0]?.defect}}.</p>
       <p style="font-size: 8pt;margin: 3px">{{"Accessory :  " + client?.device[0]?.accessory}}</p>

@@ -2,6 +2,13 @@ h1, h2, h3, h4, p, img {
   margin: 0;
 }
 
+.border-container {
+  padding: 20px;
+  border: 1px solid #888;
+  background: transparent !important;
+  border-radius: 2%;
+  margin: 2%;
+}
 
 h2 {
   font-size: 16pt;

@@ -66,29 +66,43 @@ form input {
   align-content: center;
 }
 
-.container-plugin,
-.container-chart {
-  display: inline-flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: baseline;
-  align-content: center;
-
+.chard-bord {
+  display: block;
+  padding: 20px;
+  border: 1px solid #888;
+  background: transparent !important;
+  border-radius: 2%;
+  margin: 20px;
 }
 
-.container-chart {
-  width: 80%;
+.container-chart1 {
 
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.char-modal {
+  top: -20px;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  overflow: scroll;
 }
 
 .container-plugin {
-  width: 20%;
 }
 
 .doughnut-chart {
-  width: 120%;
-  margin: 50px auto;
+  background: #efefef;
 }
 
 
@@ -179,4 +193,12 @@ form input {
   text-shadow: 0 1px 1px #fff;
   padding-top: 20px;
 
+}
+
+.image-container {
+  margin: 0;
+  padding: 5%;
+  display: block;
+  width: 100%;
+  height: 700px;
 }

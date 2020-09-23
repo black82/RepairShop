@@ -128,10 +128,9 @@ export class StatisticComponent implements OnInit {
     let count = 0;
     const sum = this.sumDevice();
     this.date_server.forEach(value => {
-      console.log(value);
       let percent = (value[1] * 100) / sum;
       percent = parseFloat(percent.toFixed(2));
-      const label = value[0] + ' / ' + percent + '%';
+      const label = value[0] + '  /  ' + percent + ' % ';
       this.labels.push(label);
       this.data.push(value[1]);
       if (count === this.colors.length) {

@@ -25,7 +25,17 @@
             <span class="ccform-addon"><i class="fa fa-android fa-2x"></i></span>
             <span class="text-input"> Type Sender</span>
             <input [value]="messages?.message_type" class="ccformfield" formControlName="type_sender"
-                   placeholder="Type Sender" type="text">
+                   placeholder="Type Sender" readonly type="text">
+            <!--              <option  style="max-width: 200px" *ngFor=" let v of invoiceTypes">{{v}}</option>-->
+
+          </div>
+          <div class="ccfield-prepend">
+            <span class="ccform-addon"><i class="fa fa-android fa-2x"></i></span>
+            <span class="text-input"> Type Message</span>
+            <input [value]="messages?.type_sender" class="ccformfield" placeholder="Type Message"
+                   readonly type="text">
+            <!--              <option  style="max-width: 200px" *ngFor=" let v of invoiceTypes">{{v}}</option>-->
+
           </div>
           <div class="ccfield-prepend">
             <span class="ccform-addon"><i class="fa fa-info fa-2x"></i></span>

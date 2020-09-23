@@ -3,6 +3,7 @@ import {AlertServiceService} from '../service/alert-service.service';
 import {PrintService} from '../service/print.service';
 import {Client} from '../entity/ClientWeb';
 import {Subscription} from 'rxjs';
+import {faCheckSquare} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-number-repair',
@@ -14,6 +15,7 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
   client: Client;
   showPopup = false;
   private subscription: Subscription;
+  check = faCheckSquare;
 
   constructor(private alert_service: AlertServiceService,
               private print: PrintService) {

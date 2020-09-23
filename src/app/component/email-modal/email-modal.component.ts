@@ -51,12 +51,11 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.splitNotes(this.client.device[0].repairs[0].note);
       this.check_test_OK(print.client_print);
       this.http.getNickNameCurrentStaffUser().subscribe(name => {
-        this.animation_wait.$anime_show.emit(false);
         this.userNickname = name.currentName;
         const timeout = setTimeout(() => {
           this.emailPage(print.client_print);
           clearTimeout(timeout);
-        }, 1500);
+        }, 2000);
       }, () => {
         this.animation_wait.$anime_show.emit(false);
       });
@@ -82,26 +81,42 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     }
     const interval = setInterval(() => {
       if (this.id !== '') {
-        this.emailSender.anime_question.next(true);
-        const html = document.querySelector('.container-page');
-        this.show_email_send = false;
-        const invoiceToPrintPage = this.createInvoiceToPrintPage(html.innerHTML);
-        this.sendEmailToBackend(invoiceToPrintPage);
+        this.createInvoiceToPrintPageAfterTimeout();
         clearInterval(interval);
+      } else {
+        if (this.client.device.length === 1 && this.client.device[0].repairs.length === 1) {
+          this.id = this.client.device[0].repairs[0].repair_Id.toString();
+          this.createInvoiceToPrintPageAfterTimeout();
+        } else {
+          this.id = this.id_repair(this.client);
+          const timeout = setTimeout(() => {
+            this.createInvoiceToPrintPageAfterTimeout();
+            clearTimeout(timeout);
+          }, 2000);
+
+        }
       }
     }, 1000);
 
+  }
+
+  createInvoiceToPrintPageAfterTimeout() {
+    this.emailSender.anime_question.emit(true);
+    const html = document.querySelector('.container-page');
+    this.show_email_send = false;
+    const invoiceToPrintPage = this.createInvoiceToPrintPage(html.innerHTML);
+    this.sendEmailToBackend(invoiceToPrintPage);
   }
 
   sendEmailToBackend(invoiceToolsDto) {
     this.animation_wait.$anime_show.emit(true);
     this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
-      this.emailSender.anime_question.next(false);
+      this.emailSender.anime_question.emit(false);
       this.emailSender.email_sent_send_success.emit(this.client);
     }, error => {
       this.animation_wait.$anime_show.emit(false);
-      this.emailSender.anime_question.next(false);
+      this.emailSender.anime_question.emit(false);
       this.alert_service.error(null, error.error.message
         , false, null, '', error);
     });
@@ -201,6 +216,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   emailPage(client: Client): void {
     this.client = client;
     this.show_email_send = true;
+    this.animation_wait.$anime_show.emit(false);
   }
 
   ngOnDestroy(): void {

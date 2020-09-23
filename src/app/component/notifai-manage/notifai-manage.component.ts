@@ -9,6 +9,7 @@ import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
+import {InvoiceType} from '../entity/InvoiceType';
 
 @Component({
   selector: 'app-notifai-manage',
@@ -23,6 +24,8 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   formMessage: FormGroup;
   hide_button = faHistory;
+  invoiceTypes: string[];
+
 
   constructor(private adminService: AdminServiceService,
               private webSocketService: WebSocketService,
@@ -32,6 +35,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.initializeInvoiceType();
     this.subscription = this.adminService.$show_notified.subscribe(notify => {
       this.messages = notify;
       this.formMessage = this.fb.group({
@@ -41,6 +45,10 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
       });
       this.show_message = true;
     });
+  }
+
+  initializeInvoiceType() {
+    this.invoiceTypes = Object.keys(InvoiceType);
   }
 
   ngOnDestroy(): void {

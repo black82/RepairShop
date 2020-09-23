@@ -1,10 +1,16 @@
 <div *ngIf="showPopup" class="overlay" id="popup1">
-  <div class="popup">
-    <h2>Repair Number</h2>
-    <a (click)="close()" class="close">&times;</a>
-    <div class="content">
-      <p>Questo è il numero di riparazioni. Scrivilo sul telefono prima di chiudere Popup!!!</p>
-      <h1 class="repair-id">Repair Number : {{client.device[0].repairs[0].repair_Id}}</h1>
+  <div class="border-div">
+    <div class="popup">
+      <h2 style="color: #c54040; font-size: 20px">
+        Repair Number</h2>
+      <a (click)="close()" class="close">&times;</a>
+      <div class="content">
+        <p style="font-size: 15px; color: #1ABC9C">Questo è il numero di riparazioni. Scrivilo sul telefono prima di
+          chiudere Popup!!!</p>
+        <h1 class="repair-id">
+          <fa-icon [icon]="check" class="icon"></fa-icon>
+          Repair Number : {{client.device[0].repairs[0].repair_Id}}</h1>
+      </div>
     </div>
   </div>
 </div>

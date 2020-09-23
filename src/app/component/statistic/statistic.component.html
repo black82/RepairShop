@@ -2,13 +2,7 @@
   <div *ngIf="isAdmin" class="row-container">
     <div class="container-plugin">
       <form [formGroup]="formDataInterval">
-        <a (click)="getData()" class="button button-small first"><span> <fa-icon
-          [icon]="statistic_button" class="button-icon"></fa-icon> Statistic Model</span></a>
 
-        <a (click)="getDataByMonth()" class="button button-small month"><span> <fa-icon
-          [icon]="statistic_button" class="button-icon"></fa-icon>Statistic Month</span></a>
-        <a (click)="getDataByModelAndParts()" class="button button-small model"><span> <fa-icon
-          [icon]="statistic_button" class="button-icon"></fa-icon>Stat. Model&Parts</span></a>
         <span class="input-title">Date init :</span>
         <label>
           <fa-icon [icon]="date_init" class="icon-input"></fa-icon>
@@ -24,8 +18,23 @@
         </label>
       </form>
     </div>
-    <div class="container-chart">
-      <div *ngIf="show_chart" class="doughnut-char">
+    <div class="container-chart1">
+      <a (click)="getData()" class="button button-small first"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon> Statistic Model</span></a>
+
+      <a (click)="getDataByMonth()" class="button button-small month"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon>Statistic Month</span></a>
+      <a (click)="getDataByModelAndParts()" class="button button-small model"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon>Stat. Model&Parts</span></a>
+    </div>
+    <div class="image-container">
+      <img alt="asd" height="60%"
+           src="http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/assets/images/chart-foto.png" width="100%">
+    </div>
+  </div>
+  <div *ngIf="show_chart" class="char-modal">
+    <div class="chard-bord">
+      <div class="doughnut-chart">
         <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
           [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
         <h1 class="title-form">Device repaired
@@ -33,11 +42,11 @@
           to dated/
           <span class="date-interval">{{formDataInterval.controls.date_complete.value}}</span>
           : = <span class="date-interval">{{sum_device}}</span></h1>
-        <p-chart [data]="data_object" class="doughnut-chart" type="doughnut"></p-chart>
+        <div class="container-chart">
+          <p-chart [data]="data_object" type="doughnut"></p-chart>
+        </div>
       </div>
-
     </div>
-
   </div>
   <app-statistic-repair></app-statistic-repair>
   <app-statistic-model-parts></app-statistic-model-parts>

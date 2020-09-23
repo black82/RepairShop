@@ -115,6 +115,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   private subscriber: Subscription;
   private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
+  private sigpad_open_second = false;
 
   constructor(private fb: FormBuilder,
               private httpService: HttpClien,
@@ -245,8 +246,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    this.client = this.addRepairToClient(this.client);
     this.animation_wait.$anime_show.emit(true);
+    this.client = this.addRepairToClient(this.client);
     this.httpService.outputDeviceForm(this.createClient(), this.client.device[0].repairs[0].repair_Id).subscribe(
       () => {
         this.printService.print_open.emit(new PrintEntity(this.client, 2));
@@ -258,7 +259,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   }
 
   createClient(): Repair {
-    this.client.device[0].repairs[0].repairFileStorage.fotoExitDevice = this.imageSender?.submitImageToBack();
+    this.client.device[0].repairs[0].repairFileStorage.fotoExitDevice = this.imageSender.submitImageToBack();
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
     this.output_test = new OutputTest(null, formData.sensor_output, formData.display_output,
@@ -301,10 +302,16 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    this.sig_pad_service.open$.emit();
-    this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
+    if (!this.sigpad_open_second) {
+      this.sig_pad_service.open$.emit();
+      this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
+        this.animation_wait.$anime_show.emit(true);
+        this.submitFormAndSendEmail();
+      });
+    } else {
+      this.animation_wait.$anime_show.emit(true);
       this.submitFormAndSendEmail();
-    });
+    }
   }
 
   dismissed(): void {
@@ -380,6 +387,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       });
       return;
     }
+    this.animation_wait.$anime_show.emit(true);
     this.subscribe_success_response();
     this.client.device[0].repairs[0] = this.createClient();
     this.emailSender.email_send(new PrintEntity(this.client, 2, null, this.repair_output.repair_Id));
@@ -388,7 +396,13 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
 
   subscribe_success_response(): void {
     this.email_event = this.emailSender.email_sent_send_success.subscribe(value => {
-      this.printService.$success_print_id.emit(value);
+      if (value) {
+        this.printService.$success_print_id.emit(value);
+      } else {
+        this.sigpad_open_second = true;
+        this.alert_service.warn(null, 'Edit repair and resend',
+          false, false, null);
+      }
     });
   }
 

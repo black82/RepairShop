@@ -90,7 +90,7 @@ export class StatisticModelPartsComponent implements OnInit {
   private elaboration_server_data() {
     let count = 0;
     this.date_server.forEach(value => {
-      const label = value[0] + ' ' + '/ ' + value[1];
+      const label = value[0] + '  ' + '  /  ' + value[1];
       this.labels.push(label);
       this.data.push(value[2]);
       if (count === this.colors.length) {
@@ -117,4 +117,6 @@ export class StatisticModelPartsComponent implements OnInit {
     this.show_data = true;
     this.animation_wait.$anime_show.emit(false);
   }
+
+
 }

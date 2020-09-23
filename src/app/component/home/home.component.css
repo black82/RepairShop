@@ -214,7 +214,6 @@
 #icon6:hover {
   display: inline-block;
   background: linear-gradient(to top right, hsl(179, 54%, 38%) 40%, hsl(155, 50%, 61%) 100%) !important;
-
   width: 120px;
   height: 120px;
   border-radius: 50%;

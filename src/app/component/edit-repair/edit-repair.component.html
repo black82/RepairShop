@@ -69,7 +69,7 @@
               <input
                 [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.email.dirty || formClient.controls.email.touched) && formClient.controls.email.invalid && formClient.controls.email.errors}"
                 [ngModel]="client?.email" class="input-1" formControlName="email" id="email-client"
-                placeholder="Email of Client" type="email">
+                placeholder="Email of Client" readonly type="email">
             </label>
             <label>
               <span class="input-title">Telethon Number</span>
@@ -78,7 +78,7 @@
            && formClient.controls.telephone_number.invalid && formClient.controls.telephone_number.errors}"
                      [ngModel]="client?.telephone_number" class="input-1"
                      formControlName="telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Telethon Number"
-                     type="tel">
+                     readonly type="tel">
             </label>
 
             <label><span class="input-title">Address</span>
@@ -161,8 +161,8 @@
               <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
               <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.imei.dirty || formClient.controls.imei.touched)
            && formClient.controls.imei.invalid && formClient.controls.imei.errors&& formClient.controls.imei.pristine}"
-                     [ngModel]="client?.device[0]?.imei.includes" class="input-2" formControlName="imei"
-                     placeholder="Imei or Sn of Device" type="text">
+                     [ngModel]="client?.device[0]?.imei" class="input-2" formControlName="imei"
+                     placeholder="Imei or Sn of Device" readonly type="text">
             </label>
             <label>
               <span class="input-title">Deposit</span>

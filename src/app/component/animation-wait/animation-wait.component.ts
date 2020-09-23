@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -9,6 +10,7 @@ import {AnimeServiceService} from '../service/anime-service.service';
 })
 
 export class AnimationWaitComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
 
 
 
@@ -16,7 +18,7 @@ export class AnimationWaitComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.anime_service.$anime_show.subscribe(val => {
+    this.subscription = this.anime_service.$anime_show.subscribe(val => {
       if (val) {
         this.show();
       } else {
@@ -40,6 +42,8 @@ export class AnimationWaitComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.anime_service.$anime_show.unsubscribe();
+    if (this.subscription) {
+      this.anime_service.$anime_show.unsubscribe();
+    }
   }
 }

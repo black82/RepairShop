@@ -438,9 +438,11 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.countSigPad++;
       this.sig_pad_service.open$.emit();
       this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
+        this.animation_wait.$anime_show.emit(true);
         this.submitFormAndSendEmail();
       });
     } else {
+      this.animation_wait.$anime_show.emit(true);
       this.submitFormAndSendEmail();
     }
   }

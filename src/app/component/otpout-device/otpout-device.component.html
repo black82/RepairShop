@@ -31,7 +31,7 @@
             formClient.controls.name_family_output.touched) && formClient.controls.name_family_output.invalid && formClient.controls.name_family_output.errors}"
                    class="input-1"
                    [ngModel]="client.typeClient ? client.companyName : client.name+' '+
-        client.typeClient ? client.family : ''" formControlName="name_family_output">
+        client.typeClient ? client.family : ''" formControlName="name_family_output" readonly>
           </label>
           <label>
             <span class="input-title">Model</span>
@@ -39,7 +39,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.mobile_output.dirty ||
             formClient.controls.mobile_output.touched) && formClient.controls.mobile_output.invalid && formClient.controls.mobile_output.errors}"
                    class="input-1"
-                   [ngModel]="client?.device[0]?.model" formControlName="mobile_output">
+                   [ngModel]="client?.device[0]?.model" formControlName="mobile_output" readonly>
           </label>
           <label>
             <span class="input-title">IMEI&&SN</span>
@@ -47,7 +47,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.imei_output.dirty ||
             formClient.controls.imei_output.touched) && formClient.controls.imei_output.invalid && formClient.controls.imei_output.errors}"
                    [ngModel]="client?.device[0]?.imei" class="input-1"
-                   formControlName="imei_output">
+                   formControlName="imei_output" readonly>
           </label>
           <label>
             <span class="input-title">Defect</span>
@@ -101,7 +101,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.address_output.dirty ||
             formClient.controls.address_output.touched) && formClient.controls.address_output.invalid && formClient.controls.address_output.errors}"
                    [ngModel]="client?.address" class="input-2"
-                   formControlName="address_output">
+                   formControlName="address_output" readonly>
           </label>
           <label>
             <span class="input-title">Telethon Model</span>
@@ -109,7 +109,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.model_output.dirty ||
             formClient.controls.model_output.touched) && formClient.controls.model_output.invalid && formClient.controls.model_output.errors}"
                    [ngModel]="client?.device[0]?.model" class="input-2"
-                   formControlName="model_output">
+                   formControlName="model_output" readonly>
           </label>
           <label>
             <span class="input-title">Deposit</span>
@@ -125,7 +125,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.accessory_output.dirty ||
             formClient.controls.accessory_output.touched) && formClient.controls.accessory_output.invalid && formClient.controls.accessory_output.errors}"
                    [ngModel]="client?.device[0]?.accessory" class="input-2"
-                   formControlName="accessory_output">
+                   formControlName="accessory_output" readonly>
           </label>
         </div>
       </div>
