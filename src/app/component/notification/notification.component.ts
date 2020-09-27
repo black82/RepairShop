@@ -42,6 +42,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
       if (value) {
         this.getAllRejectNotification();
         const stompClient = this.webSocketService.connect();
+        stompClient.debug = null;
         stompClient.connect({}, () => {
           this.getSuperNameUser();
           this.subscribe = stompClient.subscribe('/topic/notification', notifications => {

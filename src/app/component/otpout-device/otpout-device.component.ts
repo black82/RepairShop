@@ -47,6 +47,10 @@ import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
 import {map, startWith} from 'rxjs/operators';
 import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
 import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
+import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
+import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
+import {InvoiceType} from '../entity/InvoiceType';
+import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 
 
 @Component({
@@ -63,6 +67,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   cogs = faCogs;
   chip = faMicrochip;
   work = faTools;
+  whatsapp = faWhatsapp;
+  mms = faSms;
   money = faMoneyBill;
   address = faMapMarkedAlt;
   model = faMobileAlt;
@@ -99,6 +105,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   mail = faEnvelope;
   display_touch = faMobile;
   photo = faImages;
+  bluetoothIcon = faBluetooth;
+  typeSender: string;
   modul = faFileInvoice;
   id_repair: number;
   private email_event: Subscription;
@@ -113,9 +121,9 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   prompt = 'Click <enter> to add "';
   itemsModels: string[] = [];
   private subscriber: Subscription;
-  private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
   private sigpad_open_second = false;
+  buttonCheckBox = 'select all';
 
   constructor(private fb: FormBuilder,
               private httpService: HttpClien,
@@ -250,7 +258,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.client = this.addRepairToClient(this.client);
     this.httpService.outputDeviceForm(this.createClient(), this.client.device[0].repairs[0].repair_Id).subscribe(
       () => {
-        this.printService.print_open.emit(new PrintEntity(this.client, 2));
+        this.printService.print_open.emit(new PrintEntity(this.client, 2,
+          null, null, InvoiceType.PrintPage, this.titleForm));
       }, error => {
         this.animation_wait.$anime_show.emit(false);
         console.error(error);
@@ -279,9 +288,10 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.formClient.controls.parts_replace_output.value, this.client.device[0].repairs[0].nowInRepair,
       this.client.device[0].repairs[0].inputModule, this.output_test, this.client.device[0].repairs[0].note,
       this.changeNotes(this.formClient.controls.note_output.value),
-      this.client.device[0].repairs[0].repairFileStorage);
+      this.client.device[0].repairs[0].repairFileStorage,
+      this.client.device[0].repairs[0]?.lastModifiedRepair, this.client.device[0].repairs[0]?.createUserRepair,
+      this.client.device[0].repairs[0]?.closeUserRepair);
     this.repair_output.date_to_enter = this.client.device[0].repairs[0].date_to_enter;
-    console.log(this.repair_output);
     return this.repair_output;
   }
 
@@ -291,6 +301,24 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     } else {
       return note;
     }
+  }
+
+  clickWhatsappSender() {
+    this.typeSender = InvoiceType.WhatsApp;
+    this.titleForm = 'You are in a position to send invoices by WhatsApp';
+    this.sign_pad_open();
+  }
+
+  clickMmsSender() {
+    this.typeSender = InvoiceType.mms;
+    this.titleForm = 'You are in a position to send invoices by MMS';
+    this.sign_pad_open();
+  }
+
+  clickEmailSender() {
+    this.typeSender = InvoiceType.emailInvoice;
+    this.titleForm = 'You are in a position to send invoices by email';
+    this.sign_pad_open();
   }
 
   sign_pad_open(): void {
@@ -315,8 +343,10 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   }
 
   dismissed(): void {
-    this.alert_service.warn('', 'Sorry, you ' +
-      'left the module.', true, false, '', null);
+    if (confirm('Are you sure you want to dismiss')) {
+      this.alert_service.warn('', 'Sorry, you ' +
+        'left the module.', true, false, '', null);
+    }
   }
 
   animation_call(): void {
@@ -390,7 +420,9 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.animation_wait.$anime_show.emit(true);
     this.subscribe_success_response();
     this.client.device[0].repairs[0] = this.createClient();
-    this.emailSender.email_send(new PrintEntity(this.client, 2, null, this.repair_output.repair_Id));
+    this.emailSender.email_send(
+      new PrintEntity(this.client, 2, null,
+        this.repair_output.repair_Id, this.typeSender, this.titleForm));
 
   }
 
@@ -514,5 +546,23 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
     });
+  }
+
+  selectAllCheckBox() {
+    this.checkButtonTitle();
+    const container = document.getElementById('check-box-container');
+    const elementsByClassName = container.querySelectorAll('input[type="checkbox"]');
+    Array.from(elementsByClassName).forEach(check => {
+      check.click();
+
+    });
+  }
+
+  checkButtonTitle() {
+    if (this.buttonCheckBox === 'select all') {
+      this.buttonCheckBox = 'unselect all';
+    } else {
+      this.buttonCheckBox = 'select all';
+    }
   }
 }

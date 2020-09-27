@@ -9,18 +9,27 @@
       <div class="container-1-content">
         <div class="container-2-content">
           <span class="input-title">
-            <fa-icon
-              [icon]="usertag"></fa-icon>Client: {{client.typeClient ? client.companyName : client?.name + ' ' + client.family}}</span>
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>Client:<span
+            style="color: lightcoral;font-size: 20px">{{client.typeClient ? client.companyName : client?.name + ' ' + client.family}}</span></span>
+          <span *ngIf="client?.typeClient" class="input-title">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>Client Iva: <span
+            style="color: lightcoral;font-size: 20px">{{client.ivaCompany}}</span></span>
           <span *ngIf="client?.typeClient" class="input-title">
             <fa-icon
-              [icon]="usertag"></fa-icon>Client Iva: {{client.ivaCompany}}</span>
-          <span *ngIf="client?.typeClient" class="input-title">
-            <fa-icon
-              [icon]="usertag"></fa-icon>Client SDI: {{client.sdiCompany}}</span>
-          <span class="input-title"><fa-icon
-            [icon]="phone"></fa-icon> Telethon Number:{{client?.telephone_number}}</span>
-          <span class="input-title"><fa-icon [icon]="email"></fa-icon> Email:{{client?.email}}</span>
-          <span class="input-title"><fa-icon [icon]="address"></fa-icon> Address:{{client?.address}}</span>
+              [icon]="usertag"></fa-icon>Client SDI:<span
+            style="color: lightcoral;font-size: 20px"> {{client.sdiCompany}}</span></span>
+          <span class="input-title"><fa-icon [icon]="phone"
+                                             class="icon-normal-single"></fa-icon> Telethon Number:
+            <span style="color: lightcoral;font-size: 20px">{{client?.telephone_number}}</span></span>
+          <span *ngIf="client.telephone_number_second" class="input-title"><fa-icon [icon]="phone"
+                                                                                    class="icon-normal-single"></fa-icon>Second Telethon Number:<span
+            style="color: lightcoral;font-size: 20px">{{client?.telephone_number_second}}</span></span>
+          <span class="input-title"><fa-icon [icon]="email" class="icon-normal-single"></fa-icon> Email:<span
+            style="color: lightcoral;font-size: 20px">{{client?.email}}</span></span>
+          <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
+            style="color: lightcoral;font-size: 20px">{{client?.address}}</span></span>
         </div>
       </div>
       <div *ngFor="let element of devices_element; let index" class="toggle-container-1">
@@ -34,23 +43,25 @@
           <ul class="border">
             <li>
               <ol class="input-title">
-                <fa-icon [icon]="mobile"></fa-icon>
-                Model: {{element.divice?.model}}</ol>
+                <fa-icon [icon]="mobile" class="icon-normal-single"></fa-icon>
+                Model:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.model}}</span></ol>
               <ol class="input-title">
-                <fa-icon [icon]="used"></fa-icon>
-                State of use: {{element.divice?.state_of_use}}</ol>
+                <fa-icon [icon]="used" class="icon-normal-single"></fa-icon>
+                State of use:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.state_of_use}}</span>
+              </ol>
               <ol class="input-title">
-                <fa-icon [icon]="code"></fa-icon>
-                IMEI&&SN: {{element.divice?.imei}}</ol>
+                <fa-icon [icon]="code" class="icon-normal-single"></fa-icon>
+                IMEI&&SN:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.imei}}</span></ol>
               <ol class="input-title">
-                <fa-icon [icon]="password"></fa-icon>
-                Code Device: {{element.divice?.code_device}}</ol>
+                <fa-icon [icon]="password" class="icon-normal-single"></fa-icon>
+                Code Device:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.code_device}}</span></ol>
               <ol class="input-title">
-                <fa-icon [icon]="password"></fa-icon>
-                Password Device: {{element.divice?.password_device}}</ol>
+                <fa-icon [icon]="password" class="icon-normal-single"></fa-icon>
+                Password Device:<span
+                style="color: lightcoral;font-size: 20px"> {{element.divice?.password_device}}</span></ol>
               <ol class="input-title">
-                <fa-icon [icon]="accessory"></fa-icon>
-                Accessory: {{element.divice?.accessory}}</ol>
+                <fa-icon [icon]="accessory" class="icon-normal-single"></fa-icon>
+                Accessory:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.accessory}}</span></ol>
             </li>
           </ul>
         </div>
@@ -71,34 +82,40 @@
           <div class="border-container show">
             <ul class="border">
               <ol class="input-title">
-                <fa-icon [icon]="cogs"></fa-icon>
-                <strong> Repair Id:{{item.repair_elemnt?.repair_Id}}</strong></ol>
+                <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
+                <strong> Repair Id:<span
+                  style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.repair_Id}}</span></strong></ol>
               <ol class="input-title">
-                <fa-icon
-                  [icon]="date"></fa-icon>
-                Date to enter: {{item.repair_elemnt?.date_to_enter | date:'mediumDate'}} </ol>
+                <fa-icon class="icon-normal-single"
+                         [icon]="date"></fa-icon>
+                Date to enter:<span
+                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.date_to_enter | date:'mediumDate'}}</span>
+              </ol>
               <ol class="input-title">
-                <fa-icon [icon]="cogs"></fa-icon>
-                Defect:{{item.repair_elemnt?.defect}}</ol>
+                <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
+                Defect:<span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.defect}}</span></ol>
               <ol class="input-title">
-                <fa-icon
-                  [icon]="money"></fa-icon>
-                Deposit: {{item.repair_elemnt?.deposit}}</ol>
+                <fa-icon class="icon-normal-single"
+                         [icon]="money"></fa-icon>
+                Deposit:<span style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.deposit}}</span></ol>
               <ol class="input-title">
-                <fa-icon [icon]="money"></fa-icon>
-                Price:{{item.repair_elemnt?.price}}</ol>
+                <fa-icon [icon]="money" class="icon-normal-single"></fa-icon>
+                Price:<span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.price}}</span></ol>
               <ol class="input-title">
-                <fa-icon
-                  [icon]="date"></fa-icon>
-                Return Date: {{item.repair_elemnt?.output_date | date:'mediumDate'}}</ol>
+                <fa-icon class="icon-normal-single"
+                         [icon]="date"></fa-icon>
+                Return Date:<span
+                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.output_date | date:'mediumDate'}}</span>
+              </ol>
               <ol class="input-title">
-                <fa-icon
-                  [icon]="work"></fa-icon>
-                Work done: {{item.repair_elemnt?.work_don}}</ol>
+                <fa-icon class="icon-normal-single"
+                         [icon]="work"></fa-icon>
+                Work done: <span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.work_don}}</span></ol>
               <ol class="input-title">
-                <fa-icon
-                  [icon]="chip"></fa-icon>
-                Parts replaced: {{item.repair_elemnt?.parts_replaced}}</ol>
+                <fa-icon class="icon-normal-single"
+                         [icon]="chip"></fa-icon>
+                Parts replaced:<span
+                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.parts_replaced}}</span></ol>
             </ul>
             <div class="accordion">
               <div>
@@ -147,13 +164,13 @@
 
                     <p *ngIf="client.device[0].rightNowInRepair" class="input-title">
 
-                      <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                      <fa-icon [icon]="test_meteor" class="icon-normal-single" class="icon-test-tile"></fa-icon>
                       Dispozitivo e anqora in reparazione!!!
                     </p>
                     <div *ngIf="!client.device[0].rightNowInRepair" class="test-output-container">
 
                       <div *ngFor="let test_output of item.test_output" class="input-title">
-                        <fa-icon [icon]="test_minus" class="test-icon"></fa-icon>
+                        <fa-icon [icon]="test_minus" class="icon-normal-single" class="test-icon"></fa-icon>
                         {{test_output}}</div>
                     </div>
                   </div>
@@ -174,6 +191,46 @@
                     <div class="note-border">
                       <p class=" input-title note">{{item.repair_elemnt?.note}}</p>
                       <p class=" input-title note">{{item.repair_elemnt?.noteOutput}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <input class="accordion__input" id="section4" name="example_accordion" type="radio">
+                <label class="accordion__label" for="section4">
+                  <a class="input-title acortion-title">
+                    <fa-icon [icon]="userStaff" class="icon-test-tile"></fa-icon>
+                    Staff Users who Administered this Case
+                  </a>
+                </label>
+                <div class="accordion__content">
+                  <div>
+                  </div>
+                  <div class="note-container">
+                    <div class="note-border">
+                      <p *ngIf="item.repair_elemnt.createUserRepair" class=" input-title note">
+                        <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
+                        Staff User Create Repair
+                        : <span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt.createUserRepair}}</span>
+                      </p>
+                      <p *ngIf="item.repair_elemnt.lastModifiedRepair" class=" input-title note">
+                        <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
+                        Staff User Last Modified Repair
+                        : <span
+                        style="color: lightcoral;font-size: 20px">{{item.repair_elemnt.lastModifiedRepair}}</span></p>
+                      <p *ngIf="item.repair_elemnt.closeUserRepair" class=" input-title note">
+                        <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
+                        Staff User Close Repair
+                        : <span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt.closeUserRepair}}</span>
+                      </p>
+                      <p *ngIf="client.createUser" class=" input-title note">
+                        <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
+                        Staff User Create Client : <span
+                        style="color: lightcoral;font-size: 20px">{{client.createUser}}</span></p>
+                      <p *ngIf="client.lastModified" class=" input-title note">
+                        <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
+                        Staff User Last Modified Client :
+                        <span style="color: lightcoral;font-size: 20px">{{client.lastModified}}</span></p>
                     </div>
                   </div>
                 </div>
@@ -220,8 +277,8 @@
                class="link-invoice">Invoice
               to Closet Repair</a>
 
-            <div *ngIf="repair_fileStorage.fotoExitDevice.length > 0" class="foto-out-device">
-              <ul *ngFor=" let images of repair_fileStorage.fotoExitDevice;let i =index">
+            <div *ngIf="repair_fileStorage?.fotoExitDevice?.length > 0" class="foto-out-device">
+              <ul *ngFor=" let images of repair_fileStorage?.fotoExitDevice;let i =index">
                 <li (click)="zoum($event,(i+100));" class="image-content">
                   <img [class]="(i+100)+'-image'" alt="" class="image-content"
                        id="normal-zoom1"

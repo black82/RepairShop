@@ -165,18 +165,27 @@ svg {
 
 
 .box-search, .menu-box {
+  margin-left: 1%;
+  margin-right: 1%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: normal;
-  align-content: space-around;
+
+}
+
+.sign-in {
+  margin-left: auto;
 }
 
 .submenu {
-  margin-left: -5%;
   margin-top: 2%;
 
+}
+
+.submenu-sign-in {
+  margin-left: -10%;
 }
 
 .submenu-output1,
@@ -261,9 +270,14 @@ li:hover {
   cursor: pointer;
 }
 
+.animation-menu-box {
+  -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
 .anime-helper {
-  -webkit-animation: slide-in-elliptic-left-bck 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-elliptic-left-bck 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: flicker-in-1 2s linear both;
+  animation: flicker-in-1 2s linear both;
 }
 
 .anime-helper-2 {
@@ -271,39 +285,198 @@ li:hover {
   animation: heartbeat 10s ease-in-out infinite both;
 }
 
-@-webkit-keyframes slide-in-elliptic-left-bck {
+@-webkit-keyframes flicker-in-1 {
   0% {
-    -webkit-transform: translateX(-800px) rotateY(-30deg) scale(6.5);
-    transform: translateX(-800px) rotateY(-30deg) scale(6.5);
-    -webkit-transform-origin: 200% 50%;
-    transform-origin: 200% 50%;
     opacity: 0;
   }
+  10% {
+    opacity: 0;
+  }
+  10.1% {
+    opacity: 1;
+  }
+  10.2% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  20.1% {
+    opacity: 1;
+  }
+  20.6% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  30.1% {
+    opacity: 1;
+  }
+  30.5% {
+    opacity: 1;
+  }
+  30.6% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  45.1% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  55.1% {
+    opacity: 0;
+  }
+  57% {
+    opacity: 0;
+  }
+  57.1% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  60.1% {
+    opacity: 0;
+  }
+  65% {
+    opacity: 0;
+  }
+  65.1% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  75.1% {
+    opacity: 0;
+  }
+  77% {
+    opacity: 0;
+  }
+  77.1% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  85.1% {
+    opacity: 0;
+  }
+  86% {
+    opacity: 0;
+  }
+  86.1% {
+    opacity: 1;
+  }
   100% {
-    -webkit-transform: translateX(0) rotateY(0) scale(1);
-    transform: translateX(0) rotateY(0) scale(1);
-    -webkit-transform-origin: -600px 50%;
-    transform-origin: -600px 50%;
     opacity: 1;
   }
 }
 
-@keyframes slide-in-elliptic-left-bck {
+@keyframes flicker-in-1 {
   0% {
-    -webkit-transform: translateX(-800px) rotateY(-30deg) scale(6.5);
-    transform: translateX(-800px) rotateY(-30deg) scale(6.5);
-    -webkit-transform-origin: 200% 50%;
-    transform-origin: 200% 50%;
     opacity: 0;
   }
+  10% {
+    opacity: 0;
+  }
+  10.1% {
+    opacity: 1;
+  }
+  10.2% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  20.1% {
+    opacity: 1;
+  }
+  20.6% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  30.1% {
+    opacity: 1;
+  }
+  30.5% {
+    opacity: 1;
+  }
+  30.6% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  45.1% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  55.1% {
+    opacity: 0;
+  }
+  57% {
+    opacity: 0;
+  }
+  57.1% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  60.1% {
+    opacity: 0;
+  }
+  65% {
+    opacity: 0;
+  }
+  65.1% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  75.1% {
+    opacity: 0;
+  }
+  77% {
+    opacity: 0;
+  }
+  77.1% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  85.1% {
+    opacity: 0;
+  }
+  86% {
+    opacity: 0;
+  }
+  86.1% {
+    opacity: 1;
+  }
   100% {
-    -webkit-transform: translateX(0) rotateY(0) scale(1);
-    transform: translateX(0) rotateY(0) scale(1);
-    -webkit-transform-origin: -600px 50%;
-    transform-origin: -600px 50%;
     opacity: 1;
   }
 }
+
 
 @-webkit-keyframes heartbeat {
   from {
@@ -372,5 +545,23 @@ li:hover {
     transform: scale(1);
     -webkit-animation-timing-function: ease-out;
     animation-timing-function: ease-out;
+  }
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

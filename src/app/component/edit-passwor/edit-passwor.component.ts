@@ -20,7 +20,6 @@ export class EditPassworComponent implements OnInit {
               private httpClient: HttpClien,
               private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-      console.log('params: ', params);
       if (params.s) {
         this.s = params.s;
       }

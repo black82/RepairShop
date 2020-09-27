@@ -2,6 +2,8 @@
   <div class="modalDialog modal-container" id="openModal-about">
     <div class="border-container">
       <button (click)="showModal()" class="btn btn-danger" type="button">Hide the window</button>
+      <h1 style="font-size: 16pt;
+      font-weight: 500;color: #F3F3F3;text-align: center;margin: 0">{{title}}</h1>
       <div *ngIf="show_email_alternative">
         <a (click)="dismiss()" class="close" title="Close"><span class="x">X</span></a>
         <div class="container-page">
@@ -201,8 +203,8 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer" style="clear: both;margin: 0">
-          <button (click)="ok()" class="btn btn-danger" type="button">Send Email</button>
+        <div class="modal-footer" style="clear: both;margin: 0;display: flex;align-items: center">
+          <button (click)="ok()" class="btn btn-danger" type="button">Send Invoice</button>
         </div>
       </div>
     </div>

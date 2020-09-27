@@ -159,13 +159,12 @@ form ::-moz-focus-inner {
   width: 25px;
   -webkit-appearance: none;
   -moz-appearance: none;
-
   appearance: none;
   border: 1px solid #34495E;
   border-radius: 4px;
   outline: none;
   transition-duration: 0.3s;
-  background-color: #1ABC9C;
+  background: linear-gradient(to top right, hsl(179, 34%, 48%) 40%, hsl(155, 50%, 61%) 100%) !important;
   cursor: pointer;
 }
 
@@ -290,7 +289,7 @@ form textarea {
 }
 
 .button:hover {
-  color: #1ABC9C;
+  color: #ffc007;
   cursor: pointer;
 
 }
@@ -306,8 +305,12 @@ form textarea {
   color: steelblue;
 }
 
+.whatsapp:before {
+  color: #075e54;
+}
+
 .button:before {
-  background: #1ABC9C;
+  background: #ffc007;
 }
 
 .dismiss:before {
@@ -328,6 +331,12 @@ form textarea {
   cursor: pointer;
 }
 
+.whatsapp:before {
+  background: #075e54;
+  border: 1px solid #075e54;
+  cursor: pointer;
+}
+
 .dismiss:hover {
   color: #F09EA3;
   border-color: #F09EA3;
@@ -337,6 +346,12 @@ form textarea {
 .email:hover {
   color: steelblue;
   border-color: steelblue;
+  cursor: pointer;
+}
+
+.whatsapp:hover {
+  color: #075e54;
+  border-color: #075e54;
   cursor: pointer;
 }
 
@@ -704,28 +719,67 @@ form textarea {
 
 .item-autocomplete-container {
   width: 30%;
+  max-height: 84%;
   margin-top: auto;
   position: absolute;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: white;
   left: 4%;
-  border: 1px solid black;
   padding: 5px;
   z-index: 100;
   border-radius: 5px;
+  box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);
 }
 
 .item-autocomplete {
-  padding: 20px;
+  padding: 10px;
   width: 100%;
+  cursor: pointer;
 }
 
 .item-autocomplete:hover {
   border-radius: 5px;
-  background-color: DodgerBlue !important;
+  color: #efefef;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to top right, hsl(179, 34%, 48%) 40%, hsl(155, 50%, 61%) 100%) !important;
 }
 
 .box-autocomplete {
   margin: 0;
   padding: 0;
+}
+
+.second-button {
+  background: linear-gradient(to top right, hsl(179, 34%, 48%) 40%, hsl(155, 50%, 61%) 100%) !important;
+  appearance: none;
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 10px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  -webkit-transition-duration: 0.25s;
+  transition-duration: 0.25s;
+}
+
+.second-button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  color: lightcoral;
+}
+
+.second-button:focus {
+  background-color: white;
+  width: 500px;
+
 }

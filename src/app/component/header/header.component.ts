@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   showAdminPage(value) {
-    this.admin = value;
+    this.addAnimeMenuBox(value);
     this.addAnimeToHelper(value);
 
   }
@@ -100,6 +100,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
         elementById.classList.remove('anime-helper-2');
       }
     }
+  }
+
+  addAnimeMenuBox(value) {
+    const menu = document.getElementById('menu-box');
+    this.admin = value;
+    if (menu) {
+      menu.classList.add('animation-menu-box');
+    }
+
+    const timeout = setTimeout(() => {
+      menu.classList.remove('animation-menu-box');
+      clearTimeout(timeout);
+    }, 2000);
   }
 
   ngOnDestroy(): void {

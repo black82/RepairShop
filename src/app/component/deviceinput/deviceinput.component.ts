@@ -56,6 +56,10 @@ import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
 import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
+import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
+import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
+import {InvoiceType} from '../entity/InvoiceType';
+import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 
 @Component({
   selector: 'app-deviceinput',
@@ -84,6 +88,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   test = faClipboardList;
   note = faCommentAlt;
   discar = faTrashAlt;
+  bluetoothIcon = faBluetooth;
   sensors = faDigitalTachograph;
   display = faMobileAlt;
   conections = faChargingStation;
@@ -92,6 +97,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   faceIdFa = faFlushed;
   touch = faFingerprint;
   wifi = faWifi;
+  whatsapp = faWhatsapp;
+  mms = faSms;
   microfon = faMicrophone;
   sim = faSimCard;
   keybord = faPowerOff;
@@ -123,7 +130,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   email_anime_event: Subscription;
   email_send_disable = true;
   countSigPad = 0;
+  typeSender: string;
+  titleForm: string;
   showAddButton = false;
+  buttonCheckBox = 'Select All';
   showAddAutocomplete = false;
   filteredItems1: Observable<any[]>;
   private subscriber: Subscription;
@@ -222,7 +232,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
       this.setDataHourAndMin(formData.date_exit), null, formData.defect,
       formData.deposit, formData.price, null, null, true,
-      this.inputTest, null, this.changeNotes(formData.note), null, this.repairFileStorage);
+      this.inputTest, null, this.changeNotes(formData.note), null,
+      this.repairFileStorage, null, null, null);
 
     this.device = new Device(null, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
@@ -230,8 +241,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,
       [this.device], formData.email_send, formData.client_type,
-      formData.ivaClient, formData.sdiClient);
-    console.log(this.repair);
+      formData.ivaClient, formData.sdiClient, null, null);
     return this.client;
   }
 
@@ -342,7 +352,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.httpService.printClient(this.client).subscribe(client => {
 
       this.client_after_saved = client;
-      this.print.print_open.emit(new PrintEntity(client, 1, this.formClient.controls.date_exit.value));
+      this.print.print_open.emit(new PrintEntity(client, 1,
+        this.formClient.controls.date_exit.value, null, InvoiceType.PrintPage, this.titleForm));
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       console.error(error);
@@ -350,8 +361,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   dismissed() {
-    this.alert_service.warn('', 'Sorry, you ' +
-      'left the module.', true, false, '', null);
+    if (confirm('Are you sure you want to dismiss')) {
+      this.alert_service.warn('', 'Sorry, you ' +
+        'left the module.', true, false, '', null);
+    }
   }
 
   animation_call() {
@@ -417,6 +430,24 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.invoice = invoice;
   }
 
+  clickEmailSender() {
+    this.typeSender = InvoiceType.emailInvoice;
+    this.titleForm = 'You are in a position to send invoices by email';
+    this.sign_pad_open();
+  }
+
+  clickWhatsappSender() {
+    this.typeSender = InvoiceType.WhatsApp;
+    this.titleForm = 'You are in a position to send invoices by WhatsApp';
+    this.sign_pad_open();
+  }
+
+  clickMmsSender() {
+    this.typeSender = InvoiceType.mms;
+    this.titleForm = 'You are in a position to send invoices by MMS';
+    this.sign_pad_open();
+  }
+
   sign_pad_open() {
     if (!this.formClient.valid) {
       this.alert_service.warn('', 'Before sending the form ' +
@@ -449,7 +480,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   submitFormAndSendEmail() {
     this.subscribe_success_response();
-    this.emailSender.email_send(new PrintEntity(this.createClient(), 1, this.formClient.controls.date_exit.value));
+    this.emailSender.email_send(new PrintEntity(this.createClient(),
+      1, this.formClient.controls.date_exit.value,
+      null, this.typeSender, this.titleForm));
 
   }
 
@@ -568,6 +601,24 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.formClient.removeControl('ivaClient');
       this.formClient.addControl('name', new FormControl(null, [Validators.required]));
       this.formClient.addControl('family', new FormControl(null, [Validators.required]));
+    }
+  }
+
+  selectAllCheckBox() {
+    this.checkButtonTitle();
+    const container = document.getElementById('check-box-container');
+    const elementsByClassName = container.querySelectorAll('input[type="checkbox"]');
+    Array.from(elementsByClassName).forEach(check => {
+      check.click();
+
+    });
+  }
+
+  checkButtonTitle() {
+    if (this.buttonCheckBox === 'Select All') {
+      this.buttonCheckBox = 'Unselect All';
+    } else {
+      this.buttonCheckBox = 'Select All';
     }
   }
 }

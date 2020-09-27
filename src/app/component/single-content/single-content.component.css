@@ -244,7 +244,7 @@
 .icon-test-tile {
   color: white;
   margin-right: 10px;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 hr {
@@ -448,4 +448,10 @@ mat-expansion-panel {
   margin-bottom: 40px;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.icon-normal-single {
+  color: #1ABC9C;
+  font-size: 25px;
+  margin-right: 5px;
 }

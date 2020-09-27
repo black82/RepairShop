@@ -8,13 +8,13 @@
     </div>
   </div>
 
-  <form (ngSubmit)="submitForm()" [formGroup]="formClient" autocomplete="off">
+  <form [formGroup]="formClient" autocomplete="off">
     <div class="check-single">
       <fa-icon [icon]="companyType" [style.color]="formClient.controls.client_type.value? '#1ABC9C' : 'lightcoral'"
                class="icon-box test-icon"></fa-icon>
       <label class="checkbox">
         <input (click)="companyClient()"
-               class="check-box" formControlName="client_type" name="device-test" type="checkbox">
+               class="check-box" formControlName="client_type" type="checkbox">
         <span class="check-box-name">Is Company's</span>
       </label>
     </div>
@@ -113,7 +113,7 @@
                 <div *ngIf="i<5" class="item-autocomplete">
                   <div (click)="optionSelected(item)" class="item-div"><span>{{ item }}
                   </span>
-                    <hr>
+                    <hr style="background: #1ABC9C;height: 1px;">
                   </div>
                 </div>
               </div>
@@ -202,18 +202,20 @@
     <div class="title-container">
       <div tooltip="Please check all the tests the entrance.">
         <p class="title-form">
+
           <fa-icon [icon]="test" class=""></fa-icon>
           Tests at the entrance of the machine.
         </p>
       </div>
     </div>
-    <div class="col-checkbox">
+    <a (click)="selectAllCheckBox()" class="second-button"> {{buttonCheckBox}}</a>
+    <div class="col-checkbox" id="check-box-container">
       <div class="check-rouw-1">
         <div class="check-single">
           <fa-icon [icon]="sensors" [style.color]="formClient.controls.sensors_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="sensors_input"
+            <input class="check-box select-checkd" formControlName="sensors_input"
                    name="device-test" type="checkbox">
             <span class="check-box-name">Sensors</span>
           </label>
@@ -222,7 +224,7 @@
           <fa-icon [icon]="software" [style.color]="formClient.controls.software.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="software"
+            <input class="check-box select-check" formControlName="software"
                    name="device-test" type="checkbox">
             <span class="check-box-name">Software's</span>
           </label>
@@ -231,7 +233,7 @@
           <fa-icon [icon]="display" [style.color]="formClient.controls.display_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input [checked]="formClient.controls.display_input.value" class="check-box"
+            <input [checked]="formClient.controls.display_input.value" class="check-box select-check"
                    formControlName="display_input" name="device-test" type="checkbox">
             <span class="check-box-name">Display</span>
           </label>
@@ -241,7 +243,7 @@
                    [style.color]="formClient.controls.connectors_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="connectors_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="connectors_input" name="device-test" type="checkbox">
             <span class="check-box-name">Connectors</span>
           </label>
         </div>
@@ -250,7 +252,8 @@
                    [style.color]="formClient.controls.sound_equipment_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="sound_equipment_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="sound_equipment_input" name="device-test"
+                   type="checkbox">
             <span class="check-box-name">Speaker</span>
           </label>
         </div>
@@ -259,7 +262,8 @@
                    [style.color]="formClient.controls.audio_equipment_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="audio_equipment_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="audio_equipment_input" name="device-test"
+                   type="checkbox">
             <span class="check-box-name">Audio Device</span>
           </label>
         </div>
@@ -268,7 +272,7 @@
           <fa-icon [icon]="touch" [style.color]="formClient.controls.touch_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="touch_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="touch_input" name="device-test" type="checkbox">
             <span class="check-box-name">Touch</span>
           </label>
         </div>
@@ -276,7 +280,7 @@
           <fa-icon [icon]="wifi" [style.color]="formClient.controls.wi_fi_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="wi_fi_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="wi_fi_input" name="device-test" type="checkbox">
             <span class="check-box-name">Wi-Fi</span>
           </label>
         </div>
@@ -287,7 +291,7 @@
                    [style.color]="formClient.controls.microphone_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="microphone_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="microphone_input" name="device-test" type="checkbox">
             <span class="check-box-name">Microphone</span>
           </label>
         </div>
@@ -295,7 +299,7 @@
           <fa-icon [icon]="sim" [style.color]="formClient.controls.sim_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="sim_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="sim_input" name="device-test" type="checkbox">
             <span class="check-box-name">Sim</span>
           </label>
         </div>
@@ -304,7 +308,8 @@
                    [style.color]="formClient.controls.display_touch_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="display_touch_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="display_touch_input" name="device-test"
+                   type="checkbox">
             <span class="check-box-name">Display Touch</span>
           </label>
         </div>
@@ -312,7 +317,7 @@
           <fa-icon [icon]="keybord" [style.color]="formClient.controls.keyboard_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="keyboard_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="keyboard_input" name="device-test" type="checkbox">
             <span class="check-box-name">On/off button</span>
           </label>
         </div>
@@ -320,7 +325,7 @@
           <fa-icon [icon]="camera" [style.color]="formClient.controls.camera_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="camera_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="camera_input" name="device-test" type="checkbox">
             <span class="check-box-name">Camera</span>
           </label>
         </div>
@@ -329,7 +334,8 @@
                    [style.color]="formClient.controls.camera_input_front.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="camera_input_front" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="camera_input_front" name="device-test"
+                   type="checkbox">
             <span class="check-box-name">Camera Front</span>
           </label>
         </div>
@@ -337,16 +343,16 @@
           <fa-icon [icon]="vibrations" [style.color]="formClient.controls.vibrations.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="vibrations" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="vibrations" name="device-test" type="checkbox">
             <span class="check-box-name">Vibrations</span>
           </label>
         </div>
         <div class="check-single">
-          <fa-icon [icon]="wifi"
+          <fa-icon [icon]="bluetoothIcon"
                    [style.color]="formClient.controls.bluetooth.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="bluetooth" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="bluetooth" name="device-test" type="checkbox">
             <span class="check-box-name">Bluetooth</span>
           </label>
         </div>
@@ -355,7 +361,7 @@
                    [style.color]="formClient.controls.faceId_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
           <label class="checkbox">
-            <input class="check-box" formControlName="faceId_input" name="device-test" type="checkbox">
+            <input class="check-box select-check" formControlName="faceId_input" name="device-test" type="checkbox">
             <span class="check-box-name">Face Id</span>
           </label>
         </div>
@@ -400,14 +406,27 @@
         <a (click)="dismissed()" class="dismiss">
         <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
         Discard Form</span></a></div>
-      <div tooltip="The model will be sent to the printer">
+      <div tooltip="The model will be sent to the Printer">
         <a (click)="print_click()" class="print button ">
         <span> <fa-icon class="button-icon"
-                        [icon]="printer"></fa-icon> Print Page</span></a></div>
-      <div>
-        <a (click)="sign_pad_open()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
-          [icon]="mail" class="button-icon"></fa-icon> Email Submit</span></a>
+                        [icon]="printer"></fa-icon> Print Invoice</span></a></div>
+
+      <div [class.disabled]="true" tooltip="The model will be sent to the WhatsApp">
+        <a (click)="clickWhatsappSender()" class="whatsapp button ">
+        <span> <fa-icon [icon]="whatsapp"
+                        class="button-icon"></fa-icon>WhatsApp Invoice</span></a>
       </div>
+
+      <div [class.disabled]="true" tooltip="The model will be sent to the MMS">
+        <a (click)="clickMmsSender()" class="mms button ">
+        <span> <fa-icon [icon]="mms"
+                        class="button-icon"></fa-icon> MMS Invoice</span></a>
+      </div>
+      <div tooltip="The model will be sent to the Email">
+        <a (click)="clickEmailSender()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
+          [icon]="mail" class="button-icon"></fa-icon> Email Invoice</span></a>
+      </div>
+
 
     </div>
   </form>

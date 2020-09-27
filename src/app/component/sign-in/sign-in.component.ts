@@ -77,7 +77,6 @@ export class SignInComponent implements OnInit {
             if (nav_url) {
               this.router.navigate([nav_url]).then(r => r);
               localStorage.removeItem('navigate');
-
             } else {
               this.router.navigate(['']).then(r => r);
             }

@@ -5,4 +5,5 @@ export enum InvoiceType {
   WhatsApp = 'whatsApp',
   PrintPage = 'print',
   emailNot = 'emailNot',
+  mms = 'mms'
 }

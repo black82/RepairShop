@@ -42,7 +42,6 @@ export class AlertComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.alertService.alert_open
       .subscribe(alert => {
-        console.log(alert);
         if (alert.type === AlertType.Error) {
           if (alert.errore?.error?.status === 401) {
             this.body_alert = 'The time since the last login has expired.';

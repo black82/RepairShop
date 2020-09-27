@@ -70,7 +70,7 @@
                   <div *ngIf="i<5" class="item-autocomplete">
                     <div (click)="optionSelected(item)" class="item-div"><span>{{ item }}
                   </span>
-                      <hr>
+                      <hr style="background: #1ABC9C;height: 1px;">
                     </div>
                   </div>
                 </div>
@@ -136,7 +136,9 @@
           Tests at the output of the machine.
         </p>
       </div>
-      <div class="col-checkbox">
+      <a (click)="selectAllCheckBox()" class="second-button"> {{buttonCheckBox}}</a>
+      <div class="col-checkbox" id="check-box-container">
+
         <div class="check-col-1">
           <div class="check-single">
             <fa-icon [icon]="sensors" [style.color]="formClient.controls.sensor_output.value? '#1ABC9C' : 'lightcoral'"
@@ -213,8 +215,6 @@
               <span class="check-box-name">Wi-Fi</span>
             </label>
           </div>
-        </div>
-        <div class="check-col-2">
           <div class="check-single">
             <fa-icon [icon]="microfon"
                      [style.color]="formClient.controls.microphone_output.value? '#1ABC9C' : 'lightcoral'"
@@ -226,6 +226,9 @@
               <span class="check-box-name">Microphone</span>
             </label>
           </div>
+        </div>
+        <div class="check-col-2">
+
           <div class="check-single">
             <fa-icon [icon]="sim" [style.color]="formClient.controls.sim_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
@@ -290,7 +293,8 @@
             </label>
           </div>
           <div class="check-single">
-            <fa-icon [icon]="wifi" [style.color]="formClient.controls.bluetooth.value? '#1ABC9C' : 'lightcoral'"
+            <fa-icon [icon]="bluetoothIcon"
+                     [style.color]="formClient.controls.bluetooth.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box test-icon"></fa-icon>
             <label class="checkbox">
               <input class="check-box" formControlName="bluetooth"
@@ -348,13 +352,24 @@
           <a (click)="dismissed()" class="dismiss"><span><fa-icon [icon]="discar"
                                                                   class="button-icon"></fa-icon>Discard Form</span></a>
         </div>
-        <div tooltip="The model will be sent to the printer">
+        <div tooltip="The model will be sent to the Printer">
           <a (click)="print_click()" class="print button">
         <span> <fa-icon
           [icon]="printer"></fa-icon> Print Page</span></a>
         </div>
-        <div>
-          <a (click)="sign_pad_open()" [class.disabled]="email_send_disable"
+        <div [class.disabled]="true" tooltip="The model will be sent to the WhatsApp">
+          <a (click)="clickWhatsappSender()" class="whatsapp button ">
+        <span> <fa-icon [icon]="whatsapp"
+                        class="button-icon"></fa-icon>WhatsApp Invoice</span></a>
+        </div>
+
+        <div [class.disabled]="true" tooltip="The model will be sent to the MMS">
+          <a (click)="clickMmsSender()" class="mms button ">
+        <span> <fa-icon [icon]="mms"
+                        class="button-icon"></fa-icon> MMS Invoice</span></a>
+        </div>
+        <div tooltip="The model will be sent to the Email">
+          <a (click)="clickEmailSender()" [class.disabled]="email_send_disable"
              class=" button email"><span> <fa-icon
             [icon]="mail" class="button-icon"></fa-icon> Email Submit</span></a>
         </div>

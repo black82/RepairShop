@@ -20,7 +20,7 @@ import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  //  apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  //   apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
   apiUrl = 'http://localhost:8080/';
 
@@ -129,6 +129,20 @@ export class HttpClien {
 
   sendEmailClient(invoice: InvoiceToolsDto): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/sample/email/attachment', invoice)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  sendWhatsAppClient(invoice: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'message/api/whatsapp', invoice)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  sendMmsClient(invoice: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'message/api/mms', invoice)
       .pipe(
         catchError(this.errorHandler)
       );

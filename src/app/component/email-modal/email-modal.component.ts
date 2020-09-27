@@ -24,6 +24,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   type_print: number;
   date_exit: Date;
   id = '';
+  title: string;
   print_entity: PrintEntity;
   show_email_send = false;
   show_email_alternative = true;
@@ -44,6 +45,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.images_sig = this.sig_pad_service.image_sig;
     this.email_send_event = this.emailSender.email_send_event.subscribe(print => {
       this.print_entity = print;
+      this.title = print.titleForm;
       this.client = print.client_print;
       this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
@@ -71,6 +73,8 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     if (this.print_entity.type_client_print === 1) {
       this.http.printClient(this.client).subscribe(response => {
         this.client = response;
+        this.checkIsPhoneContain();
+        this.checkIsImeiContain();
         this.id = this.id_repair(response);
       });
     } else {
@@ -100,17 +104,75 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   }
 
+  checkIsPhoneContain() {
+    if (this.client?.telephone_number?.includes('n/a')) {
+      this.client.telephone_number = null;
+    }
+  }
+
+  checkIsImeiContain() {
+    if (this.client?.device[0]?.imei.includes('n/a')) {
+      this.client.device[0].imei = null;
+    }
+  }
+
   createInvoiceToPrintPageAfterTimeout() {
     this.emailSender.anime_question.emit(true);
     const html = document.querySelector('.container-page');
     this.show_email_send = false;
     const invoiceToPrintPage = this.createInvoiceToPrintPage(html.innerHTML);
-    this.sendEmailToBackend(invoiceToPrintPage);
+    this.checkTypeSender(invoiceToPrintPage);
+  }
+
+  checkTypeSender(invoiceToPrintPage) {
+    switch (this.print_entity.typeSender) {
+      case InvoiceType.emailInvoice: {
+        this.sendEmailToBackend(invoiceToPrintPage);
+        break;
+      }
+      case InvoiceType.WhatsApp: {
+        this.sendWhatsAppToBackend(invoiceToPrintPage);
+        break;
+      }
+      case InvoiceType.mms: {
+        this.sendMmsToBackend(invoiceToPrintPage);
+        break;
+      }
+
+    }
   }
 
   sendEmailToBackend(invoiceToolsDto) {
     this.animation_wait.$anime_show.emit(true);
     this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
+      this.animation_wait.$anime_show.emit(false);
+      this.emailSender.anime_question.emit(false);
+      this.emailSender.email_sent_send_success.emit(this.client);
+    }, error => {
+      this.animation_wait.$anime_show.emit(false);
+      this.emailSender.anime_question.emit(false);
+      this.alert_service.error(null, error.error.message
+        , false, null, '', error);
+    });
+  }
+
+  sendWhatsAppToBackend(invoiceToolsDto) {
+    this.animation_wait.$anime_show.emit(true);
+    this.http.sendWhatsAppClient(invoiceToolsDto).subscribe(() => {
+      this.animation_wait.$anime_show.emit(false);
+      this.emailSender.anime_question.emit(false);
+      this.emailSender.email_sent_send_success.emit(this.client);
+    }, error => {
+      this.animation_wait.$anime_show.emit(false);
+      this.emailSender.anime_question.emit(false);
+      this.alert_service.error(null, error.error.message
+        , false, null, '', error);
+    });
+  }
+
+  sendMmsToBackend(invoiceToolsDto) {
+    this.animation_wait.$anime_show.emit(true);
+    this.http.sendMmsClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
       this.emailSender.email_sent_send_success.emit(this.client);
@@ -142,7 +204,6 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   splitNotes(note: string) {
-    console.log(this.notes);
     if (note) {
       this.notes = note.split(';');
     }
@@ -301,24 +362,59 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkTypeSenderInvoice(): string {
+    switch (this.print_entity.typeSender) {
+      case InvoiceType.emailInvoice: {
+        return InvoiceType.emailInvoice;
+      }
+      case InvoiceType.WhatsApp: {
+        return InvoiceType.WhatsApp;
+
+      }
+      case InvoiceType.mms: {
+        return InvoiceType.mms;
+
+      }
+
+    }
+  }
+
+  showModal() {
+    this.show_email_alternative = !this.show_email_alternative;
+  }
+
+  checkDestinationInvoice(): string {
+    switch (this.print_entity.typeSender) {
+      case InvoiceType.emailInvoice:
+      case InvoiceType.email: {
+        return this.client.email;
+      }
+      case InvoiceType.WhatsApp: {
+        return this.client.telephone_number;
+
+      }
+      case InvoiceType.mms: {
+        return this.client.telephone_number;
+
+      }
+
+    }
+  }
+
   private createInvoiceToPrintPage(html) {
     const invoiceToPrintPage = new InvoiceToolsDto();
-    invoiceToPrintPage.destinationUser = this.client.email;
+    invoiceToPrintPage.destinationUser = this.checkDestinationInvoice();
     invoiceToPrintPage.subjectEmail = 'RfvTechnology numero di riparazione -  ' + this.id;
     if (this.print_entity.type_client_print === 1) {
       invoiceToPrintPage.messageEmail = 'The device will be ready to date : ' + this.date_exit;
     } else {
       invoiceToPrintPage.messageEmail = 'Device was taken ex offices by the owner.';
     }
-    invoiceToPrintPage.typeSender = InvoiceType.emailInvoice;
+    invoiceToPrintPage.typeSender = this.checkTypeSenderInvoice();
     invoiceToPrintPage.htmlPage = html;
     invoiceToPrintPage.repairID = +this.id;
     invoiceToPrintPage.typeFile = this.checkTypePrint();
     return invoiceToPrintPage;
-  }
-
-  showModal() {
-    this.show_email_alternative = !this.show_email_alternative;
   }
 }
 

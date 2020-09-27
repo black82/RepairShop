@@ -7,7 +7,7 @@ import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
 import {faUserLock} from '@fortawesome/free-solid-svg-icons/faUserLock';
-import {faPhoneSquare, faUserTag} from '@fortawesome/free-solid-svg-icons';
+import {faPhoneSquare, faUserCircle, faUserTag} from '@fortawesome/free-solid-svg-icons';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
 import {faHatWizard} from '@fortawesome/free-solid-svg-icons/faHatWizard';
 import {faMobileAlt} from '@fortawesome/free-solid-svg-icons/faMobileAlt';
@@ -33,6 +33,7 @@ export class SingleContentComponent implements OnInit {
   mobile = faMobile;
   email = faEnvelope;
   money = faMoneyBill;
+  userStaff = faUserCircle;
   cogs = faCogs;
   address = faAddressCard;
   date = faCalendarPlus;

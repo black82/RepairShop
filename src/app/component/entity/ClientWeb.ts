@@ -14,13 +14,17 @@ export class Client {
   typeClient: boolean;
   ivaCompany: string;
   sdiCompany: string;
+  createUser: string;
+  lastModified: string;
 
 
-  constructor(id: number, family: string, name: string,
-              companyName: string, email: string, telephone_number: string,
+  constructor(id: number, family: string, name: string, companyName: string,
+              email: string, telephone_number: string,
               telephone_number_second: string, address: string,
               device: Array<Device>, send_email_active: boolean,
-              typeClient: boolean, ivaCompany: string, sdiCompany: string) {
+              typeClient: boolean, ivaCompany: string,
+              sdiCompany: string, createUser: string,
+              lastModified: string) {
     this.id = id;
     this.family = family;
     this.name = name;
@@ -34,5 +38,7 @@ export class Client {
     this.typeClient = typeClient;
     this.ivaCompany = ivaCompany;
     this.sdiCompany = sdiCompany;
+    this.createUser = createUser;
+    this.lastModified = lastModified;
   }
 }
