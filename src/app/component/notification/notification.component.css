@@ -51,12 +51,7 @@
 
 .notification-ul {
   border: none;
-  -webkit-box-shadow: 0 3px 20px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.3);
-  min-width: 320px;
   top: 120%;
-  min-height: 80px;
-  border-bottom: 1px solid #c54040;
 }
 
 
@@ -81,21 +76,30 @@
 }
 
 .notification-body {
+  background: #fefefe;
   margin-left: -10%;
   position: absolute;
-  margin-top: 5%;
+  margin-top: 3%;
+  max-height: 60%;
+  overflow: auto;
   z-index: 5;
   visibility: hidden;
   opacity: 0;
   transform: scale(.8);
   transition: 0.8s ease-in-out;
-  display: flex;
+  display: block;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: normal;
+  border-radius: 2%;
   align-content: space-around;
-  border: #1ABC9C 2px solid;
+  box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);
 }
 .list-not {
   display: flex;
@@ -105,8 +109,12 @@
   align-items: normal;
   align-content: space-around;
   list-style: none;
+  margin: 3px;
+  padding: 5px;
+  max-width: 300px;
 
 }
+
 
 .notification-container:hover .notification-body {
   visibility: visible;
@@ -115,7 +123,7 @@
   z-index: 150;
 }
 
-.notification-ul :hover {
+.list-not :hover {
   background: #00E4F6 !important;
 }
 
@@ -245,4 +253,23 @@
 
 .user-name:hover {
   color: lightcoral;
+}
+
+.fa-w-10 {
+  margin-top: -8%;
+  margin-left: 50%;
+  font-size: 30px;
+  color: white;
+  text-shadow: 0 1px 0 #ccc,
+  0 2px 0 #c9c9c9,
+  0 3px 0 #bbb,
+  0 4px 0 #b9b9b9,
+  0 5px 0 #aaa,
+  0 6px 1px rgba(0, 0, 0, .1),
+  0 0 5px rgba(0, 0, 0, .1),
+  0 1px 3px rgba(0, 0, 0, .3),
+  0 3px 5px rgba(0, 0, 0, .2),
+  0 5px 10px rgba(0, 0, 0, .25),
+  0 10px 10px rgba(0, 0, 0, .2),
+  0 20px 20px rgba(0, 0, 0, .15);
 }

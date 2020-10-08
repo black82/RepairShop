@@ -1,72 +1,72 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
-import {faFileSignature, faFlushed, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faMoneyBill} from '@fortawesome/free-solid-svg-icons/faMoneyBill';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
-import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
 import {faUserLock} from '@fortawesome/free-solid-svg-icons/faUserLock';
+import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
+import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
+import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
+import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
+import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
+import {faFileSignature, faFlushed, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
 import {faMoneyCheck} from '@fortawesome/free-solid-svg-icons/faMoneyCheck';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
 import {faHatWizard} from '@fortawesome/free-solid-svg-icons/faHatWizard';
-import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
 import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
-import {faFingerprint} from '@fortawesome/free-solid-svg-icons/faFingerprint';
-import {faMobileAlt} from '@fortawesome/free-solid-svg-icons/faMobileAlt';
-import {faVolumeUp} from '@fortawesome/free-solid-svg-icons/faVolumeUp';
+import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
+import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 import {faDigitalTachograph} from '@fortawesome/free-solid-svg-icons/faDigitalTachograph';
+import {faMobileAlt} from '@fortawesome/free-solid-svg-icons/faMobileAlt';
+import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
+import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
+import {faVolumeUp} from '@fortawesome/free-solid-svg-icons/faVolumeUp';
+import {faFingerprint} from '@fortawesome/free-solid-svg-icons/faFingerprint';
 import {faWifi} from '@fortawesome/free-solid-svg-icons/faWifi';
+import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
+import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
 import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
 import {faSimCard} from '@fortawesome/free-solid-svg-icons/faSimCard';
+import {faPowerOff} from '@fortawesome/free-solid-svg-icons/faPowerOff';
+import {faCameraRetro} from '@fortawesome/free-solid-svg-icons/faCameraRetro';
 import {faCamera} from '@fortawesome/free-solid-svg-icons/faCamera';
 import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
-import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
+import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
+import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
+import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
+import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons/faArrowAltCircleRight';
 import {Client} from '../entity/ClientWeb';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {InputTest} from '../entity/InputTest';
+import {RepairFileStorage} from '../entity/RepairFileStorage';
+import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
+import {Observable, Subscription} from 'rxjs';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {PrintService} from '../service/print.service';
-import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
-import {PrintEntity} from '../entity/Print_Pojo';
 import {ImageSenderService} from '../service/image-sender.service';
-import {RepairFileStorage} from '../entity/RepairFileStorage';
-import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {EmailSenderService} from '../service/email-sender.service';
 import {SigPadService} from '../service/sig-pad.service';
 import {AnimeServiceService} from '../service/anime-service.service';
-import {Observable, Subscription} from 'rxjs';
-import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
-import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
 import {DeviceInputService} from '../service/device-input.service';
 import {map, startWith} from 'rxjs/operators';
-import {faPowerOff} from '@fortawesome/free-solid-svg-icons/faPowerOff';
-import {faCameraRetro} from '@fortawesome/free-solid-svg-icons/faCameraRetro';
-import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
-import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
-import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons/faArrowAltCircleRight';
-import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
-import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
-import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
-import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
-import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
-import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
+import {PrintEntity} from '../entity/Print_Pojo';
 import {InvoiceType} from '../entity/InvoiceType';
-import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
+import {DeviceForSale} from '../entity/DeviceForSale';
 
 @Component({
-  selector: 'app-deviceinput',
-  templateUrl: './deviceinput.component.html',
-  styleUrls: ['./deviceinput.component.css']
+  selector: 'app-device-bay',
+  templateUrl: './device-bay.component.html',
+  styleUrls: ['./device-bay.component.css']
 })
-export class DeviceinputComponent implements OnInit, OnDestroy {
+export class DeviceBayComponent implements OnInit, OnDestroy {
   used = faHeart;
   mobile = faMobile;
   email = faEnvelope;
@@ -116,7 +116,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   client: Client;
   client_after_saved: Client;
   formClient: FormGroup;
-  device: Device;
+  device: DeviceForSale;
   repair: Repair;
   inputTest: InputTest;
   formSubmitted: boolean;
@@ -136,10 +136,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   buttonCheckBox = 'Select All';
   showAddAutocomplete = false;
   filteredItems1: Observable<any[]>;
-  private subscriber: Subscription;
   prompt = 'Click <enter> to add "';
   itemsModels: string[] = [];
   companyShow = false;
+  private subscriber: Subscription;
   private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
 
@@ -159,14 +159,14 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       telephone_number_second: new FormControl(null),
       address: new FormControl(null, [Validators.required]),
       model: new FormControl(null, [Validators.required]),
-      state_of_use: new FormControl(null, [Validators.required]),
+      deviceType: new FormControl(null, [Validators.required]),
       imei: new FormControl(null),
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
       date_to_enter: new FormControl(null, [Validators.required]),
       defect: new FormControl(null, [Validators.required]),
-      deposit: new FormControl(null, [Validators.required]),
+      deviceClass: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),
       sensors_input: new FormControl(false),
       display_input: new FormControl(false),
@@ -188,7 +188,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       client_type: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
-      date_exit: new FormControl('', [Validators.required])
+      condition: new FormControl('', [Validators.required])
     });
 
   }
@@ -229,19 +229,16 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
       formData.software, formData.faceId_input);
 
-    this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
-      this.setDataHourAndMin(formData.date_exit), null, formData.defect,
-      formData.deposit, formData.price, null, null, true,
-      this.inputTest, null, this.changeNotes(formData.note), null,
-      this.repairFileStorage, null, null, null);
-
-    this.device = new Device(null, formData.model, formData.state_of_use,
-      formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
+    this.device = new DeviceForSale(null, formData.model, formData.deviceType, formData.condition,
+      formData.imei, formData.code_device, formData.password, formData.accessory, formData.deviceClass,
+      formData.note, null, null, this.inputTest, null, this.repairFileStorage
+      , true, formData.price, null);
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,
-      [this.device], formData.email_send, formData.client_type,
-      formData.ivaClient, formData.sdiClient, null, null, null, null);
+      null, formData.email_send, formData.client_type,
+      formData.ivaClient, formData.sdiClient, null, null,
+      new Array<DeviceForSale>(this.device), null);
     return this.client;
   }
 
@@ -281,26 +278,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       }
     }
     return true;
-  }
-
-  changeNotes(note: string) {
-    if (note) {
-      return 'Note di ingresso : ' + note + ';';
-    } else {
-      return note;
-    }
-  }
-
-  setDataHourAndMin(date: Date): Date {
-    let dateReturn = null;
-    if (date) {
-      dateReturn = new Date(date);
-      const data = new Date();
-      dateReturn.setHours(data.getHours());
-      dateReturn.setMinutes(data.getMinutes());
-      dateReturn.setSeconds(data.getSeconds());
-    }
-    return dateReturn;
   }
 
   submitForm() {
@@ -352,8 +329,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.httpService.printClient(this.client).subscribe(client => {
 
       this.client_after_saved = client;
-      this.print.print_open.emit(new PrintEntity(client, 1,
-        this.formClient.controls.date_exit.value, null, InvoiceType.PrintPage, this.titleForm));
+      this.print.print_open.emit(new PrintEntity(client, 3,
+        null, null, InvoiceType.PrintPage, this.titleForm));
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       console.error(error);
@@ -426,10 +403,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   }
 
-  private create_invoice(invoice: InvoiceToolsDto) {
-    this.invoice = invoice;
-  }
-
   clickEmailSender() {
     this.typeSender = InvoiceType.emailInvoice;
     this.titleForm = 'You are in a position to send invoices by email';
@@ -481,7 +454,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   submitFormAndSendEmail() {
     this.subscribe_success_response();
     this.emailSender.email_send(new PrintEntity(this.createClient(),
-      1, this.formClient.controls.date_exit.value,
+      3, null,
       null, this.typeSender, this.titleForm));
 
   }
@@ -527,7 +500,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.subscriptionPrintSuccess.unsubscribe();
     }
   }
-
 
   emailControlChange() {
     this.email_send_disable = (this.formClient.controls.email.invalid && this.formClient.controls.email.value.length > 0);
@@ -620,5 +592,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     } else {
       this.buttonCheckBox = 'Select All';
     }
+  }
+
+  private create_invoice(invoice: InvoiceToolsDto) {
+    this.invoice = invoice;
   }
 }

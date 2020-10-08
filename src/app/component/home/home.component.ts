@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
-import {faEnvelope, faSignInAlt, faUserFriends} from '@fortawesome/free-solid-svg-icons';
+import {faEnvelope, faFileImage, faSignInAlt, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
+import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
+import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +13,13 @@ import {Subscription} from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  search = faSearch;
+  search = faFileImage;
   user_admin = faUserFriends;
   email_send = faEnvelope;
   return = faSignOutAlt;
   entering = faSignInAlt;
+  stored = faStore;
+  repair = faTools;
   hidem_animation = true;
   admin = false;
   private subscribe_admin: Subscription;

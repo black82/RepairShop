@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
-  faClipboardCheck,
   faConciergeBell,
   faEnvelopeOpen,
+  faFileImage,
   faFileSignature,
   faHome,
   faMobile,
@@ -24,6 +24,11 @@ import {faUserPlus} from '@fortawesome/free-solid-svg-icons/faUserPlus';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
+import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
+import {faTimesCircle} from '@fortawesome/free-solid-svg-icons/faTimesCircle';
+import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
+import {faToolbox} from '@fortawesome/free-solid-svg-icons/faToolbox';
+import {faAngleDown} from '@fortawesome/free-solid-svg-icons/faAngleDown';
 
 @Component({
   selector: 'app-header',
@@ -49,9 +54,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   devices = faMobile;
   repair = faTools;
   notificationSend = faConciergeBell;
-  outputRepair = faClipboardCheck;
+  outputRepair = faTimesCircle;
   redact = faFileSignature;
   usertag = faUserTag;
+  images = faFileImage;
+  stored = faStore;
+  tools = faCogs;
+  adminTools = faToolbox;
+  dropdown = faAngleDown;
   private subscribe_admin: Subscription;
 
 

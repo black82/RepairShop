@@ -269,7 +269,7 @@ export class EditRepairComponent implements OnInit, OnDestroy {
     this.client = new Client(this.client.id, formData.family, formData.name, formData.companyName,
       formData.email, formData.telephone_number, this.client.telephone_number_second, formData.address,
       [this.device], formData.email_send, this.client.typeClient, formData.ivaClient, formData.sdiClient,
-      this.client?.createUser, this.client?.lastModified);
+      this.client?.createUser, this.client?.lastModified, null, null);
     return this.client;
   }
 

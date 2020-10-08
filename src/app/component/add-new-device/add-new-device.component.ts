@@ -67,10 +67,6 @@ export class AddNewDeviceComponent implements OnInit, OnDestroy {
     this.search_email_form = false;
     this.search_phone_form = false;
     this.device_input_container = true;
-    const interval = setTimeout(() => {
-      this.service_input.$client_push.emit(this.client);
-      clearInterval(interval);
-    }, 1000);
-
+    this.service_input.$client_push.emit(this.client);
   }
 }

@@ -35,7 +35,8 @@ export class AlertComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
 
-  constructor(private alertService: AlertServiceService, private router: Router) {
+  constructor(private alertService: AlertServiceService,
+              private router: Router) {
 
   }
 

@@ -25,11 +25,18 @@ import {SendRedactPasswordRequestComponent} from './component/send-redact-passwo
 import {EditPassworComponent} from './component/edit-passwor/edit-passwor.component';
 import {ClientPaginatorDateComponent} from './component/client-paginator-date/client-paginator-date.component';
 import {MessageAdminComponent} from './component/message-admin/message-admin.component';
+import {DragOnDropRepairComponent} from './component/drag-on-drop-repair/drag-on-drop-repair.component';
+import {DeviceSellComponent} from './component/device-sell/device-sell.component';
+import {DeviceBayComponent} from './component/device-bay/device-bay.component';
+import {NotFoundComponent} from './component/not-found/not-found.component';
 
 
-export const routers: Routes = [
+export const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: '**', component: NotFoundComponent},
   {path: 'input/client/device', component: DeviceinputComponent, canActivate: [AutGuardService]},
+  {path: 'output/client/device/sell', component: DeviceSellComponent, canActivate: [AutGuardService]},
+  {path: 'input/client/device/bay', component: DeviceBayComponent, canActivate: [AutGuardService]},
   {path: 'input/client/new/device', component: AddNewDeviceComponent, canActivate: [AutGuardService]},
   {path: 'input/client/new/repair', component: AddnewRepairComponent, canActivate: [AutGuardService]},
   {path: 'output/client/device', component: OtpoutDeviceComponent, canActivate: [AutGuardService]},
@@ -52,12 +59,15 @@ export const routers: Routes = [
   {path: 'all/repair/paginator', component: PaginatorAllRepairComponent, canActivate: [AutGuardService]},
   {path: 'date/repair/paginator', component: ClientPaginatorDateComponent, canActivate: [AutGuardService]},
   {path: 'date/message/paginator', component: MessageAdminComponent, canActivate: [AutGuardService]},
+  {path: 'upload/repair/images', component: DragOnDropRepairComponent, canActivate: [AutGuardService]},
 ];
 
+
 @NgModule({
-  imports: [RouterModule.forRoot(routers)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 
 }

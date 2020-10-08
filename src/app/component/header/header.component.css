@@ -27,6 +27,14 @@
   font-style: normal;
 }
 
+.name-company {
+  color: white;
+  text-align: center;
+  font-family: 'Pacifico', serif;
+  font-size: 2em;
+
+}
+
 svg path {
   fill: white;
 }
@@ -62,7 +70,8 @@ svg {
 }
 
 #menu li a, #menu li span,
-#menu-signi div ul li, #menu-signi div span {
+#menu-signi div ul li,
+.submenu-sign-in li {
   display: inline-block;
   padding: 1.3em 1.5em;
   text-decoration: none;
@@ -73,6 +82,11 @@ svg {
   color: #FFF;
 }
 
+.current_page_item:hover {
+
+  border-bottom: #fefefe 1px solid;
+
+}
 
 #menu .current_page_item a:hover,
 .submenu li a:hover, #sign-in:hover,
@@ -118,9 +132,9 @@ svg {
 
 #logo h1 {
   display: inline-block;
-  margin-bottom: 0.20em;
-  padding: 0.20em 0.9em;
-  font-size: 3.5em;
+  padding-left: 36px;
+  margin-top: -15px;
+  font-size: 3.4em;
 }
 
 #logo a {
@@ -189,14 +203,14 @@ svg {
 }
 
 .submenu-output1,
-.submenu-repair {
+.submenu-repair,
+.submenu-client {
   margin-left: -10%;
   margin-top: 8px;
 }
 
 .submenu-search,
-.submenu-admin,
-.submenu-client {
+.submenu-admin {
   margin-left: -15%;
   margin-top: 8px;
 }
@@ -239,7 +253,7 @@ svg {
   margin: 0 10px;
   border-bottom: 1px solid #efefef;
   font-size: 12px;
-  color: #484848;
+  color: #fefefe;
   font-family: 'Kurale', serif;
 }
 
@@ -268,6 +282,37 @@ svg {
 
 li:hover {
   cursor: pointer;
+}
+
+.icon-menu {
+  font-size: 100px;
+  color: #fefefe;
+  margin-top: 8%;
+}
+
+.submenu-repair {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: normal;
+  align-content: space-around;
+  padding: 0 2em;
+  background: linear-gradient(to right, hsl(179, 34%, 48%) 0%, hsl(155, 50%, 61%) 100%) !important;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5),
+  0 -4px 5px rgba(0, 0, 0, 0.5);
+}
+
+.icon-menu:hover {
+  color: #34495E;
+  cursor: pointer;
+}
+
+.menu-icon {
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 .animation-menu-box {

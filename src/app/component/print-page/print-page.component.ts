@@ -44,12 +44,9 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.check_type_print(print);
       this.check_test_OK(print.client_print);
       this.http.getNickNameCurrentStaffUser().subscribe(name => {
-        this.animation_wait.$anime_show.emit(false);
         this.userNickName = name.currentName;
-        const time = setTimeout(() => {
-          this.printPage(print.client_print);
-          clearTimeout(time);
-        }, 1000);
+        this.printPage(print.client_print);
+
       }, () => {
         this.animation_wait.$anime_show.emit(false);
       });
@@ -130,10 +127,13 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
   printPage(client: Client): void {
     this.client = client;
+    this.animation_wait.$anime_show.emit(false);
+    window.print();
     const timeout = setTimeout(() => {
       // this.checkIfClickPrint();
+      console.log(client);
+
       const html = document.querySelector('.container-page');
-      window.print();
       this.createInvoiceToPrintPage(html.innerHTML);
       this.print.$success_print.emit(true);
       clearTimeout(timeout);
@@ -160,11 +160,6 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(): void {
-    if (this.print_open_event) {
-      this.print_open_event.unsubscribe();
-    }
-  }
 
   check_test_OK_out(client: Client) {
     this.name_test_out = [];
@@ -243,5 +238,11 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     this.invoice_tools.typeFile = this.checkTypePrint();
     this.invoice_tools.typeSender = InvoiceType.PrintPage;
     this.print.invoice_make.emit(this.invoice_tools);
+  }
+
+  ngOnDestroy(): void {
+    if (this.print_open_event) {
+      this.print_open_event.unsubscribe();
+    }
   }
 }

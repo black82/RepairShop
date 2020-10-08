@@ -1,0 +1,436 @@
+<div class="container-body" xmlns="http://www.w3.org/1999/html">
+  <div class="title-container">
+    <div tooltip="Compile all fields are required.">
+      <p class="title-form">
+        <fa-icon [icon]="modul" class="icon-input"></fa-icon>
+        COMPILATION MODEL FOR SELLING THE DEVICE
+      </p>
+    </div>
+  </div>
+
+  <form [formGroup]="formClient" autocomplete="off">
+    <div class="check-single">
+      <fa-icon [icon]="companyType" [style.color]="formClient.controls.client_type.value? '#1ABC9C' : 'lightcoral'"
+               class="icon-box test-icon"></fa-icon>
+      <label class="checkbox">
+        <input (click)="companyClient()"
+               class="check-box" formControlName="client_type" type="checkbox">
+        <span class="check-box-name">Is Company's</span>
+      </label>
+    </div>
+    <div class="row">
+      <div class="row-1">
+
+        <label *ngIf="!companyShow">
+          <span class="input-title">Name of Client</span>
+          <fa-icon [icon]="userPerson" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.name?.dirty ||
+            formClient.controls?.name?.touched) && formClient?.controls.name?.invalid && formClient.controls?.name?.errors}"
+            class="input-1"
+            formControlName="name" placeholder="Name of Client" type="text">
+        </label>
+        <label *ngIf="!companyShow">
+          <span class="input-title">Family of Client</span>
+          <fa-icon [icon]="userFamely" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls?.family?.dirty ||
+            formClient.controls?.family?.touched) && formClient.controls?.family?.invalid && formClient.controls?.family?.errors}"
+            class="input-1" formControlName="family" placeholder="Family of Client"
+            type="text">
+        </label>
+
+        <label *ngIf="companyShow">
+          <span class="input-title">Company Name</span>
+          <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.companyName?.dirty ||
+            formClient.controls.companyName.touched) && formClient.controls.companyName.invalid && formClient.controls.companyName.errors}"
+            class="input-1" formControlName="companyName" placeholder="Company Name"
+            type="text">
+        </label>
+        <label *ngIf="companyShow">
+          <span class="input-title">Company SDI</span>
+          <fa-icon [icon]="sidCompany" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.sdiClient?.dirty ||
+            formClient.controls.sdiClient.touched) && formClient.controls.sdiClient.invalid && formClient.controls.sdiClient.errors}"
+            class="input-1" formControlName="sdiClient" placeholder="Company SDI"
+            type="text">
+        </label>
+        <label *ngIf="companyShow">
+          <span class="input-title">Company Iva</span>
+          <fa-icon [icon]="ivaCompany" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.ivaClient?.dirty ||
+            formClient.controls.ivaClient.touched) && formClient.controls.ivaClient.invalid && formClient.controls.ivaClient.errors}"
+            class="input-1" formControlName="ivaClient" placeholder="Company Iva"
+            type="text">
+        </label>
+        <label>
+          <span class="input-title">Email</span>
+          <fa-icon [icon]="email" class="icon-input"></fa-icon>
+          <input
+            (change)="emailControlChange()" (ngModelChange)="emailControlChange()" [ngModel]="client?.email"
+            class="input-1" formControlName="email" id="email-client"
+            placeholder="Email of Client" type="email">
+        </label>
+        <label>
+          <span class="input-title">Telethon Number</span>
+          <fa-icon [icon]="phone" class="icon-input"></fa-icon>
+          <input class="input-1" formControlName="telephone_number"
+                 pattern="^[0-9\-\+]{9,15}$" placeholder="Telethon Number"
+                 type="tel">
+        </label>
+        <label>
+          <span class="input-title">Telethon Number Alternative</span>
+          <fa-icon [icon]="phone" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number_second.dirty || formClient.controls.telephone_number_second.touched)
+           && formClient.controls.telephone_number_second.invalid && formClient.controls.telephone_number_second.errors}"
+                 class="input-1"
+                 formControlName="telephone_number_second" placeholder="Telethon Number Optional"
+                 type="tel">
+        </label>
+        <label><span class="input-title">Address</span>
+          <fa-icon [icon]="address" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.address.dirty || formClient.controls.address.touched)
+           && formClient.controls.address.invalid && formClient.controls.address.errors}" class="input-1"
+                 formControlName="address" placeholder="Address of Client" type="text">
+        </label>
+        <label>
+          <span class="input-title">Model</span>
+          <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
+          <input (input)="filterItems($event.target.value)" [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
+           && formClient.controls.model.invalid && formClient.controls.model.errors}"
+                 [ngModel]="device?.model"
+                 autocomplete="off" class="input-1"
+                 formControlName="model" id="model"
+                 placeholder="Device Model"
+                 readonly type="text">
+        </label>
+        <label>
+          <span class="input-title">Sale Price</span>
+          <fa-icon [icon]="money" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.price.dirty || formClient.controls.price.touched)
+           && formClient.controls.price.invalid && formClient.controls.price.errors}" class="input-1"
+                 formControlName="price" placeholder="Sale Price" type="text">
+        </label>
+      </div>
+      <div class="row-2">
+        <label><span class="input-title">Code Device</span>
+          <fa-icon [icon]="code" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.code_device.dirty || formClient.controls.code_device.touched)
+           && formClient.controls.code_device.invalid && formClient.controls.code_device.errors}"
+                 [ngModel]="device?.code_device"
+                 class="input-2" formControlName="code_device" placeholder="Code Device"
+                 readonly type="text">
+        </label>
+        <label>
+          <span class="input-title">Date of Sale</span>
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_enter.dirty || formClient.controls.date_to_enter.touched)
+           && formClient.controls.date_to_enter.invalid && formClient.controls.date_to_enter.errors&& formClient.controls.date_to_enter.pristine}"
+                 class="input-2" formControlName="date_to_enter"
+                 placeholder="Date of Sale" type="date">
+        </label>
+
+        <label>
+          <span class="input-title">IMEI&&SN</span>
+          <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.imei.dirty || formClient.controls.imei.touched)
+           && formClient.controls.imei.invalid && formClient.controls.imei.errors&& formClient.controls.imei.pristine}"
+                 [ngModel]="device?.imei" class="input-2" formControlName="imei"
+                 placeholder="Imei or Sn of Device" readonly type="text">
+        </label>
+        <label>
+          <span class="input-title">Device Warranty</span>
+          <fa-icon [icon]="money2" class="icon-input"></fa-icon>
+          <select [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.deviceClass.dirty || formClient.controls.deviceClass.touched)
+           && formClient.controls.deviceClass.invalid && formClient.controls.deviceClass.errors&& formClient.controls.deviceClass.pristine}"
+                  class="input-2" formControlName="deviceClass">
+            <option [disabled]="true" [selected]="true" value="">Please Select Device Warranty In Months</option>
+            <option>1</option>
+            <option>3</option>
+            <option>6</option>
+            <option>12</option>
+            <option>18</option>
+            <option>24</option>
+          </select>
+        </label>
+        <label>
+          <span class="input-title">Type Device</span>
+          <fa-icon [icon]="used" class="icon-input"></fa-icon>
+          <select [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.deviceType.dirty || formClient.controls.deviceType.touched)
+           && formClient.controls.deviceType.invalid && formClient.controls.deviceType.errors}"
+                  [ngModel]="client?.device[0]?.state_of_use"
+                  class="input-1" formControlName="deviceType">
+            <option [disabled]="true" [selected]="true" value="">Please Select Device Type</option>
+            <option>Smartphone with keys</option>
+            <option>Smartphone</option>
+            <option>iPad</option>
+            <option>Notebook</option>
+            <option>Tab</option>
+            <option>Pc</option>
+          </select>
+        </label>
+        <label>
+          <span class="input-title">Password Device</span>
+          <fa-icon [icon]="password" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.password_device.dirty || formClient.controls.password_device.touched)
+           && formClient.controls.password_device.invalid && formClient.controls.password_device.errors&& formClient.controls.password_device.pristine}"
+                 [ngModel]="device?.password_device" class="input-2" formControlName="password_device"
+                 placeholder="Pin Cod of Device" type="text">
+        </label>
+        <label>
+          <span class="input-title">Accessory</span>
+          <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.accessory.dirty || formClient.controls.accessory.touched)
+           && formClient.controls.accessory.invalid && formClient.controls.accessory.errors&& formClient.controls.accessory.pristine}"
+                 [ngModel]="device?.accessory" class="input-2" formControlName="accessory"
+                 placeholder="Accessory of Device" type="text">
+        </label>
+        <label>
+          <span class="input-title">Condition Device</span>
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <select [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.condition.dirty || formClient.controls.condition.touched)
+           && formClient.controls.condition.invalid && formClient.controls.condition.errors&& formClient.controls.condition.pristine}"
+                  class="input-2" formControlName="condition">
+            <option [disabled]="true" [selected]="true" value="">Please Select Device Conditions</option>
+            <option ngValue="true">New Device</option>
+            <option ngValue="false">Used Device</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="title-container">
+      <div tooltip="Please check all the tests the entrance.">
+        <p class="title-form">
+
+          <fa-icon [icon]="test" class=""></fa-icon>
+          Tests of the Sold Device performed
+        </p>
+      </div>
+    </div>
+    <a (click)="selectAllCheckBox()" class="second-button"> {{buttonCheckBox}}</a>
+    <div class="col-checkbox" id="check-box-container">
+      <div class="check-rouw-1">
+        <div class="check-single">
+          <fa-icon [icon]="sensors" [style.color]="formClient.controls.sensors_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-checkd" formControlName="sensors_input"
+                   name="device-test" type="checkbox">
+            <span class="check-box-name">Sensors</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="software" [style.color]="formClient.controls.software.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="software"
+                   name="device-test" type="checkbox">
+            <span class="check-box-name">Software's</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="display" [style.color]="formClient.controls.display_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input [checked]="formClient.controls.display_input.value" class="check-box select-check"
+                   formControlName="display_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Display</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="conections"
+                   [style.color]="formClient.controls.connectors_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="connectors_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Connectors</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="sound"
+                   [style.color]="formClient.controls.sound_equipment_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="sound_equipment_input" name="device-test"
+                   type="checkbox">
+            <span class="check-box-name">Speaker</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="soundPhone"
+                   [style.color]="formClient.controls.audio_equipment_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="audio_equipment_input" name="device-test"
+                   type="checkbox">
+            <span class="check-box-name">Audio Device</span>
+          </label>
+        </div>
+
+        <div class="check-single">
+          <fa-icon [icon]="touch" [style.color]="formClient.controls.touch_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="touch_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Touch</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="wifi" [style.color]="formClient.controls.wi_fi_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="wi_fi_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Wi-Fi</span>
+          </label>
+        </div>
+      </div>
+      <div class="check-rouw-2">
+        <div class="check-single">
+          <fa-icon [icon]="microfon"
+                   [style.color]="formClient.controls.microphone_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="microphone_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Microphone</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="sim" [style.color]="formClient.controls.sim_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="sim_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Sim</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="display_touch"
+                   [style.color]="formClient.controls.display_touch_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="display_touch_input" name="device-test"
+                   type="checkbox">
+            <span class="check-box-name">Display Touch</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="keybord" [style.color]="formClient.controls.keyboard_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="keyboard_input" name="device-test" type="checkbox">
+            <span class="check-box-name">On/off button</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="camera" [style.color]="formClient.controls.camera_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="camera_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Camera</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="cameraFront"
+                   [style.color]="formClient.controls.camera_input_front.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="camera_input_front" name="device-test"
+                   type="checkbox">
+            <span class="check-box-name">Camera Front</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="vibrations" [style.color]="formClient.controls.vibrations.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="vibrations" name="device-test" type="checkbox">
+            <span class="check-box-name">Vibrations</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="bluetoothIcon"
+                   [style.color]="formClient.controls.bluetooth.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="bluetooth" name="device-test" type="checkbox">
+            <span class="check-box-name">Bluetooth</span>
+          </label>
+        </div>
+        <div class="check-single">
+          <fa-icon [icon]="faceIdFa"
+                   [style.color]="formClient.controls.faceId_input.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="faceId_input" name="device-test" type="checkbox">
+            <span class="check-box-name">Face Id</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="text-div">
+      <div class="title-container">
+        <div tooltip="Notices for staff at the input device">
+          <p class="title-form">
+            <fa-icon [icon]="photo" class="icon-input"></fa-icon>
+            Photos and Note the selling of the device
+            <fa-icon [icon]="text" class="icon-input"></fa-icon>
+          </p>
+        </div>
+      </div>
+      <div>
+        <div class="row-1">
+          <app-dragfile></app-dragfile>
+        </div>
+        <div class="row-2">
+
+          <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
+
+          <app-email-modal></app-email-modal>
+          <app-sig-pad></app-sig-pad>
+        </div>
+      </div>
+      <app-number-repair></app-number-repair>
+      <div class="check-single">
+        <span class="send-email-activ">
+        <fa-icon [icon]="email" [style.color]="formClient.controls?.email_send.value? '#1ABC9C' : 'lightcoral'"
+                 class="icon-box"></fa-icon>
+        <label class="checkbox" tooltip="The client's agreement to receive notification invoices from us ...">
+          <input class="check-box" formControlName="email_send" id="email-sender" name="device-test" type="checkbox">
+          <span class="check-box-name">I agree to receive emails with news or invoices.</span>
+        </label>
+          </span>
+      </div>
+    </div>
+    <div class="button_form">
+      <div tooltip="You will leave this page!!!">
+        <a (click)="dismissed()" class="dismiss">
+        <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
+        Discard Form</span></a></div>
+      <div tooltip="The model will be sent to the Printer">
+        <a (click)="print_click()" class="print button ">
+        <span> <fa-icon [icon]="printer"
+                        class="button-icon"></fa-icon> Print Invoice</span></a></div>
+
+      <div [class.disabled]="true" tooltip="The model will be sent to the WhatsApp">
+        <a (click)="clickWhatsappSender()" class="whatsapp button ">
+        <span> <fa-icon [icon]="whatsapp"
+                        class="button-icon"></fa-icon>WhatsApp Invoice</span></a>
+      </div>
+
+      <div [class.disabled]="true" tooltip="The model will be sent to the MMS">
+        <a (click)="clickMmsSender()" class="mms button ">
+        <span> <fa-icon [icon]="mms"
+                        class="button-icon"></fa-icon> MMS Invoice</span></a>
+      </div>
+      <div tooltip="The model will be sent to the Email">
+        <a (click)="clickEmailSender()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
+          [icon]="mail" class="button-icon"></fa-icon> Email Invoice</span></a>
+      </div>
+    </div>
+  </form>
+</div>
+
+

@@ -6,41 +6,45 @@
           <div class="box">
             <div class="test">
               <div class="icon_cont">
-                <h3><a class="icon icon-cloud-upload  icon-animation" routerLink="/input/client/device"
-                       id="icon1"></a></h3>
+                <h3><a class="icon icon-store icon-animation" id="icon1"
+                       routerLink="/input/client/device">
+                  <fa-icon [icon]="stored"></fa-icon>
+                </a></h3>
               </div>
             </div>
             <div class="box-empty"></div>
             <a class="button button-small" routerLink="/input/client/device"><span><fa-icon
-              [icon]="entering"
-              class="icon-animation"></fa-icon> Entering</span></a>
+              [icon]="stored"
+              class="icon-animation"></fa-icon> Shop </span></a>
           </div>
         </div>
         <div class="column2">
           <div class="box">
             <div class="icon_cont">
-              <h3><a class="icon icon-cloud-download  icon-animation" routerLink="/output/client/device"
-                     id="icon2"></a></h3>
+              <h3><a class="icon icon-store icon-animation" id="icon2"
+                     routerLink="/output/client/device">
+                <fa-icon [icon]="repair"></fa-icon>
+              </a></h3>
             </div>
             <div class="box-empty"></div>
             <a class="button button-small" routerLink="/output/client/device"><span><fa-icon
-              [icon]="return"
-              class="icon-animation"></fa-icon> Returning</span></a>
+              [icon]="repair"
+              class="icon-animation"></fa-icon>  Repair  </span></a>
           </div>
         </div>
-        <div class="column3">
-          <div class="box">
-            <div class="icon_cont">
-              <h3><a class="icon icon-search icon-animation" routerLink="/search/telephone/number"
-                     id="icon3"></a></h3>
-            </div>
-            <div class="box-empty"></div>
-            <a class="button button-small" routerLink="/search/telephone/number"><span><fa-icon
-              [icon]="search"></fa-icon> Search</span></a>
-          </div>
-        </div>
+        <!--        <div class="column3">-->
+        <!--          <div class="box">-->
+        <!--            <div class="icon_cont">-->
+        <!--              <h3><a class="icon icon-camera-retro icon-animation" routerLink="/upload/repair/images"-->
+        <!--                     id="icon3"></a></h3>-->
+        <!--            </div>-->
+        <!--            <div class="box-empty"></div>-->
+        <!--            <a class="button button-small" routerLink="/upload/repair/images"><span><fa-icon-->
+        <!--              [icon]="search"></fa-icon> Upload Images</span></a>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
-    </div>
+      </div>
     <div id="wrapper2">
       <div id="tools">
         <div class="tools">
@@ -62,17 +66,4 @@
     </div>
     </div>
   </div>
-  <ul class="bg-bubbles">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
-
 </div>

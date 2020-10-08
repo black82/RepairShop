@@ -20,7 +20,7 @@ import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  //   apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  //    apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
   apiUrl = 'http://localhost:8080/';
 
@@ -297,6 +297,13 @@ export class HttpClien {
 
   addNewPartsToList(part: string): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/utils/save/parts', part)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  addNewImagesToRepair(repair: Repair): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/repair/images/saved', repair)
       .pipe(
         catchError(this.errorHandler)
       );

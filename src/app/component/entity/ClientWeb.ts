@@ -1,4 +1,5 @@
 import {Device} from './Device';
+import {DeviceForSale} from './DeviceForSale';
 
 export class Client {
   id: number;
@@ -16,15 +17,16 @@ export class Client {
   sdiCompany: string;
   createUser: string;
   lastModified: string;
+  deviceSale: Array<DeviceForSale>;
+  deviceBay: Array<DeviceForSale>;
 
 
-  constructor(id: number, family: string, name: string, companyName: string,
-              email: string, telephone_number: string,
-              telephone_number_second: string, address: string,
-              device: Array<Device>, send_email_active: boolean,
-              typeClient: boolean, ivaCompany: string,
-              sdiCompany: string, createUser: string,
-              lastModified: string) {
+  constructor(id: number, family: string, name: string, companyName: string, email: string,
+              telephone_number: string, telephone_number_second: string, address: string,
+              device: Array<Device>, send_email_active: boolean, typeClient: boolean,
+              ivaCompany: string, sdiCompany: string, createUser: string,
+              lastModified: string, deviceSale: Array<DeviceForSale>,
+              deviceBay: Array<DeviceForSale>) {
     this.id = id;
     this.family = family;
     this.name = name;
@@ -40,5 +42,7 @@ export class Client {
     this.sdiCompany = sdiCompany;
     this.createUser = createUser;
     this.lastModified = lastModified;
+    this.deviceSale = deviceSale;
+    this.deviceBay = deviceBay;
   }
 }

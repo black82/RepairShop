@@ -5,7 +5,7 @@ import {NgModule} from '@angular/core';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {HomeComponent} from './component/home/home.component';
-import {AppRoutingModule} from './app-routing-module';
+import {AppRoutingModule, routes} from './app-routing-module';
 import {DeviceinputComponent} from './component/deviceinput/deviceinput.component';
 import {OtpoutDeviceComponent} from './component/otpout-device/otpout-device.component';
 import {SingleContentComponent} from './component/single-content/single-content.component';
@@ -66,7 +66,11 @@ import {SendRedactPasswordRequestComponent} from './component/send-redact-passwo
 import {EditPassworComponent} from './component/edit-passwor/edit-passwor.component';
 import {ClientPaginatorDateComponent} from './component/client-paginator-date/client-paginator-date.component';
 import {MessageAdminComponent} from './component/message-admin/message-admin.component';
-
+import {DragOnDropRepairComponent} from './component/drag-on-drop-repair/drag-on-drop-repair.component';
+import {RouterModule} from '@angular/router';
+import {DeviceSellComponent} from './component/device-sell/device-sell.component';
+import {DeviceBayComponent} from './component/device-bay/device-bay.component';
+import {NotFoundComponent} from './component/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -114,9 +118,14 @@ import {MessageAdminComponent} from './component/message-admin/message-admin.com
     SendRedactPasswordRequestComponent,
     EditPassworComponent,
     ClientPaginatorDateComponent,
-    MessageAdminComponent
+    MessageAdminComponent,
+    DragOnDropRepairComponent,
+    DeviceSellComponent,
+    DeviceBayComponent,
+    NotFoundComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     NgbModule,
     AppRoutingModule,
     BrowserModule,
