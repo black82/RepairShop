@@ -18,8 +18,12 @@
 
             <div class="col23" style="display: inline; width:30%;float: left">
               <div class="address">
-                <h1 style="font-size: 16pt;
+                <h1 *ngIf="type_print===1||type_print===2" style="font-size: 16pt;
   font-weight: 500;color: #c54040">Riparazione</h1>
+                <h1 *ngIf="type_print===4" style="font-size: 16pt;
+  font-weight: 500;color: #c54040">Vendita del Dispositivo</h1>
+                <h1 *ngIf="type_print===3" style="font-size: 16pt;
+  font-weight: 500;color: #c54040">Acquisto del Dispositivo</h1>
                 <p style="font-size: 9pt;  color:#c54040"><strong>{{'Nr. ' + id}}</strong></p>
                 <p style="font-size: 9pt;margin: 3px;">info@rfvtechnology.it</p>
                 <p style="font-size: 9pt;margin: 3px;">Nembro Italia(BG) , 24027</p>
@@ -54,7 +58,48 @@
               </div>
             </div>
           </div>
-          <div style="border-style: solid;
+          <div *ngIf="type_print===3" style="border-style: solid;
+  border-color: black;
+  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px;">
+            <div>
+              <p style="font-size: 9pt;margin: 3px"> {{"Model :  " + client?.deviceBay[0]?.model}}</p>
+              <p style="font-size: 9pt;margin: 3px"> Condizioni d'uso
+                :   {{ client?.deviceBay[0]?.state_of_use ? 'Nuovo' : 'Usato'}}</p>
+              <p *ngIf="print_entity.type_client_print===3"
+                 style="font-size: 9pt;margin: 3px">IMEI & SN
+                : {{client?.deviceBay[0]?.imei ? client?.device[0]?.imei : 'n/a' }}</p>
+              <p style="font-size: 9pt;margin: 3px"> {{"Tipo di Dispositivo :  " + client?.deviceBay[0].deviceType}}
+                .</p>
+              <p style="font-size: 9pt;margin: 3px">{{"Accessory :  " + client?.deviceBay[0]?.accessory}}</p>
+              <p style="font-size: 9pt;margin: 3px;">
+                Data Di Acquisto
+                :  {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+            </div>
+          </div>
+          <div *ngIf="type_print===4" style="border-style: solid;
+  border-color: black;
+  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px;">
+            <div>
+              <p style="font-size: 9pt;margin: 3px"> {{"Model :  " + client?.deviceSale[0]?.model}}</p>
+              <p
+                style="font-size: 9pt;margin: 3px">Condizioni d'uso
+                :   {{ client?.deviceSale[0]?.state_of_use ? 'Nuovo' : 'Usato'}}</p>
+              <p
+                style="font-size: 9pt;margin: 3px"> {{"Condizioni d'uso :  " + client?.deviceSale[0].garantyDuration}}</p>
+              <p *ngIf="print_entity.type_client_print===4"
+                 style="font-size: 9pt;margin: 3px">IMEI & SN
+                : {{client?.deviceSale[0]?.imei ? client?.deviceSale[0]?.imei : 'n/a' }}</p>
+              <p style="font-size: 9pt;margin: 3px"> {{"Tipo di Dispositivo :  " + client?.deviceSale[0].deviceType}}
+                .</p>
+              <p style="font-size: 9pt;margin: 3px">{{"Accessory :  " + client?.deviceSale[0]?.accessory}}</p>
+              <p style="font-size: 9pt;margin: 3px;">
+                Data Di Acquisto
+                :  {{ setNewDateFormat(client?.deviceSale[0]?.dateSell)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+            </div>
+          </div>
+          <div *ngIf="type_print===1||type_print===2" style="border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;">
@@ -99,11 +144,12 @@
                 style="font-size: 9pt;margin: 3px;">{{"Ricambi usati :  " + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
             </div>
           </div>
-          <div style="border-style: solid; border-color: black;  border-width: 1pt 1pt 1pt 1pt;
+          <div *ngIf="type_print===1|| type_print===2" style="border-style: solid; border-color: black;  border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px 05px;">
             <table style="width: 99%;">
               <td style="width:50%;">
-                <p *ngIf="name_test_entre.length===0" class="label" style="font-size: 8pt;margin: 2px; color: #1ABC9C">
+                <p *ngIf="name_test_entre.length===0" class="label"
+                   style="font-size: 8pt;margin: 2px; color: #1ABC9C">
                   Il
                   tuo
                   dispositivo ha superato con successo tutti i nostri
@@ -142,7 +188,55 @@
               </td>
             </table>
           </div>
-          <div style=" border-style: solid;
+          <div *ngIf="type_print===3" style="border-style: solid; border-color: black;  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px 05px;">
+            <div style="width: 99%;">
+              <div>
+                <p *ngIf="name_test_entre.length===0" class="label"
+                   style="font-size: 8pt;margin: 2px; color: #1ABC9C">
+                  Il
+                  dispositivo ha superato con successo tutti i nostri
+                  test di
+                  acquisto!!!</p>
+                <div *ngIf="name_test_entre.length>0&& name_test_entre.length!=17">
+                  <p style="color: #1ABC9C;font-size: 8pt;">Test di acquisto no superate!!!</p>
+                  <ul *ngFor="let test of name_test_entre">
+                    <li style="color: #c54040;font-size: 8pt;"> {{'Test falito: ' + test}}</li>
+                  </ul>
+                </div>
+                <div *ngIf="name_test_entre.length===17">
+                  <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test di acquisto sono negativi o non e
+                    stato
+                    possibile testare il dispositivo.!!!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="type_print===4" style="border-style: solid; border-color: black;  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px 05px;">
+            <div style="width: 99%;">
+              <div>
+                <p *ngIf="name_test_out.length===0" class="label"
+                   style="font-size: 8pt;margin: 2px; color: #1ABC9C">
+                  Il
+                  dispositivo ha superato con successo tutti i nostri
+                  test di
+                  Vendita!!!</p>
+                <div *ngIf="name_test_out.length>0&& name_test_out.length!=17">
+                  <p style="color: #1ABC9C;font-size: 8pt;margin: 2px;">Test di vendita no superate!!!</p>
+                  <ul *ngFor="let test of name_test_out">
+                    <li style="color: #c54040;font-size: 8pt;margin: 2px;float: left"> {{'Test falito: ' + test}}</li>
+                  </ul>
+                </div>
+                <div *ngIf="name_test_out.length===17">
+                  <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test di vendita sono negativi o non e
+                    stato
+                    possibile testare il dispositivo.!!!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="type_print===1||type_print===2" style=" border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;">
@@ -176,6 +270,76 @@
             <p style="font-size: 9pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto
               Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei
               dati personali”</p>
+          </div>
+          <div *ngIf="type_print===3" style=" border-style: solid;
+  border-color: black;
+  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px;">
+            <p style="font-size: 9pt; margin: 3px;">Note : </p>
+            <p
+              *ngIf="client.deviceBay[0].noteInput!=null&&client.deviceBay[0].noteInput.length>0"
+              style="font-size: 9pt;margin: 2px; color: #c54040;">
+              {{client.deviceBay[0].noteInput}}</p>
+            <!--            <p-->
+            <!--              *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0].note.length>0"-->
+            <!--              style="font-size: 9pt;margin: 2px; color: #c54040;">-->
+            <!--              {{client.device[0].repairs[0].noteOutput}}</p>-->
+            <!--            <hr>-->
+            <!--            <p style="font-size: 9pt; margin: 3px;">Condizioni Generali:</p>-->
+            <!--            <p style="font-size: 9pt;margin: 2px;">-->
+            <!--              RFV Technology non si assume la responsabilità di nessun genere sulle seguenti-->
+            <!--              condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di-->
+            <!--              effettuare-->
+            <!--              i-->
+            <!--              test d'ingresso -Se, o seguito di un salvataggio dati, il cliente dichiara che non sono presenti del dati-->
+            <!--              (RFV-->
+            <!--              Technology si basa sulla dimensione di ogni singola cartella per verificare che tutti i dati presenti sul-->
+            <!--              dispositivo vengano salvati) -Se il dispositivo, pronto per essere consegnato, viene lasciato in negozio-->
+            <!--              per-->
+            <!--              più-->
+            <!--              di 90 giorni a partire dal giorno della chiamata al eliente-->
+            <!--            </p>-->
+            <!--            <p style="font-size: 9pt; margin: 2px;">NB: dopo il termine, Il disponitivo verrà ritirato-->
+            <!--              come spese aziendali per il lavoro non più pagato</p>-->
+            <!--            <hr>-->
+            <!--            <p style="font-size: 9pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto-->
+            <!--              Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei-->
+            <!--              dati personali”</p>-->
+          </div>
+          <div *ngIf="type_print===4" style=" border-style: solid;
+  border-color: black;
+  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px;">
+            <p style="font-size: 9pt; margin: 3px;">Note : </p>
+            <p
+              *ngIf="client.deviceSale[0].noteOutput!=null&&client.deviceSale[0].noteOutput.length>0"
+              style="font-size: 9pt;margin: 2px; color: #c54040;">
+              {{client.deviceSale[0].noteOutput}}</p>
+            <!--            <p-->
+            <!--              *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0].note.length>0"-->
+            <!--              style="font-size: 9pt;margin: 2px; color: #c54040;">-->
+            <!--              {{client.device[0].repairs[0].noteOutput}}</p>-->
+            <!--            <hr>-->
+            <!--            <p style="font-size: 9pt; margin: 3px;">Condizioni Generali:</p>-->
+            <!--            <p style="font-size: 9pt;margin: 2px;">-->
+            <!--              RFV Technology non si assume la responsabilità di nessun genere sulle seguenti-->
+            <!--              condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di-->
+            <!--              effettuare-->
+            <!--              i-->
+            <!--              test d'ingresso -Se, o seguito di un salvataggio dati, il cliente dichiara che non sono presenti del dati-->
+            <!--              (RFV-->
+            <!--              Technology si basa sulla dimensione di ogni singola cartella per verificare che tutti i dati presenti sul-->
+            <!--              dispositivo vengano salvati) -Se il dispositivo, pronto per essere consegnato, viene lasciato in negozio-->
+            <!--              per-->
+            <!--              più-->
+            <!--              di 90 giorni a partire dal giorno della chiamata al eliente-->
+            <!--            </p>-->
+            <!--            <p style="font-size: 9pt; margin: 2px;">NB: dopo il termine, Il disponitivo verrà ritirato-->
+            <!--              come spese aziendali per il lavoro non più pagato</p>-->
+            <!--            <hr>-->
+            <!--            <p style="font-size: 9pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto-->
+            <!--              Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei-->
+            <!--              dati personali”</p>-->
           </div>
           <div style="margin: 3px">
             <span style="color: #1ABC9C">{{client?.send_email_active ? ' SI ' : ' NO '}}accetto di ricevere e-mail con notizie o fatture da questo emittente.</span>

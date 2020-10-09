@@ -212,6 +212,7 @@
 #icon4:hover,
 #icon5:hover,
 #icon6:hover {
+
   display: inline-block;
   background: linear-gradient(to top right, hsl(179, 54%, 38%) 40%, hsl(155, 50%, 61%) 100%) !important;
   width: 120px;
@@ -235,7 +236,7 @@
   0 5px 10px rgba(0, 0, 0, .25),
   0 10px 10px rgba(0, 0, 0, .2),
   0 20px 20px rgba(0, 0, 0, .15);
-  transition: text-shadow 0.5s;
+  transition: text-shadow 0.5s ease-in-out;
 }
 
 .button {

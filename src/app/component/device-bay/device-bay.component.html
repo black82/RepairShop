@@ -102,9 +102,9 @@
           <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
           <input (input)="filterItems($event.target.value)"
                  (keyup.enter)="addNewModels(formClient.controls.model.value)"
-                 [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
-           && formClient.controls.model.invalid && formClient.controls.model.errors}"
-                 [ngModel]="client?.device[0]?.model" autocomplete="off"
+                 [ngClass]="{'form-submitted': (formClient?.controls?.model?.dirty || formClient?.controls?.model?.touched)
+           && formClient?.controls?.model?.invalid && formClient?.controls?.model?.errors}"
+                 [ngModel]="client?.deviceBay[0]?.model" autocomplete="off"
                  class="input-1" formControlName="model" id="model"
                  placeholder="Device Model"
                  type="text">
@@ -134,7 +134,7 @@
           <fa-icon [icon]="code" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.code_device.dirty || formClient.controls.code_device.touched)
            && formClient.controls.code_device.invalid && formClient.controls.code_device.errors}"
-                 [ngModel]="client?.device[0]?.code_device"
+                 [ngModel]="client?.deviceBay[0]?.code_device"
                  class="input-2" formControlName="code_device" placeholder="Code Device"
                  type="text">
         </label>
@@ -152,7 +152,7 @@
           <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.imei.dirty || formClient.controls.imei.touched)
            && formClient.controls.imei.invalid && formClient.controls.imei.errors&& formClient.controls.imei.pristine}"
-                 [ngModel]="client?.device[0]?.imei" class="input-2" formControlName="imei"
+                 [ngModel]="client?.deviceBay[0]?.imei" class="input-2" formControlName="imei"
                  placeholder="Imei or Sn of Device" type="text">
         </label>
         <label>
@@ -175,7 +175,7 @@
           <fa-icon [icon]="used" class="icon-input"></fa-icon>
           <select [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.deviceType.dirty || formClient.controls.deviceType.touched)
            && formClient.controls.deviceType.invalid && formClient.controls.deviceType.errors}"
-                  [ngModel]="client?.device[0]?.state_of_use"
+                  [ngModel]="client?.deviceBay[0]?.state_of_use"
                   class="input-1" formControlName="deviceType">
             <option [disabled]="true" [selected]="true" value="">Please Select Device Type</option>
             <option>Smartphone with keys</option>
@@ -191,7 +191,7 @@
           <fa-icon [icon]="password" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.password_device.dirty || formClient.controls.password_device.touched)
            && formClient.controls.password_device.invalid && formClient.controls.password_device.errors&& formClient.controls.password_device.pristine}"
-                 [ngModel]="client?.device[0]?.password_device" class="input-2" formControlName="password_device"
+                 [ngModel]="client?.deviceBay[0]?.password_device" class="input-2" formControlName="password_device"
                  placeholder="Pin Cod of Device" type="text">
         </label>
         <label>
@@ -199,12 +199,12 @@
           <fa-icon [icon]="accessory" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.accessory.dirty || formClient.controls.accessory.touched)
            && formClient.controls.accessory.invalid && formClient.controls.accessory.errors&& formClient.controls.accessory.pristine}"
-                 [ngModel]="client?.device[0]?.accessory" class="input-2" formControlName="accessory"
+                 [ngModel]="client?.deviceBay[0]?.accessory" class="input-2" formControlName="accessory"
                  placeholder="Accessory of Device" type="text">
         </label>
         <label>
           <span class="input-title">Condition Device</span>
-          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <fa-icon [icon]="conditions" class="icon-input"></fa-icon>
           <select [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.condition.dirty || formClient.controls.condition.touched)
            && formClient.controls.condition.invalid && formClient.controls.condition.errors&& formClient.controls.condition.pristine}"
                   class="input-2" formControlName="condition">

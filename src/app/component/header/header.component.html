@@ -1,10 +1,12 @@
 <header id="header-wrapper">
+  <p class="name-company">RFV Technology</p>
   <nav class="container-header" id="header">
     <div class="menu-box" id="menu-box">
+
       <div id="menu">
         <nav>
           <ul>
-            <li><a accesskey="1" routerLink="/" title="Homepage">
+            <li><a accesskey="1" class="home-link" routerLink="/" style="color: #34495E" title="Homepage">
               <fa-icon [icon]="home"></fa-icon>
               Homepage</a></li>
             <li class="current_page_item" id="new-client-menu"><a accesskey="2" class="teaming" title="">
@@ -97,9 +99,9 @@
                         <fa-icon [icon]="redact"></fa-icon>
                         Redact Repair</a>
                       </li>
-                      <li><a routerLink="/all/repair/paginator">
-                        <fa-icon [icon]="usertag"></fa-icon>
-                        Show All Client </a>
+                      <li><a routerLink="/search/email">
+                        <fa-icon [icon]="mail"></fa-icon>
+                        Search by Email</a>
                       </li>
                       <br>
                       <li><a routerLink="date/repair/paginator">
@@ -120,10 +122,11 @@
                         Search by Tel. Number</a>
                       </li>
                       <br>
-                      <li><a routerLink="/search/email">
-                        <fa-icon [icon]="mail"></fa-icon>
-                        Search by Email</a>
+                      <li><a routerLink="/all/repair/paginator">
+                        <fa-icon [icon]="usertag"></fa-icon>
+                        Show All Client </a>
                       </li>
+
                       <li><a routerLink="/search/repair/id">
                         <fa-icon [icon]="idIcon"></fa-icon>
                         Search by Repair Id</a>
@@ -183,14 +186,13 @@
           fill="#000000"
           fill-rule="evenodd" id="path0"
           stroke="none"></path></g></svg></span><a
-          routerLink="/"></a></h1>
-
+          routerLink=""></a></h1>
       </div>
       <div class="sign-in" id="menu-signi">
         <div>
-          <ul class="sign-in-menu">
+          <ul>
             <app-notification></app-notification>
-            <li class="current_page_item">
+            <li class="current_page_item sign-in-menu">
               <a id="sign-in"><i class="icon icon-lock menu-icon"></i> Sign in/up
                 <fa-icon [icon]="dropdown"></fa-icon>
               </a>

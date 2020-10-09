@@ -1,3 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -30,16 +37,29 @@
 .name-company {
   color: white;
   text-align: center;
-  font-family: 'Pacifico', serif;
-  font-size: 2em;
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  font-size: 1.5em;
+  margin-top: -20px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 3px;
+  transition: all 0.4s ease-in-out;
+}
+
+.name-company:hover {
+  font-size: 2.5em;
+  color: #34495E;
+  cursor: pointer;
 
 }
 
 svg path {
   fill: white;
+  transition: all 0.4s ease-in-out;
 }
 
-svg path:hover {
+#logo:hover svg path {
+  font-size: 7em;
   background-size: cover;
   fill: #34495E;
   cursor: pointer;
@@ -80,21 +100,21 @@ svg {
   text-transform: uppercase;
   outline: 0;
   color: #FFF;
+
 }
 
 .current_page_item:hover {
-
   border-bottom: #fefefe 1px solid;
-
 }
 
 #menu .current_page_item a:hover,
 .submenu li a:hover, #sign-in:hover,
 .submenu-output a:hover,
 .submenu-repair a:hover {
+  transition: all 0.4s ease-in-out;
   color: #34495E !important;
-  -webkit-animation: text-focus-in 200ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-  animation: text-focus-in 200ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  /*-webkit-animation: text-focus-in 2ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;*/
+  /*animation: text-focus-in 200ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;*/
 }
 
 @-webkit-keyframes text-focus-in {
@@ -243,6 +263,10 @@ svg {
   border: 1px solid #34495E;
 }
 
+.home-link:hover {
+  color: #fefefe !important;
+}
+
 .submenu li a,
 .submenu-search li a,
 .submenu-admin li a,
@@ -306,6 +330,7 @@ li:hover {
 }
 
 .icon-menu:hover {
+  transition: all 0.4s ease-in-out;
   color: #34495E;
   cursor: pointer;
 }

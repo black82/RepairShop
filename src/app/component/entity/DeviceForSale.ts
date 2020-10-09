@@ -21,13 +21,16 @@ export class DeviceForSale {
   isSaled: boolean;
   bayingPrice: string;
   sellerPrice: string;
+  dateBaying: Date;
+  dateSell: Date;
 
 
   constructor(idDeviceSale: number, model: string, deviceType: string, state_of_use: string,
               imei: string, code_device: string, password_device: string, accessory: string,
               conditionFlag: string, noteInput: string, noteOutput: string, garantyDuration: number,
               inputTest: InputTest, outputTest: OutputTest, repairFileStorage: RepairFileStorage,
-              isSaled: boolean, bayingPrice: string, sellerPrice: string) {
+              isSaled: boolean, bayingPrice: string, sellerPrice: string, dateBaying: Date,
+              dateSell: Date) {
     this.idDeviceSale = idDeviceSale;
     this.model = model;
     this.deviceType = deviceType;
@@ -46,5 +49,7 @@ export class DeviceForSale {
     this.isSaled = isSaled;
     this.bayingPrice = bayingPrice;
     this.sellerPrice = sellerPrice;
+    this.dateBaying = dateBaying;
+    this.dateSell = dateSell;
   }
 }

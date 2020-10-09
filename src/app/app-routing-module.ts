@@ -33,7 +33,7 @@ import {NotFoundComponent} from './component/not-found/not-found.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: '**', component: NotFoundComponent},
+  {path: '404', component: NotFoundComponent},
   {path: 'input/client/device', component: DeviceinputComponent, canActivate: [AutGuardService]},
   {path: 'output/client/device/sell', component: DeviceSellComponent, canActivate: [AutGuardService]},
   {path: 'input/client/device/bay', component: DeviceBayComponent, canActivate: [AutGuardService]},

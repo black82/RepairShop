@@ -1,22 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
-import {faMoneyBill} from '@fortawesome/free-solid-svg-icons/faMoneyBill';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
-import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
 import {faUserLock} from '@fortawesome/free-solid-svg-icons/faUserLock';
 import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
 import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
-import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
-import {faFileSignature, faFlushed, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faFileSignature, faFlushed, faPaperclip, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
 import {faMoneyCheck} from '@fortawesome/free-solid-svg-icons/faMoneyCheck';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
-import {faHatWizard} from '@fortawesome/free-solid-svg-icons/faHatWizard';
 import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
@@ -60,6 +55,11 @@ import {map, startWith} from 'rxjs/operators';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {InvoiceType} from '../entity/InvoiceType';
 import {DeviceForSale} from '../entity/DeviceForSale';
+import {faHouseDamage} from '@fortawesome/free-solid-svg-icons/faHouseDamage';
+import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
+import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
+import {faDelicious} from '@fortawesome/free-brands-svg-icons/faDelicious';
+import {faUserGraduate} from '@fortawesome/free-solid-svg-icons/faUserGraduate';
 
 @Component({
   selector: 'app-device-bay',
@@ -67,24 +67,25 @@ import {DeviceForSale} from '../entity/DeviceForSale';
   styleUrls: ['./device-bay.component.css']
 })
 export class DeviceBayComponent implements OnInit, OnDestroy {
-  used = faHeart;
+  used = faDesktop;
   mobile = faMobile;
   email = faEnvelope;
-  money = faMoneyBill;
+  money = faHandHoldingUsd;
   cogs = faCogs;
-  address = faAddressCard;
+  address = faHouseDamage;
   date = faCalendarPlus;
+  conditions = faDelicious;
   code = faUserLock;
   usertag = faUserSecret;
   userPerson = faUserCheck;
-  userFamely = faUserCircle;
+  userFamely = faUserGraduate;
   ivaCompany = faBars;
   sidCompany = faCode;
   phone = faPhoneSquare;
   barcode = faBarcode;
   money2 = faMoneyCheck;
   password = faUnlockAlt;
-  accessory = faHatWizard;
+  accessory = faPaperclip;
   test = faClipboardList;
   note = faCommentAlt;
   discar = faTrashAlt;
@@ -165,7 +166,6 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
       date_to_enter: new FormControl(null, [Validators.required]),
-      defect: new FormControl(null, [Validators.required]),
       deviceClass: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),
       sensors_input: new FormControl(false),
@@ -194,6 +194,7 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('asdasdasdasdas');
     this.subscription = this.httpService.getListModelsDevice().subscribe(list => {
       this.itemsModels = list;
     });
@@ -229,16 +230,16 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
       formData.software, formData.faceId_input);
 
-    this.device = new DeviceForSale(null, formData.model, formData.deviceType, formData.condition,
+    this.device = new DeviceForSale(null, formData?.model, formData.deviceType, formData.condition,
       formData.imei, formData.code_device, formData.password, formData.accessory, formData.deviceClass,
       formData.note, null, null, this.inputTest, null, this.repairFileStorage
-      , true, formData.price, null);
+      , true, formData.price, null, formData.date_to_enter, null);
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,
       null, formData.email_send, formData.client_type,
-      formData.ivaClient, formData.sdiClient, null, null,
-      new Array<DeviceForSale>(this.device), null);
+      formData.ivaClient, formData.sdiClient, null, null, null,
+      new Array<DeviceForSale>(this.device));
     return this.client;
   }
 
@@ -326,7 +327,7 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       this.client = this.client_after_saved;
     }
     this.animation_wait.$anime_show.emit(true);
-    this.httpService.printClient(this.client).subscribe(client => {
+    this.httpService.bayingDeviceToClient(this.client).subscribe(client => {
 
       this.client_after_saved = client;
       this.print.print_open.emit(new PrintEntity(client, 3,

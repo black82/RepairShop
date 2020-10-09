@@ -35,6 +35,20 @@ export class HttpClien {
       );
   }
 
+  bayingDeviceToClient(client: Client): Observable<Client> {
+    return this.http.post<Client>(this.apiUrl + 'api/device/baying', client)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  saleDeviceToClient(client: Client): Observable<Client> {
+    return this.http.post<Client>(this.apiUrl + 'api/device/sale', client)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
   saved_print_page(invoiceToolsDto: InvoiceToolsDto) {
     return this.http.post(this.apiUrl + 'api/saved/print/page', invoiceToolsDto)
       .pipe(

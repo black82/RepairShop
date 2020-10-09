@@ -1,22 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
-import {faMoneyBill} from '@fortawesome/free-solid-svg-icons/faMoneyBill';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
-import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
 import {faUserLock} from '@fortawesome/free-solid-svg-icons/faUserLock';
 import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
 import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
-import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
-import {faFileSignature, faFlushed, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faFileSignature, faFlushed, faPaperclip, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
-import {faMoneyCheck} from '@fortawesome/free-solid-svg-icons/faMoneyCheck';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
-import {faHatWizard} from '@fortawesome/free-solid-svg-icons/faHatWizard';
 import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
@@ -60,6 +54,12 @@ import {map, startWith} from 'rxjs/operators';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {InvoiceType} from '../entity/InvoiceType';
 import {DeviceForSale} from '../entity/DeviceForSale';
+import {faHouseDamage} from '@fortawesome/free-solid-svg-icons/faHouseDamage';
+import {faDelicious} from '@fortawesome/free-brands-svg-icons/faDelicious';
+import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
+import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
+import {faUserGraduate} from '@fortawesome/free-solid-svg-icons/faUserGraduate';
+import {faRadiationAlt} from '@fortawesome/free-solid-svg-icons/faRadiationAlt';
 
 @Component({
   selector: 'app-device-sell',
@@ -68,24 +68,25 @@ import {DeviceForSale} from '../entity/DeviceForSale';
 })
 export class DeviceSellComponent implements OnInit, OnDestroy {
 
-  used = faHeart;
+  used = faDesktop;
   mobile = faMobile;
   email = faEnvelope;
-  money = faMoneyBill;
+  money = faHandHoldingUsd;
   cogs = faCogs;
-  address = faAddressCard;
+  address = faHouseDamage;
   date = faCalendarPlus;
+  conditions = faDelicious;
   code = faUserLock;
   usertag = faUserSecret;
   userPerson = faUserCheck;
-  userFamely = faUserCircle;
+  userFamely = faUserGraduate;
   ivaCompany = faBars;
   sidCompany = faCode;
   phone = faPhoneSquare;
   barcode = faBarcode;
-  money2 = faMoneyCheck;
+  money2 = faRadiationAlt;
   password = faUnlockAlt;
-  accessory = faHatWizard;
+  accessory = faPaperclip;
   test = faClipboardList;
   note = faCommentAlt;
   discar = faTrashAlt;
@@ -233,7 +234,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     this.device = new DeviceForSale(null, formData.model, formData.deviceType, formData.condition,
       formData.imei, formData.code_device, formData.password, formData.accessory, formData.deviceClass,
       formData.note, null, null, this.inputTest, null, this.repairFileStorage
-      , true, formData.price, null);
+      , true, formData.price, null, this.device.dateBaying, formData.date_to_enter);
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,

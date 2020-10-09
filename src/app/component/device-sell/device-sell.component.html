@@ -191,7 +191,7 @@
         </label>
         <label>
           <span class="input-title">Condition Device</span>
-          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <fa-icon [icon]="conditions" class="icon-input"></fa-icon>
           <select [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.condition.dirty || formClient.controls.condition.touched)
            && formClient.controls.condition.invalid && formClient.controls.condition.errors&& formClient.controls.condition.pristine}"
                   class="input-2" formControlName="condition">
