@@ -84,11 +84,11 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       });
     } else if (this.print_entity.type_client_print === 3) {
       this.http.bayingDeviceToClient(this.client).subscribe(response => {
-        this.id = response?.deviceBay[0]?.idDeviceSale?.toString();
+        this.id = response.toString();
       });
     } else if (this.print_entity.type_client_print === 4) {
       this.http.saleDeviceToClient(this.client).subscribe(response => {
-        this.id = response?.deviceSale[0]?.idDeviceSale?.toString();
+        this.id = response?.toString();
       });
     }
     const interval = setInterval(() => {

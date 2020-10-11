@@ -35,15 +35,15 @@ export class HttpClien {
       );
   }
 
-  bayingDeviceToClient(client: Client): Observable<Client> {
-    return this.http.post<Client>(this.apiUrl + 'api/device/baying', client)
+  bayingDeviceToClient(client: Client): Observable<number> {
+    return this.http.post<number>(this.apiUrl + 'api/device/baying', client)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
-  saleDeviceToClient(client: Client): Observable<Client> {
-    return this.http.post<Client>(this.apiUrl + 'api/device/sale', client)
+  saleDeviceToClient(client: Client): Observable<number> {
+    return this.http.post<number>(this.apiUrl + 'api/device/sale', client)
       .pipe(
         catchError(this.errorHandler)
       );
