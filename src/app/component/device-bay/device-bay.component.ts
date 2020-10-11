@@ -327,10 +327,10 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       this.client = this.client_after_saved;
     }
     this.animation_wait.$anime_show.emit(true);
-    this.httpService.bayingDeviceToClient(this.client).subscribe(client => {
+    this.httpService.bayingDeviceToClient(this.client).subscribe(id => {
 
-      this.client_after_saved = client;
-      this.print.print_open.emit(new PrintEntity(client, 3,
+      this.client.deviceBay[0].idDeviceSale = id;
+      this.print.print_open.emit(new PrintEntity(this.client, 3,
         null, null, InvoiceType.PrintPage, this.titleForm));
     }, error => {
       this.animation_wait.$anime_show.emit(false);
