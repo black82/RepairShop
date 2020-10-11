@@ -20,7 +20,7 @@
                     <li>
                       <a routerLink="/input/client/device/bay">
                         <fa-icon [icon]="devices"></fa-icon>
-                        Buy Devices</a>
+                        Buying Devices</a>
                     </li>
                     <br>
                     <li><a routerLink="/output/client/device/sell">
@@ -74,9 +74,9 @@
             </a>
               <div class="submenu-output">
                 <ul class="submenu-output1 submenu-repair">
-                  <li><a routerLink="/output/client/device">
-                    <fa-icon [icon]="outputRepair"></fa-icon>
-                    Closing the Repair</a></li>
+                  <li><a routerLink="/shop/dashboard">
+                    <fa-icon [icon]="tools"></fa-icon>
+                    Shop Dashboard</a></li>
                   <li><a routerLink="/output/repair/notification">
                     <fa-icon [icon]="notificationSend"></fa-icon>
                     Send notification end of repair</a></li>
@@ -86,7 +86,7 @@
                 </ul>
               </div>
             </li>
-            <li class="current_page_item" id="repair-menu"><a accesskey="5">
+            <li class="current_page_item" id="repair-menu"><a accesskey="5" routerLink="/repair/dashboard">
               <fa-icon [icon]="tools" class="menu-icon"></fa-icon>
               Tools Repair
               <fa-icon [icon]="dropdown"></fa-icon>
@@ -131,6 +131,11 @@
                         <fa-icon [icon]="idIcon"></fa-icon>
                         Search by Repair Id</a>
                       </li>
+                      <br>
+                      <li><a routerLink="/repair/dashboard">
+                        <fa-icon [icon]="tools"></fa-icon>
+                        Repair Tools Dashboard</a>
+                      </li>
                     </div>
                     <div class="icon-menu">
                       <fa-icon [icon]="repair"></fa-icon>
@@ -141,7 +146,7 @@
               </div>
             </li>
             <li *ngIf="admin" class="current_page_item" id="admin-menu">
-              <a accesskey="6" routerLink="/admin/dashboard" title="Admin Ap">
+              <a accesskey="6" title="Admin Ap">
                 <fa-icon [icon]="adminTools" class="menu-icon"></fa-icon>
                 Admin App
                 <fa-icon [icon]="dropdown"></fa-icon>
@@ -149,29 +154,37 @@
               <div class="current_page_item">
                 <div class="admin-menu">
                   <ul class="submenu-admin">
-                    <li><a routerLink="/admin/logs/server">
-                      <fa-icon [icon]="logs"></fa-icon>
-                      Log on to the Server</a></li>
-                    <br>
-                    <li><a routerLink="/admin/email/client/send">
-                      <fa-icon [icon]="mail"></fa-icon>
-                      Send an Email</a></li>
-                    <br>
-                    <li><a routerLink="/admin/device/preparation">
-                      <fa-icon [icon]="device"></fa-icon>
-                      Device Ready Tomorrow</a></li>
-                    <br>
-                    <li><a routerLink="/admin/repair/extend">
-                      <fa-icon [icon]="calendar"></fa-icon>
-                      Extension Repair</a></li>
-                    <br>
-                    <li><a routerLink="/admin/user">
-                      <fa-icon [icon]="users"></fa-icon>
-                      User Management</a></li>
-                    <br>
-                    <li><a routerLink="/admin/statistic/repair">
-                      <fa-icon [icon]="charts"></fa-icon>
-                      Repair Statics</a></li>
+                    <div class="rout-link">
+                      <li><a routerLink="/admin/dashboard">
+                        <fa-icon [icon]="admins"></fa-icon>
+                        Admin Dashboard</a></li>
+                      <li><a routerLink="/admin/logs/server">
+                        <fa-icon [icon]="logs"></fa-icon>
+                        Log on to the Server</a></li>
+                      <br>
+                      <li><a routerLink="/admin/email/client/send">
+                        <fa-icon [icon]="mail"></fa-icon>
+                        Send an Email</a></li>
+
+                      <li><a routerLink="/admin/device/preparation">
+                        <fa-icon [icon]="device"></fa-icon>
+                        Device Ready Tomorrow</a></li>
+                      <br>
+                      <li><a routerLink="/admin/repair/extend">
+                        <fa-icon [icon]="calendar"></fa-icon>
+                        Extension Repair</a></li>
+
+                      <li><a routerLink="/admin/user">
+                        <fa-icon [icon]="users"></fa-icon>
+                        User Management</a></li>
+                      <br>
+                      <li><a routerLink="/admin/statistic/repair">
+                        <fa-icon [icon]="charts"></fa-icon>
+                        Repair Statics</a></li>
+                    </div>
+                    <div class="icon-menu">
+                      <fa-icon [icon]="adminIcon"></fa-icon>
+                    </div>
                   </ul>
                 </div>
               </div>

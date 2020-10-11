@@ -87,7 +87,7 @@ form textarea {
 
 label {
 
-  background: #1ABC9C;
+  background: linear-gradient(to right, hsl(179, 34%, 48%) 0%, hsl(155, 50%, 61%) 100%) !important;
   border-radius: 20px;
   padding: 15px;
 }

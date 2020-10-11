@@ -39,8 +39,9 @@ export class AddNewDeviceComponent implements OnInit, OnDestroy {
     if ($event as Client) {
       this.client = $event;
       if (this.client) {
-        this.hide_form.form_open.emit(true);
         this.inputClientDevice();
+        this.hide_form.form_open.emit(true);
+
       }
     }
   }

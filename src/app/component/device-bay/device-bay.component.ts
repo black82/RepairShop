@@ -230,10 +230,10 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
       formData.software, formData.faceId_input);
 
-    this.device = new DeviceForSale(null, formData?.model, formData.deviceType, formData.condition,
+    this.device = new DeviceForSale(null, formData.model, formData.deviceType, formData.condition,
       formData.imei, formData.code_device, formData.password, formData.accessory, formData.deviceClass,
       formData.note, null, null, this.inputTest, null, this.repairFileStorage
-      , true, formData.price, null, formData.date_to_enter, null);
+      , false, formData.price, null, formData.date_to_enter, null);
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,

@@ -29,6 +29,8 @@ import {DragOnDropRepairComponent} from './component/drag-on-drop-repair/drag-on
 import {DeviceSellComponent} from './component/device-sell/device-sell.component';
 import {DeviceBayComponent} from './component/device-bay/device-bay.component';
 import {NotFoundComponent} from './component/not-found/not-found.component';
+import {PageableDeviceSaleComponent} from './component/pageable-device-sale/pageable-device-sale.component';
+import {RepairDashboardComponent} from './component/repair-dashboard/repair-dashboard.component';
 
 
 export const routes: Routes = [
@@ -60,6 +62,9 @@ export const routes: Routes = [
   {path: 'date/repair/paginator', component: ClientPaginatorDateComponent, canActivate: [AutGuardService]},
   {path: 'date/message/paginator', component: MessageAdminComponent, canActivate: [AutGuardService]},
   {path: 'upload/repair/images', component: DragOnDropRepairComponent, canActivate: [AutGuardService]},
+  {path: 'device/sally/all/page', component: PageableDeviceSaleComponent, canActivate: [AutGuardService]},
+  {path: 'repair/dashboard', component: RepairDashboardComponent, canActivate: [AutGuardService]},
+  {path: 'shop/dashboard', component: RepairDashboardComponent, canActivate: [AutGuardService]},
 ];
 
 

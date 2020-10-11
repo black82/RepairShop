@@ -71,6 +71,10 @@ import {RouterModule} from '@angular/router';
 import {DeviceSellComponent} from './component/device-sell/device-sell.component';
 import {DeviceBayComponent} from './component/device-bay/device-bay.component';
 import {NotFoundComponent} from './component/not-found/not-found.component';
+import {PageableDeviceSaleComponent} from './component/pageable-device-sale/pageable-device-sale.component';
+import {RepairDashboardComponent} from './component/repair-dashboard/repair-dashboard.component';
+import {ShopDashboardComponent} from './component/shop-dashboard/shop-dashboard.component';
+import {SinglDeviceShouwComponent} from './component/singl-device-shouw/singl-device-shouw.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +126,11 @@ import {NotFoundComponent} from './component/not-found/not-found.component';
     DragOnDropRepairComponent,
     DeviceSellComponent,
     DeviceBayComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PageableDeviceSaleComponent,
+    RepairDashboardComponent,
+    ShopDashboardComponent,
+    SinglDeviceShouwComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

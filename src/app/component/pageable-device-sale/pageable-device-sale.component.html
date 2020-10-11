@@ -1,0 +1,43 @@
+<div *ngIf="paginatorViu" class="container-paginator">
+  <mat-paginator #paginator
+                 (page)="pageEvent = getServerData($event)"
+                 [length]="length"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="[5, 10,15, 25,50, 100]"
+                 [pageSize]="pageSize"
+  >
+
+  </mat-paginator>
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Id Device</th>
+      <th scope="col">Device Model</th>
+      <th scope="col">Device Type</th>
+      <th scope="col">Device Condition</th>
+      <th scope="col">Device State</th>
+      <th scope="col">Device Imei</th>
+      <th scope="col">Device Sell</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let element of devicesForSale; let i = index">
+      <td class="element-td">{{element.idDeviceSale}}</td>
+      <td class="element-td">{{element.model}}</td>
+      <td class="element-td">{{element?.deviceType}}</td>
+      <td class="element-td">{{element?.conditionFlag}}</td>
+      <td class="element-td">{{element?.state_of_use ? 'New' : 'Used'}}</td>
+      <td class="element-td">
+        {{element.imei}}
+      </td>
+
+      <td *ngIf="buttonEditable"><a (click)="sally(element)" class="button button-small button-activate"><span> <fa-icon
+        [icon]="sally_button" class="button-icon"></fa-icon>Sell Device</span></a>
+      </td>
+      <td *ngIf="buttonWiu"><a (click)="sally(element)" class="button button-small button-activate"><span> <fa-icon
+        [icon]="deviceIcon" class="button-icon"></fa-icon>Show Device</span></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

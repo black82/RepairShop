@@ -332,6 +332,15 @@ export class HttpClien {
     );
   }
 
+  getDeviceSalePageable(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/device/all/sally/pageable',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getClientPageableByInterval(page: number, size: number, dateInit: Date, dateComplete: Date): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/date/client/pageable-',
       {

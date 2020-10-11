@@ -141,6 +141,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   prompt = 'Click <enter> to add "';
   itemsModels: string[] = [];
   companyShow = false;
+  showContainerRedact = false;
   private subscriber: Subscription;
   private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
@@ -196,6 +197,11 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.service_input.$deviceForSaleClient.subscribe(device => {
+      this.device = device;
+      this.client.deviceBay.push(device);
+      this.showContainerRedact = true;
+    });
     this.subscription = this.httpService.getListModelsDevice().subscribe(list => {
       this.itemsModels = list;
     });

@@ -169,7 +169,7 @@ form ::-moz-focus-inner {
   border-radius: 4px;
   outline: none;
   transition-duration: 0.3s;
-  background-color: #1ABC9C;
+  background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%) !important;
   cursor: pointer;
 }
 
