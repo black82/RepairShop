@@ -181,7 +181,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.animation_wait.$anime_show.emit(true);
       this.httpService.saved_print_page(this.invoice).subscribe(() => {
         this.animation_wait.$anime_show.emit(false);
-        this.printService.$success_print_id.emit(this.client);
+        this.printService.$success_print_id.emit(this.repair_output.repair_Id);
       }, error => {
         this.animation_wait.$anime_show.emit(false);
         console.error(error);

@@ -135,7 +135,11 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   checkTypeSender(invoiceToPrintPage) {
     switch (this.print_entity.typeSender) {
       case InvoiceType.emailInvoice: {
-        this.sendEmailToBackend(invoiceToPrintPage);
+        if (this.print_entity.type_client_print === 1 || this.print_entity.type_client_print === 2) {
+          this.sendEmailToBackend(invoiceToPrintPage);
+        } else {
+          this.sendEmailToBackendBayDevice(invoiceToPrintPage);
+        }
         break;
       }
       case InvoiceType.WhatsApp: {
@@ -432,6 +436,20 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     invoiceToPrintPage.repairID = +this.id;
     invoiceToPrintPage.typeFile = this.checkTypePrint();
     return invoiceToPrintPage;
+  }
+
+  private sendEmailToBackendBayDevice(invoiceToPrintPage: InvoiceToolsDto) {
+    this.animation_wait.$anime_show.emit(true);
+    this.http.sendEmailClientDeviceSale(invoiceToPrintPage).subscribe(() => {
+      this.animation_wait.$anime_show.emit(false);
+      this.emailSender.anime_question.emit(false);
+      this.emailSender.email_sent_send_success.emit(this.client);
+    }, error => {
+      this.animation_wait.$anime_show.emit(false);
+      this.emailSender.anime_question.emit(false);
+      this.alert_service.error(null, error.error.message
+        , false, null, '', error);
+    });
   }
 }
 

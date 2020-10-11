@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertServiceService} from '../service/alert-service.service';
 import {PrintService} from '../service/print.service';
-import {Client} from '../entity/ClientWeb';
 import {Subscription} from 'rxjs';
 import {faCheckSquare} from '@fortawesome/free-solid-svg-icons';
 
@@ -12,7 +11,7 @@ import {faCheckSquare} from '@fortawesome/free-solid-svg-icons';
 })
 export class NumberRepairComponent implements OnInit, OnDestroy {
 
-  client: Client;
+  id: number;
   showPopup = false;
   private subscription: Subscription;
   check = faCheckSquare;
@@ -22,26 +21,19 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.print.$success_print_id.subscribe(client => {
-      this.client = client;
+    this.subscription = this.print.$success_print_id.subscribe(id => {
+      this.id = id;
       this.showPopup = true;
     });
   }
 
   close() {
     this.showPopup = false;
-    this.alert_service.success(null, 'The client ' + this.getNameByTypeClient(this.client) +
+    this.alert_service.success(null, 'The client ' +
       'received a device and create the repair procedure !!! Repair Id :'
-      + this.client.device[0].repairs[0].repair_Id.toString().toUpperCase(), true, null, '');
+      + this.id.toString().toUpperCase(), true, null, '');
   }
 
-  getNameByTypeClient(client: Client): string {
-    if (client.typeClient) {
-      return client.companyName.toUpperCase();
-    } else {
-      return client.name.toUpperCase() + ' ' + client.family.toUpperCase();
-    }
-  }
 
   ngOnDestroy(): void {
     if (this.subscription) {

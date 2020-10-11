@@ -148,6 +148,13 @@ export class HttpClien {
       );
   }
 
+  sendEmailClientDeviceSale(invoice: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/sample/email/device/shop', invoice)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
   sendWhatsAppClient(invoice: InvoiceToolsDto): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'message/api/whatsapp', invoice)
       .pipe(

@@ -304,7 +304,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
       this.animation_wait.$anime_show.emit(true);
       this.httpService.saved_print_page(this.invoice).subscribe(() => {
         this.animation_wait.$anime_show.emit(false);
-        this.print.$success_print_id.emit(this.client_after_saved);
+        this.print.$success_print_id.emit(this.client_after_saved.deviceSale[0].idDeviceSale);
         return;
       }, error => {
         this.animation_wait.$anime_show.emit(false);
