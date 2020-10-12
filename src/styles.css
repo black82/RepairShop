@@ -1405,15 +1405,16 @@ aside a {
 
 .title-form {
   color: #1ABC9C;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
   font-size: 20px;
   text-transform: uppercase;
   line-height: 58px;
   text-align: center;
   font-weight: bold;
+  letter-spacing: 3px;
   text-shadow: 0 1px 1px #34495E;
   cursor: pointer;
-  }
+}
 
 
 #alert-msg {

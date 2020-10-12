@@ -165,7 +165,7 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
-      date_to_enter: new FormControl(null, [Validators.required]),
+      date_to_sale: new FormControl(null, [Validators.required]),
       deviceClass: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),
       sensors_input: new FormControl(false),
@@ -231,7 +231,7 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       formData.software, formData.faceId_input);
 
     this.device = new DeviceForSale(null, formData.model, formData.deviceType, formData.condition,
-      formData.imei, formData.code_device, formData.password, formData.accessory, formData.deviceClass,
+      formData.imei, formData.code_device, formData.password_device, formData.accessory, formData.deviceClass,
       formData.note, null, null, this.inputTest, null, this.repairFileStorage
       , false, formData.price, null, formData.date_to_enter, null);
 

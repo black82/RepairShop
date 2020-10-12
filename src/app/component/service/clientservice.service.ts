@@ -340,7 +340,7 @@ export class HttpClien {
   }
 
   getDeviceSalePageable(page: number, size: number): Observable<any> {
-    return this.http.get<any>(this.apiUrl + 'api/device/all/sally/pageable',
+    return this.http.get<any>(this.apiUrl + 'api/device/all/shop/pageable',
       {
         params: new HttpParams().set('page', String(page)).set('size', String(size))
       }).pipe(

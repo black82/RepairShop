@@ -49,7 +49,16 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.print_entity = print;
       this.title = print.titleForm;
       this.client = print.client_print;
-      this.id = this.id_repair(print.client_print);
+      if (print.type_client_print === 1 || this.print_entity.type_client_print === 2) {
+        this.id = this.id_repair(print.client_print);
+      } else {
+        if (print.type_client_print === 3) {
+          this.id = print.client_print.deviceBay[0].idDeviceSale;
+        }
+        if (print.type_client_print === 4) {
+          this.id = print.client_print.deviceSale[0].idDeviceSale;
+        }
+      }
       this.type_print = print.type_client_print;
       this.check_type_print(print);
       this.http.getNickNameCurrentStaffUser().subscribe(name => {

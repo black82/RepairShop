@@ -66,7 +66,7 @@
           {{element.address}}
         </td>
         <td class="element-td">
-          {{setNewDateFormat(element.device[0].repairs[0].date_to_enter)| date: 'yyyy/MM/dd'}}
+          {{setNewDateFormat(element.device[0].repairs[0].date_to_sale)| date: 'yyyy/MM/dd'}}
         </td>
         <td><a (click)="shows(element)" class="button button-small button-activate"><span> <fa-icon
           [icon]="shows_button" class="button-icon"></fa-icon>Show Client</span></a>

@@ -38,7 +38,6 @@ import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons/faArrowAl
 import {Client} from '../entity/ClientWeb';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Repair} from '../entity/Repair';
-import {InputTest} from '../entity/InputTest';
 import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Observable, Subscription} from 'rxjs';
@@ -60,6 +59,7 @@ import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingU
 import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
 import {faUserGraduate} from '@fortawesome/free-solid-svg-icons/faUserGraduate';
 import {faRadiationAlt} from '@fortawesome/free-solid-svg-icons/faRadiationAlt';
+import {OutputTest} from '../entity/OutputTest';
 
 @Component({
   selector: 'app-device-sell',
@@ -120,7 +120,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   formClient: FormGroup;
   device: DeviceForSale;
   repair: Repair;
-  inputTest: InputTest;
+  outputTest: OutputTest;
   formSubmitted: boolean;
   repairFileStorage: RepairFileStorage = new RepairFileStorage();
   invoice: InvoiceToolsDto;
@@ -154,6 +154,46 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
               private sig_pad_service: SigPadService,
               private animation_wait: AnimeServiceService,
               private service_input: DeviceInputService) {
+
+  }
+
+  ngOnInit() {
+    this.service_input.$deviceForSaleClient.subscribe(device => {
+      this.device = device;
+      this.client = new Client(null, null, null, null, null,
+        null, null, null, null, null, null,
+        null, null, null, null, device, null);
+      this.showContainerRedact = true;
+      setTimeout(() => {
+        this.animation_call();
+      }, 200);
+    });
+    this.buildForm();
+    this.subscription = this.httpService.getListModelsDevice().subscribe(list => {
+      this.itemsModels = list;
+    });
+    this.filteredItems1 = this.formClient.controls.model.valueChanges.pipe(
+      startWith(''),
+      map(item => item ? this.filterItems(item) : this.itemsModels.slice())
+    );
+    this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
+      this.client = clientPush;
+    });
+
+    this.invoice_event = this.print.invoice_make.subscribe(invoice => {
+      this.create_invoice(invoice);
+    });
+    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
+      if (value) {
+        this.submitForm();
+      } else {
+        this.client_after_saved = null;
+      }
+    });
+
+  }
+
+  buildForm(): void {
     this.formClient = this.fb.group({
       family: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
@@ -161,15 +201,14 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
       telephone_number: new FormControl(null),
       telephone_number_second: new FormControl(null),
       address: new FormControl(null, [Validators.required]),
-      model: new FormControl(null, [Validators.required]),
-      deviceType: new FormControl(null, [Validators.required]),
+      model: new FormControl(null),
+      deviceWarranty: new FormControl(null, [Validators.required]),
       imei: new FormControl(null),
-      code_device: new FormControl(null, [Validators.required]),
-      password_device: new FormControl(null, [Validators.required]),
+      code_device: new FormControl(null),
+      password_device: new FormControl(null),
       accessory: new FormControl(null, [Validators.required]),
-      date_to_enter: new FormControl(null, [Validators.required]),
-      defect: new FormControl(null, [Validators.required]),
-      deviceClass: new FormControl(null, [Validators.required]),
+      date_to_sale: new FormControl(null, [Validators.required]),
+      deviceType: new FormControl(null),
       price: new FormControl(null, [Validators.required]),
       sensors_input: new FormControl(false),
       display_input: new FormControl(false),
@@ -191,38 +230,9 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
       client_type: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
-      condition: new FormControl('', [Validators.required])
+      condition: new FormControl(null, [Validators.required])
     });
 
-  }
-
-  ngOnInit() {
-    this.service_input.$deviceForSaleClient.subscribe(device => {
-      this.device = device;
-      this.client.deviceBay.push(device);
-      this.showContainerRedact = true;
-    });
-    this.subscription = this.httpService.getListModelsDevice().subscribe(list => {
-      this.itemsModels = list;
-    });
-    this.filteredItems1 = this.formClient.controls.model.valueChanges.pipe(
-      startWith(''),
-      map(item => item ? this.filterItems(item) : this.itemsModels.slice())
-    );
-    this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
-      this.client = clientPush;
-    });
-    this.animation_call();
-    this.invoice_event = this.print.invoice_make.subscribe(invoice => {
-      this.create_invoice(invoice);
-    });
-    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
-      if (value) {
-        this.submitForm();
-      } else {
-        this.client_after_saved = null;
-      }
-    });
   }
 
   createClient() {
@@ -230,17 +240,17 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
 
-    this.inputTest = new InputTest(null, formData.sensors_input, formData.display_input,
+    this.outputTest = new OutputTest(null, formData.sensors_input, formData.display_input,
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input, formData.camera_input_front,
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
       formData.software, formData.faceId_input);
 
-    this.device = new DeviceForSale(null, formData.model, formData.deviceType, formData.condition,
-      formData.imei, formData.code_device, formData.password, formData.accessory, formData.deviceClass,
-      formData.note, null, null, this.inputTest, null, this.repairFileStorage
-      , true, formData.price, null, this.device.dateBaying, formData.date_to_enter);
+    this.device = new DeviceForSale(this.device.idDeviceSale, formData.model, this.device.deviceType, formData.condition,
+      formData.imei, formData.code_device, formData.password_device, formData.accessory, formData.deviceClass,
+      this.device.noteInput, formData.note, formData.deviceWarranty, this.device.inputTest, this.outputTest, this.repairFileStorage
+      , true, this.device.bayingPrice, formData.price, this.device.dateBaying, formData.date_to_sale);
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,
@@ -337,7 +347,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     this.httpService.printClient(this.client).subscribe(client => {
 
       this.client_after_saved = client;
-      this.print.print_open.emit(new PrintEntity(client, 3,
+      this.print.print_open.emit(new PrintEntity(client, 4,
         null, null, InvoiceType.PrintPage, this.titleForm));
     }, error => {
       this.animation_wait.$anime_show.emit(false);
@@ -353,10 +363,11 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   }
 
   animation_call() {
+    console.log('animation_call');
     this.animationButtonForm();
-    this.animationCheckBox();
     this.animationTitle();
     this.animationInput();
+    this.animationCheckBox();
   }
 
   animationButtonForm() {
@@ -462,7 +473,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   submitFormAndSendEmail() {
     this.subscribe_success_response();
     this.emailSender.email_send(new PrintEntity(this.createClient(),
-      3, null,
+      4, null,
       null, this.typeSender, this.titleForm));
 
   }

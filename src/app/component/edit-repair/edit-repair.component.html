@@ -141,9 +141,9 @@
               <span class="input-title">Date to enter</span>
               <fa-icon [icon]="date" class="icon-input"></fa-icon>
               <input (ngModelChange)="client.device[0]?.repairs[0].date_to_enter = $event"
-                     [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_enter.dirty || formClient.controls.date_to_enter.touched)
-           && formClient.controls.date_to_enter.invalid && formClient.controls.date_to_enter.errors&& formClient.controls.date_to_enter.pristine}"
-                     [ngModel]="client.device[0]?.repairs[0].date_to_enter| date:'yyyy-MM-dd'"
+                     [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_sale.dirty || formClient.controls.date_to_sale.touched)
+           && formClient.controls.date_to_sale.invalid && formClient.controls.date_to_sale.errors&& formClient.controls.date_to_sale.pristine}"
+                     [ngModel]="client.device[0]?.repairs[0].date_to_sale| date:'yyyy-MM-dd'"
                      class="input-2"
                      formControlName="date_to_enter"
                      placeholder="Date to Enter" type="date">

@@ -164,7 +164,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
-      date_to_enter: new FormControl(null, [Validators.required]),
+      date_to_sale: new FormControl(null, [Validators.required]),
       defect: new FormControl(null, [Validators.required]),
       deposit: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),

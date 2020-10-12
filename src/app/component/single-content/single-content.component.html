@@ -74,7 +74,7 @@
           [style]="item.visible ?{'color': 'lightcoral'} : {'color': '#1ABC9C'}"
           class="title-toggle">
           <fa-icon [icon]="date"></fa-icon>
-          {{item?.repair_elemnt.date_to_enter | date:'mediumDate'}}
+          {{item?.repair_elemnt.date_to_sale | date:'mediumDate'}}
           <span *ngIf="!item.repair_elemnt.nowInRepair">(CLOSET  REPAIR)</span><span
           *ngIf="item.repair_elemnt.nowInRepair">(OPEN REPAIR)</span> </span></div>
 
@@ -89,7 +89,7 @@
                 <fa-icon class="icon-normal-single"
                          [icon]="date"></fa-icon>
                 Date to enter:<span
-                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.date_to_enter | date:'mediumDate'}}</span>
+                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.date_to_sale | date:'mediumDate'}}</span>
               </ol>
               <ol class="input-title">
                 <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>

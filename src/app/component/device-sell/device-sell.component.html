@@ -130,9 +130,9 @@
           <label>
             <span class="input-title">Date of Sale</span>
             <fa-icon [icon]="date" class="icon-input"></fa-icon>
-            <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_enter.dirty || formClient.controls.date_to_enter.touched)
-           && formClient.controls.date_to_enter.invalid && formClient.controls.date_to_enter.errors&& formClient.controls.date_to_enter.pristine}"
-                   class="input-2" formControlName="date_to_enter"
+            <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_sale.dirty || formClient.controls.date_to_sale.touched)
+           && formClient.controls.date_to_sale.invalid && formClient.controls.date_to_sale.errors&& formClient.controls.date_to_sale.pristine}"
+                   class="input-2" formControlName="date_to_sale"
                    placeholder="Date of Sale" type="date">
           </label>
 
@@ -147,9 +147,9 @@
           <label>
             <span class="input-title">Device Warranty</span>
             <fa-icon [icon]="money2" class="icon-input"></fa-icon>
-            <select [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.deviceClass.dirty || formClient.controls.deviceClass.touched)
-           && formClient.controls.deviceClass.invalid && formClient.controls.deviceClass.errors&& formClient.controls.deviceClass.pristine}"
-                    class="input-2" formControlName="deviceClass">
+            <select [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.deviceWarranty.dirty || formClient.controls.deviceWarranty.touched)
+           && formClient.controls.deviceWarranty.invalid && formClient.controls.deviceWarranty.errors&& formClient.controls.deviceWarranty.pristine}"
+                    class="input-2" formControlName="deviceWarranty">
               <option [disabled]="true" [selected]="true" value="">Please Select Device Warranty In Months</option>
               <option>1</option>
               <option>3</option>
@@ -157,23 +157,18 @@
               <option>12</option>
               <option>18</option>
               <option>24</option>
+              <option>30</option>
+              <option>36</option>
             </select>
           </label>
           <label>
             <span class="input-title">Type Device</span>
             <fa-icon [icon]="used" class="icon-input"></fa-icon>
-            <select [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.deviceType.dirty || formClient.controls.deviceType.touched)
+            <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.deviceType.dirty || formClient.controls.deviceType.touched)
            && formClient.controls.deviceType.invalid && formClient.controls.deviceType.errors}"
-                    [ngModel]="client?.device[0]?.state_of_use"
-                    class="input-1" formControlName="deviceType">
-              <option [disabled]="true" [selected]="true" value="">Please Select Device Type</option>
-              <option>Smartphone with keys</option>
-              <option>Smartphone</option>
-              <option>iPad</option>
-              <option>Notebook</option>
-              <option>Tab</option>
-              <option>Pc</option>
-            </select>
+                   [ngModel]="device?.deviceType"
+                   class="input-1" formControlName="deviceType" readonly>
+
           </label>
           <label>
             <span class="input-title">Password Device</span>

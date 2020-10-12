@@ -179,7 +179,7 @@ export class EditRepairComponent implements OnInit, OnDestroy {
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
-      date_to_enter: new FormControl(null, [Validators.required]),
+      date_to_sale: new FormControl(null, [Validators.required]),
       work_don_output: new FormControl(null, [Validators.required]),
       parts_replace_output: new FormControl(null, [Validators.required]),
       defect: new FormControl(null, [Validators.required]),
