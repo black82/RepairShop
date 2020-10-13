@@ -344,11 +344,10 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
       this.client = this.client_after_saved;
     }
     this.animation_wait.$anime_show.emit(true);
-    this.httpService.printClient(this.client).subscribe(client => {
-
-      this.client_after_saved = client;
-      this.print.print_open.emit(new PrintEntity(client, 4,
-        null, null, InvoiceType.PrintPage, this.titleForm));
+    this.httpService.saleDeviceToClient(this.client).subscribe(() => {
+      this.client_after_saved = this.client;
+      this.print.print_open.emit(new PrintEntity(this.client, 4,
+        this.client.deviceSale[0].dateSell, this.client.deviceSale[0].idDeviceSale, InvoiceType.PrintPage, this.titleForm));
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       console.error(error);

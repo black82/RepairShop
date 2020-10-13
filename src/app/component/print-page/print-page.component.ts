@@ -217,7 +217,13 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
   id_repair(client: Client): string {
-    return client.device[0].repairs[0].repair_Id.toString();
+    if (this.print_entity.type_client_print === 1 || this.print_entity.type_client_print === 2) {
+      return client.device[0].repairs[0].repair_Id.toString();
+    } else if (this.print_entity.type_client_print === 3) {
+      return client.deviceBay[0].idDeviceSale.toString();
+    } else if (this.print_entity.type_client_print === 4) {
+      return client.deviceSale[0].idDeviceSale.toString();
+    }
   }
 
   checkTypePrint(): string {
