@@ -7,6 +7,8 @@ import {Subscription} from 'rxjs';
 import {InvoiceType} from '../entity/InvoiceType';
 import {HttpClien} from '../service/clientservice.service';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {InputTest} from '../entity/InputTest';
+import {OutputTest} from '../entity/OutputTest';
 
 
 @Component({
@@ -22,7 +24,6 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   type_print: number;
   date_exit: Date;
   client_date_input: Date;
-  client_date_outpute: Date;
   id: string;
   invoice_tools: InvoiceToolsDto = new InvoiceToolsDto();
   print_entity: PrintEntity;
@@ -41,8 +42,8 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.type_print = print.type_client_print;
       this.name_test_entre = [];
       this.name_test_out = [];
+
       this.check_type_print(print);
-      this.check_test_OK(print.client_print);
       this.http.getNickNameCurrentStaffUser().subscribe(name => {
         this.userNickName = name.currentName;
         this.printPage(print.client_print);
@@ -58,10 +59,17 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
   check_type_print(printTypes: PrintEntity): void {
     if (printTypes.type_client_print === 2) {
-      this.check_test_OK_out(printTypes.client_print);
+      this.check_test_OK_out(printTypes.client_print.device[0].repairs[0].outputTest);
     }
     if (printTypes.type_client_print === 1) {
+      this.check_test_OK(printTypes.client_print.device[0].repairs[0].inputModule);
       this.date_exit = printTypes.date_exit_device;
+    }
+    if (printTypes.type_client_print === 4) {
+      this.check_test_OK_out(printTypes.client_print.deviceSale[0].outputTest);
+    }
+    if (printTypes.type_client_print === 3) {
+      this.check_test_OK(printTypes.client_print.deviceBay[0].inputTest);
     }
   }
 
@@ -69,57 +77,57 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     return new Date(date);
   }
 
-  check_test_OK(client: Client): void {
+  check_test_OK(inputTest: InputTest): void {
     this.name_test_entre = [];
-    if (!client.device[0].repairs[0].inputModule.camera_input) {
+    if (!inputTest.camera_input) {
       this.name_test_entre.push(' X Fotocamera difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.bluetooth) {
+    if (!inputTest.bluetooth) {
       this.name_test_entre.push(' X Bluetooh difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.vibrations) {
+    if (!inputTest.vibrations) {
       this.name_test_entre.push(' X Vibrations difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.audio_equipment) {
+    if (!inputTest.audio_equipment) {
       this.name_test_entre.push(' X Audio difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.software) {
+    if (!inputTest.software) {
       this.name_test_entre.push(' X Software difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.keyboard_input) {
+    if (!inputTest.keyboard_input) {
       this.name_test_entre.push(' X La tastiera è danneggiata ');
     }
-    if (!client.device[0].repairs[0].inputModule.sim_input) {
+    if (!inputTest.sim_input) {
       this.name_test_entre.push(' X La scheda SIM è danneggiata o assente ');
     }
-    if (!client.device[0].repairs[0].inputModule.microphone_input) {
+    if (!inputTest.microphone_input) {
       this.name_test_entre.push(' X Microfono difettoso ');
     }
-    if (!client.device[0].repairs[0].inputModule.wi_fi_input) {
+    if (!inputTest.wi_fi_input) {
       this.name_test_entre.push(' X Il connettore Wi-Fi è difettoso ');
     }
-    if (!client.device[0].repairs[0].inputModule.touch_input) {
+    if (!inputTest.touch_input) {
       this.name_test_entre.push(' X Il sensore Touch è difettoso ');
     }
-    if (!client.device[0].repairs[0].inputModule.sound_equipment_input) {
+    if (!inputTest.sound_equipment_input) {
       this.name_test_entre.push(' X L\'apparecchiatura audio è difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.camera_input_front) {
+    if (!inputTest.camera_input_front) {
       this.name_test_entre.push(' X Fotocamera Frontale difettosa ');
     }
-    if (!client.device[0].repairs[0].inputModule.connectors_input) {
+    if (!inputTest.connectors_input) {
       this.name_test_entre.push(' X I Connettori del dispositivo sono difettosi ');
     }
-    if (!client.device[0].repairs[0].inputModule.display_input) {
+    if (!inputTest.display_input) {
       this.name_test_entre.push(' X Il display del dispositivo è danneggiato ');
     }
-    if (!client.device[0].repairs[0].inputModule.sensors_input) {
+    if (!inputTest.sensors_input) {
       this.name_test_entre.push(' X Il sensore del dispositivo è danneggiato ');
     }
-    if (!client.device[0].repairs[0].inputModule.display_touch_input) {
+    if (!inputTest.display_touch_input) {
       this.name_test_entre.push(' X Il display_touchy del dispositivo è danneggiato ');
     }
-    if (!client.device[0].repairs[0].inputModule.faceIdInput) {
+    if (!inputTest.faceIdInput) {
       this.name_test_entre.push(' X Il Face Id del dispositivo è danneggiato ');
     }
 
@@ -161,57 +169,57 @@ export class PrintPageComponent implements OnInit, OnDestroy {
   }
 
 
-  check_test_OK_out(client: Client) {
+  check_test_OK_out(outputTest: OutputTest) {
     this.name_test_out = [];
-    if (!client.device[0].repairs[0].outputTest.camera_Output) {
+    if (!outputTest.camera_Output) {
       this.name_test_out.push(' X Fotocamera difettosa ');
     }
-    if (!client.device[0].repairs[0].outputTest.audio_equipment) {
+    if (!outputTest.audio_equipment) {
       this.name_test_out.push(' X Speaker difettosa ');
     }
-    if (!client.device[0].repairs[0].outputTest.software) {
+    if (!outputTest.software) {
       this.name_test_out.push(' X Software difettosa ');
     }
-    if (!client.device[0].repairs[0].outputTest.vibrations) {
+    if (!outputTest.vibrations) {
       this.name_test_out.push(' X Vibrations difettosa ');
     }
-    if (!client.device[0].repairs[0].outputTest.bluetooth) {
+    if (!outputTest.bluetooth) {
       this.name_test_out.push(' X Bluetooh difettosa ');
     }
-    if (!client.device[0].repairs[0].outputTest.camera_Output_Front) {
+    if (!outputTest.camera_Output_Front) {
       this.name_test_out.push(' X Fotocamera Frontale difettosa ');
     }
-    if (!client.device[0].repairs[0].outputTest.keyboard_Output) {
+    if (!outputTest.keyboard_Output) {
       this.name_test_out.push(' X La tastiera è danneggiata ');
     }
-    if (!client.device[0].repairs[0].outputTest.sim_Output) {
+    if (!outputTest.sim_Output) {
       this.name_test_out.push(' X La scheda SIM è danneggiata o assente ');
     }
-    if (!client.device[0].repairs[0].outputTest.microphone_Output) {
+    if (!outputTest.microphone_Output) {
       this.name_test_out.push(' X Microfono difettoso ');
     }
-    if (!client.device[0].repairs[0].outputTest.wi_fi_Output) {
+    if (!outputTest.wi_fi_Output) {
       this.name_test_out.push(' X Il connettore Wi-Fi è difettoso ');
     }
-    if (!client.device[0].repairs[0].outputTest.touch_Output) {
+    if (!outputTest.touch_Output) {
       this.name_test_out.push(' X Il sensore Touch è difettoso ');
     }
-    if (!client.device[0].repairs[0].outputTest.sound_equipment_Output) {
+    if (!outputTest.sound_equipment_Output) {
       this.name_test_out.push(' X L\'apparecchiatura audio è difettosa ');
     }
-    if (!client.device[0].repairs[0].outputTest.connectors_Output) {
+    if (!outputTest.connectors_Output) {
       this.name_test_out.push(' X I Connettori del dispositivo sono difettosi ');
     }
-    if (!client.device[0].repairs[0].outputTest.display_Output) {
+    if (!outputTest.display_Output) {
       this.name_test_out.push(' X Il display del dispositivo è danneggiato ');
     }
-    if (!client.device[0].repairs[0].outputTest.sensors_Output) {
+    if (!outputTest.sensors_Output) {
       this.name_test_out.push(' X Il sensore del dispositivo è danneggiato ');
     }
-    if (!client.device[0].repairs[0].outputTest.display_touch_Output) {
+    if (!outputTest.display_touch_Output) {
       this.name_test_out.push(' X Il display_touchy del dispositivo è danneggiato ');
     }
-    if (!client.device[0].repairs[0].outputTest.faceIdOutput) {
+    if (!outputTest.faceIdOutput) {
       this.name_test_out.push(' X Il Face Id del dispositivo è danneggiato ');
     }
   }
@@ -233,6 +241,12 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       }
       case 2: {
         return 'outputInvoice';
+      }
+      case 3: {
+        return 'bayingInvoice';
+      }
+      case 4: {
+        return 'sailingInvoice';
       }
     }
   }

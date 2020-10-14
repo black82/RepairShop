@@ -165,7 +165,7 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
-      date_to_sale: new FormControl(null, [Validators.required]),
+      date_to_enter: new FormControl(null, [Validators.required]),
       deviceClass: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),
       sensors_input: new FormControl(false),
@@ -290,21 +290,16 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
         false, false, '');
       return;
     }
-    if (!this.client_after_saved) {
-      this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
-        , false, null, '', null);
-    } else {
-      this.animation_wait.$anime_show.emit(true);
-      this.httpService.saved_print_page(this.invoice).subscribe(() => {
-        this.animation_wait.$anime_show.emit(false);
-        this.print.$success_print_id.emit(this.client.deviceBay[0].idDeviceSale);
-        return;
-      }, error => {
-        this.animation_wait.$anime_show.emit(false);
-        console.error(error);
-      });
+    this.animation_wait.$anime_show.emit(true);
+    this.httpService.saved_print_page(this.invoice).subscribe(() => {
+      this.animation_wait.$anime_show.emit(false);
+      this.print.$success_print_id.emit(this.client.deviceBay[0].idDeviceSale);
+      return;
+    }, error => {
+      this.animation_wait.$anime_show.emit(false);
+      console.error(error);
+    });
 
-    }
   }
 
   print_click() {

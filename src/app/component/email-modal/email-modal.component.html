@@ -120,7 +120,7 @@
               <div>
                 <p style="font-size: 9pt;margin: 3px;">
                   Date to enter
-                  :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_sale)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                  :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
                 <p style="font-size: 9pt;margin: 3px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
                 <p
                   style="font-size: 9pt;margin: 3px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
@@ -131,7 +131,7 @@
             <div *ngIf="type_print===2" style="margin: 3px">
               <p
                 style="font-size: 8pt;margin: 3px">Data di ricezione del dispositivo
-                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_sale)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
               <p style="font-size: 8pt;margin: 3px;">
                 Data di ritorno del dispositivo
                 : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
