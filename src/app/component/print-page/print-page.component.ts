@@ -37,6 +37,8 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.print_open_event = this.print.print_open.subscribe(print => {
+      console.log(print);
+      this.client = print.client_print;
       this.print_entity = print;
       this.id = this.id_repair(print.client_print);
       this.type_print = print.type_client_print;
@@ -46,7 +48,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.check_type_print(print);
       this.http.getNickNameCurrentStaffUser().subscribe(name => {
         this.userNickName = name.currentName;
-        this.printPage(print.client_print);
+        this.printPage();
 
       }, () => {
         this.animation_wait.$anime_show.emit(false);
@@ -133,19 +135,20 @@ export class PrintPageComponent implements OnInit, OnDestroy {
 
   }
 
-  printPage(client: Client): void {
-    this.client = client;
+  printPage(): void {
+    console.log('print start' + this.client)
+    // this.client = client;
     this.animation_wait.$anime_show.emit(false);
-    window.print();
     const timeout = setTimeout(() => {
       // this.checkIfClickPrint();
-      console.log(client);
+      console.log(this.client);
 
       const html = document.querySelector('.container-page');
+      window.print();
       this.createInvoiceToPrintPage(html.innerHTML);
       this.print.$success_print.emit(true);
       clearTimeout(timeout);
-    }, 1000);
+    }, 10000);
 
   }
 
