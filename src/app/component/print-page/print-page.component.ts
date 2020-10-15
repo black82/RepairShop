@@ -148,7 +148,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
       this.createInvoiceToPrintPage(html.innerHTML);
       this.print.$success_print.emit(true);
       clearTimeout(timeout);
-    }, 10000);
+    }, 2000);
 
   }
 
