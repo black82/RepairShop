@@ -1,15 +1,13 @@
+
 <div *ngIf="showPopup" class="overlay" id="popup1">
   <div class="border-div">
     <div class="popup">
-      <h2 style="color: #c54040; font-size: 20px">
-        Repair Number</h2>
       <a (click)="close()" class="close">&times;</a>
+     <fa-icon [icon]="smile" class="smile"></fa-icon>
       <div class="content">
-        <p style="font-size: 15px; color: #1ABC9C">Questo è il numero di riparazioni. Scrivilo sul telefono prima di
-          chiudere Popup!!!</p>
         <h1 class="repair-id">
           <fa-icon [icon]="check" class="icon"></fa-icon>
-          Repair Number : {{id}}</h1>
+          Operation Number : {{id}}</h1>
       </div>
     </div>
   </div>

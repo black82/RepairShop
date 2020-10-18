@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertServiceService} from '../service/alert-service.service';
 import {PrintService} from '../service/print.service';
 import {Subscription} from 'rxjs';
-import {faCheckSquare} from '@fortawesome/free-solid-svg-icons';
+import {faCheckSquare, faSmileWink} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-number-repair',
@@ -15,6 +15,7 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
   showPopup = false;
   private subscription: Subscription;
   check = faCheckSquare;
+  smile = faSmileWink;
 
   constructor(private alert_service: AlertServiceService,
               private print: PrintService) {
@@ -29,8 +30,7 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
 
   close() {
     this.showPopup = false;
-    this.alert_service.success(null, 'The client ' +
-      'received a device and create the repair procedure !!! Repair Id :'
+    this.alert_service.success(null, 'The procedure was successfully completed id is : '
       + this.id, true, null, '');
   }
 
