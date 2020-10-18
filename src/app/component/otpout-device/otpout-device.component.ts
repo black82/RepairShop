@@ -49,7 +49,6 @@ import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingSta
 import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
 import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
-import {InvoiceType} from '../entity/InvoiceType';
 import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 
 
@@ -148,46 +147,6 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.form_open = this.hidden_form.form_open.subscribe(value => {
       this.show_client = value;
     });
-    this.invoice_mak_event = this.printService.invoice_make.subscribe(invoice => {
-      this.create_invoice(invoice);
-    });
-    const interval = setInterval(() => {
-      if (this.show_client) {
-        this.animation_call();
-        clearInterval(interval);
-      }
-    }, 300);
-    this.subscriptionPrintSuccess = this.printService.$success_print.subscribe(value => {
-      if (value) {
-
-        this.submitForm();
-      }
-    });
-  }
-
-  submitForm(): void {
-    if (!this.formClient.valid) {
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      this.alert_service.warn('', 'You form not valid',
-        false, false, '');
-      return;
-    }
-    if (!this.invoice) {
-      this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
-        , false, null, '', null);
-    } else {
-      this.animation_wait.$anime_show.emit(true);
-      this.httpService.saved_print_page(this.invoice).subscribe(() => {
-        this.animation_wait.$anime_show.emit(false);
-        this.printService.$success_print_id.emit(this.repair_output.repair_Id);
-      }, error => {
-        this.animation_wait.$anime_show.emit(false);
-        console.error(error);
-      });
-
-    }
   }
 
   createFormAfterClientCam(): void {
@@ -234,6 +193,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.filterRepair();
       this.createFormAfterClientCam();
       this.emailSendButton();
+      this.animation_call();
     }
     this.filteredItems1 = this.formClient?.controls.parts_replace_output?.valueChanges.pipe(
       startWith(''),
@@ -245,27 +205,6 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.email_send_disable = this.client.email == null;
   }
 
-  print_click(): void {
-    if (!this.formClient.valid) {
-      this.alert_service.warn('', 'Before sending the form ' +
-        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      return;
-    }
-    this.animation_wait.$anime_show.emit(true);
-    this.client = this.addRepairToClient(this.client);
-    this.httpService.outputDeviceForm(this.createClient(), this.client.device[0].repairs[0].repair_Id).subscribe(
-      () => {
-        this.printService.print_open.emit(new PrintEntity(this.client, 2,
-          null, null, InvoiceType.PrintPage, this.titleForm));
-      }, error => {
-        this.animation_wait.$anime_show.emit(false);
-        console.error(error);
-      });
-
-  }
 
   createClient(): Repair {
     this.client.device[0].repairs[0].repairFileStorage.fotoExitDevice = this.imageSender.submitImageToBack();
@@ -287,7 +226,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.formClient.controls.work_don_output.value,
       this.formClient.controls.parts_replace_output.value, this.client.device[0].repairs[0].nowInRepair,
       this.client.device[0].repairs[0].inputModule, this.output_test, this.client.device[0].repairs[0].note,
-      this.changeNotes(this.formClient.controls.note_output.value),
+      this.formClient.controls.note_output.value,
       this.client.device[0].repairs[0].repairFileStorage,
       this.client.device[0].repairs[0]?.lastModifiedRepair, this.client.device[0].repairs[0]?.createUserRepair,
       this.client.device[0].repairs[0]?.closeUserRepair);
@@ -295,31 +234,6 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     return this.repair_output;
   }
 
-  changeNotes(note: string) {
-    if (note) {
-      return 'Nota in uscita : ' + note + ' ;';
-    } else {
-      return note;
-    }
-  }
-
-  clickWhatsappSender() {
-    this.typeSender = InvoiceType.WhatsApp;
-    this.titleForm = 'You are in a position to send invoices by WhatsApp';
-    this.sign_pad_open();
-  }
-
-  clickMmsSender() {
-    this.typeSender = InvoiceType.mms;
-    this.titleForm = 'You are in a position to send invoices by MMS';
-    this.sign_pad_open();
-  }
-
-  clickEmailSender() {
-    this.typeSender = InvoiceType.emailInvoice;
-    this.titleForm = 'You are in a position to send invoices by email';
-    this.sign_pad_open();
-  }
 
   sign_pad_open(): void {
     if (!this.formClient.valid) {

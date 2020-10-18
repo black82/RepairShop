@@ -53,7 +53,6 @@ import {AnimeServiceService} from '../service/anime-service.service';
 import {DeviceInputService} from '../service/device-input.service';
 import {map, startWith} from 'rxjs/operators';
 import {PrintEntity} from '../entity/Print_Pojo';
-import {InvoiceType} from '../entity/InvoiceType';
 import {DeviceForSale} from '../entity/DeviceForSale';
 import {faHouseDamage} from '@fortawesome/free-solid-svg-icons/faHouseDamage';
 import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
@@ -206,16 +205,7 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       this.client = clientPush;
     });
     this.animation_call();
-    this.invoice_event = this.print.invoice_make.subscribe(invoice => {
-      this.create_invoice(invoice);
-    });
-    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
-      if (value) {
-        this.submitForm();
-      } else {
-        this.client_after_saved = null;
-      }
-    });
+
   }
 
   createClient() {
@@ -279,58 +269,6 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       }
     }
     return true;
-  }
-
-  submitForm() {
-    if (!this.formClient.valid) {
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      this.alert_service.warn('', 'You form not valid',
-        false, false, '');
-      return;
-    }
-    this.animation_wait.$anime_show.emit(true);
-    this.httpService.saved_print_page(this.invoice).subscribe(() => {
-      this.animation_wait.$anime_show.emit(false);
-      this.print.$success_print_id.emit(this.client.deviceBay[0].idDeviceSale);
-      return;
-    }, error => {
-      this.animation_wait.$anime_show.emit(false);
-      console.error(error);
-    });
-
-  }
-
-  print_click() {
-    if (!this.formClient.valid) {
-      this.alert_service.warn('', 'Before sending the form ' +
-        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      return;
-    }
-    if (this.checkImeiLength(this.formClient.controls.imei.value) ||
-      this.checkNumberLength(this.formClient.controls.telephone_number.value)) {
-      return;
-    }
-
-    if (!this.client_after_saved) {
-      this.createClient();
-    } else {
-      this.client = this.client_after_saved;
-    }
-    this.animation_wait.$anime_show.emit(true);
-    this.httpService.bayingDeviceToClient(this.client).subscribe(id => {
-
-      this.client.deviceBay[0].idDeviceSale = id;
-      this.print.print_open.emit(new PrintEntity(this.client, 3,
-        null, null, InvoiceType.PrintPage, this.titleForm));
-    }, error => {
-      this.animation_wait.$anime_show.emit(false);
-      console.error(error);
-    });
   }
 
   dismissed() {
@@ -399,24 +337,6 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
 
   }
 
-  clickEmailSender() {
-    this.typeSender = InvoiceType.emailInvoice;
-    this.titleForm = 'You are in a position to send invoices by email';
-    this.sign_pad_open();
-  }
-
-  clickWhatsappSender() {
-    this.typeSender = InvoiceType.WhatsApp;
-    this.titleForm = 'You are in a position to send invoices by WhatsApp';
-    this.sign_pad_open();
-  }
-
-  clickMmsSender() {
-    this.typeSender = InvoiceType.mms;
-    this.titleForm = 'You are in a position to send invoices by MMS';
-    this.sign_pad_open();
-  }
-
   sign_pad_open() {
     if (!this.formClient.valid) {
       this.alert_service.warn('', 'Before sending the form ' +
@@ -448,24 +368,13 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
   }
 
   submitFormAndSendEmail() {
-    this.subscribe_success_response();
+
     this.emailSender.email_send(new PrintEntity(this.createClient(),
       3, null,
       null, this.typeSender, this.titleForm));
 
   }
 
-  subscribe_success_response() {
-    this.animation_end();
-    this.email_send_event = this.emailSender.email_sent_send_success.subscribe(success => {
-      if (success) {
-        this.print.$success_print_id.emit(success);
-      } else {
-        this.alert_service.warn(null, 'Edit repair and resend',
-          false, false, null);
-      }
-    });
-  }
 
   animation_end() {
     this.email_anime_event = this.emailSender.anime_question.subscribe(value => {

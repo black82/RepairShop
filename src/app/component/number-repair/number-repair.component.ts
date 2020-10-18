@@ -31,7 +31,7 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
     this.showPopup = false;
     this.alert_service.success(null, 'The client ' +
       'received a device and create the repair procedure !!! Repair Id :'
-      + this.id.toString().toUpperCase(), true, null, '');
+      + this.id, true, null, '');
   }
 
 

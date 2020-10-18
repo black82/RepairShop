@@ -328,7 +328,7 @@
           </div>
         </div>
       </div>
-      <app-email-modal></app-email-modal>
+      <app-email-modal [callerServiceType]="'repair'"></app-email-modal>
       <app-number-repair></app-number-repair>
       <div class="text-div">
         <div class="title-container" tooltip="Notes for staff at the output of the machine">
@@ -352,26 +352,10 @@
           <a (click)="dismissed()" class="dismiss"><span><fa-icon [icon]="discar"
                                                                   class="button-icon"></fa-icon>Discard Form</span></a>
         </div>
-        <div tooltip="The model will be sent to the Printer">
-          <a (click)="print_click()" class="print button">
-        <span> <fa-icon
-          [icon]="printer"></fa-icon> Print Page</span></a>
-        </div>
-        <div [class.disabled]="true" tooltip="The model will be sent to the WhatsApp">
-          <a (click)="clickWhatsappSender()" class="whatsapp button ">
-        <span> <fa-icon [icon]="whatsapp"
-                        class="button-icon"></fa-icon>WhatsApp Invoice</span></a>
-        </div>
-
-        <div [class.disabled]="true" tooltip="The model will be sent to the MMS">
-          <a (click)="clickMmsSender()" class="mms button ">
-        <span> <fa-icon [icon]="mms"
-                        class="button-icon"></fa-icon> MMS Invoice</span></a>
-        </div>
         <div tooltip="The model will be sent to the Email">
-          <a (click)="clickEmailSender()" [class.disabled]="email_send_disable"
+          <a (click)="sign_pad_open()" [class.disabled]="email_send_disable"
              class=" button email"><span> <fa-icon
-            [icon]="mail" class="button-icon"></fa-icon> Email Submit</span></a>
+            [icon]="mail" class="button-icon"></fa-icon>Preview and Save</span></a>
         </div>
       </div>
     </form>

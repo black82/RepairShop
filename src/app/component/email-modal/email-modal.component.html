@@ -24,7 +24,7 @@
   font-weight: 500;color: #c54040">Vendita del Dispositivo</h1>
                 <h1 *ngIf="type_print===3" style="font-size: 16pt;
   font-weight: 500;color: #c54040">Acquisto del Dispositivo</h1>
-                <p style="font-size: 9pt;  color:#c54040"><strong>{{'Nr. ' + id}}</strong></p>
+                <p style="font-size: 9pt;  color:#c54040"><strong> Nr. {{ id ? id : ''}}</strong></p>
                 <p style="font-size: 9pt;margin: 3px;">info@rfvtechnology.it</p>
                 <p style="font-size: 9pt;margin: 3px;">Nembro Italia(BG) , 24027</p>
                 <p style="font-size: 9pt;margin: 3px;">Via Garibaldi , 6/A</p>
@@ -48,8 +48,9 @@
                 <p *ngIf="client?.typeClient"
                    style="font-size: 9pt;margin: 3px">{{"Cliente  Sdi:  " + client?.sdiCompany }}</p>
                 <p style="font-size: 9pt;margin: 3px"> {{"Email :  " + client?.email}}</p>
-                <p *ngIf="print_entity.type_client_print===1"
-                   style="font-size: 9pt;margin: 3px">Numero Telefonico
+                <p
+                  *ngIf="print_entity.type_client_print===1||print_entity.type_client_print===3||print_entity.type_client_print===4"
+                  style="font-size: 9pt;margin: 3px">Numero Telefonico
                   :  {{ client?.telephone_number ? client.telephone_number : 'n/a' }}</p>
                 <p *ngIf="print_entity.type_client_print===2"
                    style="font-size: 9pt;margin: 3px">Numero Telefonico
@@ -68,7 +69,7 @@
                 :   {{ client?.deviceBay[0]?.state_of_use ? 'Nuovo' : 'Usato'}}</p>
               <p *ngIf="print_entity.type_client_print===3"
                  style="font-size: 9pt;margin: 3px">IMEI & SN
-                : {{client?.deviceBay[0]?.imei ? client?.device[0]?.imei : 'n/a' }}</p>
+                : {{client?.deviceBay[0]?.imei ? client?.deviceBay[0]?.imei : 'n/a' }}</p>
               <p style="font-size: 9pt;margin: 3px"> {{"Tipo di Dispositivo :  " + client?.deviceBay[0].deviceType}}
                 .</p>
               <p style="font-size: 9pt;margin: 3px">{{"Accessory :  " + client?.deviceBay[0]?.accessory}}</p>
@@ -90,7 +91,7 @@
                 style="font-size: 9pt;margin: 3px"> {{"Condizioni d'uso :  " + client?.deviceSale[0].garantyDuration}}</p>
               <p *ngIf="print_entity.type_client_print===4"
                  style="font-size: 9pt;margin: 3px">IMEI & SN
-                : {{client?.deviceSale[0]?.imei ? client?.deviceSale[0]?.imei : 'n/a' }}</p>
+                : {{client?.deviceSale[0]?.imei}}</p>
               <p style="font-size: 9pt;margin: 3px"> {{"Tipo di Dispositivo :  " + client?.deviceSale[0].deviceType}}
                 .</p>
               <p style="font-size: 9pt;margin: 3px">{{"Accessory :  " + client?.deviceSale[0]?.accessory}}</p>
@@ -367,8 +368,33 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer" style="clear: both;margin: 0;display: flex;align-items: center">
-          <button (click)="ok()" class="btn btn-danger" type="button">Send Invoice</button>
+        <div class="button_form">
+          <div tooltip="You will leave this page!!!">
+            <a (click)="edit_client()" class="edit">
+        <span><fa-icon [icon]="redact" class="button-icon"></fa-icon>
+        Redact Form</span></a></div>
+          <div tooltip="The model will be sent to the Printer">
+            <a (click)="print_click()" class="print button ">
+        <span> <fa-icon [icon]="printer"
+                        class="button-icon"></fa-icon> Print Invoice</span></a></div>
+
+          <div [class.disabled]="true" tooltip="The model will be sent to the WhatsApp">
+            <a (click)="clickWhatsappSender()" class="whatsapp button ">
+        <span> <fa-icon [icon]="whatsapp"
+                        class="button-icon"></fa-icon>WhatsApp Invoice</span></a>
+          </div>
+
+          <div [class.disabled]="true" tooltip="The model will be sent to the MMS">
+            <a (click)="clickMmsSender()" class="mms button ">
+        <span> <fa-icon [icon]="mms"
+                        class="button-icon"></fa-icon> MMS Invoice</span></a>
+          </div>
+          <div tooltip="The model will be sent to the Email">
+            <a (click)="clickEmailSender()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
+              [icon]="mail" class="button-icon"></fa-icon> Email Invoice</span></a>
+          </div>
+
+
         </div>
       </div>
     </div>

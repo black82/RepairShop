@@ -4,6 +4,7 @@ export class InvoiceToolsDto {
   typeFile: string;
   subjectEmail: string;
   messageEmail: string;
-  htmlPage: string;
+  htmlPage: any;
   typeSender: string;
+  callerServiceType: string;
 }

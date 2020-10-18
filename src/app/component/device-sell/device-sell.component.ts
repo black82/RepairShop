@@ -179,19 +179,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
     });
-
-    this.invoice_event = this.print.invoice_make.subscribe(invoice => {
-      this.create_invoice(invoice);
-    });
-    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
-      if (value) {
-        this.submitForm();
-      } else {
-        this.client_after_saved = null;
       }
-    });
-
-  }
 
   buildForm(): void {
     this.formClient = this.fb.group({
@@ -298,62 +286,6 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  submitForm() {
-    if (!this.formClient.valid) {
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      this.alert_service.warn('', 'You form not valid',
-        false, false, '');
-      return;
-    }
-    if (!this.client_after_saved) {
-      this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
-        , false, null, '', null);
-    } else {
-      this.animation_wait.$anime_show.emit(true);
-      this.httpService.saved_print_page(this.invoice).subscribe(() => {
-        this.animation_wait.$anime_show.emit(false);
-        this.print.$success_print_id.emit(this.client_after_saved.deviceSale[0].idDeviceSale);
-        return;
-      }, error => {
-        this.animation_wait.$anime_show.emit(false);
-        console.error(error);
-      });
-
-    }
-  }
-
-  print_click() {
-    if (!this.formClient.valid) {
-      this.alert_service.warn('', 'Before sending the form ' +
-        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      return;
-    }
-    if (this.checkImeiLength(this.formClient.controls.imei.value) ||
-      this.checkNumberLength(this.formClient.controls.telephone_number.value)) {
-      return;
-    }
-
-    if (!this.client_after_saved) {
-      this.createClient();
-    } else {
-      this.client = this.client_after_saved;
-    }
-    this.animation_wait.$anime_show.emit(true);
-    this.httpService.saleDeviceToClient(this.client).subscribe(() => {
-      this.client_after_saved = this.client;
-      this.print.print_open.emit(new PrintEntity(this.client, 4,
-        this.client.deviceSale[0].dateSell, this.client.deviceSale[0].idDeviceSale, InvoiceType.PrintPage, this.titleForm));
-    }, error => {
-      this.animation_wait.$anime_show.emit(false);
-      console.error(error);
-    });
-  }
-
   dismissed() {
     if (confirm('Are you sure you want to dismiss')) {
       this.alert_service.warn('', 'Sorry, you ' +
@@ -423,21 +355,10 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
 
   clickEmailSender() {
     this.typeSender = InvoiceType.emailInvoice;
-    this.titleForm = 'You are in a position to send invoices by email';
+    this.titleForm = 'You are in a position to send invoices and preview';
     this.sign_pad_open();
   }
 
-  clickWhatsappSender() {
-    this.typeSender = InvoiceType.WhatsApp;
-    this.titleForm = 'You are in a position to send invoices by WhatsApp';
-    this.sign_pad_open();
-  }
-
-  clickMmsSender() {
-    this.typeSender = InvoiceType.mms;
-    this.titleForm = 'You are in a position to send invoices by MMS';
-    this.sign_pad_open();
-  }
 
   sign_pad_open() {
     if (!this.formClient.valid) {
@@ -470,23 +391,10 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   }
 
   submitFormAndSendEmail() {
-    this.subscribe_success_response();
     this.emailSender.email_send(new PrintEntity(this.createClient(),
       4, null,
       null, this.typeSender, this.titleForm));
 
-  }
-
-  subscribe_success_response() {
-    this.animation_end();
-    this.email_send_event = this.emailSender.email_sent_send_success.subscribe(success => {
-      if (success) {
-        this.print.$success_print_id.emit(success);
-      } else {
-        this.alert_service.warn(null, 'Edit repair and resend',
-          false, false, null);
-      }
-    });
   }
 
   animation_end() {
@@ -563,8 +471,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
 
   addNewModels(models: string) {
     this.httpService.addNewModelsToList(models).subscribe(() => {
-    }, error => {
-      console.log(error);
+    }, () => {
     });
   }
 
@@ -612,7 +519,4 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     }
   }
 
-  private create_invoice(invoice: InvoiceToolsDto) {
-    this.invoice = invoice;
-  }
 }

@@ -16,3 +16,7 @@
   font-feature-settings: 'liga'; /* Поддержка IE. */
 }
 
+* {
+  margin: 0;
+  box-sizing: border-box;
+}

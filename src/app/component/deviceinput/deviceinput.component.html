@@ -147,8 +147,8 @@
         <label>
           <span class="input-title">Date to enter</span>
           <fa-icon [icon]="date" class="icon-input"></fa-icon>
-          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_sale.dirty || formClient.controls.date_to_sale.touched)
-           && formClient.controls.date_to_sale.invalid && formClient.controls.date_to_sale.errors&& formClient.controls.date_to_sale.pristine}"
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_enter.dirty || formClient.controls.date_to_enter.touched)
+           && formClient.controls.date_to_enter.invalid && formClient.controls.date_to_enter.errors&& formClient.controls.date_to_enter.pristine}"
                  class="input-2" formControlName="date_to_enter"
                  placeholder="Date to Enter" type="date">
         </label>
@@ -385,7 +385,7 @@
 
             <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
 
-          <app-email-modal></app-email-modal>
+          <app-email-modal [callerServiceType]="'repair'"></app-email-modal>
           <app-sig-pad></app-sig-pad>
         </div>
       </div>
@@ -406,25 +406,10 @@
         <a (click)="dismissed()" class="dismiss">
         <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
         Discard Form</span></a></div>
-      <div tooltip="The model will be sent to the Printer">
-        <a (click)="print_click()" class="print button ">
-        <span> <fa-icon class="button-icon"
-                        [icon]="printer"></fa-icon> Print Invoice</span></a></div>
 
-      <div [class.disabled]="true" tooltip="The model will be sent to the WhatsApp">
-        <a (click)="clickWhatsappSender()" class="whatsapp button ">
-        <span> <fa-icon [icon]="whatsapp"
-                        class="button-icon"></fa-icon>WhatsApp Invoice</span></a>
-      </div>
-
-      <div [class.disabled]="true" tooltip="The model will be sent to the MMS">
-        <a (click)="clickMmsSender()" class="mms button ">
-        <span> <fa-icon [icon]="mms"
-                        class="button-icon"></fa-icon> MMS Invoice</span></a>
-      </div>
       <div tooltip="The model will be sent to the Email">
         <a (click)="clickEmailSender()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
-          [icon]="mail" class="button-icon"></fa-icon> Email Invoice</span></a>
+          [icon]="mail" class="button-icon"></fa-icon> Preview and Save</span></a>
       </div>
 
 

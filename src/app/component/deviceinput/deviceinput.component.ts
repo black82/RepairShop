@@ -56,9 +56,7 @@ import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
 import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
 import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
-import {InvoiceType} from '../entity/InvoiceType';
 import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 
 @Component({
@@ -97,7 +95,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   faceIdFa = faFlushed;
   touch = faFingerprint;
   wifi = faWifi;
-  whatsapp = faWhatsapp;
   mms = faSms;
   microfon = faMicrophone;
   sim = faSimCard;
@@ -164,7 +161,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       code_device: new FormControl(null, [Validators.required]),
       password_device: new FormControl(null, [Validators.required]),
       accessory: new FormControl(null, [Validators.required]),
-      date_to_sale: new FormControl(null, [Validators.required]),
+      date_to_enter: new FormControl(null, [Validators.required]),
       defect: new FormControl(null, [Validators.required]),
       deposit: new FormControl(null, [Validators.required]),
       price: new FormControl(null, [Validators.required]),
@@ -205,16 +202,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.client = clientPush;
     });
     this.animation_call();
-    this.invoice_event = this.print.invoice_make.subscribe(invoice => {
-      this.create_invoice(invoice);
-    });
-    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
-      if (value) {
-        this.submitForm();
-      } else {
-        this.client_after_saved = null;
-      }
-    });
   }
 
   createClient() {
@@ -303,63 +290,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     return dateReturn;
   }
 
-  submitForm() {
-    if (!this.formClient.valid) {
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      this.alert_service.warn('', 'You form not valid',
-        false, false, '');
-      return;
-    }
-    if (!this.client_after_saved) {
-      this.alert_service.info(null, 'The first to save is necessary to print or send invoices by email.'
-        , false, null, '', null);
-    } else {
-      this.animation_wait.$anime_show.emit(true);
-      this.httpService.saved_print_page(this.invoice).subscribe(() => {
-        this.animation_wait.$anime_show.emit(false);
-        this.print.$success_print_id.emit(this.client_after_saved.device[0].repairs[0].repair_Id);
-        return;
-      }, error => {
-        this.animation_wait.$anime_show.emit(false);
-        console.error(error);
-      });
-
-    }
-  }
-
-  print_click() {
-    if (!this.formClient.valid) {
-      this.alert_service.warn('', 'Before sending the form ' +
-        'to the printer please complete all the fields !!! Thank you. Try again.', false, false, '', null);
-      Object.keys(this.formClient.controls).forEach(key => {
-        this.formClient.controls[key].markAllAsTouched();
-      });
-      return;
-    }
-    if (this.checkImeiLength(this.formClient.controls.imei.value) ||
-      this.checkNumberLength(this.formClient.controls.telephone_number.value)) {
-      return;
-    }
-
-    if (!this.client_after_saved) {
-      this.createClient();
-    } else {
-      this.client = this.client_after_saved;
-    }
-    this.animation_wait.$anime_show.emit(true);
-    this.httpService.printClient(this.client).subscribe(client => {
-
-      this.client_after_saved = client;
-      this.print.print_open.emit(new PrintEntity(client, 1,
-        this.formClient.controls.date_exit.value, null, InvoiceType.PrintPage, this.titleForm));
-    }, error => {
-      this.animation_wait.$anime_show.emit(false);
-      console.error(error);
-    });
-  }
-
   dismissed() {
     if (confirm('Are you sure you want to dismiss')) {
       this.alert_service.warn('', 'Sorry, you ' +
@@ -425,28 +355,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     });
 
   }
-
-  private create_invoice(invoice: InvoiceToolsDto) {
-    this.invoice = invoice;
-  }
-
   clickEmailSender() {
-    this.typeSender = InvoiceType.emailInvoice;
-    this.titleForm = 'You are in a position to send invoices by email';
     this.sign_pad_open();
   }
 
-  clickWhatsappSender() {
-    this.typeSender = InvoiceType.WhatsApp;
-    this.titleForm = 'You are in a position to send invoices by WhatsApp';
-    this.sign_pad_open();
-  }
-
-  clickMmsSender() {
-    this.typeSender = InvoiceType.mms;
-    this.titleForm = 'You are in a position to send invoices by MMS';
-    this.sign_pad_open();
-  }
 
   sign_pad_open() {
     if (!this.formClient.valid) {
@@ -479,23 +391,10 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   submitFormAndSendEmail() {
-    this.subscribe_success_response();
     this.emailSender.email_send(new PrintEntity(this.createClient(),
       1, this.formClient.controls.date_exit.value,
       null, this.typeSender, this.titleForm));
 
-  }
-
-  subscribe_success_response() {
-    this.animation_end();
-    this.email_send_event = this.emailSender.email_sent_send_success.subscribe(success => {
-      if (success) {
-        this.print.$success_print_id.emit(success);
-      } else {
-        this.alert_service.warn(null, 'Edit repair and resend',
-          false, false, null);
-      }
-    });
   }
 
   animation_end() {
