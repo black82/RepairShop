@@ -282,55 +282,55 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   check_test_OK(client: InputTest) {
     this.name_test_entre = [];
     if (!client.camera_input) {
-      this.name_test_entre.push(' X Fotocamera difettosa ');
+      this.name_test_entre.push('X Fotocamera');
     }
     if (!client.bluetooth) {
-      this.name_test_entre.push(' X Bluetooh difettosa ');
+      this.name_test_entre.push('X Bluetooh');
     }
     if (!client.vibrations) {
-      this.name_test_entre.push(' X Vibrations difettosa ');
+      this.name_test_entre.push('X Vibrations');
     }
     if (!client.audio_equipment) {
-      this.name_test_entre.push(' X Audio difettosa ');
+      this.name_test_entre.push('X Audio');
     }
     if (!client.software) {
-      this.name_test_entre.push(' X Software difettosa ');
+      this.name_test_entre.push('X Software');
     }
     if (!client.keyboard_input) {
-      this.name_test_entre.push(' X La tastiera è danneggiata ');
+      this.name_test_entre.push('X La tastiera');
     }
     if (!client.sim_input) {
-      this.name_test_entre.push(' X La scheda SIM è danneggiata o assente ');
+      this.name_test_entre.push('X SIM danneggiata/assente ');
     }
     if (!client.microphone_input) {
-      this.name_test_entre.push(' X Microfono difettoso ');
+      this.name_test_entre.push('X Microfono');
     }
     if (!client.wi_fi_input) {
-      this.name_test_entre.push(' X Il connettore Wi-Fi è difettoso ');
+      this.name_test_entre.push('X Wi-Fi');
     }
     if (!client.touch_input) {
-      this.name_test_entre.push(' X Il sensore Touch è difettoso ');
+      this.name_test_entre.push('X Touch');
     }
     if (!client.sound_equipment_input) {
-      this.name_test_entre.push(' X L\'apparecchiatura audio è difettosa ');
+      this.name_test_entre.push('X L\'apparecchiatura audio');
     }
     if (!client.camera_input_front) {
-      this.name_test_entre.push(' X Fotocamera Frontale difettosa ');
+      this.name_test_entre.push('X Fotocamera Frontale');
     }
     if (!client.connectors_input) {
-      this.name_test_entre.push(' X I Connettori del dispositivo sono difettosi ');
+      this.name_test_entre.push('X Connettori');
     }
     if (!client.display_input) {
-      this.name_test_entre.push(' X Il display del dispositivo è danneggiato ');
+      this.name_test_entre.push('X Display');
     }
     if (!client.sensors_input) {
-      this.name_test_entre.push(' X Il sensore del dispositivo è danneggiato ');
+      this.name_test_entre.push('X Sensore');
     }
     if (!client.display_touch_input) {
-      this.name_test_entre.push(' X Il display_touchy del dispositivo è danneggiato ');
+      this.name_test_entre.push('X Display_touchy');
     }
     if (!client.faceIdInput) {
-      this.name_test_entre.push(' X Il Face Id del dispositivo è danneggiato ');
+      this.name_test_entre.push('X Face Id');
     }
   }
 
@@ -349,55 +349,55 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   check_test_OK_out(client: OutputTest) {
     this.name_test_out = [];
     if (!client.camera_Output) {
-      this.name_test_out.push(' X Fotocamera difettosa ');
+      this.name_test_out.push('X Fotocamera');
     }
     if (!client.audio_equipment) {
-      this.name_test_out.push(' X Speaker difettosa ');
+      this.name_test_out.push('X Speaker');
     }
     if (!client.software) {
-      this.name_test_out.push(' X Software difettosa ');
+      this.name_test_out.push('X Software');
     }
     if (!client.vibrations) {
-      this.name_test_out.push(' X Vibrations difettosa ');
+      this.name_test_out.push('X Vibrations');
     }
     if (!client.bluetooth) {
-      this.name_test_out.push(' X Bluetooh difettosa ');
+      this.name_test_out.push('X Bluetooh');
     }
     if (!client.camera_Output_Front) {
-      this.name_test_out.push(' X Fotocamera Frontale difettosa ');
+      this.name_test_out.push('X Fotocamera Frontale');
     }
     if (!client.keyboard_Output) {
-      this.name_test_out.push(' X La tastiera è danneggiata ');
+      this.name_test_out.push('X Tastiera ');
     }
     if (!client.sim_Output) {
-      this.name_test_out.push(' X La scheda SIM è danneggiata o assente ');
+      this.name_test_out.push('X SIM è danneggiata/assente ');
     }
     if (!client.microphone_Output) {
-      this.name_test_out.push(' X Microfono difettoso ');
+      this.name_test_out.push('X Microfono');
     }
     if (!client.wi_fi_Output) {
-      this.name_test_out.push(' X Il connettore Wi-Fi è difettoso ');
+      this.name_test_out.push('X Wi-Fi');
     }
     if (!client.touch_Output) {
-      this.name_test_out.push(' X Il sensore Touch è difettoso ');
+      this.name_test_out.push('X Sensore Touch');
     }
     if (!client.sound_equipment_Output) {
-      this.name_test_out.push(' X L\'apparecchiatura audio è difettosa ');
+      this.name_test_out.push('X L\'apparecchiatura audio');
     }
     if (!client.connectors_Output) {
-      this.name_test_out.push(' X I Connettori del dispositivo sono difettosi ');
+      this.name_test_out.push('X Connettori');
     }
     if (!client.display_Output) {
-      this.name_test_out.push(' X Il display del dispositivo è danneggiato ');
+      this.name_test_out.push('X Display  ');
     }
     if (!client.sensors_Output) {
-      this.name_test_out.push(' X Il sensore del dispositivo è danneggiato ');
+      this.name_test_out.push('X Sensore ');
     }
     if (!client.display_touch_Output) {
-      this.name_test_out.push(' X Il display_touchy del dispositivo è danneggiato ');
+      this.name_test_out.push('X Display_touchy');
     }
     if (!client.faceIdOutput) {
-      this.name_test_out.push(' X Il Face Id del dispositivo è danneggiato ');
+      this.name_test_out.push('X Face Id  danneggiato ');
     }
   }
 

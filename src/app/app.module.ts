@@ -75,6 +75,7 @@ import {PageableDeviceSaleComponent} from './component/pageable-device-sale/page
 import {RepairDashboardComponent} from './component/repair-dashboard/repair-dashboard.component';
 import {ShopDashboardComponent} from './component/shop-dashboard/shop-dashboard.component';
 import {SinglDeviceShouwComponent} from './component/singl-device-shouw/singl-device-shouw.component';
+import {SingleDeviceForSaleComponent} from './component/single-divice-forsale/single-device-for-sale.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +131,8 @@ import {SinglDeviceShouwComponent} from './component/singl-device-shouw/singl-de
     PageableDeviceSaleComponent,
     RepairDashboardComponent,
     ShopDashboardComponent,
-    SinglDeviceShouwComponent
+    SinglDeviceShouwComponent,
+    SingleDeviceForSaleComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

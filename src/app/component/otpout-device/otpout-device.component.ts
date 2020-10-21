@@ -47,8 +47,6 @@ import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
 import {map, startWith} from 'rxjs/operators';
 import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
 import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
-import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
 import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 
 
@@ -66,8 +64,6 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   cogs = faCogs;
   chip = faMicrochip;
   work = faTools;
-  whatsapp = faWhatsapp;
-  mms = faSms;
   money = faMoneyBill;
   address = faMapMarkedAlt;
   model = faMobileAlt;
@@ -120,7 +116,6 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   prompt = 'Click <enter> to add "';
   itemsModels: string[] = [];
   private subscriber: Subscription;
-  private subscriptionPrintSuccess: Subscription;
   private sigpad_open_second = false;
   buttonCheckBox = 'select all';
 
@@ -249,6 +244,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       this.sig_pad_event = this.sig_pad_service.open$.subscribe(() => {
         this.animation_wait.$anime_show.emit(true);
         this.submitFormAndSendEmail();
+        this.sigpad_open_second = true;
       });
     } else {
       this.animation_wait.$anime_show.emit(true);
@@ -366,10 +362,6 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       }
     }
     return client;
-  }
-
-  private create_invoice(invoice: InvoiceToolsDto): void {
-    this.invoice = invoice;
   }
 
   ngOnDestroy(): void {
