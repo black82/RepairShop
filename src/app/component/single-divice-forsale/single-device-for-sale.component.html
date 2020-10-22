@@ -1,0 +1,280 @@
+<div class="container-body">
+  <div class="title-container">
+    <p class="title-form"> Device For Sale <span
+      style="color: lightcoral"> {{ deviceForSaleDto.deviceForSale.model + ' ' + deviceForSaleDto.deviceForSale.imei}} </span>
+    </p>
+  </div>
+  <div class="row-container">
+    <div class="row-1">
+      <div class="container-1-content">
+        <div class="container-2-content">
+          <p class="title-form">
+            Baying Client
+          </p>
+          <span class="input-title">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>Client:<span
+            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying.typeClient ? deviceForSaleDto.clientBaying.companyName : deviceForSaleDto.clientBaying?.name + ' ' + deviceForSaleDto.clientBaying.family}}</span></span>
+          <span *ngIf="deviceForSaleDto.clientBaying?.typeClient" class="input-title">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>Client Iva: <span
+            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying.ivaCompany}}</span></span>
+          <span *ngIf="deviceForSaleDto.clientBaying?.typeClient" class="input-title">
+            <fa-icon
+              [icon]="usertag"></fa-icon>Client SDI:<span
+            style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.clientBaying.sdiCompany}}</span></span>
+          <span class="input-title"><fa-icon [icon]="phone"
+                                             class="icon-normal-single"></fa-icon> Telethon Number:
+            <span
+              style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.telephone_number}}</span></span>
+          <span *ngIf="deviceForSaleDto.clientBaying.telephone_number_second" class="input-title"><fa-icon
+            [icon]="phone"
+            class="icon-normal-single"></fa-icon>Second Telethon Number:<span
+            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.telephone_number_second}}</span></span>
+          <span class="input-title"><fa-icon [icon]="email" class="icon-normal-single"></fa-icon> Email:<span
+            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.email}}</span></span>
+          <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
+            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.address}}</span></span>
+        </div>
+      </div>
+      <div class="container-2-content">
+        <p class="title-form">
+          Sailing Client
+        </p>
+        <span class="input-title">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>Client:<span
+          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing.typeClient ? deviceForSaleDto.clientBaying.companyName : deviceForSaleDto.clientBaying?.name + ' ' + deviceForSaleDto.clientBaying.family}}</span></span>
+        <span *ngIf="deviceForSaleDto.clientSailing?.typeClient" class="input-title">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>Client Iva: <span
+          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing.ivaCompany}}</span></span>
+        <span *ngIf="deviceForSaleDto.clientSailing?.typeClient" class="input-title">
+            <fa-icon
+              [icon]="usertag"></fa-icon>Client SDI:<span
+          style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.clientSailing.sdiCompany}}</span></span>
+        <span class="input-title"><fa-icon [icon]="phone"
+                                           class="icon-normal-single"></fa-icon> Telethon Number:
+            <span style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.telephone_number}}</span></span>
+        <span *ngIf="deviceForSaleDto.clientSailing.telephone_number_second" class="input-title"><fa-icon [icon]="phone"
+                                                                                                          class="icon-normal-single"></fa-icon>Second Telethon Number:<span
+          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.telephone_number_second}}</span></span>
+        <span class="input-title"><fa-icon [icon]="email" class="icon-normal-single"></fa-icon> Email:<span
+          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.email}}</span></span>
+        <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
+          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.address}}</span></span>
+      </div>
+      <div class="row-2">
+
+        <div class="toggle-container-2">
+
+          <div>
+            <div class="border-container show">
+              <p class="title-form">
+                Device For Sale
+              </p>
+              <div class="border">
+                <p class="input-title">
+                  <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
+                  <strong> Repair Id:<span
+                    style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.idDeviceSale}}</span></strong>
+                </p>
+                <p class="input-title">
+                  <fa-icon [icon]="date"
+                           class="icon-normal-single"></fa-icon>
+                  Date to enter:<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateBaying | date:'mediumDate'}}</span>
+                </p>
+                <p class="input-title">
+                  <fa-icon [icon]="date"
+                           class="icon-normal-single"></fa-icon>
+                  Date to enter:<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateSell | date:'mediumDate'}}</span>
+                </p>
+                <p class="input-title">
+                  <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
+                  Defect:<span
+                  style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.deviceType}}</span></p>
+                <p class="input-title">
+                  <fa-icon [icon]="money"
+                           class="icon-normal-single"></fa-icon>
+                  Deposit:<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.bayingPrice}}</span></p>
+                <p class="input-title">
+                  <fa-icon [icon]="money" class="icon-normal-single"></fa-icon>
+                  Price:<span
+                  style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.sellerPrice}}</span></p>
+                <p class="input-title">
+                  <fa-icon [icon]="date"
+                           class="icon-normal-single"></fa-icon>
+                  Return Date:<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.bayingPrice }}</span>
+                </p>
+                <p class="input-title">
+                  <fa-icon [icon]="work"
+                           class="icon-normal-single"></fa-icon>
+                  Work done: <span
+                  style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.accessory}}</span></p>
+                <p class="input-title">
+                  <fa-icon [icon]="chip"
+                           class="icon-normal-single"></fa-icon>
+                  Parts replaced:<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.code_device}}</span></p>
+              </div>
+              <div class="accordion">
+                <div>
+                  <input class="accordion__input" id="section1" name="example_accordion" type="radio">
+                  <label class="accordion__label" for="section1">
+                    <span class="input-title acortion-title">
+                      <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                      <p class="container-title"> Teste non pasate in intrata</p>
+                    </span>
+                  </label>
+                  <div class="accordion__content">
+                    <p>
+                    <p *ngIf="test_input?.length===0" class="input-title">
+                      <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                      <span class="container-title"> Il tuo dispositivo ha superato con successo tutti i nostri
+                    test di ingresso!!!</span>
+                    </p>
+                    <div *ngIf="test_input?.length>0" class="test-enter">
+                      <p class="input-title">
+                        <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                        <span class="container-title"> Teste non pasate in intrata</span>
+                      </p>
+                      <div class="test-input-container">
+
+                        <div *ngFor="let test_input_items of test_input" class="input-title">
+                          <fa-icon [icon]="test_minus" class="test-icon"></fa-icon>
+                          {{test_input_items}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input class="accordion__input" id="section2" name="example_accordion" type="radio">
+                  <label class="accordion__label" for="section2">
+                    <span class="input-title acortion-title">
+                      <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                      <span class="container-title"> Teste non pasate in uscita</span>
+                    </span>
+                  </label>
+                  <div class="accordion__content">
+                    <div class="test-output">
+                      <p *ngIf="test_output?.length===0" class="input-title">
+                        <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                        <span class="container-title"> Il tuo dispositivo ha superato tutti test di Uscita!!!
+                      </span>
+                      </p>
+
+                      <p *ngIf="!deviceForSaleDto.deviceForSale.isSaled" class="input-title">
+
+                        <fa-icon [icon]="test_meteor" class="icon-test-tile icon-normal-single"></fa-icon>
+                        <span class="container-title">  Dispozitivo e anqora in reparazione!!!</span>
+                      </p>
+                      <div *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="test-output-container">
+
+                        <div *ngFor="let test_output of test_output" class="input-title">
+                          <fa-icon [icon]="test_minus" class="test-icon icon-normal-single"></fa-icon>
+                          {{test_output}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input class="accordion__input" id="section3" name="example_accordion" type="radio">
+                  <label class="accordion__label" for="section3">
+                    <span class="input-title acortion-title">
+                      <fa-icon [icon]="text" class="icon-test-tile"></fa-icon>
+                      <span class="container-title">  Note  :</span>
+                    </span>
+                  </label>
+                  <div class="accordion__content">
+                    <div>
+                    </div>
+                    <div class="note-container">
+                      <div class="note-border">
+                        <p class=" input-title note">{{deviceForSaleDto?.deviceForSale?.noteInput}}</p>
+                        <p class=" input-title note">{{deviceForSaleDto?.deviceForSale?.noteOutput}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input class="accordion__input" id="section4" name="example_accordion" type="radio">
+                  <label class="accordion__label" for="section4">
+                    <a class="input-title acortion-title">
+                      <fa-icon [icon]="userStaff" class="icon-test-tile"></fa-icon>
+                      <p class="container-title">Staff Users who Administered this Case</p>
+                    </a>
+                  </label>
+                  <div class="accordion__content">
+                    <div>
+                    </div>
+                    <div class="note-container">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <fa-icon [icon]="images_icon"></fa-icon>
+        <p class="container-title">Images To Repair & Invoice</p>
+      </mat-expansion-panel-header>
+
+      <ng-template matExpansionPanelContent>
+        <div class="row-container">
+          <div class="foto-enter-device row-1">
+            <div>
+              <div *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToEnterDeviceToRepair"
+                   class="link-invoice-enter ">
+                <a (click)="open_popup(deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToEnterDeviceToRepair)"
+                   class="link-invoice">Invoice
+                  to Open Repair</a>
+              </div>
+
+              <div
+                *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.fotoEnterDevice && deviceForSaleDto.deviceForSale.repairFileStorage?.fotoEnterDevice.length > 0"
+                class="image-input">
+                <ul
+                  *ngFor="let images of deviceForSaleDto.deviceForSale.repairFileStorage?.fotoEnterDevice; let i =index">
+                  <li (click)="zoum($event,i);" class="image-content">
+                    <img [class]="i+'-image'" alt="" class="image-content"
+                         id="normal-zoom"
+                         src="{{'data:image/jpeg;base64,'+images.fotoBase64}}">
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row-2">
+            <div *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToExitDeviceToRepair"
+                 class="link-invoice-enter">
+              <a (click)="open_popup(deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToExitDeviceToRepair)"
+                 class="link-invoice">Invoice
+                to Closet Repair</a>
+
+              <div *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.fotoExitDevice?.length > 0"
+                   class="foto-out-device">
+                <ul
+                  *ngFor=" let images of deviceForSaleDto.deviceForSale.repairFileStorage?.fotoExitDevice;let i =index">
+                  <li (click)="zoum($event,(i+100));" class="image-content">
+                    <img [class]="(i+100)+'-image'" alt="" class="image-content"
+                         id="normal-zoom1"
+                         src="{{'data:image/jpeg;base64,'+images.fotoBase64}}"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+
+  </div>
+</div>
