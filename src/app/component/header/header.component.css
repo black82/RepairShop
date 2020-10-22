@@ -633,3 +633,11 @@ li:hover {
     opacity: 1;
   }
 }
+
+.icon-big {
+  -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+}
+
+.small-icon {
+  -webkit-filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12)) drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14)) drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12)) drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1));
+}
