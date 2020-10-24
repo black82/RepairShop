@@ -34,7 +34,7 @@ export class DeviceSalePaginatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getServerData(null);
+    this.getServerData(undefined);
   }
 
   public getServerData(event?: PageEvent) {
