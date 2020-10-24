@@ -56,10 +56,6 @@
         <p class="title-form">
           Sailing Client
         </p>
-        <a (click)="showsSailingClientRepair(deviceForSaleDto.clientSailing)"
-           *ngIf="deviceForSaleDto.clientSailing.device && deviceForSaleDto.clientSailing.device.length>0"
-           class="button button-small button-activate"><span> <fa-icon
-          [icon]="shows_button" class="button-icon"></fa-icon>Show Client Repair</span></a>
         <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
@@ -83,6 +79,10 @@
         <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
           style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.address}}</span></span>
       </div>
+      <a (click)="showsSailingClientRepair(deviceForSaleDto.clientSailing)"
+         *ngIf="deviceForSaleDto?.clientSailing?.device && deviceForSaleDto?.clientSailing?.device.length>0"
+         class="button button-small button-activate"><span> <fa-icon
+        [icon]="shows_button" class="button-icon"></fa-icon>Show Client Repair</span></a>
       <div class="row-2">
 
         <div class="toggle-container-2">

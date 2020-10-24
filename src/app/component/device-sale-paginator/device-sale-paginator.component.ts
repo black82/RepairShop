@@ -64,8 +64,11 @@ export class DeviceSalePaginatorComponent implements OnInit {
   }
 
   showDevice(element: DeviceForSaleTransaction) {
-    this.deviceService.$deviceForSaleClientTransaction.emit(element);
     this.showClient = true;
+    setTimeout(() => {
+      this.deviceService.$deviceForSaleClientTransaction.emit(element);
+    }, 200);
+
   }
 
   hideClient() {

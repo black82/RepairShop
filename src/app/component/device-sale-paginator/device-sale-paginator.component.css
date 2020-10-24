@@ -166,9 +166,8 @@ fa-icon {
   left: 50%;
 }
 
-::ng-deep .container-single-content > .container-modal > app-single-content > .container-body {
+::ng-deep .container-single-content > .container-modal > app-single-divice-forsale > .container-body {
   background: white !important;
-  color: black !important;
   border-radius: 5px;
 }
 
