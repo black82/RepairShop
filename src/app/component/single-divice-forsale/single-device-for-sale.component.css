@@ -533,6 +533,7 @@ fa-icon {
   color: #FFFFFF;
   padding: 0.8em;
   transition: .2s;
+  margin-bottom: 10px;
 
 }
 
@@ -581,6 +582,7 @@ fa-icon {
   color: #1ABC9C;
   border-color: #1ABC9C;
   cursor: pointer;
+
 }
 
 .button span {

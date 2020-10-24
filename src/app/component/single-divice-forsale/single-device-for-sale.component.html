@@ -46,12 +46,13 @@
             style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.email}}</span></span>
           <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
             style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.address}}</span></span>
-          <a (click)="showsBayingClientRepair(deviceForSaleDto.clientBaying)"
-             *ngIf="deviceForSaleDto.clientBaying.device && deviceForSaleDto.clientBaying.device.length>0"
-             class="button button-small button-activate"><span> <fa-icon
-            [icon]="code" class="button-icon"></fa-icon>Show Client Repair</span></a>
+
         </div>
       </div>
+      <a (click)="showsBayingClientRepair(deviceForSaleDto.clientBaying)"
+         *ngIf="deviceForSaleDto.clientBaying.device && deviceForSaleDto.clientBaying.device.length>0"
+         class="button button-small button-activate"><span> <fa-icon
+        [icon]="shows_button" class="button-icon"></fa-icon>Show Baying Client Repair</span></a>
       <div *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="container-2-content">
         <p class="title-form">
           Sailing Client
@@ -82,7 +83,7 @@
       <a (click)="showsSailingClientRepair(deviceForSaleDto.clientSailing)"
          *ngIf="deviceForSaleDto?.clientSailing?.device && deviceForSaleDto?.clientSailing?.device.length>0"
          class="button button-small button-activate"><span> <fa-icon
-        [icon]="shows_button" class="button-icon"></fa-icon>Show Client Repair</span></a>
+        [icon]="shows_button" class="button-icon"></fa-icon>Show Sailing Client Repair</span></a>
       <div class="row-2">
 
         <div class="toggle-container-2">
@@ -180,7 +181,7 @@
                   </label>
                   <div class="accordion__content">
                     <div class="test-output">
-                      <p *ngIf="test_output?.length===0" class="input-title">
+                      <p *ngIf="test_output?.length===0&&deviceForSaleDto.deviceForSale.isSaled" class="input-title">
                         <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
                         <span class="container-title"> Il tuo dispositivo ha superato tutti test di Uscita!!!
                       </span>

@@ -58,8 +58,8 @@ import {faDelicious} from '@fortawesome/free-brands-svg-icons/faDelicious';
 import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
 import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
 import {faUserGraduate} from '@fortawesome/free-solid-svg-icons/faUserGraduate';
-import {faRadiationAlt} from '@fortawesome/free-solid-svg-icons/faRadiationAlt';
 import {OutputTest} from '../entity/OutputTest';
+import {faPrayingHands} from '@fortawesome/free-solid-svg-icons/faPrayingHands';
 
 @Component({
   selector: 'app-device-sell',
@@ -84,7 +84,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   sidCompany = faCode;
   phone = faPhoneSquare;
   barcode = faBarcode;
-  money2 = faRadiationAlt;
+  money2 = faPrayingHands;
   password = faUnlockAlt;
   accessory = faPaperclip;
   test = faClipboardList;

@@ -11,6 +11,7 @@
     <table class="table table-sm">
       <thead>
       <tr>
+          <th scope="col">Device Id</th>
           <th scope="col">Client to Baying</th>
         <th scope="col">Client to Sailing</th>
         <th scope="col">Device Model</th>
@@ -22,6 +23,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let element of devicesForSale; let i = index">
+        <td class="element-td">{{element.deviceForSale.idDeviceSale}}</td>
         <td class="element-td">{{element.clientBaying.name + '  ' + element.clientBaying.family}}</td>
         <td
           class="element-td">{{element.clientSailing ? element.clientSailing?.name + '  ' + element.clientSailing?.family : ' - '}}</td>
@@ -36,7 +38,7 @@
         </td>
 
         <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
-          [icon]="sally_button" class="button-icon"></fa-icon>Sell Device</span></a>
+          [icon]="sally_button" class="button-icon"></fa-icon>Show Device</span></a>
         </td>
       </tr>
       </tbody>
