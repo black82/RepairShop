@@ -10,7 +10,7 @@
               <fa-icon [icon]="home" class="small-icon"></fa-icon>
               Homepage</a></li>
             <li class="current_page_item" id="new-client-menu"><a accesskey="2" class="teaming" title="">
-              <fa-icon [icon]="stored" class="small-icon" class="menu-icon"></fa-icon>
+              <fa-icon [icon]="stored" class="menu-icon small-icon"></fa-icon>
               Shop
               <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
             </a>
@@ -24,7 +24,7 @@
                     </li>
                     <br>
                     <li><a routerLink="/output/client/device/sell">
-                      <fa-icon [icon]="outputRepair" class="small-icon"></fa-icon>
+                      <fa-icon [icon]="sellDevices" class="small-icon"></fa-icon>
                       Sell Device</a>
                     </li>
                     <br>
@@ -207,22 +207,22 @@
             <app-notification></app-notification>
             <li class="current_page_item sign-in-menu">
               <a id="sign-in"><i class="icon icon-lock menu-icon"></i> Sign in/up
-                <fa-icon [icon]="dropdown"></fa-icon>
+                <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
               </a>
               <div class="submenu-sign">
                 <ul class="submenu submenu-sign-in">
                   <li><a routerLink="/client/sign-in">
-                    <fa-icon [icon]="signIn"></fa-icon>
+                    <fa-icon [icon]="signIn" class="small-icon"></fa-icon>
                     Sign in / Login</a></li>
                   <li><a routerLink="/client/sign-up">
-                    <fa-icon [icon]="signUp"></fa-icon>
+                    <fa-icon [icon]="signUp" class="small-icon"></fa-icon>
                     Sign up/ Registered</a></li>
                   <li><a routerLink="/recovery/password/request">
-                    <fa-icon [icon]="passwordRecovery"></fa-icon>
+                    <fa-icon [icon]="passwordRecovery" class="small-icon"></fa-icon>
                     Recovery Password</a>
                   </li>
                   <li><a (click)="logout()" href="#">
-                    <fa-icon [icon]="signOut"></fa-icon>
+                    <fa-icon [icon]="signOut" class="small-icon"></fa-icon>
                     Disconnect</a>
                   </li>
                 </ul>
