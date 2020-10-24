@@ -74,15 +74,27 @@
             </a>
               <div class="submenu-output">
                 <ul class="submenu-output1 submenu-repair">
-                  <li><a routerLink="/shop/dashboard">
-                    <fa-icon [icon]="tools" class="small-icon"></fa-icon>
-                    Shop Dashboard</a></li>
-                  <li><a routerLink="/device/for/sale/single">
-                    <fa-icon [icon]="device" class="small-icon"></fa-icon>
-                    Device Sale By Id</a></li>
-                  <div class="icon-menu">
+                  <ol class="rout-link">
+                    <li><a routerLink="/shop/dashboard">
+                      <fa-icon [icon]="tools" class="small-icon"></fa-icon>
+                      Shop Dashboard</a></li>
+                    <li><a routerLink="/device/for/sale/single">
+                      <fa-icon [icon]="device" class="small-icon"></fa-icon>
+                      Device Sale By Id</a></li>
+                    <br>
+                    <li><a routerLink="/device/sale/all/pageable">
+                      <fa-icon [icon]="devices" class="small-icon"></fa-icon>
+                      All Device For Sale</a></li>
+                    <li><a routerLink="/device/in/sale/pageable">
+                      <fa-icon [icon]="saleDevices" class="small-icon"></fa-icon>
+                      All Device In Sale Now</a>
+                    </li>
+                    <br>
+                  </ol>
+                  <ol class="icon-menu">
                     <fa-icon [icon]="stored" class="icon-big"></fa-icon>
-                  </div>
+                  </ol>
+
                 </ul>
               </div>
             </li>
@@ -94,7 +106,7 @@
               <div class="current_page_item" id="admin-repair">
                 <div class="admin-repair">
                   <ul class="submenu-repair">
-                    <div class="rout-link">
+                    <ol class="rout-link">
                       <li><a routerLink="/repair/edit">
                         <fa-icon [icon]="redact" class="small-icon"></fa-icon>
                         Redact Repair</a>
@@ -136,10 +148,10 @@
                         <fa-icon [icon]="tools" class="small-icon"></fa-icon>
                         Repair Tools Dashboard</a>
                       </li>
-                    </div>
-                    <div class="icon-menu">
+                    </ol>
+                    <ol class="icon-menu">
                       <fa-icon [icon]="repair" class="icon-big"></fa-icon>
-                    </div>
+                    </ol>
                   </ul>
 
                 </div>
@@ -154,7 +166,7 @@
               <div class="current_page_item">
                 <div class="admin-menu">
                   <ul class="submenu-admin">
-                    <div class="rout-link">
+                    <ol class="rout-link">
                       <li><a routerLink="/admin/dashboard">
                         <fa-icon [icon]="admins" class="small-icon"></fa-icon>
                         Admin Dashboard</a></li>
@@ -181,10 +193,10 @@
                       <li><a routerLink="/admin/statistic/repair">
                         <fa-icon [icon]="charts" class="small-icon"></fa-icon>
                         Repair Statics</a></li>
-                    </div>
-                    <div class="icon-menu">
+                    </ol>
+                    <ol class="icon-menu">
                       <fa-icon [icon]="adminIcon" class="icon-big"></fa-icon>
-                    </div>
+                    </ol>
                   </ul>
                 </div>
               </div>

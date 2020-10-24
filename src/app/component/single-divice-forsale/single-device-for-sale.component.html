@@ -21,10 +21,7 @@
           <p class="title-form">
             Baying Client
           </p>
-          <a (click)="showsBayingClientRepair(deviceForSaleDto.clientBaying)"
-             *ngIf="deviceForSaleDto.clientBaying.device && deviceForSaleDto.clientBaying.device.length>0"
-             class="button button-small button-activate"><span> <fa-icon
-            [icon]="shows_button" class="button-icon"></fa-icon>Show Client Repair</span></a>
+
           <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
@@ -49,6 +46,10 @@
             style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.email}}</span></span>
           <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
             style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.address}}</span></span>
+          <a (click)="showsBayingClientRepair(deviceForSaleDto.clientBaying)"
+             *ngIf="deviceForSaleDto.clientBaying.device && deviceForSaleDto.clientBaying.device.length>0"
+             class="button button-small button-activate"><span> <fa-icon
+            [icon]="code" class="button-icon"></fa-icon>Show Client Repair</span></a>
         </div>
       </div>
       <div *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="container-2-content">
@@ -107,7 +108,7 @@
                   <fa-icon [icon]="date"
                            class="icon-normal-single"></fa-icon>
                   Date to enter:<span
-                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateSell | date:'mediumDate'}}</span>
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateSale | date:'mediumDate'}}</span>
                 </p>
                 <p class="input-title">
                   <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>

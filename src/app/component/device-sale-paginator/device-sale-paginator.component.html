@@ -1,0 +1,52 @@
+<div class="container-body">
+  <div *ngIf="paginatorViu" class="container-paginator">
+    <mat-paginator #paginator
+                   (page)="pageEvent = getServerData($event)"
+                   [length]="length"
+                   [pageIndex]="pageIndex"
+                   [pageSizeOptions]="[5, 10,15, 25,50, 100]"
+                   [pageSize]="pageSize">
+
+    </mat-paginator>
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">Id Device</th>
+        <th scope="col">Client to Baying</th>
+        <th scope="col">Client to Sailing</th>
+        <th scope="col">Device Model</th>
+        <th scope="col">Device Imei</th>
+        <th scope="col">Device Is Sold</th>
+        <th scope="col">Device Date Baying</th>
+        <th scope="col">Device Date Sailing</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of devicesForSale; let i = index">
+        <td class="element-td">{{element.clientBaying.name + '  ' + element.clientBaying.family}}</td>
+        <td
+          class="element-td">{{element.clientSailing ? element.clientSailing?.name + '  ' + element.clientSailing?.family : ' - '}}</td>
+        <td class="element-td">{{element.deviceForSale.model}}</td>
+        <td class="element-td">{{element.deviceForSale.imei}}</td>
+        <td class="element-td">{{element.deviceForSale.isSaled ? 'Sold' : 'Now For Sale'}}</td>
+        <td class="element-td">
+          {{element.deviceForSale?.dateBaying}}
+        </td>
+        <td class="element-td">
+          {{element?.deviceForSale?.dateSale ? element.deviceForSale.dateSale : ' - '}}
+        </td>
+
+        <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
+          [icon]="sally_button" class="button-icon"></fa-icon>Sell Device</span></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div *ngIf="showClient" class="container-single-content" id="container-body">
+      <div class="container-modal">
+        <a (click)="hideClient()" class="close">&times;</a>
+        <app-single-divice-forsale></app-single-divice-forsale>
+      </div>
+    </div>
+  </div>
+</div>

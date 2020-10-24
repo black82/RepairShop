@@ -32,6 +32,7 @@ import {faAngleDown} from '@fortawesome/free-solid-svg-icons/faAngleDown';
 import {faUserCog} from '@fortawesome/free-solid-svg-icons/faUserCog';
 import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
+import {faEuroSign} from '@fortawesome/free-solid-svg-icons/faEuroSign';
 
 @Component({
   selector: 'app-header',
@@ -55,6 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   signOut = faSignOutAlt;
   signUp = faUserPlus;
   devices = faMobile;
+  saleDevices = faEuroSign;
   repair = faTools;
   admins = faUserCog;
   adminIcon = faUserShield;

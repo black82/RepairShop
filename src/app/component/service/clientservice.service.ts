@@ -356,6 +356,24 @@ export class HttpClien {
     );
   }
 
+  getDeviceSaleTransactionAllPageable(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/device/sale/all/pageable',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getDeviceSaleTransactionIsSalePageable(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/device/sale/is/pageable',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getClientPageableByInterval(page: number, size: number, dateInit: Date, dateComplete: Date): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/date/client/pageable-',
       {

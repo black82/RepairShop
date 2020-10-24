@@ -97,7 +97,7 @@
               <p style="font-size: 9pt;margin: 1px">{{"Accessory :  " + client?.deviceSale[0]?.accessory}}</p>
               <p style="font-size: 9pt;margin: 1px;">
                 Data Di Acquisto
-                :  {{ setNewDateFormat(client?.deviceSale[0]?.dateSell)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                :  {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===1||type_print===2" style="border-style: solid;

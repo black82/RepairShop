@@ -524,3 +524,77 @@ fa-icon {
   color: #c54040;
   cursor: pointer;
 }
+
+.button {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  background: transparent;
+  color: #FFFFFF;
+  padding: 0.8em;
+  transition: .2s;
+
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform-origin: left;
+  transition: .5s;
+  border-radius: 10px;
+
+}
+
+.button-get:before {
+  background: lightcoral;
+}
+
+.button-get {
+  margin-top: 50%;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  perspective: 500px;
+
+}
+
+.button-disable:before {
+  background: #EE4D68;
+}
+
+.button-disable:hover {
+  color: #EE4D68;
+  border-color: #EE4D68;
+  cursor: pointer;
+}
+
+.button-activate:before {
+  background: linear-gradient(to top left, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%) !important;;
+}
+
+.button-activate:hover {
+  color: #1ABC9C;
+  border-color: #1ABC9C;
+  cursor: pointer;
+}
+
+.button span {
+  position: relative;
+  z-index: 2;
+}
+
+.button-get:hover {
+  color: lightcoral;
+  border-color: lightcoral;
+  cursor: pointer;
+}
+
+.button:hover:before {
+
+  transform: rotateY(94deg);
+}
