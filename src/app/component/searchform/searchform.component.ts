@@ -7,6 +7,7 @@ import {AlertServiceService} from '../service/alert-service.service';
 import {FormhidenService} from '../service/formhiden.service';
 import {Subscription} from 'rxjs';
 import {Repair} from '../entity/Repair';
+import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
 
 @Component({
   selector: 'app-searchform',
@@ -27,6 +28,8 @@ export class SearchformComponent implements OnInit, OnDestroy {
   actionA: EventEmitter<Client> = new EventEmitter();
   @Output()
   actionB: EventEmitter<Repair> = new EventEmitter();
+  @Output()
+  actionC: EventEmitter<DeviceForSaleTransaction> = new EventEmitter();
   button: Element;
   hidem_show_form_local: EventEmitter<any> = new EventEmitter();
   private show_form: Subscription;
@@ -85,6 +88,9 @@ export class SearchformComponent implements OnInit, OnDestroy {
       case 'single-repair-id': {
         this.searchSingleRepairById();
         break;
+      }
+      case 'single-device-sale': {
+        this.searchDeviceSaleById();
       }
     }
 
@@ -241,6 +247,21 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.hidem_show_form_local.emit();
         this.client = client;
         this.actionA.emit(this.client);
+
+      });
+  }
+
+  private searchDeviceSaleById(): void {
+    if (!Number(this.formInput.controls.ob.value)) {
+      this.alert_service.info(null, 'The value entered must be a Number.', false, false, null, null);
+      return;
+    }
+    this.client_service.getDeviceForSaleById(this.formInput.controls.ob.value).subscribe(
+      deviceSaleDto => {
+        this.actionC.emit(deviceSaleDto);
+        this.hidem_show_form_local.emit();
+      },
+      () => {
 
       });
   }

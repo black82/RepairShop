@@ -31,7 +31,7 @@ import {DeviceBayComponent} from './component/device-bay/device-bay.component';
 import {NotFoundComponent} from './component/not-found/not-found.component';
 import {PageableDeviceSaleComponent} from './component/pageable-device-sale/pageable-device-sale.component';
 import {RepairDashboardComponent} from './component/repair-dashboard/repair-dashboard.component';
-import {SingleDeviceForSaleComponent} from './component/single-divice-forsale/single-device-for-sale.component';
+import {DeviceSaleByIdComponent} from './component/device-sale-by-id/device-sale-by-id.component';
 
 
 export const routes: Routes = [
@@ -66,7 +66,7 @@ export const routes: Routes = [
   {path: 'device/sally/all/page', component: PageableDeviceSaleComponent, canActivate: [AutGuardService]},
   {path: 'repair/dashboard', component: RepairDashboardComponent, canActivate: [AutGuardService]},
   {path: 'shop/dashboard', component: RepairDashboardComponent, canActivate: [AutGuardService]},
-  {path: 'device/for/sale/single', component: SingleDeviceForSaleComponent, canActivate: [AutGuardService]},
+  {path: 'device/for/sale/single', component: DeviceSaleByIdComponent, canActivate: [AutGuardService]},
 ];
 
 

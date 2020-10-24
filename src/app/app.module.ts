@@ -76,6 +76,7 @@ import {RepairDashboardComponent} from './component/repair-dashboard/repair-dash
 import {ShopDashboardComponent} from './component/shop-dashboard/shop-dashboard.component';
 import {SinglDeviceShouwComponent} from './component/singl-device-shouw/singl-device-shouw.component';
 import {SingleDeviceForSaleComponent} from './component/single-divice-forsale/single-device-for-sale.component';
+import {DeviceSaleByIdComponent} from './component/device-sale-by-id/device-sale-by-id.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import {SingleDeviceForSaleComponent} from './component/single-divice-forsale/si
     RepairDashboardComponent,
     ShopDashboardComponent,
     SinglDeviceShouwComponent,
-    SingleDeviceForSaleComponent
+    SingleDeviceForSaleComponent,
+    DeviceSaleByIdComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

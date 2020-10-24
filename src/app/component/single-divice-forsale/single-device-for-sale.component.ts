@@ -1,10 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Client} from '../entity/ClientWeb';
-import {DeviceForSale} from '../entity/DeviceForSale';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {InputTest} from '../entity/InputTest';
 import {OutputTest} from '../entity/OutputTest';
-import {RepairFileStorage} from '../entity/RepairFileStorage';
-import {DeviceForSaleDto} from '../entity/DeviceForSaleDto';
+import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
 import {faMicrochip} from '@fortawesome/free-solid-svg-icons/faMicrochip';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
@@ -23,14 +20,18 @@ import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOp
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faMeteor} from '@fortawesome/free-solid-svg-icons/faMeteor';
 import {faFileImage} from '@fortawesome/free-solid-svg-icons/faFileImage';
+import {DeviceInputService} from '../service/device-input.service';
+import {Subscription} from 'rxjs';
+import {Client} from '../entity/ClientWeb';
+import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons/faAngleDoubleRight';
+import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
 
 @Component({
   selector: 'app-single-divice-forsale',
   templateUrl: './single-device-for-sale.component.html',
   styleUrls: ['./single-device-for-sale.component.css']
 })
-export class SingleDeviceForSaleComponent implements OnInit {
-
+export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   chip = faMicrochip;
   used = faHeart;
   mobile = faMobile;
@@ -51,26 +52,36 @@ export class SingleDeviceForSaleComponent implements OnInit {
   work = faTools;
   test_meteor = faMeteor;
   images_icon = faFileImage;
-  repairStorage: RepairFileStorage = new RepairFileStorage();
-  inputTest: InputTest = new InputTest(1, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-    true, true, true);
-  outputTest: OutputTest = new OutputTest(1, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-    true, true, true);
-  clint: Client = new Client(12, 'Railean', 'Iurie',
-    null, null, null, null, 'asdadsadsad', null, true, false, null, null, 'T-0', 'T -1', null, null);
-  clint2: Client = new Client(12, 'Railean', 'iurie',
-    null, null, null, null, 'asdadsadsad', null, true, false, null, null, 'T-0', 'T -1', null, null);
-  deviceForSale: DeviceForSale = new DeviceForSale(12, 'samsung', 'Smartfon',
-    'A+', 'afsafsadsadsadsadsa', '123213', '123', 'dffghg', 'asadasd', 'asdasdsad', 'asadsadsa',
-    23, this.inputTest, this.outputTest, this.repairStorage, true, '123', '1234', new Date(), new Date());
-  deviceForSaleDto: DeviceForSaleDto = new DeviceForSaleDto(this.clint, this.clint2, this.deviceForSale);
-  test_input: string[] = [];
+  shows_button = faAngleDoubleRight;
+  client: Client;
+  showClientRepair = false;
+  hide_button = faHistory;
+  // repairStorage: RepairFileStorage = new RepairFileStorage();
+  // inputTest: InputTest = new InputTest(1, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+  //   true, true, true);
+  // outputTest: OutputTest = new OutputTest(1, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+  //   true, true, true);
+  // clint: Client = new Client(12, 'Railean', 'Iurie',
+  //   null, null, null, null, 'asdadsadsad', null, true, false, null, null, 'T-0', 'T -1', null, null);
+  // clint2: Client = new Client(12, 'Railean', 'iurie',
+  //   null, null, null, null, 'asdadsadsad', null, true, false, null, null, 'T-0', 'T -1', null, null);
+  // deviceForSale: DeviceForSale = new DeviceForSale(12, 'samsung', 'Smartfon',
+  //   'A+', 'afsafsadsadsadsadsa', '123213', '123', 'dffghg', 'asadasd', 'asdasdsad', 'asadsadsa',
+  //   23, this.inputTest, this.outputTest, this.repairStorage, true, '123', '1234', new Date(), new Date());
+  // deviceForSaleDto: DeviceForSaleDto = new DeviceForSaleDto(this.clint, this.clint2, this.deviceForSale);
+  deviceForSaleDto: DeviceForSaleTransaction;
   test_output: string[] = [];
+  test_input: any[] = [];
+  showDevice = false;
+  private subscription: Subscription;
 
-  constructor() {
+  constructor(private deviceInputService: DeviceInputService) {
   }
 
   ngOnInit(): void {
+    this.subscription = this.deviceInputService.$deviceForSaleClientTransaction.subscribe(deviceForSale => {
+      this.client_catch(deviceForSale);
+    });
   }
 
   open_popup(url: string) {
@@ -85,5 +96,146 @@ export class SingleDeviceForSaleComponent implements OnInit {
     } else {
       image.id = 'normal-zoom';
     }
+  }
+
+  check_test_OK(client: InputTest) {
+    this.test_input = [];
+    if (!client.camera_input) {
+      this.test_input.push('X Fotocamera');
+    }
+    if (!client.bluetooth) {
+      this.test_input.push('X Bluetooh');
+    }
+    if (!client.vibrations) {
+      this.test_input.push('X Vibrations');
+    }
+    if (!client.audio_equipment) {
+      this.test_input.push('X Audio');
+    }
+    if (!client.software) {
+      this.test_input.push('X Software');
+    }
+    if (!client.keyboard_input) {
+      this.test_input.push('X La tastiera');
+    }
+    if (!client.sim_input) {
+      this.test_input.push('X SIM danneggiata/assente ');
+    }
+    if (!client.microphone_input) {
+      this.test_input.push('X Microfono');
+    }
+    if (!client.wi_fi_input) {
+      this.test_input.push('X Wi-Fi');
+    }
+    if (!client.touch_input) {
+      this.test_input.push('X Touch');
+    }
+    if (!client.sound_equipment_input) {
+      this.test_input.push('X L\'apparecchiatura audio');
+    }
+    if (!client.camera_input_front) {
+      this.test_input.push('X Fotocamera Frontale');
+    }
+    if (!client.connectors_input) {
+      this.test_input.push('X Connettori');
+    }
+    if (!client.display_input) {
+      this.test_input.push('X Display');
+    }
+    if (!client.sensors_input) {
+      this.test_input.push('X Sensore');
+    }
+    if (!client.display_touch_input) {
+      this.test_input.push('X Display_touchy');
+    }
+    if (!client.faceIdInput) {
+      this.test_input.push('X Face Id');
+    }
+  }
+
+  check_test_OK_out(outputted: OutputTest) {
+    this.test_output = [];
+    if (!outputted.camera_Output) {
+      this.test_output.push('X Fotocamera');
+    }
+    if (!outputted.audio_equipment) {
+      this.test_output.push('X Speaker');
+    }
+    if (!outputted.software) {
+      this.test_output.push('X Software');
+    }
+    if (!outputted.vibrations) {
+      this.test_output.push('X Vibrations');
+    }
+    if (!outputted.bluetooth) {
+      this.test_output.push('X Bluetooh');
+    }
+    if (!outputted.camera_Output_Front) {
+      this.test_output.push('X Fotocamera Frontale');
+    }
+    if (!outputted.keyboard_Output) {
+      this.test_output.push('X Tastiera ');
+    }
+    if (!outputted.sim_Output) {
+      this.test_output.push('X SIM è danneggiata/assente ');
+    }
+    if (!outputted.microphone_Output) {
+      this.test_output.push('X Microfono');
+    }
+    if (!outputted.wi_fi_Output) {
+      this.test_output.push('X Wi-Fi');
+    }
+    if (!outputted.touch_Output) {
+      this.test_output.push('X Sensore Touch');
+    }
+    if (!outputted.sound_equipment_Output) {
+      this.test_output.push('X L\'apparecchiatura audio');
+    }
+    if (!outputted.connectors_Output) {
+      this.test_output.push('X Connettori');
+    }
+    if (!outputted.display_Output) {
+      this.test_output.push('X Display  ');
+    }
+    if (!outputted.sensors_Output) {
+      this.test_output.push('X Sensore ');
+    }
+    if (!outputted.display_touch_Output) {
+      this.test_output.push('X Display_touchy');
+    }
+    if (!outputted.faceIdOutput) {
+      this.test_output.push('X Face Id  danneggiato ');
+    }
+  }
+
+  client_catch(device: DeviceForSaleTransaction) {
+    this.deviceForSaleDto = device;
+    this.check_test_OK(this.deviceForSaleDto.deviceForSale.inputTest);
+    if (device.deviceForSale.isSaled) {
+      this.check_test_OK_out(this.deviceForSaleDto.deviceForSale.outputTest);
+    }
+    this.showDevice = true;
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  showsBayingClientRepair(clientBaying: Client) {
+    this.client = null;
+    this.client = clientBaying;
+    this.showClientRepair = true;
+  }
+
+  showsSailingClientRepair(clientSailing: Client) {
+    this.client = null;
+    this.client = clientSailing;
+    this.showClientRepair = true;
+  }
+
+  hideClient() {
+    this.showClientRepair = false;
   }
 }

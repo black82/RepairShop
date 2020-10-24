@@ -1,7 +1,7 @@
 import {Client} from './ClientWeb';
 import {DeviceForSale} from './DeviceForSale';
 
-export class DeviceForSaleDto {
+export class DeviceForSaleTransaction {
   clientBaying: Client;
   clientSailing: Client;
   deviceForSale: DeviceForSale;

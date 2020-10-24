@@ -13,6 +13,7 @@ import {StatisticModelParts} from '../entity/StatisticModelParts';
 import {MessageInvoice} from '../entity/MessageInvoice';
 import {UserStaffNickNamePojo} from '../entity/UserStaffNickNamePojo';
 import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
+import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
 
 @Injectable({
   providedIn: 'root'
@@ -335,6 +336,13 @@ export class HttpClien {
       {
         params: new HttpParams().set('page', String(page)).set('size', String(size))
       }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getDeviceForSaleById(id: any): Observable<DeviceForSaleTransaction> {
+    return this.http.get<DeviceForSaleTransaction>(this.apiUrl + 'api/device/single/id',
+      {params: new HttpParams().set('id', String(id))}).pipe(
       catchError(this.errorHandler)
     );
   }

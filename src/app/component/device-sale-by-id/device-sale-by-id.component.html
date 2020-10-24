@@ -1,0 +1,11 @@
+<div class="container-body">
+  <div class="container-form">
+    <app-searchform (actionC)="client_catch($event)" [textButton]="button" [titleForm]="nameForm"
+                    [typeForm]="'single-device-sale'"></app-searchform>
+  </div>
+  <div *ngIf="shouwClient" class="container-single-content">
+
+    <app-single-divice-forsale></app-single-divice-forsale>
+
+  </div>
+</div>

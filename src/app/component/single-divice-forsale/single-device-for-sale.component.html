@@ -1,16 +1,30 @@
 <div class="container-body">
-  <div class="title-container">
-    <p class="title-form"> Device For Sale <span
-      style="color: lightcoral"> {{ deviceForSaleDto.deviceForSale.model + ' ' + deviceForSaleDto.deviceForSale.imei}} </span>
-    </p>
-  </div>
-  <div class="row-container">
+  <div *ngIf="showDevice" class="row-container">
+    <div class="title-container">
+      <p class="title-form"> Device For Sale <span
+        style="color: lightcoral"> {{ deviceForSaleDto.deviceForSale.model + ' ' + deviceForSaleDto.deviceForSale.imei}} </span>
+      </p>
+    </div>
+    <div *ngIf="showClientRepair" class="container-single-content">
+      <div class="container-modal">
+        <a (click)="hideClient()" class="close">&times;</a>
+        <app-single-content [client]="client"></app-single-content>
+        <div><a (click)="hideClient()"
+                class="button button-small button-disable"><span> <fa-icon
+          [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+        </div>
+      </div>
+    </div>
     <div class="row-1">
       <div class="container-1-content">
         <div class="container-2-content">
           <p class="title-form">
             Baying Client
           </p>
+          <a (click)="showsBayingClientRepair(deviceForSaleDto.clientBaying)"
+             *ngIf="deviceForSaleDto.clientBaying.device && deviceForSaleDto.clientBaying.device.length>0"
+             class="button button-small button-activate"><span> <fa-icon
+            [icon]="shows_button" class="button-icon"></fa-icon>Show Client Repair</span></a>
           <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
@@ -37,10 +51,14 @@
             style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.address}}</span></span>
         </div>
       </div>
-      <div class="container-2-content">
+      <div *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="container-2-content">
         <p class="title-form">
           Sailing Client
         </p>
+        <a (click)="showsSailingClientRepair(deviceForSaleDto.clientSailing)"
+           *ngIf="deviceForSaleDto.clientSailing.device && deviceForSaleDto.clientSailing.device.length>0"
+           class="button button-small button-activate"><span> <fa-icon
+          [icon]="shows_button" class="button-icon"></fa-icon>Show Client Repair</span></a>
         <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
@@ -170,7 +188,7 @@
                       <p *ngIf="!deviceForSaleDto.deviceForSale.isSaled" class="input-title">
 
                         <fa-icon [icon]="test_meteor" class="icon-test-tile icon-normal-single"></fa-icon>
-                        <span class="container-title">  Dispozitivo e anqora in reparazione!!!</span>
+                        <span class="container-title">  Dispozitivo e anqora in Vendita!!!</span>
                       </p>
                       <div *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="test-output-container">
 

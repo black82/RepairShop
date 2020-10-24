@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
@@ -54,8 +54,8 @@ export class SingleContentComponent implements OnInit {
   devices: Device[] = [];
   repairs_element: ElementRepair[] = [];
   repair_fileStorage: RepairFileStorage;
-  @Input()
-  refresh: EventEmitter<Client> = new EventEmitter<Client>();
+  // @Input()
+  // refresh: EventEmitter<Client> = new EventEmitter<Client>();
   show_repair = false;
   show_document = false;
   device_show = false;
