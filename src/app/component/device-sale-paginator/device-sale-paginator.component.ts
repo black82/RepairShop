@@ -81,7 +81,7 @@ export class DeviceSalePaginatorComponent implements OnInit {
         return this.clientHttp.getDeviceSaleTransactionAllPageable(pageIndex, pageSize);
       }
       case 'isSale': {
-        return this.clientHttp.getDeviceSaleTransactionAllPageable(pageIndex, pageSize);
+        return this.clientHttp.getDeviceSaleTransactionIsSalePageable(pageIndex, pageSize);
       }
     }
   }
