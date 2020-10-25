@@ -88,7 +88,7 @@
                 style="font-size: 9pt;margin: 1px">Condizioni d'uso
                 :   {{ client?.deviceSale[0]?.state_of_use ? 'Nuovo' : 'Usato'}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{"Condizioni d'uso :  " + client?.deviceSale[0].garantyDuration}}</p>
+                style="font-size: 9pt;margin: 1px"> {{"Garanzia :  " + client?.deviceSale[0].garantyDuration + ' messe'}}</p>
               <p *ngIf="print_entity.type_client_print===4"
                  style="font-size: 9pt;margin: 1px">IMEI & SN
                 : {{client?.deviceSale[0]?.imei}}</p>
