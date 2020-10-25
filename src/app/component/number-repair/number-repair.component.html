@@ -1,13 +1,15 @@
-
 <div *ngIf="showPopup" class="overlay" id="popup1">
   <div class="border-div">
     <div class="popup">
       <a (click)="close()" class="close">&times;</a>
-     <fa-icon [icon]="smile" class="smile"></fa-icon>
+      <fa-icon [icon]="smile" class="smile"></fa-icon>
       <div class="content">
         <h1 class="repair-id">
           <fa-icon [icon]="check" class="icon"></fa-icon>
-          Operation Number : {{id}}</h1>
+          The Id Of The Operation : {{id}}</h1>
+        <a (click)="close()" class="second-button">
+          <fa-icon [icon]="buttonIcon"></fa-icon>
+          Ok</a>
       </div>
     </div>
   </div>

@@ -23,18 +23,18 @@
       </thead>
       <tbody>
       <tr *ngFor="let element of devicesForSale; let i = index">
-        <td class="element-td">{{element.deviceForSale.idDeviceSale}}</td>
-        <td class="element-td">{{element.clientBaying.name + '  ' + element.clientBaying.family}}</td>
+        <td class="element-td">{{element.deviceForSale?.idDeviceSale}}</td>
+        <td class="element-td">{{element.clientBaying?.name + '  ' + element.clientBaying?.family}}</td>
         <td
           class="element-td">{{element.clientSailing ? element.clientSailing?.name + '  ' + element.clientSailing?.family : ' - '}}</td>
-        <td class="element-td">{{element.deviceForSale.model}}</td>
-        <td class="element-td">{{element.deviceForSale.imei}}</td>
-        <td class="element-td">{{element.deviceForSale.isSaled ? 'Sold' : 'Now For Sale'}}</td>
+        <td class="element-td">{{element.deviceForSale?.model}}</td>
+        <td class="element-td">{{element.deviceForSale?.imei}}</td>
+        <td class="element-td">{{element.deviceForSale?.isSaled ? 'Sold' : 'Now For Sale'}}</td>
         <td class="element-td">
           {{element.deviceForSale?.dateBaying}}
         </td>
         <td class="element-td">
-          {{element?.deviceForSale?.dateSale ? element.deviceForSale.dateSale : ' - '}}
+          {{element?.deviceForSale?.dateSale ? element.deviceForSale?.dateSale : ' - '}}
         </td>
 
         <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon

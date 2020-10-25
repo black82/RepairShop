@@ -15,8 +15,6 @@ import {faLaptopCode} from '@fortawesome/free-solid-svg-icons/faLaptopCode';
 import {faChartLine} from '@fortawesome/free-solid-svg-icons/faChartLine';
 import {faUserEdit} from '@fortawesome/free-solid-svg-icons/faUserEdit';
 import {faPhoneSquare} from '@fortawesome/free-solid-svg-icons/faPhoneSquare';
-import {faIdCard} from '@fortawesome/free-solid-svg-icons/faIdCard';
-import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
 import {faUserPlus} from '@fortawesome/free-solid-svg-icons/faUserPlus';
@@ -28,6 +26,7 @@ import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {faToolbox} from '@fortawesome/free-solid-svg-icons/faToolbox';
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons/faAngleDown';
+import {faEuroSign} from '@fortawesome/free-solid-svg-icons/faEuroSign';
 
 @Component({
   selector: 'app-shop-dashboard',
@@ -44,13 +43,13 @@ export class ShopDashboardComponent implements OnInit {
   users = faUserEdit;
   mail = faEnvelopeOpen;
   phone = faPhoneSquare;
-  idIcon = faIdCard;
-  envelope = faEnvelope;
+  devices = faMobile;
+  saleDevices = faEuroSign;
   passwordRecovery = faUnlockAlt;
   signIn = faSignInAlt;
   signOut = faSignOutAlt;
   signUp = faUserPlus;
-  devices = faMobile;
+
   repair = faTools;
   admins = faUserCog;
   adminIcon = faUserShield;

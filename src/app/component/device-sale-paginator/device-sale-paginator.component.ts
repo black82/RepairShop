@@ -52,7 +52,6 @@ export class DeviceSalePaginatorComponent implements OnInit {
         this.pageSize = response.pageable.pageSize;
         this.length = response.totalElements;
         this.paginatorViu = true;
-
       },
       () => {
         this.animation_wait.$anime_show.emit(false);

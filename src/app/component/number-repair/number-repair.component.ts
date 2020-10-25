@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertServiceService} from '../service/alert-service.service';
 import {PrintService} from '../service/print.service';
 import {Subscription} from 'rxjs';
-import {faCheckSquare, faSmileWink} from '@fortawesome/free-solid-svg-icons';
+import {faDatabase, faSmileWink} from '@fortawesome/free-solid-svg-icons';
+import {faCheckCircle} from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 
 @Component({
   selector: 'app-number-repair',
@@ -14,8 +15,9 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
   id: number;
   showPopup = false;
   private subscription: Subscription;
-  check = faCheckSquare;
+  check = faDatabase;
   smile = faSmileWink;
+  buttonIcon = faCheckCircle;
 
   constructor(private alert_service: AlertServiceService,
               private print: PrintService) {

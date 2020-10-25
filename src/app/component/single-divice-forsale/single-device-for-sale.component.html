@@ -96,19 +96,19 @@
               <div class="border">
                 <p class="input-title">
                   <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
-                  <strong> Repair Id:<span
+                  <strong> Device Id:<span
                     style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.idDeviceSale}}</span></strong>
                 </p>
                 <p class="input-title">
                   <fa-icon [icon]="date"
                            class="icon-normal-single"></fa-icon>
-                  Date to enter:<span
+                  Date to Baying:<span
                   style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateBaying | date:'mediumDate'}}</span>
                 </p>
                 <p class="input-title">
                   <fa-icon [icon]="date"
                            class="icon-normal-single"></fa-icon>
-                  Date to enter:<span
+                  Date to Sailing:<span
                   style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateSale | date:'mediumDate'}}</span>
                 </p>
                 <p class="input-title">
@@ -229,10 +229,11 @@
                     </a>
                   </label>
                   <div class="accordion__content">
+                    <p>Client Update {{deviceForSaleDto.clientBaying.lastModified}}</p>
+                    <p>Client Create {{deviceForSaleDto.clientBaying.createUser}}</p>
                     <div>
                     </div>
-                    <div class="note-container">
-                    </div>
+
                   </div>
                 </div>
               </div>

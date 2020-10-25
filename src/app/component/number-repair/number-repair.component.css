@@ -7,6 +7,7 @@ h2 {
 
 .repair-id {
   color: #fefefe;
+  font-family: Bradley Hand, cursive;
 }
 
 .popup .smile {
@@ -86,7 +87,6 @@ h2 {
 
 .popup .close {
   position: absolute;
-  color: #fefefe;
   top: 20px;
   right: 30px;
   transition: all 200ms;
@@ -100,11 +100,6 @@ h2 {
   cursor: pointer;
 }
 
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
 @media screen and (max-width: 700px) {
   .box {
     width: 70%;
@@ -113,4 +108,31 @@ h2 {
   .popup {
     width: 70%;
   }
+}
+
+.second-button {
+  background: linear-gradient(to top right, hsl(179, 34%, 48%) 40%, hsl(155, 50%, 61%) 100%) !important;
+  appearance: none;
+  margin-left: 69%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin-right: 100px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  -webkit-transition-duration: 0.25s;
+  transition-duration: 0.25s;
+}
+
+.second-button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  color: #53e3a6;
+}
+
+.second-button:focus {
+  background-color: white;
+  width: 500px;
+
 }

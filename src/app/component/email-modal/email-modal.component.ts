@@ -51,6 +51,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   private typeSender: string;
   private subscriptionPrintSuccess: Subscription;
   private invoice: InvoiceToolsDto;
+  private subscriptionEmail: Subscription;
 
   constructor(private print: PrintService,
               private emailSender: EmailSenderService,
@@ -92,6 +93,11 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       });
 
       this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
+        if (value) {
+          this.submitForm();
+        }
+      });
+      this.subscriptionEmail = this.emailSender.email_sent_send_success.subscribe(value => {
         if (value) {
           this.submitForm();
         }
@@ -204,7 +210,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
-      this.emailSender.email_sent_send_success.emit(this.client);
+      this.emailSender.email_sent_send_success.emit(true);
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
@@ -218,7 +224,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.http.sendWhatsAppClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
-      this.emailSender.email_sent_send_success.emit(this.client);
+      this.emailSender.email_sent_send_success.emit(true);
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
@@ -232,7 +238,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.http.sendMmsClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
-      this.emailSender.email_sent_send_success.emit(this.client);
+      this.emailSender.email_sent_send_success.emit(true);
     }, error => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
@@ -343,6 +349,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.email_send_event) {
       this.email_send_event.unsubscribe();
+    }
+    if (this.subscriptionEmail) {
+      this.subscriptionEmail.unsubscribe();
     }
   }
 
@@ -461,8 +470,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
       }
       default: {
-        this.alert_service.warn(null, 'Unfortunately, the recipient could not be chosen',
-          false, false, null);
+        if (this.typeSender !== InvoiceType.PrintPage) {
+          this.alert_service.warn(null, 'Unfortunately, the recipient could not be chosen',
+            false, false, null);
+        }
         return;
       }
     }

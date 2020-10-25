@@ -25,7 +25,6 @@ import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
 import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
-import {faTimesCircle} from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {faToolbox} from '@fortawesome/free-solid-svg-icons/faToolbox';
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons/faAngleDown';
@@ -33,6 +32,8 @@ import {faUserCog} from '@fortawesome/free-solid-svg-icons/faUserCog';
 import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
 import {faEuroSign} from '@fortawesome/free-solid-svg-icons/faEuroSign';
+import {faAppStoreIos} from '@fortawesome/free-brands-svg-icons/faAppStoreIos';
+import {faPeopleCarry} from '@fortawesome/free-solid-svg-icons/faPeopleCarry';
 
 @Component({
   selector: 'app-header',
@@ -56,13 +57,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   signOut = faSignOutAlt;
   signUp = faUserPlus;
   devices = faMobile;
+  bayingDevice = faPeopleCarry;
   saleDevices = faEuroSign;
   repair = faTools;
   admins = faUserCog;
   adminIcon = faUserShield;
   notificationSend = faConciergeBell;
   sellDevices = faHandHoldingUsd;
-  outputRepair = faTimesCircle;
+  outputRepair = faAppStoreIos;
   redact = faFileSignature;
   usertag = faUserTag;
   images = faFileImage;
