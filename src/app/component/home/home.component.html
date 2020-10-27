@@ -7,42 +7,44 @@
             <div class="test">
               <div class="icon_cont">
                 <h3><a class="icon icon-store icon-animation" id="icon1"
-                       routerLink="/input/client/device">
+                       routerLink="/shop/dashboard">
                   <fa-icon [icon]="stored"></fa-icon>
                 </a></h3>
               </div>
             </div>
             <div class="box-empty"></div>
-            <a class="button button-small" routerLink="/input/client/device"><span><fa-icon
+            <a class="button button-small" routerLink="/shop/dashboard"><span><fa-icon
               [icon]="stored"
-              class="icon-animation"></fa-icon> Shop </span></a>
+              class="icon-animation"></fa-icon> Shop Dashboard </span></a>
           </div>
         </div>
         <div class="column2">
           <div class="box">
             <div class="icon_cont">
               <h3><a class="icon icon-store icon-animation" id="icon2"
-                     routerLink="/output/client/device">
+                     routerLink="/repair/dashboard">
                 <fa-icon [icon]="repair"></fa-icon>
               </a></h3>
             </div>
             <div class="box-empty"></div>
-            <a class="button button-small" routerLink="/output/client/device"><span><fa-icon
+            <a class="button button-small" routerLink="/repair/dashboard"><span><fa-icon
               [icon]="repair"
-              class="icon-animation"></fa-icon>  Repair  </span></a>
+              class="icon-animation"></fa-icon>  Repair Dashboard </span></a>
           </div>
         </div>
-        <!--        <div class="column3">-->
-        <!--          <div class="box">-->
-        <!--            <div class="icon_cont">-->
-        <!--              <h3><a class="icon icon-camera-retro icon-animation" routerLink="/upload/repair/images"-->
-        <!--                     id="icon3"></a></h3>-->
-        <!--            </div>-->
-        <!--            <div class="box-empty"></div>-->
-        <!--            <a class="button button-small" routerLink="/upload/repair/images"><span><fa-icon-->
-        <!--              [icon]="search"></fa-icon> Upload Images</span></a>-->
-        <!--          </div>-->
-        <!--        </div>-->
+        <div *ngIf="admin" class="column3">
+          <div class="box">
+            <div class="icon_cont">
+              <h3><a class="icon icon-animation" id="icon3"
+                     routerLink="/admin/dashboard">
+                <fa-icon [icon]="adminIcon"></fa-icon>
+              </a></h3>
+            </div>
+            <div class="box-empty"></div>
+            <a class="button button-small" routerLink="/admin/dashboard"><span><fa-icon
+              [icon]="adminIcon"></fa-icon> Admin Dashboard </span></a>
+          </div>
+        </div>
 
       </div>
     <div id="wrapper2">

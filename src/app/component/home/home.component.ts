@@ -5,6 +5,7 @@ import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
 import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
+import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   entering = faSignInAlt;
   stored = faStore;
   repair = faTools;
+  adminIcon = faUserShield;
+
   hidem_animation = true;
   admin = false;
   private subscribe_admin: Subscription;
@@ -32,12 +35,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (view) {
 
       this.admin = true;
+      this.clickElementAnimation();
     }
     this.subscribe_admin = this.adminService.$admin_show.subscribe(value => {
       this.showAdminPage(value);
+      this.clickElementAnimation();
     });
-
     this.clickElementAnimation();
+
     const timeout = setTimeout(() => {
       this.hidem_animation = false;
       clearTimeout(timeout);

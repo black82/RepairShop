@@ -64,8 +64,8 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.invoice = null;
-    this.images_sig = this.sig_pad_service.image_sig;
     this.email_send_event = this.emailSender.email_send_event.subscribe(print => {
+      this.images_sig = this.sig_pad_service.image_sig;
       this.print_entity = print;
       this.title = print.titleForm;
       this.checkIfEmailPresent(print.client_print);
@@ -99,7 +99,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       });
       this.subscriptionEmail = this.emailSender.email_sent_send_success.subscribe(value => {
         if (value) {
-          this.submitForm();
+          this.submitFormEmail();
         }
       });
     });
@@ -199,6 +199,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       }
       case InvoiceType.PrintPage: {
         this.savePrintPage(invoiceToPrintPage);
+        break;
       }
 
     }
@@ -271,6 +272,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   check_type_print(printTypes: PrintEntity) {
     if (printTypes.type_client_print === 2) {
+      this.check_test_OK(printTypes.client_print.device[0].repairs[0].inputModule);
       this.check_test_OK_out(printTypes.client_print.device[0].repairs[0].outputTest);
     }
     if (printTypes.type_client_print === 1) {
@@ -563,6 +565,11 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     invoiceToPrintPage.typeFile = this.checkTypePrint();
     invoiceToPrintPage.callerServiceType = this.callerServiceType;
     return invoiceToPrintPage;
+  }
+
+  private submitFormEmail() {
+    this.print.$success_print_id.emit(Number(this.id));
+    this.animation_wait.$anime_show.emit(false);
   }
 }
 
