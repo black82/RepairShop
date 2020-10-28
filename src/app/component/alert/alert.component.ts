@@ -3,7 +3,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AlertServiceService} from '../service/alert-service.service';
 import {Alert, AlertType} from '../entity/AlertEntity';
-import {Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 import {faBomb} from '@fortawesome/free-solid-svg-icons/faBomb';
 
@@ -23,7 +23,6 @@ import {Subscription} from 'rxjs';
 export class AlertComponent implements OnInit, OnDestroy {
   title_alert: string;
   body_alert: string;
-  alert: Alert;
   icon: any;
   color_icon: any;
   info = faInfoCircle;
@@ -33,6 +32,9 @@ export class AlertComponent implements OnInit, OnDestroy {
   exclamation_triangle = faExclamationTriangle;
   sucess = faCheckCircle;
   private subscription: Subscription;
+  alerts: Alert[] = [];
+  alert: Alert;
+  private routeSubscription: Subscription;
 
 
   constructor(private alertService: AlertServiceService,
@@ -55,28 +57,39 @@ export class AlertComponent implements OnInit, OnDestroy {
             return;
           }
         }
-        this.alert = alert;
         if (alert?.message === 'Sorry, you left the module.') {
           this.router.navigate(alert.location).then();
         }
-        this.timeout_remove_alert();
+        this.alerts.push(alert);
+        this.timeout_remove_alert(alert);
       });
+    this.routeSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.alerts.forEach(x => {
+          this.removeAlert(x);
+        });
+      }
+    });
   }
 
-  timeout_remove_alert() {
-    if (!document.querySelector('.show--alert')) {
-      this.initAlert();
+  timeout_remove_alert(alert: Alert) {
+    if (!this.alert) {
+      this.alert = alert;
+      this.initAlert(alert);
+      this.autoCloseAlert(alert);
     } else {
-      this.removeAlert();
-      this.initAlert();
+      this.removeAlert(this.alert);
+      this.alert = alert;
+      this.initAlert(alert);
+      this.autoCloseAlert(alert);
     }
   }
 
-  initAlert() {
-    if (this.alert.keepAfterRouteChange) {
-      this.rout_Out_Alert(this.alert.location);
+  initAlert(alert: Alert) {
+    if (alert.keepAfterRouteChange) {
+      this.rout_Out_Alert(alert.location);
     }
-    this.text_alert_initialized();
+    this.text_alert_initialized(alert);
   }
 
   success_alert() {
@@ -87,21 +100,25 @@ export class AlertComponent implements OnInit, OnDestroy {
     success.classList.add('show--alert');
   }
 
-  removeAlert() {
-    const remove = document.querySelectorAll('.show--alert');
-    if (remove) {
-      remove?.forEach(value => {
-        value?.classList.add('hidden--alert');
-      });
+  removeAlert(alert: Alert) {
+    if (this.alerts.includes(alert)) {
+      const remove = document.querySelectorAll('.show--alert');
+      if (remove) {
+        remove?.forEach(value => {
+          value?.classList.add('hidden--alert');
+        });
+        this.alerts.splice(this.alerts.indexOf(alert), 1);
+        this.alert = null;
+      }
     }
   }
 
-  closeBaton() {
-    this.removeAlert();
+  closeBaton(alert: Alert) {
+    this.removeAlert(alert);
   }
 
-  public text_alert_initialized(): void {
-    switch (this.alert.type) {
+  public text_alert_initialized(alert: Alert): void {
+    switch (alert.type) {
       case AlertType.Success: {
         this.color_icon = '#06D85F';
         this.icon = faCheckCircle;
@@ -114,21 +131,21 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.color_icon = '#F09EA3';
         this.icon = faTimesCircle;
 
-        if (this.alert.errore === null || this.alert.errore === undefined) {
-          this.alert.errore = new HttpErrorResponse({
+        if (alert.errore === null || alert.errore === undefined) {
+          alert.errore = new HttpErrorResponse({
             error: 'Unknown error',
             status: 404,
             statusText: 'an unknown error occurred'
           });
         }
-        if (this.alert.errore.status === 0) {
+        if (alert.errore.status === 0) {
           this.error_status = 500;
           this.title_alert = 'Oops : Error ';
-          this.alert.message = 'The backend part did not give any answer.';
+          alert.message = 'The backend part did not give any answer.';
           this.error_alert();
           break;
         }
-        this.error_status = this.alert.errore.status;
+        this.error_status = alert.errore.status;
         this.title_alert = 'Oops : Error ';
         this.body_alert = 'Try again. Otherwise contact support.';
         this.error_alert();
@@ -185,5 +202,15 @@ export class AlertComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+  }
+
+  private autoCloseAlert(alert: Alert) {
+    const timeout = setTimeout(() => {
+      this.removeAlert(alert);
+      clearTimeout(timeout);
+    }, 3000);
   }
 }

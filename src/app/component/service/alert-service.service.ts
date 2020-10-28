@@ -11,19 +11,19 @@ export class AlertServiceService {
 
 
   success(type, message: string, keepAfterRouteChange: boolean, fade: boolean, location: string) {
-    this.alert(new Alert(AlertType.Success, message, null, keepAfterRouteChange, fade, location));
+    this.alert(new Alert(Math.random(), AlertType.Success, message, null, keepAfterRouteChange, fade, location));
   }
 
   error(type, message: string, keepAfterRouteChange: boolean, fade: boolean, location: string, errore: HttpErrorResponse) {
-    this.alert(new Alert(AlertType.Error, message, errore, keepAfterRouteChange, fade, location));
+    this.alert(new Alert(Math.random(), AlertType.Error, message, errore, keepAfterRouteChange, fade, location));
   }
 
   info(type, message: string, keepAfterRouteChange: boolean, fade: boolean, location: string, errore: HttpErrorResponse) {
-    this.alert(new Alert(AlertType.Info, message, errore, keepAfterRouteChange, fade, location));
+    this.alert(new Alert(Math.random(), AlertType.Info, message, errore, keepAfterRouteChange, fade, location));
   }
 
   warn(type: any, message: string, keepAfterRouteChange: boolean, fade: boolean, location: string, errore?: HttpErrorResponse) {
-    this.alert(new Alert(AlertType.Warning, message, errore, keepAfterRouteChange, fade, location));
+    this.alert(new Alert(Math.random(), AlertType.Warning, message, errore, keepAfterRouteChange, fade, location));
   }
 
   alert(alert: Alert) {

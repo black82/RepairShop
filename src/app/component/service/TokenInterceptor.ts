@@ -46,6 +46,7 @@ export class TokenInterceptor implements HttpInterceptor {
             this.httpClient.logout();
             localStorage.setItem('navigate', this.router.url);
             this.router.navigate(['client/sign-in']).then(r => r);
+            this?.alertService.info(null, 'your session has come to an end please login', false, false, '', error);
             return;
           }
 
@@ -53,6 +54,7 @@ export class TokenInterceptor implements HttpInterceptor {
             this.httpClient.logout();
             localStorage.setItem('navigate', this.router.url);
             this.router.navigate(['client/sign-in']).then(r => r);
+            this?.alertService.info(null, 'your session has come to an end please login', false, false, '', error);
             return;
           }
         }
@@ -70,7 +72,11 @@ export class TokenInterceptor implements HttpInterceptor {
           message = error.error.message;
         }
         console.log('error--->>>', error);
-        this?.alertService.error(null, message, false, false, '', error);
+        if (error.status >= 500) {
+          this?.alertService.error(null, message, false, false, '', error);
+        } else {
+          this?.alertService.info(null, message, false, false, '', error);
+        }
         return throwError(error);
       }));
   }

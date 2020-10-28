@@ -1,6 +1,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
 
 export class Alert {
+  id: number;
   type: AlertType;
   message: string;
   errore: HttpErrorResponse;
@@ -9,8 +10,9 @@ export class Alert {
   location: string;
 
 
-  constructor(type: AlertType, message: string, errore: HttpErrorResponse,
+  constructor(id: number, type: AlertType, message: string, errore: HttpErrorResponse,
               keepAfterRouteChange: boolean, fade: boolean, location: string) {
+    this.id = id;
     this.type = type;
     this.message = message;
     this.errore = errore;

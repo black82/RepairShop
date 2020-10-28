@@ -11,7 +11,7 @@
     <p class="toast__type">Success</p>
     <p class="toast__message">{{alert?.message}}</p>
   </div>
-  <div (click)="closeBaton()" class="toast__close">
+  <div (click)="removeAlert(alert)" class="toast__close">
     <svg enable-background="new 0 0 15.642 15.642" viewBox="0 0 15.642 15.642"
          xmlns="http://www.w3.org/2000/svg">
       <path
@@ -43,7 +43,7 @@
     <p class="toast__type">Info</p>
     <p class="toast__message">{{alert?.message || body_alert}}</p>
   </div>
-  <div (click)="removeAlert()" class="toast__close">
+  <div (click)="removeAlert(alert)" class="toast__close">
     <svg enable-background="new 0 0 15.642 15.642" viewBox="0 0 15.642 15.642"
          xmlns="http://www.w3.org/2000/svg">
       <path
@@ -70,7 +70,7 @@
     <p class="toast__type">Warning</p>
     <p class="toast__message">{{alert?.message || body_alert}}</p>
   </div>
-  <div (click)="removeAlert()" class="toast__close">
+  <div (click)="removeAlert(alert)" class="toast__close">
     <svg enable-background="new 0 0 15.642 15.642" viewBox="0 0 15.642 15.642"
          xmlns="http://www.w3.org/2000/svg">
       <path
@@ -97,7 +97,7 @@
     <p class="toast__type">Error<strong [ngStyle]="{color: 'red'}">{{'  ' + alert?.errore?.status}}</strong></p>
     <p class="toast__message">{{alert?.message || body_alert}}</p>
   </div>
-  <div (click)="removeAlert()" class="toast__close">
+  <div (click)="removeAlert(alert)" class="toast__close">
     <svg enable-background="new 0 0 15.642 15.642" viewBox="0 0 15.642 15.642"
          xmlns="http://www.w3.org/2000/svg">
       <path
