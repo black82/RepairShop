@@ -56,19 +56,6 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   client: Client;
   showClientRepair = false;
   hide_button = faHistory;
-  // repairStorage: RepairFileStorage = new RepairFileStorage();
-  // inputTest: InputTest = new InputTest(1, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-  //   true, true, true);
-  // outputTest: OutputTest = new OutputTest(1, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-  //   true, true, true);
-  // clint: Client = new Client(12, 'Railean', 'Iurie',
-  //   null, null, null, null, 'asdadsadsad', null, true, false, null, null, 'T-0', 'T -1', null, null);
-  // clint2: Client = new Client(12, 'Railean', 'iurie',
-  //   null, null, null, null, 'asdadsadsad', null, true, false, null, null, 'T-0', 'T -1', null, null);
-  // deviceForSale: DeviceForSale = new DeviceForSale(12, 'samsung', 'Smartfon',
-  //   'A+', 'afsafsadsadsadsadsa', '123213', '123', 'dffghg', 'asadasd', 'asdasdsad', 'asadsadsa',
-  //   23, this.inputTest, this.outputTest, this.repairStorage, true, '123', '1234', new Date(), new Date());
-  // deviceForSaleDto: DeviceForSaleDto = new DeviceForSaleDto(this.clint, this.clint2, this.deviceForSale);
   deviceForSaleDto: DeviceForSaleTransaction;
   test_output: string[] = [];
   test_input: any[] = [];
