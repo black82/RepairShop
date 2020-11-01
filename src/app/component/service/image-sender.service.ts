@@ -41,7 +41,6 @@ export class ImageSenderService {
   }
 
   submitImageToBack() {
-    console.log(this.images);
     this.imagesList = [];
     const images = Array.from(new Set(this.images));
     images.forEach(value => {

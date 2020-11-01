@@ -236,7 +236,8 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     this.device = new DeviceForSale(this.device.idDeviceSale, formData.model, this.device.deviceType, formData.condition,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, formData.deviceClass,
       this.device.noteInput, formData.note, formData.deviceWarranty, this.device.inputTest, this.outputTest, this.repairFileStorage
-      , true, this.device.bayingPrice, formData.price, this.device.dateBaying, formData.date_to_sale);
+      , true, this.device.bayingPrice, formData.price, this.device.dateBaying, formData.date_to_sale,
+      this.device.bayingUser, this.device.sellerUser, this.device.updaterUser);
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,
@@ -292,7 +293,6 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   }
 
   animation_call() {
-    console.log('animation_call');
     this.animationButtonForm();
     this.animationTitle();
     this.animationInput();

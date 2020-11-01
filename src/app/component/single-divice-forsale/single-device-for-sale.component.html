@@ -113,33 +113,67 @@
                 </p>
                 <p class="input-title">
                   <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
-                  Defect:<span
+                  Type Device:<span
                   style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.deviceType}}</span></p>
                 <p class="input-title">
                   <fa-icon [icon]="money"
                            class="icon-normal-single"></fa-icon>
-                  Deposit:<span
+                  Price Baying:<span
                   style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.bayingPrice}}</span></p>
                 <p class="input-title">
                   <fa-icon [icon]="money" class="icon-normal-single"></fa-icon>
-                  Price:<span
+                  Price Seller:<span
                   style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.sellerPrice}}</span></p>
                 <p class="input-title">
                   <fa-icon [icon]="date"
                            class="icon-normal-single"></fa-icon>
-                  Return Date:<span
-                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.bayingPrice }}</span>
+                  Device Model : <span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.model }}</span>
                 </p>
                 <p class="input-title">
                   <fa-icon [icon]="work"
                            class="icon-normal-single"></fa-icon>
-                  Work done: <span
+                  Accessory : <span
                   style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.accessory}}</span></p>
                 <p class="input-title">
                   <fa-icon [icon]="chip"
                            class="icon-normal-single"></fa-icon>
-                  Parts replaced:<span
+                  Code Device :<span
                   style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.code_device}}</span></p>
+                <p class="input-title">
+                  <fa-icon [icon]="code"
+                           class="icon-normal-single"></fa-icon>
+                  State Of Use :<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.state_of_use}}</span>
+                </p>
+                <p class="input-title">
+                  <fa-icon [icon]="conditions"
+                           class="icon-normal-single"></fa-icon>
+                  Condition Device Flag :<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.conditionFlag}}</span></p>
+                <p class="input-title">
+                  <fa-icon [icon]="guaranty"
+                           class="icon-normal-single"></fa-icon>
+                  Device Guaranty Duration : <span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.garantyDuration}}</span>
+                </p>
+                <p class="input-title">
+                  <fa-icon [icon]="barcode"
+                           class="icon-normal-single"></fa-icon>
+                  Device Imei :<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.imei}}</span></p>
+                <p class="input-title">
+                  <fa-icon [icon]="password"
+                           class="icon-normal-single"></fa-icon>
+                  Password Device :<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.password_device}}</span>
+                </p>
+                <p class="input-title">
+                  <fa-icon [icon]="sealed"
+                           class="icon-normal-single"></fa-icon>
+                  Sailed Status Device :<span
+                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.isSaled ? 'sold' : 'for sale'}}</span>
+                </p>
               </div>
               <div class="accordion">
                 <div>
@@ -228,9 +262,25 @@
                       <p class="container-title">Staff Users who Administered this Case</p>
                     </a>
                   </label>
-                  <div class="accordion__content">
-                    <p>Client Update {{deviceForSaleDto.clientBaying.lastModified}}</p>
-                    <p>Client Create {{deviceForSaleDto.clientBaying.createUser}}</p>
+                  <div *ngIf="deviceForSaleDto.deviceForSale?.bayingUser" class="accordion__content">
+                    <p class="input-title">
+                      <fa-icon [icon]="userAdmin"
+                               class="icon-normal-single"></fa-icon>
+                      The User Who Bought Device :<span
+                      style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale?.bayingUser}}</span>
+                    </p>
+                    <p *ngIf="deviceForSaleDto.deviceForSale.sellerUser" class="input-title">
+                      <fa-icon [icon]="userAdmin"
+                               class="icon-normal-single"></fa-icon>
+                      The User Who Sold Device :<span
+                      style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.sellerUser}}</span>
+                    </p>
+                    <p *ngIf="deviceForSaleDto.deviceForSale.updaterUser" class="input-title">
+                      <fa-icon [icon]="userAdmin"
+                               class="icon-normal-single"></fa-icon>
+                      User Care to Update Device:<span
+                      style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.updaterUser}}</span>
+                    </p>
                     <div>
                     </div>
 

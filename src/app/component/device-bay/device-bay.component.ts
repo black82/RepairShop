@@ -191,7 +191,6 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('asdasdasdasdas');
     this.subscription = this.httpService.getListModelsDevice().subscribe(list => {
       this.itemsModels = list;
     });
@@ -221,7 +220,8 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
     this.device = new DeviceForSale(null, formData.model, formData.deviceType, formData.condition,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, formData.deviceClass,
       formData.note, null, null, this.inputTest, null, this.repairFileStorage
-      , false, formData.price, null, formData.date_to_enter, null);
+      , false, formData.price, null, formData.date_to_enter, null,
+      null, null, null);
 
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,

@@ -7,7 +7,7 @@ import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faMoneyBill} from '@fortawesome/free-solid-svg-icons/faMoneyBill';
-import {faPhoneSquare, faUserCircle, faUserTag} from '@fortawesome/free-solid-svg-icons';
+import {faHandsHelping, faPhoneSquare, faUserCircle, faUserTag} from '@fortawesome/free-solid-svg-icons';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {faAddressCard} from '@fortawesome/free-solid-svg-icons/faAddressCard';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons/faCalendarPlus';
@@ -26,6 +26,10 @@ import {Client} from '../entity/ClientWeb';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons/faAngleDoubleRight';
 import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
 import {InputOutputTestService} from '../service/input-output-test.service';
+import {faDelicious} from '@fortawesome/free-brands-svg-icons/faDelicious';
+import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
+import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
+import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
 
 @Component({
   selector: 'app-single-divice-forsale',
@@ -61,6 +65,11 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   test_output: string[] = [];
   test_input: any[] = [];
   showDevice = false;
+  conditions = faDelicious;
+  guaranty = faHandsHelping;
+  barcode = faBarcode;
+  sealed = faHandHoldingUsd;
+  userAdmin = faUserSecret;
   private subscription: Subscription;
 
   constructor(private deviceInputService: DeviceInputService, private inputOutputCheck: InputOutputTestService) {

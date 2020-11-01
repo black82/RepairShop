@@ -66,7 +66,7 @@
             <div>
               <p style="font-size: 9pt;margin: 1px"> {{"Model :  " + client?.deviceBay[0]?.model}}</p>
               <p style="font-size: 9pt;margin: 1px"> Condizioni d'uso
-                :   {{ client?.deviceBay[0]?.state_of_use ? 'Nuovo' : 'Usato'}}</p>
+                :   {{ client?.deviceBay[0]?.state_of_use}}</p>
               <p *ngIf="print_entity.type_client_print===3"
                  style="font-size: 9pt;margin: 1px">IMEI & SN
                 : {{client?.deviceBay[0]?.imei ? client?.deviceBay[0]?.imei : 'n/a' }}</p>
@@ -86,7 +86,7 @@
               <p style="font-size: 9pt;margin: 1px"> {{"Model :  " + client?.deviceSale[0]?.model}}</p>
               <p
                 style="font-size: 9pt;margin: 1px">Condizioni d'uso
-                :   {{ client?.deviceSale[0]?.state_of_use ? 'Nuovo' : 'Usato'}}</p>
+                :   {{ client?.deviceSale[0]?.state_of_use}}</p>
               <p
                 style="font-size: 9pt;margin: 1px"> {{"Garanzia :  " + client?.deviceSale[0].garantyDuration + ' messe'}}</p>
               <p *ngIf="print_entity.type_client_print===4"
