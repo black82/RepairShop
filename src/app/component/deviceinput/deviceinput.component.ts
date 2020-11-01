@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
-import {faFileSignature, faFlushed, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faCircle, faFileSignature, faFlushed, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import {faMoneyBill} from '@fortawesome/free-solid-svg-icons/faMoneyBill';
 import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
@@ -59,6 +59,7 @@ import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
 import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
 import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 
+
 @Component({
   selector: 'app-deviceinput',
   templateUrl: './deviceinput.component.html',
@@ -107,6 +108,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   display_touch = faMobile;
   photo = faImages;
   modul = faFileInvoice;
+  homeButton = faCircle;
   vibrations = faVihara;
   software = faFileSignature;
   companyType = faArrowAltCircleRight;
@@ -182,6 +184,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       camera_input: new FormControl(false),
       faceId_input: new FormControl(false),
       camera_input_front: new FormControl(false),
+      homeButton: new FormControl(false),
       client_type: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
@@ -214,7 +217,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input, formData.camera_input_front,
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
-      formData.software, formData.faceId_input);
+      formData.software, formData.faceId_input, formData.homeButton);
 
     this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
       this.setDataHourAndMin(formData.date_exit), null, formData.defect,
@@ -291,7 +294,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   dismissed() {
-    if (confirm('Are you sure you want to dismiss')) {
+    if (confirm('Are you sure you want to dismiss ?')) {
       this.alert_service.warn('', 'Sorry, you ' +
         'left the module.', true, false, '', null);
     }

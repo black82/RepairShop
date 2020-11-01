@@ -107,18 +107,18 @@
                  (keyup.enter)="addNewModels(formClient.controls.model.value)" formControlName="model" id="model"
                  placeholder="Device Model"
                  type="text">
-          <div class="box-autocomplete">
-            <div *ngIf="showAddAutocomplete" class="item-autocomplete-container">
-              <div *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
-                <div *ngIf="i<5" class="item-autocomplete">
-                  <div (click)="optionSelected(item)" class="item-div"><span>{{ item }}
+          <span class="box-autocomplete">
+            <span *ngIf="showAddAutocomplete" class="item-autocomplete-container">
+              <span *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
+                <span *ngIf="i<5" class="item-autocomplete">
+                  <span (click)="optionSelected(item)" class="item-div"><span>{{ item }}
                   </span>
-                    <hr style="background: #1ABC9C;height: 1px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
         </label>
         <label>
           <span class="input-title">Price</span>
@@ -366,7 +366,17 @@
           </label>
         </div>
       </div>
+      <div class="check-single">
+        <fa-icon [icon]="homeButton"
+                 [style.color]="formClient.controls.homeButton.value? '#1ABC9C' : 'lightcoral'"
+                 class="icon-box test-icon"></fa-icon>
+        <label class="checkbox">
+          <input class="check-box select-check" formControlName="homeButton" name="device-test" type="checkbox">
+          <span class="check-box-name">Home Button</span>
+        </label>
+      </div>
     </div>
+
     <div class="text-div">
       <div class="title-container">
         <div tooltip="Notices for staff at the input device">
@@ -383,7 +393,9 @@
         </div>
         <div class="row-2">
 
+          <label style="width: 100%">
             <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
+          </label>
 
           <app-email-modal [callerServiceType]="'repair'"></app-email-modal>
           <app-sig-pad></app-sig-pad>

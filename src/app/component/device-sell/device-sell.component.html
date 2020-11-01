@@ -365,6 +365,15 @@
               <span class="check-box-name">Face Id</span>
             </label>
           </div>
+          <div class="check-single">
+            <fa-icon [icon]="homeButton"
+                     [style.color]="formClient.controls.homeButton.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box test-icon"></fa-icon>
+            <label class="checkbox">
+              <input class="check-box select-check" formControlName="homeButton" name="device-test" type="checkbox">
+              <span class="check-box-name">Home Button</span>
+            </label>
+          </div>
         </div>
       </div>
       <div class="text-div">
@@ -382,9 +391,10 @@
             <app-dragfile></app-dragfile>
           </div>
           <div class="row-2">
-
-            <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
-
+            <label style="width: 100%">
+              <textarea class="text-area" formControlName="note" placeholder="Not From Staff"
+                        type="text">....</textarea>
+            </label>
             <app-email-modal [callerServiceType]="'shop'"></app-email-modal>
             <app-sig-pad></app-sig-pad>
           </div>

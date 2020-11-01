@@ -156,21 +156,20 @@
                   </p>
                 </label>
                 <div class="accordion__content">
-                  <div class="test-output">
-                    <p *ngIf="item.test_output.length===0&&!client.device[0].rightNowInRepair" class="input-title">
+                  <p *ngIf="client.device[0].rightNowInRepair" class="input-title">
+                    <fa-icon [icon]="test_meteor" class="icon-test-tile icon-normal-single"></fa-icon>
+                    Dispozitivo e anqora in reparazione!!!
+                  </p>
+                  <div *ngIf="!client.device[0].rightNowInRepair" class="test-output">
+                    <p *ngIf="item.test_output.length===0" class="input-title">
                       <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
                       Il tuo dispositivo ha superato tutti test di Uscita!!!
                     </p>
 
-                    <p *ngIf="client.device[0].rightNowInRepair" class="input-title">
 
-                      <fa-icon [icon]="test_meteor" class="icon-normal-single" class="icon-test-tile"></fa-icon>
-                      Dispozitivo e anqora in reparazione!!!
-                    </p>
                     <div *ngIf="!client.device[0].rightNowInRepair" class="test-output-container">
-
                       <div *ngFor="let test_output of item.test_output" class="input-title">
-                        <fa-icon [icon]="test_minus" class="icon-normal-single" class="test-icon"></fa-icon>
+                        <fa-icon [icon]="test_minus" class="test-icon icon-normal-single"></fa-icon>
                         {{test_output}}</div>
                     </div>
                   </div>

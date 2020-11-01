@@ -25,6 +25,7 @@ import {Subscription} from 'rxjs';
 import {Client} from '../entity/ClientWeb';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons/faAngleDoubleRight';
 import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
+import {InputOutputTestService} from '../service/input-output-test.service';
 
 @Component({
   selector: 'app-single-divice-forsale',
@@ -62,7 +63,7 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   showDevice = false;
   private subscription: Subscription;
 
-  constructor(private deviceInputService: DeviceInputService) {
+  constructor(private deviceInputService: DeviceInputService, private inputOutputCheck: InputOutputTestService) {
   }
 
   ngOnInit(): void {
@@ -85,114 +86,14 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
     }
   }
 
-  check_test_OK(client: InputTest) {
+  check_test_OK(inputTest: InputTest) {
     this.test_input = [];
-    if (!client.camera_input) {
-      this.test_input.push('X Fotocamera');
-    }
-    if (!client.bluetooth) {
-      this.test_input.push('X Bluetooh');
-    }
-    if (!client.vibrations) {
-      this.test_input.push('X Vibrations');
-    }
-    if (!client.audio_equipment) {
-      this.test_input.push('X Audio');
-    }
-    if (!client.software) {
-      this.test_input.push('X Software');
-    }
-    if (!client.keyboard_input) {
-      this.test_input.push('X La tastiera');
-    }
-    if (!client.sim_input) {
-      this.test_input.push('X SIM danneggiata/assente ');
-    }
-    if (!client.microphone_input) {
-      this.test_input.push('X Microfono');
-    }
-    if (!client.wi_fi_input) {
-      this.test_input.push('X Wi-Fi');
-    }
-    if (!client.touch_input) {
-      this.test_input.push('X Touch');
-    }
-    if (!client.sound_equipment_input) {
-      this.test_input.push('X L\'apparecchiatura audio');
-    }
-    if (!client.camera_input_front) {
-      this.test_input.push('X Fotocamera Frontale');
-    }
-    if (!client.connectors_input) {
-      this.test_input.push('X Connettori');
-    }
-    if (!client.display_input) {
-      this.test_input.push('X Display');
-    }
-    if (!client.sensors_input) {
-      this.test_input.push('X Sensore');
-    }
-    if (!client.display_touch_input) {
-      this.test_input.push('X Display_touchy');
-    }
-    if (!client.faceIdInput) {
-      this.test_input.push('X Face Id');
-    }
+    this.test_input = this.inputOutputCheck.inputTestCheck(inputTest);
   }
 
   check_test_OK_out(outputted: OutputTest) {
     this.test_output = [];
-    if (!outputted.camera_Output) {
-      this.test_output.push('X Fotocamera');
-    }
-    if (!outputted.audio_equipment) {
-      this.test_output.push('X Speaker');
-    }
-    if (!outputted.software) {
-      this.test_output.push('X Software');
-    }
-    if (!outputted.vibrations) {
-      this.test_output.push('X Vibrations');
-    }
-    if (!outputted.bluetooth) {
-      this.test_output.push('X Bluetooh');
-    }
-    if (!outputted.camera_Output_Front) {
-      this.test_output.push('X Fotocamera Frontale');
-    }
-    if (!outputted.keyboard_Output) {
-      this.test_output.push('X Tastiera ');
-    }
-    if (!outputted.sim_Output) {
-      this.test_output.push('X SIM è danneggiata/assente ');
-    }
-    if (!outputted.microphone_Output) {
-      this.test_output.push('X Microfono');
-    }
-    if (!outputted.wi_fi_Output) {
-      this.test_output.push('X Wi-Fi');
-    }
-    if (!outputted.touch_Output) {
-      this.test_output.push('X Sensore Touch');
-    }
-    if (!outputted.sound_equipment_Output) {
-      this.test_output.push('X L\'apparecchiatura audio');
-    }
-    if (!outputted.connectors_Output) {
-      this.test_output.push('X Connettori');
-    }
-    if (!outputted.display_Output) {
-      this.test_output.push('X Display  ');
-    }
-    if (!outputted.sensors_Output) {
-      this.test_output.push('X Sensore ');
-    }
-    if (!outputted.display_touch_Output) {
-      this.test_output.push('X Display_touchy');
-    }
-    if (!outputted.faceIdOutput) {
-      this.test_output.push('X Face Id  danneggiato ');
-    }
+    this.test_output = this.inputOutputCheck.outputTestCheck(outputted);
   }
 
   client_catch(device: DeviceForSaleTransaction) {

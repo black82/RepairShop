@@ -22,9 +22,9 @@
             <input [value]="messages?.message_status" class="ccformfield" placeholder="Status" readonly type="text">
           </div>
           <div class="ccfield-prepend">
-            <span class="ccform-addon"><i class="fa fa-android fa-2x"></i></span>
+            <span class="ccform-addon"><i class="fa fa-envelope fa-2x"></i></span>
             <span class="text-input"> Type Sender</span>
-            <input [value]="messages?.message_type" class="ccformfield" formControlName="type_sender"
+            <input [value]="messages?.message_type" class="ccformfield"
                    placeholder="Type Sender" readonly type="text">
             <!--              <option  style="max-width: 200px" *ngFor=" let v of invoiceTypes">{{v}}</option>-->
 
@@ -32,7 +32,8 @@
           <div class="ccfield-prepend">
             <span class="ccform-addon"><i class="fa fa-android fa-2x"></i></span>
             <span class="text-input"> Type Message</span>
-            <input [value]="messages?.type_sender" class="ccformfield" placeholder="Type Message"
+            <input [value]="messages?.type_sender" class="ccformfield" formControlName="type_sender"
+                   placeholder="Type Message"
                    readonly type="text">
             <!--              <option  style="max-width: 200px" *ngFor=" let v of invoiceTypes">{{v}}</option>-->
 
@@ -46,6 +47,12 @@
             <span class="ccform-addon"><i class="fa fa-info-circle fa-2x"></i></span>
             <span class="text-input">Repair Id</span>
             <input [value]="messages?.repair_Id" class="ccformfield" placeholder="Repair-id" readonly type="text">
+          </div>
+          <div class="ccfield-prepend">
+            <span class="ccform-addon"><i class="fa fa-toolbox fa-2x"></i></span>
+            <span class="text-input">Service That Sent</span>
+            <input [value]="messages?.callerServiceType" class="ccformfield" placeholder="Repair-id" readonly
+                   type="text">
           </div>
         </form>
       </div>

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {faCalendarCheck, faFileSignature, faFlushed, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarCheck, faCircle, faFileSignature, faFlushed, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faUserTag} from '@fortawesome/free-solid-svg-icons/faUserTag';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
@@ -48,6 +48,7 @@ import {map, startWith} from 'rxjs/operators';
 import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
 import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
 import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
+import {DeviceInputService} from '../service/device-input.service';
 
 
 @Component({
@@ -118,6 +119,9 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   private subscriber: Subscription;
   private sigpad_open_second = false;
   buttonCheckBox = 'select all';
+  homeButton = faCircle;
+  show_redacting = false;
+  private redactClientEvent: Subscription;
 
   constructor(private fb: FormBuilder,
               private httpService: HttpClien,
@@ -128,7 +132,8 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
               private imageSender: ImageSenderService,
               private emailSender: EmailSenderService,
               private sig_pad_service: SigPadService,
-              private animation_wait: AnimeServiceService) {
+              private animation_wait: AnimeServiceService,
+              private device_service: DeviceInputService) {
   }
 
   ngOnInit(): void {
@@ -141,6 +146,9 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     });
     this.form_open = this.hidden_form.form_open.subscribe(value => {
       this.show_client = value;
+    });
+    this.redactClientEvent = this.device_service.$clientAfterRedact.subscribe(client => {
+      this.client = client;
     });
   }
 
@@ -175,6 +183,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       camera_output: new FormControl(false),
       faceId_output: new FormControl(false),
       camera_Output_Front: new FormControl(false),
+      homeButton: new FormControl(false),
       note_output: [''],
     });
 
@@ -210,7 +219,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       formData.wi_fi_output, formData.microphone_output, formData.sim_output,
       formData.keyboard_output, formData.camera_output, formData.camera_Output_Front,
       formData.bluetooth, formData.vibrations,
-      formData.audio_equipment_output, formData.software, formData.faceId_output);
+      formData.audio_equipment_output, formData.software, formData.faceId_output, formData.homeButton);
     this.repair_output = new Repair(this.client.device[0].repairs[0].repair_Id,
       this.client.device[0].repairs[0].date_to_enter,
       this.client.device[0].repairs[0].exp_complet_date,
@@ -380,6 +389,9 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     if (this.id_repair_event) {
       this.id_repair_event.unsubscribe();
     }
+    if (this.redactClientEvent) {
+      this.redactClientEvent.unsubscribe();
+    }
   }
 
   setDataHourAndMin(date: Date): Date {
@@ -470,5 +482,37 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     } else {
       this.buttonCheckBox = 'select all';
     }
+  }
+
+  redactRepair() {
+    this.show_redacting = true;
+    setTimeout(() => {
+      this.device_service.$clientRepairIdByRedact.emit(this.id_repair);
+      this.device_service.$clientRedactEvent.emit(this.client);
+      this.eventClickSavedClient();
+    }, 300);
+
+  }
+
+  eventClickSavedClient() {
+    let clickRedact = document.getElementById('redact-click');
+    if (clickRedact) {
+      clickRedact.addEventListener('click', () => {
+        this.dismissButton();
+      });
+    } else {
+      setTimeout(() => {
+        clickRedact = document.getElementById('redact-click');
+        if (clickRedact) {
+          clickRedact.addEventListener('click', () => {
+            this.dismissButton();
+          });
+        }
+      }, 1000);
+    }
+  }
+
+  dismissButton() {
+    this.show_redacting = false;
   }
 }

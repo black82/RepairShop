@@ -80,6 +80,7 @@ import {DeviceSaleByIdComponent} from './component/device-sale-by-id/device-sale
 import {DeviceSalePaginatorComponent} from './component/device-sale-paginator/device-sale-paginator.component';
 import {AllDeviceSaleComponent} from './component/all-device-sale/all-device-sale.component';
 import {AllDeviceInSaleComponent} from './component/all-device-in-sale/all-device-in-sale.component';
+import {RedactClientComponent} from './component/redact-client/redact-client.component';
 
 @NgModule({
   declarations: [
@@ -140,7 +141,8 @@ import {AllDeviceInSaleComponent} from './component/all-device-in-sale/all-devic
     DeviceSaleByIdComponent,
     DeviceSalePaginatorComponent,
     AllDeviceSaleComponent,
-    AllDeviceInSaleComponent
+    AllDeviceInSaleComponent,
+    RedactClientComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

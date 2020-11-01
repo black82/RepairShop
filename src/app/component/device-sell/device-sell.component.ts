@@ -8,7 +8,7 @@ import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
 import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
-import {faFileSignature, faFlushed, faPaperclip, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {faCircle, faFileSignature, faFlushed, faPaperclip, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
 import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
 import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
@@ -22,8 +22,6 @@ import {faPhoneVolume} from '@fortawesome/free-solid-svg-icons/faPhoneVolume';
 import {faVolumeUp} from '@fortawesome/free-solid-svg-icons/faVolumeUp';
 import {faFingerprint} from '@fortawesome/free-solid-svg-icons/faFingerprint';
 import {faWifi} from '@fortawesome/free-solid-svg-icons/faWifi';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
-import {faSms} from '@fortawesome/free-solid-svg-icons/faSms';
 import {faMicrophone} from '@fortawesome/free-solid-svg-icons/faMicrophone';
 import {faSimCard} from '@fortawesome/free-solid-svg-icons/faSimCard';
 import {faPowerOff} from '@fortawesome/free-solid-svg-icons/faPowerOff';
@@ -99,8 +97,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   faceIdFa = faFlushed;
   touch = faFingerprint;
   wifi = faWifi;
-  whatsapp = faWhatsapp;
-  mms = faSms;
+  homeButton = faCircle;
   microfon = faMicrophone;
   sim = faSimCard;
   keybord = faPowerOff;
@@ -215,6 +212,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
       camera_input: new FormControl(false),
       faceId_input: new FormControl(false),
       camera_input_front: new FormControl(false),
+      homeButton: new FormControl(false),
       client_type: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
@@ -233,7 +231,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
       formData.keyboard_input, formData.camera_input, formData.camera_input_front,
       formData.bluetooth, formData.vibrations, formData.audio_equipment_input,
-      formData.software, formData.faceId_input);
+      formData.software, formData.faceId_input, formData.homeButton);
 
     this.device = new DeviceForSale(this.device.idDeviceSale, formData.model, this.device.deviceType, formData.condition,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, formData.deviceClass,

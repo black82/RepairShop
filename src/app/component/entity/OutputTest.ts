@@ -17,6 +17,7 @@ export class OutputTest {
   audio_equipment: boolean;
   software: boolean;
   faceIdOutput: boolean;
+  homeButton: boolean;
 
 
   constructor(id_Output: number, sensors_Output: boolean, display_Output: boolean,
@@ -25,7 +26,7 @@ export class OutputTest {
               microphone_Output: boolean, sim_Output: boolean, keyboard_Output: boolean,
               camera_Output: boolean, camera_Output_Front: boolean, bluetooth: boolean,
               vibrations: boolean, audio_equipment: boolean, software: boolean,
-              faceIdOutput: boolean) {
+              faceIdOutput: boolean, homeButton: boolean) {
     this.id_Output = id_Output;
     this.sensors_Output = sensors_Output;
     this.display_Output = display_Output;
@@ -44,5 +45,6 @@ export class OutputTest {
     this.audio_equipment = audio_equipment;
     this.software = software;
     this.faceIdOutput = faceIdOutput;
+    this.homeButton = homeButton;
   }
 }

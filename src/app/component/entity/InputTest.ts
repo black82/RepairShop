@@ -17,16 +17,16 @@ export class InputTest {
   audio_equipment: boolean;
   software: boolean;
   faceIdInput: boolean;
-  messageInvoiceId: string;
+  homeButton: boolean;
 
 
   constructor(id_input: number, sensors_input: boolean, display_input: boolean,
-              connectors_input: boolean, sound_equipment_input: boolean,
-              touch_input: boolean, display_touch_input: boolean,
-              wi_fi_input: boolean, microphone_input: boolean, sim_input: boolean,
-              keyboard_input: boolean, camera_input: boolean,
+              connectors_input: boolean, sound_equipment_input: boolean, touch_input: boolean,
+              display_touch_input: boolean, wi_fi_input: boolean, microphone_input: boolean,
+              sim_input: boolean, keyboard_input: boolean, camera_input: boolean,
               camera_input_front: boolean, bluetooth: boolean, vibrations: boolean,
-              audio_equipment: boolean, software: boolean, faceIdInput: boolean) {
+              audio_equipment: boolean, software: boolean, faceIdInput: boolean,
+              homeButton: boolean) {
     this.id_input = id_input;
     this.sensors_input = sensors_input;
     this.display_input = display_input;
@@ -45,5 +45,6 @@ export class InputTest {
     this.audio_equipment = audio_equipment;
     this.software = software;
     this.faceIdInput = faceIdInput;
+    this.homeButton = homeButton;
   }
 }

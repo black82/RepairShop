@@ -55,7 +55,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.defect_output.dirty ||
             formClient.controls.defect_output.touched) && formClient.controls.defect_output.invalid && formClient.controls.defect_output.errors}"
                    [ngModel]="client?.device[0]?.repairs[0]?.defect" class="input-1"
-                   formControlName="defect_output">
+                   formControlName="defect_output" readonly>
           </label>
           <label><span class="input-title">Parts replaced</span>
             <fa-icon [icon]="chip" class="icon-input"></fa-icon>
@@ -117,7 +117,7 @@
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.deposit_output.dirty ||
             formClient.controls.deposit_output.touched) && formClient.controls.deposit_output.invalid && formClient.controls.deposit_output.errors}"
                    [ngModel]="client?.device[0]?.repairs[0]?.deposit" class="input-2"
-                   formControlName="deposit_output">
+                   formControlName="deposit_output" readonly>
           </label>
           <label>
             <span class="input-title">Accessory</span>
@@ -326,6 +326,24 @@
               <span class="check-box-name">Face Id</span>
             </label>
           </div>
+          <div class="check-single">
+            <fa-icon [icon]="homeButton"
+                     [style.color]="formClient.controls?.homeButton.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.homeButton"
+                     class="check-box" formControlName="homeButton"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Home Button</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="show_redacting" class="container-redact">
+        <div class="border-container">
+          <a (click)="dismissButton()" class="close" title="Close"><span class="x">X</span></a>
+          <app-redact-client [type]="true"></app-redact-client>
         </div>
       </div>
       <app-email-modal [callerServiceType]="'repair'"></app-email-modal>
@@ -352,9 +370,14 @@
           <a (click)="dismissed()" class="dismiss"><span><fa-icon [icon]="discar"
                                                                   class="button-icon"></fa-icon>Discard Form</span></a>
         </div>
+        <div tooltip="Redact this Repair">
+          <a (click)="redactRepair()" class="button-redact">
+        <span> <fa-icon [icon]="software"
+                        class="button-icon"></fa-icon> Redact Repair </span></a>
+        </div>
         <div tooltip="The model will be sent to the Email">
           <a (click)="sign_pad_open()"
-             class=" button email"><span> <fa-icon
+             class="email button"><span> <fa-icon
             [icon]="mail" class="button-icon"></fa-icon>Preview and Save</span></a>
         </div>
       </div>

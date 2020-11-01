@@ -10,6 +10,7 @@ import {AlertServiceService} from '../service/alert-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
 import {InvoiceType} from '../entity/InvoiceType';
+import {faDolly} from '@fortawesome/free-solid-svg-icons/faDolly';
 
 @Component({
   selector: 'app-notifai-manage',
@@ -24,6 +25,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   formMessage: FormGroup;
   hide_button = faHistory;
+  doly = faDolly;
   invoiceTypes: string[];
 
 
@@ -37,6 +39,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeInvoiceType();
     this.subscription = this.adminService.$show_notified.subscribe(notify => {
+      console.log(notify);
       this.messages = notify;
       this.formMessage = this.fb.group({
         destination: [this.messages?.destination_user, [Validators.required, Validators.email]],

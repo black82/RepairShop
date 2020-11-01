@@ -3,7 +3,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AlertServiceService} from '../service/alert-service.service';
 import {Alert, AlertType} from '../entity/AlertEntity';
-import {NavigationStart, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 import {faBomb} from '@fortawesome/free-solid-svg-icons/faBomb';
 
@@ -34,6 +34,7 @@ export class AlertComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   alerts: Alert[] = [];
   alert: Alert;
+  showAlert = false;
   private routeSubscription: Subscription;
 
 
@@ -63,16 +64,11 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.alerts.push(alert);
         this.timeout_remove_alert(alert);
       });
-    this.routeSubscription = this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.alerts.forEach(x => {
-          this.removeAlert(x);
-        });
-      }
-    });
+
   }
 
   timeout_remove_alert(alert: Alert) {
+    this.showAlert = true;
     if (!this.alert) {
       this.alert = alert;
       this.initAlert(alert);
@@ -106,9 +102,15 @@ export class AlertComponent implements OnInit, OnDestroy {
       if (remove) {
         remove?.forEach(value => {
           value?.classList.add('hidden--alert');
+          value.classList.remove('show--alert');
         });
         this.alerts.splice(this.alerts.indexOf(alert), 1);
         this.alert = null;
+        // setTimeout(() => {
+        //   remove.forEach(x => {
+        //     x.style.display = 'none';
+        //   }, 1000);
+        // });
       }
     }
   }

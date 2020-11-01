@@ -22,6 +22,7 @@ import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {DeviceForSale} from '../entity/DeviceForSale';
 import {OutputTest} from '../entity/OutputTest';
 import {InputTest} from '../entity/InputTest';
+import {InputOutputTestService} from '../service/input-output-test.service';
 
 @Component({
   selector: 'app-singl-device-shouw',
@@ -63,7 +64,7 @@ export class SinglDeviceShouwComponent implements OnInit {
   device_show = false;
   element: Element;
 
-  constructor() {
+  constructor(private inputOutputTestCheck: InputOutputTestService) {
   }
 
   ngOnInit() {
@@ -116,112 +117,11 @@ export class SinglDeviceShouwComponent implements OnInit {
   }
 
   check_test_OK(inputTest: InputTest): string[] {
-    const name_test_entre: string[] = [];
-
-    if (!inputTest.camera_input) {
-      name_test_entre.push(' X Fotocamera difettosa ');
-    }
-    if (!inputTest.bluetooth) {
-      name_test_entre.push(' X Bluetooh difettosa ');
-    }
-    if (!inputTest.vibrations) {
-      name_test_entre.push(' X Vibrations difettosa ');
-    }
-    if (!inputTest.audio_equipment) {
-      name_test_entre.push(' X Audio difettosa ');
-    }
-    if (!inputTest.software) {
-      name_test_entre.push(' X Software difettosa ');
-    }
-    if (!inputTest.keyboard_input) {
-      name_test_entre.push(' X La tastiera è danneggiata ');
-    }
-    if (!inputTest.sim_input) {
-      name_test_entre.push(' X La scheda SIM è danneggiata o assente ');
-    }
-    if (!inputTest.microphone_input) {
-      name_test_entre.push(' X Microfono difettoso ');
-    }
-    if (!inputTest.wi_fi_input) {
-      name_test_entre.push(' X Il connettore Wi-Fi è difettoso ');
-    }
-    if (!inputTest.touch_input) {
-      name_test_entre.push(' X Il sensore Touch è difettoso ');
-    }
-    if (!inputTest.sound_equipment_input) {
-      name_test_entre.push(' X L\'apparecchiatura audio è difettosa ');
-    }
-    if (!inputTest.camera_input_front) {
-      name_test_entre.push(' X Fotocamera Frontale difettosa ');
-    }
-    if (!inputTest.connectors_input) {
-      name_test_entre.push(' X I Connettori del dispositivo sono difettosi ');
-    }
-    if (!inputTest.display_input) {
-      name_test_entre.push(' X Il display del dispositivo è danneggiato ');
-    }
-    if (!inputTest.sensors_input) {
-      name_test_entre.push(' X Il sensore del dispositivo è danneggiato ');
-    }
-    if (!inputTest.display_touch_input) {
-      name_test_entre.push(' X Il display_touchy del dispositivo è danneggiato ');
-    }
-    return name_test_entre;
+    return this.inputOutputTestCheck.inputTestCheck(inputTest);
   }
 
-  check_test_OK_out(client: OutputTest): string[] {
-    const name_test_out: string[] = [];
-
-    if (!client.camera_Output) {
-      name_test_out.push(' X Fotocamera difettosa ');
-    }
-    if (!client.audio_equipment) {
-      name_test_out.push(' X Speaker difettosa ');
-    }
-    if (!client.software) {
-      name_test_out.push(' X Software difettosa ');
-    }
-    if (!client.vibrations) {
-      name_test_out.push(' X Vibrations difettosa ');
-    }
-    if (!client.bluetooth) {
-      name_test_out.push(' X Bluetooh difettosa ');
-    }
-    if (!client.camera_Output_Front) {
-      name_test_out.push(' X Fotocamera Frontale difettosa ');
-    }
-    if (!client.keyboard_Output) {
-      name_test_out.push(' X La tastiera è danneggiata ');
-    }
-    if (!client.sim_Output) {
-      name_test_out.push(' X La scheda SIM è danneggiata o assente ');
-    }
-    if (!client.microphone_Output) {
-      name_test_out.push(' X Microfono difettoso ');
-    }
-    if (!client.wi_fi_Output) {
-      name_test_out.push(' X Il connettore Wi-Fi è difettoso ');
-    }
-    if (!client.touch_Output) {
-      name_test_out.push(' X Il sensore Touch è difettoso ');
-    }
-    if (!client.sound_equipment_Output) {
-      name_test_out.push(' X L\'apparecchiatura audio è difettosa ');
-    }
-    if (!client.connectors_Output) {
-      name_test_out.push(' X I Connettori del dispositivo sono difettosi ');
-    }
-    if (!client.display_Output) {
-      name_test_out.push(' X Il display del dispositivo è danneggiato ');
-    }
-    if (!client.sensors_Output) {
-      name_test_out.push(' X Il sensore del dispositivo è danneggiato ');
-    }
-    if (!client.display_touch_Output) {
-      name_test_out.push(' X Il display_touchy del dispositivo è danneggiato ');
-    }
-
-    return name_test_out;
+  check_test_OK_out(outputTest: OutputTest): string[] {
+    return this.inputOutputTestCheck.outputTestCheck(outputTest);
   }
 
   zoum($event, i: number) {

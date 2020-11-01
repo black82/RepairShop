@@ -14,6 +14,12 @@ export class DeviceInputService {
 
   $deviceForSaleClientTransaction: EventEmitter<DeviceForSaleTransaction> = new EventEmitter();
 
+  $clientRedactEvent: EventEmitter<Client> = new EventEmitter();
+
+  $clientRepairIdByRedact: EventEmitter<number> = new EventEmitter();
+
+  $clientAfterRedact: EventEmitter<Client> = new EventEmitter();
+
   constructor() {
   }
 }

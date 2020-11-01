@@ -153,9 +153,6 @@ svg {
   background-color: red;
 }
 
-.second-alert {
-  top: 70%;
-}
 
 .show--alert {
   position: fixed;
@@ -197,6 +194,7 @@ svg {
 .hidden--alert {
   -webkit-animation: puff-out-center 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
   animation: puff-out-center 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+
 }
 
 @-webkit-keyframes puff-out-center {
@@ -213,7 +211,9 @@ svg {
     -webkit-filter: blur(4px);
     filter: blur(4px);
     opacity: 0;
+
   }
+
 }
 
 @keyframes puff-out-center {

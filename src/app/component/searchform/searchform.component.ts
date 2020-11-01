@@ -105,7 +105,6 @@ export class SearchformComponent implements OnInit, OnDestroy {
       this.showSearchForm();
     } else {
       const timeout = setTimeout(() => {
-        this.hiddenFormAfterSubmitForm();
         clearTimeout(timeout);
       }, 300);
     }

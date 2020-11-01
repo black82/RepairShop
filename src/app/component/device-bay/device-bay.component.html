@@ -108,18 +108,17 @@
                  class="input-1" formControlName="model" id="model"
                  placeholder="Device Model"
                  type="text">
-          <div class="box-autocomplete">
-            <div *ngIf="showAddAutocomplete" class="item-autocomplete-container">
-              <div *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
-                <div *ngIf="i<5" class="item-autocomplete">
-                  <div (click)="optionSelected(item)" class="item-div"><span>{{ item }}
+          <span class="box-autocomplete">
+            <span *ngIf="showAddAutocomplete" class="item-autocomplete-container">
+              <span *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
+                <span *ngIf="i<5" class="item-autocomplete">
+                  <span (click)="optionSelected(item)" class="item-div"><span>{{ item }}
                   </span>
-                    <hr style="background: #1ABC9C;height: 1px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
         </label>
         <label>
           <span class="input-title">Purchase price</span>
@@ -208,7 +207,7 @@
           <select [ngClass]="{'form-submitted':formSubmitted ||(formClient.controls.condition.dirty || formClient.controls.condition.touched)
            && formClient.controls.condition.invalid && formClient.controls.condition.errors&& formClient.controls.condition.pristine}"
                   class="input-2" formControlName="condition">
-            <option [selected]="true" disabled="true" value="">Please Select Device Conditions</option>
+            <option [disabled]="true" [selected]="true" value="">Please Select Device Conditions</option>
             <option ngValue="true">New Device</option>
             <option ngValue="false">Used Device</option>
           </select>
@@ -381,6 +380,15 @@
             <span class="check-box-name">Face Id</span>
           </label>
         </div>
+        <div class="check-single">
+          <fa-icon [icon]="homeButton"
+                   [style.color]="formClient.controls.homeButton.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="homeButton" name="device-test" type="checkbox">
+            <span class="check-box-name">Home Button</span>
+          </label>
+        </div>
       </div>
     </div>
     <div class="text-div">
@@ -398,9 +406,9 @@
           <app-dragfile></app-dragfile>
         </div>
         <div class="row-2">
-
-          <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
-
+          <label style="width: 100%">
+            <textarea class="text-area" formControlName="note" placeholder="Not From Staff" type="text">....</textarea>
+          </label>
           <app-email-modal [callerServiceType]="'shop'"></app-email-modal>
           <app-sig-pad></app-sig-pad>
         </div>
@@ -424,8 +432,7 @@
         Discard Form</span></a></div>
       <div tooltip="The model will be sent to the Email">
         <a (click)="sign_pad_open()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
-          [icon]="mail" class="button-icon"></fa-icon> Preview and Save</span></a>
-      </div>
+          [icon]="mail" class="button-icon"></fa-icon> Preview and Save</span></a></div>
 
 
     </div>
