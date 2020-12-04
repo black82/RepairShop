@@ -10,9 +10,13 @@ export class DeviceInputService {
   @Output()
   $client_push: EventEmitter<Client> = new EventEmitter();
 
+  $client_pushArray: EventEmitter<Client[]> = new EventEmitter();
+
   $deviceForSaleClient: EventEmitter<DeviceForSale> = new EventEmitter();
 
   $deviceForSaleClientTransaction: EventEmitter<DeviceForSaleTransaction> = new EventEmitter();
+
+  $deviceForSaleClientTransactionArray: EventEmitter<DeviceForSaleTransaction[]> = new EventEmitter();
 
   $clientRedactEvent: EventEmitter<Client> = new EventEmitter();
 

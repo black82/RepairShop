@@ -21,9 +21,9 @@ import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  // apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
-  // apiUrl = 'http://localhost:8080/';
+  apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient,
               private adminService: AdminServiceService) {
@@ -396,6 +396,62 @@ export class HttpClien {
           .set('dateinit', String(dateInit))
           .set('datecomplete', String(dateComplete))
       }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getClientRepairByNameAndFamily(name: string, family: string) {
+    return this.http.get<Client[]>(this.apiUrl + 'api/client/repair/name/', {
+      params: new HttpParams()
+        .set('name', name)
+        .set('family', family)
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getClientShopByNameAndFamily(name: string, family: string): Observable<DeviceForSaleTransaction[]> {
+    return this.http.get<DeviceForSaleTransaction[]>(this.apiUrl + 'api/device/client/shop/name/', {
+      params: new HttpParams()
+        .set('name', name)
+        .set('family', family)
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getClientShopByOnlyFamily(family: string): Observable<DeviceForSaleTransaction[]> {
+    return this.http.get<DeviceForSaleTransaction[]>(this.apiUrl + 'api/device/client/shop/only/family/', {
+      params: new HttpParams()
+        .set('family', family)
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getClientShopByOnlyName(name: string): Observable<DeviceForSaleTransaction[]> {
+    return this.http.get<DeviceForSaleTransaction[]>(this.apiUrl + 'api/device/client/shop/only/name/', {
+      params: new HttpParams()
+        .set('name', name)
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getClientRepairByName(name: string): Observable<Client[]> {
+    return this.http.get<Client[]>(this.apiUrl + 'api/client/repair/only/name/', {
+      params: new HttpParams()
+        .set('name', name)
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getClientRepairByFamily(family: string): Observable<Client[]> {
+    return this.http.get<Client[]>(this.apiUrl + 'api/client/repair/only/family/', {
+      params: new HttpParams()
+        .set('family', family)
+    }).pipe(
       catchError(this.errorHandler)
     );
   }

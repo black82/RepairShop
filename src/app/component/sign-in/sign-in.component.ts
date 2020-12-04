@@ -64,13 +64,14 @@ export class SignInComponent implements OnInit {
           if (res.token) {
             if (res.roles) {
               localStorage.setItem('roles', res.roles);
+              localStorage.setItem('token', res.token);
               this.admin.$admin_show.emit(true);
               this.admin.$user_show.emit(true);
             } else {
+              localStorage.setItem('token', res.token);
               this.admin.$user_show.emit(true);
             }
             const element = document.querySelector('.close') as HTMLElement;
-            localStorage.setItem('token', res.token);
             if (element) {
               element.click();
             }

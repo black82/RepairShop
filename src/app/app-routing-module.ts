@@ -35,6 +35,8 @@ import {DeviceSaleByIdComponent} from './component/device-sale-by-id/device-sale
 import {AllDeviceSaleComponent} from './component/all-device-sale/all-device-sale.component';
 import {AllDeviceInSaleComponent} from './component/all-device-in-sale/all-device-in-sale.component';
 import {ShopDashboardComponent} from './component/shop-dashboard/shop-dashboard.component';
+import {SearchByNameClientRepairComponent} from './component/search-by-name-client-repair/search-by-name-client-repair.component';
+import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-by-name-sale.component';
 
 
 export const routes: Routes = [
@@ -68,10 +70,12 @@ export const routes: Routes = [
   {path: 'upload/repair/images', component: DragOnDropRepairComponent, canActivate: [AutGuardService]},
   {path: 'device/sally/all/page', component: PageableDeviceSaleComponent, canActivate: [AutGuardService]},
   {path: 'repair/dashboard', component: RepairDashboardComponent, canActivate: [AutGuardService]},
+  {path: 'client/repair/name', component: SearchByNameClientRepairComponent, canActivate: [AutGuardService]},
   {path: 'shop/dashboard', component: ShopDashboardComponent, canActivate: [AutGuardService]},
   {path: 'device/for/sale/single', component: DeviceSaleByIdComponent, canActivate: [AutGuardService]},
   {path: 'device/sale/all/pageable', component: AllDeviceSaleComponent, canActivate: [AutGuardService]},
   {path: 'device/in/sale/pageable', component: AllDeviceInSaleComponent, canActivate: [AutGuardService]},
+  {path: 'device/name/sale', component: SearchByNameSaleComponent, canActivate: [AutGuardService]},
 ];
 
 

@@ -40,38 +40,27 @@ export class TokenInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         let message = error?.error?.rootCause?.message;
+        console.log('error--->>>', error);
         if (error?.message) {
-          if (error?.message.includes('Expired or invalid JWT token')) {
-            error.error.status = 401;
+          if (error?.error?.message?.includes('Expired or invalid JWT token') || error?.status === 401) {
+            // error.error.status = 401;
             this.httpClient.logout();
             localStorage.setItem('navigate', this.router.url);
-            this.router.navigate(['client/sign-in']).then(r => r);
-            this?.alertService.info(null, 'your session has come to an end please login', false, false, '', error);
-            return;
-          }
-
-          if (error?.status === 401) {
-            this.httpClient.logout();
-            localStorage.setItem('navigate', this.router.url);
-            this.router.navigate(['client/sign-in']).then(r => r);
-            this?.alertService.info(null, 'your session has come to an end please login', false, false, '', error);
-            return;
+            this.router.navigate(['client/sign-in']);
+            this?.alertService.info(null, 'Your session has come to an end please login', false, false, '', error);
+            return throwError(error);
           }
         }
         if (!message) {
-          if (error?.status === 404 && error?.message.includes('api')) {
+          if (error?.status === 404 && error?.message?.includes('api')) {
             message = 'Unfortunately, nothing could be found. Check the data entered.';
           } else {
             message = error?.message;
           }
         }
-        if (error?.error?.payload?.localizedMessage) {
-          message = error.error.payload.localizedMessage;
-        }
         if (error?.error?.message) {
           message = error.error.message;
         }
-        console.log('error--->>>', error);
         if (error.status >= 500) {
           this?.alertService.error(null, message, false, false, '', error);
         } else {

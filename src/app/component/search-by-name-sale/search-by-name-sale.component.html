@@ -1,0 +1,57 @@
+<div>
+  <div *ngIf="paginator" class="button-show-form"><a (click)="showForm()"
+                                                     class="button button-small button-disable"><span> <fa-icon
+    [icon]="hide_button" class="button-icon"></fa-icon>Show Form</span></a>
+  </div>
+  <div *ngIf="formHide" class="container-form">
+    <app-search-by-name [headerForm]="'Search Clients Shop By Name'" [typeClient]="'shop'"></app-search-by-name>
+  </div>
+  <div *ngIf="paginator" class="container-paginator">
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">Nr</th>
+        <th scope="col">Id Dev</th>
+        <th scope="col">Full Name Baying</th>
+        <th scope="col">Full Name Selling</th>
+        <th scope="col">Device Model</th>
+        <th scope="col">Device Imei</th>
+        <th scope="col">Date Baying</th>
+        <th scope="col">Date Selling</th>
+        <th scope="col">Show Client Button</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of datasource; let i = index">
+        <td class="element-td" style="color: #c54040">{{i + 1}}</td>
+        <td class="element-td">{{element.deviceForSale.idDeviceSale}}</td>
+        <td
+          class="element-td">{{element.clientBaying.typeClient ? element.clientBaying.companyName : element?.clientBaying.name + ' ' + element.clientBaying.family}}</td>
+        <td
+          class="element-td">{{element.clientSailing.typeClient ? element.clientSailing.companyName : element?.clientSailing.name + ' ' + element.clientSailing.family}}</td>
+        <td class="element-td">{{element?.deviceForSale.model}}</td>
+        <td class="element-td">{{element?.deviceForSale.imei }}</td>
+        <td class="element-td">
+          {{setNewDateFormat(element.deviceForSale.dateSale)| date: 'yyyy/MM/dd'}}
+        </td>
+        <td class="element-td">
+          {{setNewDateFormat(element.deviceForSale.dateBaying)| date: 'yyyy/MM/dd'}}
+        </td>
+        <td><a (click)="shows(element)" class="button button-small button-activate"><span> <fa-icon
+          [icon]="shows_button" class="button-icon"></fa-icon>Show Client</span></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="shouwClient" class="container-single-content">
+    <div class="container-modal">
+      <a (click)="hideClient()" class="close">&times;</a>
+      <app-single-divice-forsale></app-single-divice-forsale>
+      <div><a (click)="hideClient()"
+              class="button button-small button-disable"><span> <fa-icon
+        [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+      </div>
+    </div>
+  </div>
+</div>

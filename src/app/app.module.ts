@@ -81,6 +81,9 @@ import {DeviceSalePaginatorComponent} from './component/device-sale-paginator/de
 import {AllDeviceSaleComponent} from './component/all-device-sale/all-device-sale.component';
 import {AllDeviceInSaleComponent} from './component/all-device-in-sale/all-device-in-sale.component';
 import {RedactClientComponent} from './component/redact-client/redact-client.component';
+import {SearchByNameComponent} from './component/search-by-name/search-by-name.component';
+import {SearchByNameClientRepairComponent} from './component/search-by-name-client-repair/search-by-name-client-repair.component';
+import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-by-name-sale.component';
 
 @NgModule({
   declarations: [
@@ -142,7 +145,10 @@ import {RedactClientComponent} from './component/redact-client/redact-client.com
     DeviceSalePaginatorComponent,
     AllDeviceSaleComponent,
     AllDeviceInSaleComponent,
-    RedactClientComponent
+    RedactClientComponent,
+    SearchByNameComponent,
+    SearchByNameClientRepairComponent,
+    SearchByNameSaleComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

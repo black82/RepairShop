@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+.container-body {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%) !important;
+
+}
+
+form {
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+
+form input {
+  appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  -webkit-transition-duration: 0.25s;
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+
+form input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 300px;
+}
+
+form input:focus {
+  background-color: white;
+  color: #53e3a6;
+}
+
+form button {
+  appearance: none;
+  outline: 0;
+
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+form button:hover {
+  background-color: #f5f7f9;
+}
+
+.welcome-anime {
+  text-align: center;
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: white;
+  font-size: 40px;
+  font-weight: 200;
+}
+
+.login-text {
+  position: center;
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: white;
+  font-size: 40px;
+  transition-duration: 1s;
+  transition-timing-function: ease-in;
+  font-weight: 200;
+}
+
+body ::-webkit-input-placeholder {
+  /* WebKit browsers */
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: white;
+  font-weight: 300;
+}
+
+form :-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: white;
+  opacity: 1;
+  font-weight: 300;
+}
+
+.container-body ::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: white;
+  opacity: 1;
+  font-weight: 300;
+}
+
+.container-body :-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: white;
+  font-weight: 300;
+}
+
+.hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.container-input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.form__field {
+  width: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: flex-start;
+
+}
+
+.form__submit {
+  margin-top: 10%;
+}
+
+.form__label {
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: white;
+  opacity: 1;
+  font-size: 3ch;
+  font-weight: 300;
+}
+
+.button-submit {
+  width: auto !important;
+  transition-duration: 1s;
+}
+
+.checkbox {
+  width: 100px !important;
+}
+
+.disabled {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+
+}
+
+.disabled-text {
+  color: rgba(255, 255, 255, 0.2) !important;
+}

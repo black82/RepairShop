@@ -15,7 +15,7 @@ export class WebSocketService {
   }
 
   public connect() {
-    this.socket = new SockJs(this.http.apiUrl + `socket`);
+    this.socket = new SockJs(this.http.apiUrl + 'socket');
     return Stomp.over(this.socket);
   }
 

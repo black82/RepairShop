@@ -46,18 +46,6 @@ export class AlertComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.alertService.alert_open
       .subscribe(alert => {
-        if (alert.type === AlertType.Error) {
-          if (alert.errore?.error?.status === 401) {
-            this.body_alert = 'The time since the last login has expired.';
-            this.info_alert();
-            return;
-          }
-          if (alert.errore?.status === 401) {
-            this.body_alert = 'Please sign in.';
-            this.info_alert();
-            return;
-          }
-        }
         if (alert?.message === 'Sorry, you left the module.') {
           this.router.navigate(alert.location).then();
         }

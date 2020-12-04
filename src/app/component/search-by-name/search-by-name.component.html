@@ -1,0 +1,34 @@
+<div class="container-body">
+  <h1 class="welcome-anime">{{headerForm}}</h1>
+  <form (ngSubmit)="onFormSubmit()" [formGroup]=searchForm class="form login" method="POST">
+    <div class="container-input">
+      <div class="form__field">
+        <label for="name">
+          <span [ngClass]="nameCheckBox?'disabled-text':'enabled'" class="form__label">Name Client</span>
+          <input [ngClass]="nameCheckBox?'disabled':'enabled'" [readonly]="nameCheckBox" autocomplete="off"
+                 class="form__input" formControlName="name" id="name" name="name"
+                 placeholder="Name" required
+                 type="text">
+
+        </label>
+        <label *ngIf="nameCheckBox" class="form__label" for="name-checkbox"> ON Input Name</label>
+        <label *ngIf="!nameCheckBox" class="form__label" for="name-checkbox"> OFF Input Name</label>
+        <input (click)="nameCheckBoxClick()" class="checkbox" id="name-checkbox" type="checkbox">
+      </div>
+      <div class="form__field">
+        <label for="family">
+          <span [ngClass]="familyCheckBox?'disabled-text':'enabled'" class="form__label">Family Client</span>
+          <input autocomplete="off" class="form__input" formControlName="family" id="family"
+                 name="family"
+                 placeholder="Family" required type="text">
+        </label>
+        <label *ngIf="familyCheckBox" class="form__label" for="family-checkbox"> ON Input Name</label>
+        <label *ngIf="!familyCheckBox" class="form__label" for="family-checkbox"> OFF Input Name</label>
+        <input (click)="familyCheckBoxClick()" class="checkbox" id="family-checkbox" type="checkbox">
+      </div>
+    </div>
+    <div class="form__submit">
+      <input class="button-submit" type="submit" value="{{buttonText}}">
+    </div>
+  </form>
+</div>
