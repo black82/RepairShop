@@ -1,17 +1,30 @@
 <div class="container-body">
+  <div *ngIf="editTransaction" class="button_container">
+    <a (click)="dismissedRedact()" class=" button email">
+        <span><fa-icon [icon]="hide_button" class="button-icon"></fa-icon>
+        Exit to Edit Mode</span></a>
+  </div>
+
+  <div *ngIf="!editTransaction" class="button_container">
+    <a (click)="editTransactionDevice()" class="dismiss"><span> <fa-icon
+      [icon]="code" class="button-icon"></fa-icon>Edit mode</span></a>
+  </div>
   <div *ngIf="showDevice" class="row-container">
     <div class="title-container">
       <p class="title-form"> Device For Sale <span
         style="color: lightcoral"> {{ deviceForSaleDto.deviceForSale.model + ' ' + deviceForSaleDto.deviceForSale.imei}} </span>
       </p>
     </div>
-    <div *ngIf="showClientRepair" class="container-single-content">
-      <div class="container-modal">
-        <a (click)="hideClient()" class="close">&times;</a>
-        <app-single-content [client]="client"></app-single-content>
-        <div><a (click)="hideClient()"
-                class="button button-small button-disable"><span> <fa-icon
-          [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+    <div class="button_form">
+
+      <div *ngIf="showClientRepair" class="container-single-content">
+        <div class="container-modal">
+          <a (click)="hideClient()" class="close">&times;</a>
+          <app-single-content [client]="client"></app-single-content>
+          <div><a (click)="hideClient()"
+                  class="button button-small button-disable"><span> <fa-icon
+            [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -181,7 +194,7 @@
                   <label class="accordion__label" for="section1">
                     <span class="input-title acortion-title">
                       <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
-                      <p class="container-title"> Teste non pasate in intrata</p>
+                      <span class="container-title"> Teste non pasate in intrata</span>
                     </span>
                   </label>
                   <div class="accordion__content">
@@ -347,5 +360,8 @@
       </ng-template>
     </mat-expansion-panel>
 
+  </div>
+  <div *ngIf="editTransaction">
+    <app-redact-client-sale></app-redact-client-sale>
   </div>
 </div>

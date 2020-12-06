@@ -71,12 +71,14 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   sealed = faHandHoldingUsd;
   userAdmin = faUserSecret;
   private subscription: Subscription;
+  editTransaction = false;
 
   constructor(private deviceInputService: DeviceInputService, private inputOutputCheck: InputOutputTestService) {
   }
 
   ngOnInit(): void {
     this.subscription = this.deviceInputService.$deviceForSaleClientTransaction.subscribe(deviceForSale => {
+      this.editTransaction = false;
       this.client_catch(deviceForSale);
     });
   }
@@ -135,4 +137,20 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   hideClient() {
     this.showClientRepair = false;
   }
+
+  editTransactionDevice() {
+    if (confirm('Are you sure to Edit this Device To Sale ')) {
+      this.editTransaction = !this.editTransaction;
+      setTimeout(() => {
+        this.showDevice = !this.showDevice;
+        this.deviceInputService.$deviceForSaleClientTransactionRedact.emit(this.deviceForSaleDto);
+      }, 100);
+    }
+  }
+
+  dismissedRedact() {
+    this.showDevice = !this.showDevice;
+    this.editTransaction = !this.editTransaction;
+  }
+
 }

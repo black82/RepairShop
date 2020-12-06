@@ -1,0 +1,822 @@
+<div class="container-body">
+  <div *ngIf="showDevice" class="row-container">
+    <div class="title-container">
+      <p class="title-form"> Device For Sale Redact <span
+        style="color: lightcoral"> {{ deviceForSaleDto.deviceForSale.model + ' ' + deviceForSaleDto.deviceForSale.imei}} </span>
+      </p>
+    </div>
+    <form (ngSubmit)="submitForm()" [formGroup]="formClient" autocomplete="off">
+      <div class="row-1">
+        <div class="container-1-content">
+          <div class="container-2-content">
+            <p class="title-form">
+              Baying Client
+            </p>
+
+            <label class="input-title" for="name">
+              <fa-icon [icon]="usertag"
+                       class="icon-normal-single"></fa-icon>
+              Client Name:
+              <input [(ngModel)]="deviceForSaleDtoConstruct.clientBaying.name" class="input"
+                     formControlName="name" id="name" name="name" type="text">
+            </label>
+            <label class="input-title" for="family">
+              <fa-icon [icon]="usertag"
+                       class="icon-normal-single"></fa-icon>
+              Client Name:
+              <input [(ngModel)]="deviceForSaleDtoConstruct.clientBaying.family"
+                     class="input" formControlName="family" id="family" name="family" type="text">
+            </label>
+            <label *ngIf="deviceForSaleDto.clientBaying?.typeClient" class="input-title" for="ivaClient">
+              <fa-icon [icon]="usertag"
+                       class="icon-normal-single"></fa-icon>
+              Client Iva:
+              <input [ngModel]="deviceForSaleDto.clientBaying.ivaCompany" class="input" formControlName="ivaClient"
+                     id="ivaClient" name="ivaClient" type="text">
+            </label>
+            <label *ngIf="deviceForSaleDto.clientBaying?.typeClient" class="input-title" for="sdiClient">
+              <fa-icon
+                [icon]="usertag" class="icon-normal-single"></fa-icon>
+              Client SDI:<input
+              [ngModel]="deviceForSaleDto.clientBaying.sdiCompany" class="input" formControlName="sdiClient"
+              id="sdiClient" name="sdiClient" type="text">
+            </label>
+            <label class="input-title" for="telephone_number_baying">
+              <fa-icon [icon]="phone"
+                       class="icon-normal-single"></fa-icon>
+              Telethon Number:
+              <input [ngModel]="deviceForSaleDto.clientBaying?.telephone_number" class="input"
+                     formControlName="telephone_number_baying"
+                     id="telephone_number_baying" name="telephone_number_baying" type="tel">
+            </label>
+            <label *ngIf="deviceForSaleDto.clientBaying.telephone_number_second" class="input-title"
+                   for="telephone_sec_number_baying">
+              <fa-icon [icon]="phone"
+                       class="icon-normal-single"></fa-icon>
+              Second Telethon Number:
+              <input [ngModel]="deviceForSaleDto.clientBaying?.telephone_number_second"
+                     class="input" formControlName="telephone_sec_number_baying"
+                     id="telephone_sec_number_baying" name="telephone_sec_number_baying" type="tel">
+            </label>
+            <label class="input-title" for="email_baying">
+              <fa-icon [icon]="email" class="icon-normal-single">
+              </fa-icon>
+              Email:
+              <input [ngModel]="deviceForSaleDto.clientBaying?.email" class="input" formControlName="email_baying"
+                     id="email_baying" name="email_baying" type="email">
+            </label>
+            <label class="input-title" for="addresses_baying">
+              <fa-icon [icon]="address" class="icon-normal-single"></fa-icon>
+              Address:
+              <input [ngModel]="deviceForSaleDto.clientBaying?.address" class="input" formControlName="addresses_baying"
+                     id="addresses_baying" name="addresses_baying" type="text">
+            </label>
+
+          </div>
+        </div>
+        <div *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="container-2-content">
+          <p class="title-form">
+            Sailing Client
+          </p>
+          <label class="input-title" for="name_selling">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>
+            Client:
+            <input [ngModel]="deviceForSaleDto.clientSailing?.name" class="input" formControlName="name_selling"
+                   id="name_selling" name="name_selling" type="text">
+          </label>
+          <label class="input-title" for="family_selling">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>
+            Client:
+            <input [ngModel]="deviceForSaleDto.clientSailing?.family" class="input" formControlName="family_selling"
+                   id="family_selling" name="family_selling" type="text">
+          </label>
+          <label *ngIf="deviceForSaleDto.clientSailing?.typeClient" class="input-title" for="iva_selling">
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>
+            Client Iva:
+            <input [ngModel]="deviceForSaleDto.clientSailing?.ivaCompany" class="input" formControlName="iva_selling"
+                   id="iva_selling" name="iva_selling" type="text">
+          </label>
+          <label *ngIf="deviceForSaleDto.clientSailing?.typeClient" class="input-title" for="sdi_selling">
+            <fa-icon
+              [icon]="usertag"></fa-icon>
+            Client SDI:
+            <input [ngModel]="deviceForSaleDto.clientSailing.sdiCompany"
+                   class="input" formControlName="sdi_selling" id="sdi_selling"
+                   name="sdi_selling"> {{deviceForSaleDto.clientSailing.sdiCompany}}
+          </label>
+          <label class="input-title" for="telephone_selling">
+            <fa-icon [icon]="phone" class="icon-normal-single"></fa-icon>
+            Telethon Number:
+            <input [ngModel]="deviceForSaleDto.clientSailing?.telephone_number" class="input"
+                   formControlName="telephone_selling" id="telephone_selling" name="telephone_selling">
+          </label>
+          <label *ngIf="deviceForSaleDto.clientSailing.telephone_number_second" class="input-title"
+                 for="telephone_second_selling">
+            <fa-icon [icon]="phone" class="icon-normal-single"></fa-icon>
+            Second Telethon Number:<input [ngModel]="deviceForSaleDto.clientSailing?.telephone_number_second"
+                                          class="input" formControlName="telephone_second_selling"
+                                          id="telephone_second_selling" name="telephone_second_selling">
+          </label>
+          <label class="input-title" for="email_selling">
+            <fa-icon [icon]="email" class="icon-normal-single"></fa-icon>
+            Email:<input [ngModel]="deviceForSaleDto.clientSailing?.email"
+                         class="input" formControlName="email_selling" id="email_selling"
+                         name="email_selling">
+          </label>
+          <label class="input-title" for="address_selling">
+            <fa-icon [icon]="address" class="icon-normal-single"></fa-icon>
+            Address:<input [ngModel]="deviceForSaleDto.clientSailing?.address" class="input"
+                           formControlName="address_selling" id="address_selling" name="address_selling">
+          </label>
+        </div>
+        <div class="row-2">
+          <div class="toggle-container-2">
+            <div>
+              <div class="border-container show">
+                <p class="title-form">
+                  Device For Sale
+                </p>
+                <div class="border">
+                  <p class="input-title">
+                    <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
+                    <strong> Device Id:<span
+                      style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.deviceForSale.idDeviceSale}}</span></strong>
+                  </p>
+                  <p class="input-title">
+                    <fa-icon [icon]="date"
+                             class="icon-normal-single"></fa-icon>
+                    Date to Baying:<span
+                    style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateBaying | date:'mediumDate'}}</span>
+                  </p>
+                  <p class="input-title">
+                    <fa-icon [icon]="date"
+                             class="icon-normal-single"></fa-icon>
+                    Date to Sailing:<span
+                    style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.dateSale | date:'mediumDate'}}</span>
+                  </p>
+                  <label class="input-title">
+                    <fa-icon [icon]="used" class="icon-input"></fa-icon>
+                    Type Device
+                    <select [ngModel]="deviceForSaleDto.deviceForSale.deviceType" class="input"
+                            formControlName="deviceType">
+                      <option [disabled]="true" [selected]="true"
+                              [value]="deviceForSaleDto.deviceForSale.deviceType">{{deviceForSaleDto.deviceForSale.deviceType}}</option>
+                      <option>Smartphone with keys</option>
+                      <option>Smartphone</option>
+                      <option>iPad</option>
+                      <option>Notebook</option>
+                      <option>Tab</option>
+                      <option>Pc</option>
+                    </select>
+                  </label>
+                  <label class="input-title" for="baying_price">
+                    <fa-icon [icon]="money"
+                             class="icon-normal-single"></fa-icon>
+                    Price Baying:<input [ngModel]="deviceForSaleDto.deviceForSale.bayingPrice"
+                                        class="input" formControlName="baying_price" id="baying_price"
+                                        name="baying_price" type="text">
+                  </label>
+                  <label *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="input-title" for="seller_price">
+                    <fa-icon [icon]="money" class="icon-normal-single"></fa-icon>
+                    Price Seller:<input [ngModel]="deviceForSaleDto.deviceForSale.sellerPrice"
+                                        class="input" formControlName="seller_price" id="seller_price"
+                                        name="seller_price" type="text">
+                  </label>
+                  <label class="input-title" for="model">
+                    <fa-icon [icon]="mobile" class="icon-normal-single"></fa-icon>
+                    Model :
+                    <input (input)="filterItems($event.target.value)"
+                           (keyup.enter)="addNewModels(formClient.controls.model.value)"
+                           [ngModel]="deviceForSaleDto.deviceForSale.model"
+                           class="input" formControlName="model" id="model"
+                           placeholder="Device Model"
+                           type="text">
+                    <span class="box-autocomplete">
+            <span *ngIf="showAddAutocomplete" class="item-autocomplete-container">
+              <span *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
+                <span *ngIf="i<5" class="item-autocomplete">
+                  <span (click)="optionSelected(item)" class="item-div"><span>{{ item }}
+                  </span>
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
+                  </label>
+                  <label class="input-title" for="accessory">
+                    <fa-icon [icon]="work"
+                             class="icon-normal-single"></fa-icon>
+                    Accessory : <input
+                    [ngModel]="deviceForSaleDto.deviceForSale.accessory"
+                    class="input" formControlName="accessory" id="accessory" name="accessory" type="text">
+                  </label>
+                  <label class="input-title" for="code_device">
+                    <fa-icon [icon]="chip"
+                             class="icon-normal-single"></fa-icon>
+                    Code Device :<input
+                    [ngModel]="deviceForSaleDto.deviceForSale.code_device"
+                    class="input" formControlName="code_device" id="code_device" name="code_device" type="text">
+                  </label>
+                  <label class="input-title" for="state_of_use">
+                    <fa-icon [icon]="code"
+                             class="icon-normal-single"></fa-icon>
+                    State Of Use :<input
+                    [ngModel]="deviceForSaleDto.deviceForSale.state_of_use"
+                    class="input" formControlName="state_of_use" id="state_of_use" name="state_of_use" type="text">
+                  </label>
+                  <label class="input-title" for="condition_flag">
+                    <fa-icon [icon]="conditions"
+                             class="icon-normal-single"></fa-icon>
+                    Condition Device Flag :<input
+                    [ngModel]="deviceForSaleDto.deviceForSale.conditionFlag"
+                    class="input" formControlName="condition_flag" id="condition_flag" name="condition_flag"
+                    type="text">
+                  </label>
+                  <label *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="input-title" for="waranty">
+                    <fa-icon [icon]="guaranty" class="icon-input"></fa-icon>
+                    Device Warranty :
+                    <select [ngModel]="deviceForSaleDto.deviceForSale.garantyDuration"
+                            class="input" formControlName="deviceWarranty" id="waranty">
+                      <option [disabled]="true" [selected]="true"
+                              [value]="deviceForSaleDto.deviceForSale.garantyDuration">
+                        {{deviceForSaleDto.deviceForSale.garantyDuration}}</option>
+                      <option>0</option>
+                      <option>1</option>
+                      <option>3</option>
+                      <option>6</option>
+                      <option>12</option>
+                      <option>18</option>
+                      <option>24</option>
+                      <option>30</option>
+                      <option>36</option>
+                    </select>
+                  </label>
+                  <label class="input-title" for="imei">
+                    <fa-icon [icon]="barcode"
+                             class="icon-normal-single"></fa-icon>
+                    Device Imei :<input [ngModel]="deviceForSaleDto.deviceForSale.imei"
+                                        class="input"
+                                        formControlName="imei" id="imei" name="imei" type="text">
+                  </label>
+                  <label class="input-title" for="password_device">
+                    <fa-icon [icon]="password"
+                             class="icon-normal-single"></fa-icon>
+                    Password Device :<input [ngModel]="deviceForSaleDto.deviceForSale.password_device"
+                                            class="input"
+                                            formControlName="password_device" id="password_device"
+                                            name="password_device" type="text">
+                  </label>
+                  <p class="input-title">
+                    <fa-icon [icon]="sealed"
+                             class="icon-normal-single"></fa-icon>
+                    Sailed Status Device :<span
+                    style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.isSaled ? 'sold' : 'for sale'}}</span>
+                  </p>
+                </div>
+                <div class="accordion">
+                  <div>
+                    <input class="accordion__input" id="section1" name="example_accordion" type="radio">
+                    <label class="accordion__label" for="section1">
+                    <span class="input-title acortion-title">
+                      <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                      <span class="container-title"> Teste In Intrata</span>
+                    </span>
+                    </label>
+                    <div class="accordion__content">
+                      <div class="check-rouw-1">
+                        <div class="check-single">
+                          <fa-icon [icon]="sensors"
+                                   [style.color]="formClient.controls.sensors_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.sensors_input" class="check-box"
+                                   formControlName="sensors_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Sensors</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="software"
+                                   [style.color]="formClient.controls.software.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.software" class="check-box"
+                                   formControlName="software" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Software's</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="display"
+                                   [style.color]="formClient.controls.display_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.display_input" class="check-box"
+                                   formControlName="display_input" name="device-test" type="checkbox">
+                            <span class="check-box-name">Display</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="conections"
+                                   [style.color]="formClient.controls.connectors_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.connectors_input"
+                                   class="check-box"
+                                   formControlName="connectors_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Connectors</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="sound"
+                                   [style.color]="formClient.controls.sound_equipment_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.sound_equipment_input"
+                                   class="check-box"
+                                   formControlName="sound_equipment_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Speaker</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="soundPhone"
+                                   [style.color]="formClient.controls.audio_equipment_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.audio_equipment"
+                                   class="check-box"
+                                   formControlName="audio_equipment_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Audio Device</span>
+                          </label>
+                        </div>
+
+                        <div class="check-single">
+                          <fa-icon [icon]="touch"
+                                   [style.color]="formClient.controls.touch_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.touch_input" class="check-box"
+                                   formControlName="touch_input"
+                                   name="device-test" type="checkbox">
+                            <span class="check-box-name">Touch</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="wifi"
+                                   [style.color]="formClient.controls.wi_fi_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.wi_fi_input" class="check-box"
+                                   formControlName="wi_fi_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Wi-Fi</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="microfon"
+                                   [style.color]="formClient.controls.microphone_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.microphone_input"
+                                   class="check-box"
+                                   formControlName="microphone_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Microphone</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="sim"
+                                   [style.color]="formClient.controls.sim_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.sim_input" class="check-box"
+                                   formControlName="sim_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Sim</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="display_touch"
+                                   [style.color]="formClient.controls.display_touch_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.display_touch_input"
+                                   class="check-box"
+                                   formControlName="display_touch_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Display Touch</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="keybord"
+                                   [style.color]="formClient.controls.keyboard_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.keyboard_input" class="check-box"
+                                   formControlName="keyboard_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">On/off button</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="camera"
+                                   [style.color]="formClient.controls.camera_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.camera_input" class="check-box"
+                                   formControlName="camera_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Camera</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="cameraFront"
+                                   [style.color]="formClient.controls.camera_input_front.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.camera_input_front"
+                                   class="check-box"
+                                   formControlName="camera_input_front" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Camera Front</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="vibrations"
+                                   [style.color]="formClient.controls.vibrations.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.vibrations" class="check-box"
+                                   formControlName="vibrations" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Vibrations</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="wifi"
+                                   [style.color]="formClient.controls.bluetooth.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.bluetooth" class="check-box"
+                                   formControlName="bluetooth" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Bluetooth</span>
+                          </label>
+
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="faceIdFa"
+                                   [style.color]="formClient.controls.faceId_input.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.faceIdInput" class="check-box"
+                                   formControlName="faceId_input" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Face Id</span>
+                          </label>
+                        </div>
+                        <div class="check-single">
+                          <fa-icon [icon]="homeButton"
+                                   [style.color]="formClient.controls.homeButton.value? '#1ABC9C' : 'lightcoral'"
+                                   class="icon-box test-icon"></fa-icon>
+                          <label class="checkbox">
+                            <input [ngModel]="deviceForSaleDto.deviceForSale.inputTest.homeButton" class="check-box"
+                                   formControlName="homeButton" name="device-test"
+                                   type="checkbox">
+                            <span class="check-box-name">Home Button</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div>
+                    <input class="accordion__input" id="section2" name="example_accordion" type="radio">
+                    <label class="accordion__label" for="section2">
+                    <span class="input-title acortion-title">
+                      <fa-icon [icon]="test_meteor" class="icon-test-tile"></fa-icon>
+                      <span class="container-title"> Teste In Uscita</span>
+                    </span>
+                    </label>
+                    <div class="accordion__content">
+                      <div class="test-output">
+                        <div *ngIf="!deviceForSaleDto.deviceForSale.isSaled" class="title-container"
+                             tooltip="Click all the tests passed at the exit.">
+
+                          <p class="title-form">
+                            <fa-icon [icon]="test" class="icon-input"></fa-icon>
+                            Tests at the output of the machine.
+                          </p>
+                        </div>
+                        <div *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="col-checkbox">
+                          <div class="check-rouw-2">
+                            <div class="check-single">
+                              <fa-icon [icon]="sensors"
+                                       [style.color]="formClient.controls.sensor_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input [ngModel]="deviceForSaleDto.deviceForSale.outputTest.sensors_Output"
+
+                                       class="check-box"
+                                       formControlName="sensor_output" name="device-test" type="checkbox">
+                                <span class="check-box-name">Sensors</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="software"
+                                       [style.color]="formClient.controls.software_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box test-icon"></fa-icon>
+                              <label class="checkbox">
+                                <input [ngModel]="deviceForSaleDto.deviceForSale.outputTest.software" class="check-box"
+                                       formControlName="software_output" name="device-test"
+                                       type="checkbox">
+                                <span class="check-box-name">Software's</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="display"
+                                       [style.color]="formClient.controls.display_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.display_Output"
+                                  class="check-box" formControlName="display_output" name="device-test"
+                                  type="checkbox">
+                                <span class="check-box-name">Display</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="conections"
+                                       [style.color]="formClient.controls.connections_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.connectors_Output"
+                                  class="check-box"
+                                  formControlName="connections_output" name="device-test" type="checkbox">
+                                <span class="check-box-name">Connectors</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="sound"
+                                       [style.color]="formClient.controls.sound_equipment_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.sound_equipment_Output"
+                                  class="check-box"
+                                  formControlName="sound_equipment_output" name="device-test" type="checkbox">
+                                <span class="check-box-name">Sound/equipment</span>
+                              </label>
+                            </div>
+
+                            <div class="check-single">
+                              <fa-icon [icon]="touch"
+                                       [style.color]="formClient.controls.touch_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.touch_Output"
+                                  class="check-box" formControlName="touch_output"
+                                  name="device-test" type="checkbox">
+                                <span class="check-box-name">Touch</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="wifi"
+                                       [style.color]="formClient.controls.wi_fi_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.wi_fi_Output"
+                                  class="check-box" formControlName="wi_fi_output"
+                                  name="device-test" type="checkbox">
+                                <span class="check-box-name">Wi-Fi</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="camera"
+                                       [style.color]="formClient.controls?.camera_Output_Front.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.camera_Output_Front"
+                                  class="check-box"
+                                  formControlName="camera_Output_Front" name="device-test"
+                                  type="checkbox">
+                                <span class="check-box-name">Camera Front</span>
+                              </label>
+                            </div>
+
+                            <div class="check-single">
+                              <fa-icon [icon]="microfon"
+                                       [style.color]="formClient.controls.microphone_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.microphone_Output"
+                                  class="check-box"
+                                  formControlName="microphone_output" name="device-test" type="checkbox">
+                                <span class="check-box-name">Microphone</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="sim"
+                                       [style.color]="formClient.controls.sim_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.sim_Output"
+                                  class="check-box" formControlName="sim_output"
+                                  name="device-test" type="checkbox">
+                                <span class="check-box-name">Sim</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="keybord"
+                                       [style.color]="formClient.controls.keyboard_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.keyboard_Output"
+                                  class="check-box"
+                                  formControlName="keyboard_output" name="device-test" type="checkbox">
+                                <span class="check-box-name">Keyboard</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="display_touch"
+                                       [style.color]="formClient.controls.display_touch_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.display_touch_Output"
+                                  class="check-box"
+                                  formControlName="display_touch_output" name="device-test" type="checkbox">
+                                <span class="check-box-name">Display Touch</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="camera"
+                                       [style.color]="formClient.controls?.camera_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box"></fa-icon>
+                              <label class="checkbox">
+                                <input
+                                  [ngModel]="deviceForSaleDto.deviceForSale.outputTest.camera_Output"
+                                  class="check-box" formControlName="camera_output"
+                                  name="device-test" type="checkbox">
+                                <span class="check-box-name">Camera</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="vibrations"
+                                       [style.color]="formClient.controls.vibrations_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box test-icon"></fa-icon>
+                              <label class="checkbox">
+                                <input [ngModel]="deviceForSaleDto.deviceForSale.outputTest.vibrations"
+                                       class="check-box"
+                                       formControlName="vibrations_output" name="device-test"
+                                       type="checkbox">
+                                <span class="check-box-name">Vibrations</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="soundPhone"
+                                       [style.color]="formClient.controls.audio_equipment_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box test-icon"></fa-icon>
+                              <label class="checkbox">
+                                <input [ngModel]="deviceForSaleDto.deviceForSale.outputTest.audio_equipment"
+                                       class="check-box"
+                                       formControlName="audio_equipment_output" name="device-test"
+                                       type="checkbox">
+                                <span class="check-box-name">Audio Device</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="wifi"
+                                       [style.color]="formClient.controls.bluetooth_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box test-icon"></fa-icon>
+                              <label class="checkbox">
+                                <input [ngModel]="deviceForSaleDto.deviceForSale.outputTest.bluetooth" class="check-box"
+                                       formControlName="bluetooth_output" name="device-test"
+                                       type="checkbox">
+                                <span class="check-box-name">Bluetooth</span>
+
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="faceIdFa"
+                                       [style.color]="formClient.controls.faceId_output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box test-icon"></fa-icon>
+                              <label class="checkbox">
+                                <input [ngModel]="deviceForSaleDto.deviceForSale.outputTest.faceIdOutput"
+                                       class="check-box"
+                                       formControlName="faceId_output" name="device-test"
+                                       type="checkbox">
+                                <span class="check-box-name">Face Id</span>
+                              </label>
+                            </div>
+                            <div class="check-single">
+                              <fa-icon [icon]="homeButton"
+                                       [style.color]="formClient.controls.homeButton_Output.value? '#1ABC9C' : 'lightcoral'"
+                                       class="icon-box test-icon"></fa-icon>
+                              <label class="checkbox">
+                                <input [ngModel]="deviceForSaleDto.deviceForSale.outputTest.homeButton"
+                                       class="check-box"
+                                       formControlName="homeButton_Output" name="device-test"
+                                       type="checkbox">
+                                <span class="check-box-name">Home Button</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input class="accordion__input" id="section3" name="example_accordion" type="radio">
+                    <label class="accordion__label" for="section3">
+                    <span class="input-title acortion-title">
+                      <fa-icon [icon]="text" class="icon-test-tile"></fa-icon>
+                      <span class="container-title">  Note  :</span>
+                    </span>
+                    </label>
+                    <div class="accordion__content">
+                      <div>
+                      </div>
+                      <div class="note-container">
+                        <div class="note-border">
+                          <label class="text-aria" for="text-aria-1">
+                            Note Input :
+                            <textarea [value]="deviceForSaleDto?.deviceForSale?.noteInput" class=" input-title note"
+                                      formControlName="note_input" id="text-aria-1" name="note_input"></textarea>
+                          </label>
+                          <label *ngIf="deviceForSaleDto.deviceForSale.isSaled" class="text-aria" for="text-aria-2">
+                            Note Output :
+                            <textarea [value]="deviceForSaleDto?.deviceForSale?.noteOutput" class="input-title note"
+                                      formControlName="note_output" id="text-aria-2" name="note_output"></textarea>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input class="accordion__input" id="section4" name="example_accordion" type="radio">
+                    <label class="accordion__label" for="section4">
+                      <a class="input-title acortion-title">
+                        <fa-icon [icon]="userStaff" class="icon-test-tile"></fa-icon>
+                        <p class="container-title">Staff Users who Administered this Case</p>
+                      </a>
+                    </label>
+                    <div *ngIf="deviceForSaleDto.deviceForSale?.bayingUser" class="accordion__content">
+                      <p class="input-title">
+                        <fa-icon [icon]="userAdmin"
+                                 class="icon-normal-single"></fa-icon>
+                        The User Who Bought Device :<span
+                        style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale?.bayingUser}}</span>
+                      </p>
+                      <p *ngIf="deviceForSaleDto.deviceForSale.sellerUser" class="input-title">
+                        <fa-icon [icon]="userAdmin"
+                                 class="icon-normal-single"></fa-icon>
+                        The User Who Sold Device :<span
+                        style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.sellerUser}}</span>
+                      </p>
+                      <p *ngIf="deviceForSaleDto.deviceForSale.updaterUser" class="input-title">
+                        <fa-icon [icon]="userAdmin"
+                                 class="icon-normal-single"></fa-icon>
+                        User Care to Update Device:<span
+                        style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.updaterUser}}</span>
+                      </p>
+                      <div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="button_form">
+      <div tooltip="You will leave this page!!!">
+        <a (click)="dismissed()" class="dismiss">
+        <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
+        Discard Device Changes</span></a></div>
+
+      <div tooltip="The model will be sent to the Email">
+        <a (click)="submitForm()" class=" button email"><span> <fa-icon
+          [icon]="software" class="button-icon"></fa-icon>  Save Device</span></a>
+      </div>
+    </div>
+  </div>
+
+</div>

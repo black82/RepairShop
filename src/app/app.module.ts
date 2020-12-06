@@ -74,7 +74,6 @@ import {NotFoundComponent} from './component/not-found/not-found.component';
 import {PageableDeviceSaleComponent} from './component/pageable-device-sale/pageable-device-sale.component';
 import {RepairDashboardComponent} from './component/repair-dashboard/repair-dashboard.component';
 import {ShopDashboardComponent} from './component/shop-dashboard/shop-dashboard.component';
-import {SinglDeviceShouwComponent} from './component/singl-device-shouw/singl-device-shouw.component';
 import {SingleDeviceForSaleComponent} from './component/single-divice-forsale/single-device-for-sale.component';
 import {DeviceSaleByIdComponent} from './component/device-sale-by-id/device-sale-by-id.component';
 import {DeviceSalePaginatorComponent} from './component/device-sale-paginator/device-sale-paginator.component';
@@ -84,6 +83,8 @@ import {RedactClientComponent} from './component/redact-client/redact-client.com
 import {SearchByNameComponent} from './component/search-by-name/search-by-name.component';
 import {SearchByNameClientRepairComponent} from './component/search-by-name-client-repair/search-by-name-client-repair.component';
 import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-by-name-sale.component';
+import {RedactClientSaleComponent} from './component/redact-client-sale/redact-client-sale.component';
+import {RedactClientsaleRedacandformComponent} from './component/redact-clientsale-redacandform/redact-clientsale-redacandform.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +140,6 @@ import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-
     PageableDeviceSaleComponent,
     RepairDashboardComponent,
     ShopDashboardComponent,
-    SinglDeviceShouwComponent,
     SingleDeviceForSaleComponent,
     DeviceSaleByIdComponent,
     DeviceSalePaginatorComponent,
@@ -148,7 +148,9 @@ import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-
     RedactClientComponent,
     SearchByNameComponent,
     SearchByNameClientRepairComponent,
-    SearchByNameSaleComponent
+    SearchByNameSaleComponent,
+    RedactClientSaleComponent,
+    RedactClientsaleRedacandformComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

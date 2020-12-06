@@ -16,6 +16,8 @@ export class DeviceInputService {
 
   $deviceForSaleClientTransaction: EventEmitter<DeviceForSaleTransaction> = new EventEmitter();
 
+  $deviceForSaleClientTransactionRedact: EventEmitter<DeviceForSaleTransaction> = new EventEmitter();
+
   $deviceForSaleClientTransactionArray: EventEmitter<DeviceForSaleTransaction[]> = new EventEmitter();
 
   $clientRedactEvent: EventEmitter<Client> = new EventEmitter();

@@ -419,12 +419,23 @@
         Discard Form</span>
           </a>
         </div>
+        <div tooltip="Redact this Device">
+          <a (click)="redactDevice()" class="button-redact">
+        <span> <fa-icon [icon]="software"
+                        class="button-icon"></fa-icon> Redact Device </span></a>
+        </div>
         <div tooltip="The model will be sent to the Email">
           <a (click)="clickEmailSender()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
             [icon]="mail" class="button-icon"></fa-icon> Preview and Save</span></a>
         </div>
       </div>
     </form>
+  </div>
+  <div *ngIf="show_redacting" class="container-redact">
+    <div class="border-container">
+      <a (click)="dismissButton()" class="close" title="Close"><span class="x">X</span></a>
+      <app-redact-client-sale [typeActionAfter]="true"></app-redact-client-sale>
+    </div>
   </div>
 </div>
 

@@ -43,7 +43,7 @@ import {Repair} from '../entity/Repair';
 import {InputTest} from '../entity/InputTest';
 import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {OutputTest} from '../entity/OutputTest';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
@@ -106,7 +106,6 @@ export class RedactClientComponent implements OnInit, OnDestroy {
   faceIdFa = faFlushed;
   vibrations = faVihara;
   software = faFileSignature;
-  client_after_saved: Client;
   device: Device;
   chip = faMicrochip;
   work = faTools;
@@ -116,13 +115,7 @@ export class RedactClientComponent implements OnInit, OnDestroy {
   repairFileStorage: RepairFileStorage = new RepairFileStorage();
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
-  invoice_event: Subscription;
-  email_send_event: Subscription;
-  email_anime_event: Subscription;
-  email_send_disable = true;
   countSigPad = 0;
-  showAddAutocomplete = false;
-  filteredItems1: Observable<any[]>;
   prompt = 'Press <enter> to add "';
   itemsModels: string[] = [];
   companyShow = false;
@@ -276,7 +269,7 @@ export class RedactClientComponent implements OnInit, OnDestroy {
     this.client = new Client(this.client.id, formData.family, formData.name, formData.companyName,
       formData.email, formData.telephone_number, this.client.telephone_number_second, formData.address,
       [this.device], formData.email_send, this.client.typeClient, formData.ivaClient, formData.sdiClient,
-      this.client?.createUser, this.client?.lastModified, null, null);
+      this.client?.createUser, this.client?.lastModified, this.client.deviceSale, this.client.deviceBay);
     return this.client;
   }
 

@@ -415,16 +415,14 @@
     </div>
     <div class="button_form">
       <div tooltip="You will leave this page!!!">
-        <a (click)="dismissed()" class="dismiss">
+        <a (click)="dismissed()" class="dismiss button">
         <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
-        Discard Form</span></a></div>
-
+        Discard Form</span></a>
+      </div>
       <div tooltip="The model will be sent to the Email">
         <a (click)="clickEmailSender()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
           [icon]="mail" class="button-icon"></fa-icon> Preview and Save</span></a>
       </div>
-
-
     </div>
   </form>
 </div>

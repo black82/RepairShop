@@ -66,12 +66,13 @@
                 </div>
               </div>
             </li>
-            <li class="current_page_item" id="output-menu"><a accesskey="3" class="teaming"
-                                                              title="Tools Shop">
-              <fa-icon [icon]="tools" class="small-icon" class="menu-icon"></fa-icon>
-              Tools Shop
-              <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
-            </a>
+            <li class="current_page_item" id="output-menu">
+              <a accesskey="3" class="teaming"
+                 title="Tools Shop">
+                <fa-icon [icon]="tools" class="menu-icon small-icon"></fa-icon>
+                Tools Shop
+                <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
+              </a>
               <div class="submenu-output">
                 <ul class="submenu-output1 submenu-repair">
                   <ol class="rout-link">
@@ -93,6 +94,10 @@
                     <li><a routerLink="/device/name/sale">
                       <fa-icon [icon]="usertag" class="small-icon"></fa-icon>
                       Search Shop Client FullName</a>
+                    </li>
+                    <li><a routerLink="/device/sale/redact">
+                      <fa-icon [icon]="redact" class="small-icon"></fa-icon>
+                      Redact Client Shop</a>
                     </li>
                   </ol>
                   <ol class="icon-menu">
@@ -157,9 +162,9 @@
                         Search Client by FullName</a>
                       </li>
                     </ol>
-                    <ol class="icon-menu">
+                    <li class="icon-menu">
                       <fa-icon [icon]="repair" class="icon-big"></fa-icon>
-                    </ol>
+                    </li>
                   </ul>
 
                 </div>

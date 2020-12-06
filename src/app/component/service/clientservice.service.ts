@@ -438,6 +438,13 @@ export class HttpClien {
     );
   }
 
+  putDeviceForSaleRedact(deviceForSaleTransaction: DeviceForSaleTransaction) {
+    return this.http.post<DeviceForSaleTransaction>(this.apiUrl + 'api/device/transactional/redact', deviceForSaleTransaction
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getClientRepairByName(name: string): Observable<Client[]> {
     return this.http.get<Client[]>(this.apiUrl + 'api/client/repair/only/name/', {
       params: new HttpParams()
@@ -451,6 +458,15 @@ export class HttpClien {
     return this.http.get<Client[]>(this.apiUrl + 'api/client/repair/only/family/', {
       params: new HttpParams()
         .set('family', family)
+    }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getDeviceForSaleByDeviceId(idDeviceSale: number): Observable<DeviceForSaleTransaction> {
+    return this.http.get<DeviceForSaleTransaction>(this.apiUrl + 'api/device/single/by/device/id', {
+      params: new HttpParams()
+        .set('id', idDeviceSale.toString())
     }).pipe(
       catchError(this.errorHandler)
     );

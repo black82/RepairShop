@@ -37,6 +37,7 @@ import {AllDeviceInSaleComponent} from './component/all-device-in-sale/all-devic
 import {ShopDashboardComponent} from './component/shop-dashboard/shop-dashboard.component';
 import {SearchByNameClientRepairComponent} from './component/search-by-name-client-repair/search-by-name-client-repair.component';
 import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-by-name-sale.component';
+import {RedactClientsaleRedacandformComponent} from './component/redact-clientsale-redacandform/redact-clientsale-redacandform.component';
 
 
 export const routes: Routes = [
@@ -76,6 +77,7 @@ export const routes: Routes = [
   {path: 'device/sale/all/pageable', component: AllDeviceSaleComponent, canActivate: [AutGuardService]},
   {path: 'device/in/sale/pageable', component: AllDeviceInSaleComponent, canActivate: [AutGuardService]},
   {path: 'device/name/sale', component: SearchByNameSaleComponent, canActivate: [AutGuardService]},
+  {path: 'device/sale/redact', component: RedactClientsaleRedacandformComponent, canActivate: [AutGuardService]},
 ];
 
 
