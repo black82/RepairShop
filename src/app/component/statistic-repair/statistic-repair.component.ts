@@ -25,6 +25,7 @@ export class StatisticRepairComponent implements OnInit {
   reject = faRemoveFormat;
   private subscribe: Subscription;
   private isAdmin: boolean;
+  isShop: boolean;
   options = {
     legend: {
       display: true,
@@ -61,9 +62,11 @@ export class StatisticRepairComponent implements OnInit {
       this.date_complete = data;
     });
     this.subscribe = this.service_show_statistic.statistic_interval_month.subscribe(value => {
+      this.isShop = value;
       if (value) {
         this.get_data_to_server();
-
+      } else {
+        this.get_data_to_server_shop();
       }
     });
   }
@@ -112,8 +115,26 @@ export class StatisticRepairComponent implements OnInit {
 
   private create_object_statistic(labels: string[],
                                   data: number[]) {
-    const datasets = [{label: 'Repairs performed this period ', backgroundColor: '#42A5F5', borderColor: '#42A5F5', data}];
+    let datasets;
+    if (this.isShop) {
+      datasets = [{label: 'Repairs performed this period ', backgroundColor: '#42A5F5', borderColor: '#42A5F5', data}];
+    } else {
+      datasets = [{label: 'Shop performed this period ', backgroundColor: '#42A5F5', borderColor: '#42A5F5', data}];
+
+    }
     this.data_object = {labels, datasets};
     this.show_data = true;
+  }
+
+  private get_data_to_server_shop() {
+    this.animation_wait.$anime_show.emit(true);
+    this.httpService.intervalShopMaidStatisticByModel(this.date_init, this.date_complete)
+      .subscribe(data_set => {
+        this.animation_wait.$anime_show.emit(false);
+        this.deleteOldDate();
+        this.create_data_set(data_set);
+      }, () => {
+        this.animation_wait.$anime_show.emit(false);
+      });
   }
 }

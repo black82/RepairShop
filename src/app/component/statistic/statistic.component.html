@@ -31,13 +31,22 @@
       </form>
     </div>
     <div class="container-chart1">
+      <p class="chart-title"> Repair Statistic</p>
       <a (click)="getData()" class="button button-small first"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon> Statistic Model</span></a>
+        [icon]="statistic_button" class="button-icon"></fa-icon> Repair By Model</span></a>
 
       <a (click)="getDataByMonth()" class="button button-small month"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon>Statistic Month</span></a>
+        [icon]="statistic_button" class="button-icon"></fa-icon>  Repair By Month</span></a>
       <a (click)="getDataByModelAndParts()" class="button button-small model"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon>Stat. Model&Parts</span></a>
+        [icon]="statistic_button" class="button-icon"></fa-icon>  Repair Model&Parts</span></a>
+      <p class="chart-title"> Shop Statistic</p>
+      <a (click)="getDataShop()" class="button button-small first"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon> Statistic Shop By Model</span></a>
+
+      <a (click)="getDataByMonthShop()" class="button button-small month"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon>  Statistic Shop By Month</span></a>
+      <!--      <a (click)="getDataByModelAndPartsShop()" class="button button-small model"><span> <fa-icon-->
+      <!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Stat. Model&Parts</span></a>-->
     </div>
   </div>
   <div *ngIf="show_chart" class="char-modal">

@@ -228,6 +228,20 @@ export class HttpClien {
         catchError(this.errorHandler));
   }
 
+  intervalShopModelMaidStatisticByModel(init: Date, finaly: Date): Observable<any> {
+    const params = new HttpParams().set('initiate', init.toString()).set('finale', finaly.toString());
+    return this.http.get<[]>(this.apiUrl + 'admin/api/interval/shop', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  intervalShopMaidStatisticByModel(init: Date, finaly: Date): Observable<any> {
+    const params = new HttpParams().set('initiate', init.toString()).set('finale', finaly.toString());
+    return this.http.get<[]>(this.apiUrl + 'admin/api/statistic/shop/month/interval', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
   intervalRepairMaidStatisticByMonth(init: Date, finaly: Date): Observable<StatisticModel[]> {
     const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
     return this.http.get<StatisticModel[]>(this.apiUrl + 'admin/api/statistic/repair/month/interval', {params})

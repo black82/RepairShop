@@ -207,6 +207,7 @@ form select {
   text-align: center;
   text-shadow: 0 1px 1px #fff;
   padding-top: 20px;
+  font-size: 20px;
 }
 
 .image-container {
@@ -245,7 +246,8 @@ form select {
   bottom: -160px;
   animation: square 25s infinite;
   transition-timing-function: linear;
-  margin-bottom: -450px;
+  margin-bottom: -4%;
+  margin-top: -17%;
 }
 
 .bg-bubbles li:nth-child(1) {

@@ -207,4 +207,39 @@ export class StatisticComponent implements OnInit {
     this.sum_device = sum;
     return sum;
   }
+
+  getDataShop() {
+    if (this.formDataInterval.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
+    this.deleteOldDate();
+    this.animation_wait.$anime_show.emit(true);
+    const init_date = this.formDataInterval.controls.date_init.value;
+    const complete_date = this.formDataInterval.controls.date_complete.value;
+    this.httpService.intervalShopModelMaidStatisticByModel(init_date, complete_date).subscribe(value => {
+      this.date_server = value;
+      this.show_chart = true;
+      this.elaboration_server_data();
+    }, () => {
+      this.animation_wait.$anime_show.emit(false);
+    });
+  }
+
+
+  getDataByMonthShop() {
+    if (this.formDataInterval.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
+    this.service_show_statistic.statistic_init_data.emit(this.formDataInterval.controls.date_init.value);
+    this.service_show_statistic.statistic_complete_data.emit(this.formDataInterval.controls.date_complete.value);
+    this.service_show_statistic.statistic_interval_month.emit(false);
+  }
+
+  getDataByModelAndPartsShop() {
+
+  }
 }
