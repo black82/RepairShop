@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
 import {StatisticRepairIntervalService} from '../service/statistic-repair-interval.service';
 import {HttpClien} from '../service/clientservice.service';
@@ -13,7 +13,8 @@ import {ColorsStringArray} from '../entity/ColorsStringArray';
   templateUrl: './statistic-model-parts.component.html',
   styleUrls: ['./statistic-model-parts.component.css']
 })
-export class StatisticModelPartsComponent implements OnInit {
+export class StatisticModelPartsComponent implements OnInit, OnDestroy {
+
   data_object: any;
   show_data = false;
   reject = faRemoveFormat;
@@ -28,6 +29,24 @@ export class StatisticModelPartsComponent implements OnInit {
   hoverBackgroundColor: string[] = [];
   isAdmin: boolean;
   private subscribe: Subscription;
+  options = {
+    legend: {
+      display: true,
+      labels: {
+        usePointStyle: true,
+        beginAtZero: true,
+        fontColor: '#fff',
+        fontFamily: 'Dancing Script',
+        serif: true
+      }, title: {
+        display: true,
+        fontColor: '#fff', // can Add title color also
+        text: 'Custom Chart Title'
+      }
+    }
+  };
+  private amount: number;
+  private subscriptionAmount: Subscription;
 
   constructor(private service_show_statistic: StatisticRepairIntervalService,
               private httpService: HttpClien,
@@ -48,6 +67,9 @@ export class StatisticModelPartsComponent implements OnInit {
         this.complete_date = request.data_complete_interval;
         this.getDateBackend();
       }
+    });
+    this.subscriptionAmount = this.service_show_statistic.statistic_amount.subscribe(amount => {
+      this.amount = amount;
     });
   }
 
@@ -87,10 +109,47 @@ export class StatisticModelPartsComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.subscribe) {
+      this.subscribe.unsubscribe();
+    }
+    if (this.subscriptionAmount) {
+      this.subscriptionAmount.unsubscribe();
+    }
+  }
+
+  private createObjectChart(data: number[], backgroundColor: string[], hoverBackgroundColor: string[]) {
+    const object = {data, backgroundColor, hoverBackgroundColor};
+    this.datasets.push(object);
+    const labels = this.labels;
+    const datasets = this.datasets;
+    this.data_object = {labels, datasets};
+    this.show_data = true;
+    this.animation_wait.$anime_show.emit(false);
+  }
+
   private elaboration_server_data() {
     let count = 0;
+    if (this.date_server?.length > 1) {
+      this.date_server.sort((a, b) => {
+          if (a[2] < b[2]) {
+            return 1;
+          }
+          if (a[2] > b[2]) {
+            return -1;
+          }
+        }
+      );
+    }
+    if (!this.amount) {
+      this.amount = 25;
+    }
+    if (this.date_server?.length > this.amount) {
+
+      this.date_server.length = this.amount;
+    }
     this.date_server.forEach(value => {
-      const label = value[0] + '  ' + '  /  ' + value[1];
+      const label = value[0] + '  ' + '  /  ' + value[1] + '  /  ' + value[2];
       this.labels.push(label);
       this.data.push(value[2]);
       if (count === this.colors.length) {
@@ -107,16 +166,4 @@ export class StatisticModelPartsComponent implements OnInit {
     this.createObjectChart(this.data, this.backgroundColor, this.hoverBackgroundColor);
 
   }
-
-  private createObjectChart(data: number[], backgroundColor: string[], hoverBackgroundColor: string[]) {
-    const object = {data, backgroundColor, hoverBackgroundColor};
-    this.datasets.push(object);
-    const labels = this.labels;
-    const datasets = this.datasets;
-    this.data_object = {labels, datasets};
-    this.show_data = true;
-    this.animation_wait.$anime_show.emit(false);
-  }
-
-
 }

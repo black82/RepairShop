@@ -25,6 +25,22 @@ export class StatisticRepairComponent implements OnInit {
   reject = faRemoveFormat;
   private subscribe: Subscription;
   private isAdmin: boolean;
+  options = {
+    legend: {
+      display: true,
+      labels: {
+        usePointStyle: true,
+        beginAtZero: true,
+        fontColor: '#0B1B48',
+        fontFamily: 'Dancing Script',
+        serif: true
+      }, title: {
+        display: true,
+        fontColor: '#0B1B48', // can Add title color also
+        text: 'Custom Chart Title'
+      }
+    }
+  };
 
   constructor(private service_show_statistic: StatisticRepairIntervalService,
               private httpService: HttpClien,

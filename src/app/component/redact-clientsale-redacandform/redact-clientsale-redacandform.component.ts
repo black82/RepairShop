@@ -31,7 +31,7 @@ export class RedactClientsaleRedacandformComponent implements OnInit, OnDestroy 
     const timeout = setTimeout(() => {
       this.deviceInputService.$deviceForSaleClientTransactionRedact.emit(deviceForSaleTransaction);
       clearTimeout(timeout);
-    }, 300);
+    }, 100);
 
   }
 

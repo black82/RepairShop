@@ -143,6 +143,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
   show_redacting = false;
+  private subscriptionTransaction: Subscription;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
@@ -424,6 +425,9 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     if (this.subscriptionPrintSuccess) {
       this.subscriptionPrintSuccess.unsubscribe();
     }
+    if (this.subscriptionTransaction) {
+      this.subscriptionTransaction.unsubscribe();
+    }
   }
 
   emailControlChange() {
@@ -525,7 +529,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
         this.service_input.$deviceForSaleClientTransactionRedact.emit(device);
       }, 200);
     });
-    this.service_input.$deviceForSaleClientTransaction.subscribe(device => {
+    this.subscriptionTransaction = this.service_input.$deviceForSaleClientTransaction.subscribe(device => {
       this.device = device.deviceForSale;
       this.show_redacting = !this.show_redacting;
     });

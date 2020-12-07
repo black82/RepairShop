@@ -2,10 +2,10 @@
   <div class="char-modal">
     <div class="chard-bord" id="anime-char">
       <div class="doughnut-chart">
-        <h1 class="title-form">Chart By Model and Parts Replace</h1>
+        <h1 class="chart-title">Chart By Model and Parts Replace</h1>
         <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
           [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-        <p-chart [data]="data_object" type="pie"></p-chart>
+        <p-chart [data]="data_object" [height]="'1000px'" [options]="options" type="pie"></p-chart>
       </div>
     </div>
   </div>

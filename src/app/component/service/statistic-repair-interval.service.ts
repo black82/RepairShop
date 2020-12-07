@@ -8,6 +8,8 @@ export class StatisticRepairIntervalService {
   @Output()
   statistic_interval_month: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
+  statistic_amount: EventEmitter<number> = new EventEmitter<number>();
+  @Output()
   statistic_init_data: EventEmitter<Date> = new EventEmitter<Date>();
   @Output()
   statistic_complete_data: EventEmitter<Date> = new EventEmitter<Date>();

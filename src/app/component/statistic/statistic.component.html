@@ -1,20 +1,32 @@
 <div class="container-body">
+  <h1 class="chart-title" style="font-size: 30px">Company Statistic</h1>
   <div *ngIf="isAdmin" class="row-container">
     <div class="container-plugin">
       <form [formGroup]="formDataInterval">
-
-        <span class="input-title">Date init :</span>
         <label>
+          <span class="input-title">Search Start Date :</span>
           <fa-icon [icon]="date_init" class="icon-input"></fa-icon>
           <input class="input-1"
                  formControlName="date_init" type="date">
-        </label><br>
-
+        </label>
         <label>
-          <span class="input-title">Date Complete :</span>
+          <span class="input-title">Search End Date :</span>
           <fa-icon [icon]="date" class="icon-input"></fa-icon>
           <input class="input-1"
                  formControlName="date_complete" type="date">
+        </label>
+        <label>
+          <span class="input-title">The Amount Of Items Top viewed :</span>
+          <fa-icon [icon]="cart" class="icon-input"></fa-icon>
+          <select
+            class="input-1" formControlName="amount">
+            <option [disabled]="true" [selected]="true" value="">Please Select Amount Viewed</option>
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
         </label>
       </form>
     </div>
@@ -27,27 +39,36 @@
       <a (click)="getDataByModelAndParts()" class="button button-small model"><span> <fa-icon
         [icon]="statistic_button" class="button-icon"></fa-icon>Stat. Model&Parts</span></a>
     </div>
-    <div class="image-container">
-      <img alt="asd" height="60%"
-           src="http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/assets/images/chart-foto.png" width="100%">
-    </div>
   </div>
   <div *ngIf="show_chart" class="char-modal">
     <div class="chard-bord">
       <div class="doughnut-chart">
         <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
           [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-        <h1 class="title-form">Device repaired
+        <h1 class="chart-title">Device repaired
           from date/ <span class="date-interval">{{formDataInterval.controls.date_init.value}}</span>
           to dated/
           <span class="date-interval">{{formDataInterval.controls.date_complete.value}}</span>
           : = <span class="date-interval">{{sum_device}}</span></h1>
         <div class="container-chart">
-          <p-chart [data]="data_object" type="doughnut"></p-chart>
+          <p-chart [data]="data_object" [height]="'1000px'" [options]="options" class="pie" type="doughnut"></p-chart>
         </div>
       </div>
     </div>
   </div>
   <app-statistic-repair></app-statistic-repair>
   <app-statistic-model-parts></app-statistic-model-parts>
+  <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
 </div>
+

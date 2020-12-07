@@ -2,10 +2,10 @@
   <div class="char-modal">
     <div class="chard-bord">
       <div class="doughnut-chart">
-        <h1 class="title-form">Statistics for the period indicated in months</h1>
+        <h1 class="chart-title">Statistics for the period indicated in months</h1>
         <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
           [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-        <p-chart [data]="data_object" type="bar"></p-chart>
+        <p-chart [data]="data_object" [options]="options" type="bar"></p-chart>
       </div>
     </div>
   </div>

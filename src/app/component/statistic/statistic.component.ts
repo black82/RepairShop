@@ -10,6 +10,7 @@ import {ColorsStringArray} from '../entity/ColorsStringArray';
 import {StatisticRepairIntervalService} from '../service/statistic-repair-interval.service';
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
 import {StatisticRequestInterval} from '../entity/StatisticRequestInterval';
+import {faCartPlus} from '@fortawesome/free-solid-svg-icons/faCartPlus';
 
 @Component({
   selector: 'app-statistic',
@@ -20,6 +21,7 @@ export class StatisticComponent implements OnInit {
   data_object: {
     labels: string[], datasets: object[]
   };
+  cart = faCartPlus;
   date = faCalendarCheck;
   statistic_button = faChartArea;
   date_init = faCalendarAlt;
@@ -35,6 +37,22 @@ export class StatisticComponent implements OnInit {
   sum_device: number;
   reject = faRemoveFormat;
   isAdmin: boolean;
+  options = {
+    legend: {
+      display: true,
+      labels: {
+        usePointStyle: true,
+        beginAtZero: true,
+        fontColor: '#fff',
+        fontFamily: 'Dancing Script',
+        serif: true
+      }, title: {
+        display: true,
+        fontColor: '#fff', // can Add title color also
+        text: 'Custom Chart Title'
+      }
+    }
+  };
 
   constructor(private httpService: HttpClien,
               private alertService: AlertServiceService,
@@ -52,7 +70,8 @@ export class StatisticComponent implements OnInit {
     this.formDataInterval = this.formBuilder.group({
       date_init: [null, Validators.required],
 
-      date_complete: [null, Validators.required]
+      date_complete: [null, Validators.required],
+      amount: [null]
     });
   }
 
@@ -118,7 +137,12 @@ export class StatisticComponent implements OnInit {
         ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
       return;
     }
+    let amount = this.formDataInterval.controls.amount.value;
+    if (!amount) {
+      amount = 25;
+    }
 
+    this.service_show_statistic.statistic_amount.emit(amount);
     this.service_show_statistic.model_parts_statistic
       .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
         this.formDataInterval.controls.date_complete.value));
@@ -127,6 +151,25 @@ export class StatisticComponent implements OnInit {
   private elaboration_server_data() {
     let count = 0;
     const sum = this.sumDevice();
+    if (this.date_server?.length > 1) {
+      this.date_server.sort((a, b) => {
+          if (a[1] < b[1]) {
+            return 1;
+          }
+          if (a[1] > b[1]) {
+            return -1;
+          }
+        }
+      );
+    }
+    let amount = this.formDataInterval.controls.amount.value;
+    if (!amount) {
+      amount = 25;
+    }
+    if (this.date_server?.length > amount) {
+
+      this.date_server.length = amount;
+    }
     this.date_server.forEach(value => {
       let percent = (value[1] * 100) / sum;
       percent = parseFloat(percent.toFixed(2));

@@ -12,6 +12,15 @@
   padding: 0.8em;
 }
 
+.chart-title {
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: #0B1B48;
+  line-height: 25px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+  padding-top: 20px;
+}
+
 .button:before {
   content: "";
   position: absolute;

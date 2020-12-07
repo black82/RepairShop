@@ -60,7 +60,8 @@
 }
 
 .doughnut-chart {
-  background: #efefef;
+  background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%) !important;
+  padding: 50px;
 }
 
 .chard-bord {
@@ -71,4 +72,13 @@
   border-radius: 2%;
   margin: 20px;
 
+}
+
+.chart-title {
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  color: #fff;
+  line-height: 25px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+  padding-top: 20px;
 }
