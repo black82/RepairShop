@@ -18,6 +18,8 @@ import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
 import {faFileSignature} from '@fortawesome/free-solid-svg-icons';
 import {PrintService} from '../service/print.service';
 import {InputOutputTestService} from '../service/input-output-test.service';
+import {InvoiceRepairModel} from '../entity/InvoiceRepairModel';
+import {InvoiceShopModels} from '../entity/InvoiceShopModels';
 
 
 @Component({
@@ -53,6 +55,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   private subscriptionPrintSuccess: Subscription;
   private invoice: InvoiceToolsDto;
   private subscriptionEmail: Subscription;
+  invoiceModel: InvoiceRepairModel;
+  staffTitle: string;
+  clientTitle: string;
+  invoiceShopModel: InvoiceShopModels;
 
   constructor(private print: PrintService,
               private emailSender: EmailSenderService,
@@ -67,43 +73,48 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.invoice = null;
     this.email_send_event = this.emailSender.email_send_event.subscribe(print => {
-      this.images_sig = this.sig_pad_service.image_sig;
-      this.print_entity = print;
-      this.title = print.titleForm;
-      this.checkIfEmailPresent(print.client_print);
-      this.client = print.client_print;
-      if (print.type_client_print === 1 || this.print_entity.type_client_print === 2) {
-        this.id = this.id_repair(print.client_print);
-      } else {
-        if (print.type_client_print === 3) {
-          this.id = print.client_print.deviceBay[0].idDeviceSale;
-        }
-        if (print.type_client_print === 4) {
-          this.id = print.client_print.deviceSale[0].idDeviceSale;
-        }
+      this.getInvoiceModel(print);
+    });
+  }
+
+
+  afterReceiveAllResourcesCall(print: PrintEntity) {
+    this.images_sig = this.sig_pad_service.image_sig;
+    this.print_entity = print;
+    this.title = print.titleForm;
+    this.checkIfEmailPresent(print.client_print);
+    this.client = print.client_print;
+    if (print.type_client_print === 1 || this.print_entity.type_client_print === 2) {
+      this.id = this.id_repair(print.client_print);
+    } else {
+      if (print.type_client_print === 3) {
+        this.id += print.client_print.deviceBay[0].idDeviceSale;
       }
-      this.type_print = print.type_client_print;
-      this.check_type_print(print);
-      this.http.getNickNameCurrentStaffUser().subscribe(name => {
-        this.userNickname = name.currentName;
-        this.emailPage(print.client_print);
-        this.animation_wait.$anime_show.emit(false);
+      if (print.type_client_print === 4) {
+        this.id += print.client_print.deviceSale[0].idDeviceSale;
+      }
+    }
+    this.type_print = print.type_client_print;
+    this.check_type_print(print);
+    this.http.getNickNameCurrentStaffUser().subscribe(name => {
+      this.userNickname = name.currentName;
+      this.emailPage(print.client_print);
+      this.animation_wait.$anime_show.emit(false);
 
-      });
-      this.print.invoice_make.subscribe(() => {
-        this.print.$success_print.emit(true);
-      });
+    });
+    this.print.invoice_make.subscribe(() => {
+      this.print.$success_print.emit(true);
+    });
 
-      this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
-        if (value) {
-          this.submitForm();
-        }
-      });
-      this.subscriptionEmail = this.emailSender.email_sent_send_success.subscribe(value => {
-        if (value) {
-          this.submitFormEmail();
-        }
-      });
+    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
+      if (value) {
+        this.submitForm();
+      }
+    });
+    this.subscriptionEmail = this.emailSender.email_sent_send_success.subscribe(value => {
+      if (value) {
+        this.submitFormEmail();
+      }
     });
   }
 
@@ -472,6 +483,24 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   private submitFormEmail() {
     this.print.$success_print_id.emit(Number(this.id));
     this.animation_wait.$anime_show.emit(false);
+  }
+
+  private getInvoiceModel(print: PrintEntity) {
+    if (print.type_client_print === 1 || print.type_client_print === 2) {
+      this.http.findInvoiceRepairsModelByOrder('default').subscribe(value => {
+        this.invoiceModel = value;
+        this.staffTitle = value?.staffSignTitle;
+        this.clientTitle = value?.clientSignTitle;
+        this.afterReceiveAllResourcesCall(print);
+      });
+    } else {
+      this.http.findInvoiceShopModelByOrder('default').subscribe(value => {
+        this.invoiceShopModel = value;
+        this.staffTitle = value?.staffSignTitle;
+        this.clientTitle = value?.clientSignTitle;
+        this.afterReceiveAllResourcesCall(print);
+      });
+    }
   }
 }
 

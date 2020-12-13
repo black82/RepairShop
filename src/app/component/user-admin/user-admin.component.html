@@ -1,32 +1,31 @@
 <div class="container-body">
   <div *ngIf="isAdmin" class="content-container">
-    <h1 class="title-form">Registered Users of the application are administered here</h1>
-    <a (click)="getAllUsers()" class="button button-small button-get"><span> <fa-icon
-      [icon]="user_icon" class="button-icon"></fa-icon> Get All Users</span></a>
+    <p class="form__label">Registered Users of the application are administered here</p>
     <div *ngIf="showUser" class="container-users">
       <table class="table table-sm">
         <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Full Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Email Confirmed</th>
-          <th scope="col">User Enable</th>
-          <th scope="col">User Roles</th>
-          <th scope="col">Disable User</th>
-          <th scope="col">Activate User</th>
+          <th class="form__label_1" scope="col">#</th>
+          <th class="form__label_1" scope="col">Full Name</th>
+          <th class="form__label_1" scope="col">Email</th>
+          <th class="form__label_1" scope="col">Email Confirmed</th>
+          <th class="form__label_1" scope="col">User Enable</th>
+          <th class="form__label_1" scope="col">User Roles</th>
+          <th class="form__label_1" scope="col">Disable User</th>
+          <th class="form__label_1" scope="col">Activate User</th>
+          <th class="form__label_1" scope="col">Redact User</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let element of users; let i = index">
-          <th scope="row">{{i + 1}}</th>
-          <td>{{element?.fullName}}</td>
-          <td>{{element?.email}}</td>
-          <td>{{element?.confirmEmail ? 'Yes' : 'Nou'}}</td>
-          <td>{{element?.enabled ? 'Yes' : 'Nou'}}</td>
-          <td>
+          <th class="form__label_1" scope="row">{{i + 1}}</th>
+          <td class="form__label_1">{{element?.fullName}}</td>
+          <td class="form__label_1">{{element?.email}}</td>
+          <td class="form__label_1">{{element?.confirmEmail ? 'Yes' : 'Not'}}</td>
+          <td class="form__label_1">{{element?.enabled ? 'is active' : 'is not active'}}</td>
+          <td class="form__label_1">
             <ul *ngFor="let role of element?.roles_users">
-              <li [style.color]="role!='USER'? 'lightcoral':'#1ABC9C'">{{role}}</li>
+              <li [style.color]="role!='USER'? 'lightcoral':'#fff'">{{role}}</li>
             </ul>
           </td>
           <td><a (click)="disableUser(element)" [class.disabled]="element.roles_users.includes('ADMIN')"
@@ -36,9 +35,13 @@
           <td><a (click)="empowerUser(element)" class="button button-small button-activate"><span> <fa-icon
             [icon]="user_active" class="button-icon"></fa-icon>Activate User</span></a>
           </td>
+          <td><a (click)="redactUser(element)" class="button button-small button-redact"><span> <fa-icon
+            [icon]="user_active" class="button-icon"></fa-icon>Redact User</span></a>
+          </td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
+  <app-redact-staff-user></app-redact-staff-user>
 </div>

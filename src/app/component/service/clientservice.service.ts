@@ -14,6 +14,8 @@ import {MessageInvoice} from '../entity/MessageInvoice';
 import {UserStaffNickNamePojo} from '../entity/UserStaffNickNamePojo';
 import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
 import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
+import {InvoiceRepairModel} from '../entity/InvoiceRepairModel';
+import {InvoiceShopModels} from '../entity/InvoiceShopModels';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +23,9 @@ import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  // apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  //  apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
-   apiUrl = 'http://localhost:8080/';
+  apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient,
               private adminService: AdminServiceService) {
@@ -256,6 +258,34 @@ export class HttpClien {
         catchError(this.errorHandler));
   }
 
+  intervalUsersAmountStatistic(init: Date, finaly: Date): Observable<StatisticModelParts[]> {
+    const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
+    return this.http.get<any>(this.apiUrl + 'admin/api/statistic/user/repair/amount/interval', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  intervalUsersAmountOpenRepairStatistic(init: Date, finaly: Date): Observable<StatisticModelParts[]> {
+    const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
+    return this.http.get<any>(this.apiUrl + 'admin/api/statistic/user/repair/open/amount/interval', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  intervalUsersShopTradeAmountStatistic(init: Date, finaly: Date): Observable<StatisticModelParts[]> {
+    const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
+    return this.http.get<any>(this.apiUrl + 'admin/api/statistic/user/shop/trade/amount/interval', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  intervalUsersBayingTradeAmountStatistic(init: Date, finaly: Date): Observable<StatisticModelParts[]> {
+    const params = new HttpParams().set('init', init.toString()).set('finale', finaly.toString());
+    return this.http.get<any>(this.apiUrl + 'admin/api/statistic/user/shop/bay/amount/interval', {params})
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
   retrySendInvoice(message: MessageInvoice) {
     return this.http.post(this.apiUrl + 'v1/send/invoice/retry', message)
       .pipe(
@@ -340,6 +370,40 @@ export class HttpClien {
 
   addNewImagesToRepair(repair: Repair): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/repair/images/saved', repair)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  addNewInvoiceRepairsModel(invoiceModel: InvoiceRepairModel): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'admin/api/invoice/model/repair/saved', invoiceModel)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  addNewInvoiceShopsModel(invoiceModel: InvoiceShopModels): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'admin/api/invoice/model/shop/saved', invoiceModel)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  findInvoiceShopModelByOrder(orderInvoice: string): Observable<InvoiceShopModels> {
+    return this.http.get<InvoiceShopModels>(this.apiUrl + 'admin/api/invoice/model/shop/order',
+      {
+        params: new HttpParams().set('order', orderInvoice)
+      })
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  findInvoiceRepairsModelByOrder(orderInvoice: string): Observable<InvoiceRepairModel> {
+    return this.http.get<InvoiceRepairModel>(this.apiUrl + 'admin/api/invoice/model/repair/order',
+      {
+        params: new HttpParams().set('order', orderInvoice)
+      })
       .pipe(
         catchError(this.errorHandler)
       );
@@ -488,6 +552,13 @@ export class HttpClien {
 
   getNickNameCurrentStaffUser(): Observable<UserStaffNickNamePojo> {
     return this.http.get<UserStaffNickNamePojo>(this.apiUrl + 'api/current/user/nickname')
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  redactStaffUser(staffUser: StaffUser): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'admin/api/redact/user', staffUser)
       .pipe(
         catchError(this.errorHandler)
       );

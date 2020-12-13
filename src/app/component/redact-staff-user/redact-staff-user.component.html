@@ -1,0 +1,48 @@
+<div *ngIf="view" class="container-body">
+  <div class="container-redact">
+    <div class="border-container">
+      <a (click)="dismissButton()" class="close" title="Close"><span class="x">X</span></a>
+
+      <div class="container-form">
+        <p class="title-form"> Redact Staff User</p>
+        <form [formGroup]="staffUserForm" class="form login" method="POST">
+          <div class="form__field">
+            <label for="email">
+              <i class="icon icon-envelope"></i>
+              <a class="form__label "> Staff User Email</a>
+            </label>
+            <input [ngModel]="staffUser?.email" [readOnly]="true" class="form__input" formControlName="email" id="email"
+                   name="email"
+                   placeholder="Staff Users Email"
+                   required
+                   type="email">
+          </div>
+          <div class="form__field">
+            <label for="name">
+              <i class="icon icon-user"></i>
+              <a class="form__label "> Staff User Full Name</a>
+            </label>
+            <input [ngModel]="staffUser.fullName" class="form__input"
+                   formControlName="name" id="name" name="name" placeholder="Name And Family"
+                   required
+                   type="text">
+          </div>
+          <div class="form__field">
+            <label for="technicName">
+              <i class="icon icon-user-md"></i>
+              <a class="form__label ">Staff User Technical Name</a>
+            </label>
+            <input [ngModel]="staffUser.technicName" class="form__input" formControlName="technicName" id="technicName"
+                   placeholder="Technical Name"
+                   type="text">
+
+          </div>
+          <div class="button-send">
+            <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon
+              [icon]="save" class="button-icon"></fa-icon> Saved User</span></a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

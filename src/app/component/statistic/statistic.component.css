@@ -56,6 +56,11 @@ form select {
   z-index: 10;
 }
 
+form input:hover,
+form select:hover {
+  cursor: pointer;
+}
+
 .icon-input {
   margin: 10px;
   color: #FFFFFF !important;
@@ -85,7 +90,7 @@ form select {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   align-content: center;
 }
 
@@ -103,6 +108,7 @@ form select {
 }
 
 .container-plugin {
+  max-width: 78%;
 }
 
 .doughnut-chart {
@@ -166,6 +172,46 @@ form select {
 .model:hover {
   color: #FFCE56;
   border-color: #FFCE56;
+  cursor: pointer;
+}
+
+.shopUser:before {
+  background: #0B1B48;
+}
+
+.shopUser:hover {
+  color: #0B1B48;
+  border-color: #0B1B48;
+  cursor: pointer;
+}
+
+.repairUserOpen:before {
+  background: darkred;
+}
+
+.repairUserOpen:hover {
+  color: darkred;
+  border-color: darkred;
+  cursor: pointer;
+}
+
+.shopUserBay:before {
+  background: #ffc007;
+}
+
+.shopUserBay:hover {
+  color: #ffc007;
+  border-color: #ffc007;
+  cursor: pointer;
+}
+
+.repairUser:before {
+  background: #336699;
+}
+
+.repairUser:hover {
+  color: #336699;
+  border-color: #336699;
   cursor: pointer;
 }
 

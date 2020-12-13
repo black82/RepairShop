@@ -19,15 +19,18 @@
             <div class="col23" style="display: inline; width:30%;float: left">
               <div class="address">
                 <h1 *ngIf="type_print===1||type_print===2" style="font-size: 16pt;
-  font-weight: 500;color: #c54040">Riparazione</h1>
+  font-weight: 500;color: #c54040">{{invoiceModel?.typeInvoiceContact}}</h1>
                 <h1 *ngIf="type_print===4" style="font-size: 16pt;
-  font-weight: 500;color: #c54040">Vendita del Dispositivo</h1>
+  font-weight: 500;color: #c54040">{{invoiceShopModel.typeInvoiceContact}}</h1>
                 <h1 *ngIf="type_print===3" style="font-size: 16pt;
-  font-weight: 500;color: #c54040">Acquisto del Dispositivo</h1>
-                <p style="font-size: 9pt;  color:#c54040"><strong> Nr. {{ id ? id : ''}}</strong></p>
-                <p style="font-size: 9pt;margin: 1px;">info@rfvtechnology.it</p>
-                <p style="font-size: 9pt;margin: 1px;">Nembro Italia(BG) , 24027</p>
-                <p style="font-size: 9pt;margin: 1px;">Via Garibaldi , 6/A</p>
+  font-weight: 500;color: #c54040">{{invoiceShopModel.typeInvoiceContact}}</h1>
+                <p style="font-size: 9pt;  color:#c54040"><strong> Nr. {{ id === null ? id : ''}}</strong></p>
+                <p
+                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.emailCompany ? invoiceModel?.emailCompany : invoiceShopModel.emailCompany}}</p>
+                <p
+                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.cityAndCountry ? invoiceModel?.cityAndCountry : invoiceShopModel.cityAndCountry}}</p>
+                <p
+                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.streetAndHouseNumber ? invoiceModel?.streetAndHouseNumber : invoiceShopModel.streetAndHouseNumber}}</p>
               </div>
             </div>
           </div>
@@ -40,22 +43,23 @@
   margin: 0 5px 5px;padding: 10px;">
               <div class="col-324234">
                 <p *ngIf="!client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{"Cliente :  " + client?.name + ' ' + client?.family }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel.clientTitle : invoiceShopModel.clientTitle}} {{  client?.name + ' ' + client?.family }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{"Cliente :  " + client?.companyName }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel.clientTitle : invoiceShopModel.clientTitle}}{{ client?.companyName }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{"Cliente Iva :  " + client?.ivaCompany }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companyIvaTitle ? invoiceModel.companyIvaTitle : invoiceShopModel.companyIvaTitle }}{{ client?.ivaCompany }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{"Cliente  Sdi:  " + client?.sdiCompany }}</p>
-                <p style="font-size: 9pt;margin: 1px"> {{"Email :  " + client?.email}}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companySdiTitle ? invoiceModel.companySdiTitle : invoiceShopModel.companySdiTitle}} {{ client?.sdiCompany }}</p>
                 <p
-                  *ngIf="print_entity.type_client_print===1||print_entity.type_client_print===3||print_entity.type_client_print===4"
-                  style="font-size: 9pt;margin: 1px">Numero Telefonico
-                  :  {{ client?.telephone_number ? client.telephone_number : 'n/a' }}</p>
-                <p *ngIf="print_entity.type_client_print===2"
-                   style="font-size: 9pt;margin: 1px">Numero Telefonico
-                  :  {{ client?.telephone_number.includes('n/a') ? 'n/a' : client.telephone_number}}</p>
-                <p style="font-size: 9pt;margin: 1px">{{"Indirizzo cliente :  " + client?.address}}</p>
+                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientEmailTitle ? invoiceModel.clientEmailTitle : invoiceShopModel.clientEmailTitle }}{{ client?.email ? client.email : ''}}</p>
+                <p
+                  *ngIf="print_entity.type_client_print===3||print_entity.type_client_print===4"
+                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel.clientPhoneTitle}} {{ client?.telephone_number ? client.telephone_number : 'n/a' }}</p>
+                <p *ngIf="print_entity.type_client_print===1||print_entity.type_client_print===2"
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientPhoneTitle}}
+                  {{client?.telephone_number && client?.telephone_number?.includes('n/a') ? 'n/a' : client?.telephone_number}}</p>
+                <p
+                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientAddressTitle ? invoiceModel.clientAddressTitle : invoiceShopModel.clientAddressTitle}}{{ client?.address}}</p>
               </div>
             </div>
           </div>
@@ -64,18 +68,20 @@
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;padding: 10px">
             <div>
-              <p style="font-size: 9pt;margin: 1px"> {{"Model :  " + client?.deviceBay[0]?.model}}</p>
-              <p style="font-size: 9pt;margin: 1px"> Condizioni d'uso
-                :   {{ client?.deviceBay[0]?.state_of_use}}</p>
+              <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.modelTitle + client?.deviceBay[0]?.model}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use}}</p>
               <p *ngIf="print_entity.type_client_print===3"
-                 style="font-size: 9pt;margin: 1px">IMEI & SN
-                : {{client?.deviceBay[0]?.imei ? client?.deviceBay[0]?.imei : 'n/a' }}</p>
-              <p style="font-size: 9pt;margin: 1px"> {{"Tipo di Dispositivo :  " + client?.deviceBay[0].deviceType}}
+                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.imeiAndSnTitle}} {{client?.deviceBay[0]?.imei ? client?.deviceBay[0]?.imei : 'n/a' }}</p>
+              <p
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.typeDeviceTitle + client?.deviceBay[0].deviceType}}
                 .</p>
-              <p style="font-size: 9pt;margin: 1px">{{"Accessory :  " + client?.deviceBay[0]?.accessory}}</p>
-              <p style="font-size: 9pt;margin: 1px;">
-                Data Di Acquisto
-                :  {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.accessoryTitle + client?.deviceBay[0]?.accessory}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.bayingPriceTitle + client?.deviceBay[0]?.bayingPrice}}</p>
+              <p style="font-size: 9pt;margin: 1px;">{{invoiceShopModel.dateBayingTitle}}
+                {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===4" style="border-style: solid;
@@ -83,21 +89,22 @@
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;padding: 10px">
             <div>
-              <p style="font-size: 9pt;margin: 1px"> {{"Model :  " + client?.deviceSale[0]?.model}}</p>
+              <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.modelTitle + client?.deviceSale[0]?.model}}</p>
               <p
-                style="font-size: 9pt;margin: 1px">Condizioni d'uso
-                :   {{ client?.deviceSale[0]?.state_of_use}}</p>
+                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.usedConditionTitle}} {{ client?.deviceSale[0]?.state_of_use}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{"Garanzia :  " + client?.deviceSale[0].garantyDuration + ' messe'}}</p>
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.guaranteeTitle + client?.deviceSale[0].garantyDuration + '  month'}}</p>
               <p *ngIf="print_entity.type_client_print===4"
-                 style="font-size: 9pt;margin: 1px">IMEI & SN
-                : {{client?.deviceSale[0]?.imei}}</p>
-              <p style="font-size: 9pt;margin: 1px"> {{"Tipo di Dispositivo :  " + client?.deviceSale[0].deviceType}}
+                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.imeiAndSnTitle}}{{client?.deviceSale[0]?.imei}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.typeDeviceTitle + client?.deviceSale[0].deviceType}}
                 .</p>
-              <p style="font-size: 9pt;margin: 1px">{{"Accessory :  " + client?.deviceSale[0]?.accessory}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.accessoryTitle + client?.deviceSale[0]?.accessory}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.sellerPriceTitle + client?.deviceSale[0]?.sellerPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">
-                Data Di Acquisto
-                :  {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===1||type_print===2" style="border-style: solid;
@@ -105,39 +112,42 @@
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;padding: 10px;">
 
-            <p style="font-size: 9pt;margin: 1px"> {{"Model :  " + client?.device[0]?.model}}</p>
-            <p style="font-size: 9pt;margin: 1px"> {{"Condizioni d'uso :  " + client?.device[0]?.state_of_use}}</p>
-            <p *ngIf="print_entity.type_client_print===1"
-               style="font-size: 9pt;margin: 1px">IMEI & SN
-              : {{client?.device[0]?.imei ? client?.device[0]?.imei : 'n/a' }}</p>
-            <p *ngIf="print_entity.type_client_print===2"
-               style="font-size: 9pt;margin: 1px">IMEI & SN
-              : {{client?.device[0]?.imei.includes('n/a') ? 'n/a' : client?.device[0]?.imei  }}</p>
-            <p style="font-size: 9pt;margin: 1px"> {{"Difect :  " + client?.device[0]?.repairs[0]?.defect}}.</p>
-            <p style="font-size: 9pt;margin: 1px">{{"Accessory :  " + client?.device[0]?.accessory}}</p>
-            <p style="font-size: 9pt;margin: 1px;">
-              Date to enter
-              :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
-            <p style="font-size: 9pt;margin: 1px"> {{"Deposit :  " + client?.device[0].repairs[0]?.deposit}}</p>
+            <p style="font-size: 9pt;margin: 1px"> {{invoiceModel?.modelTitle + client?.device[0]?.model}}</p>
             <p
-              style="font-size: 9pt;margin: 1px"> {{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
+              style="font-size: 9pt;margin: 1px"> {{invoiceModel?.usedConditionTitle + client?.device[0]?.state_of_use}}</p>
+            <p *ngIf="print_entity.type_client_print===1"
+               style="font-size: 9pt;margin: 1px">{{invoiceModel?.imeiAndSnTitle}}
+              {{client?.device[0]?.imei ? client?.device[0]?.imei : 'n/a' }}</p>
+            <p *ngIf="print_entity.type_client_print===2"
+               style="font-size: 9pt;margin: 1px">{{invoiceModel?.imeiAndSnTitle}}
+              {{client?.device[0]?.imei.includes('n/a') ? 'n/a' : client?.device[0]?.imei  }}</p>
+            <p style="font-size: 9pt;margin: 1px"> {{invoiceModel?.defectTitle + client?.device[0]?.repairs[0]?.defect}}
+            </p>
+            <p style="font-size: 9pt;margin: 1px">{{invoiceModel?.accessoryTitle + client?.device[0]?.accessory}}</p>
+            <p style="font-size: 9pt;margin: 1px;">
+              {{invoiceModel?.dateToEnterTitle}}
+              :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+            <p
+              style="font-size: 9pt;margin: 1px"> {{invoiceModel?.cashAdvance + client?.device[0].repairs[0]?.deposit}}</p>
+            <p
+              style="font-size: 9pt;margin: 1px"> {{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>
             <p *ngIf="type_print===1"
-               style="font-size: 9pt;margin: 1px">{{"La riparazione sarà finalizzata :  " + date_exit}}</p>
+               style="font-size: 9pt;margin: 1px">{{invoiceModel?.dateRepairWillReady + date_exit}}</p>
 
 
             <div *ngIf="type_print===2">
-              <p
-                style="font-size: 8pt;margin: 1px">Data di ricezione del dispositivo
-                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+              <!--              <p-->
+              <!--                style="font-size: 8pt;margin: 1px">Data di ricezione del dispositivo-->
+              <!--                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>-->
               <p style="font-size: 8pt;margin: 1px;">
-                Data di ritorno del dispositivo
+                {{invoiceModel.dateToOutTitle}}
                 : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
               <p
-                style="font-size: 9pt;margin: 1px;">{{"Prezzo di riparazione :  " + client?.device[0]?.repairs[0]?.price}}</p>
+                style="font-size: 9pt;margin: 1px;">{{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>
               <p
-                style="font-size: 9pt;margin: 1px;">{{"Lavoro svolto :  " + client?.device[0]?.repairs[0]?.work_don}}</p>
+                style="font-size: 9pt;margin: 1px;">{{invoiceModel?.workMakeTitle + client?.device[0]?.repairs[0]?.work_don}}</p>
               <p
-                style="font-size: 9pt;margin: 1px;">{{"Ricambi usati :  " + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
+                style="font-size: 9pt;margin: 1px;">{{invoiceModel?.partReplaysTitle + client?.device[0]?.repairs[0]?.parts_replaced}}</p>
             </div>
           </div>
 
@@ -146,33 +156,26 @@
             <table style="width: 99%;">
               <td style="width:50%;">
                 <p *ngIf="name_test_entre.length===0" class="label"
-                   style="font-size: 8pt;margin: 2px; color: #1ABC9C">
-                  Il
-                  tuo
-                  dispositivo ha superato con successo tutti i nostri
-                  test di
-                  ingresso!!!</p>
+                   style="font-size: 8pt;margin: 2px; color: #1ABC9C">{{invoiceModel?.testInputAllPassedTitle}}</p>
                 <div *ngIf="name_test_entre.length>0&& name_test_entre.length!=18">
-                  <p style="color: #1ABC9C;font-size: 8pt;margin: 2px;">Test di ingresso no superate!!!</p>
+                  <p style="color: #1ABC9C;font-size: 8pt;margin: 2px;">{{invoiceModel?.testInputNotPassedTitle}}</p>
                   <ul *ngFor="let test of name_test_entre" style="padding-left: 18px;margin: 0;float: left">
                     <li style="padding:0;color: #c54040;font-size: 8pt;margin: 0;float: left"> {{test}}</li>
                   </ul>
                   <div style="clear: both;float: none;"></div>
                 </div>
                 <div *ngIf="name_test_entre.length===18">
-                  <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test in ingresso sono negativi o non e
-                    stato
-                    possibile testare il dispositivo.!!!</p>
+                  <p
+                    style="font-size: 13pt;margin: 2px; color: #c54040;">{{invoiceModel?.testInputAllNotPassedTitle}}</p>
                 </div>
               </td>
               <td style="width:50%;">
                 <div>
                   <p *ngIf="name_test_out?.length===0 && type_print===2" class="label"
-                     style="font-size: 8pt;margin: 2px; color: #1ABC9C">Il tuo dispositivo
-                    ha superato con successo
-                    tutti i nostri test in uscita!!!</p>
+                     style="font-size: 8pt;margin: 2px; color: #1ABC9C">{{invoiceModel?.testOutputAllPassedTitle}}</p>
                   <div *ngIf="name_test_out?.length>0&&name_test_out.length!=18">
-                    <p style="font-size: 8pt;margin: 2px; color: #1ABC9C;">Test di uscita no superate!!!</p>
+                    <p
+                      style="font-size: 8pt;margin: 2px; color: #1ABC9C;">{{invoiceModel?.testOutputNotPassedTitle}}</p>
                     <ul *ngFor="let test_exit of name_test_out" class="disclaimer"
                         style="padding-left: 18px;margin: 0;float: left">
                       <li style=" padding:0;color: #c54040;font-size: 8pt;margin: 0;float: left">{{test_exit}}</li>
@@ -181,9 +184,8 @@
                   </div>
                 </div>
                 <div *ngIf="name_test_out.length===18">
-                  <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test in uscita sono negativi o non e
-                    stato
-                    possibile testare il dispositivo.!!!</p>
+                  <p
+                    style="font-size: 13pt;margin: 2px; color: #c54040;">{{invoiceModel?.testOutputAllNotPassedTitle}}</p>
                 </div>
               </td>
             </table>
@@ -193,22 +195,17 @@
             <div>
               <div>
                 <p *ngIf="name_test_entre.length===0" class="label"
-                   style="font-size: 8pt;margin: 2px; color: #1ABC9C;">
-                  Il
-                  dispositivo ha superato con successo tutti i nostri
-                  test di
-                  acquisto!!!</p>
+                   style="font-size: 8pt;margin: 2px; color: #1ABC9C;">{{invoiceShopModel.testInputAllPassedTitle}}</p>
                 <div *ngIf="name_test_entre.length>0&& name_test_entre.length!=18">
-                  <p style="color: #1ABC9C;font-size: 8pt;">Test di acquisto no superate!!!</p>
+                  <p style="color: #1ABC9C;font-size: 8pt;">{{invoiceShopModel.testInputNotPassedTitle}}</p>
                   <ul *ngFor="let test of name_test_entre" style="padding-left: 18px;margin: 0;float: left">
                     <li style=" padding:0;color: #c54040;font-size: 8pt;margin: 0;float: left"> {{test}}</li>
                   </ul>
                   <div style="clear: both"></div>
                 </div>
                 <div *ngIf="name_test_entre.length===18">
-                  <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test di acquisto sono negativi o non e
-                    stato
-                    possibile testare il dispositivo.!!!</p>
+                  <p
+                    style="font-size: 13pt;margin: 2px; color: #c54040;">{{invoiceShopModel.testInputAllNotPassedTitle}}</p>
                 </div>
               </div>
             </div>
@@ -218,22 +215,18 @@
             <div>
               <div>
                 <p *ngIf="name_test_out.length===0" class="label"
-                   style="font-size: 8pt;margin: 2px; color: #1ABC9C">
-                  Il
-                  dispositivo ha superato con successo tutti i nostri
-                  test di
-                  Vendita!!!</p>
+                   style="font-size: 8pt;margin: 2px; color: #1ABC9C">{{invoiceShopModel.testOutputAllPassedTitle}}</p>
                 <div *ngIf="name_test_out.length>0&& name_test_out.length!=18">
-                  <p style="color: #1ABC9C;font-size: 8pt;margin: 2px;">Test di vendita no superate!!!</p>
+                  <p
+                    style="color: #1ABC9C;font-size: 8pt;margin: 2px;">{{invoiceShopModel.testOutputNotPassedTitle}}</p>
                   <ul *ngFor="let test of name_test_out" style="padding-left: 18px;margin: 0;float: left">
                     <li style=" padding:0;color: #c54040;font-size: 8pt;margin: 0;float: left"> {{test}}</li>
                   </ul>
                   <div style="clear: both"></div>
                 </div>
                 <div *ngIf="name_test_out.length===18">
-                  <p style="font-size: 13pt;margin: 2px; color: #c54040;">Tutti i test di vendita sono negativi o non e
-                    stato
-                    possibile testare il dispositivo.!!!</p>
+                  <p
+                    style="font-size: 13pt;margin: 2px; color: #c54040;">{{invoiceShopModel.testInputAllNotPassedTitle}}</p>
                 </div>
               </div>
             </div>
@@ -242,120 +235,69 @@
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px 05px;padding: 10px;">
-            <p *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0].note.length>0"
+            <p *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0]?.note.length>0"
                style="font-size: 7pt;margin: 0; color: #c54040;">
-              <span style="font-size: 9pt; margin: 0;">Note All'ingresso  : </span>
+              <span style="font-size: 9pt; margin: 0;">{{invoiceModel?.noteInputTitle}} </span>
               {{client.device[0].repairs[0].note}}</p>
-            <p *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0].note.length>0"
+            <p *ngIf="client.device[0]?.repairs[0]?.note!=null&&client.device[0]?.repairs[0]?.note.length>0"
                style="font-size: 9pt;margin: 2px; color: #c54040;">
-              <span style="font-size: 9pt; margin: 0;">Note L'uscita  : </span>
+              <span style="font-size: 9pt; margin: 0;">{{invoiceModel?.noteOutputTitle}}</span>
               {{client.device[0].repairs[0].noteOutput}}</p>
             <hr style="margin: 0;padding: 0">
-            <p style="font-size: 9pt; margin: 0;">Condizioni Generali:</p>
-            <p style="font-size: 9pt;margin: 0;">
-              Firmando questo foglio il cliente dichiara che -Il dispositivo è stato testato al momento della consegna
-              ed è tutto funzionante ( eccetto difetti precedentemente dichiarati nella sezione NOTE ) -Si è a
-              conoscenza che la garanzia si estende per un mese dal giorno di avvenuta riparazione e che comprende
-              solamente le parti di ricambio sostituite . La suddetta garanzia non copre : lavori software (
-              formattazioni , recupero dati , liberazione memoria ... ) in quanto il tecnico non può essere a conoscenza
-              dell'utilizzo del cliente Rotture accidentali , difetti non dovuti alla fabbricazione del prodotto in
-              questione ( display , tasti , suoneria , altoparlanti , connettori ... ) o contatto con agenti esterni (
-              acqua , colle , cosmetid , liquidi , fonti di calore ... )
+            <p style="font-size: 9pt; margin: 0;">{{invoiceModel?.titleConditionedGeneral}}</p>
+            <p style="font-size: 9pt;margin: 0;">{{invoiceModel?.conditionedGeneralTitle}}
             </p>
             <hr style="margin: 0;padding: 0">
-            <p style="font-size: 9pt; margin:0;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto
-              Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei
-              dati personali” <span
-                style="color: #1ABC9C;margin: 5px">{{client?.send_email_active ? ' SI ' : ' NO '}}</span>accetto di
-              ricevere e-mail con notizie o fatture da questo emittente.</p>
+            <p style="font-size: 9pt; margin:0;">{{invoiceModel?.privacyAuthorization}}</p>
+            <span
+              style="color: #1ABC9C;margin: 5px">{{client?.send_email_active ? ' SI ' : ' NO '}}</span>
           </div>
           <div *ngIf="type_print===3" style=" border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;padding: 10px;">
-            <p style="font-size: 9pt; margin: 1px;">Note : </p>
+            <p style="font-size: 9pt; margin: 1px;">{{invoiceShopModel.noteInputTitle}}</p>
             <p
               *ngIf="client.deviceBay[0].noteInput!=null&&client.deviceBay[0].noteInput.length>0"
               style="font-size: 9pt;margin: 2px; color: #c54040;">
               {{client.deviceBay[0].noteInput}}</p>
-            <!--            <p-->
-            <!--              *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0].note.length>0"-->
-            <!--              style="font-size: 9pt;margin: 2px; color: #c54040;">-->
-            <!--              {{client.device[0].repairs[0].noteOutput}}</p>-->
-            <!--            <hr>-->
-            <!--            <p style="font-size: 9pt; margin: 1px;">Condizioni Generali:</p>-->
-            <!--            <p style="font-size: 9pt;margin: 2px;">-->
-            <!--              RFV Technology non si assume la responsabilità di nessun genere sulle seguenti-->
-            <!--              condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di-->
-            <!--              effettuare-->
-            <!--              i-->
-            <!--              test d'ingresso -Se, o seguito di un salvataggio dati, il cliente dichiara che non sono presenti del dati-->
-            <!--              (RFV-->
-            <!--              Technology si basa sulla dimensione di ogni singola cartella per verificare che tutti i dati presenti sul-->
-            <!--              dispositivo vengano salvati) -Se il dispositivo, pronto per essere consegnato, viene lasciato in negozio-->
-            <!--              per-->
-            <!--              più-->
-            <!--              di 90 giorni a partire dal giorno della chiamata al eliente-->
-            <!--            </p>-->
-            <!--            <p style="font-size: 9pt; margin: 2px;">NB: dopo il termine, Il disponitivo verrà ritirato-->
-            <!--              come spese aziendali per il lavoro non più pagato</p>-->
-            <!--            <hr>-->
-            <!--            <p style="font-size: 9pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto-->
-            <!--              Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei-->
-            <!--              dati personali”</p>-->
+            <p style="font-size: 9pt; margin: 1px;">{{invoiceShopModel.titleConditionedGeneral}}</p>
+            <p style="font-size: 9pt;margin: 2px;">
+              {{invoiceShopModel.conditionedGeneralTitle}}
+            </p>
+            <hr>
+            <p style="font-size: 9pt; margin: 2px;">{{invoiceShopModel?.privacyAuthorization}}</p>
           </div>
           <div *ngIf="type_print===4" style=" border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;padding: 10px;">
-            <p style="font-size: 9pt; margin: 1px;">Note : </p>
+            <p style="font-size: 9pt; margin: 1px;">{{invoiceShopModel.noteOutputTitle}} </p>
             <p
               *ngIf="client.deviceSale[0].noteOutput!=null&&client.deviceSale[0].noteOutput.length>0"
               style="font-size: 9pt;margin: 2px; color: #c54040;">
               {{client.deviceSale[0].noteOutput}}</p>
-            <!--            <p-->
-            <!--              *ngIf="client.device[0].repairs[0].note!=null&&client.device[0].repairs[0].note.length>0"-->
-            <!--              style="font-size: 9pt;margin: 2px; color: #c54040;">-->
-            <!--              {{client.device[0].repairs[0].noteOutput}}</p>-->
-            <!--            <hr>-->
-            <!--            <p style="font-size: 9pt; margin: 1px;">Condizioni Generali:</p>-->
-            <!--            <p style="font-size: 9pt;margin: 2px;">-->
-            <!--              RFV Technology non si assume la responsabilità di nessun genere sulle seguenti-->
-            <!--              condizioni: -Se il telefono viene consegnato spento o con difetti che non permettono al tecnico di-->
-            <!--              effettuare-->
-            <!--              i-->
-            <!--              test d'ingresso -Se, o seguito di un salvataggio dati, il cliente dichiara che non sono presenti del dati-->
-            <!--              (RFV-->
-            <!--              Technology si basa sulla dimensione di ogni singola cartella per verificare che tutti i dati presenti sul-->
-            <!--              dispositivo vengano salvati) -Se il dispositivo, pronto per essere consegnato, viene lasciato in negozio-->
-            <!--              per-->
-            <!--              più-->
-            <!--              di 90 giorni a partire dal giorno della chiamata al eliente-->
-            <!--            </p>-->
-            <!--            <p style="font-size: 9pt; margin: 2px;">NB: dopo il termine, Il disponitivo verrà ritirato-->
-            <!--              come spese aziendali per il lavoro non più pagato</p>-->
-            <!--            <hr>-->
-            <!--            <p style="font-size: 9pt; margin: 2px;">Autorizzo il trattamento dei mei dati personali ai sensi del Decreto-->
-            <!--              Legislativo 30 giugno 2003,n.196”Codice in materia di protezione dei-->
-            <!--              dati personali”</p>-->
+            <hr>
+            <p style="font-size: 9pt; margin: 1px;">{{invoiceShopModel.titleConditionedGeneral}}</p>
+            <p style="font-size: 9pt;margin: 2px;">{{invoiceShopModel.conditionedGeneralTitle}}</p>
+            <hr>
+            <p style="font-size: 9pt; margin: 2px;">{{invoiceShopModel?.privacyAuthorization}}</p>
           </div>
           <div style="margin: 1px">
 
             <div>
               <div style="font-size: 9pt; margin: 1px;color: #c54040;
-  border-bottom: solid black 1pt;">Dichiaro di essere d'accordo con le condizioni
-                stabilite in questo
-                documento. Per quello firmo. Nembro - {{date | date:'dd/MM/yyyy'}}
+  border-bottom: solid black 1pt;">{{invoiceShopModel?.statementAgreementConditions}}{{date | date:'dd/MM/yyyy'}}
                 <div class="sig_container" style=" float: left;
    width: 100%; display: inline-block;margin: 0;">
                   <div class="staff-container" style="float: left; width:48%;">
-                    <p>RFV Staff : <span style="color: #1ABC9C">{{userNickname}}</span></p>
+                    <p>{{staffTitle}} <span style="color: #1ABC9C">{{userNickname}}</span></p>
                     <img alt="" height="20px" src="{{images_sig[0]}}" width="70px">
                   </div>
                   <div class="client_container" style="display: inline; width:49%;float: left;margin: 0">
-                    <p *ngIf="!client?.typeClient" style="width: 49%">Client :<span
+                    <p *ngIf="!client?.typeClient" style="width: 49%">{{clientTitle}}<span
                       style="color: #1ABC9C"> {{client?.name + ' ' + client?.family}}</span></p>
-                    <p *ngIf="client?.typeClient" style="width: 49%">Client :<span
+                    <p *ngIf="client?.typeClient" style="width: 49%">{{clientTitle}}<span
                       style="color: #1ABC9C"> {{client?.companyName}}</span></p>
                     <img alt="" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
                   </div>

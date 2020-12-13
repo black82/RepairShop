@@ -1,10 +1,11 @@
 <div class="container-body">
   <h1 class="welcome-anime">{{headerForm}}</h1>
-  <form (ngSubmit)="onFormSubmit()" [formGroup]=searchForm class="form login" method="POST">
+  <form (ngSubmit)="onFormSubmit()" [formGroup]=searchForm class="form login" method="post">
     <div class="container-input">
       <div class="form__field">
         <label for="name">
-          <span [ngClass]="nameCheckBox?'disabled-text':'enabled'" class="form__label">Name Client</span>
+          <span [ngClass]="nameCheckBox?'disabled-text':'enabled'"
+                class="form__label">Name Client Or Company Name</span>
           <input [ngClass]="nameCheckBox?'disabled':'enabled'" [readonly]="nameCheckBox" autocomplete="off"
                  class="form__input" formControlName="name" id="name" name="name"
                  placeholder="Name" required

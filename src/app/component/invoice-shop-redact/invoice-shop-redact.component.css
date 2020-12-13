@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+form input,
+form textarea {
+  position: relative;
+  -webkit-appearance: none;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.75);
+  width: auto;
+  border-radius: 0.50em;
+  margin: 0.5em 1em;
+  padding: 0.5em 0.5em;
+  box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
+  -moz-transition: all 0.35s ease-in-out;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  font-size: 1em;
+  outline: none;
+
+}
+
+form input,
+form textarea:focus {
+  box-shadow: 0 0 2px 1px #E0E0E0;
+  background: #fff;
+}
+
+form textarea {
+  min-height: 12em;
+  min-width: 180%;
+}
+
+form .formerize-placeholder {
+  color: #555 !important;
+}
+
+form ::-webkit-input-placeholder {
+  color: #555 !important;
+}
+
+form :-moz-placeholder {
+  color: #555 !important;
+}
+
+form ::-moz-placeholder {
+  color: #555 !important;
+}
+
+form :-ms-input-placeholder {
+  color: #555 !important;
+}
+
+form ::-moz-focus-inner {
+  border: 0;
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-right: 20px;
+  background: transparent;
+  color: #FFFFFF;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  perspective: 500px;
+  transition: .1s;
+  z-index: 2;
+
+}
+
+.icon {
+  box-sizing: unset;
+  margin-left: 10px;
+}
+
+.button:last-of-type {
+  margin-right: 0;
+}
+
+.button span {
+  position: relative;
+
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, hsl(179, 34%, 48%) 0%, hsl(155, 50%, 61%) 100%) !important;;
+  transform-origin: left;
+  transition: .5s;
+  border-radius: 10px;
+  box-shadow: 0 8px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.button:hover {
+  color: #16A085;
+  border-color: #16A085;
+  cursor: pointer;
+}
+
+.button:hover:before {
+  transform: rotateY(94deg);
+}
+
+.button_form {
+  justify-content: center !important;
+}

@@ -5,6 +5,7 @@ import {StaffUser} from '../entity/StaffUser';
 import {AlertServiceService} from '../service/alert-service.service';
 import {faUserEdit} from '@fortawesome/free-solid-svg-icons/faUserEdit';
 import {faUserFriends} from '@fortawesome/free-solid-svg-icons/faUserFriends';
+import {AdminServiceService} from '../service/admin-service.service';
 
 @Component({
   selector: 'app-user-admin',
@@ -18,10 +19,11 @@ export class UserAdminComponent implements OnInit {
   user_active = faUserFriends;
   users: StaffUser[];
   showUser = false;
+  show_redacting = false;
 
   constructor(private httpService: HttpClien,
               private alertService: AlertServiceService,
-  ) {
+              private adminService: AdminServiceService) {
   }
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class UserAdminComponent implements OnInit {
     if (item) {
       this.httpService.isAdmin(item).subscribe(value => {
         this.isAdmin = value;
+        this.getAllUsers();
       }, error => {
         console.log(error);
       });
@@ -66,4 +69,16 @@ export class UserAdminComponent implements OnInit {
     user.enabled = true;
   }
 
+  redactUser(user: StaffUser) {
+    this.show_redacting = true;
+    const timeout = setTimeout(() => {
+      this.adminService.$user_redact.emit(user);
+      clearTimeout(timeout);
+    }, 300);
+
+  }
+
+  dismissButton() {
+    this.show_redacting = true;
+  }
 }

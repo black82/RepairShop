@@ -16,7 +16,7 @@
                  formControlName="date_complete" type="date">
         </label>
         <label>
-          <span class="input-title">The Amount Of Items Top viewed :</span>
+          <span class="input-title">The Amount Of Items Top Viewed :</span>
           <fa-icon [icon]="cart" class="icon-input"></fa-icon>
           <select
             class="input-1" formControlName="amount">
@@ -29,6 +29,16 @@
           </select>
         </label>
       </form>
+      <div class="container-chart1">
+        <p class="chart-title"> User Statistic</p></div>
+      <a (click)="getDataByUsersCloseAmount()" class="button button-small repairUser"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon> Users Amount Repair Close</span></a>
+      <a (click)="getDataByUsersOpenRepairAmount()" class="button button-small repairUserOpen"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon> Users Amount Repair Open</span></a>
+      <a (click)="getDataByUsersAmountByShop()" class="button button-small shopUser"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon> Users Amount Device Sell</span></a>
+      <a (click)="getDataByUsersBayingAmount()" class="button button-small shopUserBay"><span> <fa-icon
+        [icon]="statistic_button" class="button-icon"></fa-icon> Users Amount Device Bay</span></a>
     </div>
     <div class="container-chart1">
       <p class="chart-title"> Repair Statistic</p>
@@ -48,13 +58,15 @@
       <!--      <a (click)="getDataByModelAndPartsShop()" class="button button-small model"><span> <fa-icon-->
       <!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Stat. Model&Parts</span></a>-->
     </div>
+
   </div>
+
   <div *ngIf="show_chart" class="char-modal">
     <div class="chard-bord">
       <div class="doughnut-chart">
         <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
           [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-        <h1 class="chart-title">Device repaired
+        <h1 class="chart-title">{{title}}
           from date/ <span class="date-interval">{{formDataInterval.controls.date_init.value}}</span>
           to dated/
           <span class="date-interval">{{formDataInterval.controls.date_complete.value}}</span>
@@ -67,6 +79,8 @@
   </div>
   <app-statistic-repair></app-statistic-repair>
   <app-statistic-model-parts></app-statistic-model-parts>
+  <app-statistic-staff-users></app-statistic-staff-users>
+  <app-statistic-staff-users-shop></app-statistic-staff-users-shop>
   <ul class="bg-bubbles">
     <li></li>
     <li></li>

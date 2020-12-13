@@ -36,6 +36,7 @@ export class StatisticComponent implements OnInit {
   hoverBackgroundColor: string[] = [];
   sum_device: number;
   reject = faRemoveFormat;
+  title = 'Device repaired';
   isAdmin: boolean;
   options = {
     legend: {
@@ -148,6 +149,113 @@ export class StatisticComponent implements OnInit {
         this.formDataInterval.controls.date_complete.value));
   }
 
+  getDataByUsersBayingAmount() {
+    if (this.formDataInterval.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
+    let amount = this.formDataInterval.controls.amount.value;
+    if (!amount) {
+      amount = 25;
+    }
+    console.log(amount);
+    this.service_show_statistic.statistic_amount.emit(amount);
+    this.service_show_statistic.$users_amount_shop_statistic
+      .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
+        this.formDataInterval.controls.date_complete.value, 'open'));
+  }
+
+  getDataByUsersCloseAmount() {
+    if (this.formDataInterval.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
+    let amount = this.formDataInterval.controls.amount.value;
+    if (!amount) {
+      amount = 25;
+    }
+
+    this.service_show_statistic.statistic_amount.emit(amount);
+    this.service_show_statistic.$users_amount_statistic
+      .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
+        this.formDataInterval.controls.date_complete.value, 'close'));
+  }
+
+  getDataByUsersOpenRepairAmount() {
+    if (this.formDataInterval.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
+    let amount = this.formDataInterval.controls.amount.value;
+    if (!amount) {
+      amount = 25;
+    }
+
+    this.service_show_statistic.statistic_amount.emit(amount);
+    this.service_show_statistic.$users_amount_statistic
+      .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
+        this.formDataInterval.controls.date_complete.value, 'open'));
+  }
+
+  getDataByUsersAmountByShop() {
+    if (this.formDataInterval.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
+    let amount = this.formDataInterval.controls.amount.value;
+    if (!amount) {
+      amount = 25;
+    }
+
+    this.service_show_statistic.statistic_amount.emit(amount);
+    this.service_show_statistic.$users_amount_shop_statistic
+      .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
+        this.formDataInterval.controls.date_complete.value, 'close'));
+  }
+
+  getDataShop() {
+    if (this.formDataInterval.invalid) {
+      this.alertService.warn('', 'You have not filled in all' +
+        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
+      return;
+    }
+    this.deleteOldDate();
+    this.animation_wait.$anime_show.emit(true);
+    const init_date = this.formDataInterval.controls.date_init.value;
+    const complete_date = this.formDataInterval.controls.date_complete.value;
+    this.httpService.intervalShopModelMaidStatisticByModel(init_date, complete_date).subscribe(value => {
+      this.date_server = value;
+      this.title = 'Device sell in shop';
+      this.show_chart = true;
+      this.elaboration_server_data();
+    }, () => {
+      this.animation_wait.$anime_show.emit(false);
+    });
+  }
+
+  private createObjectChart(data: number[], backgroundColor: string[], hoverBackgroundColor: string[]) {
+    const object = {data, backgroundColor, hoverBackgroundColor};
+    this.datasets.push(object);
+    const labels = this.labels;
+    const datasets = this.datasets;
+    this.data_object = {labels, datasets};
+    this.show_chart = true;
+    this.animation_wait.$anime_show.emit(false);
+  }
+
+  private sumDevice(): number {
+    let sum = 0;
+    this.date_server.forEach(value => {
+      sum += value[1];
+    });
+    this.sum_device = sum;
+    return sum;
+  }
+
   private elaboration_server_data() {
     let count = 0;
     const sum = this.sumDevice();
@@ -189,44 +297,6 @@ export class StatisticComponent implements OnInit {
 
   }
 
-  private createObjectChart(data: number[], backgroundColor: string[], hoverBackgroundColor: string[]) {
-    const object = {data, backgroundColor, hoverBackgroundColor};
-    this.datasets.push(object);
-    const labels = this.labels;
-    const datasets = this.datasets;
-    this.data_object = {labels, datasets};
-    this.show_chart = true;
-    this.animation_wait.$anime_show.emit(false);
-  }
-
-  private sumDevice(): number {
-    let sum = 0;
-    this.date_server.forEach(value => {
-      sum += value[1];
-    });
-    this.sum_device = sum;
-    return sum;
-  }
-
-  getDataShop() {
-    if (this.formDataInterval.invalid) {
-      this.alertService.warn('', 'You have not filled in all' +
-        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
-      return;
-    }
-    this.deleteOldDate();
-    this.animation_wait.$anime_show.emit(true);
-    const init_date = this.formDataInterval.controls.date_init.value;
-    const complete_date = this.formDataInterval.controls.date_complete.value;
-    this.httpService.intervalShopModelMaidStatisticByModel(init_date, complete_date).subscribe(value => {
-      this.date_server = value;
-      this.show_chart = true;
-      this.elaboration_server_data();
-    }, () => {
-      this.animation_wait.$anime_show.emit(false);
-    });
-  }
-
 
   getDataByMonthShop() {
     if (this.formDataInterval.invalid) {
@@ -239,7 +309,5 @@ export class StatisticComponent implements OnInit {
     this.service_show_statistic.statistic_interval_month.emit(false);
   }
 
-  getDataByModelAndPartsShop() {
 
-  }
 }

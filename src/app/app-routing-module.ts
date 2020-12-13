@@ -38,6 +38,9 @@ import {ShopDashboardComponent} from './component/shop-dashboard/shop-dashboard.
 import {SearchByNameClientRepairComponent} from './component/search-by-name-client-repair/search-by-name-client-repair.component';
 import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-by-name-sale.component';
 import {RedactClientsaleRedacandformComponent} from './component/redact-clientsale-redacandform/redact-clientsale-redacandform.component';
+import {InvoiceModelComponent} from './component/invoice-model/invoice-model.component';
+import {InvoiceRepairRedactComponent} from './component/invoice-repair-redact/invoice-repair-redact.component';
+import {InvoiceShopRedactComponent} from './component/invoice-shop-redact/invoice-shop-redact.component';
 
 
 export const routes: Routes = [
@@ -57,6 +60,9 @@ export const routes: Routes = [
   {path: 'search/email', component: SearchEmailComponent, canActivate: [AutGuardService]},
   {path: 'search/repair/id', component: SearchRepairIdComponent, canActivate: [AutGuardService]},
   {path: 'admin/logs/server', component: LogServiceComponent, canActivate: [AutGuardService]},
+  {path: 'admin/invoice/redact', component: InvoiceModelComponent, canActivate: [AutGuardService]},
+  {path: 'admin/invoice/repair/redact', component: InvoiceRepairRedactComponent, canActivate: [AutGuardService]},
+  {path: 'admin/invoice/shop/redact', component: InvoiceShopRedactComponent, canActivate: [AutGuardService]},
   {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AutGuardService]},
   {path: 'admin/email/client/send', component: EmailClientSendComponent, canActivate: [AutGuardService]},
   {path: 'admin/device/preparation', component: DiviceTumorowComponent, canActivate: [AutGuardService]},

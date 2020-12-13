@@ -15,6 +15,10 @@ export class StatisticRepairIntervalService {
   statistic_complete_data: EventEmitter<Date> = new EventEmitter<Date>();
   @Output()
   model_parts_statistic: EventEmitter<StatisticRequestInterval> = new EventEmitter<StatisticRequestInterval>();
+  @Output()
+  $users_amount_statistic: EventEmitter<StatisticRequestInterval> = new EventEmitter<StatisticRequestInterval>();
+  @Output()
+  $users_amount_shop_statistic: EventEmitter<StatisticRequestInterval> = new EventEmitter<StatisticRequestInterval>();
 
   constructor() {
   }

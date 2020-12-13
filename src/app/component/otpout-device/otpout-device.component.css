@@ -695,7 +695,9 @@ form textarea {
 
 .item-autocomplete-container {
   width: 27%;
-  max-height: 84%;
+  overflow: auto;
+  max-height: 60%;
+  min-height: 3%;
   margin-top: auto;
   position: absolute;
   display: flex;
@@ -720,6 +722,10 @@ form textarea {
   cursor: pointer;
 }
 
+.item-div {
+  padding: 2%;
+}
+
 .item-autocomplete:hover {
   border-radius: 5px;
   color: #efefef;
@@ -730,6 +736,7 @@ form textarea {
 
 .box-autocomplete {
   margin: 0;
+
 }
 
 .second-button {

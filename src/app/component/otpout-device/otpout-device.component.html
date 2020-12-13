@@ -67,7 +67,7 @@
             <div class="box-autocomplete">
               <div *ngIf="showAddAutocomplete" class="item-autocomplete-container">
                 <div *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
-                  <div *ngIf="i<5" class="item-autocomplete">
+                  <div class="item-autocomplete">
                     <div (click)="optionSelected(item)" class="item-div"><span>{{ item }}
                   </span>
                       <hr style="background: #1ABC9C;height: 1px;">

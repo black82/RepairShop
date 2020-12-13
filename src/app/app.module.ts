@@ -85,6 +85,12 @@ import {SearchByNameClientRepairComponent} from './component/search-by-name-clie
 import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-by-name-sale.component';
 import {RedactClientSaleComponent} from './component/redact-client-sale/redact-client-sale.component';
 import {RedactClientsaleRedacandformComponent} from './component/redact-clientsale-redacandform/redact-clientsale-redacandform.component';
+import {InvoiceModelComponent} from './component/invoice-model/invoice-model.component';
+import {InvoiceRepairRedactComponent} from './component/invoice-repair-redact/invoice-repair-redact.component';
+import {InvoiceShopRedactComponent} from './component/invoice-shop-redact/invoice-shop-redact.component';
+import {StatisticStaffUsersComponent} from './component/statistic-staff-users/statistic-staff-users.component';
+import {StatisticStaffUsersShopComponent} from './component/statistic-staff-users-shop/statistic-staff-users-shop.component';
+import {RedactStaffUserComponent} from './component/redact-staff-user/redact-staff-user.component';
 
 @NgModule({
   declarations: [
@@ -150,7 +156,13 @@ import {RedactClientsaleRedacandformComponent} from './component/redact-clientsa
     SearchByNameClientRepairComponent,
     SearchByNameSaleComponent,
     RedactClientSaleComponent,
-    RedactClientsaleRedacandformComponent
+    RedactClientsaleRedacandformComponent,
+    InvoiceModelComponent,
+    InvoiceRepairRedactComponent,
+    InvoiceShopRedactComponent,
+    StatisticStaffUsersComponent,
+    StatisticStaffUsersShopComponent,
+    RedactStaffUserComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
