@@ -45,15 +45,15 @@ export class HttpClien {
       );
   }
 
-  saleDeviceToClient(client: Client): Observable<number> {
-    return this.http.post<number>(this.apiUrl + 'api/device/sale', client)
+  saleDeviceToClient(client: Client): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/device/sale', client)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
-  saved_print_page(invoiceToolsDto: InvoiceToolsDto) {
-    return this.http.post(this.apiUrl + 'api/saved/print/page', invoiceToolsDto)
+  saved_print_page(invoiceToolsDto: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/saved/print/page', invoiceToolsDto)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -195,6 +195,13 @@ export class HttpClien {
 
   isAdmin(token: string): Observable<boolean> {
     return this.http.post<boolean>(this.apiUrl + 'admin/api/' + 'check/role/user', token)
+      .pipe(
+        catchError(this.errorHandler));
+  }
+
+  isAdminByNickName(name: string): Observable<StaffUser> {
+    const params = new HttpParams().set('name', name);
+    return this.http.get<StaffUser>(this.apiUrl + 'admin/api/extracting/users', {params})
       .pipe(
         catchError(this.errorHandler));
   }

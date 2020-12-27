@@ -203,6 +203,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     );
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
+      if (this.client.typeClient) {
+        this.companyClient();
+      }
     });
     this.animation_call();
   }
@@ -449,10 +452,15 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   optionSelected(option) {
+    const elementById = document.getElementById('model-icon') as HTMLInputElement;
     if (option?.indexOf(this.prompt) === 0) {
       this.addOptionModel();
     } else {
       this.formClient.controls.model.setValue(option);
+      this.formClient.controls.model.setErrors(null);
+      if (elementById) {
+        elementById.style.color = '#34495E';
+      }
       this.showAddAutocomplete = false;
     }
   }

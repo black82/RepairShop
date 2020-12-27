@@ -455,3 +455,13 @@ mat-expansion-panel {
   font-size: 25px;
   margin-right: 5px;
 }
+
+.user-staff {
+  color: lightcoral;
+  font-size: 20px;
+}
+
+.user-staff:hover {
+  cursor: pointer;
+  color: #0B1B48 !important;
+}

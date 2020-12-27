@@ -73,7 +73,7 @@
         <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
-          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing.typeClient ? deviceForSaleDto.clientBaying.companyName : deviceForSaleDto.clientBaying?.name + ' ' + deviceForSaleDto.clientBaying.family}}</span></span>
+          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing.typeClient ? deviceForSaleDto.clientSailing.companyName : deviceForSaleDto.clientSailing?.name + ' ' + deviceForSaleDto.clientSailing.family}}</span></span>
         <span *ngIf="deviceForSaleDto.clientSailing?.typeClient" class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client Iva: <span
@@ -272,31 +272,43 @@
                   <label class="accordion__label" for="section4">
                     <a class="input-title acortion-title">
                       <fa-icon [icon]="userStaff" class="icon-test-tile"></fa-icon>
-                      <p class="container-title">Staff Users who Administered this Case</p>
+                      <p class="container-title">Staff Users who Administered</p>
                     </a>
                   </label>
                   <div *ngIf="deviceForSaleDto.deviceForSale?.bayingUser" class="accordion__content">
-                    <p class="input-title">
-                      <fa-icon [icon]="userAdmin"
-                               class="icon-normal-single"></fa-icon>
-                      The User Who Bought Device :<span
-                      style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale?.bayingUser}}</span>
-                    </p>
-                    <p *ngIf="deviceForSaleDto.deviceForSale.sellerUser" class="input-title">
-                      <fa-icon [icon]="userAdmin"
-                               class="icon-normal-single"></fa-icon>
-                      The User Who Sold Device :<span
-                      style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.sellerUser}}</span>
-                    </p>
-                    <p *ngIf="deviceForSaleDto.deviceForSale.updaterUser" class="input-title">
-                      <fa-icon [icon]="userAdmin"
-                               class="icon-normal-single"></fa-icon>
-                      User Care to Update Device:<span
-                      style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.updaterUser}}</span>
-                    </p>
+                    <div class="row-container1">
+                      <div class="row-1">
+                        <p class="input-title" tooltip="The User Who Bought Device">
+                          <fa-icon [icon]="userAdmin"
+                                   class="icon-normal-single"></fa-icon>
+                          Who Bought Device :<span
+                          (click)="showStaffUser(deviceForSaleDto.deviceForSale.bayingUser)"
+                          class="user-staff"> {{deviceForSaleDto.deviceForSale?.bayingUser}}</span>
+                        </p>
+                      </div>
+                      <div class="row-1">
+                        <p *ngIf="deviceForSaleDto.deviceForSale.sellerUser" class="input-title"
+                           tooltip="The User Who Sold Device">
+                          <fa-icon [icon]="userAdmin"
+                                   class="icon-normal-single"></fa-icon>
+                          Who Sold Device :<span
+                          (click)="showStaffUser(deviceForSaleDto.deviceForSale.sellerUser)"
+                          class="user-staff"> {{deviceForSaleDto.deviceForSale.sellerUser}}</span>
+                        </p>
+                      </div>
+                      <div class="row-1">
+                        <p *ngIf="deviceForSaleDto.deviceForSale.updaterUser" class="input-title"
+                           tooltip="The User Care to Update Device">
+                          <fa-icon [icon]="userAdmin"
+                                   class="icon-normal-single"></fa-icon>
+                          Who Update Device:<span
+                          (click)="showStaffUser(deviceForSaleDto.deviceForSale.updaterUser)"
+                          class="user-staff"> {{deviceForSaleDto.deviceForSale.updaterUser}}</span>
+                        </p>
+                      </div>
+                    </div>
                     <div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -308,18 +320,18 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <fa-icon [icon]="images_icon"></fa-icon>
-        <p class="container-title">Images To Repair & Invoice</p>
+        <p class="container-title">Images & Invoice</p>
       </mat-expansion-panel-header>
 
       <ng-template matExpansionPanelContent>
-        <div class="row-container">
-          <div class="foto-enter-device row-1">
+        <div class="row-container1">
+          <div class="foto-enter-device row-1-col">
             <div>
               <div *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToEnterDeviceToRepair"
                    class="link-invoice-enter ">
                 <a (click)="open_popup(deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToEnterDeviceToRepair)"
                    class="link-invoice">Invoice
-                  to Open Repair</a>
+                  to Baying Device</a>
               </div>
 
               <div
@@ -341,7 +353,7 @@
                  class="link-invoice-enter">
               <a (click)="open_popup(deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToExitDeviceToRepair)"
                  class="link-invoice">Invoice
-                to Closet Repair</a>
+                to Selling Device</a>
 
               <div *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.fotoExitDevice?.length > 0"
                    class="foto-out-device">
@@ -365,3 +377,4 @@
     <app-redact-client-sale></app-redact-client-sale>
   </div>
 </div>
+

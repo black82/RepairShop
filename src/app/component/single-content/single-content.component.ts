@@ -22,6 +22,8 @@ import {faMeteor} from '@fortawesome/free-solid-svg-icons/faMeteor';
 import {faFileImage} from '@fortawesome/free-solid-svg-icons/faFileImage';
 import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {InputOutputTestService} from '../service/input-output-test.service';
+import {AnimeServiceService} from '../service/anime-service.service';
+import {HttpClien} from '../service/clientservice.service';
 
 @Component({
   selector: 'app-single-content',
@@ -60,7 +62,9 @@ export class SingleContentComponent implements OnInit {
   device_show = false;
   element: Element;
 
-  constructor(private inputOutputCheckTest: InputOutputTestService) {
+  constructor(private inputOutputCheckTest: InputOutputTestService,
+              private animeService: AnimeServiceService,
+              private httpService: HttpClien) {
   }
 
   ngOnInit() {
@@ -141,7 +145,17 @@ export class SingleContentComponent implements OnInit {
     this.repair_fileStorage = item.repair_elemnt.repairFileStorage;
     this.showDocument();
   }
+
+  showStaffUser(user_nick_name: string) {
+    this.animeService.$anime_show.emit(true);
+    this.httpService.isAdminByNickName(user_nick_name).subscribe(user => {
+      this.animeService.$show_user.emit(user);
+    }, () => {
+      this.animeService.$anime_show.emit(false);
+    });
+  }
 }
+
 
 class Element {
   visible: boolean;

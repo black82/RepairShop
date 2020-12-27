@@ -19,6 +19,7 @@ export class LogServiceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.serviceGetLogHtml();
   }
 
   serviceGetLogHtml(): void {

@@ -12,6 +12,8 @@ export class PrintService {
   @Output()
   $success_print: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
+  $success_print_to_send: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
   $success_print_id: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() {

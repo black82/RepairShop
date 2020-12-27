@@ -1403,7 +1403,7 @@ aside a {
 
 .title-form {
   color: #1ABC9C;
-  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif !important;
   font-size: 20px;
   text-transform: uppercase;
   line-height: 58px;

@@ -37,15 +37,44 @@
   text-align: center;
   font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
   font-size: 1.5em;
-  margin-top: -20px;
+  padding-left: 45%;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 3px;
-  transition: all 0.4s ease-in-out;
+  -webkit-animation: flicker-2 30s ease-in-out 2s infinite backwards;
+  animation: flicker-2 30s ease-in-out 2s infinite backwards;
+  transition: font-size 1s ease-in-out;
+}
+
+.user-position {
+  color: white;
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
+  font-size: 1.2em;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 3px;
+  transition: all 1s;
+  margin-left: 5%;
+
+}
+
+.title-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+
+}
+
+.user-position:hover {
+  cursor: pointer;
 }
 
 .name-company:hover {
-  font-size: 2.5em;
+  font-size: 2em;
   color: #34495E;
   cursor: pointer;
 
@@ -109,7 +138,7 @@ svg {
 .submenu li a:hover, #sign-in:hover,
 .submenu-output a:hover,
 .submenu-repair a:hover {
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
   color: #34495E !important;
   /*-webkit-animation: text-focus-in 2ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;*/
   /*animation: text-focus-in 200ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both;*/
@@ -212,7 +241,7 @@ svg {
 }
 
 .submenu {
-  margin-top: 2%;
+  margin-top: 1.6%;
 
 }
 
@@ -224,13 +253,13 @@ svg {
 .submenu-repair,
 .submenu-client {
   margin-left: -10%;
-  margin-top: 8px;
+  margin-top: 0.3%;
 }
 
 .submenu-search,
 .submenu-admin {
   margin-left: -15%;
-  margin-top: 8px;
+  margin-top: 0.3%;
 }
 
 
@@ -249,7 +278,11 @@ svg {
   visibility: hidden;
   opacity: 0;
   transform: scale(.8);
-  transition: 0.8s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+a:link {
+  text-decoration: none;
 }
 
 .submenu:hover,
@@ -328,7 +361,7 @@ li:hover {
 }
 
 .icon-menu:hover {
-  transition: all 0.4s ease-in-out;
+  transition: all 0.1s ease-in-out;
   color: #34495E;
   cursor: pointer;
 }
@@ -641,4 +674,90 @@ li:hover {
 .small-icon {
   font-size: 15px;
   -webkit-filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12)) drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14)) drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12)) drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1));
+}
+
+@-webkit-keyframes flicker-2 {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  41.99% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0;
+  }
+  43% {
+    opacity: 0;
+  }
+  43.01% {
+    opacity: 1;
+  }
+  45.99% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0;
+  }
+  46.9% {
+    opacity: 0;
+  }
+  46.91% {
+    opacity: 1;
+  }
+  51.99% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 0;
+  }
+  52.8% {
+    opacity: 0;
+  }
+  52.81% {
+    opacity: 1;
+  }
+}
+
+@keyframes flicker-2 {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  41.99% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0;
+  }
+  43% {
+    opacity: 0;
+  }
+  43.01% {
+    opacity: 1;
+  }
+  45.99% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 0;
+  }
+  46.9% {
+    opacity: 0;
+  }
+  46.91% {
+    opacity: 1;
+  }
+  51.99% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 0;
+  }
+  52.8% {
+    opacity: 0;
+  }
+  52.81% {
+    opacity: 1;
+  }
 }

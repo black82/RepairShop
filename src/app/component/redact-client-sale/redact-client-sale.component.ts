@@ -291,7 +291,6 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
       this.deviceForSaleDto.deviceForSale?.updaterUser);
     this.deviceForSaleDtoConstruct = new DeviceForSaleTransaction(this.deviceForSaleDto.deviceForSaleTransactionId,
       this.client, this.client2, this.deviceForSale);
-
     return this.deviceForSaleDtoConstruct;
   }
 

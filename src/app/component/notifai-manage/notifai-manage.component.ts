@@ -39,8 +39,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeInvoiceType();
     this.subscription = this.adminService.$show_notified.subscribe(notify => {
-      console.log(notify);
-      this.messages = notify;
+        this.messages = notify;
       this.formMessage = this.fb.group({
         destination: [this.messages?.destination_user, [Validators.required, Validators.email]],
         subject: [this.messages.message_subject, [Validators.required]],

@@ -67,16 +67,20 @@
   width: 40px;
   height: 40px;
   line-height: 40px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   border: 1px solid #ddd;
   margin-top: 10px;
   background-color: white;
   float: left;
 }
 
+.col-xs-2:hover {
+  background-color: #c74b16 !important;
+}
+
 .notification-body {
   background: #fefefe;
-  margin-left: -10%;
+  margin-left: -17%;
   position: absolute;
   margin-top: 3%;
   max-height: 60%;
@@ -110,7 +114,6 @@
   list-style: none;
   margin: 3px;
   padding: 5px;
-  max-width: 300px;
 
 }
 
@@ -124,6 +127,8 @@
 
 .list-not :hover {
   background: #00E4F6 !important;
+  border-radius: 2%;
+
 }
 
 .notification-anime {
@@ -256,7 +261,7 @@
 
 .fa-w-10 {
   margin-top: -8%;
-  margin-left: 50%;
+  margin-left: 10%;
   font-size: 30px;
   color: white;
   text-shadow: 0 1px 0 #ccc,

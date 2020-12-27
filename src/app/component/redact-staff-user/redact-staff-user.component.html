@@ -35,7 +35,15 @@
             <input [ngModel]="staffUser.technicName" class="form__input" formControlName="technicName" id="technicName"
                    placeholder="Technical Name"
                    type="text">
-
+          </div>
+          <div class="form__field">
+            <label for="position">
+              <i class="icon icon-user-md"></i>
+              <a class="form__label ">Staff User Position</a>
+            </label>
+            <input [ngModel]="staffUser.position" class="form__input" formControlName="position" id="position"
+                   placeholder="Position User"
+                   type="text">
           </div>
           <div class="button-send">
             <a (click)="submitForm()" class="button button-small" type="submit"><span> <fa-icon

@@ -36,7 +36,7 @@ export class PrintPageComponent implements OnInit, OnDestroy {
     this.el.nativeElement.innerHTML = invoice_tools.htmlPage;
     this.borderDelete();
     window.print();
-    this.print.$success_print.emit(true);
+    this.print.$success_print_to_send.emit(true);
   }
 
   borderDelete() {

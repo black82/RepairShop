@@ -16,6 +16,8 @@ export class AdminServiceService {
   $user_show: EventEmitter<boolean> = new EventEmitter();
   @Output()
   $user_redact: EventEmitter<StaffUser> = new EventEmitter();
+  @Output()
+  $user_position: EventEmitter<string> = new EventEmitter();
 
   constructor() {
   }

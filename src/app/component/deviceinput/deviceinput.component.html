@@ -99,7 +99,7 @@
         </label>
         <label>
           <span class="input-title">Model</span>
-          <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
+          <fa-icon [icon]="mobile" class="icon-input" id="model-icon"></fa-icon>
           <input (input)="filterItems($event.target.value)" class="input-1"
                  [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
            && formClient.controls.model.invalid && formClient.controls.model.errors}"
@@ -113,7 +113,6 @@
                 <span *ngIf="i<5" class="item-autocomplete">
                   <span (click)="optionSelected(item)" class="item-div"><span>{{ item }}
                   </span>
-
                   </span>
                 </span>
               </span>

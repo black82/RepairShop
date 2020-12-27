@@ -59,6 +59,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   staffTitle: string;
   clientTitle: string;
   invoiceShopModel: InvoiceShopModels;
+  private subscriptionPrint: Subscription;
 
   constructor(private print: PrintService,
               private emailSender: EmailSenderService,
@@ -72,6 +73,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.invoice = null;
+    this.id = null;
     this.email_send_event = this.emailSender.email_send_event.subscribe(print => {
       this.getInvoiceModel(print);
     });
@@ -88,10 +90,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.id = this.id_repair(print.client_print);
     } else {
       if (print.type_client_print === 3) {
-        this.id += print.client_print.deviceBay[0].idDeviceSale;
+        this.id = '';
       }
       if (print.type_client_print === 4) {
-        this.id += print.client_print.deviceSale[0].idDeviceSale;
+        this.id = print.client_print.deviceSale[0]?.idDeviceSale?.toString();
       }
     }
     this.type_print = print.type_client_print;
@@ -102,11 +104,11 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.animation_wait.$anime_show.emit(false);
 
     });
-    this.print.invoice_make.subscribe(() => {
+    this.subscriptionPrint = this.print.invoice_make.subscribe(() => {
       this.print.$success_print.emit(true);
     });
 
-    this.subscriptionPrintSuccess = this.print.$success_print.subscribe(value => {
+    this.subscriptionPrintSuccess = this.print.$success_print_to_send.subscribe(value => {
       if (value) {
         this.submitForm();
       }
@@ -127,6 +129,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   ok() {
+    this.animation_wait.$anime_show.emit(true);
     if (this.print_entity.type_client_print === 1) {
       this.http.printClient(this.client).subscribe(response => {
         this.client = response;
@@ -157,24 +160,34 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   checkIfIdNotNullAndCreateInvoice(): void {
-    if (this.id || this.id === '') {
-      const interval = setInterval(() => {
-        if (this.id !== '') {
-          this.createInvoiceToPrintPageAfterTimeout();
-          clearInterval(interval);
-        } else if (this.print_entity.type_client_print === 1 || this.print_entity.type_client_print === 2) {
-          if (this.client.device.length === 1 && this.client.device[0].repairs.length === 1) {
-            this.id = this.client.device[0].repairs[0].repair_Id.toString();
-            this.createInvoiceToPrintPageAfterTimeout();
-          } else {
-            this.id = this.id_repair(this.client);
-            this.createInvoiceToPrintPageAfterTimeout();
-          }
-        }
+    if (this.isNumber(this.id)) {
+      const timeout = setTimeout(() => {
+        this.createInvoiceToPrintPageAfterTimeout();
+        clearTimeout(timeout);
       }, 1000);
-    } else {
+      return;
+    }
+    if (this.print_entity.type_client_print === 1 || this.print_entity.type_client_print === 2) {
+      if (this.client.device.length === 1 && this.client.device[0].repairs.length === 1) {
+        this.id = this.client.device[0].repairs[0].repair_Id.toString();
+        this.createInvoiceToPrintPageAfterTimeout();
+        return;
+      }
+    }
+    if (this.print_entity.type_client_print === 3) {
+      this.id = this.client.deviceBay[0].idDeviceSale.toString();
       this.createInvoiceToPrintPageAfterTimeout();
     }
+    if (this.print_entity.type_client_print === 4) {
+      this.id = this.client.deviceSale[0].idDeviceSale.toString();
+      this.createInvoiceToPrintPageAfterTimeout();
+    }
+  }
+
+  isNumber(value: string | number): boolean {
+    return ((value != null) &&
+      (value !== '') &&
+      !isNaN(Number(value.toString())));
   }
 
   checkIsPhoneContain() {
@@ -190,10 +203,14 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   createInvoiceToPrintPageAfterTimeout() {
-    this.emailSender.anime_question.emit(true);
-    const html = document.querySelector('.container-page');
-    this.invoice = this.createInvoiceToPage(html.innerHTML);
-    this.checkTypeSender(this.invoice);
+    const timeout = setTimeout(() => {
+      this.emailSender.anime_question.emit(true);
+      const html = document.querySelector('.container-page');
+      this.invoice = this.createInvoiceToPage(html.innerHTML);
+      this.checkTypeSender(this.invoice);
+      clearTimeout(timeout);
+    }, 1000);
+
   }
 
   checkTypeSender(invoiceToPrintPage) {
@@ -220,7 +237,6 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   sendEmailToBackend(invoiceToolsDto) {
     this.show_email_send = false;
-    this.animation_wait.$anime_show.emit(true);
     this.http.sendEmailClient(invoiceToolsDto).subscribe(() => {
       this.animation_wait.$anime_show.emit(false);
       this.emailSender.anime_question.emit(false);
@@ -318,6 +334,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     if (this.subscriptionEmail) {
       this.subscriptionEmail.unsubscribe();
     }
+    if (this.subscriptionPrint) {
+      this.subscriptionPrint.unsubscribe();
+    }
   }
 
   check_test_OK_out(outputTest: OutputTest) {
@@ -342,7 +361,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       });
       return id.toString();
     } else {
-      return '';
+      return client?.device[0]?.repairs[0]?.repair_Id?.toString();
     }
   }
 
@@ -447,6 +466,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.print.print_open.emit(invoiceToPrintPage);
     this.invoice.htmlPage = html.innerHTML;
     this.print.invoice_make.emit(this.invoice);
+    this.animation_wait.$anime_show.emit(false);
   }
 
   print_click() {

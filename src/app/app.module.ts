@@ -91,6 +91,8 @@ import {InvoiceShopRedactComponent} from './component/invoice-shop-redact/invoic
 import {StatisticStaffUsersComponent} from './component/statistic-staff-users/statistic-staff-users.component';
 import {StatisticStaffUsersShopComponent} from './component/statistic-staff-users-shop/statistic-staff-users-shop.component';
 import {RedactStaffUserComponent} from './component/redact-staff-user/redact-staff-user.component';
+import {StaffUserComponentDialogComponent} from './component/staff-user-component-dialog/staff-user-component-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -162,7 +164,8 @@ import {RedactStaffUserComponent} from './component/redact-staff-user/redact-sta
     InvoiceShopRedactComponent,
     StatisticStaffUsersComponent,
     StatisticStaffUsersShopComponent,
-    RedactStaffUserComponent
+    RedactStaffUserComponent,
+    StaffUserComponentDialogComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -184,7 +187,8 @@ import {RedactStaffUserComponent} from './component/redact-staff-user/redact-sta
     MatIconModule,
     MatTooltipModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [WebSocketService, HttpClient,
     {

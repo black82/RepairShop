@@ -1,0 +1,30 @@
+<div *ngIf="showDialog" class="container-body-dialog">
+  <div class="container-dialog">
+    <div class="title-form"> Staff User Information</div>
+    <div>
+      <h1 class="input-title">
+        <fa-icon [icon]="iconUserName" class="icon-input"></fa-icon>
+        Staff User Full Name <span class="user-info">{{staffUser?.fullName}}</span></h1>
+      <h1 class="input-title">
+        <fa-icon [icon]="iconUserEmail" class="icon-input"></fa-icon>
+        Staff User Email <span class="user-info">{{staffUser?.email}}</span></h1>
+      <h1 class="input-title">
+        <fa-icon [icon]="iconUserNickName" class="icon-input"></fa-icon>
+        Staff User Technical Name <span class="user-info">{{staffUser?.technicName}}</span></h1>
+      <h1 class="input-title">
+        <fa-icon [icon]="iconUserPosition" class="icon-input"></fa-icon>
+        Staff User Position <span class="user-info">{{staffUser?.position}}</span></h1>
+      <div *ngIf="staffUser?.roles_users" class="input-title">
+        <fa-icon [icon]="iconUserRoles" class="icon-input"></fa-icon>
+        Staff User Roles
+        <ul
+          *ngFor="let rol of staffUser?.roles_users">
+          <li class="user-info">  {{rol}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="button-container">
+      <a (click)="hideDialog()" class="button"><span><fa-icon [icon]="closeIcon"></fa-icon>   Close</span></a>
+    </div>
+  </div>
+</div>

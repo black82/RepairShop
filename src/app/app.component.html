@@ -2,9 +2,14 @@
 <div class="print-hided">
   <app-notifai-manage></app-notifai-manage>
   <app-alert></app-alert>
+  <app-staff-user-component-dialog></app-staff-user-component-dialog>
   <app-animation-wait></app-animation-wait>
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <div class="animation-clear">
+    <div [@routeAnimations]="prepareRoute(outlet)" class="routed-container">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </div>
   <app-footer></app-footer>
 </div>
 <app-print-page></app-print-page>

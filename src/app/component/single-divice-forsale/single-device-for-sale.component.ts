@@ -30,6 +30,8 @@ import {faDelicious} from '@fortawesome/free-brands-svg-icons/faDelicious';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
 import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
 import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
+import {HttpClien} from '../service/clientservice.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 @Component({
   selector: 'app-single-divice-forsale',
@@ -73,7 +75,10 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   editTransaction = false;
 
-  constructor(private deviceInputService: DeviceInputService, private inputOutputCheck: InputOutputTestService) {
+  constructor(private deviceInputService: DeviceInputService,
+              private inputOutputCheck: InputOutputTestService,
+              private httpService: HttpClien,
+              private animeService: AnimeServiceService) {
   }
 
   ngOnInit(): void {
@@ -153,4 +158,12 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
     this.editTransaction = !this.editTransaction;
   }
 
+  showStaffUser(user_nick_name: string) {
+    this.animeService.$anime_show.emit(true);
+    this.httpService.isAdminByNickName(user_nick_name).subscribe(user => {
+      this.animeService.$show_user.emit(user);
+    }, () => {
+      this.animeService.$anime_show.emit(false);
+    });
+  }
 }

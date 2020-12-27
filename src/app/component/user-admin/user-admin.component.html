@@ -8,6 +8,7 @@
           <th class="form__label_1" scope="col">#</th>
           <th class="form__label_1" scope="col">Full Name</th>
           <th class="form__label_1" scope="col">Email</th>
+          <th class="form__label_1" scope="col">Position</th>
           <th class="form__label_1" scope="col">Email Confirmed</th>
           <th class="form__label_1" scope="col">User Enable</th>
           <th class="form__label_1" scope="col">User Roles</th>
@@ -21,6 +22,7 @@
           <th class="form__label_1" scope="row">{{i + 1}}</th>
           <td class="form__label_1">{{element?.fullName}}</td>
           <td class="form__label_1">{{element?.email}}</td>
+          <td class="form__label_1">{{element?.position ? element.position : ' - '}}</td>
           <td class="form__label_1">{{element?.confirmEmail ? 'Yes' : 'Not'}}</td>
           <td class="form__label_1">{{element?.enabled ? 'is active' : 'is not active'}}</td>
           <td class="form__label_1">

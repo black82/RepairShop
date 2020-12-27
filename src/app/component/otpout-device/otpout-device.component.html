@@ -63,7 +63,7 @@
             formClient.controls.parts_replace_output.touched) && formClient.controls.parts_replace_output.invalid && formClient.controls.parts_replace_output.errors}"
                    [ngModel]="client?.device[0]?.repairs[0]?.parts_replaced" class="input-1"
                    (input)="filterItems(formClient.controls.parts_replace_output.value)"
-                   formControlName="parts_replace_output">
+                   formControlName="parts_replace_output" placeholder="Spare Parts Used">
             <div class="box-autocomplete">
               <div *ngIf="showAddAutocomplete" class="item-autocomplete-container">
                 <div *ngFor="let item of filteredItems1 |async;let i=index" class="container-autocomplete">
@@ -80,12 +80,12 @@
 
         </div>
         <div class="row-2">
-          <label><span class="input-title">Work done</span>
+          <label><span class="input-title">Work Done</span>
             <fa-icon [icon]="work" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.work_don_output.dirty ||
             formClient.controls.work_don_output.touched) && formClient.controls.work_don_output.invalid && formClient.controls.work_don_output.errors}"
                    [ngModel]="client?.device[0]?.repairs[0]?.work_don" class="input-1"
-                   formControlName="work_don_output">
+                   formControlName="work_don_output" placeholder="Work Performed">
           </label>
 
           <label><span class="input-title">Price</span>
@@ -361,8 +361,10 @@
           <app-dragfile></app-dragfile>
         </div>
         <div class="row-2">
-          <textarea [value]="client.device[0].repairs[0]?.noteOutput" class="text-area"
-                    formControlName="note_output">...</textarea>
+          <label class="text-aria-output">
+<textarea [value]="client.device[0].repairs[0]?.noteOutput" class="text-area"
+          formControlName="note_output" placeholder="Note Close Repair">...</textarea>
+          </label>
         </div>
       </div>
       <div class="button_form">

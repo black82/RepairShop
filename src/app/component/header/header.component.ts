@@ -34,6 +34,8 @@ import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingU
 import {faEuroSign} from '@fortawesome/free-solid-svg-icons/faEuroSign';
 import {faAppStoreIos} from '@fortawesome/free-brands-svg-icons/faAppStoreIos';
 import {faPeopleCarry} from '@fortawesome/free-solid-svg-icons/faPeopleCarry';
+import {faStar} from '@fortawesome/free-solid-svg-icons/faStar';
+import {faUsersCog} from '@fortawesome/free-solid-svg-icons/faUsersCog';
 
 @Component({
   selector: 'app-header',
@@ -70,10 +72,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   images = faFileImage;
   stored = faStore;
   tools = faCogs;
+  star = faStar;
+  positionShow = false;
   adminTools = faToolbox;
   dropdown = faAngleDown;
   private subscribe_admin: Subscription;
-
+  positionUser: string;
+  private subscriptionPosition: Subscription;
 
   constructor(private http: HttpClien,
               private adminService: AdminServiceService) {
@@ -81,16 +86,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const view = localStorage.getItem('roles');
+    const position = localStorage.getItem('position');
     if (view) {
       this.admin = true;
     }
+    if (position) {
+      this.positionUser = position;
+      this.iconByPosition(position);
+    }
     this.subscribe_admin = this.adminService.$admin_show.subscribe(value => {
       this.showAdminPage(value);
+    });
+    this.subscriptionPosition = this.adminService.$user_position.subscribe(position1 => {
+      this.positionUser = position1;
+      this.iconByPosition(position1);
     });
   }
 
   logout() {
     this.http.logout();
+    this.adminService.$user_position.emit('');
+    this.positionShow = false;
   }
 
   showAdminPage(value) {
@@ -138,6 +154,34 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscribe_admin) {
       this.subscribe_admin.unsubscribe();
+    }
+    if (this.subscriptionPosition) {
+      this.subscriptionPosition.unsubscribe();
+    }
+  }
+
+  iconByPosition(position: string): void {
+    switch (position) {
+      case 'Software Administration': {
+        this.star = faStar;
+        this.positionShow = true;
+        break;
+      }
+      case 'Manager': {
+        this.star = faStar;
+        this.positionShow = true;
+        break;
+      }
+      case 'Technic': {
+        this.star = faUsersCog;
+        this.positionShow = true;
+        break;
+      }
+      default: {
+        this.star = faUsersCog;
+        this.positionShow = true;
+        break;
+      }
     }
   }
 }

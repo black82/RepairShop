@@ -71,6 +71,13 @@ export class SignInComponent implements OnInit {
               localStorage.setItem('token', res.token);
               this.admin.$user_show.emit(true);
             }
+            if (res.position) {
+              localStorage.setItem('position', res.position);
+              this.admin.$user_position.emit(res.position);
+            } else {
+              localStorage.setItem('position', 'position undefined');
+              this.admin.$user_position.emit('position undefined');
+            }
             const element = document.querySelector('.close') as HTMLElement;
             if (element) {
               element.click();

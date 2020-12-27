@@ -1,5 +1,10 @@
 <header id="header-wrapper">
-  <p class="name-company">RFV Technology</p>
+  <div class="title-header">
+    <p class="name-company">RFV Technology </p>
+    <a *ngIf="positionShow" class="user-position">
+      <fa-icon [icon]="star"></fa-icon>
+      {{positionUser}}</a>
+  </div>
   <nav class="container-header" id="header">
     <div class="menu-box" id="menu-box">
 

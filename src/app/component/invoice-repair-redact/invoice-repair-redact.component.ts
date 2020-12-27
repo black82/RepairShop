@@ -22,8 +22,8 @@ export class InvoiceRepairRedactComponent implements OnInit {
   ngOnInit(): void {
     this.httpService.findInvoiceRepairsModelByOrder('default').subscribe(value => {
       this.invoiceRepairModel = value;
-      this.createForm();
     });
+    this.createForm();
   }
 
   createForm(): void {

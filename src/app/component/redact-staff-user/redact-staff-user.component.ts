@@ -44,7 +44,8 @@ export class RedactStaffUserComponent implements OnInit, OnDestroy {
 
       name: [null, [Validators.required,
         this.IsErrorState, this.ValidatorTrimSpace]],
-      technicName: [null, [Validators.required, this.IsErrorState, this.ValidatorTrimSpace]]
+      technicName: [null, [Validators.required, this.IsErrorState, this.ValidatorTrimSpace]],
+      position: [null, [Validators.required, this.IsErrorState, this.ValidatorTrimSpace]]
     });
   }
 
@@ -81,7 +82,7 @@ export class RedactStaffUserComponent implements OnInit, OnDestroy {
 
   createStaffUserForm(): StaffUser {
     return new StaffUser(this.staffUser.email, this.staffUserForm.controls.name.value, this.staffUser.enabled, this.staffUser.confirmEmail,
-      this.staffUser.roles_users, this.staffUserForm.controls.technicName.value);
+      this.staffUser.roles_users, this.staffUserForm.controls.technicName.value, this.staffUserForm.controls.position.value);
   }
 
   ngOnDestroy(): void {

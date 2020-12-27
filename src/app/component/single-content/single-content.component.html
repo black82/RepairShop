@@ -210,26 +210,30 @@
                       <p *ngIf="item.repair_elemnt.createUserRepair" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Create Repair
-                        : <span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt.createUserRepair}}</span>
+                        : <span (click)="showStaffUser(item.repair_elemnt.createUserRepair)" class="user-staff"
+                                tooltip="Click for Info">{{item.repair_elemnt.createUserRepair}}</span>
                       </p>
                       <p *ngIf="item.repair_elemnt.lastModifiedRepair" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Last Modified Repair
-                        : <span
-                        style="color: lightcoral;font-size: 20px">{{item.repair_elemnt.lastModifiedRepair}}</span></p>
+                        : <span (click)="showStaffUser(item.repair_elemnt.lastModifiedRepair)" class="user-staff"
+                                tooltip="Click for Info">{{item.repair_elemnt.lastModifiedRepair}}</span></p>
                       <p *ngIf="item.repair_elemnt.closeUserRepair" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Close Repair
-                        : <span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt.closeUserRepair}}</span>
+                        : <span (click)="showStaffUser(item.repair_elemnt.closeUserRepair)" class="user-staff"
+                                tooltip="Click for Info">{{item.repair_elemnt.closeUserRepair}}</span>
                       </p>
                       <p *ngIf="client.createUser" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
-                        Staff User Create Client : <span
-                        style="color: lightcoral;font-size: 20px">{{client.createUser}}</span></p>
+                        Staff User Create Client : <span (click)="showStaffUser(client.createUser)"
+                                                         class="user-staff"
+                                                         tooltip="Click for Info">{{client.createUser}}</span></p>
                       <p *ngIf="client.lastModified" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Last Modified Client :
-                        <span style="color: lightcoral;font-size: 20px">{{client.lastModified}}</span></p>
+                        <span (click)="showStaffUser(client.lastModified)" class="user-staff"
+                              tooltip="Click for Info">{{client.lastModified}}</span></p>
                     </div>
                   </div>
                 </div>
@@ -245,7 +249,6 @@
       <fa-icon [icon]="images_icon"></fa-icon>
       <p>Images To Repair & Invoice</p>
     </mat-expansion-panel-header>
-
     <ng-template matExpansionPanelContent>
       <div class="row-container">
         <div class="foto-enter-device row-1">

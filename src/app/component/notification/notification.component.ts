@@ -8,6 +8,7 @@ import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
+import {AnimeServiceService} from '../service/anime-service.service';
 
 @Component({
   selector: 'app-notification',
@@ -31,7 +32,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   constructor(private webSocketService: WebSocketService,
               private adminService: AdminServiceService,
               private httpClient: HttpClien,
-              private alertService: AlertServiceService) {
+              private alertService: AlertServiceService,
+              private animeService: AnimeServiceService) {
   }
 
   ngOnInit(): void {
@@ -137,5 +139,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.alertService.soundAlert();
   }
 
-
+  showStaffUserHeader(user_nick_name: string) {
+    this.animeService.$anime_show.emit(true);
+    this.httpClient.isAdminByNickName(user_nick_name).subscribe(user => {
+      this.animeService.$show_user_header.emit(user);
+    }, () => {
+      this.animeService.$anime_show.emit(false);
+    });
+  }
 }

@@ -38,6 +38,7 @@ export class DiviceTumorowComponent implements OnInit {
     if (item) {
       this.httpService.isAdmin(item).subscribe(value => {
         this.isAdmin = value;
+        this.get_list_client();
       }, error => {
         console.log(error);
       });

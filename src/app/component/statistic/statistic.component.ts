@@ -159,7 +159,6 @@ export class StatisticComponent implements OnInit {
     if (!amount) {
       amount = 25;
     }
-    console.log(amount);
     this.service_show_statistic.statistic_amount.emit(amount);
     this.service_show_statistic.$users_amount_shop_statistic
       .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,

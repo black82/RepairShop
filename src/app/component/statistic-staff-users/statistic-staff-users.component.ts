@@ -149,7 +149,6 @@ export class StatisticStaffUsersComponent implements OnInit, OnDestroy {
 
   private elaboration_server_data() {
     let count = 0;
-    console.log('count');
     if (this.date_server?.length > 1) {
       this.date_server.sort((a, b) => {
           if (a[2] < b[2]) {
