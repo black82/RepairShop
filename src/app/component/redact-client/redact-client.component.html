@@ -67,12 +67,12 @@
                 placeholder="Email of Client" type="email">
             </label>
             <label>
-              <span class="input-title">Telethon Number</span>
+              <span class="input-title">Phone Number</span>
               <fa-icon [icon]="phone" class="icon-input"></fa-icon>
               <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number.dirty || formClient.controls.telephone_number.touched)
            && formClient.controls.telephone_number.invalid && formClient.controls.telephone_number.errors}"
                      [ngModel]="client?.telephone_number" class="input-1"
-                     formControlName="telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Telethon Number"
+                     formControlName="telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number"
                      type="tel">
             </label>
 

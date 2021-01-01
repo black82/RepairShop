@@ -7,7 +7,7 @@
     <div class="title-container" tooltip="Compile all fields are required.">
       <p class="title-form">
         <fa-icon [icon]="modul" class="icon-input"></fa-icon>
-        Compile the model for the device's <span style="color: #F09EA3">"{{client.device[0]?.model}}"</span> output
+        Compile the model for the device's <span style="color: #F09EA3">"{{client.device[0]?.model}}"</span> Outgoing
         client<span style="color: #F09EA3"> "{{client.typeClient ? client.companyName : client.name}}
         {{client.typeClient ? client.family : ''}}"</span>
       </p>
@@ -104,7 +104,7 @@
                    formControlName="address_output" readonly>
           </label>
           <label>
-            <span class="input-title">Telethon Model</span>
+            <span class="input-title">Phone Model</span>
             <fa-icon [icon]="model" class="icon-input"></fa-icon>
             <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls.model_output.dirty ||
             formClient.controls.model_output.touched) && formClient.controls.model_output.invalid && formClient.controls.model_output.errors}"

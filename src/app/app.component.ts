@@ -28,7 +28,8 @@ export const slideInAnimation =
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '100%'
+          width: '100%',
+          transition: '1s transition',
         })
       ]),
       query(':enter', [

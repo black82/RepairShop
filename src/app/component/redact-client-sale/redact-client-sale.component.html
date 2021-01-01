@@ -44,7 +44,7 @@
             <label class="input-title" for="telephone_number_baying">
               <fa-icon [icon]="phone"
                        class="icon-normal-single"></fa-icon>
-              Telethon Number:
+              Phone Number:
               <input [ngModel]="deviceForSaleDto.clientBaying?.telephone_number" class="input"
                      formControlName="telephone_number_baying"
                      id="telephone_number_baying" name="telephone_number_baying" type="tel">
@@ -53,7 +53,7 @@
                    for="telephone_sec_number_baying">
               <fa-icon [icon]="phone"
                        class="icon-normal-single"></fa-icon>
-              Second Telethon Number:
+              Second Phone Number:
               <input [ngModel]="deviceForSaleDto.clientBaying?.telephone_number_second"
                      class="input" formControlName="telephone_sec_number_baying"
                      id="telephone_sec_number_baying" name="telephone_sec_number_baying" type="tel">
@@ -109,16 +109,16 @@
           </label>
           <label class="input-title" for="telephone_selling">
             <fa-icon [icon]="phone" class="icon-normal-single"></fa-icon>
-            Telethon Number:
+            Phone Number:
             <input [ngModel]="deviceForSaleDto.clientSailing?.telephone_number" class="input"
                    formControlName="telephone_selling" id="telephone_selling" name="telephone_selling">
           </label>
           <label *ngIf="deviceForSaleDto.clientSailing.telephone_number_second" class="input-title"
                  for="telephone_second_selling">
             <fa-icon [icon]="phone" class="icon-normal-single"></fa-icon>
-            Second Telethon Number:<input [ngModel]="deviceForSaleDto.clientSailing?.telephone_number_second"
-                                          class="input" formControlName="telephone_second_selling"
-                                          id="telephone_second_selling" name="telephone_second_selling">
+            Second Phone Number:<input [ngModel]="deviceForSaleDto.clientSailing?.telephone_number_second"
+                                       class="input" formControlName="telephone_second_selling"
+                                       id="telephone_second_selling" name="telephone_second_selling">
           </label>
           <label class="input-title" for="email_selling">
             <fa-icon [icon]="email" class="icon-normal-single"></fa-icon>
@@ -159,7 +159,7 @@
                   </p>
                   <label class="input-title">
                     <fa-icon [icon]="used" class="icon-input"></fa-icon>
-                    Type Device
+                    Type of Device
                     <select [ngModel]="deviceForSaleDto.deviceForSale.deviceType" class="input"
                             formControlName="deviceType">
                       <option [disabled]="true" [selected]="true"

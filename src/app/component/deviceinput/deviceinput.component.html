@@ -22,7 +22,7 @@
       <div class="row-1">
 
         <label *ngIf="!companyShow">
-          <span class="input-title">Name of Client</span>
+          <span class="input-title">First Name of Client</span>
           <fa-icon [icon]="userPerson" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.name?.dirty ||
@@ -31,7 +31,7 @@
             [ngModel]="client?.name" formControlName="name" placeholder="Name of Client" type="text">
         </label>
         <label *ngIf="!companyShow">
-          <span class="input-title">Family of Client</span>
+          <span class="input-title">Last Name of Client</span>
           <fa-icon [icon]="userFamely" class="icon-input"></fa-icon>
           <input
             [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls?.family?.dirty ||
@@ -76,19 +76,19 @@
             placeholder="Email of Client" type="email">
         </label>
         <label>
-          <span class="input-title">Telethon Number</span>
+          <span class="input-title">Phone Number</span>
           <fa-icon [icon]="phone" class="icon-input"></fa-icon>
           <input class="input-1" formControlName="telephone_number"
-                 [ngModel]="client?.telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Telethon Number"
+                 [ngModel]="client?.telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number"
                  type="tel">
         </label>
         <label>
-          <span class="input-title">Telethon Number 2</span>
+          <span class="input-title">Phone Number 2</span>
           <fa-icon [icon]="phone" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number_second.dirty || formClient.controls.telephone_number_second.touched)
            && formClient.controls.telephone_number_second.invalid && formClient.controls.telephone_number_second.errors}"
                  [ngModel]="client?.telephone_number_second" class="input-1"
-                 formControlName="telephone_number_second" placeholder="Telethon Number Optional"
+                 formControlName="telephone_number_second" placeholder="Phone Number Optional"
                  type="tel">
         </label>
         <label><span class="input-title">Address</span>
@@ -144,12 +144,12 @@
                  type="text">
         </label>
         <label>
-          <span class="input-title">Date to enter</span>
+          <span class="input-title">Accepting Date</span>
           <fa-icon [icon]="date" class="icon-input"></fa-icon>
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.date_to_enter.dirty || formClient.controls.date_to_enter.touched)
            && formClient.controls.date_to_enter.invalid && formClient.controls.date_to_enter.errors&& formClient.controls.date_to_enter.pristine}"
                  class="input-2" formControlName="date_to_enter"
-                 placeholder="Date to Enter" type="date">
+                 placeholder="Accepting Date" type="date">
         </label>
         <label>
           <span class="input-title">Defect</span>
@@ -203,7 +203,7 @@
         <p class="title-form">
 
           <fa-icon [icon]="test" class=""></fa-icon>
-          Tests at the entrance of the machine.
+          Tests at the acceptance of the machine
         </p>
       </div>
     </div>

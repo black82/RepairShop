@@ -23,6 +23,7 @@ export class SignInComponent implements OnInit {
   exclamation = faExclamation;
   email = faAt;
   lock = faLock;
+  fullName: string;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -59,6 +60,11 @@ export class SignInComponent implements OnInit {
     const client = this.createSigInEntity();
     this.authService.login(client)
       .subscribe(res => {
+        if (res.fullname) {
+          this.fullName = res.fullname;
+        } else {
+          this.fullName = '';
+        }
         this.welcomeAnime();
         const timeout = setTimeout(() => {
           if (res.token) {
@@ -78,6 +84,8 @@ export class SignInComponent implements OnInit {
               localStorage.setItem('position', 'position undefined');
               this.admin.$user_position.emit('position undefined');
             }
+            console.log(res);
+
             const element = document.querySelector('.close') as HTMLElement;
             if (element) {
               element.click();

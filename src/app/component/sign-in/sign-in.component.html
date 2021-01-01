@@ -1,6 +1,6 @@
 <div class="container-body">
   <div class="grid">
-    <h1 class="welcome-anime" id="welcome-anime">Welcome</h1>
+    <h1 class="welcome-anime" id="welcome-anime">Welcome <span class="user-name">   {{fullName}}</span></h1>
     <h1 class="login-text" id="login-text">Login Form</h1>
     <form (ngSubmit)="onFormSubmit()" [formGroup]=loginForm class="form login" method="POST">
       <div class="form__field">

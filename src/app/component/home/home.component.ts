@@ -7,6 +7,7 @@ import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   stored = faStore;
   repair = faTools;
   adminIcon = faUserShield;
-
+  labelTolls = '';
   hidem_animation = true;
   admin = false;
   private subscribe_admin: Subscription;
@@ -42,7 +43,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.clickElementAnimation();
     });
     this.clickElementAnimation();
-
     const timeout = setTimeout(() => {
       this.hidem_animation = false;
       clearTimeout(timeout);
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.tooltipAnimation();
     this.clickElementCentralIcon(document.querySelectorAll('.box'));
     this.clickElementCTools(document.querySelectorAll('.tools'));
-
+    this.toolsLabels();
   }
 
   clickElementCTools(elementList: NodeListOf<Element>) {
@@ -101,9 +101,63 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  toolsLabels() {
+    const querySelector = document.querySelectorAll('.tools');
+    querySelector.forEach(node => {
+      node.childNodes.forEach(child => {
+        child.addEventListener('mouseenter', evt => {
+          this.createLabelToEvent(evt.target.classList);
+          child.addEventListener('mouseleave', () => {
+            this.labelTolls = '';
+          });
+        });
+      });
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.subscribe_admin) {
       this.subscribe_admin.unsubscribe();
+    }
+  }
+
+  private createLabelToEvent(classList: any) {
+    if (classList) {
+      console.log('Creating Label' + classList);
+      switch (classList.value) {
+        case 'icon icon-mobile-phone icon-animation': {
+          this.labelTolls = 'Create Repair';
+          break;
+        }
+        case 'icon icon-check icon-animation': {
+          this.labelTolls = 'Close Repair';
+          break;
+        }
+        case 'icon icon-search icon-animation': {
+          this.labelTolls = 'Search By Phone Number';
+          break;
+        }
+        case 'icon icon-lock icon-animation': {
+          this.labelTolls = 'Log In';
+          break;
+        }
+        case 'icon icon-bar-chart icon-animation': {
+          this.labelTolls = 'Statistics Company';
+          break;
+        }
+        case 'icon icon-wrench icon-animation': {
+          this.labelTolls = 'Admin DashBoar';
+          break;
+        }
+        case 'icon icon-calendar icon-animation': {
+          this.labelTolls = 'Extend Repair';
+          break;
+        }
+        case 'icon icon-envelope-alt icon-animation': {
+          this.labelTolls = 'Send Email Message';
+          break;
+        }
+      }
     }
   }
 }

@@ -36,6 +36,9 @@ import {faAppStoreIos} from '@fortawesome/free-brands-svg-icons/faAppStoreIos';
 import {faPeopleCarry} from '@fortawesome/free-solid-svg-icons/faPeopleCarry';
 import {faStar} from '@fortawesome/free-solid-svg-icons/faStar';
 import {faUsersCog} from '@fortawesome/free-solid-svg-icons/faUsersCog';
+import * as anime from 'node_modules/animejs/lib/anime.min.js';
+
+export declare function animeTitle(anime): any;
 
 @Component({
   selector: 'app-header',
@@ -80,11 +83,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   positionUser: string;
   private subscriptionPosition: Subscription;
 
+
   constructor(private http: HttpClien,
               private adminService: AdminServiceService) {
   }
 
   ngOnInit() {
+
     const view = localStorage.getItem('roles');
     const position = localStorage.getItem('position');
     if (view) {
@@ -100,6 +105,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptionPosition = this.adminService.$user_position.subscribe(position1 => {
       this.positionUser = position1;
       this.iconByPosition(position1);
+    });
+    this.adminService.$admin_show.subscribe(value => {
+      if (!value) {
+        this.positionShow = false;
+      }
     });
   }
 
@@ -183,5 +193,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         break;
       }
     }
+    animeTitle(anime);
   }
 }

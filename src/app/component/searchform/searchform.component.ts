@@ -124,7 +124,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
   searchByTelephone() {
     const value = this.formInput.controls.ob.value;
     if (!this.phoneValidator(value)) {
-      this.alert_service.info(null, 'The value entered must be a Telethon Number.Example: +39123456123', false, false, null, null);
+      this.alert_service.info(null, 'The value entered must be a Phone Number.Example: +39123456123', false, false, null, null);
       return;
     }
     this.client_service.searchByTelephoneNumber(this.formInput.controls.ob.value).subscribe(

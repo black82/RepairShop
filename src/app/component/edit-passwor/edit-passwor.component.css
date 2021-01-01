@@ -71,10 +71,10 @@ form button:hover {
 
 .welcome-anime {
   text-align: center;
-  position: center;
-  font-family: 'Source Sans Pro', sans-serif;
+  position: relative;
+  font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
   color: white;
-  font-size: 40px;
+  font-size: 2em;
   transition-duration: 1s;
   transition-timing-function: ease-in;
   font-weight: 200;

@@ -30,9 +30,9 @@ export class SearchByNameComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.typeClient === 'repair') {
-      this.buttonText = 'Search Repair Clint By FullName';
+      this.buttonText = 'Search Repair Client By FullName';
     } else if (this.typeClient === 'shop') {
-      this.buttonText = 'Search Shop Clint By FullName';
+      this.buttonText = 'Search Shop Client By FullName';
     }
     this.initForm();
   }
@@ -104,11 +104,11 @@ export class SearchByNameComponent implements OnInit {
     if (this.familyCheckBox && this.nameCheckBox) {
       this.buttonText = 'INVALID FORM';
     } else if (!this.familyCheckBox && !this.nameCheckBox) {
-      this.buttonText = 'Search Shop Clint By FullName';
+      this.buttonText = 'Search Shop Client By FullName';
     } else if (this.familyCheckBox && !this.nameCheckBox) {
-      this.buttonText = 'Search Repair Clint By Name';
+      this.buttonText = 'Search Repair Client By Name';
     } else if (this.nameCheckBox && !this.familyCheckBox) {
-      this.buttonText = 'Search Repair Clint By Family';
+      this.buttonText = 'Search Repair Client By Family';
     }
   }
 

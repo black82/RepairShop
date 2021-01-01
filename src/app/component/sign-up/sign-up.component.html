@@ -10,15 +10,16 @@
         </label>
         <input class="form__input" formControlName="email" id="login__username" name="email" placeholder="Email"
                required
-               type="text">
+               autocomplete="off" type="text">
       </div>
       <div class="form__field">
         <label for="login__username">
           <span *ngIf="registerForm.controls.fullName.invalid && registerForm.controls.fullName.value!==null "
                 class="error-message">*required field
           </span></label>
+        <label for="login__family"></label>
         <input class="form__input" formControlName="fullName" id="login__family" name="fullName"
-               placeholder="Full Name" required type="text">
+               autocomplete="off" placeholder="Full Name" required type="text">
       </div>
       <div class="form__field" tooltip="Min. lents 4 Max 10.">
         <label for="login__password">
@@ -35,6 +36,7 @@
                *ngIf="registerForm.controls.confirmPassword.invalid&& registerForm.controls.confirmPassword.value!==null"
                class="error-message"> {{messagePassword}}</span>
         </label>
+        <label for="login__password__confirm"></label>
         <input autocomplete="off" class="form__input" formControlName="confirmPassword" id="login__password__confirm"
                name="confirmPassword"
                placeholder="Confirm Password" required type="password">
@@ -43,7 +45,8 @@
         <input type="submit" value="Sign Up">
       </div>
     </form>
-    <p class="text--center"> Before logging in, open the indicated email and confirm !!!</p>
+    <p class="text--center" style="font-family: Bradley Hand, cursive;"> Before logging in, open the indicated email and
+      confirm !!!</p>
   </div>
   <ul class="bg-bubbles">
     <li></li>

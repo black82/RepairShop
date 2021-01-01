@@ -1,7 +1,38 @@
-<div class="container-body">
+<div class="container-body" id="container-body">
+  <p class="title-form">
+    Store Management Application
+  </p>
+  <nav role="navigation">
+    <div id="menuToggle">
+
+      <input type="checkbox"/>
+      <span></span>
+      <span></span>
+      <span> <span class="label-tolls">{{labelTolls}}</span></span>
+
+      <ul id="menu">
+        <li class="tools">
+          <a class="icon icon-mobile-phone icon-animation" routerLink="/input/client/device"></a>
+          <a class="icon icon-check icon-animation" routerLink="/output/client/device"></a>
+          <a class="icon icon-search icon-animation" routerLink="/search/telephone/number"></a>
+          <a class="icon icon-lock icon-animation" routerLink="/client/sign-in"></a>
+        </li>
+
+        <li *ngIf="admin" class="tools " id="admin-tols">
+          <a class="icon icon-bar-chart icon-animation" routerLink="/admin/statistic/repair"></a>
+          <a class="icon icon-wrench icon-animation" routerLink="/admin/dashboard"></a>
+          <a class="icon icon-calendar icon-animation"
+             routerLink="/admin/repair/extend"></a>
+          <a class="icon icon-envelope-alt icon-animation"
+             routerLink="admin/email/client/send"></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div id="page-wrapper">
     <div class="container-1" id="page">
       <div class="container-2" id="portfolio">
+
         <div class="column1">
           <div class="box">
             <div class="test">
@@ -47,25 +78,16 @@
         </div>
 
       </div>
-    <div id="wrapper2">
-      <div id="tools">
-        <div class="tools">
-          <a class="icon icon-mobile-phone icon-animation" routerLink="/input/client/device"></a>
-          <a class="icon icon-check icon-animation" routerLink="/output/client/device"></a>
-          <a class="icon icon-search icon-animation" routerLink="/search/telephone/number"></a>
-          <div *ngIf="admin" class="admin-tols">
-            <a class="icon icon-bar-chart icon-animation" routerLink="/admin/statistic/repair"></a>
-            <a class="icon icon-wrench icon-animation" routerLink="/admin/dashboard"></a>
-            <a [style.margin-left]="'30px'" class="icon icon-calendar icon-animation"
-               routerLink="/admin/repair/extend"></a>
-            <a [style.margin-right]="'50px'" class="icon icon-envelope-alt icon-animation"
-               routerLink="admin/email/client/send"></a>
-            <a class="icon icon-user icon-animation" routerLink="/admin/user"></a>
-          </div>
-          <a class="icon icon-lock icon-animation" routerLink="/client/sign-in"></a>
-        </div>
+      <div id="wrapper2">
+
       </div>
     </div>
-    </div>
+  </div>
+  <div class="bg-all">
+    <div class="culd"></div>
+    <div class="culd"></div>
+    <div class="culd"></div>
+    <div class="culd"></div>
+    <div class="culd"></div>
   </div>
 </div>

@@ -1,9 +1,10 @@
 <header id="header-wrapper">
   <div class="title-header">
-    <p class="name-company">RFV Technology </p>
-    <a *ngIf="positionShow" class="user-position">
-      <fa-icon [icon]="star"></fa-icon>
-      {{positionUser}}</a>
+    <h1 class="name-company">
+      RFV Technology</h1>
+    <p *ngIf="positionShow" class="user-position">
+     <span> <fa-icon [icon]="star"></fa-icon>
+       {{positionUser}}</span></p>
   </div>
   <nav class="container-header" id="header">
     <div class="menu-box" id="menu-box">
@@ -12,64 +13,57 @@
         <nav>
           <ul>
             <li><a accesskey="1" class="home-link" routerLink="/" style="color: #34495E" title="Homepage">
-              <fa-icon [icon]="home" class="small-icon"></fa-icon>
-              Homepage</a></li>
-            <li class="current_page_item" id="new-client-menu"><a accesskey="2" class="teaming" title="">
-              <fa-icon [icon]="stored" class="menu-icon small-icon"></fa-icon>
-              Shop
-              <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
-            </a>
-              <div class="current_page_item" id="client_menu">
-                <div class="client-menu">
-                  <ul class="submenu-client">
-                    <li>
-                      <a routerLink="/input/client/device/bay">
-                        <fa-icon [icon]="bayingDevice" class="small-icon"></fa-icon>
-                        Buying Devices</a>
-                    </li>
-                    <br>
-                    <li><a routerLink="/output/client/device/sell">
-                      <fa-icon [icon]="sellDevices" class="small-icon"></fa-icon>
-                      Sell Device</a>
-                    </li>
-                    <br>
-                  </ul>
-                </div>
-              </div>
+              <fa-icon [icon]="home" class="menu-icon small-icon"></fa-icon>
+              Homepage</a>
+            </li>
+            <li class="current_page_item" id="new-client-menu">
+              <a accesskey="2" class="teaming" title="">
+                <fa-icon [icon]="stored" class="menu-icon small-icon"></fa-icon>
+                Shop
+                <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
+              </a>
+              <ul class="submenu-client current_page_item" id="client_menu">
+                <li>
+                  <a routerLink="/input/client/device/bay">
+                    <fa-icon [icon]="bayingDevice" class="small-icon"></fa-icon>
+                    Device To Buy</a>
+                </li>
+                <br>
+                <li><a routerLink="/output/client/device/sell">
+                  <fa-icon [icon]="sellDevices" class="small-icon"></fa-icon>
+                  Devices To Sell</a>
+                </li>
+              </ul>
             </li>
 
-            <li class="current_page_item" id="search-menu"><a accesskey="4" class="teaming" title="">
+            <li class="current_page_item parent" id="search-menu"><a accesskey="4" class="teaming" title="">
               <fa-icon [icon]="repair" class="menu-icon"></fa-icon>
               Repair
               <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
             </a>
-              <div class="current_page_item" id="search_menu">
-                <div class="search-menu">
-                  <ul class="submenu-search">
-                    <li><a class="menu-link" routerLink="/input/client/device">
-                      <fa-icon [icon]="signUp" class="small-icon"></fa-icon>
-                      Create new Client</a>
-                    </li>
-                    <br>
-                    <li><a routerLink="/input/client/new/device">
-                      <fa-icon [icon]="devices" class="small-icon"></fa-icon>
-                      Add new device</a>
-                    </li>
-                    <br>
-                    <li><a routerLink="/input/client/new/repair">
-                      <fa-icon [icon]="repair" class="small-icon"></fa-icon>
-                      Add new repair</a></li>
-                    <br>
-                    <li><a routerLink="/output/client/device">
-                      <fa-icon [icon]="outputRepair" class="small-icon"></fa-icon>
-                      Closing the Repair</a></li>
-                    <br>
-                    <li><a routerLink="/output/repair/notification">
-                      <fa-icon [icon]="notificationSend" class="small-icon"></fa-icon>
-                      Send notification end of repair</a></li>
-                  </ul>
-                </div>
-              </div>
+              <ul class="submenu-search current_page_item" id="search_menu">
+                <li><a class="menu-link" routerLink="/input/client/device">
+                  <fa-icon [icon]="signUp" class="small-icon"></fa-icon>
+                  Add new Client</a>
+                </li>
+                <br>
+                <li><a routerLink="/input/client/new/device">
+                  <fa-icon [icon]="devices" class="small-icon"></fa-icon>
+                  Add new device</a>
+                </li>
+                <br>
+                <li><a routerLink="/input/client/new/repair">
+                  <fa-icon [icon]="repair" class="small-icon"></fa-icon>
+                  Add new repair</a></li>
+                <br>
+                <li><a routerLink="/output/client/device">
+                  <fa-icon [icon]="outputRepair" class="small-icon"></fa-icon>
+                  Close the Repair</a></li>
+                <br>
+                <li><a routerLink="/output/repair/notification">
+                  <fa-icon [icon]="notificationSend" class="small-icon"></fa-icon>
+                  Send notification at the end of repair</a></li>
+              </ul>
             </li>
             <li class="current_page_item" id="output-menu">
               <a accesskey="3" class="teaming"
@@ -78,102 +72,101 @@
                 Tools Shop
                 <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
               </a>
-              <div class="submenu-output">
-                <ul class="submenu-output1 submenu-repair">
-                  <ol class="rout-link">
-                    <li><a routerLink="/shop/dashboard">
-                      <fa-icon [icon]="tools" class="small-icon"></fa-icon>
-                      Shop Dashboard</a></li>
-                    <li><a routerLink="/device/for/sale/single">
-                      <fa-icon [icon]="device" class="small-icon"></fa-icon>
-                      Device Sale By Id</a></li>
-                    <br>
-                    <li><a routerLink="/device/sale/all/pageable">
-                      <fa-icon [icon]="devices" class="small-icon"></fa-icon>
-                      Report Shop</a></li>
-                    <li><a routerLink="/device/in/sale/pageable">
+              <ul class="submenu-output1 submenu-repair submenu-flex">
+                <ol class="rout-link1">
+                  <li><a routerLink="/shop/dashboard">
+                    <fa-icon [icon]="tools" class="small-icon"></fa-icon>
+                    Shop Dashboard</a>
+                  </li>
+                  <li><a routerLink="/device/for/sale/single">
+                    <fa-icon [icon]="device" class="small-icon"></fa-icon>
+                    Device Sale By Id</a>
+                  </li>
+                  <li><a routerLink="/device/sale/all/pageable">
+                    <fa-icon [icon]="devices" class="small-icon"></fa-icon>
+                    Report Shop</a>
+                  </li>
+                </ol>
+                <ol class="rout-link1">
+                  <li>
+                    <a routerLink="/device/in/sale/pageable">
                       <fa-icon [icon]="saleDevices" class="small-icon"></fa-icon>
-                      All Device In Sale Now</a>
-                    </li>
-                    <br>
-                    <li><a routerLink="/device/name/sale">
-                      <fa-icon [icon]="usertag" class="small-icon"></fa-icon>
-                      Search Shop Client FullName</a>
-                    </li>
-                    <li><a routerLink="/device/sale/redact">
-                      <fa-icon [icon]="redact" class="small-icon"></fa-icon>
-                      Redact Client Shop</a>
-                    </li>
-                  </ol>
+                      All Devices For Sale</a>
+                  </li>
+                  <li><a routerLink="/device/name/sale">
+                    <fa-icon [icon]="usertag" class="small-icon"></fa-icon>
+                    Search Customer By Name</a>
+                  </li>
+                  <li><a routerLink="/device/sale/redact">
+                    <fa-icon [icon]="redact" class="small-icon"></fa-icon>
+                    Edit Client Info</a>
+                  </li>
+                </ol>
                   <ol class="icon-menu">
                     <fa-icon [icon]="stored" class="icon-big"></fa-icon>
                   </ol>
-
                 </ul>
-              </div>
             </li>
-            <li class="current_page_item" id="repair-menu"><a accesskey="5" routerLink="/repair/dashboard">
+            <li id="repair-menu"><a accesskey="5" routerLink="/repair/dashboard">
               <fa-icon [icon]="tools" class="menu-icon"></fa-icon>
               Tools Repair
               <fa-icon [icon]="dropdown"></fa-icon>
             </a>
-              <div class="current_page_item" id="admin-repair">
-                <div class="admin-repair">
-                  <ul class="submenu-repair">
-                    <ol class="rout-link">
-                      <li><a routerLink="/repair/edit">
-                        <fa-icon [icon]="redact" class="small-icon"></fa-icon>
-                        Redact Repair</a>
-                      </li>
-                      <li><a routerLink="/search/email">
-                        <fa-icon [icon]="mail" class="small-icon"></fa-icon>
-                        Search by Email</a>
-                      </li>
-                      <br>
-                      <li><a routerLink="date/repair/paginator">
-                        <fa-icon [icon]="idIcon" class="small-icon"></fa-icon>
-                        Show Client Period</a>
-                      </li>
-                      <li><a routerLink="date/message/paginator">
-                        <fa-icon [icon]="envelope" class="small-icon"></fa-icon>
-                        Manage Sent Messages</a>
-                      </li>
-                      <br>
-                      <li><a routerLink="upload/repair/images">
-                        <fa-icon [icon]="images" class="small-icon"></fa-icon>
-                        Upload Repair Images</a>
-                      </li>
-                      <li><a routerLink="/search/telephone/number">
-                        <fa-icon [icon]="phone" class="small-icon"></fa-icon>
-                        Search by Tel. Number</a>
-                      </li>
-                      <br>
-                      <li><a routerLink="/all/repair/paginator">
-                        <fa-icon [icon]="usertag" class="small-icon"></fa-icon>
-                        Show All Client </a>
-                      </li>
+              <ul class="submenu-repair current_page_item submenu-flex" id="admin-repair">
+                <ol class="rout-link1">
+                  <li><a routerLink="/repair/edit">
+                    <fa-icon [icon]="redact" class="small-icon"></fa-icon>
+                    Edit Repair Details</a>
+                  </li>
+                  <li><a routerLink="/search/email">
+                    <fa-icon [icon]="mail" class="small-icon"></fa-icon>
+                    Search by Email</a>
+                  </li>
+                  <br>
+                  <li><a routerLink="date/repair/paginator">
+                    <fa-icon [icon]="idIcon" class="small-icon"></fa-icon>
+                    Search Client By Period</a>
+                  </li>
+                  <li><a routerLink="date/message/paginator">
+                    <fa-icon [icon]="envelope" class="small-icon"></fa-icon>
+                    Manage Sent Messages</a>
+                  </li>
+                  <br>
+                  <li><a routerLink="upload/repair/images">
+                    <fa-icon [icon]="images" class="small-icon"></fa-icon>
+                    Upload Repair Images</a>
+                  </li>
+                </ol>
+                <ol class="rout-link1">
+                  <li><a routerLink="/search/telephone/number">
+                    <fa-icon [icon]="phone" class="small-icon"></fa-icon>
+                    Search by Tel. Number</a>
+                  </li>
+                  <br>
+                  <li><a routerLink="/all/repair/paginator">
+                    <fa-icon [icon]="usertag" class="small-icon"></fa-icon>
+                    All Clients </a>
+                  </li>
 
-                      <li><a routerLink="/search/repair/id">
-                        <fa-icon [icon]="idIcon" class="small-icon"></fa-icon>
-                        Search by Repair Id</a>
-                      </li>
-                      <br>
-                      <li><a routerLink="/repair/dashboard">
-                        <fa-icon [icon]="tools" class="small-icon"></fa-icon>
-                        Repair Tools Dashboard</a>
-                      </li>
-                      <li><a routerLink="/client/repair/name">
-                        <fa-icon [icon]="usertag" class="small-icon"></fa-icon>
-                        Search Client by FullName</a>
-                      </li>
-                    </ol>
+                  <li><a routerLink="/search/repair/id">
+                    <fa-icon [icon]="idIcon" class="small-icon"></fa-icon>
+                    Search by Repair Id</a>
+                  </li>
+                  <br>
+                  <li><a routerLink="/repair/dashboard">
+                    <fa-icon [icon]="tools" class="small-icon"></fa-icon>
+                    Repair Tools Dashboard</a>
+                  </li>
+                  <li><a routerLink="/client/repair/name">
+                    <fa-icon [icon]="usertag" class="small-icon"></fa-icon>
+                    Search Repair Client by Name</a>
+                  </li>
+                </ol>
                     <li class="icon-menu">
                       <fa-icon [icon]="repair" class="icon-big"></fa-icon>
                     </li>
                   </ul>
 
-                </div>
-              </div>
             </li>
             <li *ngIf="admin" class="current_page_item" id="admin-menu">
               <a accesskey="6" title="Admin Ap">
@@ -181,46 +174,46 @@
                 Admin App
                 <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
               </a>
-              <div class="current_page_item">
-                <div class="admin-menu">
-                  <ul class="submenu-admin">
-                    <ol class="rout-link">
-                      <li><a routerLink="/admin/dashboard">
-                        <fa-icon [icon]="admins" class="small-icon"></fa-icon>
-                        Admin Dashboard</a></li>
-                      <li><a routerLink="/admin/logs/server">
-                        <fa-icon [icon]="logs" class="small-icon"></fa-icon>
-                        Log on to the Server</a></li>
-                      <br>
-                      <li><a routerLink="/admin/email/client/send">
-                        <fa-icon [icon]="mail" class="small-icon"></fa-icon>
-                        Send an Email</a></li>
-
-                      <li><a routerLink="/admin/device/preparation">
-                        <fa-icon [icon]="device" class="small-icon"></fa-icon>
-                        Device Ready Tomorrow</a></li>
-                      <br>
-                      <li><a routerLink="/admin/repair/extend">
-                        <fa-icon [icon]="calendar" class="small-icon"></fa-icon>
-                        Extension Repair</a></li>
-
-                      <li><a routerLink="/admin/user">
-                        <fa-icon [icon]="users" class="small-icon"></fa-icon>
-                        User Management</a></li>
-                      <br>
-                      <li><a routerLink="/admin/statistic/repair">
-                        <fa-icon [icon]="charts" class="small-icon"></fa-icon>
-                        Repair Statics</a></li>
-                      <li><a routerLink="/admin/invoice/redact">
-                        <fa-icon [icon]="redact" class="small-icon"></fa-icon>
-                        Invoice Edit</a></li>
-                    </ol>
-                    <ol class="icon-menu">
-                      <fa-icon [icon]="adminIcon" class="icon-big"></fa-icon>
-                    </ol>
-                  </ul>
-                </div>
-              </div>
+              <ul class="submenu-admin submenu-flex">
+                <ol class="rout-link1">
+                  <li><a routerLink="/admin/dashboard">
+                    <fa-icon [icon]="admins" class="small-icon"></fa-icon>
+                    Admin Dashboard</a></li>
+                  <li><a routerLink="/admin/logs/server">
+                    <fa-icon [icon]="logs" class="small-icon"></fa-icon>
+                    Server Log</a>
+                  </li>
+                  <li><a routerLink="/admin/email/client/send">
+                    <fa-icon [icon]="mail" class="small-icon"></fa-icon>
+                    Send an Email</a>
+                  </li>
+                  <li><a routerLink="/admin/device/preparation">
+                    <fa-icon [icon]="device" class="small-icon"></fa-icon>
+                    Devices Ready Tomorrow</a>
+                  </li>
+                </ol>
+                <ol class="rout-link1">
+                  <li><a routerLink="/admin/repair/extend">
+                    <fa-icon [icon]="calendar" class="small-icon"></fa-icon>
+                    Extension Repair Time</a>
+                  </li>
+                  <li><a routerLink="/admin/user">
+                    <fa-icon [icon]="users" class="small-icon"></fa-icon>
+                    Users Management</a>
+                  </li>
+                  <li><a routerLink="/admin/statistic/repair">
+                    <fa-icon [icon]="charts" class="small-icon"></fa-icon>
+                    Repair&Shop Statistics</a>
+                  </li>
+                  <li><a routerLink="/admin/invoice/redact">
+                    <fa-icon [icon]="redact" class="small-icon"></fa-icon>
+                    Edit Invoice</a>
+                  </li>
+                </ol>
+                <ol class="icon-menu">
+                  <fa-icon [icon]="adminIcon" class="icon-big"></fa-icon>
+                </ol>
+              </ul>
             </li>
           </ul>
         </nav>
@@ -242,24 +235,22 @@
               <a id="sign-in"><i class="icon icon-lock menu-icon"></i> Sign in/up
                 <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
               </a>
-              <div class="submenu-sign">
                 <ul class="submenu submenu-sign-in">
                   <li><a routerLink="/client/sign-in">
                     <fa-icon [icon]="signIn" class="small-icon"></fa-icon>
                     Sign in / Login</a></li>
                   <li><a routerLink="/client/sign-up">
                     <fa-icon [icon]="signUp" class="small-icon"></fa-icon>
-                    Sign up/ Registered</a></li>
+                    Sign up/ Register</a></li>
                   <li><a routerLink="/recovery/password/request">
                     <fa-icon [icon]="passwordRecovery" class="small-icon"></fa-icon>
-                    Recovery Password</a>
+                    Password Recovery</a>
                   </li>
                   <li><a (click)="logout()" href="#">
                     <fa-icon [icon]="signOut" class="small-icon"></fa-icon>
-                    Disconnect</a>
+                    Log Out</a>
                   </li>
                 </ul>
-              </div>
             </li>
           </ul>
         </div>
