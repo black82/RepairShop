@@ -36,11 +36,12 @@
               </ul>
             </li>
 
-            <li class="current_page_item parent" id="search-menu"><a accesskey="4" class="teaming" title="">
-              <fa-icon [icon]="repair" class="menu-icon"></fa-icon>
-              Repair
-              <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
-            </a>
+            <li class="current_page_item parent" id="search-menu">
+              <a accesskey="4" class="teaming" title="">
+                <fa-icon [icon]="repair" class="menu-icon"></fa-icon>
+                Repair
+                <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
+              </a>
               <ul class="submenu-search current_page_item" id="search_menu">
                 <li><a class="menu-link" routerLink="/input/client/device">
                   <fa-icon [icon]="signUp" class="small-icon"></fa-icon>
@@ -102,16 +103,17 @@
                     Edit Client Info</a>
                   </li>
                 </ol>
-                  <ol class="icon-menu">
-                    <fa-icon [icon]="stored" class="icon-big"></fa-icon>
-                  </ol>
-                </ul>
+                <ol class="icon-menu">
+                  <fa-icon [icon]="stored" class="icon-big"></fa-icon>
+                </ol>
+              </ul>
             </li>
-            <li id="repair-menu"><a accesskey="5" routerLink="/repair/dashboard">
-              <fa-icon [icon]="tools" class="menu-icon"></fa-icon>
-              Tools Repair
-              <fa-icon [icon]="dropdown"></fa-icon>
-            </a>
+            <li id="repair-menu">
+              <a accesskey="5" class="teaming" routerLink="/repair/dashboard">
+                <fa-icon [icon]="tools" class="menu-icon"></fa-icon>
+                Tools Repair
+                <fa-icon [icon]="dropdown"></fa-icon>
+              </a>
               <ul class="submenu-repair current_page_item submenu-flex" id="admin-repair">
                 <ol class="rout-link1">
                   <li><a routerLink="/repair/edit">
@@ -169,7 +171,7 @@
 
             </li>
             <li *ngIf="admin" class="current_page_item" id="admin-menu">
-              <a accesskey="6" title="Admin Ap">
+              <a accesskey="6" class="teaming" title="Admin Ap">
                 <fa-icon [icon]="adminTools" class="menu-icon"></fa-icon>
                 Admin App
                 <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
@@ -232,7 +234,7 @@
           <ul>
             <app-notification></app-notification>
             <li class="current_page_item sign-in-menu">
-              <a id="sign-in"><i class="icon icon-lock menu-icon"></i> Sign in/up
+              <a class="teaming" id="sign-in"><i class="icon icon-lock menu-icon"></i> Sign in/up
                 <fa-icon [icon]="dropdown" class="small-icon"></fa-icon>
               </a>
                 <ul class="submenu submenu-sign-in">

@@ -115,8 +115,8 @@ export class RedactClientComponent implements OnInit, OnDestroy {
   repairFileStorage: RepairFileStorage = new RepairFileStorage();
   invoice: InvoiceToolsDto;
   mail = faEnvelope;
-  countSigPad = 0;
-  prompt = 'Press <enter> to add "';
+  // countSigPad = 0;
+  prompt = 'Press <enter> to add ';
   itemsModels: string[] = [];
   companyShow = false;
   formTitle = 'Find By Id';

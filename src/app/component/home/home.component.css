@@ -26,6 +26,15 @@
   padding: 20px;
 }
 
+.snow {
+  max-width: 100% !important;
+  max-height: 100%;
+  height: 100vh !important;
+  position: absolute !important;
+  margin-top: -15% !important;
+  z-index: 0;
+  background: transparent no-repeat !important;
+}
 
 .container-body {
   background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%), url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0 !important;
@@ -144,7 +153,7 @@
   padding: 0;
   box-sizing: border-box;
   min-width: 100%;
-
+  position: absolute;
 
 }
 

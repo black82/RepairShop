@@ -7,7 +7,9 @@ import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 
+import sparti from 'sparticles';
 
+export declare function animeBackground(sparti): void;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,9 +31,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscribe_admin: Subscription;
 
   constructor(private adminService: AdminServiceService) {
+
   }
 
   ngOnInit() {
+    animeBackground(sparti);
     const view = localStorage.getItem('token');
     if (view) {
 
@@ -42,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.showAdminPage(value);
       this.clickElementAnimation();
     });
+    this.snouwDisplay();
     this.clickElementAnimation();
     const timeout = setTimeout(() => {
       this.hidem_animation = false;
@@ -50,7 +55,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   clickElementCentralIcon(elementList: NodeListOf<Element>) {
-
     elementList.forEach(node => {
       node.addEventListener('click', evt => {
         const button = node.querySelector('.box-empty') as HTMLElement;
@@ -64,6 +68,16 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       });
     });
+  }
+
+  snouwDisplay() {
+    setTimeout(() => {
+      const element = document.querySelector('footer');
+      element.childNodes.forEach(node => {
+        const node1 = node as HTMLElement;
+        node1.style.boxShadow = 'inset 0px -50px 27px -30px #EFFFFB';
+      });
+    }, 100);
   }
 
   showAdminPage(value) {
@@ -119,6 +133,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.subscribe_admin) {
       this.subscribe_admin.unsubscribe();
     }
+
   }
 
   private createLabelToEvent(classList: any) {
