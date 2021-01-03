@@ -146,3 +146,42 @@ ul.contact li a:before {
 .facebook {
   padding: 25px 17px 15px 17px;
 }
+
+.sub {
+  width: 30px;
+  background-color: transparent;
+  border: 0;
+  color: #fff !important;
+  text-align: right;
+}
+
+@media screen and (min-width: 1900px) {
+  #footer-margin-top {
+    display: block;
+    position: absolute;
+    width: 100%;
+    transform: rotate(180deg) translateX(180px);
+    left: 5%;
+    margin-top: -2%;
+    opacity: 0.2;
+    fill: #50a3a2;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #footer-margin-top {
+    display: block;
+    position: absolute;
+    width: 100%;
+    transform: rotate(180deg) translateX(180px);
+    left: 13%;
+    margin-top: -2%;
+    opacity: 0.2;
+    fill: #50a3a2;
+  }
+}
+
+.footer-margin {
+  display: block;
+  position: relative;
+}

@@ -8,8 +8,11 @@ import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 
 import sparti from 'sparticles';
+import {NavigationEnd, Router} from '@angular/router';
 
 export declare function animeBackground(sparti): void;
+
+export declare function animeMenu(): void;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,13 +32,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   hidem_animation = true;
   admin = false;
   private subscribe_admin: Subscription;
+  lateralMenuCheck = false;
+  private events: any;
 
-  constructor(private adminService: AdminServiceService) {
+  constructor(private adminService: AdminServiceService, private router: Router) {
 
   }
 
   ngOnInit() {
-    animeBackground(sparti);
+    this.router.events.subscribe(event => {
+      console.log(event);
+      this.events = event;
+      if (event instanceof NavigationEnd) {
+        animeBackground(sparti);
+      }
+    });
+    if (!this.events) {
+      animeBackground(sparti);
+    }
     const view = localStorage.getItem('token');
     if (view) {
 
@@ -71,13 +85,25 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   snouwDisplay() {
-    setTimeout(() => {
-      const element = document.querySelector('footer');
-      element.childNodes.forEach(node => {
-        const node1 = node as HTMLElement;
-        node1.style.boxShadow = 'inset 0px -50px 27px -30px #EFFFFB';
+    animeMenu();
+    const elementById = document.getElementById('menu-buttone');
+    if (elementById) {
+      elementById.addEventListener('click', evt => {
+        this.lateralMenuCheck = !this.lateralMenuCheck;
+        console.log(this.lateralMenuCheck);
+        const ul = document.getElementById('menu-lateral');
+        if (this.lateralMenuCheck) {
+          ul.setAttribute('style', '-webkit-animation: color-change-2x 4s linear alternate both;\n' +
+            '\t        animation: color-change-2x 4s linear alternate both;-elements-785007553.jpg);\n');
+
+        } else {
+          setTimeout(() => {
+            ul.removeAttribute('style');
+          }, 400);
+
+        }
       });
-    }, 100);
+    }
   }
 
   showAdminPage(value) {
@@ -130,10 +156,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    const snow = document.querySelector('.snow-footer');
     if (this.subscribe_admin) {
       this.subscribe_admin.unsubscribe();
     }
-
   }
 
   private createLabelToEvent(classList: any) {

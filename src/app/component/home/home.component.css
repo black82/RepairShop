@@ -807,6 +807,10 @@
   background: #232323;
 }
 
+#menuToggle input:checked ~ #menu-lateral {
+
+}
+
 #menuToggle input:checked ~ span:nth-last-child(3) {
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
@@ -816,21 +820,50 @@
   transform: rotate(-45deg) translate(0, -1px);
 }
 
-#menu {
+#menu-lateral {
   display: flex;
   flex-direction: row;
   position: absolute;
   width: 300px;
-  margin: -100px 0 0 -50px;
+  margin: -50px 0 0 -50px;
   padding: 125px 50px 50px;
-  background: #fefefe;
+  border-bottom-right-radius: 9px;
+  border-top-right-radius: 9px;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   transform: translate(-100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+  transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 }
 
-#menu li {
+@-webkit-keyframes color-change-2x {
+  0% {
+    background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%), url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+  }
+  50% {
+    background: #555555;
+  }
+  100% {
+    background: #FFFFFF;
+  }
+}
+
+@keyframes color-change-2x {
+  0% {
+    background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%), url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+  }
+  50% {
+    background: #555555;
+  }
+  100% {
+    background: #FFFFFF;
+  }
+}
+
+#menu-lateral:hover {
+  background-position: right center;
+}
+
+#menu-lateral li {
   padding: 10px 0;
   font-size: 3em;
 }
@@ -899,5 +932,28 @@
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
   }
+}
+
+.wrp {
+  display: block;
+  height: 200px;
+  width: 100%;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.swet,
+.debre,
+.flash,
+#paper1 {
+  opacity: 0;
 }
 
