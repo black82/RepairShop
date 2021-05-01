@@ -11,11 +11,8 @@ import {Subscription} from 'rxjs';
 })
 export class PrintPageComponent implements OnInit, OnDestroy {
   htmlToAdd: any;
-  name_test_out: string[] = [];
   date: Date = new Date();
-  type_print: number;
   date_exit: Date;
-  client_date_input: Date;
   id: string;
   invoice_tools: InvoiceToolsDto = new InvoiceToolsDto();
   private print_open_event: Subscription;

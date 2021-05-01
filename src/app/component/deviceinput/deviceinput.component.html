@@ -79,7 +79,8 @@
           <span class="input-title">Phone Number</span>
           <fa-icon [icon]="phone" class="icon-input"></fa-icon>
           <input class="input-1" formControlName="telephone_number"
-                 [ngModel]="client?.telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number"
+                 [ngModel]="client?.telephone_number==null||client.telephone_number.includes('n/a')?null:client?.telephone_number"
+                 pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number"
                  type="tel">
         </label>
         <label>
@@ -283,8 +284,6 @@
             <span class="check-box-name">Wi-Fi</span>
           </label>
         </div>
-      </div>
-      <div class="check-rouw-2">
         <div class="check-single">
           <fa-icon [icon]="microfon"
                    [style.color]="formClient.controls.microphone_input.value? '#1ABC9C' : 'lightcoral'"
@@ -294,6 +293,9 @@
             <span class="check-box-name">Microphone</span>
           </label>
         </div>
+      </div>
+      <div class="check-rouw-2">
+
         <div class="check-single">
           <fa-icon [icon]="sim" [style.color]="formClient.controls.sim_input.value? '#1ABC9C' : 'lightcoral'"
                    class="icon-box test-icon"></fa-icon>
@@ -364,15 +366,15 @@
             <span class="check-box-name">Face Id</span>
           </label>
         </div>
-      </div>
-      <div class="check-single">
-        <fa-icon [icon]="homeButton"
-                 [style.color]="formClient.controls.homeButton.value? '#1ABC9C' : 'lightcoral'"
-                 class="icon-box test-icon"></fa-icon>
-        <label class="checkbox">
-          <input class="check-box select-check" formControlName="homeButton" name="device-test" type="checkbox">
-          <span class="check-box-name">Home Button</span>
-        </label>
+        <div class="check-single">
+          <fa-icon [icon]="homeButton"
+                   [style.color]="formClient.controls.homeButton.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input class="check-box select-check" formControlName="homeButton" name="device-test" type="checkbox">
+            <span class="check-box-name">Home Button</span>
+          </label>
+        </div>
       </div>
     </div>
 
@@ -425,5 +427,3 @@
     </div>
   </form>
 </div>
-
-

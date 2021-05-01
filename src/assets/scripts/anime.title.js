@@ -19,13 +19,14 @@ function animeTitle(anime) {
 
 function animeBackground(stats1) {
   const date = new Date();
+
   let colors = {
     color1: "rgba(255,255,255,1)",
     color2: "rgba(142,217,222,1)",
     color3: "rgba(232,248,255,1)",
     color4: "rgba(135,143,145,1)"
   }, options;
-  if (date.getMonth() < 3 && date.getMonth() < 11) {
+  if (date.getMonth() < 2 && date.getMonth() < 10) {
     options = {
       alphaSpeed: 10,
       alphaVariance: 1,
@@ -59,16 +60,15 @@ function animeBackground(stats1) {
     };
 
     const element = document.getElementById('copyright');
-    console.log(element)
     setTimeout(() => {
       element.setAttribute('style', 'box-shadow: inset 0px -50px 27px -30px #EFFFFB;')
     }, 100)
 
 
-  } else if (date.getMonth() > 2 && date.getMonth() < 6) {
+  } else if (date.getMonth() < 6 && date.getMonth() > 2) {
     options = {
       "composition": "source-over",
-      "count": 200,
+      "count": 400,
       "speed": 0,
       "parallax": 0,
       "direction": 180,
@@ -92,7 +92,7 @@ function animeBackground(stats1) {
       "shape": "diamond",
       "imageUrl": ""
     };
-  } else if (date.getMonth() > 6 && date.getMonth() < 11) {
+  } else if (date.getMonth() > 4 && date.getMonth() < 8) {
     options = {
       "composition": "lighter",
       "count": 200,
@@ -119,7 +119,7 @@ function animeBackground(stats1) {
       "shape": "diamond",
       "imageUrl": "https://image.shutterstock.com/image-vector/autumn-leaf-maple-isolated-on-260nw-689177599.jpg"
     }
-  } else if (date.getMonth() > 8 && date.getMonth() < 11) {
+  } else if (date.getMonth() > 7 && date.getMonth() < 10) {
 
     options = {
 
@@ -235,41 +235,57 @@ function animeBackground(stats1) {
   }
 
 
-  const selector = document.querySelector('.sparticles');
-  if (selector) {
-    selector.className = '';
-    document.body.removeChild(selector);
-    console.log(selector);
-  }
   let body = document.querySelector('.snow');
 
   addSparticles(body, options)
 
   function addSparticles(node, option) {
     setTimeout(() => {
+      options.transition = 'all 1s';
       let newVar = $('body').get(0);
-      const perc = newVar.scrollHeight * 0.05
-      new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight + perc);
-    }, 1000)
+      const perc = newVar.scrollHeight * 0.08
+      if (detectMob()) {
+        new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight - perc)
+      } else {
+        new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight + perc)
+      }
+    }, 1500)
   }
 
 }
 
-function animeFooter() {
-  const morphing = anime({
-    targets: '#footer-margin-top path',
-    d: 'm-2,-110.30547c213.92539,-164.88947 427.85073,164.88946 641.77607,0l0,296.80101c-139.92534,-24.11052 -264.85068,196.11055 -641.77607,0l0,-296.80101z',
-    easing: 'easeOutQuad',
-    duration: 9000,
-    loop: true,
-    direction: 'alternate',
-    margin: -1 % 11.5 % 0,
-    fill: 'transparent',
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i
+  ];
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
   });
 }
 
+function animeFooter() {
+  setTimeout(() => {
+    const morphing = anime({
+      targets: '#footer-margin-top path',
+      d: 'm-2,-110.30547c213.92539,-164.88947 427.85073,164.88946 641.77607,0l0,296.80101c-139.92534,-24.11052 -264.85068,196.11055 -641.77607,0l0,-296.80101z',
+      easing: 'easeOutQuad',
+      duration: 9000,
+      loop: true,
+      direction: 'alternate',
+      margin: -1 % 11.5 % 0,
+      fill: 'transparent',
+    });
+  }, 1000)
+
+}
+
 function animeMenu() {
-  console.log('menu')
   const GLOBAL_CFG = {
     loop: true
   }
@@ -524,4 +540,60 @@ function animeMenu() {
     easing: 'easeInOutSine',
   })
 
+}
+
+function animateHeader() {
+
+  (function ($) {
+    $(function () {
+      $('.menu ul li a:not(:only-child)').click(function (e) {
+        $(this).siblings('.nav-dropdown').toggle(200);
+        $('.dropdown').not($(this).siblings()).hide(200);
+        e.stopPropagation();
+      });
+      $('html').click(function () {
+        $('.nav-dropdown').hide(200);
+      });
+      $('#nav-toggle').click(function () {
+        $('nav ul').slideToggle();
+      });
+      $('#nav-toggle').on('click', function () {
+        this.classList.toggle('active');
+      });
+    });
+  })(jQuery);
+
+  const $menu = $('.menu');
+
+  $(document).mouseup(e => {
+    if (!$menu.is(e.target) // if the target of the click isn't the container...
+      && $menu.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+      $menu.removeClass('is-active');
+    }
+  });
+
+  $('a').on('click', () => {
+
+    $menu.toggleClass('is-active');
+  });
+
+}
+
+function animeAdminMenu() {
+  (function ($) {
+    $(function () {
+      $('.amin-menu  a:not(:only-child)').click(function (e) {
+        $(this).siblings('.nav-dropdown').toggle(200);
+        $('.dropdown').not($(this).siblings()).hide(200);
+        e.stopPropagation();
+      });
+      $('#nav-toggle').click(function () {
+        $('nav ul').slideToggle();
+      });
+      $('#nav-toggle').on('click', function () {
+        this.classList.toggle('active');
+      });
+    });
+  })(jQuery);
 }

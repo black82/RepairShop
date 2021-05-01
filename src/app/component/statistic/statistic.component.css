@@ -53,7 +53,7 @@ form select {
   font-size: 1em;
   outline: none;
   margin: 10px auto;
-  z-index: 10;
+  z-index: 107;
 }
 
 form input:hover,
@@ -103,12 +103,12 @@ form select:hover {
   position: fixed;
   display: block;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 10;
+  z-index: 107;
   overflow: scroll;
 }
 
 .container-plugin {
-  max-width: 78%;
+  max-width: 75%;
 }
 
 .doughnut-chart {
@@ -129,7 +129,7 @@ form select:hover {
   perspective: 500px;
   transition: .2s;
   padding: 0.8em;
-  z-index: 10;
+  z-index: 107;
 }
 
 .button:before {

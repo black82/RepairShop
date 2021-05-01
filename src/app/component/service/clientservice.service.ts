@@ -23,9 +23,10 @@ import {InvoiceShopModels} from '../entity/InvoiceShopModels';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-   apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+      apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
   // apiUrl = 'http://localhost:8080/';
+
 
   constructor(private http: HttpClient,
               private adminService: AdminServiceService) {
@@ -407,6 +408,7 @@ export class HttpClien {
   }
 
   findInvoiceRepairsModelByOrder(orderInvoice: string): Observable<InvoiceRepairModel> {
+    console.log(orderInvoice);
     return this.http.get<InvoiceRepairModel>(this.apiUrl + 'admin/api/invoice/model/repair/order',
       {
         params: new HttpParams().set('order', orderInvoice)
@@ -597,6 +599,5 @@ export class HttpClien {
     }
     return throwError(error);
   }
-
 
 }

@@ -38,14 +38,18 @@ footer {
 
 ul.contact {
   margin: 0;
-  padding: 2em 0 0 0;
   list-style: none;
 }
 
 ul.contact li {
-  display: inline-block;
-  padding: 0 0.10em;
-  font-size: 1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 10%;
+  min-height: 10%;
+
+  margin-top: 2em;
 }
 
 ul.contact li span {
@@ -58,13 +62,12 @@ ul.contact li a:hover {
   color: #FFF;
 }
 
-ul.contact li a:before {
-  width: 50px;
-  height: 40px;
+ul.contact li {
+  min-width: 5%;
+  min-height: 5%;
   position: relative;
-  border-radius: 25px;
-  padding: 25px 25px 15px 25px;
-  background: linear-gradient(to top right, hsl(179, 34%, 100%) 40%, hsl(155, 50%, 61%) 100%) !important;
+  border-radius: 25%;
+  background: transparent;
   box-shadow: inset 0 3px 0 0 #BBB,
   inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
   0 0 0 4px #FFFFFF,
@@ -74,12 +77,9 @@ ul.contact li a:before {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
   color: #FFF;
-  font-size: 35px;
-  margin: 10px;
-  line-height: 40px;
   text-align: center;
   overflow: hidden;
-
+  margin: 2% 2% 0;
 }
 
 .icon-divers {
@@ -87,41 +87,35 @@ ul.contact li a:before {
 }
 
 .icon-svg {
-  width: 75px;
-  height: 75px;
   position: relative;
-  border-radius: 25px;
-  padding: 20px 15px 15px 15px;
+  border-radius: 25%;
+  padding: 22% 22% 22% 22%;
   background-color: transparent;
-  box-shadow: inset 0 3px 0 0 #BBB,
-  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
-  0 0 0 4px #FFFFFF,
-  0 3px 0 3px #BBB,
-  0 8px 5px 5px rgba(0, 0, 0, 0.3),
-  0 -1px 1px 5px rgba(0, 0, 0, 0.05);
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
   fill: #FFF;
   color: #FFF;
-  font-size: 35px;
-  margin: 10px;
-  line-height: 40px;
+  font-size: 200%;
   text-align: center;
   overflow: hidden;
 
 }
 
-.icon-container:hover {
+li .icon-container {
+  transition: animation 2s;
+
+}
+
+li:hover .icon-container {
   position: relative;
-  animation-name: play;
+  animation: play;
   animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-out;
-  animation-delay: 1s;
-  animation-play-state: running;
+  animation-play-state: initial;
   -webkit-perspective: 10px;
   -webkit-perspective-origin: 50% 100%;
-
+  transition: all 2s;
 
 }
 
@@ -137,45 +131,36 @@ ul.contact li a:before {
   }
 }
 
-.ebay {
-  height: 50px;
-  filter: brightness(0) invert(1);
 
-}
-
-.facebook {
-  padding: 25px 17px 15px 17px;
-}
-
-.sub {
-  width: 30px;
-  background-color: transparent;
-  border: 0;
-  color: #fff !important;
-  text-align: right;
+@media screen and (max-width: 799px) {
+  .footer-margin {
+    display: none;
+    visibility: hidden;
+  }
 }
 
 @media screen and (min-width: 1900px) {
   #footer-margin-top {
-    display: block;
+    display: flex;
+    align-items: center;
+    vertical-align: bottom;
     position: absolute;
-    width: 100%;
-    transform: rotate(180deg) translateX(180px);
-    left: 5%;
-    margin-top: -2%;
+    width: 99.5%;
+    transform: rotate(180deg);
+
     opacity: 0.2;
     fill: #50a3a2;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen  and (max-width: 1900px) {
   #footer-margin-top {
-    display: block;
+    display: flex;
+    align-items: center;
     position: absolute;
     width: 100%;
-    transform: rotate(180deg) translateX(180px);
-    left: 13%;
-    margin-top: -2%;
+    transform: rotate(180deg);
+    margin-top: -5%;
     opacity: 0.2;
     fill: #50a3a2;
   }
@@ -183,5 +168,18 @@ ul.contact li a:before {
 
 .footer-margin {
   display: block;
-  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: contents;
 }

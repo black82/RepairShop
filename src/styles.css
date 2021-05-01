@@ -42,17 +42,6 @@
   font-style: normal;
 }
 
-/*********************************************************************************/
-/* Icons                                                                         */
-/*********************************************************************************/
-
-/*
-    Powered by:
-
-    Font Awesome (http://fortawesome.github.com/Font-Awesome/)
-    Font Awesome More (http://gregoryloucas.github.com/Font-Awesome-More/)
-*/
-
 .icon {
   text-decoration: none !important;;
 }
@@ -1349,7 +1338,7 @@ app-print-page {
 /* UNRELATED to tooltips */
 body {
   margin: 5px 10px !important;
-  background: snow;
+  /*background: snow;*/
 
 }
 
@@ -1500,7 +1489,7 @@ html, body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+
 }
 
 .dismiss,

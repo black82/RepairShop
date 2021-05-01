@@ -1,36 +1,37 @@
 <div class="snow"></div>
+<nav role="navigation">
+  <div id="menuToggle">
+
+    <input id="menu-buttone" type="checkbox"/>
+    <span></span>
+    <span></span>
+    <span> <span class="label-tolls">{{labelTolls}}</span></span>
+
+    <ul id="menu-lateral">
+      <li class="tools">
+        <a class="icon icon-mobile-phone icon-animation" routerLink="/input/client/device"></a>
+        <a class="icon icon-check icon-animation" routerLink="/output/client/device"></a>
+        <a class="icon icon-search icon-animation" routerLink="/search/telephone/number"></a>
+        <a class="icon icon-lock icon-animation" routerLink="/client/sign-in"></a>
+      </li>
+
+      <li *ngIf="admin" class="tools-admin tools" id="admin-tols">
+        <a #contentPlaceholder class="icon icon-bar-chart icon-animation" routerLink="/admin/statistic/repair"></a>
+        <a class="icon icon-wrench icon-animation" routerLink="/admin/dashboard"></a>
+        <a class="icon icon-calendar icon-animation"
+           routerLink="/admin/repair/extend"></a>
+        <a class="icon icon-envelope-alt icon-animation"
+           routerLink="admin/email/client/send"></a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
 <div class="container-body" id="gradient">
   <p class="title-form">
     Store Management Application
   </p>
-  <nav role="navigation">
-    <div id="menuToggle">
 
-      <input id="menu-buttone" type="checkbox"/>
-      <span></span>
-      <span></span>
-      <span> <span class="label-tolls">{{labelTolls}}</span></span>
-
-      <ul id="menu-lateral">
-        <li class="tools">
-          <a class="icon icon-mobile-phone icon-animation" routerLink="/input/client/device"></a>
-          <a class="icon icon-check icon-animation" routerLink="/output/client/device"></a>
-          <a class="icon icon-search icon-animation" routerLink="/search/telephone/number"></a>
-          <a class="icon icon-lock icon-animation" routerLink="/client/sign-in"></a>
-        </li>
-
-        <li *ngIf="admin" class="tools " id="admin-tols">
-          <a class="icon icon-bar-chart icon-animation" routerLink="/admin/statistic/repair"></a>
-          <a class="icon icon-wrench icon-animation" routerLink="/admin/dashboard"></a>
-          <a class="icon icon-calendar icon-animation"
-             routerLink="/admin/repair/extend"></a>
-          <a class="icon icon-envelope-alt icon-animation"
-             routerLink="admin/email/client/send"></a>
-        </li>
-
-      </ul>
-    </div>
-  </nav>
   <div id="page-wrapper">
     <div class="container-1" id="page">
       <div class="container-2" id="portfolio">
@@ -39,48 +40,49 @@
           <div class="box">
             <div class="test">
               <div class="icon_cont">
-                <h3><a class="icon icon-store icon-animation" id="icon1"
+                <h3><a class="icon icon-store box-empty icon-animation" id="icon1"
                        routerLink="/shop/dashboard">
                   <fa-icon [icon]="stored"></fa-icon>
                 </a></h3>
               </div>
             </div>
-            <div class="box-empty"></div>
-            <a class="button button-small" routerLink="/shop/dashboard"><span><fa-icon
-              [icon]="stored"
-              class="icon-animation"></fa-icon> Shop Dashboard </span></a>
+            <a class="button button-small " routerLink="/shop/dashboard"><span><fa-icon
+              [icon]="stored"></fa-icon> Shop Dashboard </span></a>
           </div>
         </div>
         <div class="column2">
           <div class="box">
             <div class="icon_cont">
-              <h3><a class="icon icon-store icon-animation" id="icon2"
+              <h3><a class="icon box-empty icon-animation" id="icon2"
                      routerLink="/repair/dashboard">
                 <fa-icon [icon]="repair"></fa-icon>
-              </a></h3>
+              </a>
+              </h3>
             </div>
-            <div class="box-empty"></div>
-            <a class="button button-small" routerLink="/repair/dashboard"><span><fa-icon
-              [icon]="repair"
-              class="icon-animation"></fa-icon>  Repair Dashboard </span></a>
+            <div>
+              <a class="button button-small" routerLink="/repair/dashboard"><span><fa-icon
+                [icon]="repair"></fa-icon>  Repair Dashboard </span></a>
+            </div>
           </div>
         </div>
         <div *ngIf="admin" class="column3">
           <div class="box">
             <div class="icon_cont">
-              <h3><a class="icon icon-animation" id="icon3"
+              <h3><a class="icon icon-animation box-empty" id="icon3"
                      routerLink="/admin/dashboard">
                 <fa-icon [icon]="adminIcon"></fa-icon>
               </a></h3>
             </div>
-            <div class="box-empty"></div>
-            <a class="button button-small" routerLink="/admin/dashboard"><span><fa-icon
-              [icon]="adminIcon"></fa-icon> Admin Dashboard </span></a>
+            <div>
+              <a class="button button-small" routerLink="/admin/dashboard"><span><fa-icon
+                [icon]="adminIcon"></fa-icon> Admin Dashboard </span></a>
+            </div>
           </div>
         </div>
-        <div class="column2">
+
+        <div class="column4">
           <div class="wrp">
-            <svg enable-background="new 0 0 686 548" version="1.1" viewBox="0 0 686 548" x="0px"
+            <svg enable-background="new 0 0 686 548" viewBox="0 0 686 548" x="0px"
                  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" y="0px">
       <g id="bg">
         <g>
@@ -786,3 +788,4 @@
   <!--    <div class="culd"></div>-->
   <!--  </div>-->
 </div>
+<app-footer></app-footer>

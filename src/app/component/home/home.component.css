@@ -27,18 +27,20 @@
 }
 
 .snow {
-  max-width: 100% !important;
+  max-width: 100%;
   max-height: 100%;
-  height: 100vh !important;
-  position: absolute !important;
-  margin-top: -15% !important;
+  height: 100vh;
+  position: absolute;
+  margin-top: -20% !important;
   z-index: 0;
   background: transparent no-repeat !important;
+  transition: all 1s ease;
 }
 
 .container-body {
   background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%), url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0 !important;
   min-height: 100vh;
+  max-height: border-box;
 
 }
 
@@ -153,8 +155,8 @@
   padding: 0;
   box-sizing: border-box;
   min-width: 100%;
-  position: absolute;
-
+  position: relative;
+  z-index: 12;
 }
 
 .tools a:hover {
@@ -185,24 +187,29 @@
 .column3,
 .column4 {
   width: auto;
+
+}
+
+.column4 {
+  width: 100%;
+  display: block;
+
 }
 
 .column1,
 .column2,
 .column3 {
-  float: left;
+
   margin-right: 80px;
   margin-left: 50px;
   padding: 3em 0;
 }
 
 #page-wrapper {
-  overflow: hidden;
   /*background: #F3F3F3;*/
   padding: 3em 0;
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 10px;
 
 }
 
@@ -217,10 +224,10 @@
 #icon6 {
   display: inline-block;
   background: linear-gradient(to top right, hsl(179, 34%, 48%) 40%, hsl(155, 50%, 61%) 100%) !important;
-  width: 120px;
-  height: 120px;
+  width: 60%;
+  height: 60%;
   border-radius: 50%;
-  line-height: 120px;
+  line-height: 220%;
   text-align: center;
   color: #FFFFFF;
   padding: 0 .2em;
@@ -233,6 +240,27 @@
   z-index: 2;
 }
 
+@media only screen and (max-width: 798px) {
+  #icon6 {
+    display: inline-block;
+    background: linear-gradient(to top right, hsl(179, 34%, 48%) 40%, hsl(155, 50%, 61%) 100%) !important;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    line-height: 120%;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 .2em;
+    font-size: 4em;
+    position: center;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+    0 -2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+    transition: text-shadow 0.5s;
+    z-index: 2;
+  }
+}
+
 #icon1:hover,
 #icon2:hover,
 #icon3:hover,
@@ -242,10 +270,7 @@
 
   display: inline-block;
   background: linear-gradient(to top right, hsl(179, 54%, 38%) 40%, hsl(155, 50%, 61%) 100%) !important;
-  width: 120px;
-  height: 120px;
   border-radius: 50%;
-  line-height: 120px;
   text-align: center;
   color: lightcoral;
   padding: 0 .2em;
@@ -328,10 +353,10 @@
   animation-duration: 500ms;
   animation-iteration-count: 1;
   animation-timing-function: frames(4);
-  /*transform: rotate(3deg); */
+  /*transform: rotate(3deg);*/
   /*transform: rotate(0.3rad);*/
-  /*transform: rotate(3grad); */
-  transform: rotate(.03turn);
+  /*transform: rotate(3grad);*/
+  /*transform: rotate(.03turn);*/
 }
 
 @keyframes spin {
@@ -357,49 +382,70 @@
 }
 
 .animation2 {
-  -webkit-animation: slit-out-vertical 0.3s ease-in both;
-  animation: slit-out-vertical 0.3s ease-in both;
+  -webkit-animation: shake-vertical 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: shake-vertical 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
-@-webkit-keyframes slit-out-vertical {
-  0% {
-    -webkit-transform: translateZ(0) rotateY(0);
-    transform: translateZ(0) rotateY(0);
-    opacity: 1;
-  }
-  54% {
-    -webkit-transform: translateZ(-160px) rotateY(87deg);
-    transform: translateZ(-160px) rotateY(87deg);
-    opacity: 1;
-  }
+@-webkit-keyframes shake-vertical {
+  0%,
   100% {
-    -webkit-transform: translateZ(-800px) rotateY(90deg);
-    transform: translateZ(-800px) rotateY(90deg);
-    opacity: 0;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+  80% {
+    -webkit-transform: translateY(6.4px);
+    transform: translateY(6.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-6.4px);
+    transform: translateY(-6.4px);
   }
 }
 
-@keyframes slit-out-vertical {
-  0% {
-    -webkit-transform: translateZ(0) rotateY(0);
-    transform: translateZ(0) rotateY(0);
-    opacity: 1;
-  }
-  54% {
-    -webkit-transform: translateZ(-160px) rotateY(87deg);
-    transform: translateZ(-160px) rotateY(87deg);
-    opacity: 1;
-  }
+@keyframes shake-vertical {
+  0%,
   100% {
-    -webkit-transform: translateZ(-800px) rotateY(90deg);
-    transform: translateZ(-800px) rotateY(90deg);
-    opacity: 0;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+  80% {
+    -webkit-transform: translateY(6.4px);
+    transform: translateY(6.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-6.4px);
+    transform: translateY(-6.4px);
   }
 }
-
 .animation-tooltip {
-  -webkit-animation: bounce-in-fwd 1.1s both;
-  animation: bounce-in-fwd 1.1s both;
+  -webkit-animation: shake-vertical 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: shake-vertical 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 @-webkit-keyframes bounce-in-fwd {
@@ -513,6 +559,7 @@
 }
 
 .tools {
+
   display: flex;
   flex-direction: column;
   margin-top: -5%;
@@ -743,11 +790,16 @@
   }
 }
 
+@media only screen and (max-width: 798px) {
+  #menuToggle {
+    visibility: hidden;
+  }
+}
 #menuToggle {
   display: block;
   position: absolute;
-  left: 50px;
-  top: -2%;
+  left: 3%;
+
   z-index: 20;
   -webkit-user-select: none;
   user-select: none;
@@ -843,19 +895,19 @@
     background: #555555;
   }
   100% {
-    background: #FFFFFF;
+    background: black;
   }
 }
 
 @keyframes color-change-2x {
   0% {
-    background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%), url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+    background: transparent;
   }
   50% {
     background: #555555;
   }
   100% {
-    background: #FFFFFF;
+    background-image: url('src/assets/images/background.jpg');
   }
 }
 

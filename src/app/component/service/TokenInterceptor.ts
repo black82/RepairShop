@@ -61,10 +61,12 @@ export class TokenInterceptor implements HttpInterceptor {
         if (error?.error?.message) {
           message = error.error.message;
         }
+
         if (error.status >= 500) {
           this?.alertService.error(null, message, false, false, '', error);
-        } else {
-          this?.alertService.info(null, message, false, false, '', error);
+        }
+        if (error.status === 0) {
+          this?.alertService.error(null, 'Something arrogant happened to try again later', false, false, '', error);
         }
         return throwError(error);
       }));

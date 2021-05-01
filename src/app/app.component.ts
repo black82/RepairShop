@@ -1,64 +1,52 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {animate, animateChild, group, query, style, transition, trigger} from '@angular/animations';
+import {animate, query, style, transition, trigger} from '@angular/animations';
+import {StaffUser} from './component/entity/StaffUser';
 
-export const slideInAnimation =
-  trigger('routeAnimations', [
-    transition('HomePage => AboutPage', [
-      query(':enter, :leave',
-        style({position: 'fixed', width: '100%'}),
-        {optional: true}),
-      group([
-        query(':enter', [
-          style({transform: 'translateX(100%)'}),
-          animate('0.6s ease-in-out',
-            style({transform: 'translateX(0%)'}))
-        ], {optional: true}),
-        query(':leave', [
-          style({transform: 'translateX(0%)'}),
-          animate('0.7s ease-in-out',
-            style({transform: 'translateX(-100%)'}))
-        ], {optional: true}),
-      ])
-    ]),
-    transition('AboutPage => HomePage', [
-      style({position: 'relative'}),
-      query(':enter, :leave', [
-        style({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          transition: '1s transition',
-        })
-      ]),
-      query(':enter', [
-        style({left: '-100%'})
-      ]),
-      query(':leave', animateChild()),
-      group([
-        query(':leave', [
-          animate('600ms ease-out', style({left: '100%'}))
-        ]),
-        query(':enter', [
-          animate('700ms ease-out', style({left: '0%'}))
-        ])
-      ]),
-      query(':enter', animateChild()),
-    ]),
+export const fadeAnimation =
+
+  trigger('fadeAnimation', [
+
+    transition('* => *', [
+
+      query(':enter',
+        [
+          style({opacity: 0})
+        ],
+        {optional: true}
+      ),
+
+      query(':leave',
+        [
+          style({opacity: 1}),
+          animate('0.5s', style({opacity: 0}))
+        ],
+        {optional: true}
+      ),
+
+      query(':enter',
+        [
+          style({opacity: 0}),
+          animate('0.5s', style({opacity: 1}))
+        ],
+        {optional: true}
+      )
+
+    ])
+
   ]);
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [
-    slideInAnimation
-  ]
+  animations: [fadeAnimation]
 
 })
 export class AppComponent {
   title = 'RepairShop';
+  @Output()
+  $routerAnime: EventEmitter<StaffUser> = new EventEmitter();
 
   constructor(private router: Router) {
     this.router.errorHandler = (error: any) => {
@@ -72,6 +60,6 @@ export class AppComponent {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+    return outlet.isActivated ? outlet.activatedRoute : '';
   }
 }

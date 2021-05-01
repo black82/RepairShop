@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {PageEvent} from '@angular/material/paginator';
 import {HttpClien} from '../service/clientservice.service';
 import {Client} from '../entity/ClientWeb';
@@ -13,7 +12,6 @@ import {faToolbox} from '@fortawesome/free-solid-svg-icons/faToolbox';
   styleUrls: ['./paginator-all-repair.component.css']
 })
 export class PaginatorAllRepairComponent implements OnInit {
-  repair_icon = faTools;
   pageEvent: PageEvent;
   datasource: Client[];
   pageIndex: number;
@@ -30,6 +28,7 @@ export class PaginatorAllRepairComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getServerData();
   }
 
 
@@ -47,9 +46,6 @@ export class PaginatorAllRepairComponent implements OnInit {
         this.pageSize = response.pageable.pageSize;
         this.length = response.totalElements;
 
-      },
-      error => {
-        // handle error
       }
     );
     this.paginator = true;

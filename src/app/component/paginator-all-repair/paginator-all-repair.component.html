@@ -1,13 +1,13 @@
 <div class="container-body">
-  <div class="container-top">
-    <img alt="repair worker" class="image-top"
-         src="http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/assets/images/plumber.png">
-    <div class="button-con">
-      <a (click)="getServerData()" class="button button-small button-get"><span> <fa-icon
-        [icon]="repair_icon" class="button-icon"></fa-icon> Get All Client</span></a>
-    </div>
+  <!--  <div class="container-top">-->
+  <!--    <img alt="repair worker" class="image-top"-->
+  <!--         src="http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/assets/images/plumber.png">-->
+  <!--&lt;!&ndash;    <div class="button-con">&ndash;&gt;-->
+  <!--&lt;!&ndash;      <a (click)="getServerData()" class="button button-small button-get"><span> <fa-icon&ndash;&gt;-->
+  <!--&lt;!&ndash;        [icon]="repair_icon" class="button-icon"></fa-icon> Get All Client</span></a>&ndash;&gt;-->
+  <!--&lt;!&ndash;    </div>&ndash;&gt;-->
 
-  </div>
+  <!--  </div>-->
   <div *ngIf="paginator" class="container-paginator">
     <mat-paginator #paginator
                    (page)="pageEvent = getServerData($event)"

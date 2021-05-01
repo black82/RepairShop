@@ -512,14 +512,19 @@ export class EmailModalComponent implements OnInit, OnDestroy {
         this.staffTitle = value?.staffSignTitle;
         this.clientTitle = value?.clientSignTitle;
         this.afterReceiveAllResourcesCall(print);
+      }, () => {
+        this.animation_wait.$anime_show.emit(false);
       });
     } else {
       this.http.findInvoiceShopModelByOrder('default').subscribe(value => {
-        this.invoiceShopModel = value;
-        this.staffTitle = value?.staffSignTitle;
-        this.clientTitle = value?.clientSignTitle;
-        this.afterReceiveAllResourcesCall(print);
-      });
+          this.invoiceShopModel = value;
+          this.staffTitle = value?.staffSignTitle;
+          this.clientTitle = value?.clientSignTitle;
+          this.afterReceiveAllResourcesCall(print);
+        }, () => {
+          this.animation_wait.$anime_show.emit(false);
+        }
+      );
     }
   }
 }

@@ -39,7 +39,6 @@ import {HttpClien} from '../service/clientservice.service';
 import {map, startWith} from 'rxjs/operators';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
-import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
 import {faMoneyCheck} from '@fortawesome/free-solid-svg-icons/faMoneyCheck';
 import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
@@ -91,7 +90,6 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
   work = faTools;
   discar = faTrashAlt;
   ivaCompany = faBars;
-  sidCompany = faCode;
   money2 = faMoneyCheck;
   test = faClipboardList;
   note = faCommentAlt;

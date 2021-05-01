@@ -73,6 +73,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
       if (nickname) {
         this.nicknameUserName = nickname.currentName;
       }
+    }, () => {
+      this.httpClient.logout();
     });
   }
 
@@ -130,6 +132,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
       this.httpClient.getAllRejectNotification().subscribe(notifications1 => {
         this.notification = notifications1;
         this.counters = notifications1.length;
+      }, () => {
+        this.httpClient.logout();
       });
     }, 1000);
 

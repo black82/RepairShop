@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
   faConciergeBell,
   faEnvelopeOpen,
@@ -6,6 +6,7 @@ import {
   faFileSignature,
   faHome,
   faMobile,
+  faSearch,
   faSignInAlt,
   faUserTag
 } from '@fortawesome/free-solid-svg-icons';
@@ -29,7 +30,6 @@ import {faCogs} from '@fortawesome/free-solid-svg-icons/faCogs';
 import {faToolbox} from '@fortawesome/free-solid-svg-icons/faToolbox';
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons/faAngleDown';
 import {faUserCog} from '@fortawesome/free-solid-svg-icons/faUserCog';
-import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
 import {faEuroSign} from '@fortawesome/free-solid-svg-icons/faEuroSign';
 import {faAppStoreIos} from '@fortawesome/free-brands-svg-icons/faAppStoreIos';
@@ -37,6 +37,10 @@ import {faPeopleCarry} from '@fortawesome/free-solid-svg-icons/faPeopleCarry';
 import {faStar} from '@fortawesome/free-solid-svg-icons/faStar';
 import {faUsersCog} from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import * as anime from 'node_modules/animejs/lib/anime.min.js';
+
+export declare function animateHeader(): void;
+
+export declare function animeAdminMenu(): any;
 
 export declare function animeTitle(anime): any;
 
@@ -46,6 +50,8 @@ export declare function animeTitle(anime): any;
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  searches = faSearch;
+
   logs = faFileMedicalAlt;
   home = faHome;
   admin = false;
@@ -66,7 +72,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   saleDevices = faEuroSign;
   repair = faTools;
   admins = faUserCog;
-  adminIcon = faUserShield;
+
+  @ViewChild('adminMenu') set toolsLabelsAdminCall(element: HTMLElement) {
+    this.addAnimeIcon();
+  }
+
   notificationSend = faConciergeBell;
   sellDevices = faHandHoldingUsd;
   outputRepair = faAppStoreIos;
@@ -89,7 +99,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    animateHeader();
     const view = localStorage.getItem('roles');
     const position = localStorage.getItem('position');
     if (view) {
@@ -109,11 +119,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.adminService.$admin_show.subscribe(value => {
       if (!value) {
         this.positionShow = false;
+      } else {
+        animeAdminMenu();
       }
     });
+    this.addAnimeIcon();
   }
 
   logout() {
+    this.addAnimeIcon();
     this.http.logout();
     this.adminService.$user_position.emit('');
     this.positionShow = false;
@@ -125,38 +139,42 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
 
-  addAnimeToHelper(value: boolean) {
+  addAnimeToHelper(value) {
     if (value) {
-      const timeout = setTimeout(() => {
-        const elementById = document.getElementById('helper');
-        if (elementById) {
-          elementById.classList.add('anime-helper');
-          const timeout1 = setTimeout(() => {
-            elementById.classList.add('anime-helper-2');
-            clearTimeout(timeout1);
-          }, 4000);
-        }
-        clearTimeout(timeout);
-      }, 1000);
+      document.querySelectorAll('.anime-container').forEach(icon => {
 
-    } else {
-      const elementById = document.getElementById('helper');
-      if (elementById) {
-        elementById.classList.remove('anime-helper');
-        elementById.classList.remove('anime-helper-2');
-      }
+        icon.classList.add('animation-icon');
+        setTimeout(() => {
+          icon.classList.remove('animation-icon');
+        }, 1000);
+      });
     }
+
+  }
+
+  addAnimeIcon() {
+    document.querySelectorAll('a').forEach(icon => {
+      icon.addEventListener('mouseenter', (evt => {
+        icon.classList.add('flip-scale-up-ver');
+        setTimeout(() => {
+          icon.classList.remove('flip-scale-up-ver');
+        }, 1000);
+      }));
+
+    });
+
+
   }
 
   addAnimeMenuBox(value) {
     const menu = document.getElementById('menu-box');
     this.admin = value;
     if (menu) {
-      menu.classList.add('animation-menu-box');
+      menu.classList?.add('animation-menu-box');
     }
 
     const timeout = setTimeout(() => {
-      menu.classList.remove('animation-menu-box');
+      menu.classList?.remove('animation-menu-box');
       clearTimeout(timeout);
     }, 2000);
   }
@@ -171,6 +189,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   iconByPosition(position: string): void {
+
     switch (position) {
       case 'Software Administration': {
         this.star = faStar;
@@ -193,6 +212,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         break;
       }
     }
+
     animeTitle(anime);
+
   }
 }

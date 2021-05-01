@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
-import {faEnvelope, faFileImage, faSignInAlt, faUserFriends} from '@fortawesome/free-solid-svg-icons';
+import {faEnvelope, faFileImage, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import {AdminServiceService} from '../service/admin-service.service';
 import {Subscription} from 'rxjs';
 import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
@@ -8,20 +8,23 @@ import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 
 import sparti from 'sparticles';
-import {NavigationEnd, Router} from '@angular/router';
 
 export declare function animeBackground(sparti): void;
 
 export declare function animeMenu(): void;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  constructor(private adminService: AdminServiceService,
+              private changeDetectorRef: ChangeDetectorRef) {
+
+  }
 
   search = faFileImage;
-  user_admin = faUserFriends;
   email_send = faEnvelope;
   return = faSignOutAlt;
   entering = faSignInAlt;
@@ -33,23 +36,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   admin = false;
   private subscribe_admin: Subscription;
   lateralMenuCheck = false;
-  private events: any;
 
-  constructor(private adminService: AdminServiceService, private router: Router) {
-
+  @ViewChild('contentPlaceholder') set toolsLabelsAdminCall(element: HTMLElement) {
+    this.toolsLabelsAdmin(element);
+    this.clickElementCentralIcon(document.querySelectorAll('.box'));
+    this.clickElementCTools(document.querySelectorAll('.tools'));
+    this.tooltipAnimation();
   }
 
   ngOnInit() {
-    this.router.events.subscribe(event => {
-      console.log(event);
-      this.events = event;
-      if (event instanceof NavigationEnd) {
-        animeBackground(sparti);
-      }
-    });
-    if (!this.events) {
-      animeBackground(sparti);
-    }
+
+    animeBackground(sparti);
+
     const view = localStorage.getItem('token');
     if (view) {
 
@@ -64,6 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.clickElementAnimation();
     const timeout = setTimeout(() => {
       this.hidem_animation = false;
+      this.changeDetectorRef.detectChanges();
       clearTimeout(timeout);
     }, 3000);
   }
@@ -72,13 +71,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     elementList.forEach(node => {
       node.addEventListener('click', evt => {
         const button = node.querySelector('.box-empty') as HTMLElement;
-        // node.querySelector('.tooltip').removeAttribute('tooltip');
         node.querySelectorAll('.icon-animation').forEach(className => {
-          if (className.className === (evt.target as Element).className) {
-            button.style.height = '160px';
-            className.classList.add('animation1');
-            (className as HTMLElement).style.color = '#34495E';
-          }
+          const htmlElement = document.querySelector('.container-body') as HTMLElement;
+          htmlElement.style.minHeight = '100vh';
+          className.classList.add('animation1');
+          (className as HTMLElement).style.color = '#34495E';
         });
       });
     });
@@ -88,13 +85,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     animeMenu();
     const elementById = document.getElementById('menu-buttone');
     if (elementById) {
-      elementById.addEventListener('click', evt => {
+      elementById.addEventListener('click', () => {
         this.lateralMenuCheck = !this.lateralMenuCheck;
-        console.log(this.lateralMenuCheck);
         const ul = document.getElementById('menu-lateral');
         if (this.lateralMenuCheck) {
-          ul.setAttribute('style', '-webkit-animation: color-change-2x 4s linear alternate both;\n' +
-            '\t        animation: color-change-2x 4s linear alternate both;-elements-785007553.jpg);\n');
+          ul.setAttribute('style', '-webkit-animation: color-change-2x 2s linear alternate both;\n' +
+            '\t        animation: color-change-2x 2s linear alternate both;-elements-785007553.jpg);\n');
 
         } else {
           setTimeout(() => {
@@ -108,6 +104,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   showAdminPage(value) {
     this.admin = value;
+
   }
 
   clickElementAnimation() {
@@ -125,6 +122,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           if (className.className === (evt.target as Element).className) {
             className.classList.add('animation2');
             (className as HTMLElement).style.color = '#34495E';
+            setTimeout(() => {
+              className.classList.remove('animation2');
+            }, 1000);
           }
         });
 
@@ -137,6 +137,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     document.querySelectorAll('.icon_cont').forEach(tooltip => {
       tooltip.addEventListener('mouseenter', () => {
         tooltip.classList.add('animation-tooltip');
+        setTimeout(() => {
+          tooltip.classList.remove('animation-tooltip');
+        }, 1000);
       });
     });
   }
@@ -155,8 +158,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  toolsLabelsAdmin(element: HTMLElement) {
+    const querySelector = document.querySelectorAll('.tools-admin');
+    querySelector.forEach(node => {
+      node.childNodes.forEach(child => {
+        child.addEventListener('mouseenter', evt => {
+          this.createLabelToEvent(evt.target.classList);
+          child.addEventListener('mouseleave', () => {
+            this.labelTolls = '';
+          });
+        });
+      });
+    });
+  }
+
   ngOnDestroy(): void {
-    const snow = document.querySelector('.snow-footer');
     if (this.subscribe_admin) {
       this.subscribe_admin.unsubscribe();
     }
@@ -164,7 +180,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private createLabelToEvent(classList: any) {
     if (classList) {
-      console.log('Creating Label' + classList);
       switch (classList.value) {
         case 'icon icon-mobile-phone icon-animation': {
           this.labelTolls = 'Create Repair';
@@ -201,4 +216,5 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     }
   }
+
 }

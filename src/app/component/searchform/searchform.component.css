@@ -2,13 +2,17 @@
 
   box-sizing: border-box;
   margin: 10px;
-  max-height: 50%;
+  max-height: 100%;
 }
 
 * {
   margin: 0;
   box-sizing: border-box;
 
+}
+
+.container-body {
+  min-height: 100%;
 }
 
 .button {

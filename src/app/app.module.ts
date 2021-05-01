@@ -94,6 +94,7 @@ import {RedactStaffUserComponent} from './component/redact-staff-user/redact-sta
 import {StaffUserComponentDialogComponent} from './component/staff-user-component-dialog/staff-user-component-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 
+
 declare let $: any;
 declare let createjs: any;
 
@@ -168,7 +169,7 @@ declare let createjs: any;
     StatisticStaffUsersComponent,
     StatisticStaffUsersShopComponent,
     RedactStaffUserComponent,
-    StaffUserComponentDialogComponent
+    StaffUserComponentDialogComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -191,7 +192,7 @@ declare let createjs: any;
     MatTooltipModule,
     MatInputModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [WebSocketService, HttpClient,
     {

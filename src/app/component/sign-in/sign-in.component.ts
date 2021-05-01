@@ -84,7 +84,6 @@ export class SignInComponent implements OnInit {
               localStorage.setItem('position', 'position undefined');
               this.admin.$user_position.emit('position undefined');
             }
-            console.log(res);
 
             const element = document.querySelector('.close') as HTMLElement;
             if (element) {

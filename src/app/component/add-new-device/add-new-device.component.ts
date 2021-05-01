@@ -71,6 +71,6 @@ export class AddNewDeviceComponent implements OnInit, OnDestroy {
     const interval = setTimeout(() => {
       this.service_input.$client_push.emit(this.client);
       clearInterval(interval);
-    }, 1000);
+    }, 1500);
   }
 }
