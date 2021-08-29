@@ -200,7 +200,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
         this.hidem_show_form_local.emit();
       },
       () => {
-
+        console.log('Repair');
       });
 
   }

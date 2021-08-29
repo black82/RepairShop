@@ -26,11 +26,11 @@
   font-weight: 500;color: #c54040">{{invoiceShopModel.typeInvoiceContact}}</h1>
                 <p style="font-size: 9pt;  color:#c54040"><strong> Nr. {{ id}}</strong></p>
                 <p
-                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.emailCompany ? invoiceModel?.emailCompany : invoiceShopModel.emailCompany}}</p>
+                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.emailCompany ? invoiceModel?.emailCompany : invoiceShopModel?.emailCompany}}</p>
                 <p
-                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.cityAndCountry ? invoiceModel?.cityAndCountry : invoiceShopModel.cityAndCountry}}</p>
+                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.cityAndCountry ? invoiceModel?.cityAndCountry : invoiceShopModel?.cityAndCountry}}</p>
                 <p
-                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.streetAndHouseNumber ? invoiceModel?.streetAndHouseNumber : invoiceShopModel.streetAndHouseNumber}}</p>
+                  style="font-size: 9pt;margin: 1px;">{{invoiceModel?.streetAndHouseNumber ? invoiceModel?.streetAndHouseNumber : invoiceShopModel?.streetAndHouseNumber}}</p>
               </div>
             </div>
           </div>
@@ -43,23 +43,26 @@
   margin: 0 5px 5px;padding: 10px;">
               <div class="col-324234">
                 <p *ngIf="!client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel.clientTitle : invoiceShopModel.clientTitle}} {{  client?.name + ' ' + client?.family }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel?.clientTitle : invoiceShopModel?.clientTitle}} {{  client?.name + ' ' + client?.family }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel.clientTitle : invoiceShopModel.clientTitle}}{{ client?.companyName }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel?.clientTitle : invoiceShopModel?.clientTitle}}{{ client?.companyName }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companyIvaTitle ? invoiceModel.companyIvaTitle : invoiceShopModel.companyIvaTitle }}{{ client?.ivaCompany }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companyIvaTitle ? invoiceModel?.companyIvaTitle : invoiceShopModel?.companyIvaTitle }}{{ client?.ivaCompany }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companySdiTitle ? invoiceModel.companySdiTitle : invoiceShopModel.companySdiTitle}} {{ client?.sdiCompany }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companySdiTitle ? invoiceModel?.companySdiTitle : invoiceShopModel?.companySdiTitle}} {{ client?.sdiCompany }}</p>
                 <p
-                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientEmailTitle ? invoiceModel.clientEmailTitle : invoiceShopModel.clientEmailTitle }}{{ client?.email ? client.email : ''}}</p>
+                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientEmailTitle ? invoiceModel?.clientEmailTitle : invoiceShopModel?.clientEmailTitle }}{{ client?.email ? client.email : ''}}</p>
                 <p
                   *ngIf="print_entity.type_client_print===3||print_entity.type_client_print===4"
-                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel.clientPhoneTitle}} {{ client?.telephone_number ? client.telephone_number : 'n/a' }}</p>
+                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel.clientPhoneTitle}} {{ client?.telephone_number ? client?.telephone_number : 'n/a' }}</p>
                 <p *ngIf="print_entity.type_client_print===1||print_entity.type_client_print===2"
                    style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientPhoneTitle}}
                   {{client?.telephone_number && client?.telephone_number?.includes('n/a') ? 'n/a' : client?.telephone_number}}</p>
+                <p *ngIf="print_entity.type_client_print===5||print_entity.type_client_print===6"
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientPhoneTitle}}
+                  {{print_entity.preorderDto.client?.telephone_number && print_entity.preorderDto.client?.telephone_number?.includes('n/a') ? 'n/a' : print_entity.preorderDto.client?.telephone_number}}</p>
                 <p
-                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientAddressTitle ? invoiceModel.clientAddressTitle : invoiceShopModel.clientAddressTitle}}{{ client?.address}}</p>
+                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientAddressTitle ? invoiceModel?.clientAddressTitle : invoiceShopModel?.clientAddressTitle}}{{ client?.address}}</p>
               </div>
             </div>
           </div>
@@ -68,13 +71,13 @@
   border-width: 1pt 1pt 1pt 1pt;
   border-radius: 5pt;margin: 0 5px 5px;padding: 10px">
             <div>
-              <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.modelTitle + client?.deviceBay[0]?.model}}</p>
+              <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.modelTitle + client?.deviceBay[0]?.model}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use}}</p>
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use}}</p>
               <p *ngIf="print_entity.type_client_print===3"
-                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.imeiAndSnTitle}} {{client?.deviceBay[0]?.imei ? client?.deviceBay[0]?.imei : 'n/a' }}</p>
+                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel?.imeiAndSnTitle}} {{client?.deviceBay[0]?.imei ? client?.deviceBay[0]?.imei : 'n/a' }}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.typeDeviceTitle + client?.deviceBay[0].deviceType}}
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.typeDeviceTitle + client?.deviceBay[0].deviceType}}
                 .</p>
               <p
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.accessoryTitle + client?.deviceBay[0]?.accessory}}</p>
@@ -82,6 +85,31 @@
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.bayingPriceTitle + client?.deviceBay[0]?.bayingPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">{{invoiceShopModel.dateBayingTitle}}
                 {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+            </div>
+          </div>
+          <div *ngIf="type_print===5||type_print===6" style="border-style: solid;
+  border-color: black;
+  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px;padding: 10px">
+            <div>
+              <p
+                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.modelTitle + print_entity.preorderDto.preOrderShop.model}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.colorsTitle ? invoceOrderModel?.colorsTitle : 'Colore :'}}   {{ print_entity.preorderDto.preOrderShop.color}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px">{{invoceOrderModel.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeObject}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.dateToEnterTitle }}{{setNewDateFormat(print_entity.preorderDto.preOrderShop.dateInit)| date: 'yyyy/MM/dd h:mm:ss a'}}
+                .</p>
+              <p *ngIf="print_entity.type_client_print===6"
+                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.dateToOutTitle}} {{ setNewDateFormat(print_entity.preorderDto.preOrderShop.completeDate)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+
+              <p
+                style="font-size: 9pt;margin: 1px">{{invoceOrderModel.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeOrder}}</p>
+              <p
+                style="font-size: 9pt;margin: 1px">{{invoceOrderModel.cashAdvance + print_entity.preorderDto.preOrderShop.deposit}}</p>
+              <p style="font-size: 9pt;margin: 1px;">{{invoceOrderModel.sellerPriceTitle}}
+                {{ print_entity.preorderDto.preOrderShop.price}}</p>
             </div>
           </div>
           <div *ngIf="type_print===4" style="border-style: solid;
@@ -252,6 +280,24 @@
             <span
               style="color: #1ABC9C;margin: 5px">{{client?.send_email_active ? ' SI ' : ' NO '}}</span>
           </div>
+          <div *ngIf="type_print===5||type_print===6" style=" border-style: solid;
+  border-color: black;
+  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;margin: 0 5px 5px 05px;padding: 10px;">
+            <p
+              *ngIf="print_entity.preorderDto.preOrderShop.note!=null&&print_entity.preorderDto.preOrderShop.note.length>0"
+              style="font-size: 7pt;margin: 0; color: #c54040;">
+              <span style="font-size: 9pt; margin: 0;">{{invoiceModel?.noteInputTitle}} </span>
+              {{print_entity.preorderDto.preOrderShop.note}}</p>
+            <hr style="margin: 0;padding: 0">
+            <p style="font-size: 9pt; margin: 0;">{{invoceOrderModel?.conditionedGeneralTitle}}</p>
+            <p style="font-size: 9pt;margin: 0;">{{invoceOrderModel?.conditionedGeneralTitle}}
+            </p>
+            <hr style="margin: 0;padding: 0">
+            <p style="font-size: 9pt; margin:0;">{{invoceOrderModel?.privacyAuthorization}}</p>
+            <span
+              style="color: #1ABC9C;margin: 5px">{{print_entity.preorderDto.client?.send_email_active ? ' SI ' : ' NO '}}</span>
+          </div>
           <div *ngIf="type_print===3" style=" border-style: solid;
   border-color: black;
   border-width: 1pt 1pt 1pt 1pt;
@@ -294,11 +340,21 @@
                     <p>{{staffTitle}} <span style="color: #1ABC9C">{{userNickname}}</span></p>
                     <img alt="" height="20px" src="{{images_sig[0]}}" width="70px">
                   </div>
-                  <div class="client_container" style="display: inline; width:49%;float: left;margin: 0">
+                  <div *ngIf="print_entity.type_client_print<5" class="client_container"
+                       style="display: inline; width:49%;float: left;margin: 0">
                     <p *ngIf="!client?.typeClient" style="width: 49%">{{clientTitle}}<span
                       style="color: #1ABC9C"> {{client?.name + ' ' + client?.family}}</span></p>
                     <p *ngIf="client?.typeClient" style="width: 49%">{{clientTitle}}<span
                       style="color: #1ABC9C"> {{client?.companyName}}</span></p>
+                    <img alt="" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
+                  </div>
+                  <div *ngIf="print_entity.type_client_print===5||print_entity.type_client_print===6"
+                       class="client_container" style="display: inline; width:49%;float: left;margin: 0">
+                    <p *ngIf="!print_entity.preorderDto.client?.typeClient" style="width: 49%">{{clientTitle}}<span
+                      style="color: #1ABC9C"> {{print_entity.preorderDto.client?.name + ' ' + print_entity.preorderDto.client?.family}}</span>
+                    </p>
+                    <p *ngIf="print_entity.preorderDto.client?.typeClient" style="width: 49%">{{clientTitle}}<span
+                      style="color: #1ABC9C"> {{print_entity.preorderDto.client?.companyName}}</span></p>
                     <img alt="" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
                   </div>
                 </div>

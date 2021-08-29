@@ -16,6 +16,9 @@ import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
 import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
 import {InvoiceRepairModel} from '../entity/InvoiceRepairModel';
 import {InvoiceShopModels} from '../entity/InvoiceShopModels';
+import {PreOrderDto} from '../entity/PreOrderDto';
+import {PreOrderShop} from '../entity/PreOrderShop';
+import {InvoiceOrderModel} from '../entity/InvoiceOrderModel';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +26,7 @@ import {InvoiceShopModels} from '../entity/InvoiceShopModels';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-      apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
   // apiUrl = 'http://localhost:8080/';
 
@@ -48,6 +51,27 @@ export class HttpClien {
 
   saleDeviceToClient(client: Client): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/device/sale', client)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  orderCreate(preOrderDto: PreOrderDto): Observable<PreOrderShop> {
+    return this.http.post<PreOrderShop>(this.apiUrl + 'api/order/saved', preOrderDto)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  orderEdit(preOrderShop: PreOrderShop): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/order/edit', preOrderShop)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  orderClose(preOrderDto: PreOrderDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'api/order/close/order', preOrderDto)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -134,9 +158,12 @@ export class HttpClien {
   }
 
   logout(): void {
-    this.adminService.$admin_show.emit(false);
-    this.adminService.$user_show.emit(false);
-    localStorage.clear();
+
+    this.http.post(this.apiUrl + 'api/auth/logout', {}, {withCredentials: true}).subscribe(() => {
+      this.adminService.$admin_show.emit(false);
+      this.adminService.$user_show.emit(false);
+      localStorage.clear();
+    });
   }
 
   register(data: any): Observable<string> {
@@ -407,8 +434,17 @@ export class HttpClien {
       );
   }
 
+  findInvoiceModelByOrder(orderInvoice: string): Observable<InvoiceOrderModel> {
+    return this.http.get<InvoiceOrderModel>(this.apiUrl + 'admin/api/invoice/model/order',
+      {
+        params: new HttpParams().set('order', orderInvoice)
+      })
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
   findInvoiceRepairsModelByOrder(orderInvoice: string): Observable<InvoiceRepairModel> {
-    console.log(orderInvoice);
     return this.http.get<InvoiceRepairModel>(this.apiUrl + 'admin/api/invoice/model/repair/order',
       {
         params: new HttpParams().set('order', orderInvoice)
@@ -422,6 +458,33 @@ export class HttpClien {
     return this.http.get<any>(this.apiUrl + 'api/all/client/pageable-',
       {
         params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getPreorderPageable(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/order/open/pageable-',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getPreorderPageableAll(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/order/all/pageable-',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getPreorderDtoById(id: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/order/id',
+      {
+        params: new HttpParams().set('id', String(id))
       }).pipe(
       catchError(this.errorHandler)
     );

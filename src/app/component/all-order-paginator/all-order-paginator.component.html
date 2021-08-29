@@ -1,0 +1,67 @@
+<div class="container-body">
+  <div *ngIf="paginatorViu" class="container-paginator">
+    <mat-paginator #paginator
+                   (page)="pageEvent = getServerData($event)"
+                   [length]="length"
+                   [pageIndex]="pageIndex"
+                   [pageSizeOptions]="[5, 10,15, 25,50, 100]"
+                   [pageSize]="pageSize">
+
+    </mat-paginator>
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">Order Id</th>
+        <th scope="col">Client</th>
+        <th scope="col">Type Object</th>
+        <th scope="col">Type Order</th>
+        <th scope="col">Date Order</th>
+        <th scope="col">Date Close Order</th>
+        <th scope="col">Color</th>
+        <th scope="col">Price</th>
+        <th scope="col">Deposit</th>
+        <th scope="col">Invoice Enter</th>
+        <th scope="col">Invoice Close</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of preOrderOpen; let i = index">
+        <td class="element-td">{{element?.orderId}}</td>
+        <td class="element-td">{{element?.userName }}</td>
+        <td
+          class="element-td">{{element?.typeObject}}</td>
+        <td class="element-td">{{element?.typeOrder}}</td>
+        <td class="element-td">{{setNewDateFormat(element?.dateInit)| date: 'yyyy/MM/dd hh:mm'}}</td>
+        <td
+          class="element-td">{{element?.completeDate ? (setNewDateFormat(element.completeDate)| date: 'yyyy/MM/dd hh:mm') : 'Open Order'}}</td>
+        <td class="element-td">{{element?.color}}</td>
+        <td class="element-td">
+          {{element?.price}}
+        </td>
+        <td class="element-td">
+          {{element?.deposit}}
+        </td>
+        <td class="element-td">
+          <a (click)="open_popup(element.invoiceInput)"
+             class="link-invoice">Invoice
+            Entre</a>
+        </td>
+        <td class="element-td">
+          <a (click)="open_popup(element.invoiceOutput)"
+             class="link-invoice">Invoice
+            Close</a>
+        </td>
+        <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
+          [icon]="sally_button" class="button-icon"></fa-icon>Edit Order</span></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div *ngIf="showClient" class="container-single-content" id="container-body">
+      <div class="container-modal">
+        <a (click)="hideClient()" class="close">&times;</a>
+        <app-clouse-order-form [preorders]="preorderDto" typePage="edit"></app-clouse-order-form>
+      </div>
+    </div>
+  </div>
+</div>

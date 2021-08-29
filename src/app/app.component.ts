@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {animate, query, style, transition, trigger} from '@angular/animations';
 import {StaffUser} from './component/entity/StaffUser';
+import {HttpClien} from './component/service/clientservice.service';
 
 export const fadeAnimation =
 
@@ -43,12 +44,20 @@ export const fadeAnimation =
   animations: [fadeAnimation]
 
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'RepairShop';
   @Output()
   $routerAnime: EventEmitter<StaffUser> = new EventEmitter();
 
-  constructor(private router: Router) {
+  // @HostListener('window:beforeunload')
+  // unloadHandler(event) {
+  //   console.log('looutevent');
+  //   this.logoutOnClose();
+  //   localStorage.clear();
+  // }
+
+  constructor(private router: Router, private http: HttpClien) {
+    //   localStorage.clear();
     this.router.errorHandler = (error: any) => {
       const routerError = error.toString();
       if (routerError.indexOf('Cannot match any routes') >= 0) {
@@ -57,9 +66,25 @@ export class AppComponent {
         throw error;
       }
     };
+    //  const context = this;
+    // window.addEventListener('beforeunload', (e) => {
+    //   const currentUser = JSON.parse(localStorage.getItem('token'));
+    //   if (currentUser) {
+    //     context.logoutOnClose();
+    //   }
+    // });
   }
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
   }
+
+  logoutOnClose() {
+    this.http.logout();
+  }
+
+  ngOnDestroy(): void {
+    this.logoutOnClose();
+  }
+
 }

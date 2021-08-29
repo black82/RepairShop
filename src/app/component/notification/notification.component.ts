@@ -42,7 +42,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.subscriptionAdminService = this.adminService.$user_show.subscribe(value => {
       this.wiuNotification = value;
       if (value) {
+
         this.getAllRejectNotification();
+
         const stompClient = this.webSocketService.connect();
         stompClient.debug = null;
         stompClient.connect({}, () => {
@@ -74,7 +76,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.nicknameUserName = nickname.currentName;
       }
     }, () => {
-      this.httpClient.logout();
+
     });
   }
 
@@ -133,7 +135,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.notification = notifications1;
         this.counters = notifications1.length;
       }, () => {
-        this.httpClient.logout();
       });
     }, 1000);
 

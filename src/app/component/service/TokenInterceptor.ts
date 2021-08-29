@@ -5,13 +5,17 @@ import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {AlertServiceService} from './alert-service.service';
 import {HttpClien} from './clientservice.service';
+import {AnimeServiceService} from './anime-service.service';
 
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   currentRoute: string;
 
-  constructor(private router: Router, private alertService: AlertServiceService, private httpClient: HttpClien) {
+  constructor(private router: Router,
+              private alertService: AlertServiceService,
+              private httpClient: HttpClien,
+              private animeService: AnimeServiceService) {
     this.currentRoute = this.router.url;
 
   }
@@ -30,7 +34,11 @@ export class TokenInterceptor implements HttpInterceptor {
           headers: request.headers.append('Content-Type', 'application/json'),
         }
       );
+
     }
+    request = request.clone({
+      withCredentials: true
+    });
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
@@ -40,15 +48,22 @@ export class TokenInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         let message = error?.error?.rootCause?.message;
+        this.animeService.$anime_show.emit(false);
         console.log('error--->>>', error);
         if (error?.message) {
           if (error?.error?.message?.includes('Expired or invalid JWT token') || error?.status === 401) {
             // error.error.status = 401;
-            this.httpClient.logout();
+            localStorage.clear();
             localStorage.setItem('navigate', this.router.url);
             this.router.navigate(['client/sign-in']);
             this?.alertService.info(null, 'Your session has come to an end please login', false, false, '', error);
             return throwError(error);
+          } else if (error.status === 403) {
+            localStorage.clear();
+            localStorage.setItem('navigate', this.router.url);
+            this.router.navigate(['client/sign-in']);
+            this?.alertService.info(null, error.message, false, false, '', error);
+
           }
         }
         if (!message) {
@@ -64,9 +79,13 @@ export class TokenInterceptor implements HttpInterceptor {
 
         if (error.status >= 500) {
           this?.alertService.error(null, message, false, false, '', error);
-        }
-        if (error.status === 0) {
-          this?.alertService.error(null, 'Something arrogant happened to try again later', false, false, '', error);
+        } else if (error.status === 0) {
+          this?.alertService.error(null, 'Something arrogant happened to try again! Sorry', false, false, '', error);
+          localStorage.clear();
+          localStorage.setItem('navigate', this.router.url);
+          this.router.navigate(['client/sign-in']);
+        } else if (error.status) {
+          this?.alertService.error(null, message, false, false, '', error);
         }
         return throwError(error);
       }));

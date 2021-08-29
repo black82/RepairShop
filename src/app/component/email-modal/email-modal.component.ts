@@ -20,6 +20,7 @@ import {PrintService} from '../service/print.service';
 import {InputOutputTestService} from '../service/input-output-test.service';
 import {InvoiceRepairModel} from '../entity/InvoiceRepairModel';
 import {InvoiceShopModels} from '../entity/InvoiceShopModels';
+import {InvoiceOrderModel} from '../entity/InvoiceOrderModel';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   staffTitle: string;
   clientTitle: string;
   invoiceShopModel: InvoiceShopModels;
+  invoceOrderModel: InvoiceOrderModel;
   private subscriptionPrint: Subscription;
 
   constructor(private print: PrintService,
@@ -84,9 +86,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.images_sig = this.sig_pad_service.image_sig;
     this.print_entity = print;
     this.title = print.titleForm;
-    this.checkIfEmailPresent(print.client_print);
+    this.checkIfEmailPresent(print);
     this.client = print.client_print;
-    if (print.type_client_print === 1 || this.print_entity.type_client_print === 2) {
+    if (print.type_client_print === 1) {
       this.id = this.id_repair(print.client_print);
     } else {
       if (print.type_client_print === 3) {
@@ -100,7 +102,11 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.check_type_print(print);
     this.http.getNickNameCurrentStaffUser().subscribe(name => {
       this.userNickname = name.currentName;
-      this.emailPage(print.client_print);
+      if (print.client_print) {
+        this.emailPage(print.client_print);
+      } else {
+        this.emailPage(print.preorderDto.client);
+      }
       this.animation_wait.$anime_show.emit(false);
 
     });
@@ -120,8 +126,12 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  checkIfEmailPresent(clientPrint: Client) {
-    this.email_send_disable = !clientPrint.email;
+  checkIfEmailPresent(clientPrint: PrintEntity) {
+    if (clientPrint.type_client_print > 4 && clientPrint.type_client_print < 7) {
+      this.email_send_disable = !clientPrint.preorderDto.client.email;
+    } else {
+      this.email_send_disable = !clientPrint.client_print.email;
+    }
   }
 
   setNewDateFormat(date: Date): Date {
@@ -129,6 +139,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   ok() {
+    console.log(this.print_entity);
     this.animation_wait.$anime_show.emit(true);
     if (this.print_entity.type_client_print === 1) {
       this.http.printClient(this.client).subscribe(response => {
@@ -152,6 +163,20 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     } else if (this.print_entity.type_client_print === 4) {
       this.http.saleDeviceToClient(this.client).subscribe(() => {
         this.id = this.client?.deviceSale[0]?.idDeviceSale?.toString();
+        this.checkIfIdNotNullAndCreateInvoice();
+      });
+    } else if (this.print_entity.type_client_print === 5) {
+      this.http.orderCreate(this.print_entity.preorderDto).subscribe(res => {
+        if (res) {
+          this.print_entity.preorderDto.preOrderShop = res;
+          this.id += res?.orderId;
+          this.checkIfIdNotNullAndCreateInvoice();
+        }
+      });
+    } else if (this.print_entity.type_client_print === 6) {
+
+      this.id += this.print_entity.preorderDto.preOrderShop.orderId;
+      this.http.orderClose(this.print_entity.preorderDto).subscribe(() => {
         this.checkIfIdNotNullAndCreateInvoice();
       });
     }
@@ -180,6 +205,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     }
     if (this.print_entity.type_client_print === 4) {
       this.id = this.client.deviceSale[0].idDeviceSale.toString();
+      this.createInvoiceToPrintPageAfterTimeout();
+    }
+    if (this.print_entity.type_client_print === 6) {
+      this.id = this.print_entity.preorderDto.preOrderShop.orderId?.toString();
       this.createInvoiceToPrintPageAfterTimeout();
     }
   }
@@ -287,12 +316,13 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   checkTypePrint(): string {
     switch (this.print_entity.type_client_print) {
       case 1:
-      case 3: {
+      case 3:
+      case 5: {
         return 'inputInvoice';
       }
       case 2:
-      case 4: {
-
+      case 4:
+      case 6: {
         return 'outputInvoice';
       }
     }
@@ -301,6 +331,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   check_type_print(printTypes: PrintEntity) {
     if (printTypes.type_client_print === 2) {
+      if (printTypes?.id) {
+        this.id = printTypes?.id.toString();
+      }
+
       this.check_test_OK(printTypes.client_print.device[0].repairs[0].inputModule);
       this.check_test_OK_out(printTypes.client_print.device[0].repairs[0].outputTest);
     }
@@ -431,6 +465,10 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       messages = 'The device was successfully purchased by the company';
     } else if (this.print_entity.type_client_print === 4) {
       messages = 'The device was successfully sold';
+    } else if (this.print_entity.type_client_print === 5) {
+      messages = 'Il tuo ordine è stato ricevuto con successo';
+    } else if (this.print_entity.type_client_print === 6) {
+      messages = 'Il tuo ordine è stato consegnato con successo';
     }
     return messages;
   }
@@ -441,6 +479,8 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       subject = 'RfvTechnology numero di riparazione -  ' + this.id;
     } else if (this.print_entity.type_client_print === 3 || this.print_entity.type_client_print === 4) {
       subject = 'RfvTechnology the commercial operation of the device is -  ' + this.id;
+    } else if (this.print_entity.type_client_print === 5 || this.print_entity.type_client_print === 6) {
+      subject = 'RfvTechnology the commercial operation of the Order is -  ' + this.id;
     }
     return subject;
   }
@@ -515,6 +555,25 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       }, () => {
         this.animation_wait.$anime_show.emit(false);
       });
+    } else if (print.type_client_print === 5 || print.type_client_print === 6) {
+      this.http.findInvoiceModelByOrder('default').subscribe(value => {
+          this.invoceOrderModel = value;
+          this.invoiceModel = new InvoiceRepairModel(0, '', '', '',
+            '', '', '', '',
+            '', '', '', '', '', '', '', ''
+            , '', '', '', '', '', ''
+            , '', '', '', '', '', '',
+            '', '', '', '', '', '',
+            '', '', '', '', '');
+
+          this.populateStandartInvoice(value);
+          this.staffTitle = value?.staffSignTitle;
+          this.clientTitle = value?.clientSignTitle;
+          this.afterReceiveAllResourcesCall(print);
+        }, () => {
+          this.animation_wait.$anime_show.emit(false);
+        }
+      );
     } else {
       this.http.findInvoiceShopModelByOrder('default').subscribe(value => {
           this.invoiceShopModel = value;
@@ -526,6 +585,17 @@ export class EmailModalComponent implements OnInit, OnDestroy {
         }
       );
     }
+  }
+
+  private populateStandartInvoice(value: InvoiceOrderModel) {
+    this.invoiceModel.emailCompany = value.emailCompany;
+    this.invoiceModel.cityAndCountry = value.cityAndCountry;
+    this.invoiceModel.streetAndHouseNumber = value.streetAndHouseNumber;
+    this.invoiceModel.clientTitle = value.clientTitle;
+    this.invoiceModel.companyIvaTitle = value.companyIvaTitle;
+    this.invoiceModel.clientEmailTitle = value.clientEmailTitle;
+    this.invoiceModel.clientPhoneTitle = value.clientPhoneTitle;
+    this.invoiceModel.clientAddressTitle = value.clientAddressTitle;
   }
 }
 

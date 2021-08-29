@@ -34,6 +34,7 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
     this.showPopup = false;
     this.alert_service.success(null, 'The procedure was successfully completed id is : '
       + this.id, true, null, '');
+    this.id = null;
   }
 
 

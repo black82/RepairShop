@@ -41,6 +41,9 @@ import {RedactClientsaleRedacandformComponent} from './component/redact-clientsa
 import {InvoiceModelComponent} from './component/invoice-model/invoice-model.component';
 import {InvoiceRepairRedactComponent} from './component/invoice-repair-redact/invoice-repair-redact.component';
 import {InvoiceShopRedactComponent} from './component/invoice-shop-redact/invoice-shop-redact.component';
+import {AddNewOrderComponent} from './component/add-new-order/add-new-order.component';
+import {ClouseOrderComponent} from './component/clouse-order/clouse-order.component';
+import {AllOrderPaginatorComponent} from './component/all-order-paginator/all-order-paginator.component';
 
 
 export const routes: Routes = [
@@ -99,6 +102,10 @@ export const routes: Routes = [
   {path: 'device/sale/all/pageable', component: AllDeviceSaleComponent, canActivate: [AutGuardService]},
   {path: 'device/in/sale/pageable', component: AllDeviceInSaleComponent, canActivate: [AutGuardService]},
   {path: 'device/name/sale', component: SearchByNameSaleComponent, canActivate: [AutGuardService]},
+
+  {path: 'input/order', component: AddNewOrderComponent, canActivate: [AutGuardService]},
+  {path: 'output/order', component: ClouseOrderComponent, canActivate: [AutGuardService]},
+  {path: 'edit/order', component: AllOrderPaginatorComponent, canActivate: [AutGuardService]},
   {
     path: 'device/sale/redact',
     component: RedactClientsaleRedacandformComponent,

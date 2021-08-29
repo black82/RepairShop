@@ -204,8 +204,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
       if (this.client.typeClient) {
-        console.log(this.client);
-        this.companyClient();
+           this.companyClient();
       }
     });
     this.animation_call();
@@ -232,7 +231,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.device = new Device(null, formData.model, formData.state_of_use,
       formData.imei, formData.code_device, formData.password_device, formData.accessory, true, [this.repair]);
     let telefoneNumber = null;
-    if (this.client.telephone_number !== null && this.client.telephone_number.includes('n/a')) {
+    if (this.client && this.client?.telephone_number !== null && this.client.telephone_number.includes('n/a')) {
       telefoneNumber = this.client.telephone_number;
     } else {
       telefoneNumber = formData.telephone_number;

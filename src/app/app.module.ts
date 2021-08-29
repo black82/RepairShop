@@ -93,6 +93,11 @@ import {StatisticStaffUsersShopComponent} from './component/statistic-staff-user
 import {RedactStaffUserComponent} from './component/redact-staff-user/redact-staff-user.component';
 import {StaffUserComponentDialogComponent} from './component/staff-user-component-dialog/staff-user-component-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {HttpXSRFInterceptor} from './component/service/HttpXSRFInterceptor';
+import {AddNewOrderComponent} from './component/add-new-order/add-new-order.component';
+import {ClouseOrderComponent} from './component/clouse-order/clouse-order.component';
+import {ClouseOrderFormComponent} from './component/clouse-order-form/clouse-order-form.component';
+import {AllOrderPaginatorComponent} from './component/all-order-paginator/all-order-paginator.component';
 
 
 declare let $: any;
@@ -170,6 +175,10 @@ declare let createjs: any;
     StatisticStaffUsersShopComponent,
     RedactStaffUserComponent,
     StaffUserComponentDialogComponent,
+    AddNewOrderComponent,
+    ClouseOrderComponent,
+    ClouseOrderFormComponent,
+    AllOrderPaginatorComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -199,6 +208,11 @@ declare let createjs: any;
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpXSRFInterceptor,
+      multi: true,
     }],
   bootstrap: [AppComponent]
 })

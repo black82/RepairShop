@@ -79,7 +79,7 @@
           <span class="input-title">Phone Number</span>
           <fa-icon [icon]="phone" class="icon-input"></fa-icon>
           <input class="input-1" formControlName="telephone_number"
-                 [ngModel]="client?.telephone_number==null||client.telephone_number.includes('n/a')?null:client?.telephone_number"
+                 [ngModel]="client&&client?.telephone_number!=null&&client.telephone_number.includes('n/a')?null:client?.telephone_number"
                  pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number"
                  type="tel">
         </label>

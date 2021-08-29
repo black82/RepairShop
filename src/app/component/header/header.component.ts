@@ -37,6 +37,8 @@ import {faPeopleCarry} from '@fortawesome/free-solid-svg-icons/faPeopleCarry';
 import {faStar} from '@fortawesome/free-solid-svg-icons/faStar';
 import {faUsersCog} from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import * as anime from 'node_modules/animejs/lib/anime.min.js';
+import {faJediOrder} from '@fortawesome/free-brands-svg-icons/faJediOrder';
+import {faDoorClosed} from '@fortawesome/free-solid-svg-icons/faDoorClosed';
 
 export declare function animateHeader(): void;
 
@@ -72,6 +74,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   saleDevices = faEuroSign;
   repair = faTools;
   admins = faUserCog;
+  newOrder = faJediOrder;
+  closeOrder = faDoorClosed;
 
   @ViewChild('adminMenu') set toolsLabelsAdminCall(element: HTMLElement) {
     this.addAnimeIcon();

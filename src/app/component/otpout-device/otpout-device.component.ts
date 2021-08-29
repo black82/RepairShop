@@ -341,7 +341,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.client.device[0].repairs[0] = this.createClient();
     this.emailSender.email_send(
       new PrintEntity(this.client, 2, null,
-        this.repair_output.repair_Id, this.typeSender, this.titleForm));
+        this.client.device[0].repairs[0].repair_Id, this.typeSender, this.titleForm));
 
   }
 

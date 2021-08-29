@@ -146,6 +146,7 @@ export class SignInComponent implements OnInit {
 
   deleteTacked() {
     this.authService.logout();
+    localStorage.clear();
   }
 }
 

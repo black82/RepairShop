@@ -1,0 +1,213 @@
+<div class="container-body" xmlns="http://www.w3.org/1999/html">
+  <div class="title-container">
+    <div tooltip="Compile all fields are required.">
+      <p class="title-form">
+        <fa-icon [icon]="modul" class="icon-input"></fa-icon>
+        COMPILATION MODEL FOR PREORDER ( Accessory & Ricambi)
+      </p>
+    </div>
+  </div>
+  <form [formGroup]="formClient" autocomplete="off">
+    <div class="check-single">
+      <fa-icon [icon]="companyType" [style.color]="formClient.controls.client_type.value? '#1ABC9C' : 'lightcoral'"
+               class="icon-box test-icon"></fa-icon>
+      <label class="checkbox">
+        <input (click)="companyClient()"
+               [ngModel]="preorders?.client?.typeClient" [readOnly]="editDisable" class="check-box"
+               formControlName="client_type" type="checkbox">
+        <span class="check-box-name">Is Company's</span>
+      </label>
+    </div>
+    <div class="row">
+      <div class="row-1">
+
+        <label *ngIf="!companyShow">
+          <span class="input-title">Name of Client</span>
+          <fa-icon [icon]="userPerson" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.name?.dirty ||
+            formClient.controls?.name?.touched) && formClient?.controls.name?.invalid && formClient.controls?.name?.errors}"
+            [ngModel]="preorders?.client.name" [readOnly]="editDisable"
+            class="input-1" formControlName="name" placeholder="Name of Client" type="text">
+        </label>
+        <label *ngIf="!companyShow">
+          <span class="input-title">Family of Client</span>
+          <fa-icon [icon]="userFamely" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls?.family?.dirty ||
+            formClient.controls?.family?.touched) && formClient.controls?.family?.invalid && formClient.controls?.family?.errors}"
+            [ngModel]="preorders?.client?.family" [readOnly]="editDisable" class="input-1"
+            formControlName="family" placeholder="Family of Client"
+            type="text">
+        </label>
+
+        <label *ngIf="companyShow">
+          <span class="input-title">Company Name</span>
+          <fa-icon [icon]="usertag" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.companyName?.dirty ||
+            formClient.controls.companyName.touched) && formClient.controls.companyName.invalid && formClient.controls.companyName.errors}"
+            [ngModel]="preorders?.client?.companyName" [readOnly]="editDisable" class="input-1"
+            formControlName="companyName" placeholder="Company Name"
+            type="text">
+        </label>
+        <label *ngIf="companyShow">
+          <span class="input-title">Company SDI</span>
+          <fa-icon [icon]="sidCompany" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.sdiClient?.dirty ||
+            formClient.controls.sdiClient.touched) && formClient.controls.sdiClient.invalid && formClient.controls.sdiClient.errors}"
+            [ngModel]="preorders?.client?.sdiCompany" [readOnly]="editDisable" class="input-1"
+            formControlName="sdiClient" placeholder="Company SDI"
+            type="text">
+        </label>
+        <label *ngIf="companyShow">
+          <span class="input-title">Company Iva</span>
+          <fa-icon [icon]="ivaCompany" class="icon-input"></fa-icon>
+          <input
+            [ngClass]="{'form-submitted': formSubmitted|| (formClient.controls.ivaClient?.dirty ||
+            formClient.controls.ivaClient.touched) && formClient.controls.ivaClient.invalid && formClient.controls.ivaClient.errors}"
+            [ngModel]="preorders?.client?.ivaCompany" [readOnly]="editDisable" class="input-1"
+            formControlName="ivaClient" placeholder="Company Iva"
+            type="text">
+        </label>
+        <label>
+          <span class="input-title">Email</span>
+          <fa-icon [icon]="email" class="icon-input"></fa-icon>
+          <input
+            (change)="emailControlChange()" (ngModelChange)="emailControlChange()"
+            [ngModel]="preorders?.client?.email" [readOnly]="editDisable" class="input-1" formControlName="email"
+            id="email-client" placeholder="Email of Client" type="email">
+        </label>
+        <label>
+          <span class="input-title">Phone Number</span>
+          <fa-icon [icon]="phone" class="icon-input"></fa-icon>
+          <input [ngModel]="preorders?.client?.telephone_number" [readOnly]="editDisable" class="input-1"
+                 formControlName="telephone_number" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number"
+                 type="tel">
+        </label>
+        <label>
+          <span class="input-title">Phone Number 2</span>
+          <fa-icon [icon]="phone" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.telephone_number_second.dirty || formClient.controls.telephone_number_second.touched)
+           && formClient.controls.telephone_number_second.invalid && formClient.controls.telephone_number_second.errors}"
+                 [ngModel]="preorders?.client?.telephone_number_second" [readOnly]="editDisable" class="input-1"
+                 formControlName="telephone_number_second" placeholder="Phone Number Optional"
+                 type="tel">
+        </label>
+        <label><span class="input-title">Address</span>
+          <fa-icon [icon]="address" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.address.dirty || formClient.controls.address.touched)
+           && formClient.controls.address.invalid && formClient.controls.address.errors}"
+                 [ngModel]="preorders?.client?.address" [readOnly]="editDisable"
+                 class="input-1" formControlName="address" placeholder="Address of Client" type="text">
+        </label>
+
+      </div>
+      <div class="row-2">
+
+        <label>
+          <span class="input-title">Color</span>
+          <fa-icon [icon]="date" class="icon-input"></fa-icon>
+          <input [ngModel]="preorders?.preOrderShop?.color" class="input-2"
+                 formControlName="color" placeholder="Color" type="text">
+        </label>
+
+        <label>
+          <span class="input-title">Type Detail</span>
+          <fa-icon [icon]="barcode" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.typeObject.dirty || formClient.controls.typeObject.touched)
+           && formClient.controls.typeObject.invalid && formClient.controls.typeObject.errors&& formClient.controls.typeObject.pristine}"
+                 [ngModel]="preorders?.preOrderShop?.typeObject" class="input-2" formControlName="typeObject"
+                 placeholder="Type" type="text">
+        </label>
+        <label>
+          <span class="input-title">Type Accessory</span>
+          <fa-icon [icon]="money2" class="icon-input"></fa-icon>
+          <select [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.typeOrder.dirty || formClient.controls.typeOrder.touched)
+           && formClient.controls.typeOrder.invalid && formClient.controls.typeOrder.errors&& formClient.controls.typeOrder.pristine}"
+                  [ngModel]="preorders?.preOrderShop?.typeOrder" class="input-2" formControlName="typeOrder">
+            <option [disabled]="true" [selected]="true"
+                    [value]="preorders?.preOrderShop.typeOrder">{{preorders?.preOrderShop.typeOrder}}</option>
+            <option>Accessory</option>
+            <option>Ricambi</option>
+            <option>Altro</option>
+          </select>
+        </label>
+        <label style="position: relative">
+          <span class="input-title">Model</span>
+          <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': (formClient?.controls?.model?.dirty || formClient?.controls?.model?.touched)
+           && formClient?.controls?.model?.invalid && formClient?.controls?.model?.errors}"
+                 [ngModel]="preorders?.preOrderShop.model" autocomplete="off"
+                 class="input-1" formControlName="model" id="model"
+                 placeholder="Device Model"
+                 type="text">
+        </label>
+        <label><span class="input-title">Deposit Order</span>
+          <fa-icon [icon]="code" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.deposit.dirty || formClient.controls.deposit.touched)
+           && formClient.controls.deposit.invalid && formClient.controls.deposit.errors}"
+                 [ngModel]="preorders?.preOrderShop?.deposit" class="input-2" formControlName="deposit"
+                 placeholder="Deposit"
+                 type="text">
+        </label>
+        <label>
+          <span class="input-title">Order Price</span>
+          <fa-icon [icon]="money" class="icon-input"></fa-icon>
+          <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.price.dirty || formClient.controls.price.touched)
+           && formClient.controls.price.invalid && formClient.controls.price.errors}"
+                 [ngModel]="preorders?.preOrderShop?.price"
+                 class="input-1" formControlName="price" placeholder="Price" type="text">
+        </label>
+      </div>
+    </div>
+
+
+    <div class="text-div">
+      <div class="title-container">
+        <div tooltip="Notices for staff at the input device">
+          <p class="title-form">
+            Notes of the Preorder device
+            <fa-icon [icon]="text" class="icon-input"></fa-icon>
+          </p>
+        </div>
+      </div>
+      <div>
+
+        <div>
+          <label style="width: 100%">
+            <textarea [ngModel]="preorders?.preOrderShop?.note" class="text-area" formControlName="note"
+                      placeholder="Notes For Staff " type="text">....</textarea>
+          </label>
+          <app-email-modal [callerServiceType]="'ordered'"></app-email-modal>
+          <app-sig-pad></app-sig-pad>
+        </div>
+      </div>
+      <app-number-repair></app-number-repair>
+      <div class="check-single">
+        <span class="send-email-activ">
+        <fa-icon [icon]="email" [style.color]="formClient.controls?.email_send.value? '#1ABC9C' : 'lightcoral'"
+                 class="icon-box"></fa-icon>
+        <label class="checkbox" tooltip="The client's agreement to receive notification invoices from us ...">
+          <input [checked]="preorders?.client?.send_email_active" class="check-box" formControlName="email_send"
+                 id="email-sender" name="device-test" type="checkbox">
+          <span class="check-box-name">I agree to receive emails with news or invoices</span>
+        </label>
+          </span>
+      </div>
+    </div>
+    <div class="button_form">
+      <div tooltip="You will leave this page!!!">
+        <a (click)="dismissed()" class="dismiss">
+        <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
+        Discard Form</span></a></div>
+      <div *ngIf="typePage==='close'" tooltip="The model will be sent to the Email">
+        <a (click)="sign_pad_open()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
+          [icon]="mail" class="button-icon"></fa-icon> Preview and Save</span></a></div>
+      <div *ngIf="typePage==='edit'" tooltip="The model will be sent to the Email">
+        <a (click)="editPreorder()" class=" button email"><span> <fa-icon
+          [icon]="edit_button" class="button-icon"></fa-icon>   Edit Order</span></a></div>
+    </div>
+  </form>
+</div>

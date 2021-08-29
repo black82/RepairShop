@@ -15,7 +15,8 @@ export class WebSocketService {
   }
 
   public connect() {
-    this.socket = new SockJs(this.http.apiUrl + 'socket');
+    const token = localStorage.getItem('token');
+    this.socket = new SockJs(this.http.apiUrl + 'socket/?' + 'token=' + token, null, {Authorization: 'Bearer ' + token});
     return Stomp.over(this.socket);
   }
 
@@ -28,7 +29,7 @@ export class WebSocketService {
 
   public addNewMessage(message: MessageInvoice) {
     if (this.socket) {
-      this.socket.send('/ app / send / message', {}, message);
+      this.socket.send('/app/send/message', {}, message);
     }
   }
 }

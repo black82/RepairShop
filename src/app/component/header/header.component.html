@@ -52,6 +52,15 @@
               <fa-icon [icon]="sellDevices" class="small-icon"></fa-icon>
               Devices To Sell</a>
             </li>
+            <br>
+            <li><a routerLink="/input/order">
+              <fa-icon [icon]="newOrder" class="small-icon"></fa-icon>
+              New Order</a>
+            </li>
+            <li><a routerLink="/output/order">
+              <fa-icon [icon]="closeOrder" class="small-icon"></fa-icon>
+              Close Order</a>
+            </li>
           </ul>
         </li>
         <li>
@@ -180,6 +189,10 @@
             <li><a routerLink="/device/sale/redact">
               <fa-icon [icon]="redact" class="small-icon"></fa-icon>
               Edit Client Info</a>
+            </li>
+            <li><a routerLink="/edit/order">
+              <fa-icon [icon]="redact" class="small-icon"></fa-icon>
+              All Order & Edit</a>
             </li>
           </ul>
         </li>

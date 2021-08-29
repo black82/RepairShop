@@ -76,6 +76,9 @@
           "configurations": {
             "production": {
               "browserTarget": "RepairShoop:build:production"
+            },
+            "options": {
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },

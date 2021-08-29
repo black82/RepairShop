@@ -113,7 +113,7 @@ h2 {
 .second-button {
   background: linear-gradient(to top right, hsl(179, 34%, 48%) 40%, hsl(155, 50%, 61%) 100%) !important;
   appearance: none;
-  margin-left: 69%;
+  margin-left: 64%;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 3px;
   padding: 10px 15px;
