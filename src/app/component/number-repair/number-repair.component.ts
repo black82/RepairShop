@@ -31,10 +31,11 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
   }
 
   close() {
+    const idTemp = this.id;
+    this.id = null;
     this.showPopup = false;
     this.alert_service.success(null, 'The procedure was successfully completed id is : '
-      + this.id, true, null, '');
-    this.id = null;
+      + idTemp, true, null, '');
   }
 
 

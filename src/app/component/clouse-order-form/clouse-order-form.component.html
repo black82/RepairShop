@@ -12,7 +12,7 @@
       <fa-icon [icon]="companyType" [style.color]="formClient.controls.client_type.value? '#1ABC9C' : 'lightcoral'"
                class="icon-box test-icon"></fa-icon>
       <label class="checkbox">
-        <input (click)="companyClient()"
+        <input (click)="companyClient()" [checked]="preorders?.client?.typeClient"
                [ngModel]="preorders?.client?.typeClient" [readOnly]="editDisable" class="check-box"
                formControlName="client_type" type="checkbox">
         <span class="check-box-name">Is Company's</span>
@@ -150,7 +150,7 @@
            && formClient.controls.deposit.invalid && formClient.controls.deposit.errors}"
                  [ngModel]="preorders?.preOrderShop?.deposit" class="input-2" formControlName="deposit"
                  placeholder="Deposit"
-                 type="text">
+                 type="number">
         </label>
         <label>
           <span class="input-title">Order Price</span>

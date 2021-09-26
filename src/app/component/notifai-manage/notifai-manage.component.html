@@ -46,7 +46,8 @@
           <div class="ccfield-prepend">
             <span class="ccform-addon"><i class="fa fa-info-circle fa-2x"></i></span>
             <span class="text-input">Repair Id</span>
-            <input [value]="messages?.repair_Id" class="ccformfield" placeholder="Repair-id" readonly type="text">
+            <input [value]="messages?.repair_Id" class="ccformfield" formControlName="repair_Id" name="repair_Id"
+                   placeholder="Repair-id" type="number">
           </div>
           <div class="ccfield-prepend">
             <span class="ccform-addon"><i class="fa fa-toolbox fa-2x"></i></span>

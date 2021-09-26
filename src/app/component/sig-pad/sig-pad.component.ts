@@ -1,12 +1,14 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SigPadService} from '../service/sig-pad.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-sig-pad',
   templateUrl: './sig-pad.component.html',
   styleUrls: ['./sig-pad.component.css']
 })
-export class SigPadComponent implements OnInit {
+export class SigPadComponent implements OnInit, OnDestroy {
+
 
   @ViewChild('sigPad') public sigPad: ElementRef;
   sigPadElement;
@@ -15,6 +17,7 @@ export class SigPadComponent implements OnInit {
   name = 'Staff sign';
   showSigPad = false;
   count = 0;
+  private subscription: Subscription;
 
   constructor(private sig_service: SigPadService) {
 
@@ -28,7 +31,7 @@ export class SigPadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sig_service.open$.subscribe(() => {
+    this.subscription = this.sig_service.open$.subscribe(() => {
       this.showSigPad = !this.showSigPad;
     });
 
@@ -68,6 +71,7 @@ export class SigPadComponent implements OnInit {
     this.sig_service.image_sig_ad.emit(img);
     if (this.count === 2) {
       this.sig_service.open$.emit();
+      this.count = 0;
     }
     if (this.count === 1) {
       this.name = 'Client sign';
@@ -75,4 +79,9 @@ export class SigPadComponent implements OnInit {
     this.clear();
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

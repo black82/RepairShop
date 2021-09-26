@@ -37,10 +37,8 @@
         <td class="element-td">
           {{element?.deposit}}
         </td>
-        <td class="element-td">
-          <a (click)="open_popup(element?.invoiceInput)"
-             class="link-invoice">Invoice
-            Entre</a>
+        <td (click)="open_popup(element?.invoiceInput)" class="element-td" style="cursor: pointer !important;">
+          Invoice Entre
         </td>
 
         <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon

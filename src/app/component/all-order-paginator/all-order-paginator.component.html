@@ -41,15 +41,19 @@
         <td class="element-td">
           {{element?.deposit}}
         </td>
-        <td class="element-td">
-          <a (click)="open_popup(element.invoiceInput)"
-             class="link-invoice">Invoice
-            Entre</a>
+        <td (click)="open_popup(element.invoiceInput)" class="element-td" style="cursor: pointer !important;">
+          <span *ngIf="element?.invoiceInput"
+                class="link-invoice">Invoice
+            Entre</span>
+          <span (click)="open_popup(element.invoiceInput)" *ngIf="!element?.invoiceInput"
+                class="link-invoice" style="color: #c54040">Invoice is not Present</span>
         </td>
-        <td class="element-td">
-          <a (click)="open_popup(element.invoiceOutput)"
-             class="link-invoice">Invoice
-            Close</a>
+        <td (click)="open_popup(element.invoiceOutput)" class="element-td" style="cursor: pointer !important;">
+          <span *ngIf="element.invoiceOutput"
+                class="link-invoice">Invoice
+            Close</span>
+          <span *ngIf="!element.invoiceOutput"
+                class="link-invoice" style="color: #c54040">Invoice is not Present</span>
         </td>
         <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
           [icon]="sally_button" class="button-icon"></fa-icon>Edit Order</span></a>

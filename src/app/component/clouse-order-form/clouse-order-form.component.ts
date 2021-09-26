@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
@@ -60,7 +60,7 @@ import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
   templateUrl: './clouse-order-form.component.html',
   styleUrls: ['./clouse-order-form.component.css']
 })
-export class ClouseOrderFormComponent implements OnInit {
+export class ClouseOrderFormComponent implements OnInit, OnDestroy {
   @Input()
   preorders: PreOrderDto;
   @Input()
@@ -176,6 +176,7 @@ export class ClouseOrderFormComponent implements OnInit {
       map(item => item ? this.filterItems(item) : this.itemsModels.slice())
     );
     this.animation_call();
+
   }
 
   createClient() {
@@ -203,6 +204,9 @@ export class ClouseOrderFormComponent implements OnInit {
   }
 
   animation_call() {
+    if (this.preorders?.client?.typeClient) {
+      this.companyClient();
+    }
     this.animationButtonForm();
     this.animationCheckBox();
     this.animationTitle();
@@ -411,5 +415,14 @@ export class ClouseOrderFormComponent implements OnInit {
     this.httpService.orderEdit(dto.preOrderShop).subscribe(() => {
       this.alert_service.success('', 'Order successfully updated', true, false, '');
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    if (this.sig_pad_event) {
+      this.sig_pad_event.unsubscribe();
+    }
   }
 }

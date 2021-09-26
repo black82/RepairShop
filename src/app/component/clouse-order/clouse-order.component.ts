@@ -73,7 +73,9 @@ export class ClouseOrderComponent implements OnInit {
   }
 
   open_popup(url: string) {
-    if (url === null || url) {
+    console.log(url);
+    console.log(url === null);
+    if (url === null) {
       window.alert('Invoice is not present !!!');
       return;
     }

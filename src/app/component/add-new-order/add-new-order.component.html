@@ -155,7 +155,7 @@
           <input [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.deposit.dirty || formClient.controls.deposit.touched)
            && formClient.controls.deposit.invalid && formClient.controls.deposit.errors}"
                  class="input-2" formControlName="deposit" placeholder="Deposit"
-                 type="text">
+                 type="number">
         </label>
         <label>
           <span class="input-title">Order Price</span>

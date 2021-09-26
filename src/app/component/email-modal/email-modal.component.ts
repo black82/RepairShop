@@ -98,11 +98,14 @@ export class EmailModalComponent implements OnInit, OnDestroy {
         this.id = print.client_print.deviceSale[0]?.idDeviceSale?.toString();
       }
     }
+    if (print.type_client_print === 6) {
+      this.id = print.preorderDto.preOrderShop.orderId?.toString();
+    }
     this.type_print = print.type_client_print;
     this.check_type_print(print);
     this.http.getNickNameCurrentStaffUser().subscribe(name => {
       this.userNickname = name.currentName;
-      if (print.client_print) {
+      if (print.type_client_print !== 5 && print.type_client_print !== 6) {
         this.emailPage(print.client_print);
       } else {
         this.emailPage(print.preorderDto.client);
@@ -127,7 +130,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   checkIfEmailPresent(clientPrint: PrintEntity) {
-    if (clientPrint.type_client_print > 4 && clientPrint.type_client_print < 7) {
+    if (clientPrint.type_client_print === 5 || clientPrint.type_client_print === 6) {
       this.email_send_disable = !clientPrint.preorderDto.client.email;
     } else {
       this.email_send_disable = !clientPrint.client_print.email;
@@ -169,13 +172,12 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.http.orderCreate(this.print_entity.preorderDto).subscribe(res => {
         if (res) {
           this.print_entity.preorderDto.preOrderShop = res;
-          this.id += res?.orderId;
+          this.id = res?.orderId?.toString();
           this.checkIfIdNotNullAndCreateInvoice();
         }
       });
     } else if (this.print_entity.type_client_print === 6) {
-
-      this.id += this.print_entity.preorderDto.preOrderShop.orderId;
+      this.id = this.print_entity.preorderDto.preOrderShop.orderId?.toString();
       this.http.orderClose(this.print_entity.preorderDto).subscribe(() => {
         this.checkIfIdNotNullAndCreateInvoice();
       });
@@ -208,7 +210,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       this.createInvoiceToPrintPageAfterTimeout();
     }
     if (this.print_entity.type_client_print === 6) {
-      this.id = this.print_entity.preorderDto.preOrderShop.orderId?.toString();
+      // this.id = this.print_entity.preorderDto.preOrderShop.orderId?.toString();
       this.createInvoiceToPrintPageAfterTimeout();
     }
   }
@@ -519,6 +521,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   submitForm() {
+    console.log('submitForm' + this.id);
     this.http.saved_print_page(this.invoice).subscribe(() => {
       this.print.$success_print_id.emit(Number(this.id));
     }, () => {

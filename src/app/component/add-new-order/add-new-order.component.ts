@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons/faEnvelope';
@@ -59,7 +59,7 @@ import {PreOrderDto} from '../entity/PreOrderDto';
   templateUrl: './add-new-order.component.html',
   styleUrls: ['./add-new-order.component.css']
 })
-export class AddNewOrderComponent implements OnInit {
+export class AddNewOrderComponent implements OnInit, OnDestroy {
   used = faDesktop;
   mobile = faMobile;
   email = faEnvelope;
@@ -169,6 +169,7 @@ export class AddNewOrderComponent implements OnInit {
       map(item => item ? this.filterItems(item) : this.itemsModels.slice())
     );
     this.animation_call();
+    this.titleForm = 'Create New Order Invoice ';
   }
 
   createClient() {
@@ -381,6 +382,15 @@ export class AddNewOrderComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.sig_pad_event) {
+      this.sig_pad_event.unsubscribe();
+    }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

@@ -39,11 +39,12 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeInvoiceType();
     this.subscription = this.adminService.$show_notified.subscribe(notify => {
-        this.messages = notify;
+      this.messages = notify;
       this.formMessage = this.fb.group({
         destination: [this.messages?.destination_user, [Validators.required, Validators.email]],
         subject: [this.messages.message_subject, [Validators.required]],
         type_sender: [this.messages.type_sender, [Validators.required]],
+        repair_Id: [this.messages.repair_Id, [Validators.required]],
       });
       this.show_message = true;
     });
@@ -62,6 +63,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   resendMessage(message) {
     if (this.formMessage.controls.destination.value) {
       this.messages.destination_user = this.formMessage.controls.destination.value;
+      this.messages.repair_Id = this.formMessage.controls.repair_Id.value;
     }
     this.messages.message_subject = this.formMessage.controls.subject.value;
     this.http.retrySendInvoice(message).subscribe(() => {

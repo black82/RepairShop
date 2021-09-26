@@ -24,6 +24,8 @@
   font-weight: 500;color: #c54040">{{invoiceShopModel.typeInvoiceContact}}</h1>
                 <h1 *ngIf="type_print===3" style="font-size: 16pt;
   font-weight: 500;color: #c54040">{{invoiceShopModel.typeInvoiceContact}}</h1>
+                <h1 *ngIf="type_print===5||type_print===6" style="font-size: 16pt;
+  font-weight: 500;color: #c54040">{{'Operazione ordine '}}</h1>
                 <p style="font-size: 9pt;  color:#c54040"><strong> Nr. {{ id}}</strong></p>
                 <p
                   style="font-size: 9pt;margin: 1px;">{{invoiceModel?.emailCompany ? invoiceModel?.emailCompany : invoiceShopModel?.emailCompany}}</p>
@@ -99,13 +101,13 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeObject}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.dateToEnterTitle }}{{setNewDateFormat(print_entity.preorderDto.preOrderShop.dateInit)| date: 'yyyy/MM/dd h:mm:ss a'}}
+                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.dateToEnterTitle }}{{setNewDateFormat(print_entity.preorderDto.preOrderShop.dateInit)| date: 'yyyy/MM/dd h:mm:ss'}}
                 .</p>
               <p *ngIf="print_entity.type_client_print===6"
-                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.dateToOutTitle}} {{ setNewDateFormat(print_entity.preorderDto.preOrderShop.completeDate)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.dateToOutTitle}} {{ setNewDateFormat(print_entity.preorderDto.preOrderShop.completeDate)| date: 'yyyy/MM/dd h:mm:ss'}}</p>
 
               <p
-                style="font-size: 9pt;margin: 1px">{{invoceOrderModel.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeOrder}}</p>
+                style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeOrder}}</p>
               <p
                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel.cashAdvance + print_entity.preorderDto.preOrderShop.deposit}}</p>
               <p style="font-size: 9pt;margin: 1px;">{{invoceOrderModel.sellerPriceTitle}}
@@ -287,12 +289,13 @@
             <p
               *ngIf="print_entity.preorderDto.preOrderShop.note!=null&&print_entity.preorderDto.preOrderShop.note.length>0"
               style="font-size: 7pt;margin: 0; color: #c54040;">
-              <span style="font-size: 9pt; margin: 0;">{{invoiceModel?.noteInputTitle}} </span>
+              <span style="font-size: 8pt;margin: 0; color: #c54040;"> Note :</span>
+              <span style="font-size: 9pt; margin: 0;"> {{invoiceModel?.noteInputTitle}} </span>
               {{print_entity.preorderDto.preOrderShop.note}}</p>
             <hr style="margin: 0;padding: 0">
             <p style="font-size: 9pt; margin: 0;">{{invoceOrderModel?.conditionedGeneralTitle}}</p>
-            <p style="font-size: 9pt;margin: 0;">{{invoceOrderModel?.conditionedGeneralTitle}}
-            </p>
+            <!--            <p style="font-size: 9pt;margin: 0;">{{invoceOrderModel?.conditionedGeneralTitle}}-->
+            <!--            </p>-->
             <hr style="margin: 0;padding: 0">
             <p style="font-size: 9pt; margin:0;">{{invoceOrderModel?.privacyAuthorization}}</p>
             <span
@@ -333,7 +336,7 @@
 
             <div>
               <div style="font-size: 9pt; margin: 1px;color: #c54040;
-  border-bottom: solid black 1pt;">{{invoiceShopModel?.statementAgreementConditions}}{{date | date:'dd/MM/yyyy'}}
+  border-bottom: solid black 1pt;">{{invoiceShopModel?.statementAgreementConditions ? invoiceShopModel?.statementAgreementConditions : invoceOrderModel?.statementAgreementConditions }}{{date | date:'dd/MM/yyyy'}}
                 <div class="sig_container" style=" float: left;
    width: 100%; display: inline-block;margin: 0;">
                   <div class="staff-container" style="float: left; width:48%;">
