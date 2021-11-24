@@ -61,6 +61,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   clientTitle: string;
   invoiceShopModel: InvoiceShopModels;
   invoceOrderModel: InvoiceOrderModel;
+  dangerRepairs = false;
   private subscriptionPrint: Subscription;
 
   constructor(private print: PrintService,
@@ -550,6 +551,12 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   private getInvoiceModel(print: PrintEntity) {
     if (print.type_client_print === 1 || print.type_client_print === 2) {
+      if (localStorage?.getItem('repairDanger')) {
+        this.dangerRepairs = true;
+        localStorage.removeItem('repairDanger');
+      } else {
+        this.dangerRepairs = false;
+      }
       this.http.findInvoiceRepairsModelByOrder('default').subscribe(value => {
         this.invoiceModel = value;
         this.staffTitle = value?.staffSignTitle;

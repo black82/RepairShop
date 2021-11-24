@@ -112,6 +112,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   vibrations = faVihara;
   software = faFileSignature;
   companyType = faArrowAltCircleRight;
+  repairDangerIcon = faCogs;
   client: Client;
   client_after_saved: Client;
   formClient: FormGroup;
@@ -141,6 +142,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   companyShow = false;
   private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
+  dangerousRepair = false;
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
@@ -188,6 +190,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       client_type: new FormControl(false),
       note: new FormControl(''),
       email_send: new FormControl(false),
+      repairDanger: new FormControl(false),
       date_exit: new FormControl('', [Validators.required])
     });
 
@@ -225,7 +228,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.repair = new Repair(null, this.setDataHourAndMin(formData.date_to_enter),
       this.setDataHourAndMin(formData.date_exit), null, formData.defect,
       formData.deposit, formData.price, null, null, true,
-      this.inputTest, null, this.changeNotes(formData.note), null,
+      this.inputTest, null, formData.note
+      , null,
       this.repairFileStorage, null, null, null);
 
     this.device = new Device(null, formData.model, formData.state_of_use,
@@ -240,7 +244,12 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       telefoneNumber, formData.telephone_number_second, formData.address,
       [this.device], formData.email_send, formData.client_type,
       formData.ivaClient, formData.sdiClient, null, null, null, null);
-    console.log(this.client);
+    console.log(formData?.repairDanger);
+    if (formData?.repairDanger) {
+      localStorage.setItem('repairDanger', 'danger');
+    } else {
+      localStorage.removeItem('repairDanger');
+    }
     return this.client;
   }
 

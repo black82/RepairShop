@@ -9,14 +9,30 @@
   </div>
 
   <form [formGroup]="formClient" autocomplete="off">
-    <div class="check-single">
-      <fa-icon [icon]="companyType" [style.color]="formClient.controls.client_type.value? '#1ABC9C' : 'lightcoral'"
-               class="icon-box test-icon"></fa-icon>
-      <label class="checkbox">
-        <input (click)="companyClient()"
-               class="check-box" formControlName="client_type" type="checkbox">
-        <span class="check-box-name">Is Company's</span>
-      </label>
+    <div class="row">
+      <div class="row-1">
+        <div class="check-single">
+          <fa-icon [icon]="companyType" [style.color]="formClient.controls.client_type.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input (click)="companyClient()"
+                   class="check-box" formControlName="client_type" type="checkbox">
+            <span class="input-title">Is Company's</span>
+          </label>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="check-single">
+          <fa-icon [icon]="repairDangerIcon"
+                   [style.color]="formClient.controls?.repairDanger?.value? '#1ABC9C' : 'lightcoral'"
+                   class="icon-box test-icon"></fa-icon>
+          <label class="checkbox">
+            <input
+              class="check-box" formControlName="repairDanger" type="checkbox">
+            <span class="input-title">Riparazione Alto Rischio</span>
+          </label>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="row-1">
