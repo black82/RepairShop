@@ -32,6 +32,8 @@ import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingU
 import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
 import {HttpClien} from '../service/clientservice.service';
 import {AnimeServiceService} from '../service/anime-service.service';
+import {PrintEntity} from '../entity/Print_Pojo';
+import {EmailSenderService} from '../service/email-sender.service';
 
 @Component({
   selector: 'app-single-divice-forsale',
@@ -78,7 +80,8 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
   constructor(private deviceInputService: DeviceInputService,
               private inputOutputCheck: InputOutputTestService,
               private httpService: HttpClien,
-              private animeService: AnimeServiceService) {
+              private animeService: AnimeServiceService,
+              private emailService: EmailSenderService) {
   }
 
   ngOnInit(): void {
@@ -165,5 +168,42 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
     }, () => {
       this.animeService.$anime_show.emit(false);
     });
+  }
+
+  invoice_Update(type: number) {
+    if (4 === type && !this.deviceForSaleDto.deviceForSale.isSaled) {
+      alert('This device in sale now');
+      return;
+    }
+    let client: Client;
+    if (type === 3) {
+      client = this.deviceForSaleDto.clientBaying;
+      client.deviceBay = client.deviceBay.filter(dev => this.deviceForSaleDto?.deviceForSale?.idDeviceSale === dev?.idDeviceSale);
+    } else {
+      client = this.deviceForSaleDto.clientSailing;
+      if (client !== null && client.deviceSale !== null) {
+        client.deviceSale = client.deviceSale.filter(dev => this.deviceForSaleDto.deviceForSale.idDeviceSale === dev.idDeviceSale);
+      }
+    }
+    this.submitFormAndSendEmail(client, type);
+  }
+
+  submitFormAndSendEmail(client, type) {
+    this.emailService.update_invoice_responses.subscribe(res => {
+      this.saveInvoice(type, res);
+      this.animeService.$anime_show.emit(false);
+    });
+    this.emailService.email_send(new PrintEntity(client,
+      type, null,
+      this.deviceForSaleDto.deviceForSale.idDeviceSale, null, 'Update Invoice'));
+
+  }
+
+  saveInvoice(type, link) {
+    if (3 === type) {
+      this.deviceForSaleDto.deviceForSale.repairFileStorage.invoiceToEnterDeviceToRepair = link;
+    } else if (4 === type) {
+      this.deviceForSaleDto.deviceForSale.repairFileStorage.invoiceToExitDeviceToRepair = link;
+    }
   }
 }

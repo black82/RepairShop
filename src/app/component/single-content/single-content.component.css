@@ -400,6 +400,68 @@ input[type=checkbox]:checked ~ label > img {
   animation: scale-down-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+.edit {
+  position: relative;
+  align-content: center;
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-right: 20px;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  perspective: 500px;
+  transition: .2s;
+  cursor: pointer;
+  margin-bottom: 20%;
+}
+
+.edit:last-of-type {
+  margin-right: 0;
+}
+
+
+.edit span {
+  position: relative;
+  z-index: 2;
+
+}
+
+.edit:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  transition: .4s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+.edit:hover:before {
+  transform: rotateY(94deg);
+}
+
+
+.edit:before {
+  background: #F09EA3;
+  border: 1px solid #F09EA3;
+  cursor: pointer;
+}
+
+
+.edit:hover {
+  color: #F09EA3;
+  border-color: #F09EA3;
+  cursor: pointer;
+}
+
 @-webkit-keyframes scale-up-center {
   0% {
     -webkit-transform: scale(0.5);

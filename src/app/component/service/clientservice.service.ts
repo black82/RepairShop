@@ -26,9 +26,9 @@ import {InvoiceOrderModel} from '../entity/InvoiceOrderModel';
 export class HttpClien {
   handler: any;
   // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-  apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+   apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
 
-   // apiUrl = 'http://localhost:8080/';
+  // apiUrl = 'http://localhost:8080/';
 
 
   constructor(private http: HttpClient,
@@ -44,6 +44,13 @@ export class HttpClien {
 
   bayingDeviceToClient(client: Client): Observable<number> {
     return this.http.post<number>(this.apiUrl + 'api/device/baying', client)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  updateInvoice(invoice: InvoiceToolsDto): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'message/api/update/invoice', invoice)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -483,6 +490,15 @@ export class HttpClien {
 
   getPreorderDtoById(id: number): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/order/id',
+      {
+        params: new HttpParams().set('id', String(id))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  updateOrderStatusToOrdinate(id: number) {
+    return this.http.post<any>(this.apiUrl + 'api/order/update/status/ordinate/id', {},
       {
         params: new HttpParams().set('id', String(id))
       }).pipe(

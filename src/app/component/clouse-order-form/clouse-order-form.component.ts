@@ -20,7 +20,6 @@ import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
 import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
-import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
 import {faDigitalTachograph} from '@fortawesome/free-solid-svg-icons/faDigitalTachograph';
 import {faMobileAlt} from '@fortawesome/free-solid-svg-icons/faMobileAlt';
 import {faChargingStation} from '@fortawesome/free-solid-svg-icons/faChargingStation';
@@ -54,6 +53,7 @@ import {AnimeServiceService} from '../service/anime-service.service';
 import {map, startWith} from 'rxjs/operators';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {faEdit} from '@fortawesome/free-solid-svg-icons/faEdit';
+import {faTrafficLight} from '@fortawesome/free-solid-svg-icons/faTrafficLight';
 
 @Component({
   selector: 'app-clouse-order-form',
@@ -87,7 +87,6 @@ export class ClouseOrderFormComponent implements OnInit, OnDestroy {
   test = faClipboardList;
   note = faCommentAlt;
   discar = faTrashAlt;
-  bluetoothIcon = faBluetooth;
   sensors = faDigitalTachograph;
   display = faMobileAlt;
   conections = faChargingStation;
@@ -123,10 +122,9 @@ export class ClouseOrderFormComponent implements OnInit, OnDestroy {
   filteredItems1: Observable<any[]>;
   prompt = 'Click <enter> to add "';
   itemsModels: string[] = [];
-  invoice_event: Subscription;
+  iconStatus = faTrafficLight;
   sig_pad_event: Subscription;
-  email_send_event: Subscription;
-  email_anime_event: Subscription;
+
   email_send_disable = true;
   formSubmitted: boolean;
   client: Client;
@@ -134,9 +132,9 @@ export class ClouseOrderFormComponent implements OnInit, OnDestroy {
   preOrderDtto: PreOrderDto;
   edit_button = faEdit;
   editDisable = false;
-  private subscriber: Subscription;
+
   private subscription: Subscription;
-  private subscriptionPrintSuccess: Subscription;
+
 
   constructor(private fb: FormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
@@ -191,7 +189,8 @@ export class ClouseOrderFormComponent implements OnInit, OnDestroy {
       this.preorders?.preOrderShop?.userId, this.preorders?.preOrderShop?.userName,
       new Date(), new Date(), formData.typeOrder,
       formData.color, formData.model, formData.typeObject, formData.deposit, formData.price, formData.note,
-      this.preOrderDtto?.preOrderShop?.invoiceInput, this.preOrderDtto?.preOrderShop?.invoiceOutput);
+      this.preOrderDtto?.preOrderShop?.invoiceInput, this.preOrderDtto?.preOrderShop?.invoiceOutput,
+      this.preOrderDtto?.preOrderShop?.orderStatus);
     this.preOrderDtto = new PreOrderDto(this.client, this.preOrderShop);
     return this.preOrderDtto;
   }
@@ -267,7 +266,6 @@ export class ClouseOrderFormComponent implements OnInit, OnDestroy {
 
   sign_pad_open() {
     if (!this.formClient.valid) {
-      console.log(this.formClient);
       this.alert_service.warn('', 'Before sending the form ' +
         'to the Email please complete all the fields !!! Thank you. Try again.', false, false, '', null);
       Object.keys(this.formClient.controls).forEach(key => {
@@ -403,7 +401,6 @@ export class ClouseOrderFormComponent implements OnInit, OnDestroy {
 
   editPreorder() {
     if (!this.formClient.valid) {
-      console.log(this.formClient);
       this.alert_service.warn('', 'Before sending the form ' +
         'to the Email please complete all the fields !!! Thank you. Try again.', false, false, '', null);
       Object.keys(this.formClient.controls).forEach(key => {
@@ -416,6 +413,7 @@ export class ClouseOrderFormComponent implements OnInit, OnDestroy {
       this.alert_service.success('', 'Order successfully updated', true, false, '');
     });
   }
+
 
   ngOnDestroy() {
     if (this.subscription) {

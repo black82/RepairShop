@@ -31,7 +31,7 @@ export class LogServiceComponent implements OnInit, OnDestroy {
       this.resizeTableHtml();
     }, error => {
       this.animation_wait.$anime_show.emit(false);
-      console.log(error?.error?.message);
+      console.log(error);
     });
 
   }

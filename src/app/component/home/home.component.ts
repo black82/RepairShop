@@ -11,6 +11,7 @@ import sparti from 'sparticles';
 
 export declare function animeBackground(sparti): void;
 
+
 export declare function animeMenu(): void;
 
 @Component({
@@ -47,7 +48,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     animeBackground(sparti);
-
     const view = localStorage.getItem('token');
     if (view) {
 

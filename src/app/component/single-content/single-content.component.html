@@ -244,6 +244,7 @@
       </div>
     </div>
   </div>
+  <app-email-modal [callerServiceType]="'update'"></app-email-modal>
   <mat-expansion-panel *ngIf="show_document">
     <mat-expansion-panel-header>
       <fa-icon [icon]="images_icon"></fa-icon>
@@ -253,6 +254,7 @@
       <div class="row-container">
         <div class="foto-enter-device row-1">
           <div>
+            <a (click)="invoice_Update(1)" class="edit button "><span>Aggiornamento Fattura</span></a>
             <div *ngIf="repair_fileStorage?.invoiceToEnterDeviceToRepair"
                  class="link-invoice-enter ">
               <a (click)="open_popup(repair_fileStorage.invoiceToEnterDeviceToRepair)"
@@ -272,7 +274,9 @@
             </div>
           </div>
         </div>
+
         <div class="row-2">
+          <a (click)="invoice_Update(2)" class="edit button "><span>Aggiornamento Fattura</span></a>
           <div *ngIf="repair_fileStorage.invoiceToExitDeviceToRepair"
                class="link-invoice-enter">
             <a (click)="open_popup(repair_fileStorage.invoiceToExitDeviceToRepair)"

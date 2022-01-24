@@ -244,7 +244,6 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       telefoneNumber, formData.telephone_number_second, formData.address,
       [this.device], formData.email_send, formData.client_type,
       formData.ivaClient, formData.sdiClient, null, null, null, null);
-    console.log(formData?.repairDanger);
     if (formData?.repairDanger) {
       localStorage.setItem('repairDanger', 'danger');
     } else {

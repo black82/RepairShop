@@ -9,6 +9,7 @@ export class EmailSenderService {
   email_send_event: EventEmitter<PrintEntity> = new EventEmitter();
   email_sent_send_success: EventEmitter<boolean> = new EventEmitter<boolean>();
   anime_question: EventEmitter<boolean> = new EventEmitter<boolean>();
+  update_invoice_responses: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
   }

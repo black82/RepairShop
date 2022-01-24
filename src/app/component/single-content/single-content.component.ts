@@ -24,6 +24,8 @@ import {RepairFileStorage} from '../entity/RepairFileStorage';
 import {InputOutputTestService} from '../service/input-output-test.service';
 import {AnimeServiceService} from '../service/anime-service.service';
 import {HttpClien} from '../service/clientservice.service';
+import {PrintEntity} from '../entity/Print_Pojo';
+import {EmailSenderService} from '../service/email-sender.service';
 
 @Component({
   selector: 'app-single-content',
@@ -61,13 +63,17 @@ export class SingleContentComponent implements OnInit {
   show_document = false;
   device_show = false;
   element: Element;
+  current_repair: Repair;
+  client_show = false;
 
   constructor(private inputOutputCheckTest: InputOutputTestService,
               private animeService: AnimeServiceService,
-              private httpService: HttpClien) {
+              private httpService: HttpClien,
+              private emailSender: EmailSenderService) {
   }
 
   ngOnInit() {
+    this.client_show = true;
     if (this.client != null) {
       this.create_client(this.client);
     }
@@ -143,6 +149,7 @@ export class SingleContentComponent implements OnInit {
     item.visible = true;
     this.repair_fileStorage = null;
     this.repair_fileStorage = item.repair_elemnt.repairFileStorage;
+    this.current_repair = item.repair_elemnt;
     this.showDocument();
   }
 
@@ -153,6 +160,41 @@ export class SingleContentComponent implements OnInit {
     }, () => {
       this.animeService.$anime_show.emit(false);
     });
+  }
+
+  invoice_Update(type: number) {
+    if (2 === type && this.current_repair.nowInRepair) {
+      alert('This repair is already in repair');
+      return;
+    }
+    const client = this.client;
+    client.device.forEach(device => {
+      if (device.repairs.find(rep1 => rep1.repair_Id === this.current_repair.repair_Id)) {
+        device.repairs = device.repairs.filter(rep => rep.repair_Id === this.current_repair.repair_Id);
+        client.device = [];
+        client.device.push(device);
+      }
+    });
+    this.submitFormAndSendEmail(client, type);
+  }
+
+  submitFormAndSendEmail(client, type) {
+    this.emailSender.update_invoice_responses.subscribe(res => {
+      this.saveInvoice(type, res);
+      this.animeService.$anime_show.emit(false);
+    });
+    this.emailSender.email_send(new PrintEntity(client,
+      type, new Date(),
+      this.current_repair.repair_Id, null, 'Update Invoice'));
+
+  }
+
+  saveInvoice(type, link) {
+    if (1 === type) {
+      this.repair_fileStorage.invoiceToEnterDeviceToRepair = link;
+    } else if (2 === type) {
+      this.repair_fileStorage.invoiceToExitDeviceToRepair = link;
+    }
   }
 }
 

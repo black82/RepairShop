@@ -15,7 +15,7 @@
 #header-wrapper {
   z-index: 2;
   background: linear-gradient(to top right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%) !important;
-
+  /*background: #262626 !important;*/
 
 }
 
@@ -27,17 +27,17 @@
 }
 
 .name-company {
-  color: white;
+  color: #222b3c;
   text-align: center;
   font-family: 'Dancing Script', "Font Awesome 5 Free", serif;
   font-size: 2em;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  text-shadow: 0 1px 2px #FFFFFF,
   0 -2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 3px;
 }
 
 .user-position {
-  color: white;
+  color: #222b3c;
   font-family: Bradley Hand, cursive;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
@@ -66,7 +66,7 @@
   font-size: 1.5em;
   letter-spacing: 4px;
   overflow: hidden;
-  color: #FFFFFF;
+  color: #222b3c;
 }
 
 svg path {
@@ -132,7 +132,7 @@ svg {
 
 .brand a,
 .brand a:visited {
-  color: #ffffff;
+  color: #222b3c;
   text-decoration: none;
 }
 
@@ -172,13 +172,24 @@ nav ul li {
   background: black;
 }
 
-nav ul li a,
+
 nav ul li a:visited {
   display: block;
   padding: 0 20px;
   line-height: 70px;
   background: transparent;
-  color: #ffffff;
+  color: #FFFFFF;
+  text-decoration: none;
+  z-index: 1;
+  position: relative;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0 20px;
+  line-height: 70px;
+  background: transparent;
+  color: #FFFFFF;
   text-decoration: none;
   z-index: 1;
   position: relative;
@@ -186,7 +197,7 @@ nav ul li a:visited {
 
 nav ul li a:hover,
 nav ul li a:visited:hover {
-  background: lightcoral;
+  background: #222b3c;
   color: #ffffff;
 }
 

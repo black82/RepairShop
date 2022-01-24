@@ -14,12 +14,12 @@
         <th scope="col">Order Id</th>
         <th scope="col">Client</th>
         <th scope="col">Type Object</th>
-        <th scope="col">Type Order</th>
-        <th scope="col">Date Order</th>
-        <th scope="col">Date Close Order</th>
+        <th scope="col">Type</th>
+        <th scope="col">Date Receive</th>
+        <th scope="col">Date Close</th>
         <th scope="col">Color</th>
         <th scope="col">Price</th>
-        <th scope="col">Deposit</th>
+        <th scope="col">Status</th>
         <th scope="col">Invoice Enter</th>
         <th scope="col">Invoice Close</th>
       </tr>
@@ -31,32 +31,35 @@
         <td
           class="element-td">{{element?.typeObject}}</td>
         <td class="element-td">{{element?.typeOrder}}</td>
-        <td class="element-td">{{setNewDateFormat(element?.dateInit)| date: 'yyyy/MM/dd hh:mm'}}</td>
+        <td class="element-td">{{setNewDateFormat(element?.dateInit)| date: 'yyyy/MM/dd'}}</td>
         <td
-          class="element-td">{{element?.completeDate ? (setNewDateFormat(element.completeDate)| date: 'yyyy/MM/dd hh:mm') : 'Open Order'}}</td>
+          class="element-td">{{element?.completeDate ? (setNewDateFormat(element.completeDate)| date: 'yyyy/MM/dd') : 'Open Order'}}</td>
         <td class="element-td">{{element?.color}}</td>
         <td class="element-td">
           {{element?.price}}
         </td>
-        <td class="element-td">
-          {{element?.deposit}}
+        <td [style]="getColorByStatus(element)" class="element-td">
+          {{element?.orderStatus === null && element?.completeDate ? 'Chiuso' : element.orderStatus}}
         </td>
-        <td (click)="open_popup(element.invoiceInput)" class="element-td" style="cursor: pointer !important;">
-          <span *ngIf="element?.invoiceInput"
-                class="link-invoice">Invoice
-            Entre</span>
-          <span (click)="open_popup(element.invoiceInput)" *ngIf="!element?.invoiceInput"
-                class="link-invoice" style="color: #c54040">Invoice is not Present</span>
+        <td class="element-td" style="cursor: pointer !important;">
+          <span (click)="open_popup(element.invoiceInput)" *ngIf="element?.invoiceInput"
+                class="link-invoice"> Entre</span>
+          <span (click)="invoice_Update(5,element)" *ngIf="!element?.invoiceInput"
+                class="link-invoice" style="color: #c54040">Update</span>
         </td>
-        <td (click)="open_popup(element.invoiceOutput)" class="element-td" style="cursor: pointer !important;">
-          <span *ngIf="element.invoiceOutput"
-                class="link-invoice">Invoice
-            Close</span>
-          <span *ngIf="!element.invoiceOutput"
-                class="link-invoice" style="color: #c54040">Invoice is not Present</span>
+        <td class="element-td" style="cursor: pointer !important;">
+          <span (click)="open_popup(element.invoiceOutput)" *ngIf="element.invoiceOutput"
+                class="link-invoice">Close</span>
+          <a (click)="invoice_Update(6,element)" *ngIf="element.invoiceOutput===null&&element.completeDate!==null"
+             class="link-invoice"
+             style="height: 100%;color: #c54040;">{{'Update'}}</a>
+          <a (click)="invoice_OpenAlert()" *ngIf="element.invoiceOutput===null&&element.completeDate===null"
+             class="link-invoice"
+             style="height: 100%;color: #1ABC9C">{{'Open'}}</a>
         </td>
-        <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
-          [icon]="sally_button" class="button-icon"></fa-icon>Edit Order</span></a>
+        <td>
+          <a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
+            [icon]="sally_button" class="button-icon"></fa-icon>Edit Order</span></a>
         </td>
       </tr>
       </tbody>
@@ -68,4 +71,5 @@
       </div>
     </div>
   </div>
+  <app-email-modal [callerServiceType]="'update'"></app-email-modal>
 </div>

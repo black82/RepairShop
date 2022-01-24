@@ -317,6 +317,7 @@
         </div>
       </div>
     </div>
+    <app-email-modal [callerServiceType]="'update'"></app-email-modal>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <fa-icon [icon]="images_icon"></fa-icon>
@@ -327,6 +328,7 @@
         <div class="row-container1">
           <div class="foto-enter-device row-1-col">
             <div>
+              <a (click)="invoice_Update(3)" class="edit button "><span>Aggiornamento Fattura</span></a>
               <div *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToEnterDeviceToRepair"
                    class="link-invoice-enter ">
                 <a (click)="open_popup(deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToEnterDeviceToRepair)"
@@ -349,6 +351,7 @@
             </div>
           </div>
           <div class="row-2">
+            <a (click)="invoice_Update(4)" class="edit button "><span>Aggiornamento Fattura</span></a>
             <div *ngIf="deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToExitDeviceToRepair"
                  class="link-invoice-enter">
               <a (click)="open_popup(deviceForSaleDto.deviceForSale.repairFileStorage?.invoiceToExitDeviceToRepair)"

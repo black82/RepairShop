@@ -162,7 +162,7 @@
             <p
               style="font-size: 9pt;margin: 1px"> {{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>
             <p *ngIf="type_print===1"
-               style="font-size: 9pt;margin: 1px">{{invoiceModel?.dateRepairWillReady + date_exit}}</p>
+               style=" font-size: 9pt;margin: 1px">{{invoiceModel?.dateRepairWillReady + date_exit}}</p>
 
 
             <div *ngIf="type_print===2">
@@ -348,7 +348,7 @@
    width: 100%; display: inline-block;margin: 0;">
                   <div class="staff-container" style="float: left; width:48%;">
                     <p>{{staffTitle}} <span style="color: #1ABC9C">{{userNickname}}</span></p>
-                    <img alt="" height="20px" src="{{images_sig[0]}}" width="70px">
+                    <img alt="Auto Sign" height="20px" src="{{images_sig[0]}}" width="70px">
                   </div>
                   <div *ngIf="print_entity.type_client_print<5" class="client_container"
                        style="display: inline; width:49%;float: left;margin: 0">
@@ -356,7 +356,7 @@
                       style="color: #1ABC9C"> {{client?.name + ' ' + client?.family}}</span></p>
                     <p *ngIf="client?.typeClient" style="width: 49%">{{clientTitle}}<span
                       style="color: #1ABC9C"> {{client?.companyName}}</span></p>
-                    <img alt="" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
+                    <img alt="Auto Sign" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
                   </div>
                   <div *ngIf="print_entity.type_client_print===5||print_entity.type_client_print===6"
                        class="client_container" style="display: inline; width:49%;float: left;margin: 0">
@@ -365,7 +365,7 @@
                     </p>
                     <p *ngIf="print_entity.preorderDto.client?.typeClient" style="width: 49%">{{clientTitle}}<span
                       style="color: #1ABC9C"> {{print_entity.preorderDto.client?.companyName}}</span></p>
-                    <img alt="" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
+                    <img alt="Auto Sign" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
                   </div>
                 </div>
                 <div class="clear" style="clear: both;margin: 0"></div>
@@ -374,30 +374,35 @@
           </div>
         </div>
         <div class="button_form">
-          <div tooltip="You will leave this page!!!">
+          <div *ngIf="callerServiceType!=='update'" tooltip="You will leave this page!!!">
             <a (click)="edit_client()" class="edit">
         <span><fa-icon [icon]="redact" class="button-icon"></fa-icon>
         Redact Form</span></a></div>
-          <div tooltip="The model will be sent to the Printer">
+          <div *ngIf="callerServiceType!=='update'" tooltip="The model will be sent to the Printer">
             <a (click)="print_click()" class="print button ">
         <span> <fa-icon [icon]="printer"
                         class="button-icon"></fa-icon> Print Invoice</span></a></div>
 
-          <div [class.disabled]="true" tooltip="The model will be sent to the WhatsApp">
+          <div *ngIf="callerServiceType!=='update'" [class.disabled]="true"
+               tooltip="The model will be sent to the WhatsApp">
             <a (click)="clickWhatsappSender()" class="whatsapp button ">
         <span> <fa-icon [icon]="whatsapp"
                         class="button-icon"></fa-icon>WhatsApp Invoice</span></a>
           </div>
 
-          <div [class.disabled]="true" tooltip="The model will be sent to the MMS">
+          <div *ngIf="callerServiceType!=='update'" [class.disabled]="true" tooltip="The model will be sent to the MMS">
             <a (click)="clickMmsSender()" class="mms button ">
         <span> <fa-icon [icon]="mms"
                         class="button-icon"></fa-icon> MMS Invoice</span></a>
           </div>
-          <div tooltip="The model will be sent to the Email">
+          <div *ngIf="callerServiceType!=='update'" tooltip="The model will be sent to the Email">
             <a (click)="clickEmailSender()" [class.disabled]="email_send_disable" class=" button email"><span> <fa-icon
               [icon]="mail" class="button-icon"></fa-icon> Email Invoice</span></a>
           </div>
+          <div *ngIf="callerServiceType==='update'" tooltip="The model will be sent to the Printer">
+            <a (click)="updateInvoiceClick()" class="print button ">
+        <span> <fa-icon [icon]="printer"
+                        class="button-icon"></fa-icon> Update Invoice</span></a></div>
         </div>
       </div>
     </div>

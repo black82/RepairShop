@@ -202,7 +202,7 @@ export class DeviceBayComponent implements OnInit, OnDestroy {
       this.client = clientPush;
     });
     this.animation_call();
-
+    this.animation_end();
   }
 
   createClient() {

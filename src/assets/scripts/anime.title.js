@@ -1,6 +1,13 @@
+
 function animeTitle(anime) {
   const textWrapper = document.querySelector('.name-company');
   textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+  if (anime === undefined) {
+
+    return;
+
+  }
+  textWrapper.style.color = 'white';
   anime.timeline({loop: true})
     .add({
       targets: '.name-company .letter',
@@ -15,9 +22,15 @@ function animeTitle(anime) {
     easing: "easeOutExpo",
     delay: 100000
   });
+  setTimeout(() => {
+    textWrapper.style.color = '#222b3c';
+  }, 3000)
+
+
 }
 
 function animeBackground(stats1) {
+
   const date = new Date();
 
   let colors = {
@@ -26,7 +39,7 @@ function animeBackground(stats1) {
     color3: "rgba(232,248,255,1)",
     color4: "rgba(135,143,145,1)"
   }, options;
-  if (date.getMonth() < 2 && date.getMonth() < 10) {
+  if (date.getMonth() === 0 || date.getMonth() === 10) {
     options = {
       alphaSpeed: 10,
       alphaVariance: 1,
@@ -37,12 +50,12 @@ function animeBackground(stats1) {
       float: 0.75,
       glow: 0,
       imageUrl: [
-        "https://image.flaticon.com/icons/svg/23/23858.svg",
-        "https://image.flaticon.com/icons/svg/23/23883.svg",
-        "https://image.flaticon.com/icons/svg/23/23889.svg",
-        "https://image.flaticon.com/icons/svg/24/24296.svg",
-        "https://image.flaticon.com/icons/svg/23/23901.svg",
-        "https://image.flaticon.com/icons/svg/24/24286.svg"
+        "https://svgsilh.com/svg/1152000.svg",
+        "https://svgsilh.com/svg/2910087.svg",
+        "https://cdn4.iconfinder.com/data/icons/christmas-cheer-volume-i-1/64/snowflake-1024.png",
+        "https://svgsilh.com/svg/2029377.svg",
+        "https://svgsilh.com/svg/1854933.svg",
+        "https://svgsilh.com/svg/2029377.svg"
       ],
       maxAlpha: 2,
       maxSize: 22,
@@ -119,7 +132,7 @@ function animeBackground(stats1) {
       "shape": "diamond",
       "imageUrl": "https://image.shutterstock.com/image-vector/autumn-leaf-maple-isolated-on-260nw-689177599.jpg"
     }
-  } else if (date.getMonth() > 7 && date.getMonth() < 10) {
+  } else if (date.getMonth() > 7 && date.getMonth() < 8) {
 
     options = {
 
@@ -241,17 +254,26 @@ function animeBackground(stats1) {
 
   function addSparticles(node, option) {
     setTimeout(() => {
-      options.transition = 'all 1s';
-      let newVar = $('body').get(0);
-      const perc = newVar.scrollHeight * 0.08
-      if (detectMob()) {
-        new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight - perc)
-      } else {
-        new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight + perc)
-      }
-    }, 1500)
+        options.transition = 'all 1s';
+        let newVar = $('body').get(0);
+        const perc = newVar.scrollHeight * 0.08
+        let stat;
+        if (detectMob()) {
+          stat = new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight - perc)
+        } else {
+          stat = new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight + perc)
+        }
+        resize(stat);
+      },
+      1500)
   }
 
+}
+
+function resize(stat) {
+  window.addEventListener('resize', function (event) {
+    // window.location.reload();
+  }, true);
 }
 
 function detectMob() {

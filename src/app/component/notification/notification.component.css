@@ -79,7 +79,7 @@
 }
 
 .col-xs-2:hover {
-  background-color: #c74b16 !important;
+  background-color: #222b3c !important;
 }
 
 .notification-body {
@@ -297,7 +297,7 @@
 }
 
 .user-name:hover {
-  color: lightcoral;
+  color: #222b3c;
 }
 
 .fa-w-10 {

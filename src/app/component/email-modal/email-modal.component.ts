@@ -84,7 +84,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
 
   afterReceiveAllResourcesCall(print: PrintEntity) {
-    this.images_sig = this.sig_pad_service.image_sig;
+    this.images_sig = this.sig_pad_service.getSignPictures();
     this.print_entity = print;
     this.title = print.titleForm;
     this.checkIfEmailPresent(print);
@@ -94,16 +94,24 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     } else {
       if (print.type_client_print === 3) {
         this.id = '';
+        if (print.id) {
+          this.id = String(print.id);
+        }
       }
       if (print.type_client_print === 4) {
         this.id = print.client_print.deviceSale[0]?.idDeviceSale?.toString();
+      }
+    }
+    if (print.type_client_print === 5) {
+      if (print.id) {
+        this.id = String(print.id);
       }
     }
     if (print.type_client_print === 6) {
       this.id = print.preorderDto.preOrderShop.orderId?.toString();
     }
     this.type_print = print.type_client_print;
-    this.check_type_print(print);
+    this.check_type_print(this.print_entity);
     this.http.getNickNameCurrentStaffUser().subscribe(name => {
       this.userNickname = name.currentName;
       if (print.type_client_print !== 5 && print.type_client_print !== 6) {
@@ -132,9 +140,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
 
   checkIfEmailPresent(clientPrint: PrintEntity) {
     if (clientPrint.type_client_print === 5 || clientPrint.type_client_print === 6) {
-      this.email_send_disable = !clientPrint.preorderDto.client.email;
+      this.email_send_disable = !clientPrint.preorderDto?.client?.email;
     } else {
-      this.email_send_disable = !clientPrint.client_print.email;
+      this.email_send_disable = !clientPrint?.client_print?.email;
     }
   }
 
@@ -143,7 +151,6 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   ok() {
-    console.log(this.print_entity);
     this.animation_wait.$anime_show.emit(true);
     if (this.print_entity.type_client_print === 1) {
       this.http.printClient(this.client).subscribe(response => {
@@ -522,7 +529,6 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   submitForm() {
-    console.log('submitForm' + this.id);
     this.http.saved_print_page(this.invoice).subscribe(() => {
       this.print.$success_print_id.emit(Number(this.id));
     }, () => {
@@ -595,6 +601,17 @@ export class EmailModalComponent implements OnInit, OnDestroy {
         }
       );
     }
+  }
+
+  updateInvoiceClick() {
+    const html = document.querySelector('.container-page');
+    this.invoice = this.createInvoiceToPage(html.innerHTML);
+    this.invoice.messageEmail = String(this.type_print);
+    this.animation_wait.$anime_show.emit(true);
+    this.http.updateInvoice(this.invoice).subscribe(res => {
+      this.emailSender.update_invoice_responses.emit(res.link);
+      this.show_email_send = false;
+    });
   }
 
   private populateStandartInvoice(value: InvoiceOrderModel) {

@@ -182,7 +182,7 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
       null);
     this.preOrderShop = new PreOrderShop(null, null, null, new Date(), null, formData.typeOrder,
       formData.color, formData.model, formData.typeObject, formData.deposit, formData.price, formData.note,
-      null, null);
+      null, null, null);
     this.preOrderDtto = new PreOrderDto(this.client, this.preOrderShop);
     return this.preOrderDtto;
   }

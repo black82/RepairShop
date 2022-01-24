@@ -28,12 +28,14 @@ export class PreOrderShop {
 
   invoiceOutput: string;
 
+  orderStatus: string;
 
-  constructor(orderId: number, userId: number, userName: number, dateInit: Date,
-              completeDate: Date, typeOrder: string, color: string,
-              model: string, typeObject: string, deposit: number,
-              price: number, note: string, invoiceInput: string,
-              invoiceOutput: string) {
+
+  constructor(orderId: number, userId: number, userName: number,
+              dateInit: Date, completeDate: Date, typeOrder: string,
+              color: string, model: string, typeObject: string, deposit: number,
+              price: number, note: string, invoiceInput: string, invoiceOutput: string,
+              orderStatus: string) {
     this.orderId = orderId;
     this.userId = userId;
     this.userName = userName;
@@ -48,5 +50,6 @@ export class PreOrderShop {
     this.note = note;
     this.invoiceInput = invoiceInput;
     this.invoiceOutput = invoiceOutput;
+    this.orderStatus = orderStatus;
   }
 }
