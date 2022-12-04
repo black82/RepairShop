@@ -11,6 +11,7 @@ import {PrintEntity} from '../entity/Print_Pojo';
 import {EmailSenderService} from '../service/email-sender.service';
 import {Subscription} from 'rxjs';
 import {faBox} from '@fortawesome/free-solid-svg-icons/faBox';
+import {ClientStaticServiceService} from '../service/client-static-service.service';
 
 @Component({
   selector: 'app-clouse-order',
@@ -35,7 +36,7 @@ export class ClouseOrderComponent implements OnInit, OnDestroy {
   constructor(private clientHttp: HttpClien,
               private animation_wait: AnimeServiceService,
               private alert_service: AlertServiceService,
-              private emailService: EmailSenderService) {
+              private emailService: EmailSenderService, public cl: ClientStaticServiceService) {
   }
 
   ngOnInit(): void {

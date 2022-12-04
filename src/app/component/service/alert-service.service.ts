@@ -32,7 +32,6 @@ export class AlertServiceService {
 
   soundAlert() {
     const audio = new Audio();
-    audio.type = 'audio/mp3';
     audio.crossOrigin = 'anonimus';
     audio.src = './../assets/sound/hand-bell.mp3';
     audio.load();
@@ -41,9 +40,8 @@ export class AlertServiceService {
 
   //
   soundSend() {
-    const audio = new Audio();
+    const audio: HTMLAudioElement = new Audio();
     audio.crossOrigin = 'anonimus';
-    audio.type = 'application/force-download';
     audio.src = './../assets/sound/sending.mp3';
     audio.load();
     audio.play().then(r => r);

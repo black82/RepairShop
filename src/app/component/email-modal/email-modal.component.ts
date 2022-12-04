@@ -21,6 +21,7 @@ import {InputOutputTestService} from '../service/input-output-test.service';
 import {InvoiceRepairModel} from '../entity/InvoiceRepairModel';
 import {InvoiceShopModels} from '../entity/InvoiceShopModels';
 import {InvoiceOrderModel} from '../entity/InvoiceOrderModel';
+import {ClientStaticServiceService} from '../service/client-static-service.service';
 
 
 @Component({
@@ -70,7 +71,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
               private alert_service: AlertServiceService,
               private sig_pad_service: SigPadService,
               private animation_wait: AnimeServiceService,
-              private inputOutputTestCheck: InputOutputTestService) {
+              private inputOutputTestCheck: InputOutputTestService, public cl: ClientStaticServiceService) {
 
   }
 

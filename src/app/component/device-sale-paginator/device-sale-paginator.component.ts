@@ -8,6 +8,7 @@ import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
 import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
 import {DeviceForSaleTransaction} from '../entity/DeviceForSaleTransaction';
 import {Observable} from 'rxjs';
+import {ClientStaticServiceService} from '../service/client-static-service.service';
 
 @Component({
   selector: 'app-device-sale-now-paginator',
@@ -30,7 +31,7 @@ export class DeviceSalePaginatorComponent implements OnInit {
   constructor(private clientHttp: HttpClien,
               private animation_wait: AnimeServiceService,
               private alert_service: AlertServiceService,
-              private deviceService: DeviceInputService) {
+              private deviceService: DeviceInputService, public cl: ClientStaticServiceService) {
   }
 
   ngOnInit(): void {

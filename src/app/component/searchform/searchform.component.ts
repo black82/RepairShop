@@ -111,7 +111,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
   }
 
   showSearchForm() {
-    document.getElementsByClassName('show-form')[0].style.opacity = '1';
+    (document.getElementsByClassName('show-form')[0] as HTMLElement).style.opacity = '1';
     document.querySelector('form').style.display = 'none';
     document.querySelector('.show-form').addEventListener('click', () => {
       (document.querySelector('.show-form') as HTMLElement).style.opacity = '0';

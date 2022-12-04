@@ -127,7 +127,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private printService: PrintService,
-              private  check_device: FiltreMoreDeviceRepairActivService,
+              private check_device: FiltreMoreDeviceRepairActivService,
               private hidden_form: FormhidenService,
               private imageSender: ImageSenderService,
               private emailSender: EmailSenderService,
@@ -288,7 +288,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   }
 
   animationCheckBox(): void {
-    document.querySelectorAll('.checkbox').forEach(checkbox => {
+    document.querySelectorAll('.checkbox').forEach((checkbox: HTMLInputElement) => {
       checkbox.addEventListener('click', () => {
         if (!checkbox?.value) {
           checkbox.id = 'success-checkbox';
@@ -318,7 +318,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
           icon.style.color = '#34495E';
         }
       }
-      label.addEventListener('input', ev => {
+      label.addEventListener('input', (ev: Event & { target }) => {
         if (ev.target?.validity?.valid && icon?.style) {
           icon.style.color = '#34495E';
         }
@@ -470,7 +470,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
     this.checkButtonTitle();
     const container = document.getElementById('check-box-container');
     const elementsByClassName = container.querySelectorAll('input[type="checkbox"]');
-    Array.from(elementsByClassName).forEach(check => {
+    Array.from(elementsByClassName).forEach((check: HTMLInputElement) => {
       check.click();
 
     });

@@ -21,12 +21,12 @@
     <tbody>
     <tr *ngFor="let element of devicesForSale; let i = index">
       <td class="element-td">{{element.idDeviceSale}}</td>
-      <td class="element-td">{{element.model}}</td>
+      <td class="element-td">{{cl.toCamelCase(cl.truncateChar(element.model, 20))}}</td>
       <td class="element-td">{{element?.deviceType}}</td>
       <td class="element-td">{{element?.conditionFlag}}</td>
       <td class="element-td">{{element?.state_of_use ? 'New' : 'Used'}}</td>
       <td class="element-td">
-        {{element.imei}}
+        {{cl.getImeiOrEmailContainNA(element.imei)}}
       </td>
 
       <td *ngIf="buttonEditable"><a (click)="sally(element)" class="button button-small button-activate"><span> <fa-icon

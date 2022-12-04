@@ -25,12 +25,12 @@
       <tbody>
       <tr *ngFor="let element of preOrderOpen; let i = index">
         <td class="element-td">{{element.orderId}}</td>
-        <td class="element-td">{{element.userName }}</td>
+        <td class="element-td">{{cl.toCamelCase(element.userName + '') }}</td>
         <td
-          class="element-td">{{element.typeObject}}</td>
+          class="element-td">{{cl.toCamelCase(cl.truncateChar(element.typeObject, 10))}}</td>
         <td class="element-td">{{element.typeOrder}}</td>
         <td class="element-td">{{(setNewDateFormat(element.dateInit)| date: 'yyyy-MM-dd')}}</td>
-        <td class="element-td">{{element.color}}</td>
+        <td class="element-td">{{cl.toCamelCase(element.color)}}</td>
         <td class="element-td">
           {{element.price}}
         </td>

@@ -130,7 +130,7 @@ export class RedactClientComponent implements OnInit, OnDestroy {
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private printService: PrintService,
-              private  check_device: FiltreMoreDeviceRepairActivService,
+              private check_device: FiltreMoreDeviceRepairActivService,
               private hidden_form: FormhidenService,
               private imageSender: ImageSenderService,
               private deviceInput: DeviceInputService) {
@@ -335,7 +335,7 @@ export class RedactClientComponent implements OnInit, OnDestroy {
   }
 
   animationCheckBox() {
-    document.querySelectorAll('.checkbox').forEach(checkbox => {
+    document.querySelectorAll('.checkbox').forEach((checkbox: HTMLInputElement) => {
       checkbox.addEventListener('click', () => {
         if (!checkbox.value) {
           checkbox.id = 'success-checkbox';
@@ -358,7 +358,7 @@ export class RedactClientComponent implements OnInit, OnDestroy {
 
   animationInput() {
     document.querySelectorAll('label').forEach(label => {
-      label.addEventListener('input', ev => {
+      label.addEventListener('input', (ev: Event & { target }) => {
         if (ev.target.validity.valid) {
           const htmlElement = label.querySelector('fa-icon') as HTMLElement;
           if (ev.target.type !== 'checkbox' && !ev.target.classList.contains('text-area')) {

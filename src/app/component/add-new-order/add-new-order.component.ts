@@ -214,7 +214,7 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
   }
 
   animationCheckBox() {
-    document.querySelectorAll('.checkbox').forEach(checkbox => {
+    document.querySelectorAll('.checkbox').forEach((checkbox: HTMLInputElement) => {
       checkbox.addEventListener('click', () => {
         if (!checkbox.value) {
           checkbox.id = 'success-checkbox';
@@ -237,7 +237,7 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
 
   animationInput() {
     document.querySelectorAll('label').forEach(label => {
-      label.addEventListener('input', ev => {
+      label.addEventListener('input', (ev: Event & { target: HTMLInputElement }) => {
         if (ev.target.validity.valid) {
           const htmlElement = label.querySelector('fa-icon') as HTMLElement;
           if (ev.target.type !== 'checkbox' && !ev.target.classList.contains('text-area')) {

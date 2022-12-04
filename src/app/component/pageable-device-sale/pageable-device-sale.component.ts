@@ -7,6 +7,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingUsd';
 import {DeviceInputService} from '../service/device-input.service';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
+import {ClientStaticServiceService} from '../service/client-static-service.service';
 
 @Component({
   selector: 'app-pageable-device-sale',
@@ -30,7 +31,7 @@ export class PageableDeviceSaleComponent implements OnInit {
   constructor(private clientHttp: HttpClien,
               private animation_wait: AnimeServiceService,
               private alert_service: AlertServiceService,
-              private deviceService: DeviceInputService) {
+              private deviceService: DeviceInputService, public cl: ClientStaticServiceService) {
   }
 
   ngOnInit(): void {

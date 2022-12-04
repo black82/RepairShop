@@ -12,14 +12,14 @@
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
             style="color: lightcoral;font-size: 20px">{{client.typeClient ? client.companyName : client?.name + ' ' + client.family}}</span></span>
-          <span *ngIf="client?.typeClient" class="input-title">
+          <div *ngIf="client?.typeClient">
+          <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client Iva: <span
             style="color: lightcoral;font-size: 20px">{{client.ivaCompany}}</span></span>
-          <span *ngIf="client?.typeClient" class="input-title">
-            <fa-icon
-              [icon]="usertag" class="icon-normal-single"></fa-icon>Client SDI:<span
-            style="color: lightcoral;font-size: 20px"> {{client.sdiCompany}}</span></span>
+            <span class="input-title">
+            <fa-icon [icon]="usertag" class="icon-normal-single"></fa-icon>Client SDI:<span
+              style="color: lightcoral;font-size: 20px"> {{client.sdiCompany}}</span></span></div>
           <span class="input-title"><fa-icon [icon]="phone"
                                              class="icon-normal-single"></fa-icon> Phone Number:
             <span style="color: lightcoral;font-size: 20px">{{client?.telephone_number}}</span></span>

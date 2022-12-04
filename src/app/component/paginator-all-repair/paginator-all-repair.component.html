@@ -33,12 +33,12 @@
       <tbody>
       <tr *ngFor="let element of datasource; let i = index">
         <td class="element-td">{{element.id}}</td>
-        <td class="element-td">{{element.typeClient ? element.companyName : element?.family + ' ' + element.name}}</td>
-        <td class="element-td">{{element?.email}}</td>
-        <td class="element-td">{{element?.telephone_number}}</td>
+        <td class="element-td">{{cl.toCamelCase(cl.truncateChar(cl.getNameOfClient(element), 20))}}</td>
+        <td class="element-td">{{cl.getImeiOrEmailContainNA(element?.email)?.toLowerCase()}}</td>
+        <td class="element-td">{{cl.getImeiOrEmailContainNA(element?.telephone_number)}}</td>
         <td class="element-td">{{element?.typeClient ? 'Company' : 'Person'}}</td>
         <td class="element-td">
-          {{element.address}}
+          {{cl.toCamelCase(cl.truncateChar(element.address, 20))}}
         </td>
 
         <td><a (click)="shows(element)" class="button button-small button-activate"><span> <fa-icon

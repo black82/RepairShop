@@ -45,24 +45,24 @@
   margin: 0 5px 5px;padding: 10px;">
               <div class="col-324234">
                 <p *ngIf="!client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel?.clientTitle : invoiceShopModel?.clientTitle}} {{  client?.name + ' ' + client?.family }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel?.clientTitle : invoiceShopModel?.clientTitle}} {{  cl.getNameOfClient(client) }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel?.clientTitle : invoiceShopModel?.clientTitle}}{{ client?.companyName }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientTitle ? invoiceModel?.clientTitle : invoiceShopModel?.clientTitle}}{{ cl.getNameOfClient(client) }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companyIvaTitle ? invoiceModel?.companyIvaTitle : invoiceShopModel?.companyIvaTitle }}{{ client?.ivaCompany }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companyIvaTitle ? invoiceModel?.companyIvaTitle : invoiceShopModel?.companyIvaTitle }}{{ cl.getImeiOrEmailContainNA(client?.ivaCompany) }}</p>
                 <p *ngIf="client?.typeClient"
-                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companySdiTitle ? invoiceModel?.companySdiTitle : invoiceShopModel?.companySdiTitle}} {{ client?.sdiCompany }}</p>
+                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.companySdiTitle ? invoiceModel?.companySdiTitle : invoiceShopModel?.companySdiTitle}} {{ cl.getImeiOrEmailContainNA(client?.sdiCompany) }}</p>
                 <p
-                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientEmailTitle ? invoiceModel?.clientEmailTitle : invoiceShopModel?.clientEmailTitle }}{{ client?.email ? client.email : ''}}</p>
+                  style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientEmailTitle ? invoiceModel?.clientEmailTitle : invoiceShopModel?.clientEmailTitle }}{{ cl.getImeiOrEmailContainNA(client?.email)}}</p>
                 <p
                   *ngIf="print_entity.type_client_print===3||print_entity.type_client_print===4"
-                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel.clientPhoneTitle}} {{ client?.telephone_number ? client?.telephone_number : 'n/a' }}</p>
+                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel.clientPhoneTitle}} {{ cl.getImeiOrEmailContainNA(client?.telephone_number)}}</p>
                 <p *ngIf="print_entity.type_client_print===1||print_entity.type_client_print===2"
                    style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientPhoneTitle}}
-                  {{client?.telephone_number && client?.telephone_number?.includes('n/a') ? 'n/a' : client?.telephone_number}}</p>
+                  {{cl.getImeiOrEmailContainNA(client?.telephone_number)}}</p>
                 <p *ngIf="print_entity.type_client_print===5||print_entity.type_client_print===6"
                    style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientPhoneTitle}}
-                  {{print_entity.preorderDto.client?.telephone_number && print_entity.preorderDto.client?.telephone_number?.includes('n/a') ? 'n/a' : print_entity.preorderDto.client?.telephone_number}}</p>
+                  {{cl.getImeiOrEmailContainNA(print_entity.preorderDto.client?.telephone_number)}}</p>
                 <p
                   style="font-size: 9pt;margin: 1px">{{invoiceModel?.clientAddressTitle ? invoiceModel?.clientAddressTitle : invoiceShopModel?.clientAddressTitle}}{{ client?.address}}</p>
               </div>
@@ -77,7 +77,7 @@
               <p
                 style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use}}</p>
               <p *ngIf="print_entity.type_client_print===3"
-                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel?.imeiAndSnTitle}} {{client?.deviceBay[0]?.imei ? client?.deviceBay[0]?.imei : 'n/a' }}</p>
+                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel?.imeiAndSnTitle}} {{cl.getImeiOrEmailContainNA(client?.deviceBay[0]?.imei)}}</p>
               <p
                 style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.typeDeviceTitle + client?.deviceBay[0].deviceType}}
                 .</p>
@@ -86,7 +86,7 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.bayingPriceTitle + client?.deviceBay[0]?.bayingPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">{{invoiceShopModel.dateBayingTitle}}
-                {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd h:mm'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===5||type_print===6" style="border-style: solid;
@@ -101,10 +101,10 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeObject}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.dateToEnterTitle }}{{setNewDateFormat(print_entity.preorderDto.preOrderShop.dateInit)| date: 'yyyy/MM/dd h:mm:ss'}}
+                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.dateToEnterTitle }}{{setNewDateFormat(print_entity.preorderDto.preOrderShop.dateInit)| date: 'yyyy/MM/dd h:mm'}}
                 .</p>
               <p *ngIf="print_entity.type_client_print===6"
-                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.dateToOutTitle}} {{ setNewDateFormat(print_entity.preorderDto.preOrderShop.completeDate)| date: 'yyyy/MM/dd h:mm:ss'}}</p>
+                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.dateToOutTitle}} {{ setNewDateFormat(print_entity.preorderDto.preOrderShop.completeDate)| date: 'yyyy/MM/dd h:mm'}}</p>
 
               <p
                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeOrder}}</p>
@@ -125,7 +125,7 @@
               <p
                 style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.guaranteeTitle + client?.deviceSale[0].garantyDuration + '  month'}}</p>
               <p *ngIf="print_entity.type_client_print===4"
-                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.imeiAndSnTitle}}{{client?.deviceSale[0]?.imei}}</p>
+                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.imeiAndSnTitle}}{{cl.getImeiOrEmailContainNA(client?.deviceSale[0]?.imei)}}</p>
               <p
                 style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.typeDeviceTitle + client?.deviceSale[0].deviceType}}
                 .</p>
@@ -134,7 +134,7 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.sellerPriceTitle + client?.deviceSale[0]?.sellerPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">
-                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===1||type_print===2" style="border-style: solid;
@@ -147,31 +147,31 @@
               style="font-size: 9pt;margin: 1px"> {{invoiceModel?.usedConditionTitle + client?.device[0]?.state_of_use}}</p>
             <p *ngIf="print_entity.type_client_print===1"
                style="font-size: 9pt;margin: 1px">{{invoiceModel?.imeiAndSnTitle}}
-              {{client?.device[0]?.imei ? client?.device[0]?.imei : 'n/a' }}</p>
+              {{cl.getImeiOrEmailContainNA(client?.device[0]?.imei)}}</p>
             <p *ngIf="print_entity.type_client_print===2"
                style="font-size: 9pt;margin: 1px">{{invoiceModel?.imeiAndSnTitle}}
-              {{client?.device[0]?.imei.includes('n/a') ? 'n/a' : client?.device[0]?.imei  }}</p>
+              {{cl.getImeiOrEmailContainNA(client?.device[0]?.imei) }}</p>
             <p style="font-size: 9pt;margin: 1px"> {{invoiceModel?.defectTitle + client?.device[0]?.repairs[0]?.defect}}
             </p>
             <p style="font-size: 9pt;margin: 1px">{{invoiceModel?.accessoryTitle + client?.device[0]?.accessory}}</p>
             <p style="font-size: 9pt;margin: 1px;">
               {{invoiceModel?.dateToEnterTitle}}
-              :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+              :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm'}}</p>
             <p
               style="font-size: 9pt;margin: 1px"> {{invoiceModel?.cashAdvance + client?.device[0].repairs[0]?.deposit}}</p>
             <p
               style="font-size: 9pt;margin: 1px"> {{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>
             <p *ngIf="type_print===1"
-               style=" font-size: 9pt;margin: 1px">{{invoiceModel?.dateRepairWillReady + date_exit}}</p>
+               style=" font-size: 9pt;margin: 1px">{{invoiceModel?.dateRepairWillReady + (date_exit| date: 'yyyy/MM/dd h:mm')}}</p>
 
 
             <div *ngIf="type_print===2">
               <!--              <p-->
               <!--                style="font-size: 8pt;margin: 1px">Data di ricezione del dispositivo-->
-              <!--                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>-->
+              <!--                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm'}}</p>-->
               <p style="font-size: 8pt;margin: 1px;">
                 {{invoiceModel.dateToOutTitle}}
-                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd h:mm:ss a'}}</p>
+                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd h:mm'}}</p>
               <p
                 style="font-size: 9pt;margin: 1px;">{{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>
               <p
@@ -352,19 +352,15 @@
                   </div>
                   <div *ngIf="print_entity.type_client_print<5" class="client_container"
                        style="display: inline; width:49%;float: left;margin: 0">
-                    <p *ngIf="!client?.typeClient" style="width: 49%">{{clientTitle}}<span
-                      style="color: #1ABC9C"> {{client?.name + ' ' + client?.family}}</span></p>
-                    <p *ngIf="client?.typeClient" style="width: 49%">{{clientTitle}}<span
-                      style="color: #1ABC9C"> {{client?.companyName}}</span></p>
+                    <p style="width: 49%">{{clientTitle}}<span
+                      style="color: #1ABC9C"> {{cl.getNameOfClient(client)}}</span></p>
                     <img alt="Auto Sign" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
                   </div>
                   <div *ngIf="print_entity.type_client_print===5||print_entity.type_client_print===6"
                        class="client_container" style="display: inline; width:49%;float: left;margin: 0">
-                    <p *ngIf="!print_entity.preorderDto.client?.typeClient" style="width: 49%">{{clientTitle}}<span
-                      style="color: #1ABC9C"> {{print_entity.preorderDto.client?.name + ' ' + print_entity.preorderDto.client?.family}}</span>
-                    </p>
-                    <p *ngIf="print_entity.preorderDto.client?.typeClient" style="width: 49%">{{clientTitle}}<span
-                      style="color: #1ABC9C"> {{print_entity.preorderDto.client?.companyName}}</span></p>
+
+                    <p style="width: 49%">{{clientTitle}}<span
+                      style="color: #1ABC9C"> {{cl.getNameOfClient(print_entity.preorderDto.client)}}</span></p>
                     <img alt="Auto Sign" height="20px" src="{{images_sig[1]}}" style="margin-bottom: 0" width="70px">
                   </div>
                 </div>

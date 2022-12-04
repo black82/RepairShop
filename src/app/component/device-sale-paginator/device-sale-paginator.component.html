@@ -11,8 +11,8 @@
     <table class="table table-sm">
       <thead>
       <tr>
-          <th scope="col">Device Id</th>
-          <th scope="col">Client to Baying</th>
+        <th scope="col">Device Id</th>
+        <th scope="col">Client to Baying</th>
         <th scope="col">Client to Sailing</th>
         <th scope="col">Device Model</th>
         <th scope="col">Device Imei</th>
@@ -24,17 +24,18 @@
       <tbody>
       <tr *ngFor="let element of devicesForSale; let i = index">
         <td class="element-td">{{element.deviceForSale?.idDeviceSale}}</td>
-        <td class="element-td">{{element.clientBaying?.name + '  ' + element.clientBaying?.family}}</td>
         <td
-          class="element-td">{{element.clientSailing ? element.clientSailing?.name + '  ' + element.clientSailing?.family : ' - '}}</td>
-        <td class="element-td">{{element.deviceForSale?.model}}</td>
-        <td class="element-td">{{element.deviceForSale?.imei}}</td>
+          class="element-td">{{cl.toCamelCase(cl.truncateChar(cl.getNameOfClient(element.clientBaying), 20))}}</td>
+        <td
+          class="element-td">{{cl.toCamelCase(cl.truncateChar(cl.getNameOfClient(element.clientSailing), 20))}}</td>
+        <td class="element-td">{{cl.toCamelCase(cl.truncateChar(element.deviceForSale?.model, 25))}}</td>
+        <td class="element-td">{{cl.getImeiOrEmailContainNA(element.deviceForSale?.imei)}}</td>
         <td class="element-td">{{element.deviceForSale?.isSaled ? 'Sold' : 'Now For Sale'}}</td>
         <td class="element-td">
-          {{element.deviceForSale?.dateBaying}}
+          {{element.deviceForSale?.dateBaying ? (element.deviceForSale.dateBaying| date : 'yyyy-MM-dd') : ' - '}}
         </td>
         <td class="element-td">
-          {{element?.deviceForSale?.dateSale ? element.deviceForSale?.dateSale : ' - '}}
+          {{element?.deviceForSale?.dateSale ? (element.deviceForSale?.dateSale | date: 'yyyy-MM-dd') : ' - '}}
         </td>
 
         <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon

@@ -1,4 +1,3 @@
-
 function animeTitle(anime) {
   const textWrapper = document.querySelector('.name-company');
   textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
@@ -31,7 +30,7 @@ function animeTitle(anime) {
 
 function animeBackground(stats1) {
 
-  const date = new Date();
+  const date = new Date()
 
   let colors = {
     color1: "rgba(255,255,255,1)",
@@ -39,13 +38,15 @@ function animeBackground(stats1) {
     color3: "rgba(232,248,255,1)",
     color4: "rgba(135,143,145,1)"
   }, options;
-  if (date.getMonth() === 0 || date.getMonth() === 10) {
+
+
+  if (date.getMonth() === 0 || date.getMonth() === 11 || date.getMonth() === 1) {
     options = {
       alphaSpeed: 10,
       alphaVariance: 1,
       color: [colors.color1, colors.color2, colors.color3, colors.color4],
       composition: "source-over",
-      count: 350,
+      count: 450,
       direction: 161,
       float: 0.75,
       glow: 0,
@@ -78,61 +79,7 @@ function animeBackground(stats1) {
     }, 100)
 
 
-  } else if (date.getMonth() < 6 && date.getMonth() > 2) {
-    options = {
-      "composition": "source-over",
-      "count": 400,
-      "speed": 0,
-      "parallax": 0,
-      "direction": 180,
-      "xVariance": 0,
-      "yVariance": 4,
-      "rotate": false,
-      "rotation": 0,
-      "alphaSpeed": 8,
-      "alphaVariance": 4,
-      "minAlpha": -1,
-      "maxAlpha": 1,
-      "minSize": 4,
-      "maxSize": 14,
-      "style": "fill",
-      "bounce": false,
-      "drift": 0,
-      "glow": 16,
-      "twinkle": true,
-      "color": ["#fdfdfc",
-        "#cbe4ed"],
-      "shape": "diamond",
-      "imageUrl": ""
-    };
-  } else if (date.getMonth() > 4 && date.getMonth() < 8) {
-    options = {
-      "composition": "lighter",
-      "count": 200,
-      "speed": 0,
-      "parallax": 2.2,
-      "direction": 30,
-      "xVariance": 8.5,
-      "yVariance": 4,
-      "rotate": false,
-      "rotation": 0,
-      "alphaSpeed": 0,
-      "alphaVariance": 24,
-      "minAlpha": -1.8,
-      "maxAlpha": 2,
-      "minSize": 46,
-      "maxSize": 14,
-      "style": "fill",
-      "bounce": false,
-      "drift": 42.5,
-      "glow": 31,
-      "twinkle": true,
-      "color": ["#fdfdfc",
-        "#cbe4ed"],
-      "shape": "diamond",
-      "imageUrl": "https://image.shutterstock.com/image-vector/autumn-leaf-maple-isolated-on-260nw-689177599.jpg"
-    }
-  } else if (date.getMonth() > 7 && date.getMonth() < 8) {
+  } else if (date.getMonth() === 5 || date.getMonth() === 6 || date.getMonth() === 7) {
 
     options = {
 
@@ -246,35 +193,19 @@ function animeBackground(stats1) {
       "retina_detect": true
     }
   }
-
-
-  let body = document.querySelector('.snow');
-
-  addSparticles(body, options)
-
-  function addSparticles(node, option) {
-    setTimeout(() => {
-        options.transition = 'all 1s';
-        let newVar = $('body').get(0);
-        const perc = newVar.scrollHeight * 0.08
-        let stat;
-        if (detectMob()) {
-          stat = new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight - perc)
-        } else {
-          stat = new stats1(node, option, newVar.scrollWidth, newVar.scrollHeight + perc)
-        }
-        resize(stat);
-      },
-      1500)
-  }
+  setTimeout(() => {
+    let newVar = $('body').get(0);
+    const perc = newVar.scrollHeight * 0.12
+    let stat;
+    if (detectMob()) {
+      stat = new stats1(document.querySelector('.snow'), options, newVar.scrollWidth, newVar.scrollHeight - perc)
+    } else {
+      stat = new stats1(document.querySelector('.snow'), options, newVar.scrollWidth, newVar.scrollHeight + perc)
+    }
+  }, 1500)
 
 }
 
-function resize(stat) {
-  window.addEventListener('resize', function (event) {
-    // window.location.reload();
-  }, true);
-}
 
 function detectMob() {
   const toMatch = [

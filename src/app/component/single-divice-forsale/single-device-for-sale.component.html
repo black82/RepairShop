@@ -12,7 +12,7 @@
   <div *ngIf="showDevice" class="row-container">
     <div class="title-container">
       <p class="title-form"> Device For Sale <span
-        style="color: lightcoral"> {{ deviceForSaleDto.deviceForSale.model + ' ' + deviceForSaleDto.deviceForSale.imei}} </span>
+        style="color: lightcoral"> {{ deviceForSaleDto.deviceForSale.model + ' ' + cl.getImeiOrEmailContainNA(deviceForSaleDto.deviceForSale.imei)}} </span>
       </p>
     </div>
     <div class="button_form">
@@ -38,25 +38,26 @@
           <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
-            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying.typeClient ? deviceForSaleDto.clientBaying.companyName : deviceForSaleDto.clientBaying?.name + ' ' + deviceForSaleDto.clientBaying.family}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{cl.getNameOfClient(deviceForSaleDto.clientBaying)}}</span></span>
           <span *ngIf="deviceForSaleDto.clientBaying?.typeClient" class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client Iva: <span
-            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying.ivaCompany}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{cl.getImeiOrEmailContainNA(deviceForSaleDto.clientBaying.ivaCompany)}}</span></span>
           <span *ngIf="deviceForSaleDto.clientBaying?.typeClient" class="input-title">
             <fa-icon
               [icon]="usertag" class="icon-normal-single"></fa-icon>Client SDI:<span
-            style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.clientBaying.sdiCompany}}</span></span>
+            style="color: lightcoral;font-size: 20px"> {{cl.getImeiOrEmailContainNA(deviceForSaleDto.clientBaying.sdiCompany)}}</span></span>
           <span class="input-title"><fa-icon [icon]="phone"
                                              class="icon-normal-single"></fa-icon> Phone Number:
             <span
-              style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.telephone_number}}</span></span>
-          <span *ngIf="deviceForSaleDto.clientBaying.telephone_number_second" class="input-title"><fa-icon
+              style="color: lightcoral;font-size: 20px">{{cl.getImeiOrEmailContainNA(deviceForSaleDto.clientBaying?.telephone_number)}}</span></span>
+          <span *ngIf="cl.getImeiOrEmailContainNA(deviceForSaleDto.clientBaying.telephone_number_second)"
+                class="input-title"><fa-icon
             [icon]="phone"
             class="icon-normal-single"></fa-icon>Second Phone Number:<span
-            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.telephone_number_second}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{cl.getImeiOrEmailContainNA(deviceForSaleDto.clientBaying?.telephone_number_second)}}</span></span>
           <span class="input-title"><fa-icon [icon]="email" class="icon-normal-single"></fa-icon> Email:<span
-            style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.email}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{cl.getImeiOrEmailContainNA(deviceForSaleDto.clientBaying?.email)}}</span></span>
           <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
             style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientBaying?.address}}</span></span>
 
@@ -73,23 +74,25 @@
         <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
-          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing.typeClient ? deviceForSaleDto.clientSailing.companyName : deviceForSaleDto.clientSailing?.name + ' ' + deviceForSaleDto.clientSailing.family}}</span></span>
+          style="color: lightcoral;font-size: 20px">{{cl.getNameOfClient(deviceForSaleDto?.clientSailing)}}</span></span>
         <span *ngIf="deviceForSaleDto.clientSailing?.typeClient" class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client Iva: <span
           style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing.ivaCompany}}</span></span>
         <span *ngIf="deviceForSaleDto.clientSailing?.typeClient" class="input-title">
-            <fa-icon
-              [icon]="usertag"></fa-icon>Client SDI:<span
+            <fa-icon [icon]="usertag"
+                     class="icon-normal-single"></fa-icon>Client SDI:<span
           style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.clientSailing.sdiCompany}}</span></span>
         <span class="input-title"><fa-icon [icon]="phone"
                                            class="icon-normal-single"></fa-icon> Phone Number:
-            <span style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.telephone_number}}</span></span>
-        <span *ngIf="deviceForSaleDto.clientSailing.telephone_number_second" class="input-title"><fa-icon [icon]="phone"
-                                                                                                          class="icon-normal-single"></fa-icon>Second Phone Number:<span
+            <span
+              style="color: lightcoral;font-size: 20px">{{cl.getImeiOrEmailContainNA(deviceForSaleDto.clientSailing?.telephone_number)}}</span></span>
+        <span *ngIf="cl.getImeiOrEmailContainNA(deviceForSaleDto.clientSailing.telephone_number_second)"
+              class="input-title"><fa-icon [icon]="phone"
+                                           class="icon-normal-single"></fa-icon>Second Phone Number:<span
           style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.telephone_number_second}}</span></span>
         <span class="input-title"><fa-icon [icon]="email" class="icon-normal-single"></fa-icon> Email:<span
-          style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.email}}</span></span>
+          style="color: lightcoral;font-size: 20px">{{cl.getImeiOrEmailContainNA(deviceForSaleDto.clientSailing?.email)}}</span></span>
         <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
           style="color: lightcoral;font-size: 20px">{{deviceForSaleDto.clientSailing?.address}}</span></span>
       </div>
@@ -174,7 +177,8 @@
                   <fa-icon [icon]="barcode"
                            class="icon-normal-single"></fa-icon>
                   Device Imei :<span
-                  style="color: lightcoral;font-size: 20px"> {{deviceForSaleDto.deviceForSale.imei}}</span></p>
+                  style="color: lightcoral;font-size: 20px"> {{cl.getImeiOrEmailContainNA(deviceForSaleDto.deviceForSale.imei)}}</span>
+                </p>
                 <p class="input-title">
                   <fa-icon [icon]="password"
                            class="icon-normal-single"></fa-icon>

@@ -5,6 +5,7 @@ import {Client} from '../entity/ClientWeb';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons/faAngleDoubleRight';
 import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
 import {faToolbox} from '@fortawesome/free-solid-svg-icons/faToolbox';
+import {ClientStaticServiceService} from '../service/client-static-service.service';
 
 @Component({
   selector: 'app-paginator-all-repair',
@@ -24,7 +25,7 @@ export class PaginatorAllRepairComponent implements OnInit {
   tools = faToolbox;
   paginator = false;
 
-  constructor(private http: HttpClien) {
+  constructor(private http: HttpClien, public cl: ClientStaticServiceService) {
   }
 
   ngOnInit(): void {

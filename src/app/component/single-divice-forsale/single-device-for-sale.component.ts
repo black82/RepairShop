@@ -34,6 +34,7 @@ import {HttpClien} from '../service/clientservice.service';
 import {AnimeServiceService} from '../service/anime-service.service';
 import {PrintEntity} from '../entity/Print_Pojo';
 import {EmailSenderService} from '../service/email-sender.service';
+import {ClientStaticServiceService} from '../service/client-static-service.service';
 
 @Component({
   selector: 'app-single-divice-forsale',
@@ -81,7 +82,7 @@ export class SingleDeviceForSaleComponent implements OnInit, OnDestroy {
               private inputOutputCheck: InputOutputTestService,
               private httpService: HttpClien,
               private animeService: AnimeServiceService,
-              private emailService: EmailSenderService) {
+              private emailService: EmailSenderService, public cl: ClientStaticServiceService) {
   }
 
   ngOnInit(): void {

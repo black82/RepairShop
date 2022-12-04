@@ -513,7 +513,7 @@ mat-expansion-panel {
 }
 
 .icon-normal-single {
-  color: #1ABC9C;
+  color: #1ABC9C !important;
   font-size: 25px;
   margin-right: 5px;
 }

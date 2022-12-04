@@ -207,7 +207,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
       if (this.client.typeClient) {
-           this.companyClient();
+        this.companyClient();
       }
     });
     this.animation_call();
@@ -337,7 +337,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   }
 
   animationCheckBox() {
-    document.querySelectorAll('.checkbox').forEach(checkbox => {
+    document.querySelectorAll('.checkbox').forEach((checkbox: HTMLInputElement) => {
       checkbox.addEventListener('click', () => {
         if (!checkbox.value) {
           checkbox.id = 'success-checkbox';
@@ -360,7 +360,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
 
   animationInput() {
     document.querySelectorAll('label').forEach(label => {
-      label.addEventListener('input', ev => {
+      label.addEventListener('input', (ev: Event & { target }) => {
         if (ev.target.validity.valid) {
           const htmlElement = label.querySelector('fa-icon') as HTMLElement;
           if (ev.target.type !== 'checkbox' && !ev.target.classList.contains('text-area')) {
@@ -375,6 +375,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     });
 
   }
+
   clickEmailSender() {
     this.sign_pad_open();
   }
@@ -532,7 +533,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
     this.checkButtonTitle();
     const container = document.getElementById('check-box-container');
     const elementsByClassName = container.querySelectorAll('input[type="checkbox"]');
-    Array.from(elementsByClassName).forEach(check => {
+    Array.from(elementsByClassName).forEach((check: HTMLInputElement) => {
       check.click();
 
     });

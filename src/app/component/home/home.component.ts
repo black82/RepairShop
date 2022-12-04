@@ -148,7 +148,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const querySelector = document.querySelectorAll('.tools');
     querySelector.forEach(node => {
       node.childNodes.forEach(child => {
-        child.addEventListener('mouseenter', evt => {
+        child.addEventListener('mouseenter', (evt: Event & { target }) => {
           this.createLabelToEvent(evt.target.classList);
           child.addEventListener('mouseleave', () => {
             this.labelTolls = '';
@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const querySelector = document.querySelectorAll('.tools-admin');
     querySelector.forEach(node => {
       node.childNodes.forEach(child => {
-        child.addEventListener('mouseenter', evt => {
+        child.addEventListener('mouseenter', (evt: Event & { target }) => {
           this.createLabelToEvent(evt.target.classList);
           child.addEventListener('mouseleave', () => {
             this.labelTolls = '';

@@ -58,6 +58,7 @@ import {faDesktop} from '@fortawesome/free-solid-svg-icons/faDesktop';
 import {faUserGraduate} from '@fortawesome/free-solid-svg-icons/faUserGraduate';
 import {OutputTest} from '../entity/OutputTest';
 import {faPrayingHands} from '@fortawesome/free-solid-svg-icons/faPrayingHands';
+import {ClientStaticServiceService} from '../service/client-static-service.service';
 
 @Component({
   selector: 'app-device-sell',
@@ -152,7 +153,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
               private emailSender: EmailSenderService,
               private sig_pad_service: SigPadService,
               private animation_wait: AnimeServiceService,
-              private service_input: DeviceInputService) {
+              private service_input: DeviceInputService, public cl: ClientStaticServiceService) {
 
   }
 
@@ -178,7 +179,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     this.subscriber = this.service_input.$client_push.subscribe(clientPush => {
       this.client = clientPush;
     });
-      }
+  }
 
   buildForm(): void {
     this.formClient = this.fb.group({
@@ -314,7 +315,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
   }
 
   animationCheckBox() {
-    document.querySelectorAll('.checkbox').forEach(checkbox => {
+    document.querySelectorAll('.checkbox').forEach((checkbox: HTMLInputElement) => {
       checkbox.addEventListener('click', () => {
         if (!checkbox.value) {
           checkbox.id = 'success-checkbox';
@@ -337,7 +338,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
 
   animationInput() {
     document.querySelectorAll('label').forEach(label => {
-      label.addEventListener('input', ev => {
+      label.addEventListener('input', (ev: Event & { target }) => {
         if (ev.target.validity.valid) {
           const htmlElement = label.querySelector('fa-icon') as HTMLElement;
           if (ev.target.type !== 'checkbox' && !ev.target.classList.contains('text-area')) {
@@ -508,7 +509,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     this.checkButtonTitle();
     const container = document.getElementById('check-box-container');
     const elementsByClassName = container.querySelectorAll('input[type="checkbox"]');
-    Array.from(elementsByClassName).forEach(check => {
+    Array.from(elementsByClassName).forEach((check: HTMLInputElement) => {
       check.click();
 
     });
