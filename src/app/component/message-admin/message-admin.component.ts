@@ -4,7 +4,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons/faAngleDoubleRight';
 import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
 import {faToolbox} from '@fortawesome/free-solid-svg-icons/faToolbox';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons';
 import {faCalendarMinus} from '@fortawesome/free-solid-svg-icons/faCalendarMinus';
 import {HttpClien} from '../service/clientservice.service';
@@ -31,13 +31,13 @@ export class MessageAdminComponent implements OnInit {
   hide_button = faHistory;
   tools = faToolbox;
   paginator = false;
-  formDataInterval: FormGroup;
+  formDataInterval: UntypedFormGroup;
   date_init = faCalendarPlus;
   date = faCalendarMinus;
   index = 0;
 
   constructor(private http: HttpClien,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private alertService: AlertServiceService,
               private adminService: AdminServiceService,) {
   }

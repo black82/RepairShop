@@ -34,7 +34,7 @@ import {faHandHoldingUsd} from '@fortawesome/free-solid-svg-icons/faHandHoldingU
 import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
 import {Observable, Subscription} from 'rxjs';
 import {DeviceInputService} from '../service/device-input.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {HttpClien} from '../service/clientservice.service';
 import {map, startWith} from 'rxjs/operators';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
@@ -70,7 +70,7 @@ import {AlertServiceService} from '../service/alert-service.service';
 export class RedactClientSaleComponent implements OnInit, OnDestroy {
   @Input()
   typeActionAfter: boolean;
-  formClient: FormGroup;
+  formClient: UntypedFormGroup;
   chip = faMicrochip;
   used = faHeart;
   mobile = faMobile;
@@ -140,7 +140,7 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
   private deviceForSale: DeviceForSale;
 
   constructor(private deviceInputService: DeviceInputService,
-              private fb: FormBuilder,
+              private fb: UntypedFormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService) {
   }
@@ -173,71 +173,71 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
 
   createFormAfterClientCam(): void {
     this.formClient = this.fb.group({
-      family: new FormControl(null, [Validators.required]),
-      name: new FormControl(null, [Validators.required]),
-      telephone_number_baying: new FormControl(null),
-      telephone_sec_number_baying: new FormControl(null),
-      email_baying: new FormControl(null),
-      addresses_baying: new FormControl(null, [Validators.required]),
-      name_selling: new FormControl(null, [Validators.required]),
-      family_selling: new FormControl(null, [Validators.required]),
-      iva_selling: new FormControl(null, [Validators.required]),
-      sdi_selling: new FormControl(null, [Validators.required]),
-      telephone_selling: new FormControl(null),
-      email_selling: new FormControl(null),
-      telephone_second_selling: new FormControl(null, [Validators.required]),
-      address_selling: new FormControl(null, [Validators.required]),
-      deviceType: new FormControl(this.deviceForSaleDto.deviceForSale.deviceType, [Validators.required]),
-      baying_price: new FormControl(this.deviceForSaleDto.deviceForSale.bayingPrice, [Validators.required]),
-      seller_price: new FormControl(this.deviceForSaleDto.deviceForSale.sellerPrice, [Validators.required]),
-      model: new FormControl(this.deviceForSaleDto.deviceForSale.model, [Validators.required]),
-      accessory: new FormControl(this.deviceForSaleDto.deviceForSale.accessory, [Validators.required]),
-      code_device: new FormControl(this.deviceForSaleDto.deviceForSale.code_device, [Validators.required]),
-      state_of_use: new FormControl(this.deviceForSaleDto.deviceForSale.state_of_use, [Validators.required]),
-      condition_flag: new FormControl(this.deviceForSaleDto.deviceForSale.conditionFlag, [Validators.required]),
-      deviceWarranty: new FormControl(this.deviceForSaleDto.deviceForSale.garantyDuration, [Validators.required]),
-      imei: new FormControl(this.deviceForSaleDto.deviceForSale.imei, [Validators.required]),
-      password_device: new FormControl(this.deviceForSaleDto.deviceForSale.password_device, [Validators.required]),
-      note_output: new FormControl(this.deviceForSaleDto.deviceForSale.noteOutput),
-      note_input: new FormControl(this.deviceForSaleDto.deviceForSale.noteInput),
-      sensors_input: new FormControl(false),
-      display_input: new FormControl(false),
-      connectors_input: new FormControl(false),
-      sound_equipment_input: new FormControl(false),
-      audio_equipment_input: new FormControl(false),
-      software: new FormControl(false),
-      bluetooth: new FormControl(false),
-      vibrations: new FormControl(false),
-      touch_input: new FormControl(false),
-      display_touch_input: new FormControl(false),
-      wi_fi_input: new FormControl(false),
-      microphone_input: new FormControl(false),
-      sim_input: new FormControl(false),
-      keyboard_input: new FormControl(false),
-      camera_input: new FormControl(false),
-      camera_input_front: new FormControl(false),
-      faceId_input: new FormControl(false),
-      faceId_output: new FormControl(false),
-      note: new FormControl(''),
-      email_send: new FormControl(false),
-      sensor_output: new FormControl(false),
-      display_output: new FormControl(false),
-      connections_output: new FormControl(false),
-      sound_equipment_output: new FormControl(false),
-      touch_output: new FormControl(false),
-      display_touch_output: new FormControl(false),
-      wi_fi_output: new FormControl(false),
-      microphone_output: new FormControl(false),
-      sim_output: new FormControl(false),
-      audio_equipment_output: new FormControl(false),
-      software_output: new FormControl(false),
-      bluetooth_output: new FormControl(false),
-      vibrations_output: new FormControl(false),
-      keyboard_output: new FormControl(false),
-      camera_output: new FormControl(false),
-      camera_Output_Front: new FormControl(false),
-      homeButton_Output: new FormControl(false),
-      homeButton: new FormControl(false),
+      family: new UntypedFormControl(null, [Validators.required]),
+      name: new UntypedFormControl(null, [Validators.required]),
+      telephone_number_baying: new UntypedFormControl(null),
+      telephone_sec_number_baying: new UntypedFormControl(null),
+      email_baying: new UntypedFormControl(null),
+      addresses_baying: new UntypedFormControl(null, [Validators.required]),
+      name_selling: new UntypedFormControl(null, [Validators.required]),
+      family_selling: new UntypedFormControl(null, [Validators.required]),
+      iva_selling: new UntypedFormControl(null, [Validators.required]),
+      sdi_selling: new UntypedFormControl(null, [Validators.required]),
+      telephone_selling: new UntypedFormControl(null),
+      email_selling: new UntypedFormControl(null),
+      telephone_second_selling: new UntypedFormControl(null, [Validators.required]),
+      address_selling: new UntypedFormControl(null, [Validators.required]),
+      deviceType: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.deviceType, [Validators.required]),
+      baying_price: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.bayingPrice, [Validators.required]),
+      seller_price: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.sellerPrice, [Validators.required]),
+      model: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.model, [Validators.required]),
+      accessory: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.accessory, [Validators.required]),
+      code_device: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.code_device, [Validators.required]),
+      state_of_use: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.state_of_use, [Validators.required]),
+      condition_flag: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.conditionFlag, [Validators.required]),
+      deviceWarranty: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.garantyDuration, [Validators.required]),
+      imei: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.imei, [Validators.required]),
+      password_device: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.password_device, [Validators.required]),
+      note_output: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.noteOutput),
+      note_input: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.noteInput),
+      sensors_input: new UntypedFormControl(false),
+      display_input: new UntypedFormControl(false),
+      connectors_input: new UntypedFormControl(false),
+      sound_equipment_input: new UntypedFormControl(false),
+      audio_equipment_input: new UntypedFormControl(false),
+      software: new UntypedFormControl(false),
+      bluetooth: new UntypedFormControl(false),
+      vibrations: new UntypedFormControl(false),
+      touch_input: new UntypedFormControl(false),
+      display_touch_input: new UntypedFormControl(false),
+      wi_fi_input: new UntypedFormControl(false),
+      microphone_input: new UntypedFormControl(false),
+      sim_input: new UntypedFormControl(false),
+      keyboard_input: new UntypedFormControl(false),
+      camera_input: new UntypedFormControl(false),
+      camera_input_front: new UntypedFormControl(false),
+      faceId_input: new UntypedFormControl(false),
+      faceId_output: new UntypedFormControl(false),
+      note: new UntypedFormControl(''),
+      email_send: new UntypedFormControl(false),
+      sensor_output: new UntypedFormControl(false),
+      display_output: new UntypedFormControl(false),
+      connections_output: new UntypedFormControl(false),
+      sound_equipment_output: new UntypedFormControl(false),
+      touch_output: new UntypedFormControl(false),
+      display_touch_output: new UntypedFormControl(false),
+      wi_fi_output: new UntypedFormControl(false),
+      microphone_output: new UntypedFormControl(false),
+      sim_output: new UntypedFormControl(false),
+      audio_equipment_output: new UntypedFormControl(false),
+      software_output: new UntypedFormControl(false),
+      bluetooth_output: new UntypedFormControl(false),
+      vibrations_output: new UntypedFormControl(false),
+      keyboard_output: new UntypedFormControl(false),
+      camera_output: new UntypedFormControl(false),
+      camera_Output_Front: new UntypedFormControl(false),
+      homeButton_Output: new UntypedFormControl(false),
+      homeButton: new UntypedFormControl(false),
     });
   }
 
@@ -308,9 +308,9 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
   companyClient() {
     this.companyShow = !this.companyShow;
     if (this.companyShow) {
-      this.formClient.addControl('companyName', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('sdiClient', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('ivaClient', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('companyName', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('sdiClient', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('ivaClient', new UntypedFormControl(null, [Validators.required]));
       this.formClient.controls.name.setValue(null);
       this.formClient.controls.family.setValue(null);
       this.formClient.removeControl('name');
@@ -319,8 +319,8 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
       this.formClient.removeControl('companyName');
       this.formClient.removeControl('sdiClient');
       this.formClient.removeControl('ivaClient');
-      this.formClient.addControl('name', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('family', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('name', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('family', new UntypedFormControl(null, [Validators.required]));
     }
   }
 

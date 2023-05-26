@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {ClientPaginatorDateComponent} from './client-paginator-date.component';
 
@@ -6,7 +6,7 @@ describe('ClientPaginatorDateComponent', () => {
   let component: ClientPaginatorDateComponent;
   let fixture: ComponentFixture<ClientPaginatorDateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ClientPaginatorDateComponent]
     })

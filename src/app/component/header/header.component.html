@@ -32,12 +32,13 @@
     <nav class="menu anime-container">
       <div class="nav-mobile"><a id="nav-toggle"><span></span></a></div>
       <ul class="nav-list" id="menu-box">
-        <li>
-          <a accesskey="1" routerLink="">
-            <fa-icon [icon]="home" class="small-icon"></fa-icon>
+        <li >
+          <a accesskey="1" routerLink=""  >
+            <fa-icon [icon]="home" class="small-icon"
+                     ></fa-icon>
             Home</a>
         </li>
-        <li>
+        <li class="drop-down">
           <a accesskey="2">
             <fa-icon [icon]="stored" class="small-icon"></fa-icon>
             Shop</a>
@@ -61,9 +62,13 @@
               <fa-icon [icon]="closeOrder" class="small-icon"></fa-icon>
               Close Order</a>
             </li>
+            <li><a routerLink="/return/all">
+              <fa-icon [icon]="closeOrder" class="small-icon"></fa-icon>
+              All Return Spare</a>
+            </li>
           </ul>
         </li>
-        <li>
+        <li class="drop-down">
           <a accesskey="3">
             <fa-icon [icon]="repair"></fa-icon>
             Repair
@@ -95,7 +100,7 @@
               Close the Repair</a></li>
           </ul>
         </li>
-        <li>
+        <li class="drop-down">
           <a accesskey="4">
             <fa-icon [icon]="tools"></fa-icon>
             Tools Repair

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
@@ -16,13 +16,13 @@ import {Subscription} from 'rxjs';
 export class RedactStaffUserComponent implements OnInit, OnDestroy {
 
   save = faShare;
-  staffUserForm: FormGroup;
+  staffUserForm: UntypedFormGroup;
   isAdmin = false;
   staffUser: StaffUser;
   view = false;
   private subscription: Subscription;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private router: Router,
               private httpClient: HttpClien,
               private alertService: AlertServiceService,
@@ -61,12 +61,12 @@ export class RedactStaffUserComponent implements OnInit, OnDestroy {
     }));
   }
 
-  IsErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  IsErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 
-  ValidatorTrimSpace(control: FormControl) {
+  ValidatorTrimSpace(control: UntypedFormControl) {
     const value = control?.value as string;
     if (value?.trim() === '') {
       return {validSpace: true};

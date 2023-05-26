@@ -26,7 +26,7 @@ import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOp
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
 import {Client} from '../entity/ClientWeb';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Device} from '../entity/Device';
 import {Repair} from '../entity/Repair';
 import {InputTest} from '../entity/InputTest';
@@ -115,7 +115,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   repairDangerIcon = faCogs;
   client: Client;
   client_after_saved: Client;
-  formClient: FormGroup;
+  formClient: UntypedFormGroup;
   device: Device;
   repair: Repair;
   inputTest: InputTest;
@@ -144,7 +144,7 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   private subscriptionPrintSuccess: Subscription;
   dangerousRepair = false;
 
-  constructor(private fb: FormBuilder, private httpService: HttpClien,
+  constructor(private fb: UntypedFormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private print: PrintService,
               private imageSender: ImageSenderService,
@@ -153,45 +153,45 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
               private animation_wait: AnimeServiceService,
               private service_input: DeviceInputService) {
     this.formClient = this.fb.group({
-      family: new FormControl(null, [Validators.required]),
-      name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.email]),
-      telephone_number: new FormControl(null),
-      telephone_number_second: new FormControl(null),
-      address: new FormControl(null, [Validators.required]),
-      model: new FormControl(null, [Validators.required]),
-      state_of_use: new FormControl(null, [Validators.required]),
-      imei: new FormControl(null),
-      code_device: new FormControl(null, [Validators.required]),
-      password_device: new FormControl(null, [Validators.required]),
-      accessory: new FormControl(null, [Validators.required]),
-      date_to_enter: new FormControl(null, [Validators.required]),
-      defect: new FormControl(null, [Validators.required]),
-      deposit: new FormControl(null, [Validators.required]),
-      price: new FormControl(null, [Validators.required]),
-      sensors_input: new FormControl(false),
-      display_input: new FormControl(false),
-      connectors_input: new FormControl(false),
-      sound_equipment_input: new FormControl(false),
-      audio_equipment_input: new FormControl(false),
-      software: new FormControl(false),
-      bluetooth: new FormControl(false),
-      vibrations: new FormControl(false),
-      touch_input: new FormControl(false),
-      display_touch_input: new FormControl(false),
-      wi_fi_input: new FormControl(false),
-      microphone_input: new FormControl(false),
-      sim_input: new FormControl(false),
-      keyboard_input: new FormControl(false),
-      camera_input: new FormControl(false),
-      faceId_input: new FormControl(false),
-      camera_input_front: new FormControl(false),
-      homeButton: new FormControl(false),
-      client_type: new FormControl(false),
-      note: new FormControl(''),
-      email_send: new FormControl(false),
-      repairDanger: new FormControl(false),
-      date_exit: new FormControl('', [Validators.required])
+      family: new UntypedFormControl(null, [Validators.required]),
+      name: new UntypedFormControl(null, [Validators.required]),
+      email: new UntypedFormControl(null, [Validators.email]),
+      telephone_number: new UntypedFormControl(null),
+      telephone_number_second: new UntypedFormControl(null),
+      address: new UntypedFormControl(null, [Validators.required]),
+      model: new UntypedFormControl(null, [Validators.required]),
+      state_of_use: new UntypedFormControl(null, [Validators.required]),
+      imei: new UntypedFormControl(null),
+      code_device: new UntypedFormControl(null, [Validators.required]),
+      password_device: new UntypedFormControl(null, [Validators.required]),
+      accessory: new UntypedFormControl(null, [Validators.required]),
+      date_to_enter: new UntypedFormControl(null, [Validators.required]),
+      defect: new UntypedFormControl(null, [Validators.required]),
+      deposit: new UntypedFormControl(null, [Validators.required]),
+      price: new UntypedFormControl(null, [Validators.required]),
+      sensors_input: new UntypedFormControl(false),
+      display_input: new UntypedFormControl(false),
+      connectors_input: new UntypedFormControl(false),
+      sound_equipment_input: new UntypedFormControl(false),
+      audio_equipment_input: new UntypedFormControl(false),
+      software: new UntypedFormControl(false),
+      bluetooth: new UntypedFormControl(false),
+      vibrations: new UntypedFormControl(false),
+      touch_input: new UntypedFormControl(false),
+      display_touch_input: new UntypedFormControl(false),
+      wi_fi_input: new UntypedFormControl(false),
+      microphone_input: new UntypedFormControl(false),
+      sim_input: new UntypedFormControl(false),
+      keyboard_input: new UntypedFormControl(false),
+      camera_input: new UntypedFormControl(false),
+      faceId_input: new UntypedFormControl(false),
+      camera_input_front: new UntypedFormControl(false),
+      homeButton: new UntypedFormControl(false),
+      client_type: new UntypedFormControl(false),
+      note: new UntypedFormControl(''),
+      email_send: new UntypedFormControl(false),
+      repairDanger: new UntypedFormControl(false),
+      date_exit: new UntypedFormControl('', [Validators.required])
     });
 
   }
@@ -510,9 +510,9 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
   companyClient() {
     this.companyShow = !this.companyShow;
     if (this.companyShow) {
-      this.formClient.addControl('companyName', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('sdiClient', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('ivaClient', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('companyName', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('sdiClient', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('ivaClient', new UntypedFormControl(null, [Validators.required]));
       this.formClient.controls.name.setValue(null);
       this.formClient.controls.family.setValue(null);
       this.formClient.removeControl('name');
@@ -524,8 +524,8 @@ export class DeviceinputComponent implements OnInit, OnDestroy {
       this.formClient.removeControl('companyName');
       this.formClient.removeControl('sdiClient');
       this.formClient.removeControl('ivaClient');
-      this.formClient.addControl('name', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('family', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('name', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('family', new UntypedFormControl(null, [Validators.required]));
     }
   }
 

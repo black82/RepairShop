@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Repair} from '../entity/Repair';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {ImageSenderService} from '../service/image-sender.service';
@@ -14,11 +14,11 @@ import {ImageList} from '../entity/ImageList';
 export class DragOnDropRepairComponent implements OnInit, OnDestroy {
   repair: Repair;
   showRepair = false;
-  formInput: FormGroup;
+  formInput: UntypedFormGroup;
   showDrag = false;
   typeImages: string;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private imageSender: ImageSenderService) {

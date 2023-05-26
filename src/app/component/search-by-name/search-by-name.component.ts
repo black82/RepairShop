@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {Client} from '../entity/ClientWeb';
@@ -11,7 +11,7 @@ import {DeviceInputService} from '../service/device-input.service';
   styleUrls: ['./search-by-name.component.css']
 })
 export class SearchByNameComponent implements OnInit {
-  searchForm: FormGroup;
+  searchForm: UntypedFormGroup;
   @Input()
   headerForm: string;
   @Input()
@@ -22,7 +22,7 @@ export class SearchByNameComponent implements OnInit {
   buttonText: string;
 
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private httpClient: HttpClien,
               private deviceService: DeviceInputService,
               private alertService: AlertServiceService) {
@@ -40,8 +40,8 @@ export class SearchByNameComponent implements OnInit {
   initForm(): void {
     this.searchForm = this.formBuilder.group(
       {
-        name: new FormControl(null, Validators.required),
-        family: new FormControl(null, Validators.required),
+        name: new UntypedFormControl(null, Validators.required),
+        family: new UntypedFormControl(null, Validators.required),
       });
   }
 

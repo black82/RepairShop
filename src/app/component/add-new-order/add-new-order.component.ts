@@ -38,7 +38,7 @@ import {faPrint} from '@fortawesome/free-solid-svg-icons/faPrint';
 import {faImages} from '@fortawesome/free-solid-svg-icons/faImages';
 import {faFileInvoice} from '@fortawesome/free-solid-svg-icons/faFileInvoice';
 import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons/faArrowAltCircleRight';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {PrintService} from '../service/print.service';
@@ -107,7 +107,7 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
   homeButton = faCircle;
   companyType = faArrowAltCircleRight;
   mail = faEnvelope;
-  formClient: FormGroup;
+  formClient: UntypedFormGroup;
   companyShow = false;
   typeSender: string;
   titleForm: string;
@@ -131,7 +131,7 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private subscriptionPrintSuccess: Subscription;
 
-  constructor(private fb: FormBuilder, private httpService: HttpClien,
+  constructor(private fb: UntypedFormBuilder, private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private print: PrintService,
               private imageSender: ImageSenderService,
@@ -140,22 +140,22 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
               private animation_wait: AnimeServiceService,
               private service_input: DeviceInputService) {
     this.formClient = this.fb.group({
-      family: new FormControl(null, [Validators.required]),
-      name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null),
-      telephone_number: new FormControl(null),
-      telephone_number_second: new FormControl(null),
-      address: new FormControl(null, [Validators.required]),
-      model: new FormControl(null, [Validators.required]),
+      family: new UntypedFormControl(null, [Validators.required]),
+      name: new UntypedFormControl(null, [Validators.required]),
+      email: new UntypedFormControl(null),
+      telephone_number: new UntypedFormControl(null),
+      telephone_number_second: new UntypedFormControl(null),
+      address: new UntypedFormControl(null, [Validators.required]),
+      model: new UntypedFormControl(null, [Validators.required]),
       // deviceType: new FormControl(null, [Validators.required]),
-      typeObject: new FormControl(null),
-      deposit: new FormControl(null, [Validators.required]),
-      color: new FormControl(null, [Validators.required]),
-      typeOrder: new FormControl(null, [Validators.required]),
-      price: new FormControl(null, [Validators.required]),
-      client_type: new FormControl(false),
-      note: new FormControl(''),
-      email_send: new FormControl(false),
+      typeObject: new UntypedFormControl(null),
+      deposit: new UntypedFormControl(null, [Validators.required]),
+      color: new UntypedFormControl(null, [Validators.required]),
+      typeOrder: new UntypedFormControl(null, [Validators.required]),
+      price: new UntypedFormControl(null, [Validators.required]),
+      client_type: new UntypedFormControl(false),
+      note: new UntypedFormControl(''),
+      email_send: new UntypedFormControl(false),
     });
 
   }
@@ -316,9 +316,9 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
   companyClient() {
     this.companyShow = !this.companyShow;
     if (this.companyShow) {
-      this.formClient.addControl('companyName', new FormControl(null));
-      this.formClient.addControl('sdiClient', new FormControl(null));
-      this.formClient.addControl('ivaClient', new FormControl(null));
+      this.formClient.addControl('companyName', new UntypedFormControl(null));
+      this.formClient.addControl('sdiClient', new UntypedFormControl(null));
+      this.formClient.addControl('ivaClient', new UntypedFormControl(null));
       this.formClient.controls.name.setValue(null);
       this.formClient.controls.family.setValue(null);
       this.formClient.removeControl('name');
@@ -330,8 +330,8 @@ export class AddNewOrderComponent implements OnInit, OnDestroy {
       this.formClient.removeControl('companyName');
       this.formClient.removeControl('sdiClient');
       this.formClient.removeControl('ivaClient');
-      this.formClient.addControl('name', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('family', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('name', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('family', new UntypedFormControl(null, [Validators.required]));
     }
   }
 

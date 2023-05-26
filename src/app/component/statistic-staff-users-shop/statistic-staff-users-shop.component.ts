@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {AnimeServiceService} from '../service/anime-service.service';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {StatisticRepairIntervalService} from '../service/statistic-repair-interval.service';
 import {ColorsStringArray} from '../entity/ColorsStringArray';
 
@@ -53,7 +53,7 @@ export class StatisticStaffUsersShopComponent implements OnInit, OnDestroy {
   constructor(private httpService: HttpClien,
               private alertService: AlertServiceService,
               private animation_wait: AnimeServiceService,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private service_show_statistic: StatisticRepairIntervalService) {
     this.colors = new ColorsStringArray().getColors();
   }

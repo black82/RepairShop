@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {AlertServiceService} from '../service/alert-service.service';
 import {HttpClien} from '../service/clientservice.service';
@@ -11,11 +11,11 @@ import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
   styleUrls: ['./edit-passwor.component.css']
 })
 export class EditPassworComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   s: string;
   n: string;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private alertService: AlertServiceService,
               private httpClient: HttpClien,
               private route: ActivatedRoute) {

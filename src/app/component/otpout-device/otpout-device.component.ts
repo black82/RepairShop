@@ -23,7 +23,7 @@ import {faKeyboard} from '@fortawesome/free-solid-svg-icons/faKeyboard';
 import {faCamera} from '@fortawesome/free-solid-svg-icons/faCamera';
 import {faEnvelopeOpenText} from '@fortawesome/free-solid-svg-icons/faEnvelopeOpenText';
 import {faDownload} from '@fortawesome/free-solid-svg-icons/faDownload';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
 import {HttpClien} from '../service/clientservice.service';
 
@@ -90,7 +90,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   faceIdFa = faFlushed;
   software = faFileSignature;
   return_device_button_text = 'Search Device';
-  formClient: FormGroup;
+  formClient: UntypedFormGroup;
   titleForm = 'Search Return Device by  Repair Number';
   client: Client;
   output_test: OutputTest;
@@ -123,7 +123,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   show_redacting = false;
   private redactClientEvent: Subscription;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private printService: PrintService,
@@ -166,24 +166,24 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
       model_output: [null, [Validators.required]],
       deposit_output: [null, [Validators.required]],
       accessory_output: [null, [Validators.required]],
-      sensor_output: new FormControl(false),
-      display_output: new FormControl(false),
-      connections_output: new FormControl(false),
-      sound_equipment_output: new FormControl(false),
-      touch_output: new FormControl(false),
-      display_touch_output: new FormControl(false),
-      wi_fi_output: new FormControl(false),
-      microphone_output: new FormControl(false),
-      sim_output: new FormControl(false),
-      audio_equipment_output: new FormControl(false),
-      software: new FormControl(false),
-      bluetooth: new FormControl(false),
-      vibrations: new FormControl(false),
-      keyboard_output: new FormControl(false),
-      camera_output: new FormControl(false),
-      faceId_output: new FormControl(false),
-      camera_Output_Front: new FormControl(false),
-      homeButton: new FormControl(false),
+      sensor_output: new UntypedFormControl(false),
+      display_output: new UntypedFormControl(false),
+      connections_output: new UntypedFormControl(false),
+      sound_equipment_output: new UntypedFormControl(false),
+      touch_output: new UntypedFormControl(false),
+      display_touch_output: new UntypedFormControl(false),
+      wi_fi_output: new UntypedFormControl(false),
+      microphone_output: new UntypedFormControl(false),
+      sim_output: new UntypedFormControl(false),
+      audio_equipment_output: new UntypedFormControl(false),
+      software: new UntypedFormControl(false),
+      bluetooth: new UntypedFormControl(false),
+      vibrations: new UntypedFormControl(false),
+      keyboard_output: new UntypedFormControl(false),
+      camera_output: new UntypedFormControl(false),
+      faceId_output: new UntypedFormControl(false),
+      camera_Output_Front: new UntypedFormControl(false),
+      homeButton: new UntypedFormControl(false),
       note_output: [''],
     });
 
@@ -348,7 +348,7 @@ export class OtpoutDeviceComponent implements OnInit, OnDestroy {
   subscribe_success_response(): void {
     this.email_event = this.emailSender.email_sent_send_success.subscribe(value => {
       if (value) {
-        this.printService.$success_print_id.emit(value);
+        this.printService.$success_print_id.emit(2);
       } else {
         this.sigpad_open_second = true;
         this.alert_service.warn(null, 'Edit repair and resend',

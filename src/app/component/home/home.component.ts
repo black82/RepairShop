@@ -7,17 +7,20 @@ import {faStore} from '@fortawesome/free-solid-svg-icons/faStore';
 import {faTools} from '@fortawesome/free-solid-svg-icons/faTools';
 import {faUserShield} from '@fortawesome/free-solid-svg-icons/faUserShield';
 
-import sparti from 'sparticles';
-
-export declare function animeBackground(sparti): void;
 
 
-export declare function animeMenu(): void;
+
+
+import {AnimeJsProvider} from "../service/anime-js-provider.service";
+
+
+
+
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(private adminService: AdminServiceService,
@@ -47,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    animeBackground(sparti);
+    AnimeJsProvider.animeBackground();
     const view = localStorage.getItem('token');
     if (view) {
 
@@ -82,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   snouwDisplay() {
-    animeMenu();
+    AnimeJsProvider.animeMenu();
     const elementById = document.getElementById('menu-buttone');
     if (elementById) {
       elementById.addEventListener('click', () => {

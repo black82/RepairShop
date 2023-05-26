@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {InvoiceRepairModel} from '../entity/InvoiceRepairModel';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 
@@ -12,9 +12,9 @@ import {AlertServiceService} from '../service/alert-service.service';
 export class InvoiceRepairRedactComponent implements OnInit {
   date: Date = new Date();
   invoiceRepairModel: InvoiceRepairModel;
-  formClient: FormGroup;
+  formClient: UntypedFormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService) {
   }
@@ -28,42 +28,42 @@ export class InvoiceRepairRedactComponent implements OnInit {
 
   createForm(): void {
     this.formClient = this.fb.group({
-      typeInvoiceContact: new FormControl(null, [Validators.required]),
-      emailCompany: new FormControl(null, [Validators.required]),
-      cityAndCountry: new FormControl(null, [Validators.required]),
-      clientTitle: new FormControl(null, [Validators.required]),
-      streetAndHouseNumber: new FormControl(null, [Validators.required]),
-      imeiAndSnTitle: new FormControl(null, [Validators.required]),
-      repairPriceTitle: new FormControl(null, [Validators.required]),
-      testInputNotPassedTitle: new FormControl(null, [Validators.required]),
-      companyIvaTitle: new FormControl(null, [Validators.required]),
-      companySdiTitle: new FormControl(null, [Validators.required]),
-      clientEmailTitle: new FormControl(null, [Validators.required]),
-      clientPhoneTitle: new FormControl(null, [Validators.required]),
-      clientAddressTitle: new FormControl(null, [Validators.required]),
-      modelTitle: new FormControl(null, [Validators.required]),
-      usedConditionTitle: new FormControl(null, [Validators.required]),
-      defectTitle: new FormControl(null, [Validators.required]),
-      accessoryTitle: new FormControl(null, [Validators.required]),
-      cashAdvance: new FormControl(null, [Validators.required]),
-      dateRepairWillReady: new FormControl(null, [Validators.required]),
-      dateToEnterTitle: new FormControl(null, [Validators.required]),
-      dateToOutTitle: new FormControl(null, [Validators.required]),
-      workMakeTitle: new FormControl(null, [Validators.required]),
-      partReplaysTitle: new FormControl(null, [Validators.required]),
-      testInputAllPassedTitle: new FormControl(null, [Validators.required]),
-      testInputAllNotPassedTitle: new FormControl(null, [Validators.required]),
-      testOutputAllPassedTitle: new FormControl(null, [Validators.required]),
-      testOutputNotPassedTitle: new FormControl(null, [Validators.required]),
-      testOutputAllNotPassedTitle: new FormControl(null, [Validators.required]),
-      noteInputTitle: new FormControl(null, [Validators.required]),
-      noteOutputTitle: new FormControl(null, [Validators.required]),
-      conditionedGeneralTitle: new FormControl(null, [Validators.required]),
-      titleConditionedGeneral: new FormControl(null, [Validators.required]),
-      privacyAuthorization: new FormControl(null, [Validators.required]),
-      statementAgreementConditions: new FormControl(null, [Validators.required]),
-      staffSignTitle: new FormControl(null, [Validators.required]),
-      clientSignTitle: new FormControl(null, [Validators.required]),
+      typeInvoiceContact: new UntypedFormControl(null, [Validators.required]),
+      emailCompany: new UntypedFormControl(null, [Validators.required]),
+      cityAndCountry: new UntypedFormControl(null, [Validators.required]),
+      clientTitle: new UntypedFormControl(null, [Validators.required]),
+      streetAndHouseNumber: new UntypedFormControl(null, [Validators.required]),
+      imeiAndSnTitle: new UntypedFormControl(null, [Validators.required]),
+      repairPriceTitle: new UntypedFormControl(null, [Validators.required]),
+      testInputNotPassedTitle: new UntypedFormControl(null, [Validators.required]),
+      companyIvaTitle: new UntypedFormControl(null, [Validators.required]),
+      companySdiTitle: new UntypedFormControl(null, [Validators.required]),
+      clientEmailTitle: new UntypedFormControl(null, [Validators.required]),
+      clientPhoneTitle: new UntypedFormControl(null, [Validators.required]),
+      clientAddressTitle: new UntypedFormControl(null, [Validators.required]),
+      modelTitle: new UntypedFormControl(null, [Validators.required]),
+      usedConditionTitle: new UntypedFormControl(null, [Validators.required]),
+      defectTitle: new UntypedFormControl(null, [Validators.required]),
+      accessoryTitle: new UntypedFormControl(null, [Validators.required]),
+      cashAdvance: new UntypedFormControl(null, [Validators.required]),
+      dateRepairWillReady: new UntypedFormControl(null, [Validators.required]),
+      dateToEnterTitle: new UntypedFormControl(null, [Validators.required]),
+      dateToOutTitle: new UntypedFormControl(null, [Validators.required]),
+      workMakeTitle: new UntypedFormControl(null, [Validators.required]),
+      partReplaysTitle: new UntypedFormControl(null, [Validators.required]),
+      testInputAllPassedTitle: new UntypedFormControl(null, [Validators.required]),
+      testInputAllNotPassedTitle: new UntypedFormControl(null, [Validators.required]),
+      testOutputAllPassedTitle: new UntypedFormControl(null, [Validators.required]),
+      testOutputNotPassedTitle: new UntypedFormControl(null, [Validators.required]),
+      testOutputAllNotPassedTitle: new UntypedFormControl(null, [Validators.required]),
+      noteInputTitle: new UntypedFormControl(null, [Validators.required]),
+      noteOutputTitle: new UntypedFormControl(null, [Validators.required]),
+      conditionedGeneralTitle: new UntypedFormControl(null, [Validators.required]),
+      titleConditionedGeneral: new UntypedFormControl(null, [Validators.required]),
+      privacyAuthorization: new UntypedFormControl(null, [Validators.required]),
+      statementAgreementConditions: new UntypedFormControl(null, [Validators.required]),
+      staffSignTitle: new UntypedFormControl(null, [Validators.required]),
+      clientSignTitle: new UntypedFormControl(null, [Validators.required]),
     });
   }
 

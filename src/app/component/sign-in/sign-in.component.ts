@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
@@ -17,7 +17,7 @@ import {AutoLogoutService} from '../service/auto-logout-service.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   question = faQuestion;
   password = faLock;
   exclamation = faExclamation;
@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
   lock = faLock;
   fullName: string;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private router: Router,
               private authService: HttpClien,
               private alertService: AlertServiceService,
@@ -121,7 +121,7 @@ export class SignInComponent implements OnInit {
     return new ClientLogIn(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
   }
 
-  IsErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null) {
+  IsErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null) {
     const isSubmitted = form && form.submitted;
     if (!!(control && control.invalid && (control.dirty || control.touched || isSubmitted))) {
       return {validity: true};
@@ -130,7 +130,7 @@ export class SignInComponent implements OnInit {
     }
   }
 
-  ValidatorTrimSpace(control: FormControl) {
+  ValidatorTrimSpace(control: UntypedFormControl) {
     const value = control?.value as string;
     if (value?.trim() === '') {
       return {validSpace: true};

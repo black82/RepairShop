@@ -3,7 +3,7 @@ import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {AnimeServiceService} from '../service/anime-service.service';
 import {faCalendarCheck} from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
 import {faChartArea} from '@fortawesome/free-solid-svg-icons/faChartArea';
 import {ColorsStringArray} from '../entity/ColorsStringArray';
@@ -14,8 +14,8 @@ import {faCartPlus} from '@fortawesome/free-solid-svg-icons/faCartPlus';
 
 @Component({
   selector: 'app-statistic',
-  templateUrl: './statistic.component.html',
-  styleUrls: ['./statistic.component.css']
+  templateUrl: 'statistic.component.html',
+  styleUrls: ['statistic.component.css']
 })
 export class StatisticComponent implements OnInit {
   data_object: {
@@ -25,7 +25,7 @@ export class StatisticComponent implements OnInit {
   date = faCalendarCheck;
   statistic_button = faChartArea;
   date_init = faCalendarAlt;
-  formDataInterval: FormGroup;
+  formDataInterval: UntypedFormGroup;
   show_chart = false;
   date_server: { model: string, amount: number }[];
   colors: string[];
@@ -58,7 +58,7 @@ export class StatisticComponent implements OnInit {
   constructor(private httpService: HttpClien,
               private alertService: AlertServiceService,
               private animation_wait: AnimeServiceService,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private service_show_statistic: StatisticRepairIntervalService) {
     this.colors = new ColorsStringArray().getColors();
   }

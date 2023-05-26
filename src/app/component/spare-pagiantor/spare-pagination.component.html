@@ -1,0 +1,101 @@
+<div *ngIf="paginatorViu" class="container-paginator">
+  <mat-paginator #paginator
+                 (page)="pageEvent = getServerData($event)"
+                 [length]="length"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="[5, 10,15, 25,50, 100]"
+                 [pageSize]="pageSize">
+
+  </mat-paginator>
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Spare Id</th>
+      <th scope="col">Client</th>
+      <th scope="col">Technic Received</th>
+      <th scope="col">Reason</th>
+      <th scope="col">Defect</th>
+      <th scope="col">Model</th>
+      <th scope="col">Status</th>
+      <th scope="col">Device Date Sailing</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let element of sparePartsReturn; let i = index">
+      <td class="element-td">{{element?.id}}</td>
+      <td
+        class="element-td">{{cl.toCamelCase(cl.truncateChar(element?.client, 20))}}</td>
+      <td
+        class="element-td">{{element?.technicReceived}}</td>
+      <td class="element-td">{{cl.getImeiOrEmailContainNA(element?.reason)}}</td>
+      <td class="element-td">{{element.difect}}</td>
+      <td class="element-td">
+        {{element?.model }}
+      </td>
+      <td [style]="getColorByStatus(element?.status)" class="element-td">
+        {{element?.status }}
+      </td>
+      <td class="element-td">
+        {{element?.dateReceived ? (element.dateReceived| date : 'yyyy-MM-dd') : ' - '}}
+      </td>
+      <td><a (click)="showDevice(element)" class="button button-small button-disable"><span> <fa-icon
+        [icon]="status" class="button-icon"></fa-icon>Changes Status</span></a>
+      </td>
+      <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
+        [icon]="sally_button" class="button-icon"></fa-icon>   Show   </span></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!--    <div *ngIf="showClient" class="container-single-content" id="container-body">-->
+  <!--      <div class="container-modal">-->
+  <!--        <a (click)="hideClient()" class="close">&times;</a>-->
+  <!--        <app-single-divice-forsale></app-single-divice-forsale>-->
+  <!--      </div>-->
+  <!--    </div>-->
+</div>
+<!--<div class="example-header">-->
+<!--  <mat-form-field>-->
+<!--    <input (keyup)="applyFilter($event.target?.value)" matInput placeholder="Filter">-->
+<!--  </mat-form-field>-->
+<!--</div>-->
+
+<!--<div class="example-container mat-elevation-z8">-->
+
+<!--  <mat-table [dataSource]="dataSource" matSort>-->
+
+<!--    &lt;!&ndash; ID Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="id">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row"> {{row?.id}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Progress Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="client">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Client</mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row"> {{row?.client}}</mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="difect">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Defect</mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row"> {{row?.difect}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Color Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="color">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Color</mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let row"> {{row?.color}} </mat-cell>-->
+<!--    </ng-container>-->
+
+<!--    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+<!--    <mat-row *matRowDef="let row; columns: displayedColumns;">-->
+<!--    </mat-row>-->
+<!--  </mat-table>-->
+
+<!--  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
+
+
+

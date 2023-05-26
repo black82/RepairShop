@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {OtpoutDeviceComponent} from './otpout-device.component';
 
@@ -6,7 +6,7 @@ describe('OtpoutDeviceComponent', () => {
   let component: OtpoutDeviceComponent;
   let fixture: ComponentFixture<OtpoutDeviceComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [OtpoutDeviceComponent]
     })

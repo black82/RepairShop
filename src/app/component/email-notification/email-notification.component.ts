@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {faShare} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {InvoiceToolsDto} from '../entity/InvoiceToolsDto';
 import {Router} from '@angular/router';
 import {HttpClien} from '../service/clientservice.service';
@@ -16,7 +16,7 @@ import {InvoiceType} from '../entity/InvoiceType';
 export class EmailNotificationComponent implements OnInit {
 
   save = faShare;
-  emailSendForm: FormGroup;
+  emailSendForm: UntypedFormGroup;
   invoice: InvoiceToolsDto = new InvoiceToolsDto();
   isAdmin = false;
   @Input()
@@ -29,7 +29,7 @@ export class EmailNotificationComponent implements OnInit {
   id_repair: number;
 
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private router: Router,
               private httpClient: HttpClien,
               private alertService: AlertServiceService,
@@ -71,7 +71,7 @@ export class EmailNotificationComponent implements OnInit {
     return this.invoice;
   }
 
-  ValidatorTrimSpace(control: FormControl) {
+  ValidatorTrimSpace(control: UntypedFormControl) {
     const value = control?.value as string;
     if (value?.trim() === '') {
       return {validSpace: true};
@@ -85,7 +85,7 @@ export class EmailNotificationComponent implements OnInit {
     return null;
   }
 
-  IsErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  IsErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }

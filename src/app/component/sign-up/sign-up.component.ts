@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
@@ -12,10 +12,10 @@ import {AnimeServiceService} from '../service/anime-service.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   messagePassword = '*required field';
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private router: Router,
               private authService: HttpClien,
               private alertService: AlertServiceService,
@@ -78,7 +78,7 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  ValidatorTrimSpace(control: FormControl) {
+  ValidatorTrimSpace(control: UntypedFormControl) {
     const value = control?.value as string;
     if (value?.trim() === '') {
       return {validSpace: true};
@@ -92,13 +92,13 @@ export class SignUpComponent implements OnInit {
     return null;
   }
 
-  IsErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  IsErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 
   ComparePassword(password: string, confirmPassword: string) {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
       const control = formGroup.controls[password];
       const matchingControl = formGroup.controls[confirmPassword];
       if (matchingControl.errors && !matchingControl.errors.mustMatch) {

@@ -11,7 +11,6 @@
 }
 
 
-
 #header-wrapper {
   z-index: 2;
   background: linear-gradient(to top right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%) !important;
@@ -34,6 +33,12 @@
   text-shadow: 0 1px 2px #FFFFFF,
   0 -2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.anime-icon {
+  animation-iteration-count: 3;
+  -webkit-animation-iteration-count: 3; /* Safari and Chrome */
 }
 
 .user-position {
@@ -67,6 +72,7 @@
   letter-spacing: 4px;
   overflow: hidden;
   color: #222b3c;
+
 }
 
 svg path {
@@ -170,6 +176,7 @@ nav ul li {
 
 .nav-dropdown {
   background: black;
+  /*display: none !important;*/
 }
 
 

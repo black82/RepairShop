@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {DragOnDropRepairComponent} from './drag-on-drop-repair.component';
 
@@ -6,7 +6,7 @@ describe('DragOnDropRepairComponent', () => {
   let component: DragOnDropRepairComponent;
   let fixture: ComponentFixture<DragOnDropRepairComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DragOnDropRepairComponent]
     })

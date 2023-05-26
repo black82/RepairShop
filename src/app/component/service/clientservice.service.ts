@@ -19,16 +19,17 @@ import {InvoiceShopModels} from '../entity/InvoiceShopModels';
 import {PreOrderDto} from '../entity/PreOrderDto';
 import {PreOrderShop} from '../entity/PreOrderShop';
 import {InvoiceOrderModel} from '../entity/InvoiceOrderModel';
+import {environment} from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClien {
   handler: any;
-  // apiUrl = 'http://ec2-15-161-2-246.eu-south-1.compute.amazonaws.com/';
-   apiUrl = 'http://ec2-15-161-166-206.eu-south-1.compute.amazonaws.com/';
+  // apiUrl = 'https://rfvtechnology.eu/';
 
-  // apiUrl = 'http://localhost:8080/';
+  apiUrl = environment.apiUrl;
 
 
   constructor(private http: HttpClient,
@@ -524,6 +525,15 @@ export class HttpClien {
 
   getDeviceSaleTransactionAllPageable(page: number, size: number): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/device/sale/all/pageable',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getSpareAllPageable(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/spare/all/page',
       {
         params: new HttpParams().set('page', String(page)).set('size', String(size))
       }).pipe(

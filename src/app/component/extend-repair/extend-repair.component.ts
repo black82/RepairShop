@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Repair} from '../entity/Repair';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {AnimeServiceService} from '../service/anime-service.service';
@@ -20,7 +20,7 @@ export class ExtendRepairComponent implements OnInit, OnDestroy {
   showRepair = false;
   private event_form: Subscription;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private animation_wait: AnimeServiceService,

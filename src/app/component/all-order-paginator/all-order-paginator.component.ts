@@ -134,7 +134,9 @@ export class AllOrderPaginatorComponent implements OnInit, OnDestroy {
     } else if (element.orderStatus === 'Ricevuto') {
       return 'background: #1ABC9C;color:white;  border-radius: 5px;';
     } else if (element.orderStatus === 'Ordinato') {
-      return 'background: #34495E;color:white;  border-radius: 5px;';
+      return 'background: #1ABC9C;color:white;  border-radius: 5px;';
+    } else {
+      return 'background: #660000;color:white;  border-radius: 5px;';
     }
   }
 

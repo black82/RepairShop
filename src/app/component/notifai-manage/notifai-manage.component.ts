@@ -7,7 +7,7 @@ import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {WebSocketService} from '../service/WebSocketService';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {faHistory} from '@fortawesome/free-solid-svg-icons/faHistory';
 import {InvoiceType} from '../entity/InvoiceType';
 import {faDolly} from '@fortawesome/free-solid-svg-icons/faDolly';
@@ -23,7 +23,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
   messages: MessageInvoice;
   show_message = false;
   private subscription: Subscription;
-  formMessage: FormGroup;
+  formMessage: UntypedFormGroup;
   hide_button = faHistory;
   doly = faDolly;
   invoiceTypes: string[];
@@ -33,7 +33,7 @@ export class NotifaiManageComponent implements OnInit, OnDestroy {
               private webSocketService: WebSocketService,
               private http: HttpClien,
               private alertService: AlertServiceService,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
   }
 
   ngOnInit(): void {

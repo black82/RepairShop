@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {ExtendDateRepairComponent} from './extend-date-repair.component';
 
@@ -6,7 +6,7 @@ describe('ExtendDateRepairComponent', () => {
   let component: ExtendDateRepairComponent;
   let fixture: ComponentFixture<ExtendDateRepairComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ExtendDateRepairComponent]
     })

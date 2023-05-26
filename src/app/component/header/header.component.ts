@@ -39,12 +39,8 @@ import {faUsersCog} from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import * as anime from 'node_modules/animejs/lib/anime.min.js';
 import {faJediOrder} from '@fortawesome/free-brands-svg-icons/faJediOrder';
 import {faDoorClosed} from '@fortawesome/free-solid-svg-icons/faDoorClosed';
+import {AnimeJsProvider} from "../service/anime-js-provider.service";
 
-export declare function animateHeader(): void;
-
-export declare function animeAdminMenu(): any;
-
-export declare function animeTitle(anime): any;
 
 @Component({
   selector: 'app-header',
@@ -76,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   admins = faUserCog;
   newOrder = faJediOrder;
   closeOrder = faDoorClosed;
+  private priviusMenu: HTMLElement;
 
   @ViewChild('adminMenu') set toolsLabelsAdminCall(element: HTMLElement) {
     this.addAnimeIcon();
@@ -96,6 +93,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscribe_admin: Subscription;
   positionUser: string;
   private subscriptionPosition: Subscription;
+  isAnimated: boolean;
 
 
   constructor(private http: HttpClien,
@@ -103,7 +101,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    animateHeader();
+    AnimeJsProvider.animateHeader();
     const view = localStorage.getItem('roles');
     const position = localStorage.getItem('position');
     if (view) {
@@ -124,7 +122,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (!value) {
         this.positionShow = false;
       } else {
-        animeAdminMenu();
+        AnimeJsProvider.animeAdminMenu();
       }
     });
     this.addAnimeIcon();
@@ -217,7 +215,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     }
 
-    animeTitle(anime);
+    AnimeJsProvider.animeTitle();
 
   }
+
+
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Client} from '../entity/ClientWeb';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
@@ -22,7 +22,7 @@ export class SearchformComponent implements OnInit, OnDestroy {
   typeForm: string;
   @Input()
   titleForm: string;
-  formInput: FormGroup;
+  formInput: UntypedFormGroup;
   client: Client;
   @Output()
   actionA: EventEmitter<Client> = new EventEmitter();
@@ -34,13 +34,13 @@ export class SearchformComponent implements OnInit, OnDestroy {
   hidem_show_form_local: EventEmitter<any> = new EventEmitter();
   private show_form: Subscription;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private client_service: HttpClien,
               private alert_service: AlertServiceService,
               private form_hide_Service: FormhidenService) {
     const nonWhitespaceRegExp: RegExp = new RegExp('\\S');
     this.formInput = this.fb.group({
-      ob: new FormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)])
+      ob: new UntypedFormControl(null, [Validators.required, Validators.pattern(nonWhitespaceRegExp)])
     });
 
 

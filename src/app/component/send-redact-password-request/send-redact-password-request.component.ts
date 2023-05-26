@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {AlertServiceService} from '../service/alert-service.service';
 import {PasswordRecoveryPojo} from '../entity/PasswordRecoveryPojo';
 import {HttpClien} from '../service/clientservice.service';
@@ -10,9 +10,9 @@ import {HttpClien} from '../service/clientservice.service';
   styleUrls: ['./send-redact-password-request.component.css']
 })
 export class SendRedactPasswordRequestComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private alertService: AlertServiceService,
               private httpClient: HttpClien) {
   }
@@ -58,7 +58,7 @@ export class SendRedactPasswordRequestComponent implements OnInit {
     }
   }
 
-  IsErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null) {
+  IsErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null) {
     const isSubmitted = form && form.submitted;
     if (!!(control && control.invalid && (control.dirty || control.touched || isSubmitted))) {
       return {validity: true};
@@ -67,7 +67,7 @@ export class SendRedactPasswordRequestComponent implements OnInit {
     }
   }
 
-  ValidatorTrimSpace(control: FormControl) {
+  ValidatorTrimSpace(control: UntypedFormControl) {
     const value = control?.value as string;
     if (value?.trim() === '') {
       this.loginForm.controls.email.value.trim();

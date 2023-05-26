@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Repair} from '../entity/Repair';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {faCalendarPlus, faDiagnoses, faIdBadge, faMoneyBill} from '@fortawesome/free-solid-svg-icons';
 import {faMobileAlt} from '@fortawesome/free-solid-svg-icons/faMobileAlt';
 import {faCalendarCheck} from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
@@ -18,7 +18,7 @@ import {Subscription} from 'rxjs';
 export class ExtendDateRepairComponent implements OnInit, OnDestroy {
   @Input()
   repair: Repair;
-  formRepair: FormGroup;
+  formRepair: UntypedFormGroup;
   @Input()
   show: boolean;
   id = faIdBadge;
@@ -31,7 +31,7 @@ export class ExtendDateRepairComponent implements OnInit, OnDestroy {
   type_modal_normal: boolean;
   private repair_subscribe: Subscription;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private animation_wait: AnimeServiceService,

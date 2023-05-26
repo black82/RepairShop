@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Client} from '../entity/ClientWeb';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 import {faMobile} from '@fortawesome/free-solid-svg-icons/faMobile';
@@ -64,7 +64,7 @@ export class RedactClientComponent implements OnInit, OnDestroy {
   client: Client;
   show_client: boolean;
   id_repair: number;
-  formClient: FormGroup;
+  formClient: UntypedFormGroup;
   titleForm = 'Find the repair for editing based on Id';
   discar = faTrashAlt;
   used = faHeart;
@@ -126,7 +126,7 @@ export class RedactClientComponent implements OnInit, OnDestroy {
   private output_test: OutputTest;
   private subscription: Subscription;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private httpService: HttpClien,
               private alert_service: AlertServiceService,
               private printService: PrintService,
@@ -165,62 +165,62 @@ export class RedactClientComponent implements OnInit, OnDestroy {
 
   createFormAfterClientCam(): void {
     this.formClient = this.fb.group({
-      family: new FormControl(null, [Validators.required]),
-      name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null),
-      telephone_number: new FormControl(null),
-      address: new FormControl(null, [Validators.required]),
-      model: new FormControl(null, [Validators.required]),
-      state_of_use: new FormControl(null, [Validators.required]),
-      imei: new FormControl(null),
-      code_device: new FormControl(null, [Validators.required]),
-      password_device: new FormControl(null, [Validators.required]),
-      accessory: new FormControl(null, [Validators.required]),
-      date_to_enter: new FormControl(null, [Validators.required]),
-      work_don_output: new FormControl(null, [Validators.required]),
-      parts_replace_output: new FormControl(null, [Validators.required]),
-      defect: new FormControl(null, [Validators.required]),
-      deposit: new FormControl(null, [Validators.required]),
-      price: new FormControl(null, [Validators.required]),
-      sensors_input: new FormControl(false),
-      display_input: new FormControl(false),
-      connectors_input: new FormControl(false),
-      sound_equipment_input: new FormControl(false),
-      audio_equipment_input: new FormControl(false),
-      software: new FormControl(false),
-      bluetooth: new FormControl(false),
-      vibrations: new FormControl(false),
-      touch_input: new FormControl(false),
-      display_touch_input: new FormControl(false),
-      wi_fi_input: new FormControl(false),
-      microphone_input: new FormControl(false),
-      sim_input: new FormControl(false),
-      keyboard_input: new FormControl(false),
-      camera_input: new FormControl(false),
-      camera_input_front: new FormControl(false),
-      faceId_input: new FormControl(false),
-      faceId_output: new FormControl(false),
-      note: new FormControl(''),
-      email_send: new FormControl(false),
-      date_exit: new FormControl(null, [Validators.required]),
-      sensor_output: new FormControl(false),
-      display_output: new FormControl(false),
-      connections_output: new FormControl(false),
-      sound_equipment_output: new FormControl(false),
-      touch_output: new FormControl(false),
-      display_touch_output: new FormControl(false),
-      wi_fi_output: new FormControl(false),
-      microphone_output: new FormControl(false),
-      sim_output: new FormControl(false),
-      audio_equipment_output: new FormControl(false),
-      software_output: new FormControl(false),
-      bluetooth_output: new FormControl(false),
-      vibrations_output: new FormControl(false),
-      keyboard_output: new FormControl(false),
-      camera_output: new FormControl(false),
-      camera_Output_Front: new FormControl(false),
-      homeButton_Output: new FormControl(false),
-      homeButton: new FormControl(false),
+      family: new UntypedFormControl(null, [Validators.required]),
+      name: new UntypedFormControl(null, [Validators.required]),
+      email: new UntypedFormControl(null),
+      telephone_number: new UntypedFormControl(null),
+      address: new UntypedFormControl(null, [Validators.required]),
+      model: new UntypedFormControl(null, [Validators.required]),
+      state_of_use: new UntypedFormControl(null, [Validators.required]),
+      imei: new UntypedFormControl(null),
+      code_device: new UntypedFormControl(null, [Validators.required]),
+      password_device: new UntypedFormControl(null, [Validators.required]),
+      accessory: new UntypedFormControl(null, [Validators.required]),
+      date_to_enter: new UntypedFormControl(null, [Validators.required]),
+      work_don_output: new UntypedFormControl(null, [Validators.required]),
+      parts_replace_output: new UntypedFormControl(null, [Validators.required]),
+      defect: new UntypedFormControl(null, [Validators.required]),
+      deposit: new UntypedFormControl(null, [Validators.required]),
+      price: new UntypedFormControl(null, [Validators.required]),
+      sensors_input: new UntypedFormControl(false),
+      display_input: new UntypedFormControl(false),
+      connectors_input: new UntypedFormControl(false),
+      sound_equipment_input: new UntypedFormControl(false),
+      audio_equipment_input: new UntypedFormControl(false),
+      software: new UntypedFormControl(false),
+      bluetooth: new UntypedFormControl(false),
+      vibrations: new UntypedFormControl(false),
+      touch_input: new UntypedFormControl(false),
+      display_touch_input: new UntypedFormControl(false),
+      wi_fi_input: new UntypedFormControl(false),
+      microphone_input: new UntypedFormControl(false),
+      sim_input: new UntypedFormControl(false),
+      keyboard_input: new UntypedFormControl(false),
+      camera_input: new UntypedFormControl(false),
+      camera_input_front: new UntypedFormControl(false),
+      faceId_input: new UntypedFormControl(false),
+      faceId_output: new UntypedFormControl(false),
+      note: new UntypedFormControl(''),
+      email_send: new UntypedFormControl(false),
+      date_exit: new UntypedFormControl(null, [Validators.required]),
+      sensor_output: new UntypedFormControl(false),
+      display_output: new UntypedFormControl(false),
+      connections_output: new UntypedFormControl(false),
+      sound_equipment_output: new UntypedFormControl(false),
+      touch_output: new UntypedFormControl(false),
+      display_touch_output: new UntypedFormControl(false),
+      wi_fi_output: new UntypedFormControl(false),
+      microphone_output: new UntypedFormControl(false),
+      sim_output: new UntypedFormControl(false),
+      audio_equipment_output: new UntypedFormControl(false),
+      software_output: new UntypedFormControl(false),
+      bluetooth_output: new UntypedFormControl(false),
+      vibrations_output: new UntypedFormControl(false),
+      keyboard_output: new UntypedFormControl(false),
+      camera_output: new UntypedFormControl(false),
+      camera_Output_Front: new UntypedFormControl(false),
+      homeButton_Output: new UntypedFormControl(false),
+      homeButton: new UntypedFormControl(false),
     });
     if (this.client.device[0].rightNowInRepair) {
       this.formClient.removeControl('parts_replace_output');
@@ -401,9 +401,9 @@ export class RedactClientComponent implements OnInit, OnDestroy {
   companyClient() {
     this.companyShow = !this.companyShow;
     if (this.companyShow) {
-      this.formClient.addControl('companyName', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('sdiClient', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('ivaClient', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('companyName', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('sdiClient', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('ivaClient', new UntypedFormControl(null, [Validators.required]));
       this.formClient.controls.name.setValue(null);
       this.formClient.controls.family.setValue(null);
       this.formClient.removeControl('name');
@@ -412,8 +412,8 @@ export class RedactClientComponent implements OnInit, OnDestroy {
       this.formClient.removeControl('companyName');
       this.formClient.removeControl('sdiClient');
       this.formClient.removeControl('ivaClient');
-      this.formClient.addControl('name', new FormControl(null, [Validators.required]));
-      this.formClient.addControl('family', new FormControl(null, [Validators.required]));
+      this.formClient.addControl('name', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('family', new UntypedFormControl(null, [Validators.required]));
     }
   }
 

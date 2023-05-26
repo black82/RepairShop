@@ -47,7 +47,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     this.subscription = this.alertService.alert_open
       .subscribe(alert => {
         if (alert?.message === 'Sorry, you left the module.') {
-          this.router.navigate(alert.location).then();
+          this.router.navigate([alert.location]).then();
         }
         this.alerts.push(alert);
         this.timeout_remove_alert(alert);
