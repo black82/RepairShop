@@ -45,6 +45,8 @@ import {AddNewOrderComponent} from './component/add-new-order/add-new-order.comp
 import {ClouseOrderComponent} from './component/clouse-order/clouse-order.component';
 import {AllOrderPaginatorComponent} from './component/all-order-paginator/all-order-paginator.component';
 import {SpareAllComponent} from './component/spare-all/spare-all.component';
+import {SpareOutPagiComponent} from "./component/spare-out-pagi/spare-out-pagi.component";
+import {SpareSingleReturnComponent} from "./component/spare-singl-return/spare-single-return.component";
 
 
 export const routes: Routes = [
@@ -108,6 +110,8 @@ export const routes: Routes = [
   {path: 'output/order', component: ClouseOrderComponent, canActivate: [AutGuardService]},
   {path: 'edit/order', component: AllOrderPaginatorComponent, canActivate: [AutGuardService]},
   {path: 'return/all', component: SpareAllComponent, canActivate: [AutGuardService]},
+  {path: 'return/out', component: SpareOutPagiComponent, canActivate: [AutGuardService]},
+  {path: 'return/single', component: SpareSingleReturnComponent, canActivate: [AutGuardService]},
   {
     path: 'device/sale/redact',
     component: RedactClientsaleRedacandformComponent,

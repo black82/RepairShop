@@ -32,14 +32,14 @@
     <nav class="menu anime-container">
       <div class="nav-mobile"><a id="nav-toggle"><span></span></a></div>
       <ul class="nav-list" id="menu-box">
-        <li >
-          <a accesskey="1" routerLink=""  >
-            <fa-icon [icon]="home" class="small-icon"
+        <li class="drop-down">
+          <a accesskey="1" routerLink="" class="nav-click"  >
+            <fa-icon [icon]="home" class="small-icon shake-icon"
                      ></fa-icon>
             Home</a>
         </li>
         <li class="drop-down">
-          <a accesskey="2">
+          <a accesskey="2" class="nav-click">
             <fa-icon [icon]="stored" class="small-icon"></fa-icon>
             Shop</a>
           <ul class="nav-dropdown">
@@ -62,21 +62,18 @@
               <fa-icon [icon]="closeOrder" class="small-icon"></fa-icon>
               Close Order</a>
             </li>
-            <li><a routerLink="/return/all">
-              <fa-icon [icon]="closeOrder" class="small-icon"></fa-icon>
-              All Return Spare</a>
-            </li>
+
           </ul>
         </li>
         <li class="drop-down">
-          <a accesskey="3">
+          <a accesskey="3" class="nav-click">
             <fa-icon [icon]="repair"></fa-icon>
             Repair
           </a>
           <ul class="nav-dropdown">
             <li>
               <a>
-                <fa-icon [icon]="signUp"></fa-icon>
+                <fa-icon [icon]="signUp" class="nav-click"></fa-icon>
                 Repair Add
               </a>
               <ul class="nav-dropdown re">
@@ -101,7 +98,7 @@
           </ul>
         </li>
         <li class="drop-down">
-          <a accesskey="4">
+          <a accesskey="4" class="nav-click">
             <fa-icon [icon]="tools"></fa-icon>
             Tools Repair
           </a>
@@ -165,8 +162,8 @@
 
           </ul>
         </li>
-        <li>
-          <a accesskey="5">
+        <li class="drop-down">
+          <a accesskey="5" class="nav-click">
             <fa-icon [icon]="tools"></fa-icon>
             Tools Shop</a>
           <ul class="nav-dropdown">
@@ -199,10 +196,18 @@
               <fa-icon [icon]="redact" class="small-icon"></fa-icon>
               All Order & Edit</a>
             </li>
+            <li><a routerLink="/return/all">
+              <fa-icon [icon]="returnAll" class="small-icon"></fa-icon>
+              Returns </a>
+            <li><a routerLink="/return/out">
+              <fa-icon [icon]="expiredParts" class="small-icon"></fa-icon>
+              Returns Expires </a>
+
+            </li>
           </ul>
         </li>
-        <li *ngIf="admin" class="amin-menu">
-          <a accesskey="6">
+        <li *ngIf="admin" class="amin-menu drop-down" >
+          <a accesskey="6" class="nav-click">
             <fa-icon [icon]="adminTools"></fa-icon>
             Admin App</a>
           <ul class="nav-dropdown">
@@ -243,8 +248,8 @@
 
           </ul>
         </li>
-        <li>
-          <a accesskey="7"><i class="icon icon-lock"></i> Sign In / Up
+        <li class="drop-down">
+          <a accesskey="7" class="nav-click"><i class="icon icon-lock"></i> Sign In / Up
           </a>
           <ul class="nav-dropdown last-child-menu">
             <li><a routerLink="/client/sign-in">

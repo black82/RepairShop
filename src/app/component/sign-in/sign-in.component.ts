@@ -100,9 +100,8 @@ export class SignInComponent implements OnInit {
           clearTimeout(timeout);
         }, 2500);
 
-      }, (err) => {
+      }, () => {
         this.animation_wait.$anime_show.emit(false);
-        console.log(err);
       });
   }
 
@@ -145,7 +144,6 @@ export class SignInComponent implements OnInit {
   }
 
   deleteTacked() {
-    this.authService.logout();
     localStorage.clear();
   }
 }

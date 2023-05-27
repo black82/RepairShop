@@ -22,7 +22,7 @@
 .container-top {
   display: flex;
   align-content: center;
-  flex: border-box;
+  flex: auto;
   margin: 20px;
   justify-content: center;
 }
@@ -135,7 +135,7 @@ li {
 }
 
 ::ng-deep #cdk-overlay-0 > div > div {
-  background: lightcoral !important;
+  background: #34495E !important;
 }
 
 fa-icon {
@@ -219,23 +219,3 @@ fa-icon {
   }
 }
 
-/*.example-container {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  min-width: 300px;*/
-/*}*/
-
-/*.example-header {*/
-/*  min-height: 64px;*/
-/*  padding: 8px 24px 0;*/
-/*}*/
-
-/*.mat-form-field {*/
-/*  font-size: 14px !important;*/
-/*  width: 100% !important;*/
-/*}*/
-
-/*.mat-table {*/
-/*  overflow: auto;*/
-/*  max-height: 500px;*/
-/*}*/

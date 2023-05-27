@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
+  faArrowCircleLeft,
   faConciergeBell,
   faEnvelopeOpen,
   faFileImage,
@@ -40,6 +41,7 @@ import * as anime from 'node_modules/animejs/lib/anime.min.js';
 import {faJediOrder} from '@fortawesome/free-brands-svg-icons/faJediOrder';
 import {faDoorClosed} from '@fortawesome/free-solid-svg-icons/faDoorClosed';
 import {AnimeJsProvider} from "../service/anime-js-provider.service";
+import {faBiohazard} from "@fortawesome/free-solid-svg-icons/faBiohazard";
 
 
 @Component({
@@ -72,6 +74,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   admins = faUserCog;
   newOrder = faJediOrder;
   closeOrder = faDoorClosed;
+  expiredParts= faBiohazard
+  returnAll=faArrowCircleLeft;
   private priviusMenu: HTMLElement;
 
   @ViewChild('adminMenu') set toolsLabelsAdminCall(element: HTMLElement) {

@@ -20,6 +20,7 @@ import {PreOrderDto} from '../entity/PreOrderDto';
 import {PreOrderShop} from '../entity/PreOrderShop';
 import {InvoiceOrderModel} from '../entity/InvoiceOrderModel';
 import {environment} from '../../../environments/environment';
+import {SparePartsReturnDto} from "../entity/SparePartsReturnDto";
 
 
 @Injectable({
@@ -531,7 +532,18 @@ export class HttpClien {
       catchError(this.errorHandler)
     );
   }
-
+  updateStatusSpareConfirmed(spare:SparePartsReturnDto) {
+    return this.http.post<any>(this.apiUrl + 'api/spare/controlled', spare,
+        ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+  updateStatusSpareSend(spare:SparePartsReturnDto) {
+    return this.http.post<any>(this.apiUrl + 'api/spare/send', spare,
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
   getSpareAllPageable(page: number, size: number): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/spare/all/page',
       {
@@ -540,7 +552,14 @@ export class HttpClien {
       catchError(this.errorHandler)
     );
   }
-
+  getSpareOutDatePageable(page: number, size: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/spare/out/page',
+      {
+        params: new HttpParams().set('page', String(page)).set('size', String(size))
+      }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
   getDeviceSaleTransactionIsSalePageable(page: number, size: number): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/device/sale/is/pageable',
       {

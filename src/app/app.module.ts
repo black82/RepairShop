@@ -104,6 +104,11 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome/icon/icon.component";
 import {ChartModule} from "primeng/chart";
+import {MatMenuModule} from "@angular/material/menu";
+import { SpareOutPagiComponent } from './component/spare-out-pagi/spare-out-pagi.component';
+import { SpareSingleReturnComponent } from './component/spare-singl-return/spare-single-return.component';
+import {CardModule} from "primeng/card";
+import {ButtonModule} from "primeng/button";
 
 
 
@@ -190,6 +195,8 @@ declare let createjs: any;
     SparePaginationComponent,
     SpareAllComponent,
     SpareRedactComponentComponent,
+    SpareOutPagiComponent,
+    SpareSingleReturnComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -215,6 +222,9 @@ declare let createjs: any;
     MatTableModule,
     MatSortModule,
     ChartModule,
+    MatMenuModule,
+    CardModule,
+    ButtonModule,
   ],
   providers: [WebSocketService, HttpClient,   RedactStaffUserComponent,
     {

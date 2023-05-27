@@ -512,16 +512,16 @@ export  class AnimeJsProvider {
     (function ($) {
       $(function () {
         $('.menu ul li a:not(:only-child)').on('click',function (e) {
-          $(this).siblings('.nav-dropdown').toggle(200);
-          $('.dropdown').not($(this).siblings()).hide(200);
+          $(this).siblings('.nav-dropdown').toggle(200).removeClass("hide-sub").addClass('active');
+          $('.dropdown').not($(this).siblings()).hide(200).removeClass('active').addClass("hide-sub");
           e.stopPropagation();
         });
         $('html').on('click',function (e) {
-          $('.nav-dropdown').hide(200);
+          $('.nav-dropdown').hide(200).removeClass('active').addClass("hide-sub");
           e.stopPropagation();
         });
         $('#nav-toggle').on('click',function (e) {
-          $('nav ul').slideToggle();
+          $('nav ul').slideToggle().removeClass("hide-sub").addClass('active');
           e.stopPropagation();
         });
         $('#nav-toggle').on('click', function (e) {
@@ -530,16 +530,27 @@ export  class AnimeJsProvider {
         });
       });
     })(jQuery);
-    document.querySelectorAll(".menu ul li a").forEach(p=>p.addEventListener('click',ev=>{
-      document.querySelectorAll(".menu ul li a").forEach(elem=> {
-        if ($(ev.target).not(elem)) {
-            setTimeout(() => {
-              elem.querySelectorAll(".nav-dropdown").forEach(el => {
-              $(el).hide(300);
-            })
-
-          },1400)
+    $(".nav-click").on("click", function(event){
+      $(".nav-click").each(function(index, val){
+        if(val !== event.target){
+          if (val.parentElement.querySelectorAll(".active").length>0){
+            $(val.parentElement.querySelectorAll(".active")).hide(200).removeClass('active').addClass("hide-sub");
+          }
         }
+      });
+    })
+    document.querySelectorAll(".nav-click").forEach(p=>p.addEventListener('click',ev=>{
+
+      document.querySelectorAll(".menu ul li").forEach(elem=> {
+        const target=ev.currentTarget;
+        // if (elem!==target) {
+        //     setTimeout(() => {
+        //       elem.querySelectorAll(".nav-dropdown").forEach(el => {
+        //       $(el).hide(300);
+        //     })
+        //
+        //   },1400)
+        // }
       })
     }))
 
@@ -567,14 +578,23 @@ export  class AnimeJsProvider {
     (function ($) {
       $(function () {
         $('.amin-menu  a:not(:only-child)').on('click',function (e) {
-          $(this).siblings('.nav-dropdown').toggle(200);
-          $('.dropdown').not($(this).siblings()).hide(200);
+          $(this).siblings('.nav-dropdown').toggle(200).removeClass("hide-sub").addClass('active');
+          $('.dropdown').not($(this).siblings()).hide(200).removeClass('active').addClass("hide-sub");
           e.stopPropagation();
         });
         $('#nav-toggle').on('click',function (e) {
-          $('nav ul').slideToggle();
+          $('nav ul').slideToggle().removeClass('active').addClass("hide-sub");
           e.stopPropagation();
         });
+        $(".nav-click").on("click", function(event){
+          $(".nav-click").each(function(index, val){
+            if(val !== event.target){
+              if (val.parentElement.querySelectorAll(".active").length>0){
+                $(val.parentElement.querySelectorAll(".active")).hide(200).removeClass('active').addClass("hide-sub");
+              }
+            }
+          });
+        })
         $('#nav-toggle').on('click', function (e) {
 
           this.classList.toggle('active');

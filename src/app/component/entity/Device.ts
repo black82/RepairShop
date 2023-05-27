@@ -3,7 +3,7 @@ import {Repair} from './Repair';
 export class Device {
   id_Device: number;
   model: string;
-  state_of_use: string;
+  state_of_use: boolean;
   imei: string;
   code_device: string;
   password_device: string;
@@ -12,7 +12,7 @@ export class Device {
   repairs: Repair[];
 
 
-  constructor(id_Device: number, model: string, state_of_use: string,
+  constructor(id_Device: number, model: string, state_of_use: boolean,
               imei: string, code_device: string, password_device: string,
               accessory: string, rightNowInRepair: boolean, repairs: Repair[]) {
     this.id_Device = id_Device;

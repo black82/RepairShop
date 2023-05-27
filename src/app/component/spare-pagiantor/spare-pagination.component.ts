@@ -10,8 +10,9 @@ import {Observable} from 'rxjs';
 import {SparePartsReturnDto} from '../entity/SparePartsReturnDto';
 import {faChartBar} from '@fortawesome/free-solid-svg-icons/faChartBar';
 import {faEye} from '@fortawesome/free-solid-svg-icons/faEye';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatSort, Sort} from '@angular/material/sort';
+import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
+import {faDiagramNext} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-spare-pagiantor',
@@ -19,13 +20,11 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./spare-pagination.component.css']
 })
 export class SparePaginationComponent implements OnInit {
-  displayedColumns = ['id', 'client', 'difect', 'color'];
-  dataSource: MatTableDataSource<SparePartsReturnDto>;
-
+  @Input()
+  typeDate: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @Input()
-  typeDate: string;
   paginatorViu = false;
   sparePartsReturn: SparePartsReturnDto[];
   pageIndex: number;
@@ -34,7 +33,8 @@ export class SparePaginationComponent implements OnInit {
   deviceIcon = faMobile;
   pageEvent: PageEvent;
   sally_button = faEye;
-  status = faChartBar;
+  status = faDiagramNext;
+  menus = faBars;
   showClient = false;
 
   constructor(private clientHttp: HttpClien,
@@ -43,16 +43,9 @@ export class SparePaginationComponent implements OnInit {
               private deviceService: DeviceInputService, public cl: ClientStaticServiceService) {
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-
   ngOnInit(): void {
     this.getServerData(undefined);
 
-    this.dataSource = new MatTableDataSource([]);
   }
 
   public getServerData(event?: PageEvent) {
@@ -70,9 +63,6 @@ export class SparePaginationComponent implements OnInit {
         this.pageSize = response.pageable.pageSize;
         this.length = response.totalElements;
         this.paginatorViu = true;
-        this.dataSource = new MatTableDataSource(response.content);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
       },
       () => {
         this.animation_wait.$anime_show.emit(false);
@@ -90,6 +80,23 @@ export class SparePaginationComponent implements OnInit {
     }, 200);
 
   }
+  statusToConfirmed(element: SparePartsReturnDto) {
+    this.clientHttp.updateStatusSpareConfirmed(element).subscribe(p=>{
+      if (p){
+        element.status='CONTROLLED';
+      }
+    });
+  }
+  changeStatus(element: SparePartsReturnDto) {
+
+
+    if (element.status==='RECEIVED'){
+      this.statusToConfirmed(element);
+    }else if (element.status==='CONTROLLED'){
+      this.changeStatusToSend(element);
+    }
+
+  }
 
   hideClient() {
     this.showClient = false;
@@ -100,8 +107,8 @@ export class SparePaginationComponent implements OnInit {
       case 'all': {
         return this.clientHttp.getSpareAllPageable(pageIndex, pageSize);
       }
-      case 'isSale': {
-        return this.clientHttp.getDeviceSaleTransactionIsSalePageable(pageIndex, pageSize);
+      case 'outDate': {
+        return this.clientHttp.getSpareOutDatePageable(pageIndex, pageSize);
       }
     }
   }
@@ -115,4 +122,53 @@ export class SparePaginationComponent implements OnInit {
       return 'background: #34495E;color:white;  border-radius: 5px;';
     }
   }
+
+  sortData(sort: Sort) {
+    const data = this.sparePartsReturn.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sparePartsReturn = data;
+      return;
+    }
+
+    this.sparePartsReturn = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id':
+          return this.compare(a.id, b.id, isAsc);
+        case 'client':
+          return this.compare(a.client, b.client, isAsc);
+        case 'technicReceived':
+          return this.compare(a.technicReceived, b.technicReceived, isAsc);
+        case 'reason':
+          return this.compare(a.reason, b.reason, isAsc);
+        case 'defect':
+          return this.compare(a.difect, b.difect, isAsc);
+        case 'model':
+          return this.compare(a.model, b.model, isAsc);
+        case 'status':
+          return this.compare(a.status, b.status, isAsc);
+        case 'date':
+          return this.compareData(a.dateReceived, b.dateReceived, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  compareData(a: Date, b: Date, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  private changeStatusToSend(element: SparePartsReturnDto) {
+    this.clientHttp.updateStatusSpareSend(element).subscribe(p=>{
+      if (p){
+        element.status='SEND';
+      }
+    });
+  }
 }
+

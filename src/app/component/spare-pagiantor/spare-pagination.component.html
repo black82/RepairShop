@@ -7,17 +7,17 @@
                  [pageSize]="pageSize">
 
   </mat-paginator>
-  <table class="table table-sm">
+  <table class="table table-sm" matSort (matSortChange)="sortData($event)" >
     <thead>
     <tr>
-      <th scope="col">Spare Id</th>
-      <th scope="col">Client</th>
-      <th scope="col">Technic Received</th>
-      <th scope="col">Reason</th>
-      <th scope="col">Defect</th>
-      <th scope="col">Model</th>
-      <th scope="col">Status</th>
-      <th scope="col">Device Date Sailing</th>
+      <th scope="col" mat-sort-header="id">Spare Id</th>
+      <th scope="col" mat-sort-header="client">Client</th>
+      <th scope="col" mat-sort-header="technicReceived">Technic Received</th>
+      <th scope="col" mat-sort-header="reason">Reason</th>
+      <th scope="col" mat-sort-header="defect">Defect</th>
+      <th scope="col" mat-sort-header="model">Model</th>
+      <th scope="col" mat-sort-header="status">Status</th>
+      <th scope="col" mat-sort-header="date">Date Create</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
@@ -40,62 +40,21 @@
       <td class="element-td">
         {{element?.dateReceived ? (element.dateReceived| date : 'yyyy-MM-dd') : ' - '}}
       </td>
-      <td><a (click)="showDevice(element)" class="button button-small button-disable"><span> <fa-icon
-        [icon]="status" class="button-icon"></fa-icon>Changes Status</span></a>
+      <td>
+        <button mat-button [matMenuTriggerFor]="menu"><fa-icon [icon]="menus" style="color: #0B1B48!important;animation: none!important;"></fa-icon></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngIf="element.status!=='SEND'"> <a (click)="changeStatus(element)" ><span> <fa-icon
+            [icon]="status" class="button-icon"></fa-icon>Changes Status</span></a></button>
+
+          <button mat-menu-item><a (click)="showDevice(element)"><span> <fa-icon
+            [icon]="sally_button" class="button-icon"></fa-icon>   Show   </span></a></button>
+        </mat-menu>
+
       </td>
-      <td><a (click)="showDevice(element)" class="button button-small button-activate"><span> <fa-icon
-        [icon]="sally_button" class="button-icon"></fa-icon>   Show   </span></a>
-      </td>
+
     </tr>
     </tbody>
   </table>
-  <!--    <div *ngIf="showClient" class="container-single-content" id="container-body">-->
-  <!--      <div class="container-modal">-->
-  <!--        <a (click)="hideClient()" class="close">&times;</a>-->
-  <!--        <app-single-divice-forsale></app-single-divice-forsale>-->
-  <!--      </div>-->
-  <!--    </div>-->
 </div>
-<!--<div class="example-header">-->
-<!--  <mat-form-field>-->
-<!--    <input (keyup)="applyFilter($event.target?.value)" matInput placeholder="Filter">-->
-<!--  </mat-form-field>-->
-<!--</div>-->
-
-<!--<div class="example-container mat-elevation-z8">-->
-
-<!--  <mat-table [dataSource]="dataSource" matSort>-->
-
-<!--    &lt;!&ndash; ID Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="id">-->
-<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let row"> {{row?.id}} </mat-cell>-->
-<!--    </ng-container>-->
-
-<!--    &lt;!&ndash; Progress Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="client">-->
-<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Client</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let row"> {{row?.client}}</mat-cell>-->
-<!--    </ng-container>-->
-
-<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="difect">-->
-<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Defect</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let row"> {{row?.difect}} </mat-cell>-->
-<!--    </ng-container>-->
-
-<!--    &lt;!&ndash; Color Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="color">-->
-<!--      <mat-header-cell *matHeaderCellDef mat-sort-header> Color</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let row"> {{row?.color}} </mat-cell>-->
-<!--    </ng-container>-->
-
-<!--    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
-<!--    <mat-row *matRowDef="let row; columns: displayedColumns;">-->
-<!--    </mat-row>-->
-<!--  </mat-table>-->
-
-<!--  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
-
 
 

@@ -49,7 +49,6 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let message = error?.error?.rootCause?.message;
         this.animeService.$anime_show.emit(false);
-        console.log('error--->>>', error);
         if (error?.message) {
           if (error?.error?.message?.includes('Expired or invalid JWT token') || error?.status === 401) {
             // error.error.status = 401;

@@ -75,7 +75,7 @@
             <div>
               <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.modelTitle + client?.deviceBay[0]?.model}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use}}</p>
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use==='true' ? 'Nuovo' : 'Usato'}}</p>
               <p *ngIf="print_entity.type_client_print===3"
                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel?.imeiAndSnTitle}} {{cl.getImeiOrEmailContainNA(client?.deviceBay[0]?.imei)}}</p>
               <p
@@ -121,7 +121,7 @@
             <div>
               <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.modelTitle + client?.deviceSale[0]?.model}}</p>
               <p
-                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.usedConditionTitle}} {{ client?.deviceSale[0]?.state_of_use}}</p>
+                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.usedConditionTitle}} {{ client?.deviceSale[0]?.state_of_use==='true' ? 'Nuovo' : 'Usato'}}</p>
               <p
                 style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.guaranteeTitle + client?.deviceSale[0].garantyDuration + '  month'}}</p>
               <p *ngIf="print_entity.type_client_print===4"
@@ -134,7 +134,7 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.sellerPriceTitle + client?.deviceSale[0]?.sellerPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">
-                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm'}}</p>
+                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===1||type_print===2" style="border-style: solid;
@@ -144,7 +144,7 @@
 
             <p style="font-size: 9pt;margin: 1px"> {{invoiceModel?.modelTitle + client?.device[0]?.model}}</p>
             <p
-              style="font-size: 9pt;margin: 1px"> {{invoiceModel?.usedConditionTitle + client?.device[0]?.state_of_use}}</p>
+              style="font-size: 9pt;margin: 1px"> {{invoiceModel?.usedConditionTitle + client?.device[0]?.state_of_use==='true' ? 'Nuovo' : 'Usato'}}</p>
             <p *ngIf="print_entity.type_client_print===1"
                style="font-size: 9pt;margin: 1px">{{invoiceModel?.imeiAndSnTitle}}
               {{cl.getImeiOrEmailContainNA(client?.device[0]?.imei)}}</p>
