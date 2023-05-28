@@ -544,11 +544,23 @@ export class HttpClien {
       catchError(this.errorHandler)
     );
   }
+  updateSpare(spare:SparePartsReturnDto) {
+    return this.http.post<any>(this.apiUrl + 'api/spare/update', spare,
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
   getSpareAllPageable(page: number, size: number): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/spare/all/page',
       {
         params: new HttpParams().set('page', String(page)).set('size', String(size))
       }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+  getSpareById(id:number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + 'api/spare/'+id+'',
+      ).pipe(
       catchError(this.errorHandler)
     );
   }

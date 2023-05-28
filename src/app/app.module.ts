@@ -109,6 +109,9 @@ import { SpareOutPagiComponent } from './component/spare-out-pagi/spare-out-pagi
 import { SpareSingleReturnComponent } from './component/spare-singl-return/spare-single-return.component';
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
+import {DividerModule} from "primeng/divider";
+import {GalleriaModule} from "primeng/galleria";
+import {NgOptimizedImage} from "@angular/common";
 
 
 
@@ -225,6 +228,9 @@ declare let createjs: any;
     MatMenuModule,
     CardModule,
     ButtonModule,
+    DividerModule,
+    GalleriaModule,
+    NgOptimizedImage,
   ],
   providers: [WebSocketService, HttpClient,   RedactStaffUserComponent,
     {

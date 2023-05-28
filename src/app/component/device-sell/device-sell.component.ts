@@ -10,8 +10,8 @@ import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
 import {faCircle, faFileSignature, faFlushed, faPaperclip, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
-import {faUnlockAlt} from '@fortawesome/free-solid-svg-icons/faUnlockAlt';
-import {faClipboardList} from '@fortawesome/free-solid-svg-icons/faClipboardList';
+
+
 import {faCommentAlt} from '@fortawesome/free-solid-svg-icons/faCommentAlt';
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons/faTrashAlt';
 import {faBluetooth} from '@fortawesome/free-brands-svg-icons/faBluetooth';
@@ -59,6 +59,8 @@ import {faUserGraduate} from '@fortawesome/free-solid-svg-icons/faUserGraduate';
 import {OutputTest} from '../entity/OutputTest';
 import {faPrayingHands} from '@fortawesome/free-solid-svg-icons/faPrayingHands';
 import {ClientStaticServiceService} from '../service/client-static-service.service';
+import {faUnlockAlt} from "@fortawesome/free-solid-svg-icons/faUnlockAlt";
+import {faClipboardList} from "@fortawesome/free-solid-svg-icons/faClipboardList";
 
 @Component({
   selector: 'app-device-sell',

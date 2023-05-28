@@ -47,6 +47,7 @@ import {AllOrderPaginatorComponent} from './component/all-order-paginator/all-or
 import {SpareAllComponent} from './component/spare-all/spare-all.component';
 import {SpareOutPagiComponent} from "./component/spare-out-pagi/spare-out-pagi.component";
 import {SpareSingleReturnComponent} from "./component/spare-singl-return/spare-single-return.component";
+import {SpareRedactComponentComponent} from "./component/spare-redact-component/spare-redact-component.component";
 
 
 export const routes: Routes = [
@@ -112,6 +113,7 @@ export const routes: Routes = [
   {path: 'return/all', component: SpareAllComponent, canActivate: [AutGuardService]},
   {path: 'return/out', component: SpareOutPagiComponent, canActivate: [AutGuardService]},
   {path: 'return/single', component: SpareSingleReturnComponent, canActivate: [AutGuardService]},
+  {path: 'return/edit', component: SpareRedactComponentComponent, canActivate: [AutGuardService]},
   {
     path: 'device/sale/redact',
     component: RedactClientsaleRedacandformComponent,

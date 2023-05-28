@@ -1,3 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+
+
+.border {
+  border: none !important;
+}
 
 .container-body {
   min-height: 100vh;
@@ -9,12 +21,13 @@
   color: #34495E;
   font-size: 1em;
   text-transform: uppercase;
+  line-height: 1.5em;
   text-align: center;
   font-weight: bold;
   letter-spacing: 3px;
   text-shadow: 0 1px 1px #34495E;
   cursor: text;
-  /*align-items: start;*/
+  align-items: start;
   justify-content: left;
   margin-left: 5em;
 }
@@ -23,30 +36,10 @@
   font-family: 'Dancing Script', "Font Awesome 5 Free", serif !important;
   font-size: 20px;
   text-transform: uppercase;
+  line-height: 58px;
   text-align: center;
   font-weight: bold;
   letter-spacing: 3px;
   text-shadow: 0 1px 1px #34495E;
   cursor: unset !important;
-}
-form input,
-form input.input-2,
-form select,
-form textarea {
-  position: relative ;
-  -webkit-appearance: none ;
-  background: #fff ;
-  background: rgba(255, 255, 255, 0.75) ;
-  width: 100% ;
-  border-radius: 0.50em ;
-  padding: 1em 1em ;
-  box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05) ;
-  -moz-transition: all 0.35s ease-in-out;
-  -webkit-transition: all 0.35s ease-in-out ;
-  -o-transition: all 0.35s ease-in-out ;
-  transition: all 0.35s ease-in-out ;
-  font-size: 1em ;
-  outline: none ;
-  height: 50% ;
-
 }

@@ -1,1 +1,84 @@
-<p>spare-redact-component works!</p>
+<div class="container-body">
+  <form  [formGroup]="formClient" autocomplete="off" *ngIf="this.showDevice" (submit)="submitForm()">
+<p-card header="Return" class="title-form"  subheader="Return Spare Edit"
+        [style]="{ width: '100%',  background: 'transparent' }">
+  <ng-template pTemplate="header">
+    <!--      <div *ngIf="editTransaction" class="button_container">-->
+    <!--        <a (click)="dismissedRedact()" class=" button email">-->
+    <!--        <span><fa-icon [icon]="hide_button" class="button-icon"></fa-icon>-->
+    <!--        Exit to Edit Mode</span></a>-->
+    <!--      </div>-->
+    <!--      <div *ngIf="!editTransaction" class="button_container">-->
+    <!--        <a (click)="editTransactionDevice()" class="dismiss"><span> <fa-icon-->
+    <!--          [icon]="code" class="button-icon"></fa-icon>Edit mode</span></a>-->
+    <!--      </div>-->
+  </ng-template>
+
+  <p-divider></p-divider>
+  <p class="input-title" *ngIf="spareReturn?.id"><fa-icon [icon]="difect" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Id Return : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">
+  {{spareReturn.id}}
+</span></p>
+  <p class="input-title " >
+    <fa-icon [icon]="usertag"
+             class="icon-normal-single" style="margin-right: 0.5em"></fa-icon>Client : <span
+    style="color: lightcoral;font-size: 20px; margin-left: 0.2em">
+    <input class="input-1"  [value]="spareReturn.client" type="text" name="client" formControlName="client"  ></span></p>
+  <p class="input-title"><fa-icon [icon]="model"
+                                  class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Model :
+    <span
+      style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">
+      <input class="input-1"  [value]="spareReturn.model" type="text"  formControlName="model"  ></span></p>
+  <p class="input-title"><fa-icon [icon]="statuse" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon>Status : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.status}}</span></p>
+  <p class="input-title"><fa-icon [icon]="difect" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Defect : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">
+    <input class="input-1"  [value]="spareReturn.difect" type="text"   formControlName="difect" ></span>
+  </p>
+  <p class="input-title" *ngIf="spareReturn?.reason"><fa-icon [icon]="reason" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Reason : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">
+    <input class="input-1"  [value]="spareReturn?.reason" type="text"  formControlName="reason" required ></span></p>
+  <p class="input-title" *ngIf="spareReturn.color"><fa-icon [icon]="color" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Color : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">
+    <input class="input-1" [value]="spareReturn.color" type="text"  formControlName="color" ></span></p>
+  <p class="input-title"><fa-icon [icon]="userRec" class="icon-normal-single" style="margin-right: 0.5em" ></fa-icon> Technic Received : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.technicReceived}}</span></p>
+  <p class="input-title" *ngIf="spareReturn?.dateReceived"><fa-icon [icon]="date" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Date Received : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.dateReceived | date :'yyyy/mm/dd'}}</span></p>
+  <p class="input-title" *ngIf="spareReturn?.technicControl"><fa-icon [icon]="userRec" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Technic Controlled : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.technicControl}}</span></p>
+  <p class="input-title" *ngIf="spareReturn?.dateControl"><fa-icon [icon]="dateControl" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Date Controlled : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.dateControl | date :'yyyy/mm/dd'}}</span></p>
+  <p class="input-title" *ngIf="spareReturn?.technicSend"><fa-icon [icon]="userRec" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Technic Sent : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.technicSend}}</span></p>
+  <p class="input-title" *ngIf="spareReturn?.dateSend"><fa-icon [icon]="dateSent" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Date Sent : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.dateSend | date :'yyyy/mm/dd'}}</span></p>
+  <p class="input-title" *ngIf="spareReturn?.supplier"><fa-icon [icon]="supplier" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Supplier : <span
+    style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">
+    <input class="input-1" type="text"  [value]="spareReturn.supplier"    formControlName="supplier" ></span></p>
+    <app-dragfile></app-dragfile>
+  <p-divider></p-divider>
+  <ul *ngFor="let item of images">
+    <img src="data:image/jpg;base64,{{item}}" style="width: 100%; display: block;" alt="50"/>
+  </ul>
+
+
+  <p-galleria id="galeria" *ngIf="images" [value]="images" [showIndicators]="true" [showThumbnails]="false" [showIndicatorsOnItem]="true" indicatorsPosition="left"  [containerStyle]="{ 'max-width': '100%', 'margin-top': '2em' }">
+    <ng-template pTemplate="item" let-item>
+      <img src="data:image/jpg;base64,{{item}}" style="width: 100%; display: block;" alt="50"/>
+    </ng-template>
+    <ng-template pTemplate="indicator" let-index>
+        <span style="color: #e9ecef; cursor: pointer">
+            {{ index + 1 }}
+        </span>
+    </ng-template>
+  </p-galleria>
+  <ng-template pTemplate="footer">
+    <p-button type="submit" label="Save" icon="pi pi-check"></p-button>
+    <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"
+              [style]="{ 'margin-left': '.5em' }"></p-button>
+  </ng-template>
+
+</p-card>
+  </form>
+</div>
