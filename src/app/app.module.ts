@@ -112,6 +112,7 @@ import {ButtonModule} from "primeng/button";
 import {DividerModule} from "primeng/divider";
 import {GalleriaModule} from "primeng/galleria";
 import {NgOptimizedImage} from "@angular/common";
+import { ImagesCaruselAppComponent } from './component/images-carusel-app/images-carusel-app.component';
 
 
 
@@ -200,6 +201,7 @@ declare let createjs: any;
     SpareRedactComponentComponent,
     SpareOutPagiComponent,
     SpareSingleReturnComponent,
+    ImagesCaruselAppComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -232,7 +234,7 @@ declare let createjs: any;
     GalleriaModule,
     NgOptimizedImage,
   ],
-  providers: [WebSocketService, HttpClient,   RedactStaffUserComponent,
+  providers: [WebSocketService, HttpClient,   RedactStaffUserComponent, GalleriaModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

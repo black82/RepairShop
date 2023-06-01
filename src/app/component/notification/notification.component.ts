@@ -28,6 +28,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   nicknameUserName: string;
   private subscriptionAdminService: Subscription;
+  countersReturn = 0;
 
   constructor(private webSocketService: WebSocketService,
               private adminService: AdminServiceService,
@@ -42,7 +43,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.subscriptionAdminService = this.adminService.$user_show.subscribe(value => {
       this.wiuNotification = value;
       if (value) {
+        this.getCount();
+        if (this.countersReturn>0){
+          if (document.getElementsByClassName('notification-anime')) {
+            this.soundAlert();
+          }
 
+        }
         this.getAllRejectNotification();
 
         const stompClient = this.webSocketService.connect();
@@ -59,15 +66,25 @@ export class NotificationComponent implements OnInit, OnDestroy {
               this.soundAlert();
             }
           });
+          this.subscribe = stompClient.subscribe('/topic/notification/spare', notifications => {
+            this.getCount();
+            if (document.getElementsByClassName('notification-anime')) {
+              this.soundAlert();
+            }
+          });
         });
       } else {
         this.webSocketService.disconnection();
+      }
+      if (this.countersReturn>0){
+        confirm("Ci sono alcuni resi che scadono. Stai attento!!!");
       }
     });
     const view = localStorage.getItem('token');
     if (view) {
       this.adminService.$user_show.emit(true);
     }
+
   }
 
   getSuperNameUser() {
@@ -75,8 +92,14 @@ export class NotificationComponent implements OnInit, OnDestroy {
       if (nickname) {
         this.nicknameUserName = nickname.currentName;
       }
-    }, () => {
+    });
+  }
 
+  getCount() {
+    this.httpClient.getCountSpareOut().subscribe(count => {
+      if (count) {
+        this.countersReturn = count;
+      }
     });
   }
 

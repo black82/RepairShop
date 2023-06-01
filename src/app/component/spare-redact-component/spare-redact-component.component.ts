@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {faBomb} from "@fortawesome/free-solid-svg-icons/faBomb";
 import {faQuestion} from "@fortawesome/free-solid-svg-icons/faQuestion";
 import {faUserTag} from "@fortawesome/free-solid-svg-icons";
@@ -13,9 +13,11 @@ import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
 import {faEdge} from "@fortawesome/free-brands-svg-icons/faEdge";
 import {SparePartsReturnDto} from "../entity/SparePartsReturnDto";
 import {HttpClien} from "../service/clientservice.service";
-import {FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormControl, Validators} from "@angular/forms";
+import {FormGroup, UntypedFormBuilder, UntypedFormControl, Validators} from "@angular/forms";
 import {ImageSenderService} from "../service/image-sender.service";
 import {AlertServiceService} from "../service/alert-service.service";
+import {AnimeServiceService} from "../service/anime-service.service";
+
 
 @Component({
   selector: 'app-spare-redact-component',
@@ -27,6 +29,7 @@ export class SpareRedactComponentComponent implements OnInit {
   hide_button = faCog;
   showDevice = false;
   code = faEdge;
+  @Input()
   spareReturn: SparePartsReturnDto
   usertag = faUserTag;
   difect = faBomb;
@@ -41,20 +44,36 @@ export class SpareRedactComponentComponent implements OnInit {
   supplier = faUserAstronaut;
   images: string [];
   formClient: FormGroup;
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1
+    }
+  ];
 
   constructor(private httpClient: HttpClien,
               private fb: UntypedFormBuilder,
               private imageSender: ImageSenderService,
-              private alertService: AlertServiceService) {
+              private alertService: AlertServiceService, private animeService: AnimeServiceService) {
 
   }
 
   ngOnInit(): void {
-    this.httpClient.getSpareById(2).subscribe(p => {
+    this.animeService.$anime_show.emit(true);
+    this.httpClient.getSpareById(this.spareReturn.id).subscribe(p => {
       this.spareReturn = p;
-      this.images=this.spareReturn.filesSpareReturn
+      this.images = this.spareReturn.filesSpareReturn
       this.createFormAfterClientCam();
       this.showDevice = true;
+      this.animeService.$anime_show.emit(false);
     })
   }
 
@@ -67,16 +86,19 @@ export class SpareRedactComponentComponent implements OnInit {
       });
       return;
     }
+    this.animeService.$anime_show.emit(true);
     const images = this.imageSender.submitImageToBack().map(p => p.fotoBase64);
     console.log(images);
     if (images?.length > 0) {
-     this.spareReturn.filesSpareReturn= this.spareReturn.filesSpareReturn.concat(images);
+      this.spareReturn.filesSpareReturn = this.spareReturn.filesSpareReturn.concat(images);
     }
-   const dto= this.createSpare();
+    this.imageSender.removeImagesAll();
+    const dto = this.createSpare();
     this.httpClient.updateSpare(dto).subscribe(() => {
       this.alertService.success('', 'Return successfully updated', true, false, '');
+      this.animeService.$anime_show.emit(false);
     });
-
+    this.animeService.$anime_show.emit(false);
 
   }
 
@@ -101,5 +123,10 @@ export class SpareRedactComponentComponent implements OnInit {
       this.spareReturn.technicControl, this.spareReturn.dateControl,
       this.spareReturn.dateSend, this.spareReturn.technicSend,
       this.spareReturn.status, this.spareReturn.filesSpareReturn);
+  }
+
+
+  canceled() {
+    this.alertService.warn('', 'Go to home', true, false, '');
   }
 }

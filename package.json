@@ -37,6 +37,7 @@
     "@types/canvasjs": "^1.9.6",
     "@types/jest": "^26.0.19",
     "@types/mocha": "^8.0.0",
+    "quill": "^1.3.7",
     "acorn": ">=6.4.1",
     "angular-base64": "^2.0.5",
     "angular-stats": "^1.2.4",

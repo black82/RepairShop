@@ -538,6 +538,12 @@ export class HttpClien {
       catchError(this.errorHandler)
     );
   }
+  getCountSpareOut() {
+    return this.http.get<any>(this.apiUrl + 'api/spare/out/date/count',
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
   updateStatusSpareSend(spare:SparePartsReturnDto) {
     return this.http.post<any>(this.apiUrl + 'api/spare/send', spare,
     ).pipe(

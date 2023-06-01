@@ -20,6 +20,7 @@
 }
 
 .notification-head {
+  margin: 0.5em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -44,6 +45,9 @@
   transition: box-shadow 1s;
   animation: pulse-red 2s infinite;
   text-align: center;
+}
+.alert-return{
+  animation: blink-2  2s infinite;
 }
 
 .counter-notification:hover {
@@ -317,4 +321,30 @@
   0 5px 10px rgba(0, 0, 0, .25),
   0 10px 10px rgba(0, 0, 0, .2),
   0 20px 20px rgba(0, 0, 0, .15);
+}
+.blink-2  {
+  -webkit-animation: blink-2 0.9s infinite both;
+  animation: blink-2 0.9s infinite both;
+}
+@-webkit-keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -26,7 +26,9 @@ export class ImageSenderService {
   removeImages(index) {
     this.images.splice(index, 1);
   }
-
+  removeImagesAll() {
+    this.images= [];
+  }
   selectFile(file) {
     const reader = new FileReader();
     reader.onload = this.handleFile.bind(this);

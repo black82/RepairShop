@@ -7,7 +7,7 @@
                  [pageSize]="pageSize">
 
   </mat-paginator>
-  <table class="table table-sm" matSort (matSortChange)="sortData($event)" >
+  <table class="table table-sm" matSort (matSortChange)="sortData($event)">
     <thead>
     <tr>
       <th scope="col" mat-sort-header="id">Spare Id</th>
@@ -41,13 +41,17 @@
         {{element?.dateReceived ? (element.dateReceived| date : 'yyyy-MM-dd') : ' - '}}
       </td>
       <td>
-        <button mat-button [matMenuTriggerFor]="menu"><fa-icon [icon]="menus" style="color: #0B1B48!important;animation: none!important;"></fa-icon></button>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <fa-icon [icon]="menus" style="color: #0B1B48!important;animation: none!important;"></fa-icon>
+        </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngIf="element.status!=='SEND'"> <a (click)="changeStatus(element)" ><span> <fa-icon
-            [icon]="status" class="button-icon"></fa-icon>Changes Status</span></a></button>
+          <button mat-menu-item *ngIf="element.status!=='SEND'" (click)="changeStatus(element)"><span> <fa-icon
+            [icon]="status" class="button-icon"></fa-icon>Status</span></button>
 
-          <button mat-menu-item><a (click)="showDevice(element)"><span> <fa-icon
-            [icon]="sally_button" class="button-icon"></fa-icon>   Show   </span></a></button>
+          <button mat-menu-item (click)="showDevice(element)"><span> <fa-icon
+            [icon]="sally_button" class="button-icon"></fa-icon>   Show   </span></button>
+          <button mat-menu-item (click)="editSpare(element)"><span> <fa-icon
+            [icon]="editIcon" class="button-icon"></fa-icon>   Edit   </span></button>
         </mat-menu>
 
       </td>
@@ -55,6 +59,28 @@
     </tr>
     </tbody>
   </table>
+  <div *ngIf="showClient" class="container-single-content" id="container-body">
+    <div class="container-modal">
+      <a (click)="hideClient()" class="close">&times;</a>
+      <app-spare-single-return [spareReturn]="spare"></app-spare-single-return>
+      <div><a (click)="hideClient()"
+              class="button button-small button-disable"><span> <fa-icon
+        [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showRedactClient" class="container-single-content">
+    <div class="container-modal">
+      <a (click)="hideClientRedact()" class="close">&times;</a>
+      <app-spare-redact-component [spareReturn]="spare"></app-spare-redact-component>
+      <div><a (click)="hideClientRedact()"
+              class="button button-small button-disable"><span> <fa-icon
+        [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
 

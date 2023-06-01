@@ -1,4 +1,8 @@
 <div *ngIf="wiuNotification" class="notification-container">
+  <div [style.color]="countersReturn==0?'white':'#EE4D68'" class="notification-head">
+    <a routerLink="return/out" *ngIf="countersReturn>0" class="counter-notification alert-return" >{{ countersReturn }}</a>
+    <span routerLink="return/all" tooltip="Return Number Expired " *ngIf="countersReturn==0" class="user-name" >{{ countersReturn }}</span>
+  </div>
   <div [style.color]="counters==0?'white':'#EE4D68'" class="notification-head">
     <fa-icon [icon]="counters>0?notificationIconPresent:notificationIcon" class="notification-icon"
              id="icon-noti">

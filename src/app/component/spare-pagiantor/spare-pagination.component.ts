@@ -13,6 +13,9 @@ import {faEye} from '@fortawesome/free-solid-svg-icons/faEye';
 import {MatSort, Sort} from '@angular/material/sort';
 import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
 import {faDiagramNext} from "@fortawesome/free-solid-svg-icons";
+import {faHistory} from "@fortawesome/free-solid-svg-icons/faHistory";
+import {faPenToSquare} from "@fortawesome/free-solid-svg-icons/faPenToSquare";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-spare-pagiantor',
@@ -36,11 +39,16 @@ export class SparePaginationComponent implements OnInit {
   status = faDiagramNext;
   menus = faBars;
   showClient = false;
+  spare: SparePartsReturnDto;
+  hide_button = faHistory;
+  protected readonly faHistory = faHistory;
+  showRedactClient = false;
+  editIcon = faPenToSquare;
 
   constructor(private clientHttp: HttpClien,
               private animation_wait: AnimeServiceService,
               private alert_service: AlertServiceService,
-              private deviceService: DeviceInputService, public cl: ClientStaticServiceService) {
+              public dialog: MatDialog, public cl: ClientStaticServiceService) {
   }
 
   ngOnInit(): void {
@@ -74,26 +82,31 @@ export class SparePaginationComponent implements OnInit {
   }
 
   showDevice(element: SparePartsReturnDto) {
+    console.log(element)
+    this.spare = element;
+    console.log(this.spare)
     this.showClient = true;
-    setTimeout(() => {
-      // this.deviceService.$deviceForSaleClientTransaction.emit(element);
-    }, 200);
+
 
   }
+
   statusToConfirmed(element: SparePartsReturnDto) {
-    this.clientHttp.updateStatusSpareConfirmed(element).subscribe(p=>{
-      if (p){
-        element.status='CONTROLLED';
+    this.clientHttp.updateStatusSpareConfirmed(element).subscribe(p => {
+      if (p) {
+        element.status = 'CONTROLLED';
       }
     });
   }
+
   changeStatus(element: SparePartsReturnDto) {
-
-
-    if (element.status==='RECEIVED'){
-      this.statusToConfirmed(element);
-    }else if (element.status==='CONTROLLED'){
-      this.changeStatusToSend(element);
+    if (confirm(`Are you sure you want to change the Status?`)) {
+      this.animation_wait.$anime_show.emit(true);
+      if (element.status === 'RECEIVED') {
+        this.statusToConfirmed(element);
+      } else if (element.status === 'CONTROLLED') {
+        this.changeStatusToSend(element);
+      }
+      this.animation_wait.$anime_show.emit(false);
     }
 
   }
@@ -164,11 +177,22 @@ export class SparePaginationComponent implements OnInit {
   }
 
   private changeStatusToSend(element: SparePartsReturnDto) {
-    this.clientHttp.updateStatusSpareSend(element).subscribe(p=>{
-      if (p){
-        element.status='SEND';
+    this.clientHttp.updateStatusSpareSend(element).subscribe(p => {
+      if (p) {
+        element.status = 'SEND';
       }
     });
+  }
+
+
+  hideClientRedact() {
+    this.showRedactClient = !this.showRedactClient;
+  }
+
+  editSpare(element: SparePartsReturnDto) {
+    this.spare = element;
+    this.showClient = false;
+    this.showRedactClient = true;
   }
 }
 

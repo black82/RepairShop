@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {faUserTag} from "@fortawesome/free-solid-svg-icons";
 
@@ -16,7 +16,7 @@ import {faCalendar} from "@fortawesome/free-solid-svg-icons/faCalendar";
 import {faCalendarPlus} from "@fortawesome/free-solid-svg-icons/faCalendarPlus";
 import {faCalendarCheck} from "@fortawesome/free-solid-svg-icons/faCalendarCheck";
 import {faUserAstronaut} from "@fortawesome/free-solid-svg-icons/faUserAstronaut";
-import {MultiPartFile} from "../entity/MultiPartFile";
+import {AnimeServiceService} from "../service/anime-service.service";
 
 @Component({
   selector: 'app-spare-single-return',
@@ -24,12 +24,14 @@ import {MultiPartFile} from "../entity/MultiPartFile";
   styleUrls: ['./spare-single-return.component.css']
 })
 export class SpareSingleReturnComponent implements OnInit {
+  @Input()
+  spareReturn: SparePartsReturnDto;
 
   editTransaction = false;
   hide_button = faCog;
   showDevice = false;
   code = faEdge;
-  spareReturn: SparePartsReturnDto
+
   usertag = faUserTag;
   difect = faBomb;
   statuse = faHistory;
@@ -43,15 +45,18 @@ export class SpareSingleReturnComponent implements OnInit {
   supplier = faUserAstronaut;
   images: string [];
 
-  constructor(private httpClient: HttpClien) {
-    this.httpClient.getSpareById(2).subscribe(p => {
-      this.spareReturn = p;
-      this.images =this.spareReturn.filesSpareReturn
-        this.showDevice = true;
-    })
+  constructor(private httpClient: HttpClien,private animeService:AnimeServiceService) {
+
   }
 
   ngOnInit(): void {
+    this.animeService.$anime_show.emit(true);
+    this.httpClient.getSpareById(this.spareReturn.id).subscribe(p => {
+      this.spareReturn = p;
+      this.images =this.spareReturn.filesSpareReturn
+      this.showDevice = true;
+      this.animeService.$anime_show.emit(false);
+    })
   }
 
   dismissedRedact() {
