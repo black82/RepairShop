@@ -27,7 +27,7 @@
   letter-spacing: 3px;
   text-shadow: 0 1px 1px #34495E;
   cursor: text;
-  align-items: start;
+  /*align-items: start;*/
   justify-content: left;
   margin-left: 5em;
 }

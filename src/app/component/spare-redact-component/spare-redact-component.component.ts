@@ -17,6 +17,7 @@ import {FormGroup, UntypedFormBuilder, UntypedFormControl, Validators} from "@an
 import {ImageSenderService} from "../service/image-sender.service";
 import {AlertServiceService} from "../service/alert-service.service";
 import {AnimeServiceService} from "../service/anime-service.service";
+import {faMicroscope} from "@fortawesome/free-solid-svg-icons/faMicroscope";
 
 
 @Component({
@@ -42,6 +43,7 @@ export class SpareRedactComponentComponent implements OnInit {
   dateControl = faCalendarPlus;
   dateSent = faCalendarCheck;
   supplier = faUserAstronaut;
+  testIcon=faMicroscope;
   images: string [];
   formClient: FormGroup;
   responsiveOptions: any[] = [
@@ -88,17 +90,15 @@ export class SpareRedactComponentComponent implements OnInit {
     }
     this.animeService.$anime_show.emit(true);
     const images = this.imageSender.submitImageToBack().map(p => p.fotoBase64);
-    console.log(images);
     if (images?.length > 0) {
       this.spareReturn.filesSpareReturn = this.spareReturn.filesSpareReturn.concat(images);
     }
-    this.imageSender.removeImagesAll();
     const dto = this.createSpare();
     this.httpClient.updateSpare(dto).subscribe(() => {
       this.alertService.success('', 'Return successfully updated', true, false, '');
       this.animeService.$anime_show.emit(false);
+      this.imageSender.removeImagesAll();
     });
-    this.animeService.$anime_show.emit(false);
 
   }
 
@@ -109,7 +109,9 @@ export class SpareRedactComponentComponent implements OnInit {
       difect: new UntypedFormControl(this.spareReturn.difect, [Validators.nullValidator, Validators.required, Validators.maxLength(255)]),
       reason: new UntypedFormControl(this.spareReturn.reason, [Validators.nullValidator, Validators.required, Validators.maxLength(255)]),
       color: new UntypedFormControl(this.spareReturn.color, [Validators.nullValidator, Validators.required, Validators.maxLength(255)]),
-      supplier: new UntypedFormControl(this.spareReturn.supplier, [Validators.nullValidator, Validators.required, Validators.maxLength(255)])
+      supplier: new UntypedFormControl(this.spareReturn.supplier, [Validators.nullValidator, Validators.required, Validators.maxLength(255)]),
+      testControl: new UntypedFormControl(this.spareReturn.testControl, [ Validators.maxLength(1000)]),
+      testSupplier: new UntypedFormControl(this.spareReturn.testSupplier, [ Validators.maxLength(1000)]),
     })
   }
 
@@ -122,7 +124,8 @@ export class SpareRedactComponentComponent implements OnInit {
       this.spareReturn.technicReceived, this.spareReturn.dateReceived,
       this.spareReturn.technicControl, this.spareReturn.dateControl,
       this.spareReturn.dateSend, this.spareReturn.technicSend,
-      this.spareReturn.status, this.spareReturn.filesSpareReturn);
+      this.spareReturn.status, this.spareReturn.filesSpareReturn,
+      formData.testControl,formData.testSupplier);
   }
 
 

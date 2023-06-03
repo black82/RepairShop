@@ -62,12 +62,19 @@
   <div *ngIf="showClient" class="container-single-content" id="container-body">
     <div class="container-modal">
       <a (click)="hideClient()" class="close">&times;</a>
+      <p-button (click)="printParte()" label="Print" icon="pi pi-times" styleClass="p-button-secondary"
+                [style]="{ 'margin-left': '.5em' }"></p-button>
       <app-spare-single-return [spareReturn]="spare"></app-spare-single-return>
       <div><a (click)="hideClient()"
               class="button button-small button-disable"><span> <fa-icon
         [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+
       </div>
     </div>
+  </div>
+  <div *ngIf="printPage">
+    <app-app-print-return [spareReturn]="spare" [typeInput]="'short'"></app-app-print-return>
+
   </div>
   <div *ngIf="showRedactClient" class="container-single-content">
     <div class="container-modal">
@@ -76,6 +83,7 @@
       <div><a (click)="hideClientRedact()"
               class="button button-small button-disable"><span> <fa-icon
         [icon]="hide_button" class="button-icon"></fa-icon>Hide Client</span></a>
+
       </div>
     </div>
   </div>

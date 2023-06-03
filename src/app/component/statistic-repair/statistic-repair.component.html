@@ -1,12 +1,16 @@
-<div *ngIf="show_data" class="container-body1">
-  <div class="char-modal">
-    <div class="chard-bord">
-      <div class="doughnut-chart">
-        <h1 class="chart-title">Statistics for the period indicated in months</h1>
-        <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
-          [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-        <p-chart [data]="data_object" [options]="options" type="bar"></p-chart>
-      </div>
-    </div>
-  </div>
+<!--<div *ngIf="show_data &&modalChart" class="container-body1" >-->
+<!--  <div class="char-modal">-->
+<!--    <div class="chard-bord">-->
+<!--      <div class="doughnut-chart">-->
+<!--        <h1 class="chart-title">Statistics for the period indicated in months</h1>-->
+<!--        <a (click)="hidden_container()" class="button button-small"><span> <fa-icon-->
+<!--          [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>-->
+<!--        <p-chart [data]="data_object" [options]="options" type="bar"></p-chart>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="doughnut-chart" *ngIf="show_data && !modalChart">
+  <h1 class="chart-title">Statistics for the period indicated in months {{typeChart==='shop'?'Shop':'Repair'}}</h1>
+  <p-chart [data]="data_object" [height]="'500px'"  [options]="options" type="bar"></p-chart>
 </div>

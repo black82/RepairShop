@@ -556,6 +556,12 @@ export class HttpClien {
       catchError(this.errorHandler)
     );
   }
+  saveSpare(spare:SparePartsReturnDto) {
+    return this.http.post<any>(this.apiUrl + 'api/spare/save', spare,
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
   getSpareAllPageable(page: number, size: number): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'api/spare/all/page',
       {

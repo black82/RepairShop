@@ -4,9 +4,11 @@ import {faAmazon} from '@fortawesome/free-brands-svg-icons/faAmazon';
 import {faGoogle} from '@fortawesome/free-brands-svg-icons/faGoogle';
 import {faFacebook} from '@fortawesome/free-brands-svg-icons/faFacebook';
 import {faInstagram} from '@fortawesome/free-brands-svg-icons/faInstagram';
+import {AnimeServiceService} from "../service/anime-service.service";
+import {AnimeJsProvider} from "../service/anime-js-provider.service";
 
 
-export declare function animeFooter(): void;
+
 
 @Component({
   selector: 'app-footer',
@@ -25,7 +27,7 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    // animeFooter();
+    AnimeJsProvider.animeFooter();
   }
 
 }

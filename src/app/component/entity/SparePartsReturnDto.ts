@@ -30,9 +30,12 @@ export class SparePartsReturnDto {
   status: string;
 
   filesSpareReturn: string [];
+  testControl: string;
+
+  testSupplier: string;
 
 
-  constructor(id: number, model: string, color: string, client: string, reason: string, difect: string, supplier: string, technicReceived: string, dateReceived: Date, technicControl: string, dateControl: Date, dateSend: Date, technicSend: string, status: string, filesSpareReturn: string[]) {
+  constructor(id: number, model: string, color: string, client: string, reason: string, difect: string, supplier: string, technicReceived: string, dateReceived: Date, technicControl: string, dateControl: Date, dateSend: Date, technicSend: string, status: string, filesSpareReturn: string[], testControl: string, testSupplier: string) {
     this.id = id;
     this.model = model;
     this.color = color;
@@ -48,5 +51,7 @@ export class SparePartsReturnDto {
     this.technicSend = technicSend;
     this.status = status;
     this.filesSpareReturn = filesSpareReturn;
+    this.testControl = testControl;
+    this.testSupplier = testSupplier;
   }
 }

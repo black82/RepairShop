@@ -17,7 +17,9 @@ import {AnimationWaitComponent} from './component/animation-wait/animation-wait.
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {PrintPageComponent} from './component/print-page/print-page.component';
-import {CheckDeviceRepairActiveComponent} from './component/check-device-repair-active/check-device-repair-active.component';
+import {
+  CheckDeviceRepairActiveComponent
+} from './component/check-device-repair-active/check-device-repair-active.component';
 import {SignUpComponent} from './component/sign-up/sign-up.component';
 import {SignInComponent} from './component/sign-in/sign-in.component';
 import {TokenInterceptor} from './component/service/TokenInterceptor';
@@ -61,7 +63,9 @@ import {NumberRepairComponent} from './component/number-repair/number-repair.com
 import {EditRepairComponent} from './component/edit-repair/edit-repair.component';
 import {PaginatorAllRepairComponent} from './component/paginator-all-repair/paginator-all-repair.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {SendRedactPasswordRequestComponent} from './component/send-redact-password-request/send-redact-password-request.component';
+import {
+  SendRedactPasswordRequestComponent
+} from './component/send-redact-password-request/send-redact-password-request.component';
 import {EditPassworComponent} from './component/edit-passwor/edit-passwor.component';
 import {ClientPaginatorDateComponent} from './component/client-paginator-date/client-paginator-date.component';
 import {MessageAdminComponent} from './component/message-admin/message-admin.component';
@@ -80,17 +84,25 @@ import {AllDeviceSaleComponent} from './component/all-device-sale/all-device-sal
 import {AllDeviceInSaleComponent} from './component/all-device-in-sale/all-device-in-sale.component';
 import {RedactClientComponent} from './component/redact-client/redact-client.component';
 import {SearchByNameComponent} from './component/search-by-name/search-by-name.component';
-import {SearchByNameClientRepairComponent} from './component/search-by-name-client-repair/search-by-name-client-repair.component';
+import {
+  SearchByNameClientRepairComponent
+} from './component/search-by-name-client-repair/search-by-name-client-repair.component';
 import {SearchByNameSaleComponent} from './component/search-by-name-sale/search-by-name-sale.component';
 import {RedactClientSaleComponent} from './component/redact-client-sale/redact-client-sale.component';
-import {RedactClientsaleRedacandformComponent} from './component/redact-clientsale-redacandform/redact-clientsale-redacandform.component';
+import {
+  RedactClientsaleRedacandformComponent
+} from './component/redact-clientsale-redacandform/redact-clientsale-redacandform.component';
 import {InvoiceModelComponent} from './component/invoice-model/invoice-model.component';
 import {InvoiceRepairRedactComponent} from './component/invoice-repair-redact/invoice-repair-redact.component';
 import {InvoiceShopRedactComponent} from './component/invoice-shop-redact/invoice-shop-redact.component';
 import {StatisticStaffUsersComponent} from './component/statistic-staff-users/statistic-staff-users.component';
-import {StatisticStaffUsersShopComponent} from './component/statistic-staff-users-shop/statistic-staff-users-shop.component';
+import {
+  StatisticStaffUsersShopComponent
+} from './component/statistic-staff-users-shop/statistic-staff-users-shop.component';
 import {RedactStaffUserComponent} from './component/redact-staff-user/redact-staff-user.component';
-import {StaffUserComponentDialogComponent} from './component/staff-user-component-dialog/staff-user-component-dialog.component';
+import {
+  StaffUserComponentDialogComponent
+} from './component/staff-user-component-dialog/staff-user-component-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {HttpXSRFInterceptor} from './component/service/HttpXSRFInterceptor';
 import {AddNewOrderComponent} from './component/add-new-order/add-new-order.component';
@@ -105,14 +117,17 @@ import {MatSortModule} from '@angular/material/sort';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome/icon/icon.component";
 import {ChartModule} from "primeng/chart";
 import {MatMenuModule} from "@angular/material/menu";
-import { SpareOutPagiComponent } from './component/spare-out-pagi/spare-out-pagi.component';
-import { SpareSingleReturnComponent } from './component/spare-singl-return/spare-single-return.component';
+import {SpareOutPagiComponent} from './component/spare-out-pagi/spare-out-pagi.component';
+import {SpareSingleReturnComponent} from './component/spare-singl-return/spare-single-return.component';
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
 import {DividerModule} from "primeng/divider";
 import {GalleriaModule} from "primeng/galleria";
-import {NgOptimizedImage} from "@angular/common";
-import { ImagesCaruselAppComponent } from './component/images-carusel-app/images-carusel-app.component';
+import {DatePipe, NgOptimizedImage} from "@angular/common";
+import {ImagesCaruselAppComponent} from './component/images-carusel-app/images-carusel-app.component';
+import {SaveReturnSpareComponent} from './component/save-return-spare/save-return-spare.component';
+import {AppPrintReturnComponent} from './component/app-print-return/app-print-return.component';
+import {BadgeModule} from "primeng/badge";
 
 
 
@@ -120,7 +135,7 @@ declare let $: any;
 declare let createjs: any;
 
 @NgModule({
-  schemas : [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -202,6 +217,8 @@ declare let createjs: any;
     SpareOutPagiComponent,
     SpareSingleReturnComponent,
     ImagesCaruselAppComponent,
+    SaveReturnSpareComponent,
+    AppPrintReturnComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -233,8 +250,9 @@ declare let createjs: any;
     DividerModule,
     GalleriaModule,
     NgOptimizedImage,
+    BadgeModule,
   ],
-  providers: [WebSocketService, HttpClient,   RedactStaffUserComponent, GalleriaModule,
+  providers: [WebSocketService, HttpClient, RedactStaffUserComponent, GalleriaModule, DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

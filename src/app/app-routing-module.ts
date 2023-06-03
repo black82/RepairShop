@@ -48,6 +48,7 @@ import {SpareAllComponent} from './component/spare-all/spare-all.component';
 import {SpareOutPagiComponent} from "./component/spare-out-pagi/spare-out-pagi.component";
 import {SpareSingleReturnComponent} from "./component/spare-singl-return/spare-single-return.component";
 import {SpareRedactComponentComponent} from "./component/spare-redact-component/spare-redact-component.component";
+import {SaveReturnSpareComponent} from "./component/save-return-spare/save-return-spare.component";
 
 
 export const routes: Routes = [
@@ -114,6 +115,7 @@ export const routes: Routes = [
   {path: 'return/out', component: SpareOutPagiComponent, canActivate: [AutGuardService]},
   {path: 'return/single', component: SpareSingleReturnComponent, canActivate: [AutGuardService]},
   {path: 'return/edit', component: SpareRedactComponentComponent, canActivate: [AutGuardService]},
+  {path: 'return/save', component: SaveReturnSpareComponent, canActivate: [AutGuardService]},
   {
     path: 'device/sale/redact',
     component: RedactClientsaleRedacandformComponent,

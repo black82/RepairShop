@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
 import {StatisticModelParts} from '../entity/StatisticModelParts';
 import {Subscription} from 'rxjs';
@@ -15,6 +15,8 @@ import {ColorsStringArray} from '../entity/ColorsStringArray';
   styleUrls: ['./statistic-staff-users-shop.component.css']
 })
 export class StatisticStaffUsersShopComponent implements OnInit, OnDestroy {
+  @Input()
+  typeChartInput: string;
   data_object: any;
   show_data = false;
   reject = faRemoveFormat;
@@ -68,10 +70,11 @@ export class StatisticStaffUsersShopComponent implements OnInit, OnDestroy {
         this.colors = new ColorsStringArray().getColors();
         this.init_data = request.data_init_interval;
         this.complete_date = request.data_complete_interval;
-        if (request.type === 'close') {
+        if (this.typeChartInput === 'close') {
           this.typeChart = 'sell';
           this.typeChartTitle = 'Chart By Users Amount Sell Shop';
           this.getDateBackendClose();
+
         } else {
           this.typeChart = 'baying';
           this.typeChartTitle = 'Chart By Users Amount Baying Shop';
@@ -105,6 +108,7 @@ export class StatisticStaffUsersShopComponent implements OnInit, OnDestroy {
     this.httpService.intervalUsersShopTradeAmountStatistic(this.init_data, this.complete_date).subscribe(value => {
       this.date_server = value;
       this.elaboration_server_data();
+      this.show_data=true
     }, () => {
       this.animation_wait.$anime_show.emit(false);
     });
@@ -116,6 +120,7 @@ export class StatisticStaffUsersShopComponent implements OnInit, OnDestroy {
     this.httpService.intervalUsersBayingTradeAmountStatistic(this.init_data, this.complete_date).subscribe(value => {
       this.date_server = value;
       this.elaboration_server_data();
+      this.show_data=true
     }, () => {
       this.animation_wait.$anime_show.emit(false);
     });

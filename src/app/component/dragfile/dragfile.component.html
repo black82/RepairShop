@@ -4,8 +4,8 @@
       <fa-icon [icon]="file_icon" class="icon-input"></fa-icon>
       Upload photo of the device!
     </ngx-dropzone-label>
-    <ngx-dropzone-preview (removed)="onRemove(f)" *ngFor="let f of files" [removable]="true">
+    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" (removed)="onRemove(f)" *ngFor="let f of files" [removable]="true" [file]="f">
       <ngx-dropzone-label>{{ f.name }} ({{ f.type }})+{{'\n'}}/</ngx-dropzone-label>
-    </ngx-dropzone-preview>
+    </ngx-dropzone-image-preview>
   </ngx-dropzone>
 </div>

@@ -61,8 +61,13 @@
             <li><a routerLink="/output/order">
               <fa-icon [icon]="closeOrder" class="small-icon"></fa-icon>
               Close Order</a>
+            <li><a routerLink="/return/save">
+              <fa-icon [icon]="orderReturn" class="small-icon"></fa-icon>
+              New Return</a>
             </li>
-
+            <li><a routerLink="/return/out">
+              <fa-icon [icon]="expiredParts" class="small-icon"></fa-icon>
+              Returns Expires </a>
           </ul>
         </li>
         <li class="drop-down">
@@ -199,10 +204,6 @@
             <li><a routerLink="/return/all">
               <fa-icon [icon]="returnAll" class="small-icon"></fa-icon>
               Returns </a>
-            <li><a routerLink="/return/out">
-              <fa-icon [icon]="expiredParts" class="small-icon"></fa-icon>
-              Returns Expires </a>
-
             </li>
           </ul>
         </li>

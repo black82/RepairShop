@@ -75,12 +75,28 @@
         <fa-icon [icon]="supplier" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon>
         Supplier : <span
         style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">
-    <input class="input-1" type="text" [value]="spareReturn.supplier" formControlName="supplier"></span></p>
+    <input class="input-1" type="text" [value]="spareReturn?.supplier" formControlName="supplier"></span></p>
+      <div class="row-2">
+        <p class="input-title">
+        <label style="width: 100%;height: 80%">
+          <fa-icon [icon]="testIcon" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon>
+          Test Control :
+              <textarea class="text-area" [value]="spareReturn?.testControl" formControlName="testControl" placeholder="Test Control"
+                        type="text"></textarea>
+        </label></p>
+      </div>
+      <div class="row-2">
+        <p class="input-title" >
+        <label style="width: 100%;height: 80%" >
+          <fa-icon [icon]="testIcon"  class="icon-normal-single" style="margin-right: 0.5em"></fa-icon>
+          Test Before Send :
+          <textarea class="text-area" [value]="spareReturn?.testSupplier" formControlName="testSupplier" placeholder="Test Before Send"
+                        type="text"></textarea>
+        </label>
+        </p>
+      </div>
       <app-dragfile></app-dragfile>
       <p-divider></p-divider>
-      <ul *ngFor="let item of images">
-
-      </ul>
       <ng-template pTemplate="footer">
         <p-button type="submit" label="Update" icon="pi pi-check"></p-button>
         <p-button (click)="canceled()" label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"

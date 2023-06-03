@@ -42,6 +42,9 @@ import {faJediOrder} from '@fortawesome/free-brands-svg-icons/faJediOrder';
 import {faDoorClosed} from '@fortawesome/free-solid-svg-icons/faDoorClosed';
 import {AnimeJsProvider} from "../service/anime-js-provider.service";
 import {faBiohazard} from "@fortawesome/free-solid-svg-icons/faBiohazard";
+import {faBoxOpen} from "@fortawesome/free-solid-svg-icons/faBoxOpen";
+import {faBoxArchive} from "@fortawesome/free-solid-svg-icons/faBoxArchive";
+import {faPersonWalkingArrowLoopLeft} from "@fortawesome/free-solid-svg-icons/faPersonWalkingArrowLoopLeft";
 
 
 @Component({
@@ -72,8 +75,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   saleDevices = faEuroSign;
   repair = faTools;
   admins = faUserCog;
-  newOrder = faJediOrder;
-  closeOrder = faDoorClosed;
+  newOrder = faBoxOpen;
+  closeOrder = faBoxArchive;
+  orderReturn=faPersonWalkingArrowLoopLeft
   expiredParts= faBiohazard
   returnAll=faArrowCircleLeft;
   private priviusMenu: HTMLElement;

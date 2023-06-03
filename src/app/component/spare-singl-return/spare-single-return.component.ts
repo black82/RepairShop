@@ -17,6 +17,7 @@ import {faCalendarPlus} from "@fortawesome/free-solid-svg-icons/faCalendarPlus";
 import {faCalendarCheck} from "@fortawesome/free-solid-svg-icons/faCalendarCheck";
 import {faUserAstronaut} from "@fortawesome/free-solid-svg-icons/faUserAstronaut";
 import {AnimeServiceService} from "../service/anime-service.service";
+import {faMicroscope} from "@fortawesome/free-solid-svg-icons/faMicroscope";
 
 @Component({
   selector: 'app-spare-single-return',
@@ -43,6 +44,7 @@ export class SpareSingleReturnComponent implements OnInit {
   dateControl = faCalendarPlus;
   dateSent = faCalendarCheck;
   supplier = faUserAstronaut;
+  testIcon=faMicroscope
   images: string [];
 
   constructor(private httpClient: HttpClien,private animeService:AnimeServiceService) {

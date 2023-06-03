@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ColorsStringArray} from '../entity/ColorsStringArray';
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
 import {StatisticModelParts} from '../entity/StatisticModelParts';
@@ -15,6 +15,10 @@ import {StatisticRepairIntervalService} from '../service/statistic-repair-interv
   styleUrls: ['./statistic-staff-users.component.css']
 })
 export class StatisticStaffUsersComponent implements OnInit, OnDestroy {
+  @Input()
+  modalChart:boolean;
+  @Input()
+  typeChart:string;
   data_object: any;
   show_data = false;
   reject = faRemoveFormat;
@@ -67,12 +71,15 @@ export class StatisticStaffUsersComponent implements OnInit, OnDestroy {
         this.colors = new ColorsStringArray().getColors();
         this.init_data = request.data_init_interval;
         this.complete_date = request.data_complete_interval;
-        this.typeChartTitle = 'Chart By Users Amount Close Repair';
-        if (request.type === 'close') {
+
+        if (this.typeChart === 'close') {
+          this.typeChartTitle = 'Chart By Users Amount Close Repair';
           this.getDateBackendClose();
+          this.modalChart=true;
         } else {
           this.typeChartTitle = 'Chart By Users Amount Open Repair';
           this.getDateBackendOpen();
+          this.modalChart=true;
         }
       }
     });

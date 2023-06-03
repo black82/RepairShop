@@ -1,12 +1,16 @@
-<div *ngIf="show_data&&isAdmin" class="container-body-chart">
-  <div class="char-modal">
-    <div class="chard-bord" id="anime-char">
-      <div class="doughnut-chart">
-        <h1 class="chart-title">{{typeChartTitle}}</h1>
-        <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
-          [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-        <p-chart [data]="data_object" [height]="'1000px'" [options]="options" type="pie"></p-chart>
-      </div>
-    </div>
-  </div>
+<!--<div *ngIf="show_data&&isAdmin&&modalChart" class="container-body-chart">-->
+<!--  <div class="char-modal">-->
+<!--    <div class="chard-bord" id="anime-char">-->
+<!--      <div class="doughnut-chart">-->
+<!--        <h1 class="chart-title">{{typeChartTitle}}</h1>-->
+<!--        <a (click)="hidden_container()" class="button button-small"><span> <fa-icon-->
+<!--          [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>-->
+<!--        <p-chart [data]="data_object"  [options]="options" type="pie"></p-chart>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="doughnut-chart" *ngIf="modalChart">
+  <h1 class="chart-title">{{typeChartTitle}}</h1>
+  <p-chart [data]="data_object" [height]="'500px'"   [options]="options" type="pie"></p-chart>
 </div>

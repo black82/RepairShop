@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {StatisticRepairIntervalService} from '../service/statistic-repair-interval.service';
 import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
@@ -17,6 +17,8 @@ export class StatisticRepairComponent implements OnInit {
   data_object: {
     labels: string[], datasets: object[]
   };
+  @Input()
+  typeChart:string;
   date_init: Date;
   date_complete: Date;
   show_data = false;
@@ -42,6 +44,8 @@ export class StatisticRepairComponent implements OnInit {
       }
     }
   };
+  @Input()
+  modalChart: boolean;
 
   constructor(private service_show_statistic: StatisticRepairIntervalService,
               private httpService: HttpClien,
@@ -63,7 +67,7 @@ export class StatisticRepairComponent implements OnInit {
     });
     this.subscribe = this.service_show_statistic.statistic_interval_month.subscribe(value => {
       this.isShop = value;
-      if (value) {
+      if (this.typeChart!=='shop') {
         this.get_data_to_server();
       } else {
         this.get_data_to_server_shop();

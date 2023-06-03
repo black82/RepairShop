@@ -46,17 +46,17 @@
         style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.dateSend | date :'yyyy/mm/dd'}}</span></p>
       <p class="input-title" *ngIf="spareReturn?.supplier"><fa-icon [icon]="supplier" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Supplier : <span
         style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.supplier }}</span></p>
+      <p class="input-title" *ngIf="spareReturn?.testControl"><fa-icon [icon]="testIcon" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Test Control : <span
+        style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.testControl }}</span></p>
+      <p class="input-title" *ngIf="spareReturn?.testSupplier"><fa-icon [icon]="testIcon" class="icon-normal-single" style="margin-right: 0.5em"></fa-icon> Test Control : <span
+        style="color: lightcoral;font-size: 20px ; margin-left: 0.2em">{{spareReturn?.testSupplier }}</span></p>
       <p-divider></p-divider>
      <app-images-carusel-app [images]="images"></app-images-carusel-app>
       <ng-template pTemplate="footer">
       </ng-template>
     </p-card>
-    <div class="title-container">
 
-    </div>
-    <div class="button_form">
 
-      </div>
     </div>
   </div>
 

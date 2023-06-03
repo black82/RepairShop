@@ -1,13 +1,17 @@
 <div *ngIf="wiuNotification" class="notification-container">
   <div [style.color]="countersReturn==0?'white':'#EE4D68'" class="notification-head">
-    <a routerLink="return/out" *ngIf="countersReturn>0" class="counter-notification alert-return" >{{ countersReturn }}</a>
-    <span routerLink="return/all" tooltip="Return Number Expired " *ngIf="countersReturn==0" class="user-name" >{{ countersReturn }}</span>
+<!--    <a routerLink="return/out" *ngIf="countersReturn>0" class="counter-notification alert-return" >{{ countersReturn }}</a>-->
+    <i [badgeDisabled]="true" *ngIf="countersReturn===0"  class="pi pi-calendar mr-4 p-text-secondary" pBadge style="font-size: 1.5rem;color: white;  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);"></i>
+    <i routerLink="return/out" *ngIf="countersReturn>0"  class="pi pi-calendar mr-4 p-text-secondary alert-return" pBadge style="font-size: 1.5rem;color:#EE4D68;   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);" [value]="countersReturn+''" [severity]="'danger'"></i>
+<!--    <span routerLink="return/all" tooltip="Return Number Expired " *ngIf="countersReturn==0" class="user-name" >{{ countersReturn }}</span>-->
   </div>
   <div [style.color]="counters==0?'white':'#EE4D68'" class="notification-head">
-    <fa-icon [icon]="counters>0?notificationIconPresent:notificationIcon" class="notification-icon"
-             id="icon-noti">
-    </fa-icon>
-    <a *ngIf="counters>0" class="counter-notification" id="counter-notify">{{ counters }}</a>
+    <i *ngIf="counters===0" [badgeDisabled]="true" class="pi pi-bell text-3xl" pBadge style="font-size: 1.5rem;color: white;  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);"></i>
+    <i *ngIf="counters>0" [badgeDisabled]="false" class="pi pi-bell text-3xl alert-return notification-anime" pBadge style="font-size: 1.5rem;color: #EE4D68;  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);" [value]="counters+''" [severity]="'danger'"></i>
     <span tooltip="Click for Info User">
     <span (click)="showStaffUserHeader(nicknameUserName)" class="user-name"> {{nicknameUserName}}</span>
       </span>

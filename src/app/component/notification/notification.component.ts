@@ -101,6 +101,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.countersReturn = count;
       }
     });
+
+
   }
 
   bellAnimation(): void {

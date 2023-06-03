@@ -16,6 +16,7 @@ import {faDiagramNext} from "@fortawesome/free-solid-svg-icons";
 import {faHistory} from "@fortawesome/free-solid-svg-icons/faHistory";
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons/faPenToSquare";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {PrintService} from "../service/print.service";
 
 @Component({
   selector: 'app-spare-pagiantor',
@@ -44,11 +45,12 @@ export class SparePaginationComponent implements OnInit {
   protected readonly faHistory = faHistory;
   showRedactClient = false;
   editIcon = faPenToSquare;
+  printPage=false;
 
   constructor(private clientHttp: HttpClien,
               private animation_wait: AnimeServiceService,
               private alert_service: AlertServiceService,
-              public dialog: MatDialog, public cl: ClientStaticServiceService) {
+              public dialog: MatDialog, private printService: PrintService,public cl: ClientStaticServiceService) {
   }
 
   ngOnInit(): void {
@@ -82,9 +84,7 @@ export class SparePaginationComponent implements OnInit {
   }
 
   showDevice(element: SparePartsReturnDto) {
-    console.log(element)
-    this.spare = element;
-    console.log(this.spare)
+      this.spare = element;
     this.showClient = true;
 
 
@@ -193,6 +193,13 @@ export class SparePaginationComponent implements OnInit {
     this.spare = element;
     this.showClient = false;
     this.showRedactClient = true;
+  }
+
+  printParte() {
+    this.printPage=!this.printPage;
+    this.printService.$success_print_to_send.subscribe(p=>{
+      this.printPage=false;
+    })
   }
 }
 

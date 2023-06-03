@@ -28,59 +28,134 @@
             <option>100</option>
           </select>
         </label>
+        <a (click)="initData()" class="button button-small repairUser"><span><fa-icon
+      [icon]="statistic_button" class="button-icon"></fa-icon> Period Apply</span></a>
       </form>
-      <div class="container-chart1">
-        <p class="chart-title"> User Statistic</p></div>
-      <a (click)="getDataByUsersCloseAmount()" class="button button-small repairUser"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon>  Amount Users Closed Repairs</span></a>
-      <a (click)="getDataByUsersOpenRepairAmount()" class="button button-small repairUserOpen"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon>  Amount Users Open Repairs</span></a>
-      <a (click)="getDataByUsersAmountByShop()" class="button button-small shopUser"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon> Amount Users Sold  Devices </span></a>
-      <a (click)="getDataByUsersBayingAmount()" class="button button-small shopUserBay"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon> Amount Users Bought Devices </span></a>
-    </div>
-    <div class="container-chart1">
-      <p class="chart-title"> Repair Statistic</p>
-      <a (click)="getData()" class="button button-small first"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon> Repair By Model</span></a>
 
-      <a (click)="getDataByMonth()" class="button button-small month"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon>  Repair By Month</span></a>
-      <a (click)="getDataByModelAndParts()" class="button button-small model"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon>  Repair Model&Components</span></a>
-      <p class="chart-title"> Shop Statistic</p>
-      <a (click)="getDataShop()" class="button button-small first"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon> Statistics Shop By Model</span></a>
+<!--      <div class="container-chart1">-->
+<!--        <p class="chart-title"> User Statistic</p></div>-->
+<!--      <a (click)="getDataByUsersCloseAmount()" class="button button-small repairUser"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Amount Users Closed Repairs</span></a>-->
+<!--      <a (click)="getDataByUsersOpenRepairAmount()" class="button button-small repairUserOpen"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Amount Users Open Repairs</span></a>-->
+<!--      <a (click)="getDataByUsersAmountByShop()" class="button button-small shopUser"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon> Amount Users Sold  Devices </span></a>-->
+<!--      <a (click)="getDataByUsersBayingAmount()" class="button button-small shopUserBay"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon> Amount Users Bought Devices </span></a>-->
+<!--    </div>-->
+<!--    <div class="container-chart1">-->
+<!--      <p class="chart-title"> Repair Statistic</p>-->
+<!--      <a (click)="getData()" class="button button-small first"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon> Repair By Model</span></a>-->
 
-      <a (click)="getDataByMonthShop()" class="button button-small month"><span> <fa-icon
-        [icon]="statistic_button" class="button-icon"></fa-icon>  Statistics Shop By Month</span></a>
-      <!--      <a (click)="getDataByModelAndPartsShop()" class="button button-small model"><span> <fa-icon-->
-      <!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Stat. Model&Parts</span></a>-->
-    </div>
+<!--      <a (click)="getDataByMonth()" class="button button-small month"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Repair By Month</span></a>-->
+<!--      <a (click)="getDataByModelAndParts()" class="button button-small model"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Repair Model&Components</span></a>-->
+<!--      <p class="chart-title"> Shop Statistic</p>-->
+<!--      <a (click)="getDataShop()" class="button button-small first"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon> Statistics Shop By Model</span></a>-->
+
+<!--      <a (click)="getDataByMonthShop()" class="button button-small month"><span> <fa-icon-->
+<!--        [icon]="statistic_button" class="button-icon"></fa-icon>  Statistics Shop By Month</span></a>-->
+<!--      &lt;!&ndash;      <a (click)="getDataByModelAndPartsShop()" class="button button-small model"><span> <fa-icon&ndash;&gt;-->
+<!--      &lt;!&ndash;        [icon]="statistic_button" class="button-icon"></fa-icon>  Stat. Model&Parts</span></a>&ndash;&gt;-->
+<!--    </div>-->
 
   </div>
 
-  <div *ngIf="show_chart" class="char-modal">
-    <div class="chard-bord">
-      <div class="doughnut-chart">
-        <a (click)="hidden_container()" class="button button-small"><span> <fa-icon
-          [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>
-        <h1 class="chart-title">{{title}}
-          from date/ <span class="date-interval">{{formDataInterval.controls.date_init.value}}</span>
-          to dated/
-          <span class="date-interval">{{formDataInterval.controls.date_complete.value}}</span>
-          : = <span class="date-interval">{{sum_device}}</span></h1>
-        <div class="container-chart">
-          <p-chart [data]="data_object" [height]="'1000px'" [options]="options" class="pie" type="doughnut"></p-chart>
-        </div>
+  <div class="row-container" *ngIf="modalchart">
+    <div style="width: 49%; display: block;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-left: 0.5%;margin-right: 0.5% ; background: white">
+      <app-statistic-repair [modalChart]="false"></app-statistic-repair>
+
+    </div>
+    <div style="width: 49% ; display: block;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-right: 0.5% ; background: white">
+      <app-statistic-repair [modalChart]="false" [typeChart]="'shop'"></app-statistic-repair>
+    </div>
+
+    <div style="width: 49% ; display: block;height: 50%;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-top: 1%;margin-left: 0.5% ; background: white">
+      <app-statistic-model-parts [modalChart]="false"></app-statistic-model-parts>
+    </div>
+    <div style="width: 49% ; display: block;height: 50%;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-top: 1%;margin-right: 0.5% ; background: white">
+      <app-statistic-staff-users [typeChart]="'close'" [modalChart]="false"></app-statistic-staff-users>
+    </div>
+    <div style="width: 49% ; display: block;height: 50%;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-top: 1%;margin-left: 0.5% ; background: white">
+      <app-statistic-staff-users [modalChart]="false"></app-statistic-staff-users>
+    </div>
+    <div style="width: 49% ; display: block;height: 50%;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-top: 1%;margin-right: 0.5% ; background: white">
+      <app-statistic-staff-users-shop [typeChartInput]="'close'"></app-statistic-staff-users-shop>
+    </div>
+    <div style="width: 49% ; display: block;height: 50%;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-top: 1%;margin-left: 0.5% ; background: white">
+      <app-statistic-staff-users-shop [typeChartInput]="'open'"></app-statistic-staff-users-shop>
+    </div>
+    <div style="width: 49% ; display: block;height: 50%;box-shadow: inset 0 3px 0 0 #BBB,
+  inset 0 3px 0 3px rgba(0, 0, 0, 0.1),
+  0 0 0 4px #FFFFFF,
+  0 3px 0 3px #BBB,
+  0 8px 5px 5px rgba(0, 0, 0, 0.3),
+  0 -1px 1px 5px rgba(0, 0, 0, 0.05);margin-top: 1%;margin-right: 0.5%; background: white">
+      <div *ngIf="show_chart">
+      <h1 class="chart-title">{{title}}
+        from date/ <span class="date-interval">{{formDataInterval.controls.date_init.value}}</span>
+        to dated/
+        <span class="date-interval">{{formDataInterval.controls.date_complete.value}}</span>
+        : = <span class="date-interval">{{sum_device}}</span></h1>
+      <div class="container-chart">
+        <p-chart [data]="data_object" [height]="'500px'" [options]="options" class="pie" type="doughnut"></p-chart>
+      </div>
       </div>
     </div>
   </div>
-  <app-statistic-repair></app-statistic-repair>
-  <app-statistic-model-parts></app-statistic-model-parts>
-  <app-statistic-staff-users></app-statistic-staff-users>
-  <app-statistic-staff-users-shop></app-statistic-staff-users-shop>
+
+<!--  <div *ngIf="show_chart" class="char-modal">-->
+<!--    <div class="chard-bord">-->
+<!--      <div class="doughnut-chart">-->
+<!--        <a (click)="hidden_container()" class="button button-small"><span> <fa-icon-->
+<!--          [icon]="reject" class="button-icon"></fa-icon> Hidden</span></a>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <app-statistic-repair [modalChart]="modalchart" *ngIf="modalchart"></app-statistic-repair>-->
+<!--  <app-statistic-model-parts [modalChart]="modalchartParts" *ngIf="modalchartParts"></app-statistic-model-parts>-->
+<!--  <app-statistic-staff-users [modalChart]="modalChartStaf" *ngIf="modalChartStaf"></app-statistic-staff-users>-->
+
   <ul class="bg-bubbles">
     <li></li>
     <li></li>
@@ -94,4 +169,4 @@
     <li></li>
   </ul>
 </div>
-
+</div>

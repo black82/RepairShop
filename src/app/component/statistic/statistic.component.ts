@@ -11,6 +11,7 @@ import {StatisticRepairIntervalService} from '../service/statistic-repair-interv
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
 import {StatisticRequestInterval} from '../entity/StatisticRequestInterval';
 import {faCartPlus} from '@fortawesome/free-solid-svg-icons/faCartPlus';
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-statistic',
@@ -54,12 +55,16 @@ export class StatisticComponent implements OnInit {
       }
     }
   };
+  modalchart = false;
+  modalchartParts = false;
+  modalChartStaf = false;
 
   constructor(private httpService: HttpClien,
               private alertService: AlertServiceService,
               private animation_wait: AnimeServiceService,
               private formBuilder: UntypedFormBuilder,
-              private service_show_statistic: StatisticRepairIntervalService) {
+              private service_show_statistic: StatisticRepairIntervalService,
+              private datepipe: DatePipe) {
     this.colors = new ColorsStringArray().getColors();
   }
 
@@ -68,12 +73,39 @@ export class StatisticComponent implements OnInit {
     if (this.isAdmin) {
       return;
     }
+
     this.formDataInterval = this.formBuilder.group({
       date_init: [null, Validators.required],
 
       date_complete: [null, Validators.required],
       amount: [null]
     });
+    this.modalchart=true;
+    this.initData();
+    // setTimeout(() => {
+    //   const date1 = new Date();
+    //   date1.setMonth(date1.getMonth() - 7)
+    //   this.service_show_statistic.statistic_init_data.emit(this.datepipe.transform(date1, 'yyyy-MM-dd', 'UTC'));
+    //   this.service_show_statistic.statistic_complete_data.emit(this.datepipe.transform(new Date(), 'yyyy-MM-dd', 'UTC'));
+    //   this.service_show_statistic.statistic_interval_month.emit(false);
+    //   this.service_show_statistic.statistic_amount.emit(15);
+    //   this.service_show_statistic.model_parts_statistic
+    //     .emit({
+    //       data_init_interval: this.datepipe.transform(date1, 'yyyy-MM-dd', 'UTC'),
+    //       data_complete_interval: this.datepipe.transform(new Date(), 'yyyy-MM-dd', 'UTC')
+    //     });
+    //   this.service_show_statistic.statistic_amount.emit(15);
+    //   this.service_show_statistic.$users_amount_statistic
+    //     .emit({
+    //       data_init_interval: this.datepipe.transform(date1, 'yyyy-MM-dd', 'UTC'),
+    //       data_complete_interval: this.datepipe.transform(new Date(), 'yyyy-MM-dd', 'UTC'), type: 'open'
+    //     });
+    //   this.service_show_statistic.$users_amount_shop_statistic
+    //     .emit({
+    //       data_init_interval: this.datepipe.transform(date1, 'yyyy-MM-dd', 'UTC'),
+    //       data_complete_interval: this.datepipe.transform(new Date(), 'yyyy-MM-dd', 'UTC'), type: 'open'
+    //     });
+    // }, 1000)
   }
 
   checkAuth() {
@@ -123,6 +155,7 @@ export class StatisticComponent implements OnInit {
         ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
       return;
     }
+    this.modalchart = true;
     this.service_show_statistic.statistic_init_data.emit(this.formDataInterval.controls.date_init.value);
     this.service_show_statistic.statistic_complete_data.emit(this.formDataInterval.controls.date_complete.value);
     this.service_show_statistic.statistic_interval_month.emit(true);
@@ -142,7 +175,7 @@ export class StatisticComponent implements OnInit {
     if (!amount) {
       amount = 25;
     }
-
+    this.modalchartParts = true;
     this.service_show_statistic.statistic_amount.emit(amount);
     this.service_show_statistic.model_parts_statistic
       .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
@@ -159,44 +192,62 @@ export class StatisticComponent implements OnInit {
     if (!amount) {
       amount = 25;
     }
+    this.modalChartStaf = true;
     this.service_show_statistic.statistic_amount.emit(amount);
     this.service_show_statistic.$users_amount_shop_statistic
       .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
         this.formDataInterval.controls.date_complete.value, 'open'));
   }
 
-  getDataByUsersCloseAmount() {
+  initData() {
+    let dateStart, dateEnd, amount;
+
     if (this.formDataInterval.invalid) {
-      this.alertService.warn('', 'You have not filled in all' +
-        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
-      return;
+      dateEnd = this.datepipe.transform(new Date(), 'yyyy-MM-dd', 'UTC');
+      const month = new Date().setMonth(new Date().getMonth() - 7);
+      dateStart = this.datepipe.transform(month, 'yyyy-MM-dd', 'UTC');
+    } else {
+      dateStart = this.formDataInterval.controls.date_init.value;
+      dateEnd = this.formDataInterval.controls.date_complete.value;
+      amount = this.formDataInterval.controls.amount.value;
+
     }
-    let amount = this.formDataInterval.controls.amount.value;
-    if (!amount) {
+    if (amount === undefined || amount === null) {
       amount = 25;
     }
+    console.log(amount)
+    setTimeout(() => {
+      this.deleteOldDate();
+      this.httpService.intervalShopModelMaidStatisticByModel(dateStart, dateEnd).subscribe(value => {
+        this.date_server = value;
+        this.title = 'Device sell in shop';
+        this.show_chart = true;
+        this.elaboration_server_data();
+      }, () => {
+      });
+      this.modalchart = true;
+      this.service_show_statistic.statistic_init_data.emit(dateStart);
+      this.service_show_statistic.statistic_complete_data.emit(dateEnd);
+      this.service_show_statistic.statistic_interval_month.emit(false);
+      this.service_show_statistic.statistic_amount.emit(amount);
+      this.service_show_statistic.model_parts_statistic
+        .emit({
+          data_init_interval: dateStart,
+          data_complete_interval: dateEnd
+        });
+      this.service_show_statistic.statistic_amount.emit(amount);
+      this.service_show_statistic.$users_amount_statistic
+        .emit({
+          data_init_interval: dateStart,
+          data_complete_interval: dateEnd
+        });
+      this.service_show_statistic.$users_amount_shop_statistic
+        .emit({
+          data_init_interval: dateStart,
+          data_complete_interval: dateEnd, type: 'open'
+        });
 
-    this.service_show_statistic.statistic_amount.emit(amount);
-    this.service_show_statistic.$users_amount_statistic
-      .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
-        this.formDataInterval.controls.date_complete.value, 'close'));
-  }
-
-  getDataByUsersOpenRepairAmount() {
-    if (this.formDataInterval.invalid) {
-      this.alertService.warn('', 'You have not filled in all' +
-        ' the fields, or you have entered inadmissible values. Try again.', false, false, '');
-      return;
-    }
-    let amount = this.formDataInterval.controls.amount.value;
-    if (!amount) {
-      amount = 25;
-    }
-
-    this.service_show_statistic.statistic_amount.emit(amount);
-    this.service_show_statistic.$users_amount_statistic
-      .emit(new StatisticRequestInterval(this.formDataInterval.controls.date_init.value,
-        this.formDataInterval.controls.date_complete.value, 'open'));
+    }, 300)
   }
 
   getDataByUsersAmountByShop() {
@@ -298,6 +349,7 @@ export class StatisticComponent implements OnInit {
 
 
   getDataByMonthShop() {
+    this.modalchart = true;
     if (this.formDataInterval.invalid) {
       this.alertService.warn('', 'You have not filled in all' +
         ' the fields, or you have entered inadmissible values. Try again.', false, false, '');

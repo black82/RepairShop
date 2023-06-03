@@ -92,10 +92,8 @@ export  class AnimeJsProvider {
       }, 100)
 
 
-    } else if (date.getMonth() === 5 || date.getMonth() === 6 || date.getMonth() === 7) {
-
+    } else if (date.getMonth() === 2 || date.getMonth() === 3 || date.getMonth() === 4) {
       options = {
-
         "particles": {
           "number": {
             "value": 80,
@@ -205,6 +203,33 @@ export  class AnimeJsProvider {
         },
         "retina_detect": true
       }
+    }else {
+      options = {
+        "composition": "source-over",
+        "count": 500,
+        "speed": 0,
+        "parallax": 0,
+        "direction": 180,
+        "xVariance": 0,
+        "yVariance": 4,
+        "rotate": false,
+        "rotation": 0,
+        "alphaSpeed": 8,
+        "alphaVariance": 4,
+        "minAlpha": -1,
+        "maxAlpha": 1,
+        "minSize": 4,
+        "maxSize": 14,
+        "style": "fill",
+        "bounce": false,
+        "drift": 0,
+        "glow": 16,
+        "twinkle": true,
+        "color": ["#fdfdfc",
+          "#cbe4ed","#00d4ff","#08f1e3"],
+        "shape": "diamond",
+        "imageUrl": ""
+      };
     }
     setTimeout(() => {
       let newVar = $('body').get(0);

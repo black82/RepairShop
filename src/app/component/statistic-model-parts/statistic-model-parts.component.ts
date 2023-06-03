@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
 import {StatisticRepairIntervalService} from '../service/statistic-repair-interval.service';
 import {HttpClien} from '../service/clientservice.service';
@@ -14,7 +14,8 @@ import {ColorsStringArray} from '../entity/ColorsStringArray';
   styleUrls: ['./statistic-model-parts.component.css']
 })
 export class StatisticModelPartsComponent implements OnInit, OnDestroy {
-
+@Input()
+modalChart:boolean;
   data_object: any;
   show_data = false;
   reject = faRemoveFormat;
@@ -32,6 +33,8 @@ export class StatisticModelPartsComponent implements OnInit, OnDestroy {
   options = {
     legend: {
       display: true,
+      responsive: false,
+      maintainAspectRatio: false,
       labels: {
         usePointStyle: true,
         beginAtZero: true,
