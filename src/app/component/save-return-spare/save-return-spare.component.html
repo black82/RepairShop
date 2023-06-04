@@ -1,0 +1,103 @@
+<div class="container-body" xmlns="http://www.w3.org/1999/html">
+  <div  class="redact-container">
+    <div class="title-container">
+      <div tooltip="Compile all fields are required.">
+        <p class="title-form">
+          <fa-icon [icon]="modul" class="icon-input"></fa-icon>
+          COMPILATION MODEL FOR New Return
+        </p>
+      </div>
+    </div>
+    <form [formGroup]="formClient" autocomplete="off">
+      <div class="row">
+        <div class="row-1">
+
+          <label>
+            <span class="input-title">Name of Client</span>
+            <fa-icon [icon]="userPerson" class="icon-input"></fa-icon>
+            <input
+              [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.client?.dirty ||
+            formClient.controls?.client?.touched) && formClient?.controls.client?.invalid && formClient.controls?.client?.errors}"
+              class="input-1"
+              formControlName="client" placeholder="Client" type="text">
+          </label>
+          <label>
+            <span class="input-title">Reason</span>
+            <fa-icon [icon]="reason" class="icon-input"></fa-icon>
+            <input [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.reason?.dirty ||
+            formClient.controls?.reason?.touched) && formClient?.controls.reason?.invalid && formClient.controls?.reason?.errors}"
+              class="input-1" formControlName="reason"
+              placeholder="Reason" type="text">
+          </label>
+          <label>
+            <span class="input-title">Defect</span>
+            <fa-icon [icon]="defect" class="icon-input"></fa-icon>
+            <input class="input-1" formControlName="difect" [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.difect?.dirty ||
+            formClient.controls?.difect?.touched) && formClient?.controls.difect?.invalid && formClient.controls?.difect?.errors}"
+                   placeholder="Defect"
+                   type="text">
+          </label>
+          <app-dragfile></app-dragfile>
+        </div>
+        <div class="row-2">
+
+          <label>
+            <span class="input-title">Supplier</span>
+            <fa-icon [icon]="supplier" class="icon-input"></fa-icon>
+            <input [ngClass]="{'form-submitted': formSubmitted ||(formClient.controls.supplier.dirty || formClient.controls.supplier.touched)
+           && formClient.controls.supplier.invalid && formClient.controls.supplier.errors}"
+                   class="input-1"
+                   formControlName="supplier" placeholder="Supplier"
+                   type="text">
+          </label>
+          <label>
+            <span class="input-title">Model</span>
+            <fa-icon [icon]="mobile" class="icon-input"></fa-icon>
+            <input  [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.model.dirty || formClient.controls.model.touched)
+               && formClient.controls.model.invalid && formClient.controls.model.errors}"
+                  class="input-1"
+                    formControlName="model"
+                    placeholder="Device Model"
+                     type="text">
+          </label>
+          <label>
+            <span class="input-title">Color</span>
+            <fa-icon [icon]="colorIcon" class="icon-input"></fa-icon>
+            <input  [ngClass]="{'form-submitted': formSubmitted||(formClient.controls.color.dirty || formClient.controls.color.touched)
+               && formClient.controls.color.invalid && formClient.controls.color.errors}"
+                    class="input-1"
+                    formControlName="color"
+                    placeholder="Color Model"
+                    type="text">
+          </label>
+          <label>
+              <textarea class="text-area input-1" [ngClass]="{'form-submitted': formSubmitted || (formClient.controls?.note?.dirty ||
+            formClient.controls?.note?.touched) && formClient?.controls.note?.invalid && formClient.controls?.note?.errors}"
+                        formControlName="note" placeholder="Test Note"
+                        type="text"></textarea>
+          </label>
+        </div>
+      </div>
+      <div>
+
+        </div>
+      <div class="button_form">
+        <div tooltip="You will leave this page!!!">
+          <a (click)="dismissed()" class="dismiss">
+        <span><fa-icon [icon]="discar" class="button-icon"></fa-icon>
+        Discard Form</span>
+          </a>
+        </div>
+        <div tooltip="Redact this Device">
+          <a (click)="creatReturn()" type="submitted" class="second-button">
+        <span> <fa-icon [icon]="software"
+                        class="button-icon"></fa-icon>Save Return </span></a>
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div *ngIf="printPage" class="container-redact">
+<app-app-print-return [spareReturn]="spareReturn" [typeInput]="'full'"></app-app-print-return>
+  </div>
+</div>
