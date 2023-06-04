@@ -38,12 +38,12 @@ modalChart:boolean;
       labels: {
         usePointStyle: true,
         beginAtZero: true,
-        fontColor: '#fff',
+        fontColor: '#222b3c',
         fontFamily: 'Dancing Script',
-        serif: true
+        serif: true,
       }, title: {
         display: true,
-        fontColor: '#fff', // can Add title color also
+        fontColor: '', // can Add title color also
         text: 'Custom Chart Title'
       }
     }
@@ -122,7 +122,7 @@ modalChart:boolean;
   }
 
   private createObjectChart(data: number[], backgroundColor: string[], hoverBackgroundColor: string[]) {
-    const object = {data, backgroundColor, hoverBackgroundColor};
+    const object = {label: 'Model and Parts Replace',data, backgroundColor, hoverBackgroundColor};
     this.datasets.push(object);
     const labels = this.labels;
     const datasets = this.datasets;

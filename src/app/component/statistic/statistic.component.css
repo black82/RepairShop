@@ -253,7 +253,6 @@ form select:hover {
   text-align: center;
   text-shadow: 0 1px 1px #fff;
   padding-top: 20px;
-  font-size: 20px;
 }
 
 .image-container {
@@ -381,4 +380,79 @@ form select:hover {
   100% {
     transform: translateY(-700px) rotate(600deg);
   }
+}
+#menu{
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+  z-index: 10;
+  margin-top: 8%;
+}
+
+.menu-line1{
+  width: 100%;
+  height: 2px;
+  background: #222b3c;
+  transition: .6s;
+}
+
+.menu-line2{
+  width: 80%;
+  height: 2px;
+  margin-top: .7rem;
+  background: #222b3c;
+  transition: .6s;
+}
+
+.rotate{
+  transform: rotateZ(180deg)
+}
+.rotate1{
+  background: #212121;
+  transform: rotateZ(45deg);
+}
+.rotate2{
+  background: #212121;
+  width: 100%;
+  transform:  translate(0,-0.8rem) rotateZ(-45deg);
+}
+.nav-page1{
+  position: fixed ;
+  top:0 ;
+  left: 0;
+  background: #FFFFFF;
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #212121;
+  transform: translate(0,-100%);
+  transition: .5s;
+  z-index: 9;
+}
+.nav-page1 span{
+  padding: 1rem;
+}
+.nav-page2{
+  position: fixed;
+  top:0 ;
+  left: 60%;
+  background: #222b3c;
+  width: 40%;
+  height: 70vh;
+  transition: .8s;
+  transform: translate(0,-100%);
+}
+
+.transform{
+  transform: translate(0,0);
 }

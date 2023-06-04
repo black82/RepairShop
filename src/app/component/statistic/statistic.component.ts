@@ -40,6 +40,7 @@ export class StatisticComponent implements OnInit {
   title = 'Device repaired';
   isAdmin: boolean;
   options = {
+
     legend: {
       display: true,
       labels: {
@@ -80,7 +81,7 @@ export class StatisticComponent implements OnInit {
       date_complete: [null, Validators.required],
       amount: [null]
     });
-    this.modalchart=true;
+    this.modalchart = true;
     this.initData();
     // setTimeout(() => {
     //   const date1 = new Date();
@@ -106,6 +107,20 @@ export class StatisticComponent implements OnInit {
     //       data_complete_interval: this.datepipe.transform(new Date(), 'yyyy-MM-dd', 'UTC'), type: 'open'
     //     });
     // }, 1000)
+    window.onload = () => {
+      const $ = document.querySelector.bind(document);
+      setTimeout(() => {
+        $('#menu').onclick = () => {
+          $('#menu').classList.toggle('rotate')
+          $('.nav-page1').classList.toggle('transform')
+        }
+        // $('#period').onclick=()=>{
+        //   $('#menu').classList.toggle('rotate')
+        //   $('.nav-page1').classList.toggle('transform')
+        // }
+      }, 800)
+
+    }
   }
 
   checkAuth() {
@@ -215,7 +230,7 @@ export class StatisticComponent implements OnInit {
     if (amount === undefined || amount === null) {
       amount = 25;
     }
-    console.log(amount)
+    this.modalchart = true;
     setTimeout(() => {
       this.deleteOldDate();
       this.httpService.intervalShopModelMaidStatisticByModel(dateStart, dateEnd).subscribe(value => {
@@ -225,7 +240,7 @@ export class StatisticComponent implements OnInit {
         this.elaboration_server_data();
       }, () => {
       });
-      this.modalchart = true;
+
       this.service_show_statistic.statistic_init_data.emit(dateStart);
       this.service_show_statistic.statistic_complete_data.emit(dateEnd);
       this.service_show_statistic.statistic_interval_month.emit(false);
@@ -247,7 +262,7 @@ export class StatisticComponent implements OnInit {
           data_complete_interval: dateEnd, type: 'open'
         });
 
-    }, 300)
+    }, 500)
   }
 
   getDataByUsersAmountByShop() {
@@ -288,7 +303,7 @@ export class StatisticComponent implements OnInit {
   }
 
   private createObjectChart(data: number[], backgroundColor: string[], hoverBackgroundColor: string[]) {
-    const object = {data, backgroundColor, hoverBackgroundColor};
+    const object = {label: 'Device sell in shop by Model', data, backgroundColor, hoverBackgroundColor};
     this.datasets.push(object);
     const labels = this.labels;
     const datasets = this.datasets;

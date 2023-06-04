@@ -13,7 +13,8 @@
     <i *ngIf="counters>0" [badgeDisabled]="false" class="pi pi-bell text-3xl alert-return notification-anime" pBadge style="font-size: 1.5rem;color: #EE4D68;  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);" [value]="counters+''" [severity]="'danger'"></i>
     <span tooltip="Click for Info User">
-    <span (click)="showStaffUserHeader(nicknameUserName)" class="user-name"> {{nicknameUserName}}</span>
+    <span (click)="showStaffUserHeader(nicknameUserName)" class="user-name"><i class="pi pi-user" style="font-size: 1.5rem;color: white;  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
+  0 -2px 4px rgba(0, 0, 0, 0.5);"></i></span>
       </span>
   </div>
 
