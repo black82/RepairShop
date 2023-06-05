@@ -75,7 +75,7 @@
             <div>
               <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.modelTitle + client?.deviceBay[0]?.model}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use==='true' ? 'Nuovo' : 'Usato'}}</p>
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel?.usedConditionTitle}}   {{ client?.deviceBay[0]?.state_of_use}}</p>
               <p *ngIf="print_entity.type_client_print===3"
                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel?.imeiAndSnTitle}} {{cl.getImeiOrEmailContainNA(client?.deviceBay[0]?.imei)}}</p>
               <p
@@ -121,9 +121,9 @@
             <div>
               <p style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.modelTitle + client?.deviceSale[0]?.model}}</p>
               <p
-                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.usedConditionTitle}} {{ client?.deviceSale[0]?.state_of_use==='true' ? 'Nuovo' : 'Usato'}}</p>
+                style="font-size: 9pt;margin: 1px">{{invoiceShopModel.usedConditionTitle}} {{ client?.deviceSale[0]?.state_of_use?'Usato':'Nuovo'}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.guaranteeTitle + client?.deviceSale[0].garantyDuration + '  month'}}</p>
+                style="font-size: 9pt;margin: 1px"> {{invoiceShopModel.guaranteeTitle + client?.deviceSale[0].garantyDuration + '  mesi'}}</p>
               <p *ngIf="print_entity.type_client_print===4"
                  style="font-size: 9pt;margin: 1px">{{invoiceShopModel.imeiAndSnTitle}}{{cl.getImeiOrEmailContainNA(client?.deviceSale[0]?.imei)}}</p>
               <p
@@ -134,7 +134,7 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.sellerPriceTitle + client?.deviceSale[0]?.sellerPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">
-                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd'}}</p>
+                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===1||type_print===2" style="border-style: solid;
@@ -143,8 +143,8 @@
   border-radius: 5pt;margin: 0 5px 5px;padding: 10px;">
 
             <p style="font-size: 9pt;margin: 1px"> {{invoiceModel?.modelTitle + client?.device[0]?.model}}</p>
-            <p
-              style="font-size: 9pt;margin: 1px"> {{invoiceModel?.usedConditionTitle + client?.device[0]?.state_of_use==='true' ? 'Nuovo' : 'Usato'}}</p>
+<!--            <p-->
+<!--              style="font-size: 9pt;margin: 1px"> {{invoiceModel?.usedConditionTitle + client?.device[0]?.state_of_use}}</p>-->
             <p *ngIf="print_entity.type_client_print===1"
                style="font-size: 9pt;margin: 1px">{{invoiceModel?.imeiAndSnTitle}}
               {{cl.getImeiOrEmailContainNA(client?.device[0]?.imei)}}</p>
@@ -172,8 +172,8 @@
               <p style="font-size: 8pt;margin: 1px;">
                 {{invoiceModel.dateToOutTitle}}
                 : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd h:mm'}}</p>
-              <p
-                style="font-size: 9pt;margin: 1px;">{{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>
+<!--              <p-->
+<!--                style="font-size: 9pt;margin: 1px;">{{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>-->
               <p
                 style="font-size: 9pt;margin: 1px;">{{invoiceModel?.workMakeTitle + client?.device[0]?.repairs[0]?.work_don}}</p>
               <p
