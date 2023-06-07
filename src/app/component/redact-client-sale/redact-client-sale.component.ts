@@ -61,6 +61,7 @@ import {InputTest} from '../entity/InputTest';
 import {OutputTest} from '../entity/OutputTest';
 import {DeviceForSale} from '../entity/DeviceForSale';
 import {AlertServiceService} from '../service/alert-service.service';
+import {AnimeServiceService} from "../service/anime-service.service";
 
 @Component({
   selector: 'app-redact-client-sale',
@@ -142,18 +143,20 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
   constructor(private deviceInputService: DeviceInputService,
               private fb: UntypedFormBuilder,
               private httpService: HttpClien,
-              private alert_service: AlertServiceService) {
+              private alert_service: AlertServiceService, private animeWait: AnimeServiceService) {
   }
 
   ngOnInit(): void {
     this.subscription = this.deviceInputService.$deviceForSaleClientTransactionRedact.subscribe(transaction => {
       this.deviceForSaleDto = transaction;
+      console.log(transaction)
       this.deviceForSaleDtoConstruct = transaction;
       this.subscriptionModel = this.httpService.getListModelsDevice().subscribe(list => {
         this.itemsModels = list;
       });
-      this.showDevice = true;
+
       this.createFormAfterClientCam();
+      this.showDevice = true;
       this.filteredItems1 = this.formClient.controls.model.valueChanges.pipe(
         startWith(''),
         map(item => item ? this.filterItems(item) : this.itemsModels.slice())
@@ -173,20 +176,21 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
 
   createFormAfterClientCam(): void {
     this.formClient = this.fb.group({
-      family: new UntypedFormControl(null, [Validators.required]),
-      name: new UntypedFormControl(null, [Validators.required]),
-      telephone_number_baying: new UntypedFormControl(null),
-      telephone_sec_number_baying: new UntypedFormControl(null),
-      email_baying: new UntypedFormControl(null),
-      addresses_baying: new UntypedFormControl(null, [Validators.required]),
-      name_selling: new UntypedFormControl(null, [Validators.required]),
-      family_selling: new UntypedFormControl(null, [Validators.required]),
-      iva_selling: new UntypedFormControl(null, [Validators.required]),
-      sdi_selling: new UntypedFormControl(null, [Validators.required]),
-      telephone_selling: new UntypedFormControl(null),
-      email_selling: new UntypedFormControl(null),
-      telephone_second_selling: new UntypedFormControl(null, [Validators.required]),
-      address_selling: new UntypedFormControl(null, [Validators.required]),
+      companyName: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.companyName, this.deviceForSaleDto?.clientSailing.typeClient ? [Validators.required] : []),
+      family: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.family, [Validators.required]),
+      name: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.name, [Validators.required]),
+      telephone_number_baying: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.telephone_number),
+      telephone_sec_number_baying: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.telephone_number_second),
+      email_baying: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.email),
+      addresses_baying: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.address, [Validators.required]),
+      name_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.name, [Validators.required]),
+      family_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.family, [Validators.required]),
+      iva_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.ivaCompany, this.deviceForSaleDto?.clientSailing.typeClient ? [Validators.required] : []),
+      sdi_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.sdiCompany, this.deviceForSaleDto?.clientSailing.typeClient ? [Validators.required] : []),
+      telephone_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.telephone_number),
+      email_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.email),
+      telephone_second_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.telephone_number_second, [Validators.required]),
+      address_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.address, [Validators.required]),
       deviceType: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.deviceType, [Validators.required]),
       baying_price: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.bayingPrice, [Validators.required]),
       seller_price: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.sellerPrice, [Validators.required]),
@@ -200,44 +204,44 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
       password_device: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.password_device, [Validators.required]),
       note_output: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.noteOutput),
       note_input: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.noteInput),
-      sensors_input: new UntypedFormControl(false),
-      display_input: new UntypedFormControl(false),
-      connectors_input: new UntypedFormControl(false),
-      sound_equipment_input: new UntypedFormControl(false),
-      audio_equipment_input: new UntypedFormControl(false),
-      software: new UntypedFormControl(false),
-      bluetooth: new UntypedFormControl(false),
-      vibrations: new UntypedFormControl(false),
-      touch_input: new UntypedFormControl(false),
-      display_touch_input: new UntypedFormControl(false),
-      wi_fi_input: new UntypedFormControl(false),
-      microphone_input: new UntypedFormControl(false),
-      sim_input: new UntypedFormControl(false),
-      keyboard_input: new UntypedFormControl(false),
-      camera_input: new UntypedFormControl(false),
-      camera_input_front: new UntypedFormControl(false),
-      faceId_input: new UntypedFormControl(false),
-      faceId_output: new UntypedFormControl(false),
-      note: new UntypedFormControl(''),
+      sensors_input: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.inputTest.sensors_input),
+      display_input: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.inputTest.display_input),
+      connectors_input: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.inputTest.connectors_input),
+      sound_equipment_input: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.inputTest.sound_equipment_input),
+      audio_equipment_input: new UntypedFormControl(this.deviceForSaleDto.deviceForSale.inputTest.audio_equipment),
+      software: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.software),
+      bluetooth: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.bluetooth),
+      vibrations: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.vibrations),
+      touch_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.touch_input),
+      display_touch_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.display_touch_input),
+      wi_fi_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.wi_fi_input),
+      microphone_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.microphone_input),
+      sim_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.sim_input),
+      keyboard_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.keyboard_input),
+      camera_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.camera_input),
+      camera_input_front: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.camera_input_front),
+      faceId_input: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.faceIdInput),
+      faceId_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.faceIdOutput),
+      note: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.noteOutput),
       email_send: new UntypedFormControl(false),
-      sensor_output: new UntypedFormControl(false),
-      display_output: new UntypedFormControl(false),
-      connections_output: new UntypedFormControl(false),
-      sound_equipment_output: new UntypedFormControl(false),
-      touch_output: new UntypedFormControl(false),
-      display_touch_output: new UntypedFormControl(false),
-      wi_fi_output: new UntypedFormControl(false),
-      microphone_output: new UntypedFormControl(false),
-      sim_output: new UntypedFormControl(false),
-      audio_equipment_output: new UntypedFormControl(false),
-      software_output: new UntypedFormControl(false),
-      bluetooth_output: new UntypedFormControl(false),
-      vibrations_output: new UntypedFormControl(false),
-      keyboard_output: new UntypedFormControl(false),
-      camera_output: new UntypedFormControl(false),
-      camera_Output_Front: new UntypedFormControl(false),
-      homeButton_Output: new UntypedFormControl(false),
-      homeButton: new UntypedFormControl(false),
+      sensor_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.sensors_Output),
+      display_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.display_Output),
+      connections_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.connectors_Output),
+      sound_equipment_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.sound_equipment_Output),
+      touch_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.touch_Output),
+      display_touch_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.display_touch_Output),
+      wi_fi_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.wi_fi_Output),
+      microphone_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.microphone_Output),
+      sim_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.sim_Output),
+      audio_equipment_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.audio_equipment),
+      software_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.software),
+      bluetooth_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.bluetooth),
+      vibrations_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.vibrations),
+      keyboard_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.keyboard_Output),
+      camera_output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.camera_Output),
+      camera_Output_Front: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.camera_Output_Front),
+      homeButton_Output: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.outputTest?.homeButton),
+      homeButton: new UntypedFormControl(this.deviceForSaleDto?.deviceForSale?.inputTest?.homeButton),
     });
   }
 
@@ -299,18 +303,22 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
         ' The field cannot be empty.', false, false, '');
       return;
     }
+    this.animeWait.$anime_show.emit(true);
     this.httpService.putDeviceForSaleRedact(this.createDeviceForSaleTransaction()).subscribe((res) => {
       this.deviceForSaleDto = res;
       this.deviceInputService.$deviceForSaleClientTransaction.emit(res);
+      this.animeWait.$anime_show.emit(false);
+      this.alert_service.success('',
+        ' Success Saved !!! ', true, false, '');
     });
   }
 
   companyClient() {
     this.companyShow = !this.companyShow;
     if (this.companyShow) {
-      this.formClient.addControl('companyName', new UntypedFormControl(null, [Validators.required]));
-      this.formClient.addControl('sdiClient', new UntypedFormControl(null, [Validators.required]));
-      this.formClient.addControl('ivaClient', new UntypedFormControl(null, [Validators.required]));
+      this.formClient.addControl('companyName', new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.companyName, [Validators.required]));
+      this.formClient.addControl('sdiClient', new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.sdiCompany, [Validators.required]));
+      this.formClient.addControl('ivaClient', new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.ivaCompany, [Validators.required]));
       this.formClient.controls.name.setValue(null);
       this.formClient.controls.family.setValue(null);
       this.formClient.removeControl('name');

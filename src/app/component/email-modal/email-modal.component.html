@@ -86,7 +86,7 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.bayingPriceTitle + client?.deviceBay[0]?.bayingPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">{{invoiceShopModel.dateBayingTitle}}
-                {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd h:mm'}}</p>
+                {{ setNewDateFormat(client?.deviceBay[0]?.dateBaying)| date: 'yyyy/MM/dd'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===5||type_print===6" style="border-style: solid;
@@ -101,10 +101,10 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeObject}}</p>
               <p
-                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.dateToEnterTitle }}{{setNewDateFormat(print_entity.preorderDto.preOrderShop.dateInit)| date: 'yyyy/MM/dd h:mm'}}
+                style="font-size: 9pt;margin: 1px"> {{invoceOrderModel?.dateToEnterTitle }}{{setNewDateFormat(print_entity.preorderDto.preOrderShop.dateInit)| date: 'yyyy/MM/dd'}}
                 .</p>
               <p *ngIf="print_entity.type_client_print===6"
-                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.dateToOutTitle}} {{ setNewDateFormat(print_entity.preorderDto.preOrderShop.completeDate)| date: 'yyyy/MM/dd h:mm'}}</p>
+                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.dateToOutTitle}} {{ setNewDateFormat(print_entity.preorderDto.preOrderShop.completeDate)| date: 'yyyy/MM/dd'}}</p>
 
               <p
                 style="font-size: 9pt;margin: 1px">{{invoceOrderModel?.typeObjectTitle + print_entity.preorderDto.preOrderShop.typeOrder}}</p>
@@ -134,7 +134,7 @@
               <p
                 style="font-size: 9pt;margin: 1px">{{invoiceShopModel.sellerPriceTitle + client?.deviceSale[0]?.sellerPrice}}</p>
               <p style="font-size: 9pt;margin: 1px;">
-                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd h:mm'}}</p>
+                {{invoiceShopModel.dateSailingTitle}} {{ setNewDateFormat(client?.deviceSale[0]?.dateSale)| date: 'yyyy/MM/dd'}}</p>
             </div>
           </div>
           <div *ngIf="type_print===1||type_print===2" style="border-style: solid;
@@ -156,13 +156,13 @@
             <p style="font-size: 9pt;margin: 1px">{{invoiceModel?.accessoryTitle + client?.device[0]?.accessory}}</p>
             <p style="font-size: 9pt;margin: 1px;">
               {{invoiceModel?.dateToEnterTitle}}
-              :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm'}}</p>
+              :  {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd'}}</p>
             <p
               style="font-size: 9pt;margin: 1px"> {{invoiceModel?.cashAdvance + client?.device[0].repairs[0]?.deposit}}</p>
             <p
               style="font-size: 9pt;margin: 1px"> {{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>
             <p *ngIf="type_print===1"
-               style=" font-size: 9pt;margin: 1px">{{invoiceModel?.dateRepairWillReady + (date_exit| date: 'yyyy/MM/dd h:mm')}}</p>
+               style=" font-size: 9pt;margin: 1px">{{invoiceModel?.dateRepairWillReady + (date_exit| date: 'yyyy/MM/dd')}}</p>
 
 
             <div *ngIf="type_print===2">
@@ -171,7 +171,7 @@
               <!--                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.date_to_enter)| date: 'yyyy/MM/dd h:mm'}}</p>-->
               <p style="font-size: 8pt;margin: 1px;">
                 {{invoiceModel.dateToOutTitle}}
-                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd h:mm'}}</p>
+                : {{ setNewDateFormat(client?.device[0]?.repairs[0]?.output_date)| date: 'yyyy/MM/dd'}}</p>
 <!--              <p-->
 <!--                style="font-size: 9pt;margin: 1px;">{{invoiceModel?.repairPriceTitle + client?.device[0]?.repairs[0]?.price}}</p>-->
               <p
