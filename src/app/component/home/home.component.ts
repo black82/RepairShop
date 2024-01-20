@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    AnimeJsProvider.animeBackground();
+    // AnimeJsProvider.animeBackground();
     const view = localStorage.getItem('token');
     if (view) {
 

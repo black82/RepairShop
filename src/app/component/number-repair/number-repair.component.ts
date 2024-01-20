@@ -25,6 +25,7 @@ export class NumberRepairComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.print.$success_print_id.subscribe(id => {
+      this.id = null;
       this.id = id;
       this.showPopup = true;
     });

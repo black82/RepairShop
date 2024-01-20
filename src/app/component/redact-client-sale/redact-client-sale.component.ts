@@ -176,7 +176,7 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
 
   createFormAfterClientCam(): void {
     this.formClient = this.fb.group({
-      companyName: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.companyName, this.deviceForSaleDto?.clientSailing.typeClient ? [Validators.required] : []),
+      companyName: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.companyName, this.deviceForSaleDto?.clientSailing?.typeClient ? [Validators.required] : []),
       family: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.family, [Validators.required]),
       name: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.name, [Validators.required]),
       telephone_number_baying: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.telephone_number),
@@ -185,8 +185,8 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
       addresses_baying: new UntypedFormControl(this.deviceForSaleDto?.clientBaying?.address, [Validators.required]),
       name_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.name, [Validators.required]),
       family_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.family, [Validators.required]),
-      iva_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.ivaCompany, this.deviceForSaleDto?.clientSailing.typeClient ? [Validators.required] : []),
-      sdi_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.sdiCompany, this.deviceForSaleDto?.clientSailing.typeClient ? [Validators.required] : []),
+      iva_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.ivaCompany, this.deviceForSaleDto?.clientSailing?.typeClient ? [Validators.required] : []),
+      sdi_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.sdiCompany, this.deviceForSaleDto?.clientSailing?.typeClient ? [Validators.required] : []),
       telephone_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.telephone_number),
       email_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.email),
       telephone_second_selling: new UntypedFormControl(this.deviceForSaleDto?.clientSailing?.telephone_number_second, [Validators.required]),
@@ -380,5 +380,6 @@ export class RedactClientSaleComponent implements OnInit, OnDestroy {
 
   dismissed() {
     this.deviceInputService.$deviceForSaleClientTransaction.emit(this.deviceForSaleDto);
+    this.alert_service.warn('warn', ' Form Discarded !!!', true, false, "")
   }
 }

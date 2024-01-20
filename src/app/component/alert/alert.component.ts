@@ -124,7 +124,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         if (alert.errore === null || alert.errore === undefined) {
           alert.errore = new HttpErrorResponse({
             error: 'Unknown error',
-            status: 404,
+            status: 503,
             statusText: 'an unknown error occurred'
           });
         }

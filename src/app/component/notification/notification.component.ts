@@ -56,7 +56,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
         stompClient.debug = null;
         stompClient.connect({}, () => {
           this.getSuperNameUser();
-          this.subscribe = stompClient.subscribe('/topic/notification', notifications => {
+          this.subscribe = stompClient.subscribe('/topic/notification', (notifications: { body: string; }) => {
             this.notifications = JSON.parse(notifications.body);
             this.notification.push(this.notifications);
             this.counters = this.notification.length;

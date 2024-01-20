@@ -8,7 +8,14 @@ import {faUserSecret} from '@fortawesome/free-solid-svg-icons/faUserSecret';
 import {faUserCheck} from '@fortawesome/free-solid-svg-icons/faUserCheck';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {faCode} from '@fortawesome/free-solid-svg-icons/faCode';
-import {faCircle, faFileSignature, faFlushed, faPaperclip, faPhoneSquare, faVihara} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircle,
+  faFileSignature,
+  faFlushed,
+  faPaperclip,
+  faPhoneSquare,
+  faVihara
+} from '@fortawesome/free-solid-svg-icons';
 import {faBarcode} from '@fortawesome/free-solid-svg-icons/faBarcode';
 
 
@@ -230,7 +237,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
     this.repairFileStorage.fotoEnterDevice = this.imageSender.submitImageToBack();
     let formData = Object.assign({});
     formData = Object.assign(formData, this.formClient.value);
-
+    console.log(formData)
     this.outputTest = new OutputTest(null, formData.sensors_input, formData.display_input,
       formData.connectors_input, formData.sound_equipment_input, formData.touch_input, formData.display_touch_input,
       formData.wi_fi_input, formData.microphone_input, formData.sim_input,
@@ -244,6 +251,7 @@ export class DeviceSellComponent implements OnInit, OnDestroy {
       , true, this.device.bayingPrice, formData.price, this.device.dateBaying, formData.date_to_sale,
       this.device.bayingUser, this.device.sellerUser, this.device.updaterUser);
 
+    console.log(this.device)
     this.client = new Client(null, formData.family, formData.name, formData.companyName, formData.email,
       formData.telephone_number, formData.telephone_number_second, formData.address,
       null, formData.email_send, formData.client_type,

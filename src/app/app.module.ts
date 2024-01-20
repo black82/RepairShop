@@ -114,7 +114,7 @@ import {SpareAllComponent} from './component/spare-all/spare-all.component';
 import {SpareRedactComponentComponent} from './component/spare-redact-component/spare-redact-component.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
-import {FaIconComponent} from "@fortawesome/angular-fontawesome/icon/icon.component";
+
 import {ChartModule} from "primeng/chart";
 import {MatMenuModule} from "@angular/material/menu";
 import {SpareOutPagiComponent} from './component/spare-out-pagi/spare-out-pagi.component';
@@ -129,10 +129,6 @@ import {SaveReturnSpareComponent} from './component/save-return-spare/save-retur
 import {AppPrintReturnComponent} from './component/app-print-return/app-print-return.component';
 import {BadgeModule} from "primeng/badge";
 
-
-
-declare let $: any;
-declare let createjs: any;
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

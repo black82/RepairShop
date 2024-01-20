@@ -43,7 +43,6 @@
 .container-body {
   background: linear-gradient(to bottom right, hsl(179, 34%, 48%) 0%, hsl(155, 72%, 61%) 100%), url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0 !important;
   min-height: 100vh;
-  max-height: border-box;
 
 }
 
@@ -238,7 +237,6 @@
   color: #FFFFFF;
   padding: 0 .2em;
   font-size: 4em;
-  position: center;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
   0 -2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
@@ -261,7 +259,6 @@ svg {
     color: #FFFFFF;
     padding: 0 .2em;
     font-size: 4em;
-    position: center;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5),
     0 -2px 4px rgba(0, 0, 0, 0.5);
     box-shadow: 10px 10px 10px 2px #c9c9c9 inset !important;
@@ -284,7 +281,6 @@ svg {
   color: lightcoral;
   padding: 0 .2em;
   font-size: 4em;
-  position: center;
   text-shadow: 0 1px 0 #ccc,
   0 2px 0 #c9c9c9,
   0 3px 0 #bbb,
@@ -366,7 +362,7 @@ svg {
   animation-name: spin;
   animation-duration: 500ms;
   animation-iteration-count: 1;
-  animation-timing-function: frames(4);
+  /*animation-timing-function: frames(4);*/
   /*transform: rotate(3deg);*/
   /*transform: rotate(0.3rad);*/
   /*transform: rotate(3grad);*/
@@ -898,7 +894,7 @@ svg {
   border-top-right-radius: 9px;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
-  transform: translate(-100%, 0);
+  transform: translate(-120%, 0);
   transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 }
 

@@ -11,6 +11,7 @@ import {HttpClien} from '../service/clientservice.service';
 import {AlertServiceService} from '../service/alert-service.service';
 import {MessageInvoice} from '../entity/MessageInvoice';
 import {AdminServiceService} from '../service/admin-service.service';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-message-admin',
@@ -105,4 +106,6 @@ export class MessageAdminComponent implements OnInit {
   setNewDateFormat(date: Date): Date {
     return new Date(date);
   }
+
+  protected readonly environment = environment;
 }

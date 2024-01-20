@@ -79,6 +79,8 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.invoice = null;
     this.id = null;
     this.email_send_event = this.emailSender.email_send_event.subscribe(print => {
+      this.invoice = null;
+      this.id = null;
       this.getInvoiceModel(print);
     });
   }
@@ -155,6 +157,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.animation_wait.$anime_show.emit(true);
     if (this.print_entity.type_client_print === 1) {
       this.http.printClient(this.client).subscribe(response => {
+        console.log(response)
         this.client = response;
         this.checkIsPhoneContain();
         this.checkIsImeiContain();
@@ -203,9 +206,9 @@ export class EmailModalComponent implements OnInit, OnDestroy {
       }, 1000);
       return;
     }
-    if (this.print_entity.type_client_print === 1 || this.print_entity.type_client_print === 2) {
-      if (this.client.device.length === 1 && this.client.device[0].repairs.length === 1) {
-        this.id = this.client.device[0].repairs[0].repair_Id.toString();
+    if (this.print_entity?.type_client_print === 1 || this.print_entity?.type_client_print === 2) {
+      if (this.client?.device?.length === 1 && this.client?.device[0]?.repairs?.length === 1) {
+        this.id = this?.client?.device[0]?.repairs[0]?.repair_Id.toString();
         this.createInvoiceToPrintPageAfterTimeout();
         return;
       }
@@ -390,7 +393,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
   }
 
   id_repair(client: Client): string {
-    if (client.id != null) {
+    if (client?.id != null) {
       let id = 0;
       if (this.print_entity?.id) {
         return this.print_entity?.id.toString();
@@ -610,7 +613,7 @@ export class EmailModalComponent implements OnInit, OnDestroy {
     this.invoice.messageEmail = String(this.type_print);
     this.animation_wait.$anime_show.emit(true);
     this.http.updateInvoice(this.invoice).subscribe(res => {
-      this.emailSender.update_invoice_responses.emit(res.link);
+      this.emailSender.update_invoice_responses.emit(res?.link);
       this.show_email_send = false;
     });
   }

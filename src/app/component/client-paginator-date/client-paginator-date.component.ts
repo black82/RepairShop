@@ -10,6 +10,7 @@ import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons';
 import {faCalendarMinus} from '@fortawesome/free-solid-svg-icons/faCalendarMinus';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
 import {AlertServiceService} from '../service/alert-service.service';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-client-paginator-date',
@@ -104,4 +105,6 @@ export class ClientPaginatorDateComponent implements OnInit {
   setNewDateFormat(date: Date): Date {
     return new Date(date);
   }
+
+    protected readonly environment = environment;
 }
