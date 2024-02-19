@@ -464,7 +464,7 @@ export class HttpClien {
   }
 
   getClientPageable(page: number, size: number): Observable<any> {
-    return this.http.get<any>(this.apiUrl + 'api/all/client/pageable-',
+    return this.http.get<any>(this.apiUrl + 'api/repair/not/close/pageable',
       {
         params: new HttpParams().set('page', String(page)).set('size', String(size))
       }).pipe(

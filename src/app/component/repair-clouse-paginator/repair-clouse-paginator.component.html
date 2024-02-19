@@ -1,18 +1,51 @@
 <div class="container-body">
-    <app-searchform (actionA)="client_catch($event)" [textButton]="return_device_button_text"
-                    [typeForm]="'id-repair'"
-                    [titleForm]="titleForm"></app-searchform>
+  <div *ngIf="paginator" class="container-paginator">
+    <mat-paginator #paginator
+                   (page)="pageEvent = getServerData($event)"
+                   [length]="length"
+                   [pageIndex]="pageIndex"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   [pageSize]="pageSize"
+    >
 
+    </mat-paginator>
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">Id Repair</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Model Device</th>
+        <th scope="col">Type Client</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of datasource; let i = index">
+        <td class="element-td">{{ element?.repairId }}</td>
+        <td
+          class="element-td">{{ cl.toCamelCase(cl.truncateChar(!element?.companyName ? element?.clientName + ' ' + element.clientFamily : element.companyName, 20)) }}
+        </td>
+        <td class="element-td">{{ cl.getImeiOrEmailContainNA(element?.deviceModel)?.toLowerCase() }}</td>
+        <td class="element-td">{{element?.companyName ? 'Company' : 'Person' }}</td>
 
-
+        <td><a (click)="shows(element)" class="button button-small button-activate"><span> <fa-icon
+          [icon]="shows_button" class="button-icon"></fa-icon>Close Repair</span></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
   <div *ngIf="show_client" class="container_form">
+
     <div class="title-container" tooltip="Compile all fields are required.">
       <p class="title-form">
         <fa-icon [icon]="modul" class="icon-input"></fa-icon>
-        Compile the model for the device's <span style="color: #F09EA3">"{{client.device[0]?.model}}"</span> Outgoing
-        client<span style="color: #F09EA3"> "{{client.typeClient ? client.companyName : client.name}}
-        {{client.typeClient ? client.family : ''}}"</span>
+        Compile the model for the device's <span style="color: #F09EA3">"{{ client.device[0]?.model }}"</span> Outgoing
+        client<span style="color: #F09EA3"> "{{ client.typeClient ? client.companyName : client.name }}
+        {{ client.typeClient ? client.family : '' }}"</span>
       </p>
+      <a (click)="showsPaginator()" class="button button-small button-activate"><span> <fa-icon
+        [icon]="shows_button" class="button-icon"></fa-icon>Show Repairs</span></a>
     </div>
     <form [formGroup]="formClient">
       <div class="row">
@@ -138,7 +171,7 @@
           Tests at the output of the machine.
         </p>
       </div>
-      <a (click)="selectAllCheckBox()" class="second-button"> {{buttonCheckBox}}</a>
+      <a (click)="selectAllCheckBox()" class="second-button"> {{ buttonCheckBox }}</a>
       <div class="col-checkbox" id="check-box-container">
 
         <div class="check-col-1">
@@ -195,17 +228,17 @@
             </label>
           </div>
 
-        <div class="check-single">
-          <fa-icon [icon]="touch" [style.color]="formClient.controls.touch_output.value? '#1ABC9C' : 'lightcoral'"
-                   class="icon-box"></fa-icon>
-          <label class="checkbox">
-            <input [ngClass]="{'form-submitted': formSubmitted}"
-                   [value]="client.device[0].repairs[0]?.outputTest?.touch_Output"
-                   class="check-box" formControlName="touch_output"
-                   name="device-test" type="checkbox">
-            <span class="check-box-name">Touch</span>
-          </label>
-        </div>
+          <div class="check-single">
+            <fa-icon [icon]="touch" [style.color]="formClient.controls.touch_output.value? '#1ABC9C' : 'lightcoral'"
+                     class="icon-box"></fa-icon>
+            <label class="checkbox">
+              <input [ngClass]="{'form-submitted': formSubmitted}"
+                     [value]="client.device[0].repairs[0]?.outputTest?.touch_Output"
+                     class="check-box" formControlName="touch_output"
+                     name="device-test" type="checkbox">
+              <span class="check-box-name">Touch</span>
+            </label>
+          </div>
           <div class="check-single">
             <fa-icon [icon]="wifi" [style.color]="formClient.controls.wi_fi_output.value? '#1ABC9C' : 'lightcoral'"
                      class="icon-box"></fa-icon>
@@ -388,5 +421,3 @@
     </form>
   </div>
 </div>
-
-

@@ -128,6 +128,7 @@ import {ImagesCaruselAppComponent} from './component/images-carusel-app/images-c
 import {SaveReturnSpareComponent} from './component/save-return-spare/save-return-spare.component';
 import {AppPrintReturnComponent} from './component/app-print-return/app-print-return.component';
 import {BadgeModule} from "primeng/badge";
+import { RepairClousePaginatorComponent } from './component/repair-clouse-paginator/repair-clouse-paginator.component';
 
 
 @NgModule({
@@ -215,6 +216,7 @@ import {BadgeModule} from "primeng/badge";
     ImagesCaruselAppComponent,
     SaveReturnSpareComponent,
     AppPrintReturnComponent,
+    RepairClousePaginatorComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
