@@ -129,6 +129,7 @@ import {SaveReturnSpareComponent} from './component/save-return-spare/save-retur
 import {AppPrintReturnComponent} from './component/app-print-return/app-print-return.component';
 import {BadgeModule} from "primeng/badge";
 import { RepairClousePaginatorComponent } from './component/repair-clouse-paginator/repair-clouse-paginator.component';
+import { SearchByRepairIdSinglComponent } from './component/search-by-repair-id-singl/search-by-repair-id-singl.component';
 
 
 @NgModule({
@@ -217,6 +218,7 @@ import { RepairClousePaginatorComponent } from './component/repair-clouse-pagina
     SaveReturnSpareComponent,
     AppPrintReturnComponent,
     RepairClousePaginatorComponent,
+    SearchByRepairIdSinglComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

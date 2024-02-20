@@ -1,0 +1,9 @@
+<div class="container-body">
+  <div class="container-search">
+    <div class="search-input-container1">
+      <app-searchform (actionA)="client_catch($event)" [textButton]="button" [titleForm]="nameForm"
+                      [typeForm]="'single-repair-id'"></app-searchform>
+    </div>
+    <app-single-content *ngIf="show_content" [client]="client"></app-single-content>
+  </div>
+</div>

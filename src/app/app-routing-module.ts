@@ -50,6 +50,9 @@ import {SpareSingleReturnComponent} from "./component/spare-singl-return/spare-s
 import {SpareRedactComponentComponent} from "./component/spare-redact-component/spare-redact-component.component";
 import {SaveReturnSpareComponent} from "./component/save-return-spare/save-return-spare.component";
 import {RepairClousePaginatorComponent} from "./component/repair-clouse-paginator/repair-clouse-paginator.component";
+import {
+  SearchByRepairIdSinglComponent
+} from "./component/search-by-repair-id-singl/search-by-repair-id-singl.component";
 
 
 export const routes: Routes = [
@@ -68,6 +71,7 @@ export const routes: Routes = [
   {path: 'recovery/password/request', component: SendRedactPasswordRequestComponent},
   {path: 'search/email', component: SearchEmailComponent, canActivate: [AutGuardService]},
   {path: 'search/repair/id', component: SearchRepairIdComponent, canActivate: [AutGuardService]},
+  {path: 'search/repair/id/single', component: SearchByRepairIdSinglComponent, canActivate: [AutGuardService]},
   {path: 'admin/logs/server', component: LogServiceComponent, canActivate: [AutGuardService]},
   {path: 'admin/invoice/redact', component: InvoiceModelComponent, canActivate: [AutGuardService]},
   {

@@ -130,7 +130,9 @@ export class SingleContentComponent implements OnInit {
       return [];
     }
   }
-
+  public getIdRepair(device: Device): string {
+    return device.repairs.map(r=>r.repair_Id).join(',')
+  }
   zoum($event, i: number) {
     const htmlImageElement = document.getElementsByClassName(`${i}-image`);
     const image = htmlImageElement[0] as HTMLImageElement;
@@ -222,4 +224,6 @@ class ElementRepair {
     this.test_input = test_input;
     this.test_output = test_output;
   }
+
+
 }

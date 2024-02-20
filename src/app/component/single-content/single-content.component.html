@@ -1,7 +1,7 @@
 <div class="container-body">
   <div class="title-container">
     <p class="title-form"> Client <span
-      style="color: lightcoral"> {{client.typeClient ? client.companyName : client?.name + ' ' + client.family}} </span>
+      style="color: lightcoral"> {{ client.typeClient ? client.companyName : client?.name + ' ' + client.family }} </span>
     </p>
   </div>
   <div class="row-container">
@@ -11,57 +11,59 @@
           <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client:<span
-            style="color: lightcoral;font-size: 20px">{{client.typeClient ? client.companyName : client?.name + ' ' + client.family}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{ client.typeClient ? client.companyName : client?.name + ' ' + client.family }}</span></span>
           <div *ngIf="client?.typeClient">
           <span class="input-title">
             <fa-icon [icon]="usertag"
                      class="icon-normal-single"></fa-icon>Client Iva: <span
-            style="color: lightcoral;font-size: 20px">{{client.ivaCompany}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{ client.ivaCompany }}</span></span>
             <span class="input-title">
             <fa-icon [icon]="usertag" class="icon-normal-single"></fa-icon>Client SDI:<span
-              style="color: lightcoral;font-size: 20px"> {{client.sdiCompany}}</span></span></div>
+              style="color: lightcoral;font-size: 20px"> {{ client.sdiCompany }}</span></span></div>
           <span class="input-title"><fa-icon [icon]="phone"
                                              class="icon-normal-single"></fa-icon> Phone Number:
-            <span style="color: lightcoral;font-size: 20px">{{client?.telephone_number}}</span></span>
+            <span style="color: lightcoral;font-size: 20px">{{ client?.telephone_number }}</span></span>
           <span *ngIf="client.telephone_number_second" class="input-title"><fa-icon [icon]="phone"
                                                                                     class="icon-normal-single"></fa-icon>Second Phone Number:<span
-            style="color: lightcoral;font-size: 20px">{{client?.telephone_number_second}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{ client?.telephone_number_second }}</span></span>
           <span class="input-title"><fa-icon [icon]="email" class="icon-normal-single"></fa-icon> Email:<span
-            style="color: lightcoral;font-size: 20px">{{client?.email}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{ client?.email }}</span></span>
           <span class="input-title"><fa-icon [icon]="address" class="icon-normal-single"></fa-icon> Address:<span
-            style="color: lightcoral;font-size: 20px">{{client?.address}}</span></span>
+            style="color: lightcoral;font-size: 20px">{{ client?.address }}</span></span>
         </div>
       </div>
       <div *ngFor="let element of devices_element; let index" class="toggle-container-1">
         <div (click)="showElement(element)" class="toggle-title">
           <span [style]="element.visible ?{'color': 'lightcoral'} : {'color': '#1ABC9C'}" class="title-toggle"><fa-icon
             [icon]="usertag"></fa-icon>
-            {{client?.name}} - <fa-icon [icon]="mobile"></fa-icon>
-            {{element.divice.model}}<span *ngIf="!element.divice.rightNowInRepair">(CLOSET  REPAIR)</span><span
-              *ngIf="element.divice.rightNowInRepair">(OPEN REPAIR)</span></span></div>
+            {{ client?.name }} - <fa-icon [icon]="mobile"></fa-icon>
+            {{ element.divice.model }}<span *ngIf="!element.divice.rightNowInRepair">(CLOSET  REPAIR)</span><span
+              *ngIf="element.divice.rightNowInRepair">(OPEN REPAIR)</span></span><div style="color: lightcoral">Repair {{ this.getIdRepair(element.divice) }}</div>
+        </div>
         <div *ngIf="element.visible && device_show" class="show">
           <ul class="border">
             <li>
               <ol class="input-title">
                 <fa-icon [icon]="mobile" class="icon-normal-single"></fa-icon>
-                Model:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.model}}</span></ol>
+                Model:<span style="color: lightcoral;font-size: 20px"> {{ element.divice?.model }}</span></ol>
               <ol class="input-title">
                 <fa-icon [icon]="used" class="icon-normal-single"></fa-icon>
-                State of use:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.state_of_use}}</span>
+                State of use:<span style="color: lightcoral;font-size: 20px"> {{ element.divice?.state_of_use }}</span>
               </ol>
               <ol class="input-title">
                 <fa-icon [icon]="code" class="icon-normal-single"></fa-icon>
-                IMEI&&SN:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.imei}}</span></ol>
+                IMEI&&SN:<span style="color: lightcoral;font-size: 20px"> {{ element.divice?.imei }}</span></ol>
               <ol class="input-title">
                 <fa-icon [icon]="password" class="icon-normal-single"></fa-icon>
-                Code Device:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.code_device}}</span></ol>
+                Code Device:<span style="color: lightcoral;font-size: 20px"> {{ element.divice?.code_device }}</span>
+              </ol>
               <ol class="input-title">
                 <fa-icon [icon]="password" class="icon-normal-single"></fa-icon>
                 Password Device:<span
-                style="color: lightcoral;font-size: 20px"> {{element.divice?.password_device}}</span></ol>
+                style="color: lightcoral;font-size: 20px"> {{ element.divice?.password_device }}</span></ol>
               <ol class="input-title">
                 <fa-icon [icon]="accessory" class="icon-normal-single"></fa-icon>
-                Accessory:<span style="color: lightcoral;font-size: 20px"> {{element.divice?.accessory}}</span></ol>
+                Accessory:<span style="color: lightcoral;font-size: 20px"> {{ element.divice?.accessory }}</span></ol>
             </li>
           </ul>
         </div>
@@ -74,7 +76,7 @@
           [style]="item.visible ?{'color': 'lightcoral'} : {'color': '#1ABC9C'}"
           class="title-toggle">
           <fa-icon [icon]="date"></fa-icon>
-          {{item?.repair_elemnt.date_to_enter | date:'mediumDate'}}
+          {{ item?.repair_elemnt.date_to_enter | date:'mediumDate' }}
           <span *ngIf="!item.repair_elemnt.nowInRepair">(CLOSET  REPAIR)</span><span
           *ngIf="item.repair_elemnt.nowInRepair">(OPEN REPAIR)</span> </span></div>
 
@@ -84,38 +86,39 @@
               <ol class="input-title">
                 <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
                 <strong> Repair Id:<span
-                  style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.repair_Id}}</span></strong></ol>
+                  style="color: lightcoral;font-size: 20px">{{ item.repair_elemnt?.repair_Id }}</span></strong></ol>
               <ol class="input-title">
                 <fa-icon class="icon-normal-single"
                          [icon]="date"></fa-icon>
                 Date to enter:<span
-                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.date_to_enter | date:'mediumDate'}}</span>
+                style="color: lightcoral;font-size: 20px"> {{ item.repair_elemnt?.date_to_enter | date:'mediumDate' }}</span>
               </ol>
               <ol class="input-title">
                 <fa-icon [icon]="cogs" class="icon-normal-single"></fa-icon>
-                Defect:<span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.defect}}</span></ol>
+                Defect:<span style="color: lightcoral;font-size: 20px">{{ item.repair_elemnt?.defect }}</span></ol>
               <ol class="input-title">
                 <fa-icon class="icon-normal-single"
                          [icon]="money"></fa-icon>
-                Deposit:<span style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.deposit}}</span></ol>
+                Deposit:<span style="color: lightcoral;font-size: 20px"> {{ item.repair_elemnt?.deposit }}</span></ol>
               <ol class="input-title">
                 <fa-icon [icon]="money" class="icon-normal-single"></fa-icon>
-                Price:<span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.price}}</span></ol>
+                Price:<span style="color: lightcoral;font-size: 20px">{{ item.repair_elemnt?.price }}</span></ol>
               <ol class="input-title">
                 <fa-icon class="icon-normal-single"
                          [icon]="date"></fa-icon>
                 Return Date:<span
-                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.output_date | date:'mediumDate'}}</span>
+                style="color: lightcoral;font-size: 20px"> {{ item.repair_elemnt?.output_date | date:'mediumDate' }}</span>
               </ol>
               <ol class="input-title">
                 <fa-icon class="icon-normal-single"
                          [icon]="work"></fa-icon>
-                Work done: <span style="color: lightcoral;font-size: 20px">{{item.repair_elemnt?.work_don}}</span></ol>
+                Work done: <span style="color: lightcoral;font-size: 20px">{{ item.repair_elemnt?.work_don }}</span>
+              </ol>
               <ol class="input-title">
                 <fa-icon class="icon-normal-single"
                          [icon]="chip"></fa-icon>
                 Parts replaced:<span
-                style="color: lightcoral;font-size: 20px"> {{item.repair_elemnt?.parts_replaced}}</span></ol>
+                style="color: lightcoral;font-size: 20px"> {{ item.repair_elemnt?.parts_replaced }}</span></ol>
             </ul>
             <div class="accordion">
               <div>
@@ -142,7 +145,8 @@
 
                       <div *ngFor="let test_input of item.test_input" class="input-title">
                         <fa-icon [icon]="test_minus" class="test-icon"></fa-icon>
-                        {{test_input}}</div>
+                        {{ test_input }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -170,7 +174,8 @@
                     <div *ngIf="!client.device[0].rightNowInRepair" class="test-output-container">
                       <div *ngFor="let test_output of item.test_output" class="input-title">
                         <fa-icon [icon]="test_minus" class="test-icon icon-normal-single"></fa-icon>
-                        {{test_output}}</div>
+                        {{ test_output }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -188,8 +193,8 @@
                   </div>
                   <div class="note-container">
                     <div class="note-border">
-                      <p class=" input-title note">{{item.repair_elemnt?.note}}</p>
-                      <p class=" input-title note">{{item.repair_elemnt?.noteOutput}}</p>
+                      <p class=" input-title note">{{ item.repair_elemnt?.note }}</p>
+                      <p class=" input-title note">{{ item.repair_elemnt?.noteOutput }}</p>
                     </div>
                   </div>
                 </div>
@@ -211,29 +216,29 @@
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Create Repair
                         : <span (click)="showStaffUser(item.repair_elemnt.createUserRepair)" class="user-staff"
-                                tooltip="Click for Info">{{item.repair_elemnt.createUserRepair}}</span>
+                                tooltip="Click for Info">{{ item.repair_elemnt.createUserRepair }}</span>
                       </p>
                       <p *ngIf="item.repair_elemnt.lastModifiedRepair" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Last Modified Repair
                         : <span (click)="showStaffUser(item.repair_elemnt.lastModifiedRepair)" class="user-staff"
-                                tooltip="Click for Info">{{item.repair_elemnt.lastModifiedRepair}}</span></p>
+                                tooltip="Click for Info">{{ item.repair_elemnt.lastModifiedRepair }}</span></p>
                       <p *ngIf="item.repair_elemnt.closeUserRepair" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Close Repair
                         : <span (click)="showStaffUser(item.repair_elemnt.closeUserRepair)" class="user-staff"
-                                tooltip="Click for Info">{{item.repair_elemnt.closeUserRepair}}</span>
+                                tooltip="Click for Info">{{ item.repair_elemnt.closeUserRepair }}</span>
                       </p>
                       <p *ngIf="client.createUser" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Create Client : <span (click)="showStaffUser(client.createUser)"
                                                          class="user-staff"
-                                                         tooltip="Click for Info">{{client.createUser}}</span></p>
+                                                         tooltip="Click for Info">{{ client.createUser }}</span></p>
                       <p *ngIf="client.lastModified" class=" input-title note">
                         <fa-icon [icon]="userStaff" class="icon-normal-single"></fa-icon>
                         Staff User Last Modified Client :
                         <span (click)="showStaffUser(client.lastModified)" class="user-staff"
-                              tooltip="Click for Info">{{client.lastModified}}</span></p>
+                              tooltip="Click for Info">{{ client.lastModified }}</span></p>
                     </div>
                   </div>
                 </div>
