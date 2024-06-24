@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://rfvtechnology.eu/'
+  apiUrl: window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '')
 };

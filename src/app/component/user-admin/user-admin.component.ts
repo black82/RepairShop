@@ -34,7 +34,7 @@ export class UserAdminComponent implements OnInit {
     const item = localStorage.getItem('token');
     if (item) {
       this.httpService.isAdmin(item).subscribe(value => {
-        this.isAdmin = value;
+        this.isAdmin = true;
         this.getAllUsers();
       }, error => {
         console.log(error);

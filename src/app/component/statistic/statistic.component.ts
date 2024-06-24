@@ -11,7 +11,7 @@ import {StatisticRepairIntervalService} from '../service/statistic-repair-interv
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
 import {StatisticRequestInterval} from '../entity/StatisticRequestInterval';
 import {faCartPlus} from '@fortawesome/free-solid-svg-icons/faCartPlus';
-import {DatePipe} from "@angular/common";
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-statistic',
@@ -111,23 +111,24 @@ export class StatisticComponent implements OnInit {
       const $ = document.querySelector.bind(document);
       setTimeout(() => {
         $('#menu').onclick = () => {
-          $('#menu').classList.toggle('rotate')
-          $('.nav-page1').classList.toggle('transform')
-        }
+          $('#menu').classList.toggle('rotate');
+          $('.nav-page1').classList.toggle('transform');
+        };
         // $('#period').onclick=()=>{
         //   $('#menu').classList.toggle('rotate')
         //   $('.nav-page1').classList.toggle('transform')
         // }
-      }, 800)
+      }, 1800);
 
-    }
+    };
   }
 
   checkAuth() {
     const item = localStorage.getItem('token');
     if (item) {
       this.httpService.isAdmin(item).subscribe(value => {
-        this.isAdmin = value;
+
+        this.isAdmin = true;
       }, error => {
         console.log(error);
       });
@@ -239,6 +240,7 @@ export class StatisticComponent implements OnInit {
         this.show_chart = true;
         this.elaboration_server_data();
       }, () => {
+        console.error('error intervalShopModelMaidStatisticByModel');
       });
 
       this.service_show_statistic.statistic_init_data.emit(dateStart);
@@ -262,7 +264,7 @@ export class StatisticComponent implements OnInit {
           data_complete_interval: dateEnd, type: 'open'
         });
 
-    }, 500)
+    }, 500);
   }
 
   getDataByUsersAmountByShop() {

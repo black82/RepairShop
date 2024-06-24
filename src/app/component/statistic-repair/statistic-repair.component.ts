@@ -6,6 +6,7 @@ import {AnimeServiceService} from '../service/anime-service.service';
 import {Subscription} from 'rxjs';
 import {StatisticModel} from '../entity/StatisticModel';
 import {faRemoveFormat} from '@fortawesome/free-solid-svg-icons/faRemoveFormat';
+import {co} from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-statistic-repair',
@@ -18,7 +19,7 @@ export class StatisticRepairComponent implements OnInit {
     labels: string[], datasets: object[]
   };
   @Input()
-  typeChart:string;
+  typeChart: string;
   date_init: Date;
   date_complete: Date;
   show_data = false;
@@ -59,6 +60,7 @@ export class StatisticRepairComponent implements OnInit {
     if (this.isAdmin) {
       return;
     }
+    console.log('init');
     this.service_show_statistic.statistic_init_data.subscribe(data => {
       this.date_init = data;
     });
@@ -67,7 +69,7 @@ export class StatisticRepairComponent implements OnInit {
     });
     this.subscribe = this.service_show_statistic.statistic_interval_month.subscribe(value => {
       this.isShop = value;
-      if (this.typeChart!=='shop') {
+      if (this.typeChart !== 'shop') {
         this.get_data_to_server();
       } else {
         this.get_data_to_server_shop();
@@ -90,6 +92,7 @@ export class StatisticRepairComponent implements OnInit {
     this.animation_wait.$anime_show.emit(true);
     this.httpService.intervalRepairMaidStatisticByMonth(this.date_init, this.date_complete)
       .subscribe(data_set => {
+        console.log(data_set);
         this.animation_wait.$anime_show.emit(false);
         this.deleteOldDate();
         this.create_data_set(data_set);
@@ -100,6 +103,7 @@ export class StatisticRepairComponent implements OnInit {
 
   create_data_set(data_set: StatisticModel[]) {
     data_set.forEach(d => {
+      console.log(d);
       this.labels.push(d.valueString);
       this.data.push(d.amount);
     });

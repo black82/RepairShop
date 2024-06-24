@@ -15,7 +15,7 @@ import {SearchpageComponent} from './component/searchpage/searchpage.component';
 import {AlertComponent} from './component/alert/alert.component';
 import {AnimationWaitComponent} from './component/animation-wait/animation-wait.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {PrintPageComponent} from './component/print-page/print-page.component';
 import {
   CheckDeviceRepairActiveComponent
@@ -115,21 +115,21 @@ import {SpareRedactComponentComponent} from './component/spare-redact-component/
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 
-import {ChartModule} from "primeng/chart";
-import {MatMenuModule} from "@angular/material/menu";
+import {ChartModule} from 'primeng/chart';
+import {MatMenuModule} from '@angular/material/menu';
 import {SpareOutPagiComponent} from './component/spare-out-pagi/spare-out-pagi.component';
 import {SpareSingleReturnComponent} from './component/spare-singl-return/spare-single-return.component';
-import {CardModule} from "primeng/card";
-import {ButtonModule} from "primeng/button";
-import {DividerModule} from "primeng/divider";
-import {GalleriaModule} from "primeng/galleria";
-import {DatePipe, NgOptimizedImage} from "@angular/common";
+import {CardModule} from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
+import {DividerModule} from 'primeng/divider';
+import {GalleriaModule} from 'primeng/galleria';
+import {DatePipe, NgOptimizedImage} from '@angular/common';
 import {ImagesCaruselAppComponent} from './component/images-carusel-app/images-carusel-app.component';
 import {SaveReturnSpareComponent} from './component/save-return-spare/save-return-spare.component';
 import {AppPrintReturnComponent} from './component/app-print-return/app-print-return.component';
-import {BadgeModule} from "primeng/badge";
-import { RepairClousePaginatorComponent } from './component/repair-clouse-paginator/repair-clouse-paginator.component';
-import { SearchByRepairIdSinglComponent } from './component/search-by-repair-id-singl/search-by-repair-id-singl.component';
+import {BadgeModule} from 'primeng/badge';
+import {RepairClousePaginatorComponent} from './component/repair-clouse-paginator/repair-clouse-paginator.component';
+import {SearchByRepairIdSinglComponent} from './component/search-by-repair-id-singl/search-by-repair-id-singl.component';
 
 
 @NgModule({
@@ -251,6 +251,7 @@ import { SearchByRepairIdSinglComponent } from './component/search-by-repair-id-
     GalleriaModule,
     NgOptimizedImage,
     BadgeModule,
+    HttpClientModule,
   ],
   providers: [WebSocketService, HttpClient, RedactStaffUserComponent, GalleriaModule, DatePipe,
     {

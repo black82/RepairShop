@@ -49,9 +49,11 @@ export class DiviceTumorowComponent implements OnInit {
     this.animation_wait.$anime_show.emit(true);
     this.httpService.list_preparing_device().subscribe(value => {
       this.client_array = value;
-      this.filerRepair();
+      if (value) {
+        this.filerRepair();
+      }
       this.animation_wait.$anime_show.emit(false);
-      if (this.client_array.length > 0) {
+      if (this.client_array?.length > 0) {
         this.show_devices = true;
       } else {
         this.notdevice = true;

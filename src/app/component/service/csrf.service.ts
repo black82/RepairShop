@@ -7,7 +7,7 @@ export class CSRFService {
   constructor(private cookieService: CookieService) {
   }
 
-  getCSRF(name = 'XSRF-TOKEN'): string {
+  getCSRF(name = 'X-CSRF-TOKEN'): string {
     return this.cookieService.get(name);
   }
 }
